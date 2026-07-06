@@ -10,13 +10,15 @@ services:
 
   api:
     build: .
+    volumes:
+      - .:/app
     environment:
       DATABASE_URL: postgresql+psycopg://chess:chess@db:5432/chess_trainer
     expose:
       - "8000"
     depends_on:
       - db
-    command: sh -c "PYTHONPATH=/app alembic -c backend/app/migrations/alembic.ini upgrade head && uvicorn backend.app.app:app --host=0.0.0.0 --port=8000"
+    command: sh -c "PYTHONPATH=/app alembic -c backend/app/migrations/alembic.ini upgrade head && uvicorn backend.app.app:app --host=0.0.0.0 --port=8000 --reload"
 
   nginx:
     image: nginx:1.27

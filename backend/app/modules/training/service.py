@@ -2,7 +2,11 @@ from dataclasses import dataclass
 from sqlalchemy.orm import Session
 from sqlalchemy import select
 
-from backend.app.modules.training.models import TrainingSession, TrainingItem, TrainingResponse
+from backend.app.modules.training.models import (
+    TrainingSession,
+    TrainingItem,
+    TrainingResponse,
+)
 from backend.app.modules.training.chess_rules import validate_and_apply
 
 # MVP: static first item(s). Later, replace with openings dataset selection.
@@ -14,6 +18,7 @@ MVP_ITEMS = [
     }
 ]
 
+
 @dataclass
 class SubmitResult:
     http_status: int
@@ -21,6 +26,7 @@ class SubmitResult:
     reason: str
     fen_after: str | None = None
     error_message: str | None = None
+
 
 def create_training_session(db: Session, batch_size: int = 1) -> TrainingSession:
     session = TrainingSession(status="active")
@@ -42,6 +48,7 @@ def create_training_session(db: Session, batch_size: int = 1) -> TrainingSession
     db.refresh(session)
     return session
 
+
 def get_current_training_item(db: Session, session_id: int) -> TrainingItem | None:
     stmt = (
         select(TrainingItem)
@@ -53,13 +60,20 @@ def get_current_training_item(db: Session, session_id: int) -> TrainingItem | No
         return None
 
     for item in items:
-        exists = db.query(TrainingResponse).filter(TrainingResponse.item_id == item.id).first()
+        exists = (
+            db.query(TrainingResponse)
+            .filter(TrainingResponse.item_id == item.id)
+            .first()
+        )
         if exists is None:
             return item
 
     return None  # no current unanswered item
 
-def submit_training_response(db: Session, session_id: int, item_id: int, move_uci: str) -> SubmitResult:
+
+def submit_training_response(
+    db: Session, session_id: int, item_id: int, move_uci: str
+) -> SubmitResult:
     session = db.get(TrainingSession, session_id)
     if session is None:
         return SubmitResult(
@@ -115,7 +129,8 @@ def submit_training_response(db: Session, session_id: int, item_id: int, move_uc
     )
 
     all_responded = all(
-        db.query(TrainingResponse).filter(TrainingResponse.item_id == it.id).first() is not None
+        db.query(TrainingResponse).filter(TrainingResponse.item_id == it.id).first()
+        is not None
         for it in all_items
     )
     if all_responded:
@@ -129,3 +144,32 @@ def submit_training_response(db: Session, session_id: int, item_id: int, move_uc
         fen_after=result.fen_after,
         error_message=result.error_message,
     )
+
+
+from typing import List
+
+
+def create_training_items(
+    db: Session, session_id: int, items: List["TrainingItemCreate"]
+) -> int:
+    session = db.get(TrainingSession, session_id)
+    if session is None:
+        raise HTTPException(status_code=404, detail="Training session not found")
+
+    # optional: enforce order_index uniqueness inside payload
+    payload_order_indexes = [it.order_index for it in items]
+    if len(payload_order_indexes) != len(set(payload_order_indexes)):
+        raise HTTPException(status_code=400, detail="Duplicate order_index")
+
+    for it in items:
+        db.add(
+            TrainingItem(
+                session_id=session.id,
+                order_index=it.order_index,
+                fen=it.fen,
+                correct_move_uci=it.correct_move_uci,
+            )
+        )
+
+    db.commit()
+    return len(items)
