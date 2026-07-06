@@ -5,3 +5,5 @@ psycopg[binary]
 python-chess
 pydantic-settings
 alembic
+pytest
+httpx2

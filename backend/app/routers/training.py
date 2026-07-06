@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from backend.app.modules.shared.db import get_db
 from backend.app.modules.training.service import (
     create_training_session,
-    get_next_training_item,
+    get_current_training_item,
     submit_training_response,
 )
 
@@ -23,6 +23,7 @@ class TrainingNextResponse(BaseModel):
 
 class MoveResponseRequest(BaseModel):
     move_uci: str
+    item_id: int
 
 class MoveResponseResponse(BaseModel):
     correct: bool
@@ -36,14 +37,17 @@ def post_training_sessions(db: Session = Depends(get_db)):
 
 @router.get("/training-sessions/{id}/next", response_model=TrainingNextResponse)
 def get_training_next(id: int, db: Session = Depends(get_db)):
-    item = get_next_training_item(db, session_id=id)
-    return {
-        "session_id": item.session_id,
-        "item_id": item.id,
-        "order_index": item.order_index,
-        "fen": item.fen,
-        "move_count_limit": None,
-    }
+    item = get_current_training_item(db, session_id=id)
+    if item is None:
+        raise HTTPException(status_code=404, detail="No current training item")
+
+    return TrainingNextResponse(
+        session_id=item.session_id,
+        item_id=item.id,
+        order_index=item.order_index,
+        fen=item.fen,
+        move_count_limit=None,
+    )
 
 @router.post(
     "/training-sessions/{id}/responses",
@@ -51,7 +55,7 @@ def get_training_next(id: int, db: Session = Depends(get_db)):
     status_code=status.HTTP_200_OK,
 )
 def post_training_response(id: int, req: MoveResponseRequest, db: Session = Depends(get_db)):
-    result = submit_training_response(db, session_id=id, move_uci=req.move_uci)
+    result = submit_training_response(db, session_id=id, item_id=req.item_id, move_uci=req.move_uci)
     if result.http_status == 400:
         raise HTTPException(status_code=400, detail=result.error_message)
     if result.http_status == 404:

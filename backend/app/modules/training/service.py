@@ -42,7 +42,7 @@ def create_training_session(db: Session, batch_size: int = 1) -> TrainingSession
     db.refresh(session)
     return session
 
-def get_next_training_item(db: Session, session_id: int) -> TrainingItem | None:
+def get_current_training_item(db: Session, session_id: int) -> TrainingItem | None:
     stmt = (
         select(TrainingItem)
         .where(TrainingItem.session_id == session_id)
@@ -57,11 +57,9 @@ def get_next_training_item(db: Session, session_id: int) -> TrainingItem | None:
         if exists is None:
             return item
 
-    # all items already responded; return first item deterministically
-    return items[0]
+    return None  # no current unanswered item
 
-
-def submit_training_response(db: Session, session_id: int, move_uci: str) -> SubmitResult:
+def submit_training_response(db: Session, session_id: int, item_id: int, move_uci: str) -> SubmitResult:
     session = db.get(TrainingSession, session_id)
     if session is None:
         return SubmitResult(
@@ -72,8 +70,8 @@ def submit_training_response(db: Session, session_id: int, move_uci: str) -> Sub
             error_message="Training session not found.",
         )
 
-    item = get_next_training_item(db, session_id=session_id)
-    if item is None:
+    current = get_current_training_item(db, session_id=session_id)
+    if current is None:
         return SubmitResult(
             http_status=404,
             correct=False,
@@ -82,15 +80,24 @@ def submit_training_response(db: Session, session_id: int, move_uci: str) -> Sub
             error_message="Training items not found for this session.",
         )
 
+    if current.id != item_id:
+        return SubmitResult(
+            http_status=404,
+            correct=False,
+            reason="training item not found",
+            fen_after=None,
+            error_message="Training item not found.",
+        )
+
     result = validate_and_apply(
-        fen=item.fen,
+        fen=current.fen,
         move_uci=move_uci,
-        expected_correct_uci=item.correct_move_uci,
+        expected_correct_uci=current.correct_move_uci,
     )
 
     db.add(
         TrainingResponse(
-            item_id=item.id,
+            item_id=current.id,
             submitted_move_uci=move_uci.strip(),
             is_correct=result.correct,
             reason=result.reason,
@@ -98,11 +105,14 @@ def submit_training_response(db: Session, session_id: int, move_uci: str) -> Sub
         )
     )
 
-    all_items = list(db.scalars(
-        select(TrainingItem)
-        .where(TrainingItem.session_id == session_id)
-        .order_by(TrainingItem.order_index.asc())
-    ).all())
+    # completion check unchanged
+    all_items = list(
+        db.scalars(
+            select(TrainingItem)
+            .where(TrainingItem.session_id == session_id)
+            .order_by(TrainingItem.order_index.asc())
+        ).all()
+    )
 
     all_responded = all(
         db.query(TrainingResponse).filter(TrainingResponse.item_id == it.id).first() is not None
