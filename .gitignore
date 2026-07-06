@@ -1,0 +1,62 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+*.egg
+*.egg-info/
+.venv/
+venv/
+ENV/
+env/
+
+# Virtualenv (common)
+.venv*/
+.venv-*/
+
+# FastAPI/Starlette logs
+*.log
+
+# SQLite / local DB artifacts (if you ever use them)
+*.db
+*.sqlite3
+
+# Node (if frontend exists later)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Docker
+docker-compose.override.yml
+*.env
+.env
+.env.*
+!.env.example
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Build artifacts
+dist/
+build/
+staticfiles/
+static/
+
+# Typing / tooling
+.mypy_cache/
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+ruff_cache/
+/.ruff_cache/
+
+# Secrets
+secrets/
+*.pem
+*.key
+letsencrypt/
