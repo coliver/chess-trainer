@@ -61,3 +61,4 @@ secrets/
 *.key
 letsencrypt/
 tree_but_skip.ps1
+.env

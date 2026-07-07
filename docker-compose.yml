@@ -2,18 +2,17 @@ services:
   db:
     image: postgres:16
     environment:
-      POSTGRES_DB: chess_trainer
-      POSTGRES_USER: chess
-      POSTGRES_PASSWORD: chess
+      DATABASE_URL: ${DATABASE_URL}
     volumes:
       - pgdata:/var/lib/postgresql/data
-
+    ports:
+      - "5432:5432"
   api:
     build: .
     volumes:
       - .:/app
     environment:
-      DATABASE_URL: postgresql+psycopg://chess:chess@db:5432/chess_trainer
+      DATABASE_URL: ${DATABASE_URL}
     expose:
       - "8000"
     depends_on:
