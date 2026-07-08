@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from sqlalchemy.orm import Session
 from sqlalchemy import select
+from fastapi import HTTPException
 
 from backend.app.modules.training.models import (
     TrainingSession,
@@ -8,6 +9,12 @@ from backend.app.modules.training.models import (
     TrainingResponse,
 )
 from backend.app.modules.training.chess_rules import validate_and_apply
+
+from typing import TYPE_CHECKING, List
+
+if TYPE_CHECKING:
+    # Import only for type checking to avoid circular imports at runtime
+    from backend.app.routers.training import TrainingItemCreate
 
 # MVP: static first item(s). Later, replace with openings dataset selection.
 MVP_ITEMS = [
@@ -118,6 +125,9 @@ def submit_training_response(
             fen_after=result.fen_after,
         )
     )
+    
+    # Ensure the just-added TrainingResponse is visible to the completion query
+    db.flush()
 
     # completion check unchanged
     all_items = list(

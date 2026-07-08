@@ -10,3 +10,4 @@ httpx2
 flake8 
 autopep8 
 coverage
+pytest-cov

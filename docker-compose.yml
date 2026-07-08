@@ -29,6 +29,7 @@ services:
     volumes:
       - ./nginx:/etc/nginx/conf.d:ro
       - ./letsencrypt:/etc/nginx/certs:ro
+      - ./htmlcov:/app/htmlcov:ro
 
   erd:
     build:
