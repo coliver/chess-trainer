@@ -60,6 +60,5 @@ secrets/
 *.pem
 *.key
 letsencrypt/
-tree_but_skip.ps1
 .env
-scrip.ps1
+*.ps1

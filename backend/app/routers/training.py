@@ -3,13 +3,12 @@ from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from typing import List
 from backend.app.modules.training.models import TrainingItem
-from sqlalchemy.exc import SQLAlchemyError
 from backend.app.modules.shared.db import get_db
 from backend.app.modules.training.service import (
     create_training_session,
     get_current_training_item,
     submit_training_response,
-    create_training_items
+    create_training_items,
 )
 
 router = APIRouter()
@@ -93,6 +92,7 @@ def post_training_response(
         reason=result.reason,
         fen_after=result.fen_after,
     )
+
 
 @router.post(
     "/training-sessions/{id}/items",
