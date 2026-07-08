@@ -12,3 +12,4 @@ autopep8
 coverage
 pytest-cov
 email-validator
+pyjwt

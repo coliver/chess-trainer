@@ -34,3 +34,20 @@ Planning is done in clickUp.com
   - Done when: trainer accepts any valid next move for the chosen line/allowed transitions
 - Progress logging (correct/incorrect)
   - Done when: session attempts persist and can be summarized per opening/position
+
+## Current MVP status
+- Auth + training MVP implemented:
+  - `POST /auth/register`
+  - `POST /auth/login`
+  - `POST /training-sessions`
+  - `GET /training-sessions/{id}/next`
+  - `POST /training-sessions/{id}/responses`
+- Validation rules:
+  - invalid UCI → HTTP 400
+  - illegal move → `correct=false`, `reason="illegal move"`, `fen_after=null`
+  - wrong legal move → `correct=false`, `reason="wrong move"`, deterministic `fen_after`
+- Frontend MVP:
+  - Shows a 2D chess board with clickable pieces
+  - Clicking a piece highlights its legal moves
+  - Clicking a highlighted legal square makes the move and advances turn to the other side
+

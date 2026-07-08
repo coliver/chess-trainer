@@ -3,23 +3,22 @@ import base64
 import hashlib
 import os
 import hmac
-
-from fastapi import APIRouter, Depends, HTTPException
+import jwt
+from typing import Any
+from fastapi import APIRouter, Depends, HTTPException, Header
 from pydantic import BaseModel, EmailStr, constr
 from typing import Optional
-
+import datetime
 from backend.app.modules.shared.db import get_db
 from backend.app.modules.users.models import User
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
 
-
 class RegisterRequest(BaseModel):
     email: EmailStr
     username: constr(min_length=1, strip_whitespace=True)
     password: constr(min_length=1)
-
 
 
 def hash_password(password: str) -> str:
@@ -56,10 +55,12 @@ def register(req: RegisterRequest, db=Depends(get_db)):
     db.refresh(user)
     return {"id": user.id, "email": user.email, "username": user.username}
 
+
 class LoginRequest(BaseModel):
     email: Optional[EmailStr] = None
     username: Optional[constr(min_length=1, strip_whitespace=True)] = None
     password: constr(min_length=1)
+
 
 @router.post("/login")
 def login(req: LoginRequest, db=Depends(get_db)):
@@ -79,4 +80,65 @@ def login(req: LoginRequest, db=Depends(get_db)):
     if not verify_password(req.password, user.password_hash):
         raise HTTPException(status_code=401, detail="Invalid credentials")
 
-    return {"id": user.id, "email": user.email, "username": user.username}
+    # return {"id": user.id, "email": user.email, "username": user.username}
+    token = create_access_token(user.id)
+
+    return {
+        "id": user.id,
+        "email": user.email,
+        "username": user.username,
+        "access_token": token,
+        "token_type": "Bearer",
+    }
+
+
+def _jwt_secret() -> str:
+    secret = os.getenv("JWT_SECRET")
+    if not secret:
+        raise HTTPException(status_code=500, detail="JWT_SECRET not configured")
+    return secret
+
+
+def _jwt_algorithm() -> str:
+    return os.getenv("JWT_ALGORITHM", "HS256")
+
+
+def create_access_token(user_id: int) -> str:
+    now = datetime.datetime.utcnow()
+    exp_min = int(os.getenv("JWT_EXPIRES_MINUTES", "60"))
+    exp = now + datetime.timedelta(minutes=exp_min)
+
+    payload: dict[str, Any] = {
+        "sub": str(user_id),
+        "iat": int(now.timestamp()),
+        "exp": int(exp.timestamp()),
+    }
+    return jwt.encode(payload, _jwt_secret(), algorithm=_jwt_algorithm())
+
+
+def get_current_user(
+    authorization: str | None = Header(default=None),
+    db=Depends(get_db),
+) -> User:
+    if not authorization or not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Missing Bearer token")
+
+    token = authorization.split(" ", 1)[1]
+    try:
+        payload = jwt.decode(
+            token,
+            _jwt_secret(),
+            algorithms=[_jwt_algorithm()],
+        )
+        sub = payload.get("sub")
+        if not sub:
+            raise HTTPException(status_code=401, detail="Invalid token")
+        user_id = int(sub)
+    except jwt.PyJWTError:
+        raise HTTPException(status_code=401, detail="Invalid token")
+
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user or not user.is_active:
+        raise HTTPException(status_code=401, detail="Invalid token")
+
+    return user

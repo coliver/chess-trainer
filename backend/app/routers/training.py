@@ -1,8 +1,10 @@
+from sqlalchemy import select
+from backend.app.modules.training.models import TrainingItem, TrainingSession
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from typing import List
-from backend.app.modules.training.models import TrainingItem
 from backend.app.modules.shared.db import get_db
 from backend.app.modules.training.service import (
     create_training_session,
@@ -10,7 +12,7 @@ from backend.app.modules.training.service import (
     submit_training_response,
     create_training_items,
 )
-
+from backend.app.routers.auth import get_current_user
 router = APIRouter()
 
 
@@ -49,14 +51,30 @@ class TrainingItemsCreateResponse(BaseModel):
 
 
 @router.post("/training-sessions", response_model=TrainingSessionCreateResponse)
-def post_training_sessions(db: Session = Depends(get_db)):
+def post_training_sessions(
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user),
+):
     session = create_training_session(db)
     return {"id": session.id}
 
-
 @router.get("/training-sessions/{id}/next", response_model=TrainingNextResponse)
 def get_training_next(id: int, db: Session = Depends(get_db)):
-    item = get_current_training_item(db, session_id=id)
+    training_session = db.get(TrainingSession, id)
+    if training_session is None:
+        raise HTTPException(status_code=404, detail="Training session not found")
+
+    all_items = list(
+        db.scalars(
+            select(TrainingItem)
+            .where(TrainingItem.session_id == id)
+            .order_by(TrainingItem.order_index.asc())
+        ).all()
+    )
+
+    item = get_current_training_item(
+        db, training_session=training_session, all_items=all_items
+    )
     if item is None:
         raise HTTPException(status_code=404, detail="No current training item")
 

@@ -55,27 +55,19 @@ def create_training_session(db: Session, batch_size: int = 1) -> TrainingSession
     db.refresh(session)
     return session
 
-
-def get_current_training_item(db: Session, session_id: int) -> TrainingItem | None:
-    stmt = (
-        select(TrainingItem)
-        .where(TrainingItem.session_id == session_id)
-        .order_by(TrainingItem.order_index.asc())
-    )
-    items = list(db.scalars(stmt).all())
-    if not items:
-        return None
-
-    for item in items:
-        exists = (
+def get_current_training_item(db, training_session, all_items):
+    for item in all_items:
+        exists_correct = (
             db.query(TrainingResponse)
-            .filter(TrainingResponse.item_id == item.id)
+            .filter(
+                TrainingResponse.item_id == item.id,
+                TrainingResponse.is_correct.is_(True),
+            )
             .first()
         )
-        if exists is None:
+        if exists_correct is None:
             return item
-
-    return None  # no current unanswered item
+    return None
 
 
 def submit_training_response(
@@ -91,7 +83,15 @@ def submit_training_response(
             error_message="Training session not found.",
         )
 
-    current = get_current_training_item(db, session_id=session_id)
+    all_items = list(
+        db.scalars(
+            select(TrainingItem)
+            .where(TrainingItem.session_id == session_id)
+            .order_by(TrainingItem.order_index.asc())
+        ).all()
+    )
+
+    current = get_current_training_item(db, training_session=session, all_items=all_items)
     if current is None:
         return SubmitResult(
             http_status=404,
@@ -116,30 +116,37 @@ def submit_training_response(
         expected_correct_uci=current.correct_move_uci,
     )
 
-    db.add(
-        TrainingResponse(
-            item_id=current.id,
-            submitted_move_uci=move_uci.strip(),
-            is_correct=result.correct,
-            reason=result.reason,
-            fen_after=result.fen_after,
-        )
+    existing = (
+        db.query(TrainingResponse)
+        .filter(TrainingResponse.item_id == current.id)
+        .first()
     )
-    
-    # Ensure the just-added TrainingResponse is visible to the completion query
+
+    if existing:
+        existing.submitted_move_uci = move_uci.strip()
+        existing.is_correct = result.correct
+        existing.reason = result.reason
+        existing.fen_after = result.fen_after
+    else:
+        db.add(
+            TrainingResponse(
+                item_id=current.id,
+                submitted_move_uci=move_uci.strip(),
+                is_correct=result.correct,
+                reason=result.reason,
+                fen_after=result.fen_after,
+            )
+        )
+
     db.flush()
 
-    # completion check unchanged
-    all_items = list(
-        db.scalars(
-            select(TrainingItem)
-            .where(TrainingItem.session_id == session_id)
-            .order_by(TrainingItem.order_index.asc())
-        ).all()
-    )
-
     all_responded = all(
-        db.query(TrainingResponse).filter(TrainingResponse.item_id == it.id).first()
+        db.query(TrainingResponse)
+        .filter(
+            TrainingResponse.item_id == it.id,
+            TrainingResponse.is_correct.is_(True),
+        )
+        .first()
         is not None
         for it in all_items
     )

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type TrainingNextResponse = {
   session_id: number;
@@ -20,7 +20,12 @@ export default function Training() {
   const [moveUci, setMoveUci] = useState("");
   const [status, setStatus] = useState<string>("");
 
+  const didStart = useRef(false);
+
   async function startNewSession() {
+    // ensure no synchronous setState runs inside the effect call path
+    await Promise.resolve();
+
     setStatus("Starting...");
     setNext(null);
     setSessionId(null);
@@ -32,26 +37,47 @@ export default function Training() {
   }
 
   useEffect(() => {
-    startNewSession();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (didStart.current) return;
+    didStart.current = true;
+
+    let cancelled = false;
+    (async () => {
+      await startNewSession();
+      if (cancelled) return;
+    })().catch(() => {
+      /* optional: setStatus("Error") */
+    });
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   useEffect(() => {
     if (!sessionId) return;
 
+    let cancelled = false;
+
     (async () => {
       const res = await fetch(`/api/training-sessions/${sessionId}/next`);
+      if (cancelled) return;
+
       if (!res.ok) {
         setNext(null);
         const err = await res.json().catch(() => ({}));
         setStatus(err?.detail ?? "Training completed");
         return;
       }
+
       const data: TrainingNextResponse = await res.json();
       setNext(data);
       setStatus("");
       setMoveUci("");
     })();
+
+    return () => {
+      cancelled = true;
+    };
   }, [sessionId]);
 
   async function submit() {
@@ -73,7 +99,6 @@ export default function Training() {
 
     setStatus(data.correct ? "Correct!" : `Wrong: ${data.reason}`);
 
-    // Load next (or completion)
     const nextRes = await fetch(`/api/training-sessions/${sessionId}/next`);
     if (!nextRes.ok) {
       setNext(null);
@@ -81,6 +106,7 @@ export default function Training() {
       setStatus(err?.detail ?? "Training completed");
       return;
     }
+
     const nextData: TrainingNextResponse = await nextRes.json();
     setNext(nextData);
     setMoveUci("");
@@ -96,7 +122,6 @@ export default function Training() {
       </button>
 
       {sessionId == null && <div>Starting session...</div>}
-
       {sessionId != null && !next && <div>Training completed.</div>}
 
       {next && (
