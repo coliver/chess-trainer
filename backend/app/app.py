@@ -4,11 +4,12 @@ from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 
 from backend.app.routers.training import router as training_router
+from backend.app.routers.auth import router as auth_router
 
 app = FastAPI(title="Chess Trainer")
 
-app.include_router(training_router, prefix="/api")
-
+app.include_router(training_router, prefix="")
+app.include_router(auth_router, prefix="")
 
 class PingResponse(BaseModel):
     message: str

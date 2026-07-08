@@ -14,8 +14,8 @@ Planning is done in clickUp.com
 - **Frontend:** TypeScript + React
 - **Backend:** Python + FastAPI
 - **DB:** PostgreSQL
-- **Infra:** Dockerized full stack from day one
-- **Data import:** opening dataset importer/seed code (not request-path code)
+- **Infra:** Dockerized full stack
+- **Data import:** opening dataset importer/seed code
 
 ## Epics
 - Import openings database and normalize move lines

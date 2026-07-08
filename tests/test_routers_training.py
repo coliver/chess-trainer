@@ -24,7 +24,7 @@ def test_post_training_sessions_returns_id(client, monkeypatch):
 
     monkeypatch.setattr(training_router, "create_training_session", lambda db: FakeSession)
 
-    r = client.post("/api/training-sessions")
+    r = client.post("/training-sessions")
     assert r.status_code == 200
     assert r.json() == {"id": 123}
 
@@ -32,7 +32,7 @@ def test_post_training_sessions_returns_id(client, monkeypatch):
 def test_get_training_next_404_when_no_item(client, monkeypatch):
     monkeypatch.setattr(training_router, "get_current_training_item", lambda db, session_id: None)
 
-    r = client.get("/api/training-sessions/1/next")
+    r = client.get("/training-sessions/1/next")
     assert r.status_code == 404
     assert r.json() == {"detail": "No current training item"}
 
@@ -46,7 +46,7 @@ def test_get_training_next_200(client, monkeypatch):
 
     monkeypatch.setattr(training_router, "get_current_training_item", lambda db, session_id: Item())
 
-    r = client.get("/api/training-sessions/1/next")
+    r = client.get("/training-sessions/1/next")
     assert r.status_code == 200
     assert r.json() == {
         "session_id": 1,
@@ -71,7 +71,7 @@ def test_post_training_response_200_correct(client, monkeypatch):
     )
 
     payload = {"move_uci": "e2e4", "item_id": 9}
-    r = client.post("/api/training-sessions/1/responses", json=payload)
+    r = client.post("/training-sessions/1/responses", json=payload)
     assert r.status_code == 200
     assert r.json() == {"correct": True, "reason": "ok", "fen_after": "after"}
 
@@ -91,7 +91,7 @@ def test_post_training_response_maps_400(client, monkeypatch):
     )
 
     payload = {"move_uci": "e2e5", "item_id": 9}
-    r = client.post("/api/training-sessions/1/responses", json=payload)
+    r = client.post("/training-sessions/1/responses", json=payload)
     assert r.status_code == 400
     assert r.json() == {"detail": "bad move"}
 
@@ -111,7 +111,7 @@ def test_post_training_response_maps_404(client, monkeypatch):
     )
 
     payload = {"move_uci": "e2e5", "item_id": 9}
-    r = client.post("/api/training-sessions/1/responses", json=payload)
+    r = client.post("/training-sessions/1/responses", json=payload)
     assert r.status_code == 404
     assert r.json() == {"detail": "not found"}
 
@@ -127,6 +127,6 @@ def test_post_training_items_200(client, monkeypatch):
         {"order_index": 0, "fen": "fen0", "correct_move_uci": "e2e4"},
         {"order_index": 1, "fen": "fen1", "correct_move_uci": "d2d4"},
     ]
-    r = client.post("/api/training-sessions/1/items", json=payload)
+    r = client.post("/training-sessions/1/items", json=payload)
     assert r.status_code == 200
     assert r.json() == {"created": 2, "session_id": 1}
