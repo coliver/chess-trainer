@@ -30,6 +30,7 @@ services:
       - ./nginx:/etc/nginx/conf.d:ro
       - ./letsencrypt:/etc/nginx/certs:ro
       - ./htmlcov:/app/htmlcov:ro
+      - ./frontend/dist:/usr/share/nginx/html:ro
 
   erd:
     build:

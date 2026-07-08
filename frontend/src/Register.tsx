@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -26,6 +29,7 @@ const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
       }
 
       setSuccess(true);
+      navigate("/login");
     } catch (err) {
       setError("Failed to register. Please try again later.");
     } finally {

@@ -6,7 +6,7 @@ import hmac
 
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, EmailStr, constr
-
+from typing import Optional
 
 from backend.app.modules.shared.db import get_db
 from backend.app.modules.users.models import User
@@ -54,4 +54,29 @@ def register(req: RegisterRequest, db=Depends(get_db)):
     db.add(user)
     db.commit()
     db.refresh(user)
+    return {"id": user.id, "email": user.email, "username": user.username}
+
+class LoginRequest(BaseModel):
+    email: Optional[EmailStr] = None
+    username: Optional[constr(min_length=1, strip_whitespace=True)] = None
+    password: constr(min_length=1)
+
+@router.post("/login")
+def login(req: LoginRequest, db=Depends(get_db)):
+    if not req.email and not req.username:
+        raise HTTPException(status_code=400, detail="Provide email or username")
+
+    q = db.query(User)
+    user = None
+    if req.email:
+        user = q.filter(User.email == req.email).first()
+    else:
+        user = q.filter(User.username == req.username).first()
+
+    if user is None:
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+
+    if not verify_password(req.password, user.password_hash):
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+
     return {"id": user.id, "email": user.email, "username": user.username}
