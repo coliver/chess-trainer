@@ -1,75 +1,147 @@
-# React + TypeScript + Vite
+# Frontend (React)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + TypeScript + Vite UI for the chess training application.
 
-Currently, two official plugins are available:
+## Development setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### Requirements
+- Node.js (LTS recommended)
 
-## React Compiler
+### Install
+From `frontend/`:
+    npm install
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Run (dev)
+    npm run dev
 
-## Expanding the ESLint configuration
+Dev-time backend connection: the Vite dev server proxies `/api` to:
+- `http://localhost:8000`
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Build
+    npm run build
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Preview
+    npm run preview
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Lint
+    npm run lint
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Frontend routes
 
-```
+- `GET /login` — login form
+- `GET /register` — registration form
+- `GET /dashboard` — dashboard placeholder
+- `GET /training` — training UI
+- `*` — falls back to `/dashboard`
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## API (what the frontend calls)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Base path is always `/api` (proxied in dev).
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Auth — Register
+**Request**
+- `POST /api/auth/register`
+- Body (JSON):
+  - `{ "email": string, "username": string, "password": string }`
 
-```
+**Success**
+- Frontend checks only `resp.ok` (does not parse JSON).
+- Then it navigates to `/login`.
+
+**Error**
+- Frontend reads `await resp.text()` and displays it.
+
+---
+
+### Auth — Login
+**Request**
+- `POST /api/auth/login`
+- Body (JSON):
+  - `{ "username": string, "password": string }`
+
+**Success**
+- Frontend checks `resp.ok` only.
+- Then it navigates to `/dashboard`.
+
+**Error**
+- Frontend reads `await resp.text()` and displays it.
+
+---
+
+### Training — Start a new session
+**Request**
+- `POST /api/training-sessions`
+- No body
+
+**Success (JSON)**
+The frontend expects JSON with:
+- `{ "id": number }`
+
+**Error**
+- Not explicitly handled beyond the normal fetch flow (it will fail and the UI won’t proceed).
+
+---
+
+### Training — Fetch next item
+**Request**
+- `GET /api/training-sessions/:sessionId/next`
+
+**Success (JSON)**
+Frontend expects:
+- `{
+  "session_id": number,
+  "item_id": number,
+  "order_index": number,
+  "fen": string,
+  "move_count_limit": number | null
+}`
+
+**Error (JSON)**
+On non-2xx responses, the frontend tries:
+- `const err = await res.json().catch(() => ({}));`
+- then uses `err.detail ?? "Training completed"`
+
+So you should return (on failure) JSON like:
+- `{ "detail": string }`
+
+---
+
+### Training — Submit an answer
+**Request**
+- `POST /api/training-sessions/:sessionId/responses`
+- Body (JSON):
+  - `{ "move_uci": string, "item_id": number }`
+- Content-Type: `application/json`
+
+**Success (JSON)**
+Frontend expects:
+- `{
+  "correct": boolean,
+  "reason": string,
+  "fen_after": string | null
+}`
+
+On success, the UI uses:
+- `data.correct ? "Correct!" : "Wrong: ${data.reason}"`
+and then immediately fetches `.../next`.
+
+**Error (JSON)**
+On non-2xx responses, the frontend expects:
+- `const data = await res.json();`
+- uses `data.detail ?? "Error"`
+
+So you should return (on failure) JSON like:
+- `{ "detail": string }`
+
+---
+
+## Frontend code layout
+- `src/main.tsx` — React + router bootstrap
+- `src/App.tsx` — route definitions
+- `src/Login.tsx` — login page
+- `src/Register.tsx` — register page
+- `src/Dashboard.tsx` — dashboard placeholder
+- `src/Training.tsx` — training session logic + API calls
+- `src/index.css` — global styles
+
+If you want, I can also add a short “Expected response schemas” section with a copy/paste JSON example for each endpoint (matching the types above).
