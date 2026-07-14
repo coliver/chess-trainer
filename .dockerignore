@@ -1,0 +1,11 @@
+# .dockerignore
+node_modules/
+frontend/node_modules/
+**/node_modules/
+.git
+.venv
+__pycache__
+*.pyc
+.pytest_cache
+htmlcov/
+.env

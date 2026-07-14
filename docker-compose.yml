@@ -7,6 +7,13 @@ services:
       - pgdata:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
   api:
     build: .
     volumes:
@@ -19,8 +26,22 @@ services:
     expose:
       - "8000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     command: sh -c "PYTHONPATH=/app alembic -c backend/app/migrations/alembic.ini upgrade head && uvicorn backend.app.app:app --host=0.0.0.0 --port=8000 --reload"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    environment:
+      VITE_BACKEND_URL: http://api:8000
+    expose:
+      - "5173"
+    depends_on:
+      - api
+    restart: unless-stopped
 
   nginx:
     image: nginx:1.27
@@ -34,13 +55,15 @@ services:
       - ./letsencrypt:/etc/nginx/certs:ro
       - ./htmlcov:/app/htmlcov:ro
       - ./frontend/dist:/usr/share/nginx/html:ro
+    restart: unless-stopped
 
   erd:
     build:
       context: ./schemacrawler
     image: schemacrawler/schemacrawler:latest
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     volumes:
       - ./backend/app/docs:/out
     environment:
@@ -61,6 +84,7 @@ services:
       --output-file "/out/schema.svg"
       --info-level=STANDARD
       --log-level=INFO
+    restart: unless-stopped
 
 volumes:
   pgdata:

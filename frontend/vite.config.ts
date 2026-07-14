@@ -1,17 +1,20 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
   server: {
-    proxy: {
-      "/api": "http://localhost:8000",
+    host: '0.0.0.0',
+    port: 5173,
+    cors: {
+      // Allowed origins for the Docker‑compose dev setup
+      origin: [
+        'http://localhost',
+        'http://frontend',
+        'https://localhost',
+        'https://frontend',
+      ],
+      credentials: true,
     },
-    hmr: {
-      host: 'localhost',
-      port: 443,
-      protocol: 'wss',
-    },
-    allowedHosts: ['localhost', 'host.docker.internal']
   },
 });
