@@ -1,4 +1,4 @@
-${message}
+# ${message}
 
 # Revision ID: ${repr(up_revision)}
 # Revises: ${repr(down_revision)}

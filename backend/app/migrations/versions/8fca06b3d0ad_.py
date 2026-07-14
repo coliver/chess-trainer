@@ -1,5 +1,3 @@
-...
-
 # Revision ID: '8fca06b3d0ad'
 # Revises: '0001'
 # Create Date: 2026-07-06 23:56:07.949766

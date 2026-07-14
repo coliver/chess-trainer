@@ -63,3 +63,8 @@ letsencrypt/
 .env
 bootstrap.ps1
 tree_but_skip.ps1
+tmp_openings_tsv/a.tsv
+tmp_openings_tsv/b.tsv
+tmp_openings_tsv/c.tsv
+tmp_openings_tsv/d.tsv
+tmp_openings_tsv/e.tsv

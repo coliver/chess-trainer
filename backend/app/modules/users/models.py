@@ -2,6 +2,8 @@ import datetime
 from sqlalchemy import String, Boolean, DateTime, func
 from sqlalchemy.orm import Mapped, mapped_column
 from backend.app.modules.shared.db import Base
+
+
 class User(Base):
     __tablename__ = "users"
 

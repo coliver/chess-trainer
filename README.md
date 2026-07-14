@@ -1,53 +1,113 @@
 # Chess-Trainer
 
-## Project plan (v1)
+A web-based chess openings trainer that drills specific lines and tracks improvement.
 
-**Goal:** Build a web-based chess openings trainer that drills specific lines and tracks improvement.
+## Goal
 
-## Developers
-- Christopher Oliver (@coliver)
+Build a web-based chess openings trainer that:
+- presents opening prompt positions,
+- accepts your next-move attempts as UCI,
+- validates the move against an openings dataset,
+- provides deterministic feedback (including the expected resulting position),
+- tracks your progress per opening/position.
 
-## Planning
-Planning is done in clickUp.com
+## MVP (what’s working now)
 
-## Architecture (high level)
-- **Frontend:** TypeScript + React
-- **Backend:** Python + FastAPI
-- **DB:** PostgreSQL
-- **Infra:** Dockerized full stack
-- **Data import:** opening dataset importer/seed code
+### Backend (FastAPI + PostgreSQL)
+Auth + training MVP implemented:
 
-## Epics
-- Import openings database and normalize move lines
-- Training sessions (select an opening, start position; serve prompts and accept answers)
-- Move validation and feedback (correct/incorrect + FEN-after handling)
-- Progress tracking and review scheduling
+- `POST /api/auth/register`
+- `POST /api/auth/login`
+- `POST /api/training-sessions`
+- `GET /api/training-sessions/{id}/next`
+- `POST /api/training-sessions/{id}/responses`
 
-## Tickets (examples)
-- Set up “positions → opening/line” lookup
-  - Done when: given input moves/position, the trainer resolves to the correct opening/line; unknown lines handled deterministically
-- Implement move parser (canonicalization)
-  - Done when: same PGN/UCI line consistently normalizes to the same stored move representation
-- Training session: accept next-move attempts
-  - Done when: UI/API accepts a move and returns pass/fail + next expected state
-- Branch handling for alternative continuations
-  - Done when: trainer accepts any valid next move for the chosen line/allowed transitions
-- Progress logging (correct/incorrect)
-  - Done when: session attempts persist and can be summarized per opening/position
+Validation behavior on response submission:
+- invalid UCI → HTTP 400
+- illegal move → `correct=false`, `reason="illegal move"`, `fen_after=null`
+- wrong legal move → `correct=false`, `reason="wrong move"`, includes deterministic `fen_after`
 
-## Current MVP status
-- Auth + training MVP implemented:
-  - `POST /auth/register`
-  - `POST /auth/login`
-  - `POST /training-sessions`
-  - `GET /training-sessions/{id}/next`
-  - `POST /training-sessions/{id}/responses`
-- Validation rules:
-  - invalid UCI → HTTP 400
-  - illegal move → `correct=false`, `reason="illegal move"`, `fen_after=null`
-  - wrong legal move → `correct=false`, `reason="wrong move"`, deterministic `fen_after`
-- Frontend MVP:
-  - Shows a 2D chess board with clickable pieces
-  - Clicking a piece highlights its legal moves
-  - Clicking a highlighted legal square makes the move and advances turn to the other side
+### Frontend (not yet implemented)
+Frontend UI (2D chess board, clickable pieces, move submission from the UI) is not complete yet.
 
+## How it works (high level request flow)
+
+1. **Create a training session**
+   - `POST /api/training-sessions`
+   - backend selects training items (MVP policy) and persists them as `training_items`.
+
+2. **Ask for the next prompt**
+   - `GET /api/training-sessions/{id}/next`
+   - backend returns the current prompt position/item.
+
+3. **Submit your answer**
+   - `POST /api/training-sessions/{id}/responses`
+   - backend validates the submitted UCI, records the attempt (`training_responses`), and updates progress (`user_position_stats`, aggregations).
+
+4. **Completion**
+   - once all items are answered, `training_sessions.status` becomes `completed`.
+
+## Architecture
+
+### Stack
+- Frontend: TypeScript + React
+- Backend: Python + FastAPI
+- DB: PostgreSQL
+- Infra: Dockerized full stack (docker-compose)
+- Data import: opening dataset seeding/normalization command(s)
+
+### Internal modules (backend)
+`backend/app/modules/` (first MVP):
+- `auth` (JWT login)
+- `users` (profile + lookup)
+- `openings` (resolve positions → allowed next moves; no runtime mutation)
+- `training` (create sessions, serve next item, accept responses)
+- `progress` (update/read user stats)
+- `shared` (DB session, common schemas, auth dependency, error types)
+
+### Data model (minimum)
+
+**Opening content**
+- `openings`
+- `opening_lines`
+- `opening_positions` (stable position identity key: FEN/derived hash)
+- `opening_transitions` (`from_position_id` + `move_uci` → `to_position_id`)
+
+**User progress**
+- `user_opening_progress` (aggregate per opening)
+- `user_position_stats` (aggregate per opening_position)
+
+**Training sessions (immutable session artifacts)**
+- `training_sessions` (mode, status, `dataset_version_id`)
+- `training_items` (session_id, position_id, `correct_move_uci`, order_index)
+- `training_responses` (`submitted_move_uci`, `is_correct`, timing, created_at)
+
+## Public routes vs backend routes
+
+The FastAPI app runs its routes without a `/api` prefix. The nginx container reverse-proxies:
+- public: routes under `/api/*`
+- backend: the same routes without `/api` (used internally by the container network)
+
+Example:
+- public `POST /api/auth/login` → backend `POST /auth/login`
+
+## Local development (Docker)
+
+1. Bring up the stack:
+   - `docker compose up --build`
+
+2. Run migrations:
+   - `docker compose run --rm api alembic -c backend/app/migrations/alembic.ini upgrade head`
+
+3. Optional: seed openings:
+   - `docker compose run --rm api python -m app.seed_openings`
+
+## API endpoints (current/required)
+
+- `POST /api/auth/register`
+- `POST /api/auth/login`
+- `POST /api/training-sessions`
+- `GET /api/training-sessions/{id}`
+- `GET /api/training-sessions/{id}/next`
+- `POST /api/training-sessions/{id}/responses`
+- `GET /api/progress/overview`
