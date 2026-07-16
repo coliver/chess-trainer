@@ -1,18 +1,22 @@
 import { Routes, Route } from "react-router-dom";
-import Login from "./Login";
-import Register from "./Register";
-import { Dashboard } from "./Dashboard";
-import { Training } from "./Training";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import { Dashboard } from "./pages/Dashboard";
+import { Training } from "./pages/Training";
+import Header from "./components/Header";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/training/:id" element={<Training />} />
-      <Route path="*" element={<Dashboard />} />
-    </Routes>
+    <>
+      <Header />
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/training/:id" element={<Training />} />
+        <Route path="*" element={<Dashboard />} />
+      </Routes>
+    </>
   );
 }
 

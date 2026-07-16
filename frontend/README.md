@@ -1,147 +1,222 @@
-# Frontend (React)
+# Frontend - Chess Openings Trainer
 
-React + TypeScript + Vite UI for the chess training application.
+## 🚀 Project Overview
 
-## Development setup
+TypeScript + React application for a chess openings training platform, providing interactive position-based drills with real-time validation.
+
+## 📦 Project Structure
+
+```
+frontend/
+├── src
+│   ├── components          # Reusable UI elements
+│   │   ├── Header
+│   │   ├── Chessboard      # Interactive chess board
+│   │   ├── MoveSelector    # UCI move input with autocomplete
+│   │   └── FeedbackModal   # Result feedback display
+│   ├── pages               # Page-level components
+│   │   ├── Login
+│   │   ├── Register
+│   │   ├── Dashboard
+│   │   └── Training        # Core training interface
+│   ├── services            # API calls and data handling
+│   │   ┈── api.ts          # Base API configuration
+│   │   └── training.ts     # Training session-related API calls
+│   ├── types               # Type definitions
+│   │   ├── chess.d.ts      # Chess-specific types (positions, moves)
+│   │   └── training.d.ts   # Training session types
+│   ├── hooks               # Custom React hooks
+│   │   └── useTrainingSession.ts
+│   └── styles              # CSS and theme
+│       └── index.css
+├── vite.config.ts          # Vite configuration
+└── tsconfig.json           # TypeScript configuration
+```
+
+## 🚧 Development Setup
 
 ### Requirements
-- Node.js (LTS recommended)
 
-### Install
-From `frontend/`:
-    npm install
+| Software | Version |
+|----------|---------|
+| Node.js | LTS (v20.x or higher) |
+| npm | 9.x or higher |
 
-### Run (dev)
-    npm run dev
+### Installation & Setup
 
-Dev-time backend connection: the Vite dev server proxies `/api` to:
-- `http://localhost:8000`
+```bash
+# Navigate to frontend directory
+cd frontend
 
-### Build
-    npm run build
+# Install dependencies
+npm install
 
-### Preview
-    npm run preview
+# Start development server
+npm run dev
+```
 
-### Lint
-    npm run lint
+### Development Server Details
 
-## Frontend routes
+```
+Dev Server: http://localhost:5173 (Vite)
+Backend API: proxied to http://localhost:8000 via /api
+WebSockets: proxied to ws://localhost:8000/vs (for HMR)
+```
 
-- `GET /login` — login form
-- `GET /register` — registration form
-- `GET /dashboard` — dashboard placeholder
-- `GET /training` — training UI
-- `*` — falls back to `/dashboard`
+## 🔄 Key Features
 
-## API (what the frontend calls)
+### Authentication Flow
 
-Base path is always `/api` (proxied in dev).
+```mermaid
+flowchart LR
+  U["User"] -->|Open browser| FE["Frontend (Vite app)"]
+  FE -->|Visit /login| L["Login page"]
+  L -->|Enter credentials| LF["Submit login"]
+  LF -->|Authenticate| BE["Backend auth service"]
+  BE -->|Return JWT token| FE
+  FE -->|Store JWT| J["JWT stored"]
+  J -->|Auto-redirect| D["Dashboard"]
+```
 
-### Auth — Register
-**Request**
-- `POST /api/auth/register`
-- Body (JSON):
-  - `{ "email": string, "username": string, "password": string }`
+### Training Session Flow
 
-**Success**
-- Frontend checks only `resp.ok` (does not parse JSON).
-- Then it navigates to `/login`.
+```mermaid
+flowchart TD
+  A[Session Starts] --> B[Get Next Item]
+  B --> C[Position UI\n- Chess board\n- Move suggestions\n- Input field]
+  C --> D[Submit Move]
+  D --> E[Response\nProcessing...]
+  E --> F{Correct?}
+  F -- Yes --> G[Correct!]
+  G --> B
+  F -- No --> H[Try Again / Request Next Move Suggestion]
+  H --> C
+```
 
-**Error**
-- Frontend reads `await resp.text()` and displays it.
+## 🧩 Core Components
 
----
+### Chess Board Component
 
-### Auth — Login
-**Request**
-- `POST /api/auth/login`
-- Body (JSON):
-  - `{ "username": string, "password": string }`
+```tsx
+// src/components/Chessboard.tsx - Excerpt
+export function Chessboard({ fen, onMoveSelect }: ChessboardProps) {
+  // ...
+  
+  return (
+    <div className="chess-board">
+      {/* Board rendering */}
+      {fen && <BoardCanvas fen={fen} />}
+      
+      {/* Move suggestions popup */}
+      {suggestedMoves.length > 0 && (
+        <MoveSuggestions 
+          moves={suggestedMoves} 
+          onSelect={handleMoveSelect}
+        />
+      )}
+    </div>
+  )
+}
+```
 
-**Success**
-- Frontend checks `resp.ok` only.
-- Then it navigates to `/dashboard`.
+### Move Selector Component
 
-**Error**
-- Frontend reads `await resp.text()` and displays it.
+```tsx
+// src/components/MoveSelector.tsx - Excerpt
+export function MoveInput({ fen, onSubmit }: MoveInputProps) {
+  const { board } = chessEngine(fen)
+  
+  // Generate valid moves
+  const validMoves = generateValidMoves(board)
+  
+  return (
+    <input
+      type="text"
+      placeholder={`Enter move (UCI notation)...`}
+      className={`move-input ${validMoves.length > 0 ? 'suggestions-available' : ''}`}
+      disabled={!board}
+    />
+  )
+}
+```
 
----
+### Feedback Modal
 
-### Training — Start a new session
-**Request**
-- `POST /api/training-sessions`
-- No body
+```tsx
+// src/components/FeedbackModal.tsx - Excerpt
+export function FeedbackModal({ 
+  isOpen, 
+  onClose,
+  result: { correct, reason, fenAfter } 
+}: FeedbackProps) {
+  return (
+    <div className={`feedback-modal ${isOpen ? 'open' : 'closed'}`}>
+      <div className="modal-content">
+        <h3>{correct ? 'Correct!' : 'Wrong move'}</h3>
+        
+        {reason && <p>Reason: {reason}</p>}
+        
+        {fenAfter && (
+          <div className="position-preview">
+            <strong>New position (FEN):</strong>
+            <pre>{fenAfter}</pre>
+          </div>
+        )}
+        
+        <button onClick={onClose}>Continue</button>
+      </div>
+    </div>
+  )
+}
+```
 
-**Success (JSON)**
-The frontend expects JSON with:
-- `{ "id": number }`
+## 📡 API Interaction
 
-**Error**
-- Not explicitly handled beyond the normal fetch flow (it will fail and the UI won’t proceed).
+### Request/Response Specifications
 
----
+#### GET /api/training-sessions/:id/next
 
-### Training — Fetch next item
-**Request**
-- `GET /api/training-sessions/:sessionId/next`
+**Request:**
+```http
+GET /api/training-sessions/${sessionId}/next HTTP/1.1
+Authorization: Bearer <JWT Token>
+Accept: application/json
+```
 
-**Success (JSON)**
-Frontend expects:
-- `{
-  "session_id": number,
-  "item_id": number,
-  "order_index": number,
-  "fen": string,
-  "move_count_limit": number | null
-}`
+**Response (200 OK):**
 
-**Error (JSON)**
-On non-2xx responses, the frontend tries:
-- `const err = await res.json().catch(() => ({}));`
-- then uses `err.detail ?? "Training completed"`
+```json
+{
+  "session_id": 42,
+  "item_id": 7,
+  "order_index": 3,
+  "fen": "rnbqkbnr/ppp2ppp/4p3/8/8/8/PPP2PPP/RNBQKBNR b KQkq - 0 1",
+  "move_count_limit": 3,
+  "opening_eco": "B02",
+  "opening_name": "Scandinavian Defense"
+}
+```
 
-So you should return (on failure) JSON like:
-- `{ "detail": string }`
+**Response (404 Not Found):**
 
----
+```json
+{
+  "detail": "No more items available in this session."
+}
+```
 
-### Training — Submit an answer
-**Request**
-- `POST /api/training-sessions/:sessionId/responses`
-- Body (JSON):
-  - `{ "move_uci": string, "item_id": number }`
-- Content-Type: `application/json`
+#### POST /api/training-sessions/:id/responses
 
-**Success (JSON)**
-Frontend expects:
-- `{
-  "correct": boolean,
-  "reason": string,
-  "fen_after": string | null
-}`
+**Request:**
+```http
+POST /api/training-sessions/${sessionId}/responses HTTP/1.1
+Authorization: Bearer <JWT Token>
+Content-Type: application/json
+```
 
-On success, the UI uses:
-- `data.correct ? "Correct!" : "Wrong: ${data.reason}"`
-and then immediately fetches `.../next`.
-
-**Error (JSON)**
-On non-2xx responses, the frontend expects:
-- `const data = await res.json();`
-- uses `data.detail ?? "Error"`
-
-So you should return (on failure) JSON like:
-- `{ "detail": string }`
-
----
-
-## Frontend code layout
-- `src/main.tsx` — React + router bootstrap
-- `src/App.tsx` — route definitions
-- `src/Login.tsx` — login page
-- `src/Register.tsx` — register page
-- `src/Dashboard.tsx` — dashboard placeholder
-- `src/Training.tsx` — training session logic + API calls
-- `src/index.css` — global styles
-
-If you want, I can also add a short “Expected response schemas” section with a copy/paste JSON example for each endpoint (matching the types above).
+```json
+{
+  "move_uci": "e7e5",
+  "
+}
+```

@@ -1,7 +1,7 @@
 // frontend/src/Training.tsx
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import api from "./api";
+import api from "../api";
 import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
 
