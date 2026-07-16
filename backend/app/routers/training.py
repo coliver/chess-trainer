@@ -13,8 +13,8 @@ from backend.app.modules.training.service import (
     create_training_items,
 )
 from backend.app.routers.auth import get_current_user
-router = APIRouter()
 
+router = APIRouter()
 
 class TrainingSessionCreateResponse(BaseModel):
     id: int
@@ -26,6 +26,8 @@ class TrainingNextResponse(BaseModel):
     order_index: int
     fen: str
     move_count_limit: int | None = None
+    opening_eco: str | None = None
+    opening_name: str | None = None
 
 
 class MoveResponseRequest(BaseModel):
@@ -58,6 +60,7 @@ def post_training_sessions(
     session = create_training_session(db)
     return {"id": session.id}
 
+
 @router.get("/training-sessions/{id}/next", response_model=TrainingNextResponse)
 def get_training_next(id: int, db: Session = Depends(get_db)):
     training_session = db.get(TrainingSession, id)
@@ -84,6 +87,8 @@ def get_training_next(id: int, db: Session = Depends(get_db)):
         order_index=item.order_index,
         fen=item.fen,
         move_count_limit=None,
+        opening_eco=training_session.opening_eco,
+        opening_name=training_session.opening_name,
     )
 
 
@@ -122,5 +127,14 @@ def post_training_items(
     items: List[TrainingItemCreate],
     db: Session = Depends(get_db),
 ):
+    training_session = db.get(TrainingSession, id)
+    if training_session is None:
+        raise HTTPException(status_code=404, detail="Training session not found")
+    if training_session.opening_eco is None or training_session.opening_name is None:
+        raise HTTPException(
+            status_code=400,
+            detail="Training session not initialized. Create it via POST /training-sessions first.",
+        )
+
     created = create_training_items(db=db, session_id=id, items=items)
     return TrainingItemsCreateResponse(created=created, session_id=id)

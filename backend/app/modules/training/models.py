@@ -2,6 +2,8 @@ from sqlalchemy import String, Integer, Boolean, ForeignKey, DateTime, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from backend.app.modules.shared.db import Base
 
+from typing import Optional
+
 class TrainingSession(Base):
     __tablename__ = "training_sessions"
 
@@ -9,7 +11,11 @@ class TrainingSession(Base):
     status: Mapped[str] = mapped_column(String, nullable=False, default="active")
     created_at: Mapped["DateTime"] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
+    opening_eco: Mapped[Optional[str]] = mapped_column(String, nullable=True)
+    opening_name: Mapped[Optional[str]] = mapped_column(String, nullable=True)
+
     items = relationship("TrainingItem", back_populates="session", cascade="all, delete-orphan")
+
 
 class TrainingItem(Base):
     __tablename__ = "training_items"
