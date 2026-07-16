@@ -1,113 +1,94 @@
 # Chess-Trainer
 
-A web-based chess openings trainer that drills specific lines and tracks improvement.
+## Project plan (v1)
 
-## Goal
+**Goal:** Build a web-based chess openings trainer that drills specific lines and tracks improvement.
 
-Build a web-based chess openings trainer that:
-- presents opening prompt positions,
-- accepts your next-move attempts as UCI,
-- validates the move against an openings dataset,
-- provides deterministic feedback (including the expected resulting position),
-- tracks your progress per opening/position.
+## Developers
+- Christopher Oliver (@coliver)
 
-## MVP (what’s working now)
+## Planning
+Planning is done in clickUp.com
 
-### Backend (FastAPI + PostgreSQL)
-Auth + training MVP implemented:
+## Architecture (high level)
+- **Frontend:** TypeScript + React
+- **Backend:** Python + FastAPI
+- **DB:** PostgreSQL
+- **Infra:** Dockerized full stack with nginx reverse proxy (with websocket proxying for `/ws`)
+- **Data import:** opening dataset importer/seed code
 
-- `POST /api/auth/register`
-- `POST /api/auth/login`
-- `POST /api/training-sessions`
-- `GET /api/training-sessions/{id}/next`
-- `POST /api/training-sessions/{id}/responses`
+## Epics
 
-Validation behavior on response submission:
-- invalid UCI → HTTP 400
-- illegal move → `correct=false`, `reason="illegal move"`, `fen_after=null`
-- wrong legal move → `correct=false`, `reason="wrong move"`, includes deterministic `fen_after`
+### Import openings database
+- Status: In progress
+- Goal: Load an openings dataset and support deterministic opening/line prompting from stored data.
+- Current behavior:
+  - Training items are generated from opening records using `opening.epd` (starting position) and `opening.uci_moves` (move sequence).
+  - Prompt generation can be derived by **(ECO, move index)** using the opening moves and `python-chess` to compute the prompt FEN.
 
-### Frontend (not yet implemented)
-Frontend UI (2D chess board, clickable pieces, move submission from the UI) is not complete yet.
+### Training core
+- Status: Developing
+- Key APIs:
+  - `POST /training-sessions` - Create new training sessions
+    - Creates a session and stores `opening_eco` and `opening_name` on the session.
+    - Training items are generated from the opening dataset (`epd` + `uci_moves`) at session creation time.
+  - `GET /training-sessions/{id}/next` - Get next training item
+    - Returns the next item’s `fen` and (optionally) move limits.
+    - Also includes `opening_eco` and `opening_name` in the response.
+  - `POST /training-sessions/{id}/responses` - Submit responses
+    - Validates the submitted move against the expected correct UCI for the current item.
 
-## How it works (high level request flow)
+### Validation and feedback
+- Status: Core functionality complete
+- Features:
+  - Move validation with UCI parsing
+  - Illegal move detection
+  - Correct/wrong move feedback with FEN states
+  - Error handling with HTTP 400 for invalid input
 
-1. **Create a training session**
-   - `POST /api/training-sessions`
-   - backend selects training items (MVP policy) and persists them as `training_items`.
+## Tickets (examples)
 
-2. **Ask for the next prompt**
-   - `GET /api/training-sessions/{id}/next`
-   - backend returns the current prompt position/item.
+| Ticket | Status | Definition |
+|--------|--------|------------|
+| Positions lookup | In progress | Given a position, resolve to opening/line deterministically |
+| Move canonicalization | To-do | Standardize PGN move notation parsing |
+| Session persistence | Complete | Training sessions are creatable and savable |
 
-3. **Submit your answer**
-   - `POST /api/training-sessions/{id}/responses`
-   - backend validates the submitted UCI, records the attempt (`training_responses`), and updates progress (`user_position_stats`, aggregations).
+## Current MVP status
 
-4. **Completion**
-   - once all items are answered, `training_sessions.status` becomes `completed`.
+- **Completed:**
+  - ✓ `POST /auth/register`
+  - ✓ `POST /auth/login`
+  - ✓ `POST /training-sessions`
+  - ✓ `GET /training-sessions/{id}/next`
+  - ✓ `POST /training-sessions/{id}/responses`
 
-## Architecture
+- **Validation rules implemented:**
+  - ✅ Invalid UCI strings → HTTP 400 with error message
+  - ✅ Illegal moves → `correct=false`, shows next FEN
+  - ✅ Correct move → `correct=true`, shows new state
+  - ✅ Wrong legal move → `correct=false`, shows new state
 
-### Stack
-- Frontend: TypeScript + React
-- Backend: Python + FastAPI
-- DB: PostgreSQL
-- Infra: Dockerized full stack (docker-compose)
-- Data import: opening dataset seeding/normalization command(s)
+- **Additional training session metadata (current code behavior):**
+  - `GET /training-sessions/{id}/next` response includes:
+    - `opening_eco`
+    - `opening_name`
 
-### Internal modules (backend)
-`backend/app/modules/` (first MVP):
-- `auth` (JWT login)
-- `users` (profile + lookup)
-- `openings` (resolve positions → allowed next moves; no runtime mutation)
-- `training` (create sessions, serve next item, accept responses)
-- `progress` (update/read user stats)
-- `shared` (DB session, common schemas, auth dependency, error types)
+## Frontend routes (current behavior)
 
-### Data model (minimum)
+- The app navigates to training using `/training/:id` (training session id in the path).
+- The dashboard starts a new session and then redirects to `/training/:id`.
 
-**Opening content**
-- `openings`
-- `opening_lines`
-- `opening_positions` (stable position identity key: FEN/derived hash)
-- `opening_transitions` (`from_position_id` + `move_uci` → `to_position_id`)
+## Running the Application
 
-**User progress**
-- `user_opening_progress` (aggregate per opening)
-- `user_position_stats` (aggregate per opening_position)
+```bash
+# Start the development environment
+docker-compose up --build
 
-**Training sessions (immutable session artifacts)**
-- `training_sessions` (mode, status, `dataset_version_id`)
-- `training_items` (session_id, position_id, `correct_move_uci`, order_index)
-- `training_responses` (`submitted_move_uci`, `is_correct`, timing, created_at)
+docker compose up -d
+```
 
-## Public routes vs backend routes
+    The application is available at https://localhost behind nginx.
+    nginx also proxies websocket traffic at /ws (used by the frontend dev server / Vite HMR).
+    nginx is configured with TLS on port 443 using the self-signed certificate in the container.
 
-The FastAPI app runs its routes without a `/api` prefix. The nginx container reverse-proxies:
-- public: routes under `/api/*`
-- backend: the same routes without `/api` (used internally by the container network)
-
-Example:
-- public `POST /api/auth/login` → backend `POST /auth/login`
-
-## Local development (Docker)
-
-1. Bring up the stack:
-   - `docker compose up --build`
-
-2. Run migrations:
-   - `docker compose run --rm api alembic -c backend/app/migrations/alembic.ini upgrade head`
-
-3. Optional: seed openings:
-   - `docker compose run --rm api python -m app.seed_openings`
-
-## API endpoints (current/required)
-
-- `POST /api/auth/register`
-- `POST /api/auth/login`
-- `POST /api/training-sessions`
-- `GET /api/training-sessions/{id}`
-- `GET /api/training-sessions/{id}/next`
-- `POST /api/training-sessions/{id}/responses`
-- `GET /api/progress/overview`
