@@ -1,73 +1,87 @@
-## Chess Openings Trainer (MVP) — Essential Architecture
+# Chess Training Architecture Overview
 
-### 1) Stack + structure
-- **Frontend:** TypeScript + React (Next.js optional)
-- **Backend:** **Python + FastAPI**
-- **DB:** **PostgreSQL**
-- **Monolith:** modularized codebase (one deployable), clean internal service boundaries
-- **Infra:** **Docker everything** via `docker-compose` from day 1
+## Project Structure (Backend)
 
-### 2) Modules (first MVP)
-Inside `backend/app/modules/`:
-- `auth` (JWT login)
-- `users` (profile + lookup)
-- `openings` (query positions/allowed next moves; no runtime mutation)
-- `training` (create sessions, serve next item, accept responses)
-- `progress` (update/read user stats)
-- `shared` (DB session, common schemas, auth dependency, error types)
+```text
+backend/
+├── app/
+│   ├── db/
+│   │   └── base.py
+│   ├── docs/
+│   │   ├── ARCHITECTURE.md
+│   │   └── schema.svg
+│   ├── migrations/
+│   └── app.py
+├── modules/
+│   ├── auth/
+│   │   ├── service.py
+│   │   └── __init__.py
+│   ├── openings/
+│   │   ├── models.py
+│   │   └── service.py
+│   ├── progress/
+│   │   ├── shared/
+│   │   │   └── db.py
+│   │   └── __init__.py
+│   ├── training/
+│   │   ├── chess_rules.py
+│   │   ├── models.py
+│   │   └── service.py
+│   └── users/
+│       └── models.py
+├── opening_importer/
+│   └── importer/
+│       └── seed/
+├── routers/
+│   ├── auth.py
+│   └── training.py
+└── __init__.py
+```
 
-### 3) Data model (minimum)
-- **Opening content**
-  - `openings`
-  - `opening_lines`
-  - `opening_positions` (derived position key: e.g., FEN or position hash)
-  - `opening_transitions` (from_position_id + move_uci → to_position_id)
-- **User progress**
-  - `user_opening_progress` (aggregate per opening)
-  - `user_position_stats` (aggregate per opening_position)
-- **Training sessions (immutable session artifacts)**
-  - `training_sessions` (mode, status, dataset_version_id)
-  - `training_items` (session_id, position_id, correct_move_uci, order_index)
-  - `training_responses` (submitted_move_uci, is_correct, timing, created_at)
+## High-Level Request Flow
 
-### 4) Request/response flow
-1. **Session create:** `POST /api/training-sessions`
-   - `training` selects items (simple policy) using `progress` + `openings`
-   - writes `training_items` (transaction)
-2. **Training loop:**
-   - `GET /api/training-sessions/{id}/next` (or returns session+next item)
-   - `POST /api/training-sessions/{id}/responses` (records response)
-3. **On each response submission:**
-   - `training` writes `training_responses`
-   - `progress` updates `user_position_stats` (and aggregates) in **same transaction**
-4. **Completion:** when all items answered → mark `training_sessions.status=completed`
+1. Request arrives at FastAPI endpoints in `backend/routers/`.
+2. Routers call module services in `backend/modules/`.
+3. Services use domain models in `backend/modules/*/models.py` (and rules in `backend/modules/training/chess_rules.py`).
+4. Persistence is handled via the DB utilities in `backend/app/db/base.py` and via Alembic migrations in `backend/app/migrations/`.
+5. Training progress read/write uses helpers in `backend/modules/progress/shared/db.py`.
 
-### 5) Opening dataset import (one-time/managed)
-- Import/seeding runs as a **separate command** (not during request handling).
-- Store an `opening_dataset_versions` id; sessions reference it so historical sessions remain consistent.
+## Component Overview
 
-### 6) Local dev workflow (Docker)
-- `docker compose up --build`
-- Run migrations: `docker compose run --rm api alembic upgrade head`
-- Optional seed: `docker compose run --rm api python -m app.seed_openings`
+### Routers (`backend/routers/`)
+- `auth.py`
+- `training.py`
 
-### 7) Migrations strategy (Alembic)
-- All schema changes via Alembic migrations in `backend/app/migrations/versions`.
-- Add indexes for:
-  - session/item ordering and lookup
-  - user stats filters
-  - transitions lookup (`from_position_id`, `move_uci`)
-- Keep data import idempotent/versioned (don’t mix with migrations).
+### Services (`backend/modules/*/service.py`)
+- `modules/auth/service.py`
+- `modules/openings/service.py`
+- `modules/training/service.py`
 
-### 8) Main trade-offs / risks (MVP)
-- **Position identity:** choose stable position key (FEN/derived hash) early.
-- **Selection quality:** keep selection simple for MVP (accuracy-weighted + new/review mix).
-- **Dataset drift:** freeze dataset per MVP release (or version it and bind sessions).
+### Domain Models
+- `modules/users/models.py`
+- `modules/openings/models.py`
+- `modules/training/models.py`
 
-### 9) Minimal endpoints to implement
-- `POST /api/auth/login`
-- `POST /api/training-sessions`
-- `GET /api/training-sessions/{id}`
-- `GET /api/training-sessions/{id}/next`
-- `POST /api/training-sessions/{id}/responses`
-- `GET /api/progress/overview`
+### Rules / Validation Helpers
+- `modules/training/chess_rules.py`
+
+### Progress DB Helpers
+- `modules/progress/shared/db.py`
+
+### DB / Migrations
+- `app/db/base.py`
+- `app/migrations/*` (Alembic)
+
+### Import / Seed Tooling
+- `opening_importer/` (offline seed/import utilities)
+
+## Key Architecture Decisions
+
+| Decision | Implementation |
+|---|---|
+| API design | FastAPI routers grouped by feature area (`routers/auth.py`, `routers/training.py`) |
+| Business logic placement | Module services own workflows (`modules/*/service.py`) |
+| Domain boundaries | Feature-specific model files (`modules/*/models.py`) |
+| Rules location | Move legality and related rules kept in `modules/training/chess_rules.py` |
+| Persistence and migrations | Central DB plumbing in `app/db/base.py` with Alembic migrations in `app/migrations/` |
+| Progress coupling | Progress DB operations centralized in `modules/progress/shared/db.py` |
