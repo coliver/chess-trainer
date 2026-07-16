@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "./api";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -16,22 +17,14 @@ export default function Login() {
     setSubmitting(true);
 
     try {
-      const resp = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
+      // Use your axios instance 'api' instead of fetch
+      const { data } = await api.post("/auth/login", { username, password });
 
-      if (!resp.ok) {
-        setError(await resp.text());
-        return;
-      }
-
+      localStorage.setItem("token", data.access_token);
       setSuccess(true);
       navigate("/dashboard");
-      
-    } catch (err) {
-      setError("Failed to Login. Please try again later.");
+    } catch (err: any) {
+      setError(err.response?.data?.detail || "Failed to Login.");
     } finally {
       setSubmitting(false);
     }
@@ -42,7 +35,6 @@ export default function Login() {
       style={{ maxWidth: 420, margin: "40px auto", fontFamily: "sans-serif" }}
     >
       <h1>Login</h1>
-
 
       <form onSubmit={handleSubmit}>
         <label style={{ display: "block", marginTop: 12 }}>
