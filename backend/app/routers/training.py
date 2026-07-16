@@ -5,6 +5,9 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from typing import List
+
+router = APIRouter()
+
 from backend.app.modules.shared.db import get_db
 from backend.app.modules.training.service import (
     create_training_session,
@@ -14,7 +17,6 @@ from backend.app.modules.training.service import (
 )
 from backend.app.routers.auth import get_current_user
 
-router = APIRouter()
 
 class TrainingSessionCreateResponse(BaseModel):
     id: int

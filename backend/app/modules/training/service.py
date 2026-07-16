@@ -1,3 +1,4 @@
+# backend/app/modules/training/service.py
 from dataclasses import dataclass
 from sqlalchemy.orm import Session
 from sqlalchemy import select, func
@@ -29,13 +30,13 @@ class SubmitResult:
 
 def create_training_session(db: Session, batch_size: int = 1) -> TrainingSession:
     # Deterministic
-    # opening = db.execute(
-    #     select(Opening).order_by(Opening.eco.asc(), Opening.name.asc()).limit(1)
-    # ).scalar_one_or_none()
+    opening = db.execute(
+        select(Opening).order_by(Opening.eco.asc(), Opening.name.asc()).limit(1)
+    ).scalar_one_or_none()
 
-    opening = db.scalar(
-        select(Opening).where(Opening.name == "Amar Opening: Paris Gambit, Gent Gambit")
-    )
+    # opening = db.scalar(
+    #     select(Opening).where(Opening.name == "Amar Opening: Paris Gambit, Gent Gambit")
+    # )
 
     # RANDO
     # opening = db.execute(
@@ -49,6 +50,10 @@ def create_training_session(db: Session, batch_size: int = 1) -> TrainingSession
         raise HTTPException(status_code=404, detail="No openings found in database")
 
     moves = opening.uci_moves.split()
+
+    if not moves:
+        raise HTTPException(status_code=404, detail="No opening moves found")
+
     print(
         "CREATE_TRAINING_SESSION opening:",
         opening.eco,
@@ -58,8 +63,6 @@ def create_training_session(db: Session, batch_size: int = 1) -> TrainingSession
         "all_uci:",
         opening.uci_moves,
     )
-    if not moves:
-        raise HTTPException(status_code=404, detail="No opening moves found")
 
     # 2) Build items from the opening dataset (fen from opening.epd)
     def can_apply(start_board: chess.Board) -> bool:
@@ -140,7 +143,13 @@ def get_current_training_item(db, training_session, all_items):
             )
             .first()
         )
-        print("NEXT_ITEM check:", "item_id=", item.id, "exists_correct=", exists_correct is not None)
+        print(
+            "NEXT_ITEM check:",
+            "item_id=",
+            item.id,
+            "exists_correct=",
+            exists_correct is not None,
+        )
 
         if exists_correct is None:
             return item
@@ -148,7 +157,6 @@ def get_current_training_item(db, training_session, all_items):
     # Everything is already correct: keep showing the last item's prompt instead of returning None
     print("NEXT_ITEM all correct -> returning last_item id=", None)
     return None
-
 
 
 def submit_training_response(
@@ -172,12 +180,14 @@ def submit_training_response(
         ).all()
     )
 
-    print("SESSION_ITEMS_COUNT",
-      db.query(TrainingItem).filter(TrainingItem.session_id == session_id).count())
     print(
-    "items_count_for_session_20=",
-    db.query(TrainingItem).filter(TrainingItem.session_id == session_id).count()
-)
+        "SESSION_ITEMS_COUNT",
+        db.query(TrainingItem).filter(TrainingItem.session_id == session_id).count(),
+    )
+    print(
+        "items_count_for_session_20=",
+        db.query(TrainingItem).filter(TrainingItem.session_id == session_id).count(),
+    )
     current = get_current_training_item(
         db, training_session=session, all_items=all_items
     )
@@ -211,7 +221,6 @@ def submit_training_response(
             error_message="Training items not found for this session.",
         )
 
-
     if current.id != item_id:
         return SubmitResult(
             http_status=404,
@@ -221,10 +230,15 @@ def submit_training_response(
             error_message="Training item not found.",
         )
 
-    print("SUBMIT_DEBUG",
-        "item_id=", current.id,
-        "expected_correct_move_uci=", current.correct_move_uci,
-        "submitted_move_uci=", move_uci)
+    print(
+        "SUBMIT_DEBUG",
+        "item_id=",
+        current.id,
+        "expected_correct_move_uci=",
+        current.correct_move_uci,
+        "submitted_move_uci=",
+        move_uci,
+    )
 
     result = validate_and_apply(
         fen=current.fen,
