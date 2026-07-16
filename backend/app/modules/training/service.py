@@ -4,6 +4,8 @@ from sqlalchemy.orm import Session
 from sqlalchemy import select, func
 from fastapi import HTTPException
 import chess
+from backend.app.routers.auth import get_current_user
+
 
 from backend.app.modules.training.models import (
     TrainingSession,
@@ -28,7 +30,9 @@ class SubmitResult:
     error_message: str | None = None
 
 
-def create_training_session(db: Session, batch_size: int = 1) -> TrainingSession:
+def create_training_session(
+    db: Session, user_id: int, batch_size: int = 1
+) -> TrainingSession:
     # Deterministic
     opening = db.execute(
         select(Opening).order_by(Opening.eco.asc(), Opening.name.asc()).limit(1)
@@ -95,6 +99,7 @@ def create_training_session(db: Session, batch_size: int = 1) -> TrainingSession
         status="active",
         opening_eco=opening.eco,
         opening_name=opening.name,
+        user_id=user_id,
     )
     db.add(session)
     db.flush()

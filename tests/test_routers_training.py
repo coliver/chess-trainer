@@ -1,4 +1,6 @@
 # tests/test_routers_training.py
+from types import SimpleNamespace
+
 import pytest
 from fastapi.testclient import TestClient
 from backend.app.routers.auth import get_current_user
@@ -14,8 +16,7 @@ def client():
         yield None
 
     def _get_current_user_override():
-        return {"id": 1}  # or SimpleNamespace(id=1)
-
+        return SimpleNamespace(id=1)
     app.dependency_overrides[get_db] = _get_db_override
     app.dependency_overrides[get_current_user] = _get_current_user_override
 
@@ -29,7 +30,11 @@ def test_post_training_sessions_returns_id(client, monkeypatch):
     class FakeSession:
         id = 123
 
-    monkeypatch.setattr(training_router, "create_training_session", lambda db: FakeSession)
+    monkeypatch.setattr(
+        training_router,
+        "create_training_session",
+        lambda db, user_id: FakeSession(),
+    )
 
     r = client.post("/training-sessions")
     assert r.status_code == 200
@@ -73,7 +78,11 @@ def test_get_training_next_404_when_no_current_item(client, monkeypatch):
 
     app.dependency_overrides[get_db] = _get_db_override
 
-    monkeypatch.setattr(training_router, "get_current_training_item", lambda db, training_session, all_items: None)
+    monkeypatch.setattr(
+        training_router,
+        "get_current_training_item",
+        lambda db, training_session, all_items: None,
+    )
 
     r = client.get("/training-sessions/10/next")
     assert r.status_code == 404
@@ -137,7 +146,11 @@ def test_post_training_response_400_when_service_returns_400(client, monkeypatch
         reason = "ignored"
         fen_after = None
 
-    monkeypatch.setattr(training_router, "submit_training_response", lambda db, session_id, item_id, move_uci: Result())
+    monkeypatch.setattr(
+        training_router,
+        "submit_training_response",
+        lambda db, session_id, item_id, move_uci: Result(),
+    )
 
     r = client.post(
         "/training-sessions/1/responses",
@@ -147,7 +160,9 @@ def test_post_training_response_400_when_service_returns_400(client, monkeypatch
     assert r.json()["detail"] == "invalid uci"
 
 
-def test_post_training_response_404_uses_reason_when_error_message_missing(client, monkeypatch):
+def test_post_training_response_404_uses_reason_when_error_message_missing(
+    client, monkeypatch
+):
     class Result:
         http_status = 404
         error_message = None
@@ -155,7 +170,11 @@ def test_post_training_response_404_uses_reason_when_error_message_missing(clien
         reason = "session not found"
         fen_after = None
 
-    monkeypatch.setattr(training_router, "submit_training_response", lambda db, session_id, item_id, move_uci: Result())
+    monkeypatch.setattr(
+        training_router,
+        "submit_training_response",
+        lambda db, session_id, item_id, move_uci: Result(),
+    )
 
     r = client.post(
         "/training-sessions/1/responses",
@@ -173,7 +192,11 @@ def test_post_training_response_success_maps_fields(client, monkeypatch):
         reason = "wrong move"
         fen_after = "afterfen"
 
-    monkeypatch.setattr(training_router, "submit_training_response", lambda db, session_id, item_id, move_uci: Result())
+    monkeypatch.setattr(
+        training_router,
+        "submit_training_response",
+        lambda db, session_id, item_id, move_uci: Result(),
+    )
 
     r = client.post(
         "/training-sessions/1/responses",
@@ -231,7 +254,9 @@ def test_post_training_items_400_when_session_not_initialized(client, monkeypatc
     )
 
 
-def test_post_training_items_success_returns_created_and_session_id(client, monkeypatch):
+def test_post_training_items_success_returns_created_and_session_id(
+    client, monkeypatch
+):
     class FakeSession:
         id = 10
         opening_eco = "C20"
@@ -246,7 +271,9 @@ def test_post_training_items_success_returns_created_and_session_id(client, monk
 
     app.dependency_overrides[get_db] = _get_db_override
 
-    monkeypatch.setattr(training_router, "create_training_items", lambda db, session_id, items: 7)
+    monkeypatch.setattr(
+        training_router, "create_training_items", lambda db, session_id, items: 7
+    )
 
     r = client.post(
         "/training-sessions/10/items",

@@ -16,6 +16,9 @@ class TrainingSession(Base):
 
     items = relationship("TrainingItem", back_populates="session", cascade="all, delete-orphan")
 
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
+    
+    user = relationship("User", back_populates="training_sessions")
 
 class TrainingItem(Base):
     __tablename__ = "training_items"

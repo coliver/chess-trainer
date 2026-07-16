@@ -22,7 +22,7 @@ def test_submit_response_non_current_item_id_returns_404(tmp_path):
     db: Session = shared_db.SessionLocal()
     try:
         # Session + two items
-        session = TrainingSession(status="active")
+        session = TrainingSession(status="active", user_id=1)
         db.add(session)
         db.flush()
 

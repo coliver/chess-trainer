@@ -1,6 +1,6 @@
 import datetime
 from sqlalchemy import String, Boolean, DateTime, func
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from backend.app.modules.shared.db import Base
 class User(Base):
     __tablename__ = "users"
@@ -23,4 +23,10 @@ class User(Base):
     )
     updated_at: Mapped[datetime] = mapped_column(
         DateTime, nullable=False, server_default=func.now(), onupdate=func.now()
+    )
+
+    training_sessions = relationship(
+        "TrainingSession",
+        back_populates="user",
+        cascade="all, delete-orphan",
     )

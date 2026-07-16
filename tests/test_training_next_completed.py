@@ -22,7 +22,7 @@ def test_get_next_after_completion_does_not_fallback(tmp_path):
 
     db = shared_db.SessionLocal()
     try:
-        session = TrainingSession(status="active")
+        session = TrainingSession(status="active", user_id=1)
         db.add(session)
         db.flush()
 

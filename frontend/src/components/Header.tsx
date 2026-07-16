@@ -1,5 +1,6 @@
 // frontend/src/Header.tsx
 import { Link } from "react-router-dom";
+import profileIcon from "../assets/profile.svg";
 
 export default function Header() {
   const isLoggedIn = !!localStorage.getItem("token");
@@ -22,7 +23,12 @@ export default function Header() {
               </Link>
             </>
           ) : (
-            <span className="site-header-pill"> </span>
+            <>
+              <Link to="/profile" className="site-header-profile-link" aria-label="Profile">
+                <img src={profileIcon} alt="" width={28} height={28} />
+              </Link>
+              <span className="site-header-pill">you are logged in maybe?</span>
+            </>
           )}
         </nav>
       </div>

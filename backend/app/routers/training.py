@@ -59,7 +59,7 @@ def post_training_sessions(
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user),
 ):
-    session = create_training_session(db)
+    session = create_training_session(db, current_user.id)
     return {"id": session.id}
 
 

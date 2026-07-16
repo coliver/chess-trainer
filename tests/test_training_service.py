@@ -459,7 +459,7 @@ def test_create_training_session_success_creates_session_and_items():
 
     db = FakeDBCreateSession(opening=opening)
 
-    session = service.create_training_session(db=db)
+    session = service.create_training_session(db=db, user_id=1)
 
     assert isinstance(session, TrainingSession)
     assert session.status == "active"
@@ -484,7 +484,7 @@ def test_create_training_session_no_opening_returns_404():
     db = FakeDBCreateSession(opening=None)
 
     with pytest.raises(HTTPException) as exc:
-        service.create_training_session(db=db)
+        service.create_training_session(db=db, user_id=1)
 
     assert exc.value.status_code == 404
     assert exc.value.detail == "No openings found in database"
@@ -501,7 +501,7 @@ def test_create_training_session_no_opening_moves_found_returns_404():
     db = FakeDBCreateSession(opening=opening)
 
     with pytest.raises(HTTPException) as exc:
-        service.create_training_session(db=db)
+        service.create_training_session(db=db, user_id=1)
 
     assert exc.value.status_code == 404
     assert exc.value.detail == "No opening moves found"
@@ -518,7 +518,7 @@ def test_create_training_session_inconsistent_epd_falls_back_to_initial():
     )
 
     db = FakeDBCreateSession(opening=opening)
-    session = service.create_training_session(db=db)
+    session = service.create_training_session(db=db, user_id=1)
 
     assert session.status == "active"
 
@@ -540,7 +540,7 @@ def test_create_training_session_can_apply_except_hits_500():
     db = FakeDBCreateSession(opening=opening)
 
     with pytest.raises(HTTPException) as exc:
-        service.create_training_session(db=db)
+        service.create_training_session(db=db, user_id=1)
 
     assert exc.value.status_code == 500
     assert "Opening dataset inconsistent" in exc.value.detail
@@ -570,7 +570,7 @@ def test_create_training_session_dataset_mismatch_hits_500(monkeypatch):
     monkeypatch.setattr(chess.Move, "from_uci", fake_from_uci)
 
     with pytest.raises(HTTPException) as exc:
-        service.create_training_session(db=db)
+        service.create_training_session(db=db, user_id=1)
 
     assert exc.value.status_code == 500
     assert "Dataset mismatch" in exc.value.detail

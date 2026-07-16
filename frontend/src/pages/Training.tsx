@@ -22,8 +22,6 @@ export const Training = () => {
   const [showAnimations, setShowAnimations] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const chessForFen = useCallback((f: string) => new Chess(f), []);
-
   const toPositionString = (raw: unknown) => {
     if (raw == null) return START_FEN;
     const s = String(raw).trim();
@@ -182,7 +180,6 @@ export const Training = () => {
         : "";
       const uci = `${sourceSquare}${targetSquare}${promotionChar}`;
 
-      // Keep your existing flow
       setMoveInput(uci);
       void submitMove(uci);
 
