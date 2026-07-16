@@ -102,8 +102,7 @@ def compute_epd_and_uci(pgn: str) -> tuple[str, str]:
             '[Round "?"]\n'
             '[White "-"]\n'
             '[Black "-"]\n'
-            '[Result "*"]\n\n'
-            + pgn_text
+            '[Result "*"]\n\n' + pgn_text
         )
 
     game = chess.pgn.read_game(io.StringIO(pgn_text))
@@ -142,9 +141,6 @@ def main() -> None:
                 print(f"Downloading {key}.tsv ...")
                 download(url, tsv_path)
 
-            # rows = load_tsv(tsv_path)
-            # print(f"{key}.tsv: {len(rows)} rows")
-            # upsert_openings(conn, rows)
             rows = load_tsv(tsv_path)
             print(f"{key}.tsv: {len(rows)} rows")
 
