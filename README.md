@@ -88,7 +88,9 @@ docker-compose up --build
 docker compose up -d
 ```
 
-    The application is available at https://localhost behind nginx.
-    nginx also proxies websocket traffic at /ws (used by the frontend dev server / Vite HMR).
-    nginx is configured with TLS on port 443 using the self-signed certificate in the container.
+The application is available at https://localhost behind nginx.
+
+nginx also proxies websocket traffic at /ws (used by the frontend dev server / Vite HMR). 
+
+nginx is configured with TLS on port 443 using the self-signed certificate in the container. 
 
