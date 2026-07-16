@@ -35,6 +35,9 @@ services:
     build:
       context: .
       dockerfile: frontend/Dockerfile
+    volumes:
+      - ./frontend:/app            # Syncs the code
+      - /app/node_modules          # Keeps container modules separate
     environment:
       VITE_BACKEND_URL: http://api:8000
     expose:
@@ -84,7 +87,6 @@ services:
       --output-file "/out/schema.svg"
       --info-level=STANDARD
       --log-level=INFO
-    restart: unless-stopped
 
 volumes:
   pgdata:

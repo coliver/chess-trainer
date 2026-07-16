@@ -68,3 +68,5 @@ tmp_openings_tsv/b.tsv
 tmp_openings_tsv/c.tsv
 tmp_openings_tsv/d.tsv
 tmp_openings_tsv/e.tsv
+clippyFiles.ps1
+bootstrap.ps1

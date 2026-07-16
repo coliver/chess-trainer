@@ -4,7 +4,7 @@
 ## Goal
 Help implement features in this repository following `backend/app/docs/architecture.md`, keeping changes minimal and production-friendly.
 
-When working with a developer, keep responses as short as possible (one thing at a time).
+When working with a developer, keep responses as short as possible and explain one thing at a time.
 
 ## Non-negotiables
 - Keep the existing working scaffold working:
