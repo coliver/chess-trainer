@@ -2,6 +2,7 @@ import chess
 from dataclasses import dataclass
 from typing import Optional
 
+
 @dataclass
 class ValidationResult:
     http_status: int
@@ -10,8 +11,10 @@ class ValidationResult:
     fen_after: Optional[str] = None
     error_message: Optional[str] = None
 
+
 def parse_move_uci(move_uci: str) -> chess.Move:
     return chess.Move.from_uci(move_uci.strip())
+
 
 def validate_and_apply(fen: str, move_uci: str, expected_correct_uci: str) -> ValidationResult:
     board = chess.Board(fen)

@@ -1,7 +1,6 @@
 # tests/test_openings_service_get_prompt_and_move.py
 import pytest
 import chess
-from sqlalchemy import select
 
 from backend.app.modules.openings.service import get_prompt_and_move
 from backend.app.modules.openings.models import Opening

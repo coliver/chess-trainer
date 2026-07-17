@@ -17,6 +17,7 @@ def client():
 
     def _get_current_user_override():
         return SimpleNamespace(id=1)
+
     app.dependency_overrides[get_db] = _get_db_override
     app.dependency_overrides[get_current_user] = _get_current_user_override
 
@@ -160,9 +161,7 @@ def test_post_training_response_400_when_service_returns_400(client, monkeypatch
     assert r.json()["detail"] == "invalid uci"
 
 
-def test_post_training_response_404_uses_reason_when_error_message_missing(
-    client, monkeypatch
-):
+def test_post_training_response_404_uses_reason_when_error_message_missing(client, monkeypatch):
     class Result:
         http_status = 404
         error_message = None
@@ -254,9 +253,7 @@ def test_post_training_items_400_when_session_not_initialized(client, monkeypatc
     )
 
 
-def test_post_training_items_success_returns_created_and_session_id(
-    client, monkeypatch
-):
+def test_post_training_items_success_returns_created_and_session_id(client, monkeypatch):
     class FakeSession:
         id = 10
         opening_eco = "C20"
@@ -271,9 +268,7 @@ def test_post_training_items_success_returns_created_and_session_id(
 
     app.dependency_overrides[get_db] = _get_db_override
 
-    monkeypatch.setattr(
-        training_router, "create_training_items", lambda db, session_id, items: 7
-    )
+    monkeypatch.setattr(training_router, "create_training_items", lambda db, session_id, items: 7)
 
     r = client.post(
         "/training-sessions/10/items",

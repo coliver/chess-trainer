@@ -11,6 +11,7 @@ app = FastAPI(title="Chess Trainer")
 app.include_router(training_router, prefix="")
 app.include_router(auth_router, prefix="")
 
+
 class PingResponse(BaseModel):
     message: str
 

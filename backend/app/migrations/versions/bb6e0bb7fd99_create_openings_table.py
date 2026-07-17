@@ -15,16 +15,14 @@ def table_exists(table_name: str) -> bool:
     """Return True if the given table already exists in the current schema."""
     conn = op.get_bind()
     result = conn.execute(
-        text(
-            """
+        text("""
             SELECT EXISTS (
                 SELECT 1
                 FROM information_schema.tables
                 WHERE table_schema = current_schema()
                   AND table_name = :tbl
             )
-            """
-        ),
+            """),
         {"tbl": table_name},
     )
     return result.scalar()

@@ -1,19 +1,26 @@
 import os
 
+
 def setup_db_sqlite(tmp_path):
     # Must be set BEFORE importing anything that reads DATABASE_URL at import-time.
     db_file = tmp_path / "test.sqlite"
     os.environ["DATABASE_URL"] = f"sqlite+pysqlite:///{db_file}"
 
     from backend.app.modules.shared import db as shared_db
+
     return shared_db
+
 
 def test_submit_response_non_current_item_id_returns_404(tmp_path):
     shared_db = setup_db_sqlite(tmp_path)
 
     # Imports after DATABASE_URL is set
     from sqlalchemy.orm import Session
-    from backend.app.modules.training.models import TrainingSession, TrainingItem, TrainingResponse
+    from backend.app.modules.training.models import (
+        TrainingSession,
+        TrainingItem,
+        TrainingResponse,
+    )
     from backend.app.modules.training.service import submit_training_response
 
     # Create schema
@@ -57,7 +64,7 @@ def test_submit_response_non_current_item_id_returns_404(tmp_path):
         res = submit_training_response(
             db=db,
             session_id=session.id,
-            item_id=item1.id,     # NOT the current item
+            item_id=item1.id,  # NOT the current item
             move_uci="thiswon'tbeparsedbutshouldnotmatter",
         )
 

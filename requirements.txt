@@ -3,12 +3,12 @@ uvicorn[standard]
 sqlalchemy
 psycopg[binary]
 python-chess
-pydantic-settings
 alembic
 pytest
 httpx2
-flake8 
-autopep8 
+pydantic-settings
+ruff 
+black
 coverage
 pytest-cov
 email-validator

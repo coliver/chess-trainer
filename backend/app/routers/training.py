@@ -77,9 +77,7 @@ def get_training_next(id: int, db: Session = Depends(get_db)):
         ).all()
     )
 
-    item = get_current_training_item(
-        db, training_session=training_session, all_items=all_items
-    )
+    item = get_current_training_item(db, training_session=training_session, all_items=all_items)
     if item is None:
         raise HTTPException(status_code=404, detail="No current training item")
 
@@ -99,18 +97,12 @@ def get_training_next(id: int, db: Session = Depends(get_db)):
     response_model=MoveResponseResponse,
     status_code=status.HTTP_200_OK,
 )
-def post_training_response(
-    id: int, req: MoveResponseRequest, db: Session = Depends(get_db)
-):
-    result = submit_training_response(
-        db, session_id=id, item_id=req.item_id, move_uci=req.move_uci
-    )
+def post_training_response(id: int, req: MoveResponseRequest, db: Session = Depends(get_db)):
+    result = submit_training_response(db, session_id=id, item_id=req.item_id, move_uci=req.move_uci)
     if result.http_status == 400:
         raise HTTPException(status_code=400, detail=result.error_message)
     if result.http_status == 404:
-        raise HTTPException(
-            status_code=404, detail=result.error_message or result.reason
-        )
+        raise HTTPException(status_code=404, detail=result.error_message or result.reason)
 
     return MoveResponseResponse(
         correct=result.correct,

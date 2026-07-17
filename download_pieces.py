@@ -3,7 +3,7 @@ import requests
 import time
 
 base = "https://www.chessboardjs.com/img/chesspieces/wikipedia"
-pieces = ["wP","wN","wB","wR","wQ","wK","bP","bN","bB","bR","bQ","bK"]
+pieces = ["wP", "wN", "wB", "wR", "wQ", "wK", "bP", "bN", "bB", "bR", "bQ", "bK"]
 
 out_dir = "static/img/chesspieces/wikipedia"
 os.makedirs(out_dir, exist_ok=True)

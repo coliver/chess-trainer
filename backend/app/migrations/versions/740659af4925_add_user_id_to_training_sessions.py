@@ -8,10 +8,11 @@ from alembic import op
 import sqlalchemy as sa
 
 # revision identifiers, used by Alembic.
-revision = '740659af4925'
-down_revision = '7f740a9c4e3a'
+revision = "740659af4925"
+down_revision = "7f740a9c4e3a"
 branch_labels = None
 depends_on = None
+
 
 def upgrade():
     op.add_column(

@@ -8,10 +8,11 @@ from alembic import op
 import sqlalchemy as sa
 
 # revision identifiers, used by Alembic.
-revision = '7f740a9c4e3a'
-down_revision = 'bb6e0bb7fd99'
+revision = "7f740a9c4e3a"
+down_revision = "bb6e0bb7fd99"
 branch_labels = None
 depends_on = None
+
 
 def upgrade():
     op.add_column(
@@ -38,6 +39,7 @@ def upgrade():
         ["eco", "name"],
         ondelete="RESTRICT",
     )
+
 
 def downgrade():
     op.drop_constraint("fk_training_sessions_openings", "training_sessions", type_="foreignkey")

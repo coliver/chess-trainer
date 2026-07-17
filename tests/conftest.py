@@ -7,7 +7,8 @@ sys.path.insert(0, str(ROOT))
 import pytest
 from sqlalchemy.orm import sessionmaker
 from backend.app.modules.shared.db import engine, get_db
-from backend.app.app import app 
+from backend.app.app import app
+
 
 @pytest.fixture()
 def db():
@@ -27,10 +28,10 @@ def db():
         trans.rollback()
         connection.close()
 
+
 @pytest.fixture(autouse=True)
 def override_get_db(db):
     print("OVERRIDE GET DB")
     app.dependency_overrides[get_db] = lambda: db
     yield
     app.dependency_overrides.clear()
-    

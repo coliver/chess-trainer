@@ -1,10 +1,9 @@
 # backend/app/modules/training/service.py
 from dataclasses import dataclass
 from sqlalchemy.orm import Session
-from sqlalchemy import select, func
+from sqlalchemy import select
 from fastapi import HTTPException
 import chess
-from backend.app.routers.auth import get_current_user
 
 
 from backend.app.modules.training.models import (
@@ -30,9 +29,7 @@ class SubmitResult:
     error_message: str | None = None
 
 
-def create_training_session(
-    db: Session, user_id: int, batch_size: int = 1
-) -> TrainingSession:
+def create_training_session(db: Session, user_id: int, batch_size: int = 1) -> TrainingSession:
     # Deterministic
     opening = db.execute(
         select(Opening).order_by(Opening.eco.asc(), Opening.name.asc()).limit(1)
@@ -137,8 +134,6 @@ def get_current_training_item(db, training_session, all_items):
     if not all_items:
         return None
 
-    last_item = all_items[-1]
-
     for item in all_items:
         exists_correct = (
             db.query(TrainingResponse)
@@ -193,9 +188,7 @@ def submit_training_response(
         "items_count_for_session_20=",
         db.query(TrainingItem).filter(TrainingItem.session_id == session_id).count(),
     )
-    current = get_current_training_item(
-        db, training_session=session, all_items=all_items
-    )
+    current = get_current_training_item(db, training_session=session, all_items=all_items)
     if current is None:
         # If all items are already answered, the session is complete; return a completion-specific message.
         all_items_responded = all(
@@ -271,11 +264,7 @@ def submit_training_response(
         result.fen_after,
     )
 
-    existing = (
-        db.query(TrainingResponse)
-        .filter(TrainingResponse.item_id == current.id)
-        .first()
-    )
+    existing = db.query(TrainingResponse).filter(TrainingResponse.item_id == current.id).first()
 
     if existing:
         existing.submitted_move_uci = move_uci.strip()
@@ -318,9 +307,7 @@ def submit_training_response(
     )
 
 
-def create_training_items(
-    db: Session, session_id: int, items: List["TrainingItemCreate"]
-) -> int:
+def create_training_items(db: Session, session_id: int, items: List["TrainingItemCreate"]) -> int:
     session = db.get(TrainingSession, session_id)
     if session is None:
         raise HTTPException(status_code=404, detail="Training session not found")

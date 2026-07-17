@@ -65,9 +65,7 @@ def load_tsv(
         return rows
 
 
-def upsert_openings(
-    conn, rows: list[tuple[str, str, str | None, str | None, str | None]]
-) -> None:
+def upsert_openings(conn, rows: list[tuple[str, str, str | None, str | None, str | None]]) -> None:
     sql = """
       insert into openings (eco, name, epd, pgn, uci_moves)
       values %s

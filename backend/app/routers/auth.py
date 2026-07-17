@@ -37,9 +37,7 @@ def verify_password(password: str, password_hash: str) -> bool:
 @router.post("/register")
 def register(req: RegisterRequest, db=Depends(get_db)):
     existing = (
-        db.query(User)
-        .filter((User.email == req.email) | (User.username == req.username))
-        .first()
+        db.query(User).filter((User.email == req.email) | (User.username == req.username)).first()
     )
     if existing:
         raise HTTPException(status_code=409, detail="Email or username already exists")

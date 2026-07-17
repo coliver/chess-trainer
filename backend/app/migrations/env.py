@@ -11,14 +11,14 @@ import pkgutil
 from dotenv import load_dotenv
 
 # .env lives at the repository root: /app/.env
-repo_root = Path(__file__).resolve().parents[3]      # /app
+repo_root = Path(__file__).resolve().parents[3]  # /app
 dotenv_path = repo_root / ".env"
 load_dotenv(dotenv_path)  # populates os.environ
 
 # ----------------------------------------------------------------------
 # Ensure the project packages are on PYTHONPATH
 # ----------------------------------------------------------------------
-backend_root = Path(__file__).resolve().parents[2]   # /app/backend
+backend_root = Path(__file__).resolve().parents[2]  # /app/backend
 sys.path.insert(0, str(repo_root))
 sys.path.insert(0, str(backend_root))
 

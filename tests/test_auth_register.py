@@ -201,6 +201,7 @@ def test_login_success_returns_access_token(jwt_env):
     )
     assert payload["sub"] == "1"
 
+
 def test_login_by_username_success_returns_access_token(jwt_env):
     u = User(
         id=1,
@@ -237,11 +238,13 @@ def test_get_current_user_invalid_token_401(jwt_env):
     assert e.value.status_code == 401
     assert e.value.detail == "Invalid token"
 
+
 def test_get_current_user_missing_sub_raises_401(jwt_env, monkeypatch):
     db = FakeDB(users=[])
 
     # Force jwt.decode to succeed but return payload without "sub"
     import backend.app.routers.auth as auth_mod
+
     monkeypatch.setattr(auth_mod.jwt, "decode", lambda *args, **kwargs: {})
 
     with pytest.raises(HTTPException) as e:
@@ -261,7 +264,11 @@ def test_get_current_user_inactive_user_401(jwt_env):
     )
     db = FakeDB(users=[inactive])
 
-    token = jwt.encode({"sub": "1", "iat": 0, "exp": 9_999_999_999}, os.environ["JWT_SECRET"], algorithm="HS256")
+    token = jwt.encode(
+        {"sub": "1", "iat": 0, "exp": 9_999_999_999},
+        os.environ["JWT_SECRET"],
+        algorithm="HS256",
+    )
     with pytest.raises(HTTPException) as e:
         get_current_user(authorization=f"Bearer {token}", db=db)
 
@@ -279,12 +286,17 @@ def test_get_current_user_success(jwt_env):
     )
     db = FakeDB(users=[active])
 
-    token = jwt.encode({"sub": "1", "iat": 0, "exp": 9_999_999_999}, os.environ["JWT_SECRET"], algorithm="HS256")
+    token = jwt.encode(
+        {"sub": "1", "iat": 0, "exp": 9_999_999_999},
+        os.environ["JWT_SECRET"],
+        algorithm="HS256",
+    )
     out = get_current_user(authorization=f"Bearer {token}", db=db)
 
     assert out.id == 1
     assert out.email == "a@example.com"
     assert out.is_active is True
+
 
 def test_jwt_secret_not_configured_raises_500(monkeypatch):
     monkeypatch.delenv("JWT_SECRET", raising=False)
