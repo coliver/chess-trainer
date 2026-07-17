@@ -1,10 +1,9 @@
 # backend/app/modules/training/service.py
 from dataclasses import dataclass
 from sqlalchemy.orm import Session
-from sqlalchemy import select
+from sqlalchemy import select, func, and_
 from fastapi import HTTPException
 import chess
-
 
 from backend.app.modules.training.models import (
     TrainingSession,
@@ -27,31 +26,30 @@ class SubmitResult:
     reason: str
     fen_after: str | None = None
     error_message: str | None = None
+    session_completed: bool = False
 
 
 def create_training_session(db: Session, user_id: int, batch_size: int = 1) -> TrainingSession:
-    # Deterministic
     opening = db.execute(
-        select(Opening).order_by(Opening.eco.asc(), Opening.name.asc()).limit(1)
+        select(Opening)
+        .outerjoin(
+            TrainingSession,
+            and_(
+                TrainingSession.user_id == user_id,
+                TrainingSession.opening_eco == Opening.eco,
+                TrainingSession.opening_name == Opening.name,
+            ),
+        )
+        .where(Opening.uci_moves.is_not(None))
+        .where(TrainingSession.id.is_(None))
+        .order_by(func.random())
+        .limit(1)
     ).scalar_one_or_none()
-
-    # opening = db.scalar(
-    #     select(Opening).where(Opening.name == "Amar Opening: Paris Gambit, Gent Gambit")
-    # )
-
-    # RANDO
-    # opening = db.execute(
-    #     select(Opening)
-    #     .where(Opening.uci_moves.is_not(None))
-    #     .order_by(func.random())
-    #     .limit(1)
-    # ).scalar_one_or_none()
 
     if not opening or not opening.uci_moves:
         raise HTTPException(status_code=404, detail="No openings found in database")
 
     moves = opening.uci_moves.split()
-
     if not moves:
         raise HTTPException(status_code=404, detail="No opening moves found")
 
@@ -65,7 +63,6 @@ def create_training_session(db: Session, user_id: int, batch_size: int = 1) -> T
         opening.uci_moves,
     )
 
-    # 2) Build items from the opening dataset (fen from opening.epd)
     def can_apply(start_board: chess.Board) -> bool:
         b = start_board.copy()
         try:
@@ -78,7 +75,16 @@ def create_training_session(db: Session, user_id: int, batch_size: int = 1) -> T
         except Exception:
             return False
 
-    board = chess.Board(opening.epd) if opening.epd else chess.Board()
+    def epd_to_fen(epd: str) -> str:
+        s = epd.split("|", 1)[0].split(";", 1)[0].strip()
+        return s
+
+    clean_epd = None
+    if opening.epd:
+        clean_epd = epd_to_fen(opening.epd)
+    
+    board = chess.Board(clean_epd) if clean_epd else chess.Board()
+
     if not can_apply(board):
         initial = chess.Board()
         if can_apply(initial):
@@ -101,6 +107,8 @@ def create_training_session(db: Session, user_id: int, batch_size: int = 1) -> T
     db.add(session)
     db.flush()
 
+    order_index = 0
+
     for idx, move_uci in enumerate(moves):
         current_fen = board.fen()
 
@@ -117,11 +125,12 @@ def create_training_session(db: Session, user_id: int, batch_size: int = 1) -> T
         db.add(
             TrainingItem(
                 session_id=session.id,
-                order_index=idx,
+                order_index=order_index,
                 fen=current_fen,
                 correct_move_uci=move_uci,
             )
         )
+        order_index += 1
 
         board.push(move)
 
@@ -154,7 +163,6 @@ def get_current_training_item(db, training_session, all_items):
         if exists_correct is None:
             return item
 
-    # Everything is already correct: keep showing the last item's prompt instead of returning None
     print("NEXT_ITEM all correct -> returning last_item id=", None)
     return None
 
@@ -188,9 +196,9 @@ def submit_training_response(
         "items_count_for_session_20=",
         db.query(TrainingItem).filter(TrainingItem.session_id == session_id).count(),
     )
+
     current = get_current_training_item(db, training_session=session, all_items=all_items)
     if current is None:
-        # If all items are already answered, the session is complete; return a completion-specific message.
         all_items_responded = all(
             db.query(TrainingResponse)
             .filter(
@@ -204,11 +212,12 @@ def submit_training_response(
 
         if all_items_responded:
             return SubmitResult(
-                http_status=404,
+                http_status=200,
                 correct=False,
                 reason="training session completed",
                 fen_after=None,
                 error_message="Training session already completed.",
+                session_completed=True,
             )
 
         return SubmitResult(
@@ -294,7 +303,9 @@ def submit_training_response(
         is not None
         for it in all_items
     )
-    if all_responded:
+    session_completed = all_responded
+
+    if session_completed:
         session.status = "completed"
 
     db.commit()
@@ -304,6 +315,7 @@ def submit_training_response(
         reason=result.reason,
         fen_after=result.fen_after,
         error_message=result.error_message,
+        session_completed=session_completed,
     )
 
 

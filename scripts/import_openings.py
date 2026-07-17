@@ -90,8 +90,6 @@ def compute_epd_and_uci(pgn: str) -> tuple[str, str]:
     if not pgn_text:
         return None, None
 
-    # If TSV pgn has no tags, chess.pgn.read_game can fail.
-    # Prepend minimal tags.
     if "[" not in pgn_text.splitlines()[0]:
         pgn_text = (
             '[Event "Opening"]\n'
@@ -108,13 +106,15 @@ def compute_epd_and_uci(pgn: str) -> tuple[str, str]:
         raise RuntimeError(f"Could not parse PGN: {pgn[:80]}...")
 
     board = game.board()
+
+    # EPD from the START position
+    epd = " ".join(board.fen().split(" ")[:4])
+
     uci_moves: list[str] = []
     for move in game.mainline_moves():
         uci_moves.append(move.uci())
         board.push(move)
 
-    # EPD = FEN without move numbers => first 4 fields of FEN
-    epd = " ".join(board.fen().split(" ")[:4])
     return epd, " ".join(uci_moves)
 
 

@@ -1,5 +1,5 @@
 // frontend/src/pages/Dashboard.tsx
-import React from 'react';
+import { Button } from "../components/Button";
 import { useNavigate } from 'react-router-dom';
 import api from '../api';
 
@@ -23,9 +23,9 @@ export const Dashboard = () => {
         <p className="subtitle">Ready to practice your lines?</p>
 
         <div className="dashboard-actions">
-          <button className="btn" onClick={startSession}>
+          <Button onClick={startSession}>
             Start New Training Session
-          </button>
+          </Button>
         </div>
       </div>
     </main>

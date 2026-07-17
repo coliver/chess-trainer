@@ -332,12 +332,14 @@ def test_submit_training_response_current_none_all_items_responded_returns_compl
 
     res = service.submit_training_response(db=db, session_id=123, item_id=999, move_uci="e2e4")
 
-    assert res.http_status == 404
+    assert res.http_status == 200
     assert res.correct is False
     assert res.reason == "training session completed"
     assert res.error_message == "Training session already completed."
     assert res.fen_after is None
+    assert res.session_completed is True
     assert db.commit_calls == 0  # early return
+
 
 
 def test_submit_training_response_current_none_not_all_items_responded_returns_item_not_found(

@@ -27,7 +27,7 @@ def client():
     app.dependency_overrides.clear()
 
 
-def test_post_training_sessions_returns_id(client, monkeypatch):
+def test_post_training_sessions_returns_id(client: any, monkeypatch: pytest.MonkeyPatch):
     class FakeSession:
         id = 123
 
@@ -42,7 +42,7 @@ def test_post_training_sessions_returns_id(client, monkeypatch):
     assert r.json() == {"id": 123}
 
 
-def test_get_training_next_404_when_session_missing(client, monkeypatch):
+def test_get_training_next_404_when_session_missing(client: any, monkeypatch: pytest.MonkeyPatch):
     class FakeDB:
         def get(self, model, id):
             return None
@@ -57,7 +57,7 @@ def test_get_training_next_404_when_session_missing(client, monkeypatch):
     assert r.json()["detail"] == "Training session not found"
 
 
-def test_get_training_next_404_when_no_current_item(client, monkeypatch):
+def test_get_training_next_404_when_no_current_item(client: any, monkeypatch: pytest.MonkeyPatch):
     class FakeSession:
         id = 10
         opening_eco = "C20"
@@ -90,7 +90,7 @@ def test_get_training_next_404_when_no_current_item(client, monkeypatch):
     assert r.json()["detail"] == "No current training item"
 
 
-def test_get_training_next_success_maps_fields(client, monkeypatch):
+def test_get_training_next_success_maps_fields(client: any, monkeypatch: pytest.MonkeyPatch):
     class FakeSession:
         id = 10
         opening_eco = "C20"
@@ -101,6 +101,7 @@ def test_get_training_next_success_maps_fields(client, monkeypatch):
         session_id = 10
         order_index = 2
         fen = "the-fen"
+        correct_move_uci = 'e2e4'
 
     class FakeScalarResult:
         def all(self):
@@ -136,10 +137,11 @@ def test_get_training_next_success_maps_fields(client, monkeypatch):
         "move_count_limit": None,
         "opening_eco": "C20",
         "opening_name": "Test Opening",
+        "correct_move_uci": "e2e4" # TODO Remove me. DEBUG ONLY.        
     }
 
 
-def test_post_training_response_400_when_service_returns_400(client, monkeypatch):
+def test_post_training_response_400_when_service_returns_400(client: any, monkeypatch: pytest.MonkeyPatch):
     class Result:
         http_status = 400
         error_message = "invalid uci"
@@ -161,7 +163,7 @@ def test_post_training_response_400_when_service_returns_400(client, monkeypatch
     assert r.json()["detail"] == "invalid uci"
 
 
-def test_post_training_response_404_uses_reason_when_error_message_missing(client, monkeypatch):
+def test_post_training_response_404_uses_reason_when_error_message_missing(client: any, monkeypatch: pytest.MonkeyPatch):
     class Result:
         http_status = 404
         error_message = None
@@ -183,13 +185,14 @@ def test_post_training_response_404_uses_reason_when_error_message_missing(clien
     assert r.json()["detail"] == "session not found"
 
 
-def test_post_training_response_success_maps_fields(client, monkeypatch):
+def test_post_training_response_success_maps_fields(client: any, monkeypatch: pytest.MonkeyPatch):
     class Result:
         http_status = 200
         error_message = None
         correct = False
         reason = "wrong move"
         fen_after = "afterfen"
+        session_completed = False
 
     monkeypatch.setattr(
         training_router,
@@ -206,10 +209,11 @@ def test_post_training_response_success_maps_fields(client, monkeypatch):
         "correct": False,
         "reason": "wrong move",
         "fen_after": "afterfen",
+        "session_completed": False,  
     }
 
 
-def test_post_training_items_404_when_session_missing(client, monkeypatch):
+def test_post_training_items_404_when_session_missing(client: any, monkeypatch: pytest.MonkeyPatch):
     class FakeDB:
         def get(self, model, id):
             return None
@@ -227,7 +231,7 @@ def test_post_training_items_404_when_session_missing(client, monkeypatch):
     assert r.json()["detail"] == "Training session not found"
 
 
-def test_post_training_items_400_when_session_not_initialized(client, monkeypatch):
+def test_post_training_items_400_when_session_not_initialized(client: any, monkeypatch: pytest.MonkeyPatch):
     class FakeSession:
         id = 10
         opening_eco = None
@@ -253,7 +257,7 @@ def test_post_training_items_400_when_session_not_initialized(client, monkeypatc
     )
 
 
-def test_post_training_items_success_returns_created_and_session_id(client, monkeypatch):
+def test_post_training_items_success_returns_created_and_session_id(client: any, monkeypatch: pytest.MonkeyPatch):
     class FakeSession:
         id = 10
         opening_eco = "C20"

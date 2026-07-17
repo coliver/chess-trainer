@@ -1,3 +1,4 @@
+# /backend/app/routers/training.py
 from sqlalchemy import select
 from backend.app.modules.training.models import TrainingItem, TrainingSession
 
@@ -30,6 +31,7 @@ class TrainingNextResponse(BaseModel):
     move_count_limit: int | None = None
     opening_eco: str | None = None
     opening_name: str | None = None
+    correct_move_uci: str  # TODO: REMOVE THIS Before live. debug only.
 
 
 class MoveResponseRequest(BaseModel):
@@ -41,6 +43,7 @@ class MoveResponseResponse(BaseModel):
     correct: bool
     reason: str
     fen_after: str | None = None
+    session_completed: bool = False
 
 
 class TrainingItemCreate(BaseModel):
@@ -89,6 +92,7 @@ def get_training_next(id: int, db: Session = Depends(get_db)):
         move_count_limit=None,
         opening_eco=training_session.opening_eco,
         opening_name=training_session.opening_name,
+        correct_move_uci=item.correct_move_uci, # For the HAX
     )
 
 
@@ -108,6 +112,7 @@ def post_training_response(id: int, req: MoveResponseRequest, db: Session = Depe
         correct=result.correct,
         reason=result.reason,
         fen_after=result.fen_after,
+        session_completed=result.session_completed,
     )
 
 
