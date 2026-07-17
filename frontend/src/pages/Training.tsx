@@ -61,7 +61,7 @@ export const Training = () => {
     };
 
     run();
-  }, [id, navigate]);
+  }, [fetchNextItem, id, navigate]);
 
   useEffect(() => {
     console.log("fen state changed:", fen);
@@ -196,70 +196,62 @@ export const Training = () => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        padding: "20px",
-      }}
-    >
-      <h1>Training</h1>
-      <p style={{ marginTop: 12, fontWeight: "bold" }}>{openingLabel}</p>
-      <div style={{ marginBottom: 8 }}>
-        {isLoggedIn ? "Logged in" : "Not logged in"}
-      </div>
+    <main className="page">
+      <div className="training-card">
+        <h1 className="title" style={{ marginTop: 0 }}>
+          Training
+        </h1>
 
-      <div style={{ width: "400px" }}>
-        <Chessboard options={chessboardOptions} />
-        <label>
-          <input
-            type="checkbox"
-            checked={showAnimations}
-            onChange={() => setShowAnimations(!showAnimations)}
-          />
-          Show animations
-        </label>
-      </div>
+        <p className="training-opening">{openingLabel}</p>
 
-      <div style={{ marginTop: "20px", width: "400px", textAlign: "center" }}>
-        <form
-          onSubmit={handleSubmit}
-          style={{ display: "flex", gap: "10px", justifyContent: "center" }}
-        >
-          <input
-            value={moveInput}
-            onChange={(e) => setMoveInput(e.target.value)}
-            placeholder="e.g. e2e4"
+        <div className="training-board-wrap" style={{ marginTop: 16 }}>
+          <Chessboard options={chessboardOptions} />
+
+          <label
             style={{
-              padding: "8px",
-              borderRadius: "4px",
-              border: "1px solid #ccc",
+              marginTop: 12,
+              display: "inline-flex",
+              gap: 8,
+              alignItems: "center",
             }}
-            disabled={isSubmitting}
-          />
-          <button
-            type="submit"
-            style={{ padding: "8px 16px", cursor: "pointer" }}
-            disabled={isSubmitting}
           >
-            Submit
-          </button>
-          <button
-            type="button"
-            style={{ padding: "8px 16px", cursor: "pointer" }}
-            onClick={handleRetry}
-            disabled={isSubmitting}
-          >
-            Retry?
-          </button>
-        </form>
+            <input
+              type="checkbox"
+              checked={showAnimations}
+              onChange={() => setShowAnimations(!showAnimations)}
+            />
+            Show animations
+          </label>
+        </div>
 
-        <p>{pgn}</p>
-        <p>{epd}</p>
+        <div style={{ marginTop: 20 }}>
+          <form className="training-form" onSubmit={handleSubmit}>
+            <input
+              className="text-input"
+              value={moveInput}
+              onChange={(e) => setMoveInput(e.target.value)}
+              placeholder="e.g. e2e4"
+              disabled={isSubmitting}
+            />
+            <button className="btn" type="submit" disabled={isSubmitting}>
+              Submit
+            </button>
+            <button
+              className="btn btn-secondary"
+              type="button"
+              onClick={handleRetry}
+              disabled={isSubmitting}
+            >
+              Retry?
+            </button>
+          </form>
 
-        <p style={{ marginTop: "10px", fontWeight: "bold" }}>{feedback}</p>
-      </div>
-    </div>
+          <p className="training-p">{pgn}</p>
+          <p className="training-p">{epd}</p>
+
+          <p className="training-feedback">{feedback}</p>
+        </div>
+      </div>        
+    </main>
   );
 };

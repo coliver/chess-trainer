@@ -17,13 +17,13 @@ export const Dashboard = () => {
   };
 
   return (
-    <main className="dashboard-page">
-      <div className="dashboard-card">
-        <h1 className="dashboard-title">Chess Opening Trainer</h1>
-        <p className="dashboard-subtitle">Ready to practice your lines?</p>
+    <main className="page">
+      <div className="card">
+        <h1 className="title">Chess Opening Trainer</h1>
+        <p className="subtitle">Ready to practice your lines?</p>
 
         <div className="dashboard-actions">
-          <button className="dashboard-button" onClick={startSession}>
+          <button className="btn" onClick={startSession}>
             Start New Training Session
           </button>
         </div>

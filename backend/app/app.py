@@ -6,7 +6,7 @@ from pydantic import BaseModel
 from backend.app.routers.training import router as training_router
 from backend.app.routers.auth import router as auth_router
 
-app = FastAPI(title="Chess Trainer")
+app = FastAPI(title="Knight School")
 
 app.include_router(training_router, prefix="")
 app.include_router(auth_router, prefix="")
@@ -21,7 +21,7 @@ def home():
     return """
     <html>
       <body style="font-family: sans-serif; margin: 40px;">
-        <h1>Chess Trainer API</h1>
+        <h1>Knight School API</h1>
         <p>Try <code>GET /ping</code>.</p>
       </body>
     </html>

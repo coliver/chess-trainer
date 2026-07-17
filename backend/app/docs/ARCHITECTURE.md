@@ -1,4 +1,4 @@
-# Chess Training Architecture Overview
+# Knight School Architecture Overview
 
 ## Project Structure (Backend)
 

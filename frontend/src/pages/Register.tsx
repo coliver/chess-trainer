@@ -76,7 +76,7 @@ const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
             />
           </label>
 
-          <button disabled={submitting} type="submit" style={{ marginTop: 16 }}>
+          <button disabled={submitting} type="submit" className="btn" style={{ marginTop: 16 }}>
             {submitting ? "Registering..." : "Register"}
           </button>
 

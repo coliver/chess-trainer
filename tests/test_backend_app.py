@@ -10,7 +10,7 @@ def test_home_returns_html():
     r = client.get("/")
     assert r.status_code == 200
     assert "text/html" in r.headers["content-type"]
-    assert "<h1>Chess Trainer API</h1>" in r.text
+    assert "<h1>Knight School API</h1>" in r.text
     assert "Try <code>GET /ping</code>." in r.text
 
 

@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 
-app = FastAPI(title="Chess Trainer")
+app = FastAPI(title="Knight School")
 
 
 class PingResponse(BaseModel):
@@ -15,7 +15,7 @@ def home():
     return """
     <html>
       <body style="font-family: sans-serif; margin: 40px;">
-        <h1>Chess Trainer API</h1>
+        <h1>Knight School API</h1>
         <p>Try <code>GET /ping</code>.</p>
       </body>
     </html>

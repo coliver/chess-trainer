@@ -56,7 +56,12 @@ export default function Login() {
           />
         </label>
 
-        <button disabled={submitting} type="submit" style={{ marginTop: 16 }}>
+        <button
+          className="btn"
+          disabled={submitting}
+          type="submit"
+          style={{ marginTop: 16 }}
+        >
           {submitting ? "Submitting..." : "Submit"}
         </button>
 

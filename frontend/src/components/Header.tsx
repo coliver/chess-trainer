@@ -1,6 +1,8 @@
 // frontend/src/Header.tsx
 import { Link } from "react-router-dom";
 import profileIcon from "../assets/profile.svg";
+import { KnightSchoolIcon } from "./KnightSchoolIcon";
+import { ThemeToggle } from "./ThemeToggle";
 
 export default function Header() {
   const isLoggedIn = !!localStorage.getItem("token");
@@ -8,11 +10,14 @@ export default function Header() {
   return (
     <header className="site-header">
       <div className="site-header-inner">
-        <Link to="/dashboard" className="site-header-title">
-          Chess Trainer
-        </Link>
+        <div className="site-header-brand">
+          <KnightSchoolIcon height="64px" />
+          <Link to="/dashboard" className="site-header-title">
+            Knight&nbsp;School
+          </Link>
+        </div>
 
-        <nav className="site-header-nav">
+        <nav className="site-header-nav" aria-label="Primary">
           {!isLoggedIn ? (
             <>
               <Link to="/login" className="site-header-link">
@@ -24,12 +29,19 @@ export default function Header() {
             </>
           ) : (
             <>
-              <Link to="/profile" className="site-header-profile-link" aria-label="Profile">
+              <Link
+                to="/profile"
+                className="site-header-profile-link"
+                aria-label="Profile"
+              >
                 <img src={profileIcon} alt="" width={28} height={28} />
               </Link>
-              <span className="site-header-pill">you are logged in maybe?</span>
             </>
           )}
+
+          <div className="site-header-actions">
+            <ThemeToggle />
+          </div>
         </nav>
       </div>
     </header>
