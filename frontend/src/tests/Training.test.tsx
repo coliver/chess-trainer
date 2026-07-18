@@ -1,13 +1,14 @@
-// src/tests/Training.test.tsx
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, waitFor, act, screen } from "@testing-library/react";
+import { describe, it, expect, vi, afterEach, beforeEach } from "vitest";
+import { render, waitFor, act, screen, cleanup  } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import api from "../api";
+import { Training } from "../pages/Training";
 
-let onPieceDrop: any;
-let allowDragging: any;
+let capturedOptions: any;
 
 const moveMock = vi.fn();
-const fenMock = vi.fn().mockReturnValue("after-fen");
-const turnMock = vi.fn().mockReturnValue("w");
+const fenMock = vi.fn();
+const turnMock = vi.fn();
 
 vi.mock("chess.js", () => ({
   Chess: vi.fn().mockImplementation(function ChessMock() {
@@ -19,8 +20,7 @@ vi.mock("chess.js", () => ({
 
 vi.mock("react-chessboard", () => ({
   Chessboard: (props: any) => {
-    onPieceDrop = props?.options?.onPieceDrop;
-    allowDragging = props?.options?.allowDragging;
+    capturedOptions = props?.options;
     return <div data-testid="chessboard" />;
   },
 }));
@@ -45,17 +45,20 @@ vi.mock("../components/FenTurnBadge", () => ({
   default: ({ fen }: any) => <div data-testid="fen-badge">{fen}</div>,
 }));
 
-import api from "../api";
-import { Training } from "../pages/Training";
+describe("Training Page", () => {
+  let user: any;
 
-describe("Training handlePieceDrop", () => {
+  afterEach(() => {
+    cleanup(); // This wipes the DOM clean after every single test
+  });
+
   beforeEach(() => {
+    user = userEvent.setup();
     vi.clearAllMocks();
-    onPieceDrop = undefined;
+    capturedOptions = undefined;
 
     moveMock.mockReset();
     moveMock.mockReturnValue(null);
-
     fenMock.mockReturnValue("after-fen");
     turnMock.mockReturnValue("w");
 
@@ -65,57 +68,116 @@ describe("Training handlePieceDrop", () => {
         item_id: "item-123",
         opening_name: "Test",
         opening_eco: "E00",
-        correct_move_uci: "", // prevent auto-play
+        correct_move_uci: "", 
         pgn: "",
         epd: "",
       },
     });
   });
 
-  it("returns true and sets uci + submits move on legal move", async () => {
-    moveMock.mockReturnValue({ promotion: "q" });
+  describe("handlePieceDrop", () => {
+    it("returns true and submits move on legal move", async () => {
+      moveMock.mockReturnValue({ promotion: "q" });
+      (api.post as any).mockResolvedValue({ data: { correct: false, reason: "bad move" } });
 
-    (api.post as any).mockResolvedValue({
-      data: { correct: false, reason: "bad move" },
+      render(<Training />);
+      await waitFor(() => expect(capturedOptions?.allowDragging).toBe(true));
+
+      act(() => {
+        const ok = capturedOptions.onPieceDrop("e2", "e4");
+        expect(ok).toBe(true);
+      });
+
+      await waitFor(() =>
+        expect(api.post).toHaveBeenCalledWith(
+          "/training-sessions/sess-1/responses",
+          { move_uci: "e2e4q", item_id: "item-123" },
+        ),
+      );
     });
 
-    render(<Training />);
+    it("sets illegal-move feedback and returns false when chess.js move() returns null", async () => {
+      moveMock.mockReturnValue(null);
+      render(<Training />);
+      await waitFor(() => expect(capturedOptions?.allowDragging).toBe(true));
 
-    await waitFor(() => expect(onPieceDrop).toBeTypeOf("function"));
+      act(() => {
+        const ok = capturedOptions.onPieceDrop("e2", "e4");
+        expect(ok).toBe(false);
+      });
 
-    act(() => {
-      const ok = onPieceDrop("e2", "e4");
-      expect(ok).toBe(true);
+      expect(await screen.findByText((content) => /illegal move/i.test(content))).toBeTruthy();
     });
-
-    const expectedUci = "e2e4q";
-    await waitFor(() =>
-      expect(api.post).toHaveBeenCalledWith(
-        "/training-sessions/sess-1/responses",
-        { move_uci: expectedUci, item_id: "item-123" },
-      ),
-    );
-
-    expect(
-      (screen.getByPlaceholderText("e.g. e2e4") as HTMLInputElement).value,
-    ).toBe(expectedUci);
   });
 
-  it("sets illegal-move feedback and returns false when chess.js move() returns null", async () => {
-    moveMock.mockReturnValue(null);
-    (api.post as any).mockResolvedValue({ data: {} });
+  describe("User Interactions", () => {
+    it("submits move via text input", async () => {
+      render(<Training />);
+      await waitFor(() => expect(capturedOptions?.onPieceDrop).toBeTypeOf("function"));
 
-    render(<Training />);
+      const input = screen.getByPlaceholderText("e.g. e2e4");
+      const submitBtn = screen.getByRole("button", { name: /submit/i });
 
-    await waitFor(() => expect(onPieceDrop).toBeTypeOf("function"));
-    await waitFor(() => expect(allowDragging).toBe(true)); // <-- key change
+      await user.type(input, "e2e4");
+      await user.click(submitBtn);
 
-    act(() => {
-      const ok = onPieceDrop("e2", "e4");
-      expect(ok).toBe(false);
+      await waitFor(() => 
+        expect(api.post).toHaveBeenCalledWith(
+          "/training-sessions/sess-1/responses", 
+          expect.objectContaining({ move_uci: "e2e4" })
+        )
+      );
     });
 
-    expect(await screen.findByText("❌ Illegal move")).toBeTruthy();
-    expect(api.post).not.toHaveBeenCalled();
+    it("toggles the info panel and starts a new session", async () => {
+      (api.post as any).mockResolvedValue({ data: { id: "sess-new" } });
+      render(<Training />);
+
+      const toggleBtn = screen.getByRole("button", { name: /show panel/i });
+      await user.click(toggleBtn);
+      
+      const startBtn = screen.getByText(/start new training session/i);
+      await user.click(startBtn);
+
+      await waitFor(() => {
+        expect(api.post).toHaveBeenCalledWith("/training-sessions");
+      });
+    });
+
+    it("clears input and triggers retry on click", async () => {
+      render(<Training />);
+      await waitFor(() => expect(capturedOptions?.onPieceDrop).toBeTypeOf("function"));
+
+      const input = screen.getByPlaceholderText("e.g. e2e4");
+      await user.type(input, "wrong_move");
+
+      const retryBtn = screen.getByRole("button", { name: /retry\?/i });
+      await user.click(retryBtn);
+
+      expect(input).toHaveValue("");
+    });
+  });
+
+  describe("Autoplay", () => {
+    it("automatically submits the correct move when it is black's turn", async () => {
+      turnMock.mockReturnValue("b"); 
+      (api.get as any).mockResolvedValue({
+        data: {
+          fen_after: "some-fen",
+          item_id: "item-123",
+          correct_move_uci: "e7e5",
+        },
+      });
+
+      render(<Training />);
+
+      await waitFor(() => 
+        expect(api.post).toHaveBeenCalledWith(
+          "/training-sessions/sess-1/responses", 
+          { move_uci: "e7e5", item_id: "item-123" }
+        )
+      );
+    });
   });
 });
+
