@@ -27,6 +27,7 @@ export const Training = () => {
   const blinkTimerRef = React.useRef<number | null>(null);
   const [blinkOpacity, setBlinkOpacity] = useState(0);
   const blinkRafRef = React.useRef<number | null>(null);
+  const [isAdvancing, setIsAdvancing] = useState(false);
 
   const blinkGreen = (uci: string, times = 3) => {
     const toSquare = uci.slice(2, 4);
@@ -187,13 +188,25 @@ export const Training = () => {
             return;
           }
 
+          setIsAdvancing(true);
+
           setTimeout(async () => {
             try {
               const next = await fetchNextItem();
 
-              // If backend didn't advance the training item, don't overwrite fen_after
+              console.log(
+                "prevItemId",
+                prevItemId,
+                "nextItemId",
+                next.nextItemId,
+                "nextFen",
+                next.nextFen,
+              );
               if (next.nextItemId === prevItemId) {
                 setFeedback("✅ Opening complete.");
+                setFen(next.nextFen); // <— apply the updated board
+                setOpeningLabel(next.nextOpeningLabel);
+                setCorrectMoveUci(next.nextCorrectMoveUci);
                 return;
               }
 
@@ -202,6 +215,8 @@ export const Training = () => {
             } catch (err: any) {
               if (err?.response?.status === 401) navigate("/login");
               setFeedback("No more moves in this session or session expired.");
+            } finally {
+               setIsAdvancing(false);
             }
           }, 1000);
 
@@ -258,7 +273,7 @@ export const Training = () => {
           ? (maybeTargetSquare ?? "")
           : dropOrSourceSquare.targetSquare;
 
-      if (isSubmitting) return false;
+      if (isSubmitting || isAdvancing) return false;
       if (!itemId) return false;
 
       const game = new Chess(fen);
@@ -302,7 +317,7 @@ export const Training = () => {
   const chessboardOptions = {
     position: fen,
     showAnimations,
-    allowDragging: !!itemId && !isSubmitting,
+    allowDragging: !!itemId && !isSubmitting && !isAdvancing,
     onPieceDrop: handlePieceDrop,
 
     squareStyles: blinkSquare
@@ -316,16 +331,12 @@ export const Training = () => {
       : undefined,
   };
 
-  
-
   return (
     <main className="page">
       <div className="card">
-        <h1 className="title" style={{ marginTop: 0 }}>
-          Training
-        </h1>
+        <h1 className="title">Training</h1>
 
-        <h1>{openingLabel}</h1>
+        <h2 className="opening-label">{openingLabel}</h2>
 
         <div style={{ marginTop: 16 }}>
           <div style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
@@ -344,7 +355,7 @@ export const Training = () => {
                     placeholder="e.g. e2e4"
                     disabled={isSubmitting}
                   />
-                  <button className="btn" type="submit" disabled={isSubmitting}>
+                  <button className="btn" type="submit" disabled={(isSubmitting || isAdvancing)} >
                     Submit
                   </button>
                   <button
