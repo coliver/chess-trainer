@@ -213,7 +213,7 @@ def submit_training_response(
         if all_items_responded:
             return SubmitResult(
                 http_status=200,
-                correct=False,
+                correct=True,
                 reason="training session completed",
                 fen_after=None,
                 error_message="Training session already completed.",
