@@ -41,6 +41,8 @@ def create_training_session(db: Session, user_id: int, batch_size: int = 1) -> T
             ),
         )
         .where(Opening.uci_moves.is_not(None))
+        .where(Opening.eco.is_not(None))
+        .where(Opening.name.is_not(None))
         .where(TrainingSession.id.is_(None))
         .order_by(func.random())
         .limit(1)

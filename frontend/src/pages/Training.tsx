@@ -15,12 +15,15 @@ import FenTurnBadge from "../components/FenTurnBadge";
 import { useBlinkGreen } from "../hooks/useBlinkGreen";
 const START_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
-type NextItem = Awaited<ReturnType<typeof fetchNextItemShim>>;
-
-// Shim for typing helper (so NextItem can reference fetchNextItem).
-function fetchNextItemShim() {
-  return Promise.resolve(null as any);
-}
+type NextItem = {
+  data: any;
+  nextFen: string;
+  nextItemId: string;
+  nextOpeningLabel: string;
+  nextCorrectMoveUci: string;
+  nextPgn: string;
+  nextEpd: string;
+};
 
 export const Training = () => {
   const { id } = useParams();
@@ -79,7 +82,7 @@ export const Training = () => {
     };
   }, []);
 
-  const fetchNextItem = useCallback(async () => {
+  const fetchNextItem = useCallback(async (): Promise<NextItem> => {
     if (!id) throw new Error("Missing training session id");
 
     const res = await api.get(`/training-sessions/${id}/next`);
@@ -106,7 +109,7 @@ export const Training = () => {
   }, [id, normalizeFen]);
 
   const applyNextItemState = useCallback(
-    (next: Awaited<ReturnType<typeof fetchNextItem>>) => {
+    (next: NextItem) => {
       setItemId(next.nextItemId);
       setFen(next.nextFen);
       setOpeningLabel(next.nextOpeningLabel);
