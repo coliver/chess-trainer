@@ -1,5 +1,11 @@
 // frontend/src/pages/Training.tsx
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Chess } from "chess.js";
 import { Chessboard } from "react-chessboard";
@@ -57,10 +63,14 @@ export const Training = () => {
 
     if (!takeAutoplayOnce(itemId)) return;
 
-    setLocalFeedback("");
+    if (localFeedback !== "") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setLocalFeedback("");
+    }
+
     lastSubmittedMoveUciRef.current = correctMoveUci;
     void submitMove(correctMoveUci, fen);
-  }, [id, itemId, fen, correctMoveUci, isSubmitting, isAdvancing, takeAutoplayOnce, submitMove]);
+  }, [id, itemId, fen, correctMoveUci, isSubmitting, isAdvancing, takeAutoplayOnce, submitMove, localFeedback]);
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -93,12 +103,11 @@ export const Training = () => {
 
       const targetSquare =
         typeof dropOrSourceSquare === "string"
-          ? maybeTargetSquare ?? ""
+          ? (maybeTargetSquare ?? "")
           : dropOrSourceSquare.targetSquare;
 
       if (isSubmitting || isAdvancing) return false;
       if (!itemId) return false;
-
 
       const uciPrefix = `${sourceSquare}${targetSquare}`;
       const expectedPromo = correctMoveUci.startsWith(uciPrefix)
@@ -124,7 +133,9 @@ export const Training = () => {
       // optimistic UI update
       setFen(game.fen());
 
-      const promotionChar = move.promotion ? String(move.promotion).toLowerCase() : "";
+      const promotionChar = move.promotion
+        ? String(move.promotion).toLowerCase()
+        : "";
       const uci = `${sourceSquare}${targetSquare}${promotionChar}`;
 
       setLocalFeedback("");
@@ -134,7 +145,7 @@ export const Training = () => {
 
       return true;
     },
-    [fen, itemId, isSubmitting, isAdvancing, setFen, submitMove],
+    [fen, itemId, isSubmitting, isAdvancing, setFen, submitMove, correctMoveUci],
   );
 
   const startSession = async () => {
@@ -155,7 +166,7 @@ export const Training = () => {
       onPieceDrop: handlePieceDrop,
       squareStyles,
     }),
-    [fen, showAnimations, itemId, isSubmitting, isAdvancing, isWhiteToMove, handlePieceDrop],
+    [fen, showAnimations, itemId, isSubmitting, isAdvancing, isWhiteToMove, handlePieceDrop, squareStyles],
   );
 
   return (
@@ -180,7 +191,11 @@ export const Training = () => {
                     placeholder="e.g. e2e4"
                     disabled={isSubmitting}
                   />
-                  <button className="btn" type="submit" disabled={isSubmitting || isAdvancing}>
+                  <button
+                    className="btn"
+                    type="submit"
+                    disabled={isSubmitting || isAdvancing}
+                  >
                     Submit
                   </button>
                   <button

@@ -31,6 +31,7 @@ const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
       setSuccess(true);
       navigate("/login");
     } catch (err) {
+      console.error(err)
       setError("Failed to register. Please try again later.");
     } finally {
       setSubmitting(false);

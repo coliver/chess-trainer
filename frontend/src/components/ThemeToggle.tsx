@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react";
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(() => {
+    // 1. Check localStorage
+    const saved = localStorage.getItem("theme");
+    if (saved === "light" || saved === "dark") return saved;
+
+    // 2. Check system preference
+    const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)")?.matches;
+    return prefersDark ? "dark" : "light";
+  });
 
   useEffect(() => {
-    const saved = localStorage.getItem("theme");
-    if (saved === "light" || saved === "dark") {
-      setTheme(saved);
-      document.documentElement.dataset.theme = saved;
-      return;
-    }
-
-    const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)")?.matches;
-    const initial = prefersDark ? "dark" : "light";
-    setTheme(initial);
-    document.documentElement.dataset.theme = initial;
-  }, []);
+    // Only synchronize the DOM with the current state
+    document.documentElement.dataset.theme = theme;
+  }, [theme]);
 
   function toggle() {
     const next = theme === "dark" ? "light" : "dark";
@@ -25,7 +24,7 @@ export function ThemeToggle() {
   }
 
   return (
-<button
+    <button
       className="theme-toggle-btn"
       type="button"
       onClick={toggle}
@@ -37,10 +36,15 @@ export function ThemeToggle() {
   );
 }
 
-
 function SunIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      fill="none"
+    >
       <path
         d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z"
         stroke="currentColor"
@@ -58,7 +62,13 @@ function SunIcon() {
 
 function MoonIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      fill="none"
+    >
       <path
         d="M21 13.2A8.4 8.4 0 0 1 10.8 3a6.9 6.9 0 1 0 10.2 10.2Z"
         stroke="currentColor"

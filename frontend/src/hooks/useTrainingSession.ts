@@ -1,5 +1,5 @@
 // frontend/src/hooks/useTrainingSession.ts
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import api from "../api";
 import { Chess } from "chess.js";
 

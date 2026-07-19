@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api";
@@ -8,7 +9,6 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
@@ -21,10 +21,13 @@ export default function Login() {
       const { data } = await api.post("/auth/login", { username, password });
 
       localStorage.setItem("token", data.access_token);
-      setSuccess(true);
       navigate("/dashboard");
-    } catch (err: any) {
-      setError(err.response?.data?.detail || "Failed to Login.");
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        setError(err.response?.data?.detail || "Failed to Login");
+      } else {
+        setError("An unexpected error occurred.");
+      }
     } finally {
       setSubmitting(false);
     }
