@@ -1,115 +1,68 @@
-***
-
 # ♟️ Knight School (Chess Trainer)
 
-A web-based chess openings trainer designed to drill specific lines and track performance metrics.
+A web-based chess openings trainer designed to drill specific lines, validate move legality, and track performance metrics.
+
+### 📂 Project Navigation
+- **[Backend](./backend/README.md)**: API logic, Database schema, and Chess engine rules.
+- **[Frontend](./frontend/README.md)**: React components, State management, and UI/UX.
+- **[Infrastructure](./nginx)**: Nginx configuration and Docker orchestration.
+
+---
 
 ## 🛠 Tech Stack
-- **Backend:** Python 3.10+ / FastAPI / SQLAlchemy / Alembic
-- **Frontend:** TypeScript / React / `chess.js` / `react-chessboard`
-- **Infrastructure:** PostgreSQL / Nginx / Docker
 
-## 📂 Project Structure
-```text
-├── backend/
-│   ├── app/               # FastAPI application
-│   │   ├── modules/       # Domain logic (openings, training, shared)
-│   │   └── app.py         # App entry point
-│   └── migrations/        # Alembic migrations
-├── tests/                 # Backend tests
-├── requirements.txt       # Backend dependencies
-└── frontend/
-    └── src/               # React source
-```
+| Layer | Technologies |
+| :--- | :--- |
+| **Backend** | Python 3.10+, FastAPI, SQLAlchemy, Alembic, `python-chess` |
+| **Frontend** | TypeScript, React, Vite, `chess.js`, `react-chessboard` |
+| **Infrastructure** | PostgreSQL 16, Nginx, Docker |
 
-## 🚀 Quick Start
+## 🚀 Quick Start (Docker)
 
-### Prerequisites
-- Python $\ge$ 3.10
-- PostgreSQL $\ge$ 14
-- Node.js $\ge$ 18
+The fastest way to get Knight School running is via Docker.
 
-### Local Setup
-
-**1. Backend**
+### 1. Environment Setup
+Copy the example environment file and fill in your secrets:
 ```bash
-# Copy environment variables template
 cp .env.example .env
-
-# Setup and activate virtual environment
-python -m venv venv && source venv/bin/activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Create the database
-createdb chess_trainer
-
-# Run migrations to set up tables
-alembic upgrade heads
 ```
 
-**2. Frontend**
+### 2. Launch the Stack
 ```bash
-cd frontend
-npm install
-npm run dev
+docker compose up -d --build
 ```
 
-### Docker Setup
+### 3. Seed the Openings Library
+Once the containers are running, populate the database with the chess openings:
 ```bash
-docker-compose up -d --build
+docker compose exec api python scripts/import_openings.py
 ```
 
-## 📡 API Reference
+### 4. Access the App
+- **Web Interface:** `http://localhost` (via Nginx)
+- **API Documentation:** `http://localhost:8000/docs`
 
-### Auth
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| `POST` | `/auth/register` | Create account |
-| `POST` | `/auth/login` | Authenticate user (returns JWT) |
+---
 
-### Training
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| `POST` | `/training-sessions` | Start new session (random opening) |
-| `GET` | `/training-sessions/{id}/next` | Fetch next pending move |
-| `POST` | `/training-sessions/{id}/responses` | Submit move (UCI) |
-| `POST` | `/training-sessions/{id}/items` | Bulk add items to session |
+## 🏗 High-Level Architecture
 
-## ⚙️ Logic & Validation
+Knight School uses a decoupled architecture to separate the chess engine from the user interface:
 
-**Move Validation Flow:**
-1. **UCI Format:** Validated via `python-chess` $\rightarrow$ `400 Bad Request` if invalid.
-2. **Legality:** Validated via `board.legal_moves` $\rightarrow$ `200 OK` (Correct: False) if illegal.
-3. **Correctness:** Compared against target move $\rightarrow$ `200 OK` (Correct: True) if match.
+1. **Frontend:** A React SPA that handles the board visualization and user interaction.
+2. **Backend:** A modular FastAPI server that validates moves against the `python-chess` library and manages user sessions in PostgreSQL.
+3. **Reverse Proxy:** Nginx handles routing, SSL (via Let's Encrypt), and serves the frontend production build.
 
-**Session Completion:**
-- A session is marked **completed** automatically when all associated `TrainingItems` have a correct `TrainingResponse`.
-
-**Tracking Metrics:** TODO
-- **Accuracy:** Success rate based on `is_correct` flags.
-- **Consistency:** Session volume tracked via `created_at` timestamps.
+---
 
 ## 🤝 Contribution
-- **Python:** Type hints required $\rightarrow$ **Ruff**.
+
+- **Development:** Please refer to the [Backend](./backend/README.md) and [Frontend](./frontend/README.md) guides for specific coding standards.
 - **Commits:** Use conventional commits (`feat:`, `fix:`, `docs:`, `test:`).
-- **PRs:** Must include tests for any new logic.
+- **PRs:** Ensure all new logic is covered by tests.
 
-## Project Credits
+---
 
-### 🎨 Frontend
-- ⚛️ [React](https://github.com/facebook/react)
-- 🛣️ [React Router](https://github.com/remix-run/react-router)
-- 🌐 [Axios](https://github.com/axios/axios)
-- ♟️ [Chess.js](https://github.com/jhlywa/chess.js)
-- 🏁 [React-Chessboard](https://github.com/Clarielle/react-chessboard)
+## 📜 Project Credits
 
-### ⚙️ Backend
-- ⚡ [FastAPI](https://github.com/tiangolo/fastapi)
-- 🛢️ [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy)
-- ♟️ [Python-Chess](https://github.com/niklasf/python-chess)
-- 🚀 [Uvicorn](https://github.com/encode/uvicorn)
-- 🔑 [PyJWT](https://github.com/pyjwt/pyjwt)
-- 📦 [Pydantic](https://github.com/pydantic/pydantic)
-- 🐘 [Psycopg](https://github.com/psycopg/psycopg)
+- **Frontend:** React, React Router, Axios, Chess.js, React-Chessboard.
+- **Backend:** FastAPI, SQLAlchemy, Python-Chess, Uvicorn, PyJWT, Pydantic.
