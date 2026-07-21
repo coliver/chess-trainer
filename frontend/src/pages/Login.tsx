@@ -21,6 +21,7 @@ export default function Login() {
       const { data } = await api.post("/auth/login", { username, password });
 
       localStorage.setItem("token", data.access_token);
+      localStorage.setItem("refresh_token", data.refresh_token); // Add this line
       navigate("/dashboard");
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {

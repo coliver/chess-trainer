@@ -265,7 +265,7 @@ def test_get_current_user_inactive_user_401(jwt_env):
     db = FakeDB(users=[inactive])
 
     token = jwt.encode(
-        {"sub": "1", "iat": 0, "exp": 9_999_999_999},
+        {"sub": "1", "iat": 0, "exp": 9_999_999_999, "type": "access"},
         os.environ["JWT_SECRET"],
         algorithm="HS256",
     )
@@ -287,7 +287,7 @@ def test_get_current_user_success(jwt_env):
     db = FakeDB(users=[active])
 
     token = jwt.encode(
-        {"sub": "1", "iat": 0, "exp": 9_999_999_999},
+        {"sub": "1", "iat": 0, "exp": 9_999_999_999, "type": "access"},
         os.environ["JWT_SECRET"],
         algorithm="HS256",
     )
