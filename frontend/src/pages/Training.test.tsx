@@ -266,14 +266,14 @@ describe("Training Page", () => {
       render(<Training />);
       await waitFor(() => expect(capturedOptions).toBeDefined());
 
-      // First click: Select e2
+      // First click: Select e2 - PASS OBJECT
       act(() => {
-        capturedOptions.onSquareClick("e2");
+        capturedOptions.onSquareClick({ square: "e2" });
       });
 
-      // Second click: Move to e4
+      // Second click: Move to e4 - PASS OBJECT
       act(() => {
-        capturedOptions.onSquareClick("e4");
+        capturedOptions.onSquareClick({ square: "e4" });
       });
 
       expect(mockSubmitMove).toHaveBeenCalledWith("e2e4q", "start-fen");
@@ -289,15 +289,15 @@ describe("Training Page", () => {
       await waitFor(() => expect(capturedOptions).toBeDefined());
 
       act(() => {
-        capturedOptions.onSquareClick("e2"); // Select
+        capturedOptions.onSquareClick({ square: "e2" }); // Select
       });
       act(() => {
-        capturedOptions.onSquareClick("e2"); // Deselect
+        capturedOptions.onSquareClick({ square: "e2" }); // Deselect
       });
 
       // If it was deselected, a subsequent click on e4 should NOT submit a move
       act(() => {
-        capturedOptions.onSquareClick("e4");
+        capturedOptions.onSquareClick({ square: "e4" });
       });
 
       expect(mockSubmitMove).not.toHaveBeenCalled();
@@ -316,18 +316,19 @@ describe("Training Page", () => {
       await waitFor(() => expect(capturedOptions).toBeDefined());
 
       act(() => {
-        capturedOptions.onSquareClick("e5"); // Click black piece
+        capturedOptions.onSquareClick({ square: "e5" }); // Click black piece
       });
       act(() => {
-        capturedOptions.onSquareClick("a1"); // Click empty
+        capturedOptions.onSquareClick({ square: "a1" }); // Click empty
       });
       act(() => {
-        capturedOptions.onSquareClick("e4"); // This would be the "target" but no source is selected
+        capturedOptions.onSquareClick({ square: "e4" }); // No source selected
       });
 
       expect(mockSubmitMove).not.toHaveBeenCalled();
     });
   });
+
 
   describe("Hint System", () => {
     it("applies highlights and arrows as hint level increases", async () => {

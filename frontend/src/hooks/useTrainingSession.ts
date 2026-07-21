@@ -34,10 +34,9 @@ export function useTrainingSession(
   const [openingLabel, setOpeningLabel] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isAdvancing, setIsAdvancing] = useState(false);
-
   const isMountedRef = useRef(true);
   const advanceTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const autoPlayedItemIdRef = useRef<string | null>(null);
+  const autoPlayedItemIdRef = useRef<string | null | number >(null);
   const prevFenRef = useRef<string>(START_FEN);
 
   useEffect(() => {
@@ -205,7 +204,7 @@ export function useTrainingSession(
     }
   }, [fen]);
 
-  const takeAutoplayOnce = useCallback((currentItemId: string) => {
+  const takeAutoplayOnce = useCallback((currentItemId: string | number) => {
     if (autoPlayedItemIdRef.current === currentItemId) return false;
     autoPlayedItemIdRef.current = currentItemId;
     return true;

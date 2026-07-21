@@ -43,7 +43,10 @@ export const Training = () => {
   const lastSubmittedMoveUciRef = useRef<string>("");
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setHintLevel(0);
+    setMoveFrom(null);
+    setLocalFeedback("");
   }, [itemId]);
 
   useEffect(() => {
@@ -194,22 +197,21 @@ export const Training = () => {
   }, [correctMoveUci, hintLevel]);
 
   const onSquareClick = useCallback(
-    (square: string) => {
+    (payload: { square: string; piece?: { pieceType?: string } }) => {
+      const square = payload?.square;
+      if (!square) return;
+
       if (isSubmitting || isAdvancing || !itemId || !isWhiteToMove) return;
 
-      // If we have already selected a source square
       if (moveFrom) {
-        // If the user clicks the same square, deselect it
         if (moveFrom === square) {
           setMoveFrom(null);
           return;
         }
 
-        // Try to process the move from source to target
-        const success = processMove(moveFrom, square);
-        setMoveFrom(null); // Reset selection regardless of success
+        processMove(moveFrom, square);
+        setMoveFrom(null);
       } else {
-        // First click: Select the source square if it contains a piece
         const game = new Chess(fen);
         const piece = game.get(square as any);
         if (piece && piece.color === "w") {
@@ -247,6 +249,7 @@ export const Training = () => {
       isAdvancing,
       isWhiteToMove,
       handlePieceDrop,
+      onSquareClick,
       squareStyles,
       hintStyles,
       customArrows,
