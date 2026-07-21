@@ -1,4 +1,3 @@
-// frontend/src/pages/Training.tsx
 import React, {
   useCallback,
   useEffect,
@@ -37,12 +36,15 @@ export const Training = () => {
   const [moveInput, setMoveInput] = useState("");
   const [showAnimations, setShowAnimations] = useState(true);
   const [showPanel, setShowPanel] = useState(false);
-
-  // keep the “illegal move” message local (hook doesn’t export setFeedback)
+  const [hintLevel, setHintLevel] = useState(0);
   const [localFeedback, setLocalFeedback] = useState("");
   const shownFeedback = localFeedback || feedback;
-
+  const [moveFrom, setMoveFrom] = useState<string | null>(null);
   const lastSubmittedMoveUciRef = useRef<string>("");
+
+  useEffect(() => {
+    setHintLevel(0);
+  }, [itemId]);
 
   useEffect(() => {
     if (feedback === "✅ Correct!" && lastSubmittedMoveUciRef.current) {
@@ -53,30 +55,30 @@ export const Training = () => {
   const isWhiteToMove = useMemo(() => new Chess(fen).turn() === "w", [fen]);
 
   useEffect(() => {
-    if (!id) return;
-    if (!itemId) return;
-    if (isSubmitting || isAdvancing) return;
-    if (!correctMoveUci) return;
-
+    if (!id || !itemId || isSubmitting || isAdvancing || !correctMoveUci)
+      return;
     const game = new Chess(fen);
     if (game.turn() !== "b") return;
-
     if (!takeAutoplayOnce(itemId)) return;
-
-    if (localFeedback !== "") {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setLocalFeedback("");
-    }
-
+    if (localFeedback !== "") setLocalFeedback("");
     lastSubmittedMoveUciRef.current = correctMoveUci;
     void submitMove(correctMoveUci, fen);
-  }, [id, itemId, fen, correctMoveUci, isSubmitting, isAdvancing, takeAutoplayOnce, submitMove, localFeedback]);
+  }, [
+    id,
+    itemId,
+    fen,
+    correctMoveUci,
+    isSubmitting,
+    isAdvancing,
+    takeAutoplayOnce,
+    submitMove,
+    localFeedback,
+  ]);
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     const uci = moveInput.trim();
     if (!uci) return;
-
     setLocalFeedback("");
     lastSubmittedMoveUciRef.current = uci;
     await submitMove(uci, fen);
@@ -86,34 +88,18 @@ export const Training = () => {
   const handleRetryClick = async () => {
     setLocalFeedback("");
     setMoveInput("");
+    setHintLevel(0);
     await handleRetry();
   };
 
-  const handlePieceDrop = useCallback(
-    (
-      dropOrSourceSquare:
-        | { sourceSquare: string; targetSquare: string; piece?: unknown }
-        | string,
-      maybeTargetSquare?: string,
-    ): boolean => {
-      const sourceSquare =
-        typeof dropOrSourceSquare === "string"
-          ? dropOrSourceSquare
-          : dropOrSourceSquare.sourceSquare;
-
-      const targetSquare =
-        typeof dropOrSourceSquare === "string"
-          ? (maybeTargetSquare ?? "")
-          : dropOrSourceSquare.targetSquare;
-
-      if (isSubmitting || isAdvancing) return false;
-      if (!itemId) return false;
+  const processMove = useCallback(
+    (sourceSquare: string, targetSquare: string): boolean => {
+      if (isSubmitting || isAdvancing || !itemId) return false;
 
       const uciPrefix = `${sourceSquare}${targetSquare}`;
       const expectedPromo = correctMoveUci.startsWith(uciPrefix)
-        ? correctMoveUci.slice(uciPrefix.length) // "q" | "r" | "b" | "n" | ""
+        ? correctMoveUci.slice(uciPrefix.length)
         : "";
-
       const promoForMove = expectedPromo ? expectedPromo : "q";
 
       const game = new Chess(fen);
@@ -129,10 +115,7 @@ export const Training = () => {
       }
 
       const preFen = fen;
-
-      // optimistic UI update
       setFen(game.fen());
-
       const promotionChar = move.promotion
         ? String(move.promotion).toLowerCase()
         : "";
@@ -142,10 +125,32 @@ export const Training = () => {
       lastSubmittedMoveUciRef.current = uci;
       setMoveInput(uci);
       void submitMove(uci, preFen);
-
       return true;
     },
-    [fen, itemId, isSubmitting, isAdvancing, setFen, submitMove, correctMoveUci],
+    [
+      fen,
+      itemId,
+      isSubmitting,
+      isAdvancing,
+      setFen,
+      submitMove,
+      correctMoveUci,
+    ],
+  );
+
+  const handlePieceDrop = useCallback(
+    (dropOrSourceSquare: any, maybeTargetSquare?: string): boolean => {
+      const sourceSquare =
+        typeof dropOrSourceSquare === "string"
+          ? dropOrSourceSquare
+          : dropOrSourceSquare.sourceSquare;
+      const targetSquare =
+        typeof dropOrSourceSquare === "string"
+          ? (maybeTargetSquare ?? "")
+          : dropOrSourceSquare.targetSquare;
+      return processMove(sourceSquare, targetSquare);
+    },
+    [processMove],
   );
 
   const startSession = async () => {
@@ -154,9 +159,74 @@ export const Training = () => {
       navigate(`/training/${response.data.id}`);
     } catch (error) {
       console.error("Error starting session:", error);
-      alert("Failed to start session. Check your connection or token.");
     }
   };
+
+  const hintStyles = useMemo(() => {
+    const styles: any = {};
+
+    // Selected square highlight (Click-to-move)
+    if (moveFrom) {
+      styles[moveFrom] = { backgroundColor: "rgba(0, 0, 255, 0.4)" };
+    }
+
+    if (!correctMoveUci || hintLevel === 0) return styles;
+    const fromSquare = correctMoveUci.substring(0, 2);
+    const toSquare = correctMoveUci.substring(2, 4);
+    const highlightStyle = { backgroundColor: "rgba(255, 255, 0, 0.4)" };
+    if (hintLevel === 1) styles[fromSquare] = highlightStyle;
+    if (hintLevel >= 2) {
+      styles[fromSquare] = highlightStyle;
+      styles[toSquare] = highlightStyle;
+    }
+    return styles;
+  }, [correctMoveUci, hintLevel, moveFrom]);
+
+  const customArrows = useMemo(() => {
+    if (!correctMoveUci || hintLevel < 3) return [];
+    return [
+      {
+        from: correctMoveUci.substring(0, 2),
+        to: correctMoveUci.substring(2, 4),
+        color: "yellow",
+      },
+    ];
+  }, [correctMoveUci, hintLevel]);
+
+  const onSquareClick = useCallback(
+    (square: string) => {
+      if (isSubmitting || isAdvancing || !itemId || !isWhiteToMove) return;
+
+      // If we have already selected a source square
+      if (moveFrom) {
+        // If the user clicks the same square, deselect it
+        if (moveFrom === square) {
+          setMoveFrom(null);
+          return;
+        }
+
+        // Try to process the move from source to target
+        const success = processMove(moveFrom, square);
+        setMoveFrom(null); // Reset selection regardless of success
+      } else {
+        // First click: Select the source square if it contains a piece
+        const game = new Chess(fen);
+        const piece = game.get(square as any);
+        if (piece && piece.color === "w") {
+          setMoveFrom(square);
+        }
+      }
+    },
+    [
+      moveFrom,
+      isSubmitting,
+      isAdvancing,
+      itemId,
+      isWhiteToMove,
+      processMove,
+      fen,
+    ],
+  );
 
   const chessboardOptions = useMemo(
     () => ({
@@ -164,9 +234,23 @@ export const Training = () => {
       showAnimations,
       allowDragging: !!itemId && !isSubmitting && !isAdvancing && isWhiteToMove,
       onPieceDrop: handlePieceDrop,
-      squareStyles,
+      onSquareClick: onSquareClick, // <--- Add this
+      squareStyles: { ...squareStyles, ...hintStyles },
+      customArrows: customArrows,
+      allowDrawingArrows: true,
     }),
-    [fen, showAnimations, itemId, isSubmitting, isAdvancing, isWhiteToMove, handlePieceDrop, squareStyles],
+    [
+      fen,
+      showAnimations,
+      itemId,
+      isSubmitting,
+      isAdvancing,
+      isWhiteToMove,
+      handlePieceDrop,
+      squareStyles,
+      hintStyles,
+      customArrows,
+    ],
   );
 
   return (
@@ -178,7 +262,10 @@ export const Training = () => {
         <div style={{ marginTop: 16 }}>
           <div style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
             <div style={{ flex: 1, minWidth: 0 }}>
-              <div className="training-board-wrap" style={{ marginTop: 0 }}>
+              <div
+                className="training-board-wrap"
+                style={{ position: "relative", marginTop: 0 }}
+              >
                 <Chessboard options={chessboardOptions} />
               </div>
 
@@ -201,6 +288,20 @@ export const Training = () => {
                   <button
                     className="btn btn-secondary"
                     type="button"
+                    onClick={() => setHintLevel((h) => h + 1)}
+                    disabled={isSubmitting || !itemId}
+                  >
+                    {hintLevel === 0
+                      ? "Hint"
+                      : hintLevel === 1
+                        ? "More Hint"
+                        : hintLevel === 2
+                          ? "Full Hint"
+                          : "Max Hint"}
+                  </button>
+                  <button
+                    className="btn btn-secondary"
+                    type="button"
                     onClick={handleRetryClick}
                     disabled={isSubmitting}
                   >
@@ -208,7 +309,6 @@ export const Training = () => {
                   </button>
                   <FenTurnBadge fen={fen} />
                 </form>
-
                 <p className="training-feedback">{shownFeedback}</p>
               </div>
             </div>
@@ -217,14 +317,11 @@ export const Training = () => {
               <button className="btn" onClick={() => setShowPanel((s) => !s)}>
                 {showPanel ? "Hide" : "Show"} Panel
               </button>
-
               <div style={{ marginTop: 12, display: showPanel ? "" : "none" }}>
                 <StartNewTrainingButton className="btn" onClick={startSession}>
                   Start New Training Session
                 </StartNewTrainingButton>
-
-                <h2>{correctMoveUci}</h2>
-
+                <h2 style={{ marginTop: 12 }}>{correctMoveUci}</h2>
                 <label
                   style={{
                     marginTop: 12,

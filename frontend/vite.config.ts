@@ -1,8 +1,10 @@
-import { defineConfig } from "vite";
+// vite.config.ts
+import { defineConfig } from "vite"; 
 import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
+  
   server: {
     host: '0.0.0.0',
     origin: 'https://localhost',
@@ -10,9 +12,9 @@ export default defineConfig({
     hmr: {
       protocol: 'wss',
       host: 'localhost',
-      port: 5173,        // Vite’s internal port
-      clientPort: 443,  // external/public port
-      path: '/vite-hmr', // keep default-ish behavior
+      port: 5173,
+      clientPort: 443,
+      path: '/vite-hmr',
     },
   },
 });
