@@ -8,10 +8,9 @@ from typing import Any
 from fastapi import APIRouter, Depends, HTTPException, Header
 from pydantic import BaseModel, EmailStr, constr
 from typing import Optional
-import datetime
 from backend.app.modules.shared.db import get_db
 from backend.app.modules.users.models import User
-from datetime import datetime, timedelta, timezone # Update your imports
+from datetime import datetime, timedelta, timezone  # Update your imports
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 

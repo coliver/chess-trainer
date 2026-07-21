@@ -1,29 +1,22 @@
-import pytest
 from fastapi.testclient import TestClient
 from backend.app.app import app
-from backend.app.routers.auth import create_access_token, create_refresh_token, hash_password
+from backend.app.routers.auth import create_refresh_token
 from backend.app.modules.users.models import User
 
 client = TestClient(app)
 
 
-def test_login_returns_both_tokens(db):
-    # 1. Setup: Create the user in the test database
-    test_username = "testuser"
-    test_password = "password123"
+def test_login_returns_both_tokens(db, test_user):
+    # 1. Setup: Use the data from the fixture instead of creating a new User object
+    test_username = test_user.username
+    test_password = "password123"  # This must match the password in your fixture
 
-    user = User(
-        username=test_username,
-        email="test@example.com",
-        password_hash=hash_password(test_password),  # Must be hashed!
-        is_active=True,
-    )
-    db.add(user)
-    db.commit()
-
+    # 2. Execution: Attempt to login
     response = client.post(
         "/auth/login", json={"username": test_username, "password": test_password}
     )
+
+    # 3. Verification
     assert response.status_code == 200
     data = response.json()
     assert "access_token" in data
