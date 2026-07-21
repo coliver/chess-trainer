@@ -84,7 +84,7 @@ def create_training_session(db: Session, user_id: int, batch_size: int = 1) -> T
     clean_epd = None
     if opening.epd:
         clean_epd = epd_to_fen(opening.epd)
-    
+
     board = chess.Board(clean_epd) if clean_epd else chess.Board()
 
     if not can_apply(board):

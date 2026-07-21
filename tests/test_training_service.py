@@ -341,7 +341,6 @@ def test_submit_training_response_current_none_all_items_responded_returns_compl
     assert db.commit_calls == 0  # early return
 
 
-
 def test_submit_training_response_current_none_not_all_items_responded_returns_item_not_found(
     monkeypatch,
 ):

@@ -101,7 +101,7 @@ def test_get_training_next_success_maps_fields(client: any, monkeypatch: pytest.
         session_id = 10
         order_index = 2
         fen = "the-fen"
-        correct_move_uci = 'e2e4'
+        correct_move_uci = "e2e4"
 
     class FakeScalarResult:
         def all(self):
@@ -137,11 +137,13 @@ def test_get_training_next_success_maps_fields(client: any, monkeypatch: pytest.
         "move_count_limit": None,
         "opening_eco": "C20",
         "opening_name": "Test Opening",
-        "correct_move_uci": "e2e4" # TODO Remove me. DEBUG ONLY.        
+        "correct_move_uci": "e2e4",  # TODO Remove me. DEBUG ONLY.
     }
 
 
-def test_post_training_response_400_when_service_returns_400(client: any, monkeypatch: pytest.MonkeyPatch):
+def test_post_training_response_400_when_service_returns_400(
+    client: any, monkeypatch: pytest.MonkeyPatch
+):
     class Result:
         http_status = 400
         error_message = "invalid uci"
@@ -163,7 +165,9 @@ def test_post_training_response_400_when_service_returns_400(client: any, monkey
     assert r.json()["detail"] == "invalid uci"
 
 
-def test_post_training_response_404_uses_reason_when_error_message_missing(client: any, monkeypatch: pytest.MonkeyPatch):
+def test_post_training_response_404_uses_reason_when_error_message_missing(
+    client: any, monkeypatch: pytest.MonkeyPatch
+):
     class Result:
         http_status = 404
         error_message = None
@@ -209,7 +213,7 @@ def test_post_training_response_success_maps_fields(client: any, monkeypatch: py
         "correct": False,
         "reason": "wrong move",
         "fen_after": "afterfen",
-        "session_completed": False,  
+        "session_completed": False,
     }
 
 
@@ -231,7 +235,9 @@ def test_post_training_items_404_when_session_missing(client: any, monkeypatch: 
     assert r.json()["detail"] == "Training session not found"
 
 
-def test_post_training_items_400_when_session_not_initialized(client: any, monkeypatch: pytest.MonkeyPatch):
+def test_post_training_items_400_when_session_not_initialized(
+    client: any, monkeypatch: pytest.MonkeyPatch
+):
     class FakeSession:
         id = 10
         opening_eco = None
@@ -257,7 +263,9 @@ def test_post_training_items_400_when_session_not_initialized(client: any, monke
     )
 
 
-def test_post_training_items_success_returns_created_and_session_id(client: any, monkeypatch: pytest.MonkeyPatch):
+def test_post_training_items_success_returns_created_and_session_id(
+    client: any, monkeypatch: pytest.MonkeyPatch
+):
     class FakeSession:
         id = 10
         opening_eco = "C20"

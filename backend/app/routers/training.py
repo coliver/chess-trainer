@@ -92,7 +92,7 @@ def get_training_next(id: int, db: Session = Depends(get_db)):
         move_count_limit=None,
         opening_eco=training_session.opening_eco,
         opening_name=training_session.opening_name,
-        correct_move_uci=item.correct_move_uci, # For the HAX
+        correct_move_uci=item.correct_move_uci,  # For the HAX
     )
 
 
