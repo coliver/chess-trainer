@@ -2,8 +2,10 @@
 from pydantic import BaseModel, ConfigDict
 from backend.app.utils import to_camel  # if you add it; see below
 
+
 class CamelModel(BaseModel):
     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
+
 
 from sqlalchemy import select
 from backend.app.modules.training.models import TrainingItem, TrainingSession

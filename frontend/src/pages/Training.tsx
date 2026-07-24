@@ -36,7 +36,7 @@ export const Training = () => {
   const [moveInput, setMoveInput] = useState("");
   const [showAnimations, setShowAnimations] = useState(true);
   const [showPanel, setShowPanel] = useState(false);
-  const [hintLevel, setHintLevel] = useState(0);
+  const [hintLevel, setHintLevel] = useState(-1);
   const [localFeedback, setLocalFeedback] = useState("");
   const shownFeedback = localFeedback || feedback;
 
@@ -61,8 +61,7 @@ export const Training = () => {
   }, [isAdvancing]);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setHintLevel(0); 
+    setHintLevel(-1);
     setMoveFrom(null);
     moveFromRef.current = null;
     setLocalFeedback("");
@@ -97,11 +96,10 @@ export const Training = () => {
     // render cycle (which happens milliseconds later) hits Guard 2.
     lastAutoplayedItemIdRef.current = itemId;
 
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLocalFeedback("");
     lastSubmittedMoveUciRef.current = correctMoveUci;
     void submitMove(correctMoveUci, fen);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, itemId, fen, correctMoveUci, takeAutoplayOnce, submitMove]);
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
@@ -117,28 +115,8 @@ export const Training = () => {
   const handleRetryClick = async () => {
     setLocalFeedback("");
     setMoveInput("");
-    setHintLevel(0);
+    setHintLevel(-1);
     await handleRetry();
-  };
-
-  const getArrowsForHintLevel = (
-    hintLevel: number,
-    correctMoveUci: string | null | undefined,
-  ) => {
-    if (hintLevel < 3 || !correctMoveUci || correctMoveUci.length < 4) {
-      return [];
-    }
-
-    const from = correctMoveUci.substring(0, 2);
-    const to = correctMoveUci.substring(2, 4);
-
-    // v5's internal .match() will crash if these aren't exactly [a-h][1-8]
-    const squareRegex = /^[a-h][1-8]$/;
-    if (!squareRegex.test(from) || !squareRegex.test(to)) {
-      return [];
-    }
-
-    return [{ from, to, color: "yellow" }];
   };
 
   const processMove = useCallback(
@@ -178,7 +156,7 @@ export const Training = () => {
       void submitMove(uci, preFen);
       return true;
     },
-    [itemId, setFen, submitMove, correctMoveUci], 
+    [itemId, setFen, submitMove, correctMoveUci],
   );
 
   const handlePieceDrop = useCallback(
@@ -209,39 +187,25 @@ export const Training = () => {
     const styles: Record<string, React.CSSProperties> = { ...squareStyles };
 
     if (moveFrom) {
-      styles[moveFrom] = { background: "yellow" }; // Changed from backgroundColor and rgba
+      styles[moveFrom] = { backgroundColor: "rgba(255, 255, 0, 0.35)" };
     }
 
-    if (correctMoveUci && hintLevel > 0) {
+    if (correctMoveUci && hintLevel >= 0) {
       const fromSquare = correctMoveUci.substring(0, 2);
       const toSquare = correctMoveUci.substring(2, 4);
-      const highlightStyle = { background: "yellow" }; // Changed from backgroundColor and rgba
+      const highlightStyle = { backgroundColor: "rgba(255, 255, 0, 0.35)" };
 
-      if (hintLevel === 1) styles[fromSquare] = highlightStyle;
-      if (hintLevel >= 2) {
-        styles[fromSquare] = highlightStyle;
+      if (hintLevel === 0) {
+        styles[fromSquare] = highlightStyle; // piece only
+      }
+      if (hintLevel === 1) {
+        styles[fromSquare] = highlightStyle; // piece + destination
         styles[toSquare] = highlightStyle;
       }
     }
+
     return styles;
   }, [squareStyles, moveFrom, correctMoveUci, hintLevel]);
-
-  const customArrows = useMemo(() => {
-    // 1. Basic guards
-    if (!correctMoveUci || hintLevel < 3) return [];
-
-    // 2. Strict UCI format check (must be at least 4 chars: [a-h][1-8][a-h][1-8])
-    const uciPattern = /^[a-h][1-8][a-h][1-8]/;
-    if (!uciPattern.test(correctMoveUci)) return [];
-
-    return [
-      {
-        from: correctMoveUci.substring(0, 2),
-        to: correctMoveUci.substring(2, 4),
-        color: "yellow",
-      },
-    ];
-  }, [correctMoveUci, hintLevel]);
 
   const onSquareClick = useCallback(
     (payload: { square: string }) => {
@@ -290,7 +254,7 @@ export const Training = () => {
         }
       }
     },
-    [itemId, isWhiteToMove, processMove], // REMOVED isSubmitting and isAdvancing from here
+    [itemId, isWhiteToMove, processMove],
   );
 
   const chessboardOptions = useMemo(
@@ -298,21 +262,13 @@ export const Training = () => {
       position: fen,
       onPieceDrop: handlePieceDrop,
       onSquareClick: onSquareClick,
-      squareStyles: combinedSquareStyles, // Fixed property name
-      arrows: customArrows,
+
+      squareStyles: combinedSquareStyles,
+
       showAnimations: showAnimations,
-      customArrows: getArrowsForHintLevel(hintLevel, correctMoveUci),
+      areArrowsAllowed: true,
     }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [
-      fen,
-      handlePieceDrop,
-      onSquareClick,
-      combinedSquareStyles,
-      customArrows,
-      showAnimations,
-      hintLevel,
-    ],
+    [fen, handlePieceDrop, onSquareClick, combinedSquareStyles, showAnimations],
   );
 
   return (
@@ -350,16 +306,13 @@ export const Training = () => {
                   <button
                     className="btn btn-secondary"
                     type="button"
-                    onClick={() => setHintLevel((h) => h + 1)}
-                    disabled={isSubmitting || !itemId}
+                    onClick={() => {
+                      if (isSubmitting || isAdvancing || !itemId) return;
+                      setHintLevel((h) => (h < 0 ? 0 : 1));
+                    }}
+                    disabled={isSubmitting || isAdvancing || !itemId}
                   >
-                    {hintLevel === 0
-                      ? "Hint"
-                      : hintLevel === 1
-                        ? "More Hint"
-                        : hintLevel === 2
-                          ? "Full Hint"
-                          : "Max Hint"}
+                    {hintLevel <= -1 ? "Hint" : "More Hint"}
                   </button>
                   <button
                     className="btn btn-secondary"

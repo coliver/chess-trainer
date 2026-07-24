@@ -28,7 +28,6 @@ vi.mock("chess.js", () => ({
 
 vi.mock("react-chessboard", () => ({
   Chessboard: (props: any) => {
-    // capturedOptions IS the options object
     capturedOptions = props?.options;
     return <div data-testid="chessboard" />;
   },
@@ -66,6 +65,7 @@ describe("Training Page", () => {
     feedback: "",
     isSubmitting: false,
     isAdvancing: false,
+    isSessionCompleted: false,
     submitMove: mockSubmitMove,
     handleRetry: mockHandleRetry,
     takeAutoplayOnce: mockTakeAutoplayOnce,
@@ -213,6 +213,8 @@ describe("Training Page", () => {
       const checkbox = screen.getByLabelText(/show animations/i);
       await waitFor(() => expect(capturedOptions.showAnimations).toBe(true));
       await user.click(checkbox);
+      // chessboard mock captures props.options, not state from hook update.
+      // So just ensure it got re-rendered with toggled option value.
       expect(capturedOptions.showAnimations).toBe(false);
     });
   });
@@ -316,27 +318,29 @@ describe("Training Page", () => {
     });
   });
 
-  describe("Hint System", () => {
-    it("applies highlights and arrows as hint level increases", async () => {
+  describe("Hint System (2 levels, no arrows)", () => {
+    it("shows only from-square on Hint and from+to on More Hint", async () => {
       render(<Training />);
       await waitFor(() => expect(capturedOptions).toBeDefined());
 
-      const hintBtn = screen.getByRole("button", { name: /hint/i });
+      // initial: hintLevel should be off => from-square should not be highlighted
+      expect(capturedOptions.squareStyles?.["e2"]).toBeUndefined();
+      expect(capturedOptions.squareStyles?.["e4"]).toBeUndefined();
 
+      const hintBtn = screen.getByRole("button", { name: /hint/i });
       await user.click(hintBtn);
+
       expect(capturedOptions.squareStyles["e2"]).toBeDefined();
       expect(capturedOptions.squareStyles["e4"]).toBeUndefined();
 
-      await user.click(screen.getByRole("button", { name: /more hint/i }));
+      const moreHintBtn = screen.getByRole("button", { name: /more hint/i });
+      await user.click(moreHintBtn);
+
       expect(capturedOptions.squareStyles["e2"]).toBeDefined();
       expect(capturedOptions.squareStyles["e4"]).toBeDefined();
 
-      await user.click(screen.getByRole("button", { name: /full hint/i }));
-      expect(capturedOptions.customArrows).toContainEqual({
-        from: "e2",
-        to: "e4",
-        color: "yellow",
-      });
+      // arrows were removed
+      expect(capturedOptions.customArrows).toBeUndefined();
     });
   });
 });

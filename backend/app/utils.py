@@ -1,5 +1,5 @@
 # app/utils.py
-import re
+
 
 def to_camel(string: str) -> str:
     parts = string.split("_")

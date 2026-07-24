@@ -12,6 +12,7 @@ export type NextItem = {
   nextItemId: string | null;
   nextOpeningLabel: string;
   nextCorrectMoveUci: string;
+  nextNextPgn?: string;
   nextPgn: string;
   nextEpd: string;
 };
@@ -49,6 +50,7 @@ export function useTrainingSession(
   const [openingLabel, setOpeningLabel] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isAdvancing, setIsAdvancing] = useState(false);
+  const [isSessionCompleted, setIsSessionCompleted] = useState(false);
 
   const isMountedRef = useRef(true);
   const advanceTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -64,6 +66,10 @@ export function useTrainingSession(
       }
     };
   }, [clearTimeoutFn]);
+
+  useEffect(() => {
+    setIsSessionCompleted(false);
+  }, [id]);
 
   const fetchNextItem = useCallback(async (): Promise<NextItem> => {
     if (!id) throw new Error("Missing training session id");
@@ -112,6 +118,7 @@ export function useTrainingSession(
         if (!isMountedRef.current) return;
         applyNextItemState(next);
         setFeedback("");
+        setIsSessionCompleted(false);
       } catch (err: any) {
         if (!isMountedRef.current) return;
         if ((err?.response?.status ?? err?.status) === 401) on401Navigate();
@@ -148,6 +155,7 @@ export function useTrainingSession(
 
           if (data.sessionCompleted) {
             setFeedback("✅ Session completed.");
+            setIsSessionCompleted(true);
             setIsSubmitting(false);
             return;
           }
@@ -173,6 +181,7 @@ export function useTrainingSession(
               } else {
                 applyNextItemState(next);
                 setFeedback("");
+                setIsSessionCompleted(false);
               }
             } catch (err: any) {
               if (!isMountedRef.current) return;
@@ -223,6 +232,7 @@ export function useTrainingSession(
       if (!isMountedRef.current) return;
       applyNextItemState(next);
       setFeedback("");
+      setIsSessionCompleted(false);
     } catch (err: any) {
       if (!isMountedRef.current) return;
       if (err?.response?.status === 401) on401Navigate();
@@ -257,6 +267,7 @@ export function useTrainingSession(
     openingLabel,
     isSubmitting,
     isAdvancing,
+    isSessionCompleted,
     normalizeFen,
     submitMove,
     handleRetry,
