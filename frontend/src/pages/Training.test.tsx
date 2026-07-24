@@ -1,3 +1,4 @@
+//frontend/src/pages/Training.test.tsx
 import { describe, it, expect, vi, afterEach, beforeEach } from "vitest";
 import { render, waitFor, act, screen, cleanup } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -6,9 +7,10 @@ import { Training } from "./Training";
 import { useTrainingSession } from "../hooks/useTrainingSession";
 import { useBlinkGreen } from "../hooks/useBlinkGreen";
 import { Chess } from "chess.js";
+import "@testing-library/jest-dom";
+
 vi.mock("../hooks/useTrainingSession");
 vi.mock("../hooks/useBlinkGreen");
-import "@testing-library/jest-dom";
 
 let capturedOptions: any;
 const moveMock = vi.fn();
@@ -26,6 +28,7 @@ vi.mock("chess.js", () => ({
 
 vi.mock("react-chessboard", () => ({
   Chessboard: (props: any) => {
+    // capturedOptions IS the options object
     capturedOptions = props?.options;
     return <div data-testid="chessboard" />;
   },
@@ -54,7 +57,6 @@ describe("Training Page", () => {
   const mockHandleRetry = vi.fn();
   const mockTakeAutoplayOnce = vi.fn();
 
-  // Define the base state of the hook so we can spread it in individual tests
   const baseHookValue = {
     fen: "start-fen",
     setFen: vi.fn(),
@@ -79,13 +81,10 @@ describe("Training Page", () => {
       squareStyles: {},
     });
 
-    // Set the default return value
     (useTrainingSession as any).mockReturnValue(baseHookValue);
 
     moveMock.mockReset();
-
     moveMock.mockReturnValue({ promotion: "q" });
-
     fenMock.mockReturnValue("after-fen");
     turnMock.mockReturnValue("w");
   });
@@ -101,7 +100,6 @@ describe("Training Page", () => {
       squareStyles: {},
     });
 
-    // 1. Start with NO feedback
     (useTrainingSession as any).mockReturnValue({
       ...baseHookValue,
       feedback: "",
@@ -110,12 +108,10 @@ describe("Training Page", () => {
     const { rerender } = render(<Training />);
     await waitFor(() => expect(capturedOptions).toBeDefined());
 
-    // 2. Perform the move (this sets the Ref in the component)
     act(() => {
       capturedOptions.onPieceDrop("e2", "e4");
     });
 
-    // 3. Now change the mock to "Correct!" and re-render to trigger the useEffect
     (useTrainingSession as any).mockReturnValue({
       ...baseHookValue,
       feedback: "✅ Correct!",
@@ -130,15 +126,11 @@ describe("Training Page", () => {
     render(<Training />);
     const toggleBtn = screen.getByRole("button", { name: /show panel/i });
 
-    // Open
     await user.click(toggleBtn);
-    // Use toBeVisible() instead of toBeInTheDocument()
     expect(screen.getByText(/start new training session/i)).toBeVisible();
     expect(toggleBtn).toHaveTextContent(/hide/i);
 
-    // Close
     await user.click(toggleBtn);
-    // Use NOT toBeVisible()
     expect(screen.getByText(/start new training session/i)).not.toBeVisible();
     expect(toggleBtn).toHaveTextContent(/show/i);
   });
@@ -169,7 +161,6 @@ describe("Training Page", () => {
     });
 
     it("handles specific promotion characters from correctMoveUci", async () => {
-      // FIX: Spread baseHookValue instead of the mock function
       (useTrainingSession as any).mockReturnValue({
         ...baseHookValue,
         correctMoveUci: "a7a8n",
@@ -252,7 +243,6 @@ describe("Training Page", () => {
 
   describe("Click-to-Move Logic", () => {
     it("selects a white piece on first click and submits on second click", async () => {
-      // Mock Chess.get to return a white piece for 'e2'
       (Chess as any).mockImplementation(function () {
         this.turn = () => "w";
         this.move = moveMock;
@@ -266,12 +256,10 @@ describe("Training Page", () => {
       render(<Training />);
       await waitFor(() => expect(capturedOptions).toBeDefined());
 
-      // First click: Select e2 - PASS OBJECT
       act(() => {
         capturedOptions.onSquareClick({ square: "e2" });
       });
 
-      // Second click: Move to e4 - PASS OBJECT
       act(() => {
         capturedOptions.onSquareClick({ square: "e4" });
       });
@@ -289,13 +277,12 @@ describe("Training Page", () => {
       await waitFor(() => expect(capturedOptions).toBeDefined());
 
       act(() => {
-        capturedOptions.onSquareClick({ square: "e2" }); // Select
+        capturedOptions.onSquareClick({ square: "e2" });
       });
       act(() => {
-        capturedOptions.onSquareClick({ square: "e2" }); // Deselect
+        capturedOptions.onSquareClick({ square: "e2" });
       });
 
-      // If it was deselected, a subsequent click on e4 should NOT submit a move
       act(() => {
         capturedOptions.onSquareClick({ square: "e4" });
       });
@@ -307,8 +294,8 @@ describe("Training Page", () => {
       (Chess as any).mockImplementation(function () {
         this.turn = () => "w";
         this.get = vi.fn().mockImplementation((sq: string) => {
-          if (sq === "e5") return { color: "b" }; // Black piece
-          return null; // Empty
+          if (sq === "e5") return { color: "b" };
+          return null;
         });
       });
 
@@ -316,19 +303,18 @@ describe("Training Page", () => {
       await waitFor(() => expect(capturedOptions).toBeDefined());
 
       act(() => {
-        capturedOptions.onSquareClick({ square: "e5" }); // Click black piece
+        capturedOptions.onSquareClick({ square: "e5" });
       });
       act(() => {
-        capturedOptions.onSquareClick({ square: "a1" }); // Click empty
+        capturedOptions.onSquareClick({ square: "a1" });
       });
       act(() => {
-        capturedOptions.onSquareClick({ square: "e4" }); // No source selected
+        capturedOptions.onSquareClick({ square: "e4" });
       });
 
       expect(mockSubmitMove).not.toHaveBeenCalled();
     });
   });
-
 
   describe("Hint System", () => {
     it("applies highlights and arrows as hint level increases", async () => {
@@ -337,17 +323,14 @@ describe("Training Page", () => {
 
       const hintBtn = screen.getByRole("button", { name: /hint/i });
 
-      // Level 1: Highlight 'from' square (e2)
       await user.click(hintBtn);
       expect(capturedOptions.squareStyles["e2"]).toBeDefined();
       expect(capturedOptions.squareStyles["e4"]).toBeUndefined();
 
-      // Level 2: Highlight 'to' square (e4)
       await user.click(screen.getByRole("button", { name: /more hint/i }));
       expect(capturedOptions.squareStyles["e2"]).toBeDefined();
       expect(capturedOptions.squareStyles["e4"]).toBeDefined();
 
-      // Level 3: Show Arrow
       await user.click(screen.getByRole("button", { name: /full hint/i }));
       expect(capturedOptions.customArrows).toContainEqual({
         from: "e2",

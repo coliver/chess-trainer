@@ -1,9 +1,14 @@
 # /backend/app/routers/training.py
+from pydantic import BaseModel, ConfigDict
+from backend.app.utils import to_camel  # if you add it; see below
+
+class CamelModel(BaseModel):
+    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
+
 from sqlalchemy import select
 from backend.app.modules.training.models import TrainingItem, TrainingSession
 
 from fastapi import APIRouter, Depends, HTTPException, status
-from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from typing import List
 
@@ -19,11 +24,11 @@ from backend.app.modules.training.service import (
 from backend.app.routers.auth import get_current_user
 
 
-class TrainingSessionCreateResponse(BaseModel):
+class TrainingSessionCreateResponse(CamelModel):
     id: int
 
 
-class TrainingNextResponse(BaseModel):
+class TrainingNextResponse(CamelModel):
     session_id: int
     item_id: int
     order_index: int
@@ -34,25 +39,25 @@ class TrainingNextResponse(BaseModel):
     correct_move_uci: str  # TODO: REMOVE THIS Before live. debug only.
 
 
-class MoveResponseRequest(BaseModel):
+class MoveResponseRequest(CamelModel):
     move_uci: str
     item_id: int
 
 
-class MoveResponseResponse(BaseModel):
+class MoveResponseResponse(CamelModel):
     correct: bool
     reason: str
     fen_after: str | None = None
     session_completed: bool = False
 
 
-class TrainingItemCreate(BaseModel):
+class TrainingItemCreate(CamelModel):
     order_index: int
     fen: str
     correct_move_uci: str
 
 
-class TrainingItemsCreateResponse(BaseModel):
+class TrainingItemsCreateResponse(CamelModel):
     created: int
     session_id: int
 

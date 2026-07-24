@@ -1,32 +1,51 @@
-// frontend/src/tests/msw/handlers.ts
+//frontend/src/tests/msw/handlers.ts
 import { http, HttpResponse } from "msw";
 
+const nextRegex =
+  /\/api\/training-sessions\/[^/]+\/next\/?(?:\?.*)?$/;
+const responsesRegex =
+  /\/api\/training-sessions\/[^/]+\/responses\/?(?:\?.*)?$/;
+const trainingSessionsPostRegex =
+  /\/api\/training-sessions\/?(?:\?.*)?$/;
+
 export const defaultHandlers = [
-  http.get("/api/training-sessions/:id/next", () => {
+  http.get(nextRegex, ({ request }) => {
+    const url = new URL(request.url, "http://localhost");
+    const match = url.pathname.match(
+      /\/api\/training-sessions\/([^/]+)\/next\/?$/
+    );
+
+    const rawId = match?.[1] ?? "";
+    const id = Number(rawId);
+
+    console.log("MSW hit: next", { rawId, id, pathname: url.pathname });
+
     return HttpResponse.json({
-      item_id: 10,
-      fen_after: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
-      correct_move_uci: "e2e4",
-      opening_eco: "C20",
-      opening_name: "King's Pawn Game",
-      pgn: "",
-      epd: "",
-      fen: null,
+      sessionId: id,
+      itemId: 10,
+      orderIndex: 0,
+      fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      moveCountLimit: null,
+      openingEco: "C20",
+      openingName: "King's Pawn Game",
+      correctMoveUci: "e2e4",
     });
   }),
 
-  http.post("/api/training-sessions/:id/responses", async () => {
-    // default: treat move as correct
+  http.post(responsesRegex, async () => {
+    console.log("MSW hit: responses");
+
     return HttpResponse.json({
       correct: true,
       reason: "correct move",
-      fen_after:
+      fenAfter:
         "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1",
-      session_completed: false,
+      sessionCompleted: false,
     });
   }),
 
-  http.post("/api/training-sessions", () => {
+  http.post(trainingSessionsPostRegex, () => {
+    console.log("MSW hit: post training-sessions");
     return HttpResponse.json({ id: 1 });
   }),
 ];

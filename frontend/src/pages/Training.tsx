@@ -18,7 +18,7 @@ export const Training = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { blinkGreen, squareStyles } = useBlinkGreen();
-
+  const handle401 = useCallback(() => navigate("/login"), [navigate]);
   const {
     fen,
     setFen,
@@ -31,7 +31,7 @@ export const Training = () => {
     submitMove,
     handleRetry,
     takeAutoplayOnce,
-  } = useTrainingSession(id, () => navigate("/login"));
+  } = useTrainingSession(id, handle401);
 
   const [moveInput, setMoveInput] = useState("");
   const [showAnimations, setShowAnimations] = useState(true);
@@ -39,13 +39,32 @@ export const Training = () => {
   const [hintLevel, setHintLevel] = useState(0);
   const [localFeedback, setLocalFeedback] = useState("");
   const shownFeedback = localFeedback || feedback;
+
   const [moveFrom, setMoveFrom] = useState<string | null>(null);
+
+  const moveFromRef = useRef<string | null>(null);
+  const fenRef = useRef(fen);
   const lastSubmittedMoveUciRef = useRef<string>("");
+  const isSubmittingRef = useRef(isSubmitting);
+  const isAdvancingRef = useRef(isAdvancing);
+  const lastAutoplayedItemIdRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    fenRef.current = fen;
+  }, [fen]);
+  useEffect(() => {
+    isSubmittingRef.current = isSubmitting;
+  }, [isSubmitting]);
+
+  useEffect(() => {
+    isAdvancingRef.current = isAdvancing;
+  }, [isAdvancing]);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setHintLevel(0);
+    setHintLevel(0); 
     setMoveFrom(null);
+    moveFromRef.current = null;
     setLocalFeedback("");
   }, [itemId]);
 
@@ -58,25 +77,32 @@ export const Training = () => {
   const isWhiteToMove = useMemo(() => new Chess(fen).turn() === "w", [fen]);
 
   useEffect(() => {
+    // Guard 1: Basic data requirements
     if (!id || !itemId || isSubmitting || isAdvancing || !correctMoveUci)
       return;
+
+    // Guard 2: Hard Lock - If we already processed this itemId, STOP.
+    // This is the most important line in the component.
+    if (lastAutoplayedItemIdRef.current === itemId) return;
+
+    // Guard 3: Only run if it is the opponent's (black) turn
     const game = new Chess(fen);
     if (game.turn() !== "b") return;
+
+    // Guard 4: Hook-level lock (keep it as a secondary safety)
     if (!takeAutoplayOnce(itemId)) return;
-    if (localFeedback !== "") setLocalFeedback("");
+
+    // --- LOCK THE ITEM IMMEDIATELY ---
+    // We set the ref BEFORE the async call so that the next
+    // render cycle (which happens milliseconds later) hits Guard 2.
+    lastAutoplayedItemIdRef.current = itemId;
+
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setLocalFeedback("");
     lastSubmittedMoveUciRef.current = correctMoveUci;
     void submitMove(correctMoveUci, fen);
-  }, [
-    id,
-    itemId,
-    fen,
-    correctMoveUci,
-    isSubmitting,
-    isAdvancing,
-    takeAutoplayOnce,
-    submitMove,
-    localFeedback,
-  ]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, itemId, fen, correctMoveUci, takeAutoplayOnce, submitMove]);
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -95,9 +121,31 @@ export const Training = () => {
     await handleRetry();
   };
 
+  const getArrowsForHintLevel = (
+    hintLevel: number,
+    correctMoveUci: string | null | undefined,
+  ) => {
+    if (hintLevel < 3 || !correctMoveUci || correctMoveUci.length < 4) {
+      return [];
+    }
+
+    const from = correctMoveUci.substring(0, 2);
+    const to = correctMoveUci.substring(2, 4);
+
+    // v5's internal .match() will crash if these aren't exactly [a-h][1-8]
+    const squareRegex = /^[a-h][1-8]$/;
+    if (!squareRegex.test(from) || !squareRegex.test(to)) {
+      return [];
+    }
+
+    return [{ from, to, color: "yellow" }];
+  };
+
   const processMove = useCallback(
     (sourceSquare: string, targetSquare: string): boolean => {
-      if (isSubmitting || isAdvancing || !itemId) return false;
+      // Use .current here so this function doesn't need to change when state changes
+      if (isSubmittingRef.current || isAdvancingRef.current || !itemId)
+        return false;
 
       const uciPrefix = `${sourceSquare}${targetSquare}`;
       const expectedPromo = correctMoveUci.startsWith(uciPrefix)
@@ -105,7 +153,7 @@ export const Training = () => {
         : "";
       const promoForMove = expectedPromo ? expectedPromo : "q";
 
-      const game = new Chess(fen);
+      const game = new Chess(fenRef.current);
       const move = game.move({
         from: sourceSquare,
         to: targetSquare,
@@ -117,7 +165,7 @@ export const Training = () => {
         return false;
       }
 
-      const preFen = fen;
+      const preFen = fenRef.current;
       setFen(game.fen());
       const promotionChar = move.promotion
         ? String(move.promotion).toLowerCase()
@@ -130,15 +178,7 @@ export const Training = () => {
       void submitMove(uci, preFen);
       return true;
     },
-    [
-      fen,
-      itemId,
-      isSubmitting,
-      isAdvancing,
-      setFen,
-      submitMove,
-      correctMoveUci,
-    ],
+    [itemId, setFen, submitMove, correctMoveUci], 
   );
 
   const handlePieceDrop = useCallback(
@@ -165,28 +205,35 @@ export const Training = () => {
     }
   };
 
-  const hintStyles = useMemo(() => {
-    const styles: any = {};
+  const combinedSquareStyles = useMemo(() => {
+    const styles: Record<string, React.CSSProperties> = { ...squareStyles };
 
-    // Selected square highlight (Click-to-move)
     if (moveFrom) {
-      styles[moveFrom] = { backgroundColor: "rgba(0, 0, 255, 0.4)" };
+      styles[moveFrom] = { background: "yellow" }; // Changed from backgroundColor and rgba
     }
 
-    if (!correctMoveUci || hintLevel === 0) return styles;
-    const fromSquare = correctMoveUci.substring(0, 2);
-    const toSquare = correctMoveUci.substring(2, 4);
-    const highlightStyle = { backgroundColor: "rgba(255, 255, 0, 0.4)" };
-    if (hintLevel === 1) styles[fromSquare] = highlightStyle;
-    if (hintLevel >= 2) {
-      styles[fromSquare] = highlightStyle;
-      styles[toSquare] = highlightStyle;
+    if (correctMoveUci && hintLevel > 0) {
+      const fromSquare = correctMoveUci.substring(0, 2);
+      const toSquare = correctMoveUci.substring(2, 4);
+      const highlightStyle = { background: "yellow" }; // Changed from backgroundColor and rgba
+
+      if (hintLevel === 1) styles[fromSquare] = highlightStyle;
+      if (hintLevel >= 2) {
+        styles[fromSquare] = highlightStyle;
+        styles[toSquare] = highlightStyle;
+      }
     }
     return styles;
-  }, [correctMoveUci, hintLevel, moveFrom]);
+  }, [squareStyles, moveFrom, correctMoveUci, hintLevel]);
 
   const customArrows = useMemo(() => {
+    // 1. Basic guards
     if (!correctMoveUci || hintLevel < 3) return [];
+
+    // 2. Strict UCI format check (must be at least 4 chars: [a-h][1-8][a-h][1-8])
+    const uciPattern = /^[a-h][1-8][a-h][1-8]/;
+    if (!uciPattern.test(correctMoveUci)) return [];
+
     return [
       {
         from: correctMoveUci.substring(0, 2),
@@ -197,62 +244,74 @@ export const Training = () => {
   }, [correctMoveUci, hintLevel]);
 
   const onSquareClick = useCallback(
-    (payload: { square: string; piece?: { pieceType?: string } }) => {
-      const square = payload?.square;
+    (payload: { square: string }) => {
+      const square = payload.square;
       if (!square) return;
 
-      if (isSubmitting || isAdvancing || !itemId || !isWhiteToMove) return;
+      // Use .current here
+      if (
+        isSubmittingRef.current ||
+        isAdvancingRef.current ||
+        !itemId ||
+        !isWhiteToMove
+      )
+        return;
 
-      if (moveFrom) {
-        if (moveFrom === square) {
+      const currentFrom = moveFromRef.current;
+
+      if (currentFrom) {
+        if (currentFrom === square) {
           setMoveFrom(null);
+          moveFromRef.current = null;
           return;
         }
 
-        processMove(moveFrom, square);
-        setMoveFrom(null);
+        const success = processMove(currentFrom, square);
+        if (success) {
+          setMoveFrom(null);
+          moveFromRef.current = null;
+        } else {
+          const game = new Chess(fenRef.current);
+          const piece = game.get(square as any);
+          if (piece && piece.color === "w") {
+            setMoveFrom(square);
+            moveFromRef.current = square;
+          } else {
+            setMoveFrom(null);
+            moveFromRef.current = null;
+          }
+        }
       } else {
-        const game = new Chess(fen);
+        const game = new Chess(fenRef.current);
         const piece = game.get(square as any);
         if (piece && piece.color === "w") {
           setMoveFrom(square);
+          moveFromRef.current = square;
         }
       }
     },
-    [
-      moveFrom,
-      isSubmitting,
-      isAdvancing,
-      itemId,
-      isWhiteToMove,
-      processMove,
-      fen,
-    ],
+    [itemId, isWhiteToMove, processMove], // REMOVED isSubmitting and isAdvancing from here
   );
 
   const chessboardOptions = useMemo(
     () => ({
       position: fen,
-      showAnimations,
-      allowDragging: !!itemId && !isSubmitting && !isAdvancing && isWhiteToMove,
       onPieceDrop: handlePieceDrop,
-      onSquareClick: onSquareClick, // <--- Add this
-      squareStyles: { ...squareStyles, ...hintStyles },
-      customArrows: customArrows,
-      allowDrawingArrows: true,
+      onSquareClick: onSquareClick,
+      squareStyles: combinedSquareStyles, // Fixed property name
+      arrows: customArrows,
+      showAnimations: showAnimations,
+      customArrows: getArrowsForHintLevel(hintLevel, correctMoveUci),
     }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [
       fen,
-      showAnimations,
-      itemId,
-      isSubmitting,
-      isAdvancing,
-      isWhiteToMove,
       handlePieceDrop,
       onSquareClick,
-      squareStyles,
-      hintStyles,
+      combinedSquareStyles,
       customArrows,
+      showAnimations,
+      hintLevel,
     ],
   );
 
@@ -261,9 +320,9 @@ export const Training = () => {
       <div className="card">
         <h1 className="title">Training</h1>
         <h2 className="opening-label">{openingLabel}</h2>
-
         <div style={{ marginTop: 16 }}>
           <div style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
+            {/* Left Column */}
             <div style={{ flex: 1, minWidth: 0 }}>
               <div
                 className="training-board-wrap"
@@ -316,11 +375,14 @@ export const Training = () => {
               </div>
             </div>
 
+            {/* Right Column */}
             <div style={{ flex: 1, minWidth: 0 }}>
               <button className="btn" onClick={() => setShowPanel((s) => !s)}>
                 {showPanel ? "Hide" : "Show"} Panel
               </button>
-              <div style={{ marginTop: 12, display: showPanel ? "" : "none" }}>
+              <div
+                style={{ marginTop: 12, display: showPanel ? "block" : "none" }}
+              >
                 <StartNewTrainingButton className="btn" onClick={startSession}>
                   Start New Training Session
                 </StartNewTrainingButton>

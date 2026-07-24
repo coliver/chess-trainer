@@ -1,3 +1,4 @@
+// vitest.setup.ts
 import '@testing-library/jest-dom/vitest'
 import { server } from "./src/tests/msw/server";
 import { afterAll, afterEach, beforeAll } from 'vitest';
