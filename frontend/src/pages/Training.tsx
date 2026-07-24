@@ -29,7 +29,6 @@ export const Training = () => {
     isSubmitting,
     isAdvancing,
     submitMove,
-    handleRetry,
     takeAutoplayOnce,
   } = useTrainingSession(id, handle401);
 
@@ -110,13 +109,6 @@ export const Training = () => {
     lastSubmittedMoveUciRef.current = uci;
     await submitMove(uci, fen);
     setMoveInput("");
-  };
-
-  const handleRetryClick = async () => {
-    setLocalFeedback("");
-    setMoveInput("");
-    setHintLevel(-1);
-    await handleRetry();
   };
 
   const processMove = useCallback(
@@ -278,7 +270,6 @@ export const Training = () => {
         <h2 className="opening-label">{openingLabel}</h2>
         <div style={{ marginTop: 16 }}>
           <div style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
-            {/* Left Column */}
             <div style={{ flex: 1, minWidth: 0 }}>
               <div
                 className="training-board-wrap"
@@ -314,21 +305,12 @@ export const Training = () => {
                   >
                     {hintLevel <= -1 ? "Hint" : "More Hint"}
                   </button>
-                  <button
-                    className="btn btn-secondary"
-                    type="button"
-                    onClick={handleRetryClick}
-                    disabled={isSubmitting}
-                  >
-                    Retry?
-                  </button>
                   <FenTurnBadge fen={fen} />
                 </form>
                 <p className="training-feedback">{shownFeedback}</p>
               </div>
             </div>
 
-            {/* Right Column */}
             <div style={{ flex: 1, minWidth: 0 }}>
               <button className="btn" onClick={() => setShowPanel((s) => !s)}>
                 {showPanel ? "Hide" : "Show"} Panel

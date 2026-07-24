@@ -53,7 +53,6 @@ vi.mock("../components/FenTurnBadge", () => ({
 describe("Training Page", () => {
   let user: any;
   const mockSubmitMove = vi.fn();
-  const mockHandleRetry = vi.fn();
   const mockTakeAutoplayOnce = vi.fn();
 
   const baseHookValue = {
@@ -67,7 +66,6 @@ describe("Training Page", () => {
     isAdvancing: false,
     isSessionCompleted: false,
     submitMove: mockSubmitMove,
-    handleRetry: mockHandleRetry,
     takeAutoplayOnce: mockTakeAutoplayOnce,
   };
 
@@ -197,15 +195,6 @@ describe("Training Page", () => {
       await user.click(screen.getByRole("button", { name: /show panel/i }));
       await user.click(screen.getByText(/start new training session/i));
       expect(api.post).toHaveBeenCalledWith("/training-sessions");
-    });
-
-    it("clears input and triggers retry on click", async () => {
-      render(<Training />);
-      const input = screen.getByPlaceholderText("e.g. e2e4");
-      await user.type(input, "wrong_move");
-      await user.click(screen.getByRole("button", { name: /retry\?/i }));
-      expect(input).toHaveValue("");
-      expect(mockHandleRetry).toHaveBeenCalled();
     });
 
     it("toggles animations state on checkbox change", async () => {

@@ -226,20 +226,6 @@ export function useTrainingSession(
     ],
   );
 
-  const handleRetry = useCallback(async () => {
-    try {
-      const next = await fetchNextItem();
-      if (!isMountedRef.current) return;
-      applyNextItemState(next);
-      setFeedback("");
-      setIsSessionCompleted(false);
-    } catch (err: any) {
-      if (!isMountedRef.current) return;
-      if (err?.response?.status === 401) on401Navigate();
-      setFeedback("No more moves in this session or session expired.");
-    }
-  }, [fetchNextItem, applyNextItemState, on401Navigate]);
-
   const shouldAutoplay = useCallback(() => {
     const normalized = normalizeFen(fen);
     try {
@@ -270,7 +256,6 @@ export function useTrainingSession(
     isSessionCompleted,
     normalizeFen,
     submitMove,
-    handleRetry,
     shouldAutoplay,
     takeAutoplayOnce,
     prevFenRef,

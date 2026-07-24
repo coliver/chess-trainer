@@ -394,60 +394,6 @@ describe("useTrainingSession", () => {
     expect(on401Navigate).not.toHaveBeenCalled();
   });
 
-  it("handleRetry: fetches next and clears feedback", async () => {
-    let getCalls = 0;
-
-    server.use(
-      http.get(`/api/training-sessions/${id}/next`, () => {
-        getCalls += 1;
-
-        if (getCalls === 1) {
-          return HttpResponse.json({
-            itemId: "1",
-            fenAfter: "8/8/8/8/8/8/4K3/4k3 w - - 0 1",
-            openingEco: "C20",
-            openingName: "Opening A",
-            correctMoveUci: "e2e4",
-          });
-        }
-
-        // called by handleRetry
-        return HttpResponse.json({
-          itemId: "2",
-          fenAfter: "8/8/8/8/8/8/4K3/3Rk3 b - - 0 1",
-          openingEco: "C20",
-          openingName: "Opening B",
-          correctMoveUci: "d2d4",
-        });
-      }),
-      http.post(`/api/training-sessions/${id}/responses`, async () => {
-        return HttpResponse.json({ correct: false, reason: "wrong move" });
-      }),
-    );
-
-    const { result } = renderHook(() => useTrainingSession(id, on401Navigate));
-
-    await waitFor(() => expect(result.current.itemId).toBe("1"));
-
-    await act(async () => {
-      await result.current.submitMove("g1f3");
-    });
-
-    await waitFor(() => expect(result.current.feedback).toBe("❌ wrong move"));
-
-    await act(async () => {
-      await result.current.handleRetry();
-      await Promise.resolve(); // flush
-    });
-
-    await waitFor(() => {
-      expect(result.current.itemId).toBe("2");
-      expect(result.current.feedback).toBe("");
-      expect(result.current.openingLabel).toBe("C20 Opening B");
-      expect(result.current.correctMoveUci).toBe("d2d4");
-    });
-  });
-
   it("shouldAutoplay: returns true when it's black to move", async () => {
     server.use(
       http.get(`/api/training-sessions/${id}/next`, () => {
