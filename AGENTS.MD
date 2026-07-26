@@ -2,9 +2,7 @@
 # Chess Openings Trainer (FastAPI + PostgreSQL + Docker + nginx)
 
 ## Goal
-Help implement features in this repository following `backend/app/docs/architecture.md`, keeping changes minimal and production-friendly.
-
-IMPORTANT: When working with a developer, keep responses as short as possible and explain one thing at a time.
+Help implement features in this repository following `backend/app/docs/ARCHITECTURE.md`, keeping changes minimal and production-friendly.
 
 ## Non-negotiables
 - Keep the existing working scaffold working:
@@ -15,55 +13,118 @@ IMPORTANT: When working with a developer, keep responses as short as possible an
 - No secrets/credentials added to the repo.
 - Dockerize end-to-end from the start (no dev-only non-container workflows).
 
+## Developer communication rule
+When working with a developer, keep responses as short as possible and explain one thing at a time.
+
 ## Tech & libraries
-- Backend: **Python + FastAPI**
-- Frontend: **TypeScript + React**
-- DB: **PostgreSQL**
-- Data-layer:
-  - Migrations with **Alembic** in `backend/app/migrations/`
-  - ORM + migrations consistent with `architecture.md` (SQLAlchemy + Alembic)
-- Chess rules:
-  - Use **python-chess** for legality checks and applying moves to compute resulting positions/FEN.
-  - Keep runtime logic inside trainer/opening modules; keep `app.py` thin.
+- Backend: Python + FastAPI
+- Frontend: TypeScript + React
+- DB: PostgreSQL
+
+Data-layer:
+- Migrations with Alembic in `backend/app/migrations/`
+- ORM + migrations consistent with `backend/app/docs/architecture.md` (SQLAlchemy + Alembic)
+
+Chess rules:
+- Use `python-chess` for legality checks and applying moves to compute resulting positions/FEN.
+- Keep runtime logic inside trainer/opening modules; keep `app.py` thin.
 
 ## Status (MVP done)
-Auth (FastAPI paths; nginx exposes them under `/api`):
+
+### Auth (FastAPI paths; nginx exposes them under `/api`)
 - `POST /auth/register`
 - `POST /auth/login`
 
-Training MVP (position prompt + answer validation; FastAPI paths; nginx exposes them under `/api`):
+### Training MVP (position prompt + answer validation; FastAPI paths; nginx exposes them under `/api`)
 - `POST /training-sessions`
 - `GET /training-sessions/{id}/next`
 - `POST /training-sessions/{id}/responses`
 
-Validation behavior:
-- invalid UCI -> HTTP 400 with clear error message
-- illegal move -> `correct=false`, `reason="illegal move"`, `fen_after=null`
-- wrong legal move -> `correct=false`, `reason="wrong move"`, includes deterministic `fen_after`
+### Validation behavior (MVP contract — must not change)
+Validation is performed by `backend/app/modules/training/chess_rules.py:validate_and_apply()`:
 
-## Primary implementation target (next feature)
-Replace the current MVP static items with real opening-dataset-driven selection:
-- `training.create_training_session()` should generate `training_items` from the openings dataset (via `backend/app/modules/openings/`)
-- Each item must provide:
-  - `fen` for the prompt position
-  - exactly one expected correct next-move UCI (MVP behavior contract)
-- Keep selection logic deterministic for MVP.
+- invalid UCI string (cannot parse):
+  - `http_status=400`
+  - `correct=false`
+  - `reason="invalid move_uci"`
+  - `fen_after=null`
+  - `error_message` must explain the UCI parsing requirement
+- illegal move (UCI parses but not legal from `fen`):
+  - `http_status=200`
+  - `correct=false`
+  - `reason="illegal move"`
+  - `fen_after=null`
+- wrong legal move (UCI is legal but not equal to expected):
+  - `http_status=200`
+  - `correct=false`
+  - `reason="wrong move"`
+  - includes deterministic `fen_after` (computed by applying the submitted legal move)
 
-## Where code should live (align to `backend/app/docs/architecture.md`)
-- `backend/app/`:
-  - FastAPI routing entrypoints (wiring + request/response models only)
-- `backend/app/modules/`:
-  - `openings/` (resolve position -> expected next moves)
-  - `training/` (session creation, next-item selection, response submission)
-  - `progress/` (only when implementing progress endpoints/updates)
-  - `shared/` (DB session + common deps/helpers)
-- `backend/app/migrations/versions/`:
+## Current code layout (where logic lives)
+- `backend/app/`
+  - `app.py`: FastAPI wiring / startup concerns (keep thin)
+  - `routers/`
+    - `auth.py`: auth endpoints (routing + request/response models)
+    - `training.py`: training endpoints (routing + request/response models)
+
+- `backend/app/modules/`
+  - `openings/`
+    - `models.py`: opening dataset model(s)
+    - `service.py`: opening dataset lookup / prompt mapping
+  - `training/`
+    - `models.py`: `TrainingSession`, `TrainingItem`, `TrainingResponse`
+    - `service.py`: session creation + “next item” selection + response submission
+    - `chess_rules.py`: legality checks and `fen_after` computation
+  - `shared/`
+    - `db.py`: DB session/deps/helpers
+  - `progress/`
+    - only when implementing progress endpoints/updates
+
+- `backend/app/migrations/versions/`
   - only schema migrations
 
+## Primary implementation target (next feature)
+Replace current MVP static items with real opening-dataset-driven selection.
+
+### Dataset → prompt mapping (current openings contract)
+- `backend/app/modules/openings/service.py:get_prompt_and_move(eco: str, move_index: int, db)`
+  is the expected canonical mapping interface:
+  - loads a single `Opening` by `Opening.eco`
+  - splits `opening.uci_moves` into `moves`
+  - builds a `python-chess` board from `opening.epd`
+  - applies moves `[0..move_index-1]`
+  - returns:
+    - `fen` for the prompt position
+    - `correct_move_uci = moves[move_index]` (exactly one expected next-move UCI)
+
+### Training session item generation (must match the contract)
+Training items must be generated from the dataset mapping above (directly or via equivalent logic):
+
+- `backend/app/modules/training/service.py:create_training_session()`
+  must create `TrainingItem`s such that each item provides:
+  - `fen` for the prompt position
+  - exactly one expected correct next-move UCI (the `correct_move_uci` from the dataset mapping)
+
+Determinism requirement (MVP + tests)
+- Selection logic for which opening/step is used must be deterministic for MVP (so unit tests can assert exact FEN/expected UCI).
+- Avoid relying on non-deterministic DB ordering (your current implementation uses `order_by(func.random())` for choosing an opening; if tests depend on stability, ensure deterministic behavior under test conditions).
+
+### Validation contract remains unchanged
+- `backend/app/modules/training/chess_rules.py:validate_and_apply()` remains the single source of truth for:
+  - parsing invalid UCI => HTTP 400 + `reason="invalid move_uci"`
+  - illegal moves => `reason="illegal move"` and `fen_after=null`
+  - wrong legal moves => `reason="wrong move"` and deterministic `fen_after`
+
 ## Tests (required)
-- Use **pytest**.
+- Use `pytest`.
 - Extend existing unit tests rather than creating new layouts.
 - Add/adjust tests when changing validation, selection, or response mapping.
+
+Key existing tests to update/extend as needed:
+- `tests/test_openings_service.py`
+- `tests/test_training_service.py`
+- `tests/test_routers_training.py`
+- any tests that assert exact `fen_after` or `reason` values
 
 ## Output constraints
 - Only text/code changes.
