@@ -67,10 +67,6 @@ export function useTrainingSession(
     };
   }, [clearTimeoutFn]);
 
-  useEffect(() => {
-    setIsSessionCompleted(false);
-  }, [id]);
-
   const fetchNextItem = useCallback(async (): Promise<NextItem> => {
     if (!id) throw new Error("Missing training session id");
 
@@ -118,7 +114,6 @@ export function useTrainingSession(
         if (!isMountedRef.current) return;
         applyNextItemState(next);
         setFeedback("");
-        setIsSessionCompleted(false);
       } catch (err: any) {
         if (!isMountedRef.current) return;
         if ((err?.response?.status ?? err?.status) === 401) on401Navigate();

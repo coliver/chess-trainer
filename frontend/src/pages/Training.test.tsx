@@ -8,11 +8,14 @@ import { useTrainingSession } from "../hooks/useTrainingSession";
 import { useBlinkGreen } from "../hooks/useBlinkGreen";
 import { Chess } from "chess.js";
 import "@testing-library/jest-dom";
+import type { ChessboardOptions } from "react-chessboard";
+
+import type { PieceDropHandlerArgs } from "react-chessboard";
 
 vi.mock("../hooks/useTrainingSession");
 vi.mock("../hooks/useBlinkGreen");
 
-let capturedOptions: any;
+let capturedOptions: ChessboardOptions;
 const moveMock = vi.fn();
 const fenMock = vi.fn();
 const turnMock = vi.fn();
@@ -107,7 +110,10 @@ describe("Training Page", () => {
     await waitFor(() => expect(capturedOptions).toBeDefined());
 
     act(() => {
-      capturedOptions.onPieceDrop("e2", "e4");
+      (capturedOptions as ChessboardOptions).onPieceDrop({
+        sourceSquare: "e2",
+        targetSquare: "e4",
+      });
     });
 
     (useTrainingSession as any).mockReturnValue({
@@ -140,7 +146,15 @@ describe("Training Page", () => {
       await waitFor(() => expect(capturedOptions).toBeDefined());
 
       act(() => {
-        capturedOptions.onPieceDrop("e2", "e4");
+        (capturedOptions as ChessboardOptions).onPieceDrop({
+          sourceSquare: "e2",
+          targetSquare: "e4",
+          piece: {
+            isSparePiece: false,
+            position: "",
+            pieceType: "",
+          },
+        });
       });
 
       expect(mockSubmitMove).toHaveBeenCalledWith("e2e4q", "start-fen");
@@ -152,7 +166,15 @@ describe("Training Page", () => {
       await waitFor(() => expect(capturedOptions).toBeDefined());
 
       act(() => {
-        capturedOptions.onPieceDrop("e2", "e4");
+        (capturedOptions as any).onPieceDrop({
+          sourceSquare: "e2",
+          targetSquare: "e4",
+          piece: {
+            isSparePiece: false,
+            position: "",
+            pieceType: "",
+          },
+        } satisfies PieceDropHandlerArgs);
       });
 
       expect(await screen.findByText(/illegal move/i)).toBeTruthy();
@@ -167,13 +189,23 @@ describe("Training Page", () => {
       moveMock.mockReturnValue({ promotion: "n" });
 
       render(<Training />);
-      await waitFor(() => expect(capturedOptions).toBeDefined());
+      await waitFor(() => expect(capturedOptions).not.toBeUndefined());
 
       act(() => {
-        capturedOptions.onPieceDrop("a7", "a8");
+        (capturedOptions as any).onPieceDrop({
+          sourceSquare: "a7",
+          targetSquare: "a8",
+          piece: {
+            isSparePiece: false,
+            position: "",
+            pieceType: "",
+          },
+        } satisfies PieceDropHandlerArgs);
       });
 
-      expect(mockSubmitMove).toHaveBeenCalledWith("a7a8n", "start-fen");
+      await waitFor(() =>
+        expect(mockSubmitMove).toHaveBeenCalledWith("a7a8n", "start-fen"),
+      );
     });
 
     it("submits move via text input", async () => {
@@ -200,11 +232,12 @@ describe("Training Page", () => {
     it("toggles animations state on checkbox change", async () => {
       render(<Training />);
       const checkbox = screen.getByLabelText(/show animations/i);
-      await waitFor(() => expect(capturedOptions.showAnimations).toBe(true));
+      await waitFor(() =>
+        expect((capturedOptions as any).showAnimations).toBe(true),
+      );
       await user.click(checkbox);
-      // chessboard mock captures props.options, not state from hook update.
-      // So just ensure it got re-rendered with toggled option value.
-      expect(capturedOptions.showAnimations).toBe(false);
+
+      expect((capturedOptions as any).showAnimations).toBe(false);
     });
   });
 
@@ -248,11 +281,11 @@ describe("Training Page", () => {
       await waitFor(() => expect(capturedOptions).toBeDefined());
 
       act(() => {
-        capturedOptions.onSquareClick({ square: "e2" });
+        (capturedOptions as any).onSquareClick({ square: "e2" });
       });
 
       act(() => {
-        capturedOptions.onSquareClick({ square: "e4" });
+        (capturedOptions as any).onSquareClick({ square: "e4" });
       });
 
       expect(mockSubmitMove).toHaveBeenCalledWith("e2e4q", "start-fen");
@@ -268,14 +301,14 @@ describe("Training Page", () => {
       await waitFor(() => expect(capturedOptions).toBeDefined());
 
       act(() => {
-        capturedOptions.onSquareClick({ square: "e2" });
+        (capturedOptions as any).onSquareClick({ square: "e2" });
       });
       act(() => {
-        capturedOptions.onSquareClick({ square: "e2" });
+        (capturedOptions as any).onSquareClick({ square: "e2" });
       });
 
       act(() => {
-        capturedOptions.onSquareClick({ square: "e4" });
+        (capturedOptions as any).onSquareClick({ square: "e4" });
       });
 
       expect(mockSubmitMove).not.toHaveBeenCalled();
@@ -294,13 +327,13 @@ describe("Training Page", () => {
       await waitFor(() => expect(capturedOptions).toBeDefined());
 
       act(() => {
-        capturedOptions.onSquareClick({ square: "e5" });
+        (capturedOptions as any).onSquareClick({ square: "e5" });
       });
       act(() => {
-        capturedOptions.onSquareClick({ square: "a1" });
+        (capturedOptions as any).onSquareClick({ square: "a1" });
       });
       act(() => {
-        capturedOptions.onSquareClick({ square: "e4" });
+        (capturedOptions as any).onSquareClick({ square: "e4" });
       });
 
       expect(mockSubmitMove).not.toHaveBeenCalled();
@@ -312,24 +345,22 @@ describe("Training Page", () => {
       render(<Training />);
       await waitFor(() => expect(capturedOptions).toBeDefined());
 
-      // initial: hintLevel should be off => from-square should not be highlighted
-      expect(capturedOptions.squareStyles?.["e2"]).toBeUndefined();
-      expect(capturedOptions.squareStyles?.["e4"]).toBeUndefined();
+      expect((capturedOptions as any).squareStyles?.["e2"]).toBeUndefined();
+      expect((capturedOptions as any).squareStyles?.["e4"]).toBeUndefined();
 
       const hintBtn = screen.getByRole("button", { name: /hint/i });
       await user.click(hintBtn);
 
-      expect(capturedOptions.squareStyles["e2"]).toBeDefined();
-      expect(capturedOptions.squareStyles["e4"]).toBeUndefined();
+      expect((capturedOptions as any).squareStyles["e2"]).toBeDefined();
+      expect((capturedOptions as any).squareStyles["e4"]).toBeUndefined();
 
       const moreHintBtn = screen.getByRole("button", { name: /more hint/i });
       await user.click(moreHintBtn);
 
-      expect(capturedOptions.squareStyles["e2"]).toBeDefined();
-      expect(capturedOptions.squareStyles["e4"]).toBeDefined();
+      expect((capturedOptions as any).squareStyles["e2"]).toBeDefined();
+      expect((capturedOptions as any).squareStyles["e4"]).toBeDefined();
 
-      // arrows were removed
-      expect(capturedOptions.customArrows).toBeUndefined();
+      expect((capturedOptions as any).customArrows).toBeUndefined();
     });
   });
 });

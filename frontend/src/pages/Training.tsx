@@ -6,8 +6,13 @@ import React, {
   useState,
 } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Chess } from "chess.js";
-import { Chessboard } from "react-chessboard";
+import { Chess, type Square } from "chess.js";
+import {
+  Chessboard,
+  type ChessboardOptions,
+  type PieceDropHandlerArgs,
+  type SquareHandlerArgs,
+} from "react-chessboard";
 import api from "../api";
 import { StartNewTrainingButton } from "../components/StartNewTrainingButton";
 import FenTurnBadge from "../components/FenTurnBadge";
@@ -17,8 +22,10 @@ import { useTrainingSession } from "../hooks/useTrainingSession";
 export const Training = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+
   const { blinkGreen, squareStyles } = useBlinkGreen();
   const handle401 = useCallback(() => navigate("/login"), [navigate]);
+
   const {
     fen,
     setFen,
@@ -51,6 +58,7 @@ export const Training = () => {
   useEffect(() => {
     fenRef.current = fen;
   }, [fen]);
+
   useEffect(() => {
     isSubmittingRef.current = isSubmitting;
   }, [isSubmitting]);
@@ -60,10 +68,7 @@ export const Training = () => {
   }, [isAdvancing]);
 
   useEffect(() => {
-    setHintLevel(-1);
-    setMoveFrom(null);
     moveFromRef.current = null;
-    setLocalFeedback("");
   }, [itemId]);
 
   useEffect(() => {
@@ -75,27 +80,17 @@ export const Training = () => {
   const isWhiteToMove = useMemo(() => new Chess(fen).turn() === "w", [fen]);
 
   useEffect(() => {
-    // Guard 1: Basic data requirements
     if (!id || !itemId || isSubmitting || isAdvancing || !correctMoveUci)
       return;
-
-    // Guard 2: Hard Lock - If we already processed this itemId, STOP.
-    // This is the most important line in the component.
     if (lastAutoplayedItemIdRef.current === itemId) return;
 
-    // Guard 3: Only run if it is the opponent's (black) turn
     const game = new Chess(fen);
     if (game.turn() !== "b") return;
 
-    // Guard 4: Hook-level lock (keep it as a secondary safety)
     if (!takeAutoplayOnce(itemId)) return;
 
-    // --- LOCK THE ITEM IMMEDIATELY ---
-    // We set the ref BEFORE the async call so that the next
-    // render cycle (which happens milliseconds later) hits Guard 2.
     lastAutoplayedItemIdRef.current = itemId;
 
-    setLocalFeedback("");
     lastSubmittedMoveUciRef.current = correctMoveUci;
     void submitMove(correctMoveUci, fen);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -105,6 +100,7 @@ export const Training = () => {
     e.preventDefault();
     const uci = moveInput.trim();
     if (!uci) return;
+
     setLocalFeedback("");
     lastSubmittedMoveUciRef.current = uci;
     await submitMove(uci, fen);
@@ -113,7 +109,6 @@ export const Training = () => {
 
   const processMove = useCallback(
     (sourceSquare: string, targetSquare: string): boolean => {
-      // Use .current here so this function doesn't need to change when state changes
       if (isSubmittingRef.current || isAdvancingRef.current || !itemId)
         return false;
 
@@ -137,6 +132,7 @@ export const Training = () => {
 
       const preFen = fenRef.current;
       setFen(game.fen());
+
       const promotionChar = move.promotion
         ? String(move.promotion).toLowerCase()
         : "";
@@ -146,21 +142,14 @@ export const Training = () => {
       lastSubmittedMoveUciRef.current = uci;
       setMoveInput(uci);
       void submitMove(uci, preFen);
+
       return true;
     },
     [itemId, setFen, submitMove, correctMoveUci],
   );
 
   const handlePieceDrop = useCallback(
-    (dropOrSourceSquare: any, maybeTargetSquare?: string): boolean => {
-      const sourceSquare =
-        typeof dropOrSourceSquare === "string"
-          ? dropOrSourceSquare
-          : dropOrSourceSquare.sourceSquare;
-      const targetSquare =
-        typeof dropOrSourceSquare === "string"
-          ? (maybeTargetSquare ?? "")
-          : dropOrSourceSquare.targetSquare;
+    ({ sourceSquare, targetSquare }: PieceDropHandlerArgs): boolean => {
       return processMove(sourceSquare, targetSquare);
     },
     [processMove],
@@ -188,10 +177,10 @@ export const Training = () => {
       const highlightStyle = { backgroundColor: "rgba(255, 255, 0, 0.35)" };
 
       if (hintLevel === 0) {
-        styles[fromSquare] = highlightStyle; // piece only
+        styles[fromSquare] = highlightStyle;
       }
       if (hintLevel === 1) {
-        styles[fromSquare] = highlightStyle; // piece + destination
+        styles[fromSquare] = highlightStyle;
         styles[toSquare] = highlightStyle;
       }
     }
@@ -200,65 +189,79 @@ export const Training = () => {
   }, [squareStyles, moveFrom, correctMoveUci, hintLevel]);
 
   const onSquareClick = useCallback(
-    (payload: { square: string }) => {
-      const square = payload.square;
-      if (!square) return;
+    ({ square }: SquareHandlerArgs): void => {
+      const selectedSquare = square as Square;
+      if (!selectedSquare) return;
 
-      // Use .current here
       if (
         isSubmittingRef.current ||
         isAdvancingRef.current ||
         !itemId ||
         !isWhiteToMove
-      )
+      ) {
         return;
+      }
 
       const currentFrom = moveFromRef.current;
 
-      if (currentFrom) {
-        if (currentFrom === square) {
-          setMoveFrom(null);
-          moveFromRef.current = null;
-          return;
-        }
-
-        const success = processMove(currentFrom, square);
-        if (success) {
-          setMoveFrom(null);
-          moveFromRef.current = null;
-        } else {
-          const game = new Chess(fenRef.current);
-          const piece = game.get(square as any);
-          if (piece && piece.color === "w") {
-            setMoveFrom(square);
-            moveFromRef.current = square;
-          } else {
-            setMoveFrom(null);
-            moveFromRef.current = null;
-          }
-        }
-      } else {
+      // No "from" selected yet: choose it if it's a white piece.
+      if (currentFrom === null) {
         const game = new Chess(fenRef.current);
-        const piece = game.get(square as any);
+        const piece = game.get(selectedSquare);
+
         if (piece && piece.color === "w") {
-          setMoveFrom(square);
-          moveFromRef.current = square;
+          setMoveFrom(selectedSquare);
+          moveFromRef.current = selectedSquare;
+        } else {
+          setMoveFrom(null);
+          moveFromRef.current = null;
         }
+        return;
+      }
+
+      // "from" selected: clicking it again toggles off.
+      if (currentFrom === selectedSquare) {
+        setMoveFrom(null);
+        moveFromRef.current = null;
+        return;
+      }
+
+      // Try the move.
+      const from: string = currentFrom; // currentFrom is not null here due to the early return
+      const success = processMove(from, selectedSquare);
+      if (success) {
+        setMoveFrom(null);
+        moveFromRef.current = null;
+        return;
+      }
+
+      // Move failed: allow selecting a new from-square (only if it's white).
+      const game = new Chess(fenRef.current);
+      const piece = game.get(selectedSquare);
+
+      if (piece && piece.color === "w") {
+        setMoveFrom(selectedSquare);
+        moveFromRef.current = selectedSquare;
+      } else {
+        setMoveFrom(null);
+        moveFromRef.current = null;
       }
     },
     [itemId, isWhiteToMove, processMove],
   );
 
-  const chessboardOptions = useMemo(
+  const chessboardOptions: ChessboardOptions = useMemo(
     () => ({
       position: fen,
       onPieceDrop: handlePieceDrop,
       onSquareClick: onSquareClick,
 
       squareStyles: combinedSquareStyles,
-
       showAnimations: showAnimations,
-      areArrowsAllowed: true,
+
+      // Your pasted ChessboardOptions type doesn't have `areArrowsAllowed`.
+      // Arrow enabling is done via `allowDrawingArrows`.
+      allowDrawingArrows: true,
     }),
     [fen, handlePieceDrop, onSquareClick, combinedSquareStyles, showAnimations],
   );
@@ -268,6 +271,7 @@ export const Training = () => {
       <div className="card">
         <h1 className="title">Training</h1>
         <h2 className="opening-label">{openingLabel}</h2>
+
         <div style={{ marginTop: 16 }}>
           <div style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
             <div style={{ flex: 1, minWidth: 0 }}>
@@ -294,6 +298,7 @@ export const Training = () => {
                   >
                     Submit
                   </button>
+
                   <button
                     className="btn btn-secondary"
                     type="button"
@@ -305,8 +310,10 @@ export const Training = () => {
                   >
                     {hintLevel <= -1 ? "Hint" : "More Hint"}
                   </button>
+
                   <FenTurnBadge fen={fen} />
                 </form>
+
                 <p className="training-feedback">{shownFeedback}</p>
               </div>
             </div>
@@ -315,13 +322,16 @@ export const Training = () => {
               <button className="btn" onClick={() => setShowPanel((s) => !s)}>
                 {showPanel ? "Hide" : "Show"} Panel
               </button>
+
               <div
                 style={{ marginTop: 12, display: showPanel ? "block" : "none" }}
               >
                 <StartNewTrainingButton className="btn" onClick={startSession}>
                   Start New Training Session
                 </StartNewTrainingButton>
+
                 <h2 style={{ marginTop: 12 }}>{correctMoveUci}</h2>
+
                 <label
                   style={{
                     marginTop: 12,

@@ -166,8 +166,8 @@ describe("useTrainingSession", () => {
   });
 
   it("submitMove correct: clears existing advance timeout before scheduling a new one", async () => {
-    let nextTimeoutCallbacks: Array<() => Promise<void>> = [];
-    let clearTimeoutFn = vi.fn();
+    const nextTimeoutCallbacks: Array<() => Promise<void>> = [];
+    const clearTimeoutFn = vi.fn();
 
     const setTimeoutFn = (cb: () => void, _ms: number) => {
       // Wrap to match "async callback" behavior inside the hook
