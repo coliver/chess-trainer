@@ -1,11 +1,26 @@
-// frontend/src/Header.tsx
+// frontend/src/components/Header.tsx
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import profileIcon from "../assets/profile.svg";
 import { KnightSchoolIcon } from "./KnightSchoolIcon";
 import { ThemeToggle } from "./ThemeToggle";
 
 export default function Header() {
-  const isLoggedIn = !!localStorage.getItem("token");
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    () => !!localStorage.getItem("token")
+  );
+
+  useEffect(() => {
+    const syncFromStorage = () =>
+      setIsLoggedIn(!!localStorage.getItem("token"));
+
+    window.addEventListener("storage", syncFromStorage);
+
+    // also sync immediately (covers same-tab login without relying on "storage" event)
+    syncFromStorage();
+
+    return () => window.removeEventListener("storage", syncFromStorage);
+  }, []);
 
   return (
     <header className="site-header">
