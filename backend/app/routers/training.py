@@ -1,6 +1,6 @@
 # /backend/app/routers/training.py
 from pydantic import BaseModel, ConfigDict
-from backend.app.utils import to_camel  # if you add it; see below
+from backend.app.utils import to_camel
 
 
 class CamelModel(BaseModel):
@@ -24,6 +24,10 @@ from backend.app.modules.training.service import (
     create_training_items,
 )
 from backend.app.routers.auth import get_current_user
+
+
+class TrainingSessionCreateRequest(CamelModel):
+    opening_name: str | None = None
 
 
 class TrainingSessionCreateResponse(CamelModel):
@@ -66,10 +70,15 @@ class TrainingItemsCreateResponse(CamelModel):
 
 @router.post("/training-sessions", response_model=TrainingSessionCreateResponse)
 def post_training_sessions(
+    req: TrainingSessionCreateRequest,
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user),
 ):
-    session = create_training_session(db, current_user.id)
+    session = create_training_session(
+        db,
+        current_user.id,
+        opening_name=req.opening_name,
+    )
     return {"id": session.id}
 
 

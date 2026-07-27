@@ -131,7 +131,6 @@ def create_refresh_token(user_id: int) -> str:
     return jwt.encode(payload, _jwt_secret(), algorithm=_jwt_algorithm())
 
 
-# Update get_current_user to ensure only 'access' tokens work
 def get_current_user(
     authorization: str | None = Header(default=None),
     db=Depends(get_db),

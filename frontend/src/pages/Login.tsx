@@ -17,11 +17,14 @@ export default function Login() {
     setSubmitting(true);
 
     try {
-      // Use your axios instance 'api' instead of fetch
       const { data } = await api.post("/auth/login", { username, password });
 
       localStorage.setItem("token", data.access_token);
-      localStorage.setItem("refresh_token", data.refresh_token); // Add this line
+      localStorage.setItem("refresh_token", data.refresh_token);
+      localStorage.setItem("user_id", String(data.id));
+      localStorage.setItem("username", data.username);
+      localStorage.setItem("email", data.email);
+
       navigate("/dashboard");
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {

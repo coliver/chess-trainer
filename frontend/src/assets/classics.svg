@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Classics Practice and Progress icons">
+  <!-- Classics (▣) -->
+  <rect x="10" y="10" width="18" height="18" rx="3" fill="#fff" opacity="0.92"/>
+  <rect x="16" y="16" width="6" height="6" rx="2" fill="rgba(255,255,255,0.0)" stroke="#fff" stroke-width="3"/>
+
+  <!-- Re-learn cue (small book lines) -->
+  <path d="M10 33h18" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+  <path d="M10 39h18" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+
+  <!-- Progress (↟) -->
+  <path d="M36 18l10 0" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M41 13l5 5-5 5" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Progress % rings -->
+  <circle cx="48" cy="40" r="10" fill="none" stroke="#fff" stroke-width="3" opacity="0.25"/>
+  <path d="M48 30a10 10 0 1 1-8.66 5" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Tiny “82%” text mark -->
+  <text x="48" y="43" text-anchor="middle" font-family="system-ui, -apple-system, Segoe UI, Roboto, Arial" font-weight="800" font-size="8" fill="#fff">82%</text>
+</svg>

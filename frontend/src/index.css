@@ -6,11 +6,11 @@
   /* gray text */
   --text-h: #111827;
   /* near-black headings */
-  --bg: #e6e8ee;    
+  --bg: #e6e8ee;
   --card-bg: #f6f7fb;
   --border: #d6d8df;
 
-  --code-bg: #eef0ff; 
+  --code-bg: #eef0ff;
   --accent: #923e69;
   --accent-bg: rgba(146, 62, 105, 0.1);
   --accent-border: rgba(146, 62, 105, 0.45);
@@ -51,7 +51,7 @@
 html[data-theme="dark"] {
   --text: #9ca3af;
   --text-h: #f3f4f6;
-  
+
   --bg: #16171d;
   --border: #2e303a;
   --code-bg: #1f2028;
@@ -399,3 +399,315 @@ code {
   overflow-wrap: anywhere;
   max-width: 100%;
 }
+
+/* ===== Dashboard (fixed) ===== */
+
+/* Dashboard layout (3 left cols + 1 right tall) */
+.dashboard-layout {
+  margin-top: 16px;
+
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 1fr);
+  /* 3 left + 1 right */
+  grid-template-rows: auto auto;
+  /* row 1 = start unit, row 2 = 3 tiles */
+
+  gap: 14px;
+  width: 100%;
+}
+
+/* Shared tile base */
+.dashboard-tile {
+  align-items: stretch;
+
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.02);
+  padding: 16px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  min-height: 160px;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+/* Left row 1: spans all 3 left columns */
+.tile-start {
+  grid-column: 1 / span 3;
+  grid-row: 1;
+
+  min-height: 165px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  padding: 20px;
+  background: color-mix(in oklab, var(--card-bg) 86%, rgba(146, 62, 105, 0.08));
+}
+
+/* Left row 2: three tiles */
+.tile-1 {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.tile-2 {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.tile-3 {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+/* Right tall card spanning both rows */
+.dashboard-tile--tall {
+  grid-column: 4;
+  grid-row: 1 / span 2;
+
+  align-self: stretch;
+  /* makes it actually fill combined row height */
+  min-height: 360px;
+  /* tune if you want slightly taller/shorter */
+  height: 100%;
+
+  background: color-mix(in oklab, var(--card-bg) 86%, rgba(146, 62, 105, 0.06));
+}
+
+/* Tile inner elements */
+.tile-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  font-size: 16px;
+}
+
+/* Give the header-row the extra vertical space */
+.tile-1 .tile-header-row,
+.tile-2 .tile-header-row,
+.tile-3 .tile-header-row {
+  flex: 1;                 /* take remaining space */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  justify-content: flex-start; /* or: space-between (see below) */
+}
+
+.tile-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tile-header-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 18px;
+  /* was 12px */
+  text-align: center;
+}
+
+
+.tile-icon-inline {
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
+
+  display: grid;
+  place-items: center;
+
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  color: var(--accent);
+  flex: 0 0 auto;
+}
+
+/* space between title and subtitle when stacked */
+.tile-title {
+  display: block;
+  margin-bottom: 16px;
+  /* tune: 6–16px */
+  line-height: 1.2;
+}
+
+.tile-subtitle {
+  display: block;
+  margin: 0;
+  line-height: 1.35;
+}
+
+
+.tile-title--compact {
+  font-size: 15px;
+}
+
+/* Push actions to the bottom */
+.tile-action,
+.dashboard-tile button {
+  margin-top: auto;
+}
+
+.tile-start button {
+  margin-top: 0;
+  align-self: center;
+}
+
+/* Plain “ghost” button used in your Dashboard.tsx */
+.tile-action--ghost {
+  border: 1px solid var(--accent-border);
+  background: transparent;
+  color: var(--text-h);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.tile-action--ghost:hover {
+  background: var(--accent-bg);
+}
+
+/* Progress layout */
+.progress-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.progress-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.progress-value {
+  color: var(--text-h);
+  font-weight: 950;
+  font-size: 22px;
+}
+
+.progress-label {
+  color: var(--text);
+  font-size: 12px;
+}
+
+.progress-hint {
+  color: var(--text);
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .dashboard-layout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto auto auto;
+  }
+
+  .tile-start {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+  }
+
+  .tile-1 {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .tile-2 {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .tile-3 {
+    grid-column: 1 / span 2;
+    grid-row: 3;
+  }
+
+  .dashboard-tile--tall {
+    grid-column: 1 / span 2;
+    grid-row: 4;
+    min-height: 260px;
+  }
+}
+
+.tile-start .tile-action,
+.tile-1 .tile-action,
+.tile-2 .tile-action,
+.tile-3 .tile-action {
+  margin-top: 28px;
+  /* tune: 20–40px is usually right */
+}
+
+/* Dashboard Select */
+.dashboard-tile .select-wrap{
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+}
+
+.dashboard-tile .select-wrap select{
+  width: 100%;
+  height: 44px;
+  box-sizing: border-box;
+
+  padding: 0 44px 0 14px; /* right padding leaves space for the arrow */
+  border-radius: 12px;
+
+  border: 1px solid var(--border);
+  background: transparent;       /* so it matches your card bg */
+  color: var(--text-h);
+
+  font-size: 14px;
+  font-weight: 600;
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  outline: none;
+}
+
+.dashboard-tile .select-wrap select:focus-visible{
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Custom arrow */
+.dashboard-tile .select-wrap::after{
+  content: "";
+  position: absolute;
+  right: 16px;
+  top: 50%;
+
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid rgba(0,0,0,0.55);
+  border-bottom: 2px solid rgba(0,0,0,0.55);
+
+  transform: translateY(-70%) rotate(45deg);
+  pointer-events: none;
+}
+
+/* Dark theme arrow contrast */
+html[data-theme="dark"] .dashboard-tile .select-wrap::after{
+  border-right-color: rgba(255,255,255,0.7);
+  border-bottom-color: rgba(255,255,255,0.7);
+}
+
+
+/* ===== End Dashboard ===== */

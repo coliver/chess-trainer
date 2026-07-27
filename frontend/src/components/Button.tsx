@@ -6,6 +6,7 @@ type Props = {
   variant?: "primary" | "secondary";
   disabled?: boolean;
   type?: "button" | "submit";
+  className?: string;
 };
 
 export function Button({
@@ -14,10 +15,16 @@ export function Button({
   variant = "primary",
   disabled,
   type = "button",
+  className,
 }: Props) {
-  const className = variant === "secondary" ? "btn btn-secondary" : "btn";
+  const base = variant === "secondary" ? "btn btn-secondary" : "btn";
   return (
-    <button type={type} className={className} onClick={onClick} disabled={disabled}>
+    <button
+      type={type}
+      className={`${base}${className ? ` ${className}` : ""}`}
+      onClick={onClick}
+      disabled={disabled}
+    >
       {children}
     </button>
   );

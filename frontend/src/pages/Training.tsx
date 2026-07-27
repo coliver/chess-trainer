@@ -294,7 +294,7 @@ export const Training = () => {
                   <button
                     className="btn"
                     type="submit"
-                    disabled={isSubmitting || isAdvancing}
+                    disabled={isSubmitting || isAdvancing || !moveInput.trim()}
                   >
                     Submit
                   </button>
@@ -308,7 +308,7 @@ export const Training = () => {
                     }}
                     disabled={isSubmitting || isAdvancing || !itemId}
                   >
-                    {hintLevel <= -1 ? "Hint" : "More Hint"}
+                    {"Hint"}
                   </button>
 
                   <FenTurnBadge fen={fen} />

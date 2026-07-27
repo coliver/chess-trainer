@@ -1,0 +1,18 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <g fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round">
+    <!-- circles -->
+    <circle cx="128" cy="56" r="30" stroke-width="16"/>
+    <circle cx="64"  cy="190" r="20" stroke-width="12"/>
+    <circle cx="128" cy="190" r="20" stroke-width="12"/>
+    <circle cx="192" cy="190" r="20" stroke-width="12"/>
+
+    <!-- longer connections -->
+    <path d="M128 86 L128 156" stroke-width="6"/>
+    <path d="M64 130 L192 130" stroke-width="6"/>
+
+    <!-- vertical stubs to the bottom circles -->
+    <path d="M64 130 L64 166" stroke-width="6"/>
+    <path d="M128 146 L128 166" stroke-width="6"/>
+    <path d="M192 130 L192 166" stroke-width="6"/>
+  </g>
+</svg>
