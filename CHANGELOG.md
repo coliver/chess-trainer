@@ -12,6 +12,12 @@
 - Add CamelCasing to all api returns
 - Fix lots of frontend tests
 - Add lots of test coverage on the frontend
+- refactor: Remove Retry button and backing logic
+- feat(training): track session completion with isSessionCompleted
+- refactor(training): change hintLevel to -1/0 (Hint/More Hint) and highlight from/to squares only
+- fix(training): remove custom arrows/hint arrow logic and update chessboard options + expectations in tests
+- feat(training): add optional nextNextPgn to NextItem
+
 
 ## 2026-07-21
 - test: refactor auth tests and improve pytest configuration
@@ -25,6 +31,10 @@
 
 ## 2026-07-21
 - fix Click to Move functionality
+- test: refactor auth tests and improve pytest configuration
+- Add refresh tokens
+- Add env.example
+- Run black / ruff
 
 ## 2026-07-20
 - Fix `/api/` slash issue
