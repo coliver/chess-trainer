@@ -170,16 +170,31 @@ def get_current_training_item(db, training_session, all_items):
 
 
 def submit_training_response(
-    db: Session, session_id: int, item_id: int, move_uci: str
+    db: Session,
+    session_id: int,
+    item_id: int,
+    move_uci: str,
+    current_user_id: int,
 ) -> SubmitResult:
     session = db.get(TrainingSession, session_id)
-    if session is None:
+    if session is None or session.user_id != current_user_id:
         return SubmitResult(
             http_status=404,
             correct=False,
             reason="training session not found",
             fen_after=None,
             error_message="Training session not found.",
+        )
+
+    # Ensure the item belongs to this session
+    current_item = db.get(TrainingItem, item_id)
+    if current_item is None or current_item.session_id != session_id:
+        return SubmitResult(
+            http_status=404,
+            correct=False,
+            reason="training item not found",
+            fen_after=None,
+            error_message="Training item not found.",
         )
 
     all_items = list(
@@ -190,38 +205,8 @@ def submit_training_response(
         ).all()
     )
 
-    print(
-        "SESSION_ITEMS_COUNT",
-        db.query(TrainingItem).filter(TrainingItem.session_id == session_id).count(),
-    )
-    print(
-        "items_count_for_session_20=",
-        db.query(TrainingItem).filter(TrainingItem.session_id == session_id).count(),
-    )
-
     current = get_current_training_item(db, training_session=session, all_items=all_items)
     if current is None:
-        all_items_responded = all(
-            db.query(TrainingResponse)
-            .filter(
-                TrainingResponse.item_id == it.id,
-                TrainingResponse.is_correct.is_(True),
-            )
-            .first()
-            is not None
-            for it in all_items
-        )
-
-        if all_items_responded:
-            return SubmitResult(
-                http_status=200,
-                correct=True,
-                reason="training session completed",
-                fen_after=None,
-                error_message="Training session already completed.",
-                session_completed=True,
-            )
-
         return SubmitResult(
             http_status=404,
             correct=False,
@@ -239,40 +224,10 @@ def submit_training_response(
             error_message="Training item not found.",
         )
 
-    print(
-        "SUBMIT_DEBUG",
-        "item_id=",
-        current.id,
-        "expected_correct_move_uci=",
-        current.correct_move_uci,
-        "submitted_move_uci=",
-        move_uci,
-    )
-
     result = validate_and_apply(
         fen=current.fen,
         move_uci=move_uci,
         expected_correct_uci=current.correct_move_uci,
-    )
-
-    print(
-        "TRAIN_VALIDATE",
-        "session_id=",
-        session_id,
-        "item_id=",
-        current.id,
-        "fen_before=",
-        current.fen,
-        "submitted_move_uci=",
-        move_uci.strip(),
-        "expected_correct_uci=",
-        current.correct_move_uci,
-        "result_correct=",
-        result.correct,
-        "reason=",
-        result.reason,
-        "fen_after=",
-        result.fen_after,
     )
 
     existing = db.query(TrainingResponse).filter(TrainingResponse.item_id == current.id).first()

@@ -1,6 +1,6 @@
 # /backend/app/routers/training.py
 from pydantic import BaseModel, ConfigDict
-from backend.app.utils import to_camel  # if you add it; see below
+from backend.app.utils import to_camel
 
 
 class CamelModel(BaseModel):
@@ -38,7 +38,7 @@ class TrainingNextResponse(CamelModel):
     move_count_limit: int | None = None
     opening_eco: str | None = None
     opening_name: str | None = None
-    correct_move_uci: str  # TODO: REMOVE THIS Before live. debug only.
+    correct_move_uci: str
 
 
 class MoveResponseRequest(CamelModel):
@@ -74,9 +74,13 @@ def post_training_sessions(
 
 
 @router.get("/training-sessions/{id}/next", response_model=TrainingNextResponse)
-def get_training_next(id: int, db: Session = Depends(get_db)):
+def get_training_next(
+    id: int,
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user),
+):
     training_session = db.get(TrainingSession, id)
-    if training_session is None:
+    if training_session is None or training_session.user_id != current_user.id:
         raise HTTPException(status_code=404, detail="Training session not found")
 
     all_items = list(
@@ -99,7 +103,7 @@ def get_training_next(id: int, db: Session = Depends(get_db)):
         move_count_limit=None,
         opening_eco=training_session.opening_eco,
         opening_name=training_session.opening_name,
-        correct_move_uci=item.correct_move_uci,  # For the HAX
+        correct_move_uci=item.correct_move_uci,
     )
 
 
@@ -108,8 +112,23 @@ def get_training_next(id: int, db: Session = Depends(get_db)):
     response_model=MoveResponseResponse,
     status_code=status.HTTP_200_OK,
 )
-def post_training_response(id: int, req: MoveResponseRequest, db: Session = Depends(get_db)):
-    result = submit_training_response(db, session_id=id, item_id=req.item_id, move_uci=req.move_uci)
+def post_training_response(
+    id: int,
+    req: MoveResponseRequest,
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user),
+):
+    training_session = db.get(TrainingSession, id)
+    if training_session is None or training_session.user_id != current_user.id:
+        raise HTTPException(status_code=404, detail="Training session not found")
+
+    result = submit_training_response(
+        db,
+        session_id=id,
+        item_id=req.item_id,
+        move_uci=req.move_uci,
+        current_user_id=current_user.id,
+    )
     if result.http_status == 400:
         raise HTTPException(status_code=400, detail=result.error_message)
     if result.http_status == 404:
@@ -132,10 +151,12 @@ def post_training_items(
     id: int,
     items: List[TrainingItemCreate],
     db: Session = Depends(get_db),
+    current_user=Depends(get_current_user),
 ):
     training_session = db.get(TrainingSession, id)
-    if training_session is None:
+    if training_session is None or training_session.user_id != current_user.id:
         raise HTTPException(status_code=404, detail="Training session not found")
+
     if training_session.opening_eco is None or training_session.opening_name is None:
         raise HTTPException(
             status_code=400,
