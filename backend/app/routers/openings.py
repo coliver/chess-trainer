@@ -23,8 +23,12 @@ def list_openings(db: Session = Depends(get_db)):
 
     return [
         {
-            "name": o.name,
             "eco": o.eco,
+            "name": o.name,
+            "epd": o.epd,
+            "pgn": o.pgn,
+            "uci_moves": o.uci_moves,
+            "description": o.description,
         }
         for o in rows
     ]

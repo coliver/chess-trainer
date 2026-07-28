@@ -12,3 +12,5 @@ class Opening(Base):
     epd = Column(Text, nullable=True)
     pgn = Column(Text, nullable=True)
     uci_moves = Column(Text, nullable=True)
+
+    description = Column(Text, nullable=True)

@@ -73,21 +73,32 @@ describe("Dashboard", () => {
       </MemoryRouter>,
     );
 
-    const select = await screen.findByRole("combobox");
-
-    await waitFor(() => {
-      expect((select as HTMLSelectElement).value).toBe(openings[0].name);
+    const input = await screen.findByRole("combobox", {
+      name: "Search openings",
     });
 
+    // Wait until the query is set to the first opening
+    await waitFor(() => {
+      expect((input as HTMLInputElement).value).toBe(
+        `${openings[0].eco} — ${openings[0].name}`,
+      );
+    });
+
+    // Open the dropdown (the component opens on click)
+    await user.click(input);
+
+    // Now options should exist
     expect(
       screen.getByRole("option", { name: "B10 — Caro-Kann" }),
     ).toBeInTheDocument();
-    expect(
-      screen.getByRole("option", { name: "B20 — Sicilian" }),
-    ).toBeInTheDocument();
+    await waitFor(() => {
+      expect(
+        screen.queryByRole("option", { name: "B20 — Sicilian" }),
+      ).not.toBeInTheDocument();
+    });
   });
 
-  it("clicking the first Start posts training session and navigates to /training/:id", async () => {
+  it("clicking the Start button launches a training session and navigates to /training/:id", async () => {
     (api.get as any).mockResolvedValueOnce({ data: openings });
     (api.post as any).mockResolvedValueOnce({ data: { id: 123 } });
 
@@ -123,6 +134,6 @@ describe("Dashboard", () => {
     );
 
     // greeting is synchronous; no need to wait for openings
-    expect(screen.getByRole("heading", { name: /Chris/i })).toBeInTheDocument();
+    await screen.findByRole("heading", { name: /Chris/i })
   });
 });

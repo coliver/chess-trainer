@@ -195,6 +195,10 @@ code {
   gap: 12px;
 }
 
+.margin12 {
+  margin: 12px;
+}
+
 .site-header-nav {
   display: flex;
   align-items: center;
@@ -261,12 +265,27 @@ code {
 
 .site-header-title {
   font-family: var(--heading);
-  color: var(--text-h);
-  text-decoration: none;
   font-weight: 600;
   letter-spacing: -0.4px;
   font-size: 64px;
+  text-decoration: none;
+
+  display: block;
+
+  background-repeat: repeat-x;
+  background-size: 100% auto;
+  background-position: 0% 15%;
+
+  -webkit-background-clip: text;
+  background-clip: text;
 }
+
+.site-header-title Link {
+  border: 1px solid white;
+  opacity: 1;
+}
+
+
 
 .site-header-actions {
   display: flex;
@@ -432,20 +451,41 @@ code {
   min-height: 160px;
   box-sizing: border-box;
   text-align: left;
+
+  overflow: hidden;
 }
 
-/* Left row 1: spans all 3 left columns */
+
+.dashboard-tile>* {
+  /* keeps children from shifting due to different content heights */
+  min-width: 0;
+}
+
 .tile-start {
   grid-column: 1 / span 3;
   grid-row: 1;
 
-  min-height: 165px;
-  align-items: center;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* was center */
+  align-items: stretch;
+  /* was center */
   text-align: center;
 
   padding: 20px;
   background: color-mix(in oklab, var(--card-bg) 86%, rgba(146, 62, 105, 0.08));
+  min-height: 165px;
+  gap: 12px;
+}
+
+.tile-start .tile-start-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  gap: 12px;
 }
 
 /* Left row 2: three tiles */
@@ -466,16 +506,22 @@ code {
 
 /* Right tall card spanning both rows */
 .dashboard-tile--tall {
-  grid-column: 4;
-  grid-row: 1 / span 2;
+  display: flex;
+  flex-direction: column;
+}
 
-  align-self: stretch;
-  /* makes it actually fill combined row height */
-  min-height: 360px;
-  /* tune if you want slightly taller/shorter */
-  height: 100%;
+.dashboard-tile--tall .next-review {
+  margin-top: auto;
+}
 
-  background: color-mix(in oklab, var(--card-bg) 86%, rgba(146, 62, 105, 0.06));
+.dashboard-tile--tall .tile-header {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  justify-content: flex-start;
 }
 
 /* Tile inner elements */
@@ -496,13 +542,15 @@ code {
 .tile-1 .tile-header-row,
 .tile-2 .tile-header-row,
 .tile-3 .tile-header-row {
-  flex: 1;                 /* take remaining space */
+  flex: 1;
+  /* take remaining space */
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
 
-  justify-content: flex-start; /* or: space-between (see below) */
+  justify-content: flex-start;
+  /* or: space-between (see below) */
 }
 
 .tile-header {
@@ -521,6 +569,9 @@ code {
   text-align: center;
 }
 
+.margin {
+  margin: 12px
+}
 
 .tile-icon-inline {
   width: 72px;
@@ -539,32 +590,39 @@ code {
 /* space between title and subtitle when stacked */
 .tile-title {
   display: block;
+  /* keeps it on its own line */
   margin-bottom: 16px;
-  /* tune: 6–16px */
-  line-height: 1.2;
+  /* space to subtitle */
+  line-height: 1.1;
+  /* tighter = more “title” feel */
+  font-weight: 700;
+  /* or 600 */
+  font-size: 1.25rem;
+  /* increase if needed */
+  letter-spacing: -0.02em;
+  /* subtle modern title look */
+  /* optional: text-transform: uppercase; */
 }
 
 .tile-subtitle {
   display: block;
   margin: 0;
-  line-height: 1.35;
+  line-height: 1.25;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: currentColor
 }
-
 
 .tile-title--compact {
   font-size: 15px;
 }
 
-/* Push actions to the bottom */
-.tile-action,
-.dashboard-tile button {
+/* Only buttons that are direct children of the tile should push to bottom */
+.dashboard-tile>.tile-action,
+.dashboard-tile>button {
   margin-top: auto;
 }
 
-.tile-start button {
-  margin-top: 0;
-  align-self: center;
-}
 
 /* Plain “ghost” button used in your Dashboard.tsx */
 .tile-action--ghost {
@@ -615,7 +673,8 @@ code {
 @media (max-width: 1024px) {
   .dashboard-layout {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto auto auto auto;
+    /* was auto auto auto */
   }
 
   .tile-start {
@@ -637,77 +696,129 @@ code {
     grid-column: 1 / span 2;
     grid-row: 3;
   }
-
-  .dashboard-tile--tall {
-    grid-column: 1 / span 2;
-    grid-row: 4;
-    min-height: 260px;
-  }
 }
 
-.tile-start .tile-action,
-.tile-1 .tile-action,
-.tile-2 .tile-action,
-.tile-3 .tile-action {
-  margin-top: 28px;
-  /* tune: 20–40px is usually right */
+
+/* ===== Dashboard Combobox (input + dropdown) ===== */
+
+.dashboard-tile .select-wrap {
+  margin: 0 auto;
+  width: 100%;
+  /* max-width: 520px; */
+  display: flex;
+  justify-content: center;
 }
 
-/* Dashboard Select */
-.dashboard-tile .select-wrap{
+.dashboard-tile .combo-root {
   position: relative;
   width: 100%;
-  max-width: 320px;
 }
 
-.dashboard-tile .select-wrap select{
+.dashboard-tile .combo-input {
   width: 100%;
   height: 44px;
   box-sizing: border-box;
-
-  padding: 0 44px 0 14px; /* right padding leaves space for the arrow */
+  padding: 0 14px;
   border-radius: 12px;
-
   border: 1px solid var(--border);
-  background: transparent;       /* so it matches your card bg */
+  background: transparent;
   color: var(--text-h);
-
   font-size: 14px;
   font-weight: 600;
-
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-
   outline: none;
 }
 
-.dashboard-tile .select-wrap select:focus-visible{
+.dashboard-tile .combo-input:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
-/* Custom arrow */
-.dashboard-tile .select-wrap::after{
-  content: "";
+.dashboard-tile .combo-list {
   position: absolute;
-  right: 16px;
-  top: 50%;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
 
-  width: 10px;
-  height: 10px;
-  border-right: 2px solid rgba(0,0,0,0.55);
-  border-bottom: 2px solid rgba(0,0,0,0.55);
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
 
-  transform: translateY(-70%) rotate(45deg);
-  pointer-events: none;
+  box-shadow: var(--shadow);
+  z-index: 9999;
+
+  max-height: 320px;
+  overflow: auto;
+
+  padding: 6px;
+  box-sizing: border-box;
 }
 
-/* Dark theme arrow contrast */
-html[data-theme="dark"] .dashboard-tile .select-wrap::after{
-  border-right-color: rgba(255,255,255,0.7);
-  border-bottom-color: rgba(255,255,255,0.7);
+.dashboard-tile .combo-item--empty {
+  padding: 10px 12px;
+  color: var(--text);
+  cursor: default;
+  border-radius: 10px;
 }
 
+.dashboard-tile .combo-item {
+  width: 100%;
+  display: block;
+  text-align: left;
 
-/* ===== End Dashboard ===== */
+  border: 0;
+  background: transparent;
+
+  padding: 10px 12px;
+  border-radius: 10px;
+
+  font-size: 14px;
+  font-weight: 650;
+  color: var(--text-h);
+
+  cursor: pointer;
+}
+
+.dashboard-tile .combo-item:hover {
+  background: var(--accent-bg);
+}
+
+.dashboard-tile .combo-item--selected {
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  padding: 9px 11px;
+  /* keep height stable when border appears */
+}
+
+/* ===== Dashboard Opening Description ===== */
+
+.opening-description {
+  margin: 8px 0 0;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.45;
+
+  height: calc(1.45 * 3em);
+  /* ~3 lines, adjust if needed */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.opening-description--empty {
+  opacity: 0.8;
+}
+
+/* ===== Board Preview ===== */
+.boardPreview {
+  width: 140px;
+  max-width: 100%;
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+  margin: 0 auto;
+}
+
+.boardPreview .react-chessboard .boardPreview svg {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
