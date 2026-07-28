@@ -11,6 +11,8 @@ import "@testing-library/jest-dom";
 import type { ChessboardOptions } from "react-chessboard";
 
 import type { PieceDropHandlerArgs } from "react-chessboard";
+import type { ComponentProps } from "react";
+import type { StartNewTrainingButton } from "../components/StartNewTrainingButton";
 
 vi.mock("../hooks/useTrainingSession");
 vi.mock("../hooks/useBlinkGreen");
@@ -20,18 +22,30 @@ const moveMock = vi.fn();
 const fenMock = vi.fn();
 const turnMock = vi.fn();
 
+type ChessInstance = {
+  move: (...args: unknown[]) => unknown;
+  fen: (...args: unknown[]) => string;
+  turn: () => string;
+  get: (square: string) => { color: "w" | "b" } | null;
+};
+
+function ChessMock(this: ChessInstance) {
+  this.move = moveMock as ChessInstance["move"];
+  this.fen = fenMock as ChessInstance["fen"];
+  this.turn = turnMock as ChessInstance["turn"];
+  this.get = vi.fn().mockReturnValue({ color: "w" });
+}
+
+// Mock dat constructor
 vi.mock("chess.js", () => ({
-  Chess: vi.fn().mockImplementation(function ChessMock() {
-    (this as any).move = moveMock;
-    (this as any).fen = fenMock;
-    (this as any).turn = turnMock;
-    (this as any).get = vi.fn().mockReturnValue({ color: "w" });
+  Chess: vi.fn().mockImplementation(function ChessCtor(this: ChessInstance) {
+    ChessMock.call(this);
   }),
 }));
 
 vi.mock("react-chessboard", () => ({
-  Chessboard: (props: any) => {
-    capturedOptions = props?.options;
+  Chessboard: (props: { options: ChessboardOptions }) => {
+    capturedOptions = props.options;
     return <div data-testid="chessboard" />;
   },
 }));
@@ -46,15 +60,20 @@ vi.mock("react-router-dom", () => ({
 }));
 
 vi.mock("../components/StartNewTrainingButton", () => ({
-  StartNewTrainingButton: (p: any) => <button {...p} />,
+  StartNewTrainingButton: (
+    p: ComponentProps<typeof StartNewTrainingButton>,
+  ) => <button {...p} />,
 }));
+type FenTurnBadgeProps = { fen: string };
 
 vi.mock("../components/FenTurnBadge", () => ({
-  default: ({ fen }: any) => <div data-testid="fen-badge">{fen}</div>,
+  default: ({ fen }: FenTurnBadgeProps) => (
+    <div data-testid="fen-badge">{fen}</div>
+  ),
 }));
 
 describe("Training Page", () => {
-  let user: any;
+  let user: ReturnType<typeof userEvent.setup>;
   const mockSubmitMove = vi.fn();
   const mockTakeAutoplayOnce = vi.fn();
 
@@ -77,12 +96,12 @@ describe("Training Page", () => {
     vi.clearAllMocks();
     capturedOptions = undefined;
 
-    (useBlinkGreen as any).mockReturnValue({
+    useBlinkGreen.mockReturnValue({
       blinkGreen: vi.fn(),
       squareStyles: {},
     });
 
-    (useTrainingSession as any).mockReturnValue(baseHookValue);
+    useTrainingSession.mockReturnValue(baseHookValue);
 
     moveMock.mockReset();
     moveMock.mockReturnValue({ promotion: "q" });
@@ -96,12 +115,12 @@ describe("Training Page", () => {
 
   it("triggers blinkGreen animation when feedback is '✅ Correct!'", async () => {
     const mockBlinkGreen = vi.fn();
-    (useBlinkGreen as any).mockReturnValue({
+    useBlinkGreen.mockReturnValue({
       blinkGreen: mockBlinkGreen,
       squareStyles: {},
     });
 
-    (useTrainingSession as any).mockReturnValue({
+    useTrainingSession.mockReturnValue({
       ...baseHookValue,
       feedback: "",
     });
@@ -116,7 +135,7 @@ describe("Training Page", () => {
       });
     });
 
-    (useTrainingSession as any).mockReturnValue({
+    useTrainingSession.mockReturnValue({
       ...baseHookValue,
       feedback: "✅ Correct!",
     });
@@ -166,7 +185,7 @@ describe("Training Page", () => {
       await waitFor(() => expect(capturedOptions).toBeDefined());
 
       act(() => {
-        (capturedOptions as any).onPieceDrop({
+        capturedOptions.onPieceDrop({
           sourceSquare: "e2",
           targetSquare: "e4",
           piece: {
@@ -181,7 +200,7 @@ describe("Training Page", () => {
     });
 
     it("handles specific promotion characters from correctMoveUci", async () => {
-      (useTrainingSession as any).mockReturnValue({
+      useTrainingSession.mockReturnValue({
         ...baseHookValue,
         correctMoveUci: "a7a8n",
       });
@@ -192,7 +211,7 @@ describe("Training Page", () => {
       await waitFor(() => expect(capturedOptions).not.toBeUndefined());
 
       act(() => {
-        (capturedOptions as any).onPieceDrop({
+        capturedOptions.onPieceDrop({
           sourceSquare: "a7",
           targetSquare: "a8",
           piece: {
@@ -222,7 +241,7 @@ describe("Training Page", () => {
 
   describe("UI & Session Controls", () => {
     it("toggles the info panel and starts a new session", async () => {
-      (api.post as any).mockResolvedValue({ data: { id: "sess-new" } });
+      api.post.mockResolvedValue({ data: { id: "sess-new" } });
       render(<Training />);
       await user.click(screen.getByRole("button", { name: /show panel/i }));
       await user.click(screen.getByText(/start new training session/i));
@@ -232,12 +251,10 @@ describe("Training Page", () => {
     it("toggles animations state on checkbox change", async () => {
       render(<Training />);
       const checkbox = screen.getByLabelText(/show animations/i);
-      await waitFor(() =>
-        expect((capturedOptions as any).showAnimations).toBe(true),
-      );
+      await waitFor(() => expect(capturedOptions.showAnimations).toBe(true));
       await user.click(checkbox);
 
-      expect((capturedOptions as any).showAnimations).toBe(false);
+      expect(capturedOptions.showAnimations).toBe(false);
     });
   });
 
@@ -255,7 +272,7 @@ describe("Training Page", () => {
       turnMock.mockReturnValue("b");
       mockTakeAutoplayOnce.mockReturnValue(true);
 
-      (useTrainingSession as any).mockReturnValue({
+      useTrainingSession.mockReturnValue({
         ...baseHookValue,
         isSubmitting: true,
       });
@@ -267,7 +284,7 @@ describe("Training Page", () => {
 
   describe("Click-to-Move Logic", () => {
     it("selects a white piece on first click and submits on second click", async () => {
-      (Chess as any).mockImplementation(function () {
+      Chess.mockImplementation(function () {
         this.turn = () => "w";
         this.move = moveMock;
         this.fen = fenMock;
@@ -281,18 +298,18 @@ describe("Training Page", () => {
       await waitFor(() => expect(capturedOptions).toBeDefined());
 
       act(() => {
-        (capturedOptions as any).onSquareClick({ square: "e2" });
+        capturedOptions.onSquareClick({ square: "e2" });
       });
 
       act(() => {
-        (capturedOptions as any).onSquareClick({ square: "e4" });
+        capturedOptions.onSquareClick({ square: "e4" });
       });
 
       expect(mockSubmitMove).toHaveBeenCalledWith("e2e4q", "start-fen");
     });
 
     it("deselects the piece if the same square is clicked twice", async () => {
-      (Chess as any).mockImplementation(function () {
+      Chess.mockImplementation(function () {
         this.turn = () => "w";
         this.get = vi.fn().mockReturnValue({ color: "w" });
       });
@@ -301,21 +318,21 @@ describe("Training Page", () => {
       await waitFor(() => expect(capturedOptions).toBeDefined());
 
       act(() => {
-        (capturedOptions as any).onSquareClick({ square: "e2" });
+        capturedOptions.onSquareClick({ square: "e2" });
       });
       act(() => {
-        (capturedOptions as any).onSquareClick({ square: "e2" });
+        capturedOptions.onSquareClick({ square: "e2" });
       });
 
       act(() => {
-        (capturedOptions as any).onSquareClick({ square: "e4" });
+        capturedOptions.onSquareClick({ square: "e4" });
       });
 
       expect(mockSubmitMove).not.toHaveBeenCalled();
     });
 
     it("ignores clicks on black pieces or empty squares for the first selection", async () => {
-      (Chess as any).mockImplementation(function () {
+      Chess.mockImplementation(function () {
         this.turn = () => "w";
         this.get = vi.fn().mockImplementation((sq: string) => {
           if (sq === "e5") return { color: "b" };
@@ -327,13 +344,13 @@ describe("Training Page", () => {
       await waitFor(() => expect(capturedOptions).toBeDefined());
 
       act(() => {
-        (capturedOptions as any).onSquareClick({ square: "e5" });
+        capturedOptions.onSquareClick({ square: "e5" });
       });
       act(() => {
-        (capturedOptions as any).onSquareClick({ square: "a1" });
+        capturedOptions.onSquareClick({ square: "a1" });
       });
       act(() => {
-        (capturedOptions as any).onSquareClick({ square: "e4" });
+        capturedOptions.onSquareClick({ square: "e4" });
       });
 
       expect(mockSubmitMove).not.toHaveBeenCalled();
@@ -345,21 +362,21 @@ describe("Training Page", () => {
       render(<Training />);
       await waitFor(() => expect(capturedOptions).toBeDefined());
 
-      expect((capturedOptions as any).squareStyles?.["e2"]).toBeUndefined();
-      expect((capturedOptions as any).squareStyles?.["e4"]).toBeUndefined();
+      expect(capturedOptions.squareStyles?.["e2"]).toBeUndefined();
+      expect(capturedOptions.squareStyles?.["e4"]).toBeUndefined();
 
       const hintBtn = screen.getByRole("button", { name: /hint/i });
       await user.click(hintBtn);
 
-      expect((capturedOptions as any).squareStyles["e2"]).toBeDefined();
-      expect((capturedOptions as any).squareStyles["e4"]).toBeUndefined();
+      expect(capturedOptions.squareStyles["e2"]).toBeDefined();
+      expect(capturedOptions.squareStyles["e4"]).toBeUndefined();
 
       await user.click(hintBtn);
-      
-      expect((capturedOptions as any).squareStyles["e2"]).toBeDefined();
-      expect((capturedOptions as any).squareStyles["e4"]).toBeDefined();
 
-      expect((capturedOptions as any).customArrows).toBeUndefined();
+      expect(capturedOptions.squareStyles["e2"]).toBeDefined();
+      expect(capturedOptions.squareStyles["e4"]).toBeDefined();
+
+      expect(capturedOptions.customArrows).toBeUndefined();
     });
   });
 });
