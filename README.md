@@ -4,8 +4,17 @@ A web-based chess openings trainer designed to drill specific lines and track pe
 
 This is a work in progress.
 
-![Screentshot of Knight School Dashboard](image.png)
+<details>
+  <summary>Light mode</summary>
 
+  ![Light mode](./LightMode.png)
+</details>
+
+<details>
+  <summary>Dark mode</summary>
+
+  ![Dark mode](./DarkMode.png)
+</details>
 
 ### 📂 Project Navigation
 - **[Backend](./backend/README.md)**: API logic, Database schema, and Chess engine rules.

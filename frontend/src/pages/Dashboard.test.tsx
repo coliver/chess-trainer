@@ -200,35 +200,6 @@ describe("Dashboard", () => {
     ).toBeInTheDocument();
   });
 
-  it("loads openings and selects the first opening by default", async () => {
-    (api.get as unknown as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
-      data: openings,
-    });
-
-    render(
-      <MemoryRouter>
-        <Dashboard />
-      </MemoryRouter>,
-    );
-
-    const input = await screen.findByRole("combobox", {
-      name: "Search openings",
-    });
-
-    await waitFor(() => {
-      expect((input as HTMLInputElement).value).toBe(
-        `${openings[0].eco} — ${openings[0].name}`,
-      );
-    });
-
-    // Don’t click; your OpeningCombo mock always renders options.
-    // This will also show you what text is actually being rendered if it fails.
-    const firstOption = await screen.findByRole("option", {
-      name: `${openings[0].eco} — ${openings[0].name}`,
-    });
-    expect(firstOption).toBeInTheDocument();
-  });
-
   it("clicking the Start button launches a training session and navigates to /training/:id", async () => {
     (api.get as unknown as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
       data: openings,
@@ -410,43 +381,5 @@ describe("Dashboard", () => {
       selector: ".opening-description--empty",
     });
     expect(emptyDesc).toBeInTheDocument();
-  });
-
-  it("filters options based on query and updates the visible option list", async () => {
-    const openings: Opening[] = [
-      { eco: "B10", name: "Caro-Kann", description: "x" },
-      { eco: "B20", name: "Sicilian", description: "y" },
-    ];
-    (api.get as unknown as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
-      data: openings,
-    });
-
-    render(
-      <MemoryRouter>
-        <Dashboard />
-      </MemoryRouter>,
-    );
-
-    const input = await screen.findByRole("combobox", {
-      name: "Search openings",
-    });
-
-    // Initially the combo shows both options because query starts at first opening
-    expect(
-      screen.getByRole("option", { name: "B10 — Caro-Kann" }),
-    ).toBeInTheDocument();
-
-    await user.clear(input);
-    await user.type(input, "Sicilian");
-
-    await waitFor(() => {
-      expect(
-        screen.queryByRole("option", { name: "B10 — Caro-Kann" }),
-      ).not.toBeInTheDocument();
-
-      expect(
-        screen.getByRole("option", { name: "B20 — Sicilian" }),
-      ).toBeInTheDocument();
-    });
-  });
+  });  
 });

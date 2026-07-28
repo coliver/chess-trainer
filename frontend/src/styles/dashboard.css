@@ -1,5 +1,4 @@
-/* ===== Dashboard (fixed) ===== */
-
+/* ===== Dashboard layout ===== */
 /* Dashboard layout (3 left cols + 1 right tall) */
 .dashboard-layout {
   margin-top: 16px;
@@ -14,7 +13,7 @@
   width: 100%;
 }
 
-/* Shared tile base */
+/* ===== Shared tile base ===== */
 .dashboard-tile {
   align-items: stretch;
 
@@ -34,12 +33,18 @@
   overflow: hidden;
 }
 
-
 .dashboard-tile>* {
   /* keeps children from shifting due to different content heights */
   min-width: 0;
 }
 
+/* Only buttons that are direct children of the tile should push to bottom */
+.dashboard-tile>.tile-action,
+.dashboard-tile>button {
+  margin-top: auto;
+}
+
+/* ===== Start tile (top row, left spanning 3 cols) ===== */
 .tile-start {
   grid-column: 1 / span 3;
   grid-row: 1;
@@ -47,9 +52,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  /* was center */
   align-items: stretch;
-  /* was center */
   text-align: center;
 
   padding: 20px;
@@ -71,7 +74,7 @@
   min-height: 12px;
 }
 
-/* Left row 2: three tiles */
+/* ===== Left row 2: three tiles ===== */
 .tile-1 {
   grid-column: 1;
   grid-row: 2;
@@ -87,17 +90,10 @@
   grid-row: 2;
 }
 
-/* Right tall card spanning both rows */
-.dashboard-tile--tall {
-  display: flex;
-  flex-direction: column;
-}
-
-.dashboard-tile--tall .next-review {
-  margin-top: auto;
-}
-
-.dashboard-tile--tall .tile-header {
+/* Give the header-row the extra vertical space */
+.tile-1 .tile-header-row,
+.tile-2 .tile-header-row,
+.tile-3 .tile-header-row {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -105,9 +101,10 @@
   text-align: center;
 
   justify-content: flex-start;
+  gap: 18px;
 }
 
-/* Tile inner elements */
+/* ===== Tile inner elements ===== */
 .tile-icon {
   width: 36px;
   height: 36px;
@@ -119,21 +116,6 @@
   place-items: center;
   font-weight: 900;
   font-size: 16px;
-}
-
-/* Give the header-row the extra vertical space */
-.tile-1 .tile-header-row,
-.tile-2 .tile-header-row,
-.tile-3 .tile-header-row {
-  flex: 1;
-  /* take remaining space */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-
-  justify-content: flex-start;
-  /* or: space-between (see below) */
 }
 
 .tile-header {
@@ -148,12 +130,12 @@
   align-items: center;
   justify-content: flex-start;
   gap: 18px;
-  /* was 12px */
+
   text-align: center;
 }
 
 .margin12 {
-  margin: 12px
+  margin: 12px;
 }
 
 .tile-icon-inline {
@@ -170,21 +152,46 @@
   flex: 0 0 auto;
 }
 
+/* Make the right-arrow/progress icon match the other big inline icons */
+.dashboard-tile .tile-icon--right,
+.dashboard-tile .tile-icon.tile-icon--right {
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
+
+  /* center whatever SVG/img you pass in */
+  display: grid;
+  place-items: center;
+
+  /* keep border visible at the correct scale */
+  font-size: 16px;
+}
+
+/* Ensure the icon itself fills the container */
+.dashboard-tile .tile-icon--right>img,
+.dashboard-tile .tile-icon--right>svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.dashboard-tile .tile-icon-inline,
+.dashboard-tile .tile-icon--right {
+  color: var(--accent);
+}
+
 /* space between title and subtitle when stacked */
 .tile-title {
   display: block;
-  /* keeps it on its own line */
   margin-bottom: 16px;
-  /* space to subtitle */
   line-height: 1.1;
-  /* tighter = more “title” feel */
   font-weight: 700;
-  /* or 600 */
   font-size: 1.25rem;
-  /* increase if needed */
   letter-spacing: -0.02em;
-  /* subtle modern title look */
-  /* optional: text-transform: uppercase; */
+}
+
+.tile-title--compact {
+  font-size: 15px;
 }
 
 .tile-subtitle {
@@ -193,20 +200,10 @@
   line-height: 1.25;
   font-weight: 500;
   font-size: 0.95rem;
-  color: currentColor
+  color: currentColor;
 }
 
-.tile-title--compact {
-  font-size: 15px;
-}
-
-/* Only buttons that are direct children of the tile should push to bottom */
-.dashboard-tile>.tile-action,
-.dashboard-tile>button {
-  margin-top: auto;
-}
-
-
+/* ===== Buttons ===== */
 /* Plain “ghost” button used in your Dashboard.tsx */
 .tile-action--ghost {
   border: 1px solid var(--accent-border);
@@ -222,7 +219,7 @@
   background: var(--accent-bg);
 }
 
-/* Progress layout */
+/* ===== Progress layout ===== */
 .progress-row {
   display: flex;
   gap: 16px;
@@ -252,12 +249,11 @@
   margin-top: 4px;
 }
 
-/* Responsive */
+/* ===== Responsive ===== */
 @media (max-width: 1024px) {
   .dashboard-layout {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-rows: auto auto auto auto;
-    /* was auto auto auto */
   }
 
   .tile-start {
@@ -279,15 +275,18 @@
     grid-column: 1 / span 2;
     grid-row: 3;
   }
+
+  .tile-right {
+    grid-column: 4;
+    grid-row: 2;
+  }
 }
 
 
 /* ===== Dashboard Combobox (input + dropdown) ===== */
-
 .dashboard-tile .select-wrap {
   margin: 0 auto;
   width: 100%;
-  /* max-width: 520px; */
   display: flex;
   justify-content: center;
 }
@@ -373,7 +372,6 @@
 }
 
 /* ===== Dashboard Opening Description ===== */
-
 .opening-description {
   margin: 8px 0 0;
   color: var(--text);
@@ -381,7 +379,7 @@
   line-height: 1.45;
 
   height: calc(1.45 * 3em);
-  /* ~3 lines, adjust if needed */
+  /* ~3 lines */
   overflow: hidden;
   text-overflow: ellipsis;
 }

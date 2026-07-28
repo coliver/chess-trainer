@@ -1,22 +1,22 @@
 /* tokens.css */
-/* Light theme (default) */
+/* Soft Light Theme (default) */
 :root {
-  --text: #6b7280;
-  --text-h: #111827;
-  --bg: #e6e8ee;
-  --card-bg: #f6f7fb;
-  --border: #d6d8df;
+  --text: #5b6472;        /* softer than #6b7280 */
+  --text-h: #0f172a;      /* dark slate */
+  --bg: hsl(220, 14%, 94%);          /* near-white, not bluish-gray bright */
+  --card-bg: hsl(240, 25%, 98%);     /* gentle lift over bg */
+  --border: #dde1e8;      /* softer border */
 
-  --code-bg: #eef0ff;
-  --accent: #923e69;
-  --accent-bg: rgba(146, 62, 105, 0.1);
-  --accent-border: rgba(146, 62, 105, 0.45);
+  --code-bg: hsl(218, 31%, 95%);     /* calm code surface */
+  --accent: #8b2f63;      /* slightly less saturated */
+  --accent-bg: rgba(139, 47, 99, 0.10);
+  --accent-border: rgba(139, 47, 99, 0.40);
 
-  --social-bg: rgba(146, 62, 105, 0.07);
+  --social-bg: rgba(139, 47, 99, 0.08);
 
   --shadow:
-    rgba(0, 0, 0, 0.08) 0 10px 15px -3px,
-    rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+    rgba(15, 23, 42, 0.08) 0 10px 15px -3px,
+    rgba(15, 23, 42, 0.05) 0 4px 6px -2px;
 
   --sans: Inter, system-ui, "Segoe UI", Roboto, sans-serif;
   --heading: sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
@@ -28,6 +28,7 @@
   color-scheme: light;
   color: var(--text);
   background: var(--bg);
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -43,7 +44,7 @@
   }
 }
 
-/* Dark Theme */
+/* Dark Theme (keep yours as-is, or tell me if you want softer there too) */
 html[data-theme="dark"] {
   --text: #9ca3af;
   --text-h: #f3f4f6;

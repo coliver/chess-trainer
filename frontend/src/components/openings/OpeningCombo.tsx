@@ -31,6 +31,12 @@ export default function OpeningCombo({
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
+    if (query.trim().length > 0 && options.length > 0) {
+      setIsOpen(true);
+    }
+  }, [query, options.length, setIsOpen]);
+
+  useEffect(() => {
     const onMouseDown = (e: MouseEvent) => {
       if (!rootRef.current) return;
       if (!rootRef.current.contains(e.target as Node)) setIsOpen(false);

@@ -2,17 +2,17 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api";
 
-import classicsUrl from "../assets/classics.svg";
-import upRightArrowUrl from "../assets/up-right-arrow.svg";
-import targetUrl from "../assets/target.svg";
-import branchUrl from "../assets/branch.svg";
-
-import { KnightSchoolIcon } from "../components/KnightSchoolIcon";
+import DailyDrillIcon from "../components/DailyDrillIcon";
 import BoardPreview from "../components/openings/BoardPreview";
 import OpeningCombo from "../components/openings/OpeningCombo";
 import DashboardTile from "../components/openings/DashboardTile";
 
 import { Button } from "../components/Button";
+import { RandomQuote } from "../components/RandomQuote";
+import RecommendedLineIcon from "../components/RecommendedLineIcon";
+import ProgressIcon from "../components/ProgressIcon";
+import ClassicsIcon from "../components/ClassicsIcon";
+import TrainingIcon from "../components/TrainingIcon";
 
 export type Opening = {
   name: string;
@@ -46,8 +46,8 @@ export const Dashboard = () => {
         setSelectedOpeningName(first?.name ?? null);
         setSelectedOpeningDescription(first?.description ?? "");
 
-        setQuery(first ? `${first.eco} — ${first.name}` : "");
-        setIsComboOpen(false);
+        setQuery(""); // ✅ don’t pre-fill query (prevents filtering to 1 option)
+        setIsComboOpen(false); // or true if your test expects it open immediately
       })
       .catch((e) => console.error("Error loading openings:", e));
   }, []);
@@ -102,26 +102,24 @@ export const Dashboard = () => {
   return (
     <main className="page">
       <div className="card">
-        <div className="title" role="heading">
+        <div className="tile-title" role="heading">
           {greeting}
         </div>
-        <div className="subtitle">Ready to practice your lines?</div>
+        <div className="tile-subtitle">Ready to practice your lines?</div>
 
         <div className="dashboard-layout">
           <DashboardTile
             className="tile-start"
-            tile={
+            icon={<TrainingIcon />}
+            title="Training"
+            subtitle={
+              <span className="tile-subtitle italics">
+                <RandomQuote />
+              </span>
+            }
+            customBody={
               <div>
-                <div className="tile-start-text">
-                  <div>
-                    <KnightSchoolIcon height={"100px"} />
-                  </div>
-                  <div className="tile-title">Training</div>
-                  <div className="tile-subtitle">
-                    Every day a little better.
-                  </div>
-                </div>
-
+                <div className="tile-spacer" />
                 <OpeningCombo
                   rootLabel="Search openings"
                   query={query}
@@ -147,6 +145,7 @@ export const Dashboard = () => {
                     selectedOpeningName={selectedOpeningName}
                   />
                 </div>
+
                 <Button
                   className="tile-action"
                   onClick={() => startSession(selectedOpeningName)}
@@ -160,14 +159,7 @@ export const Dashboard = () => {
 
           <DashboardTile
             className="tile-1"
-            icon={
-              <img
-                src={targetUrl}
-                alt="Target with arrow"
-                width={"64px"}
-                height={"64px"}
-              />
-            }
+            icon={<DailyDrillIcon />}
             title="Daily Drill"
             subtitle="A focused tactical challenge just for today."
             cta={
@@ -179,14 +171,7 @@ export const Dashboard = () => {
 
           <DashboardTile
             className="tile-2"
-            icon={
-              <img
-                src={branchUrl}
-                alt="Recommended line"
-                width={"64px"}
-                height={"64px"}
-              />
-            }
+            icon={<RecommendedLineIcon />}
             title="Recommended Line"
             subtitle="Study prompt picked for you"
             cta={
@@ -198,14 +183,7 @@ export const Dashboard = () => {
 
           <DashboardTile
             className="tile-3"
-            icon={
-              <img
-                src={classicsUrl}
-                alt="Recommended line"
-                width={"64px"}
-                height={"64px"}
-              />
-            }
+            icon={<ClassicsIcon />}
             title="Classics Practice"
             subtitle="Re-learn the classics"
             cta={
@@ -216,16 +194,8 @@ export const Dashboard = () => {
           />
 
           <DashboardTile
-            className="dashboard-tile--tall tile-right"
-            compact
-            rightArrowIcon={
-              <img
-                src={upRightArrowUrl}
-                alt="Recommended line"
-                width={28}
-                height={28}
-              />
-            }
+            className="dashboard-tile tile-right"
+            icon={<ProgressIcon />}
             title="Progress"
             customBody={
               <div>

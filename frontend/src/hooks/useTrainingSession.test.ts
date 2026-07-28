@@ -1,5 +1,4 @@
 // frontend/src/hooks/useTrainingSession.test.tsx
-import React from "react";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { renderHook, act } from "@testing-library/react";
 import { waitFor } from "@testing-library/react";
@@ -62,10 +61,12 @@ describe("useTrainingSession", () => {
   it("submitMove correct: advance path shows 'Opening complete.' when nextItemId equals prev itemId", async () => {
     vi.useFakeTimers();
 
-    // If anything in your test environment uses chessFactory/autoplay,
-    // keep it deterministic.
-    vi.spyOn(Chess.prototype as any, "turn").mockReturnValue("b");
+    type Turn = "w" | "b";
 
+    vi.spyOn(
+      Chess.prototype as unknown as { turn: () => Turn },
+      "turn",
+    ).mockReturnValue("b");
     const prevItemId = 10; // must match what the first GET /next returns
     const prevFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
     const nextFen =
@@ -434,5 +435,4 @@ describe("useTrainingSession", () => {
     expect(result.current.takeAutoplayOnce("y")).toBe(true);
     expect(result.current.takeAutoplayOnce("y")).toBe(false);
   });
-
 });
