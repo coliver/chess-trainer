@@ -1,13 +1,13 @@
 //frontend/src/hooks/useTrainingSession.ts
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, useMemo } from "react";
 import api from "../api";
 import { Chess } from "chess.js";
+import { AxiosError } from "axios";
 
-const START_FEN =
-  "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+const START_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
 export type NextItem = {
-  data: any;
+  data: unknown;
   nextFen: string;
   nextItemId: string | null;
   nextOpeningLabel: string;
@@ -40,7 +40,10 @@ export function useTrainingSession(
 ) {
   const setTimeoutFn = deps.setTimeoutFn ?? window.setTimeout;
   const clearTimeoutFn = deps.clearTimeoutFn ?? window.clearTimeout;
-  const chessFactory = deps.chessFactory ?? ((fen: string) => new Chess(fen));
+  const chessFactory = useMemo(
+    () => deps.chessFactory ?? ((fen: string) => new Chess(fen)),
+    [deps.chessFactory],
+  );
   const timeoutMs = deps.timeoutMs ?? 500;
 
   const [itemId, setItemId] = useState<string | null>(null);
@@ -70,19 +73,39 @@ export function useTrainingSession(
   const fetchNextItem = useCallback(async (): Promise<NextItem> => {
     if (!id) throw new Error("Missing training session id");
 
-    const response = await api.get(`training-sessions/${id}/next`);
-    const data = (response as any)?.data ?? response;
+    type NextItemResponse = {
+      fenAfter?: string | null;
+      fen?: string | null;
+      epd?: string | null;
+      itemId?: string | null;
+      id?: string | null;
 
-    const raw = data?.fenAfter ?? data?.fen ?? data?.epd;
+      openingName?: string | null;
+      openingEco?: string | null;
+
+      correctMoveUci?: string;
+      pgn?: string;
+      epd?: string | null;
+
+      // include anything else you might get
+      [k: string]: unknown;
+    };
+
+    const response = await api.get<NextItemResponse>(
+      `training-sessions/${id}/next`,
+    );
+    const data = response.data;
+
+    const raw = data.fenAfter ?? data.fen ?? data.epd;
     const nextFen = normalizeFen(raw);
 
-    const nextItemIdRaw = data?.itemId ?? data?.id;
+    const nextItemIdRaw = data.itemId ?? data.id;
     const nextItemId =
       nextItemIdRaw == null || nextItemIdRaw === ""
         ? null
         : String(nextItemIdRaw);
 
-    const nextOpeningLabel = data?.openingName
+    const nextOpeningLabel = data.openingName
       ? `${data.openingEco ?? ""} ${data.openingName}`.trim()
       : "Opening: (unknown)";
 
@@ -91,9 +114,9 @@ export function useTrainingSession(
       nextFen,
       nextItemId,
       nextOpeningLabel,
-      nextCorrectMoveUci: data?.correctMoveUci ?? "",
-      nextPgn: data?.pgn ?? "",
-      nextEpd: data?.epd ?? "",
+      nextCorrectMoveUci: (data.correctMoveUci ?? "") as string,
+      nextPgn: (data.pgn ?? "") as string,
+      nextEpd: (data.epd ?? "") as string,
     };
   }, [id]);
 
@@ -114,7 +137,8 @@ export function useTrainingSession(
         if (!isMountedRef.current) return;
         applyNextItemState(next);
         setFeedback("");
-      } catch (err: any) {
+      } catch (unknownErr) {
+        const err = unknownErr as AxiosError<{ detail?: string }>;
         if (!isMountedRef.current) return;
         if ((err?.response?.status ?? err?.status) === 401) on401Navigate();
         setFeedback("No more moves in this session or session expired.");
@@ -123,6 +147,18 @@ export function useTrainingSession(
 
     void run();
   }, [id, fetchNextItem, applyNextItemState, on401Navigate]);
+
+  // Shape your backend actually returns
+  type SubmitMoveResponse = {
+    correct: boolean;
+    reason?: string;
+    fenAfter?: string | null;
+    sessionCompleted?: boolean;
+  };
+
+  type ApiErrorBody = {
+    detail?: string;
+  };
 
   const submitMove = useCallback(
     async (moveUci: string, preFen?: string) => {
@@ -134,14 +170,17 @@ export function useTrainingSession(
       setIsSubmitting(true);
 
       try {
-        const response = await api.post(`training-sessions/${id}/responses`, {
-          moveUci: moveUci,
-          itemId: itemId,
-        });
+        const response = await api.post<SubmitMoveResponse>(
+          `training-sessions/${id}/responses`,
+          {
+            moveUci,
+            itemId: itemId, // type whatever your itemId really is
+          },
+        );
 
-        const data = (response as any)?.data ?? response;
+        const data = response.data;
 
-        if (data?.correct) {
+        if (data.correct) {
           setFeedback("✅ Correct!");
 
           const fenAfterNorm =
@@ -178,10 +217,14 @@ export function useTrainingSession(
                 setFeedback("");
                 setIsSessionCompleted(false);
               }
-            } catch (err: any) {
+            } catch (unknownErr) {
               if (!isMountedRef.current) return;
-              if ((err?.response?.status ?? err?.status) === 401)
-                on401Navigate();
+
+              const err = unknownErr as AxiosError<ApiErrorBody>;
+
+              const status = err.response?.status;
+              if (status === 401) on401Navigate();
+
               setFeedback("No more moves in this session or session expired.");
             } finally {
               if (isMountedRef.current) setIsAdvancing(false);
@@ -193,13 +236,18 @@ export function useTrainingSession(
         }
 
         setFen(revertFen);
-        setFeedback(`❌ ${data?.reason ?? "Incorrect move"}`);
-      } catch (err: any) {
-        if (!isMountedRef.current) return;
-        if (err?.response?.status === 401) on401Navigate();
+        setFeedback(`❌ ${data.reason ?? "Incorrect move"}`);
+      } catch (unknownErr) {
+        const err = unknownErr as AxiosError<ApiErrorBody>;
 
-        const detail = err?.response?.data?.detail;
-        if (err?.response?.status === 404) {
+        if (!isMountedRef.current) return;
+
+        const status = err.response?.status;
+        if (status === 401) on401Navigate();
+
+        const detail = err.response?.data?.detail;
+
+        if (status === 404) {
           setFeedback(String(detail || "Session completed."));
         } else {
           setFeedback("Error submitting move");
