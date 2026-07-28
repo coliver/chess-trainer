@@ -1,8 +1,8 @@
 // frontend/src/pages/Dashboard.test.tsx
 import React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { vi, describe, it, expect, beforeEach } from "vitest";
+import { vi, describe, it, expect, beforeEach, afterEach } from "vitest";
 import { MemoryRouter } from "react-router-dom";
 
 import { Dashboard } from "./Dashboard";
@@ -43,6 +43,63 @@ vi.mock("../components/KnightSchoolIcon", () => ({
     </div>
   ),
 }));
+vi.mock("../components/openings/OpeningCombo", () => {
+  return {
+    default: ({
+      rootLabel,
+      query,
+      setQuery,
+      options,
+      onPick,
+      // these props exist in your component but not needed for interaction
+    }: any) => {
+      return (
+        <div>
+          <label htmlFor="opening-search">{rootLabel}</label>
+          <input
+            id="opening-search"
+            role="combobox"
+            aria-label={rootLabel}
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          {/* options are rendered so we can assert filtering */}
+          <div role="listbox" aria-label="options">
+            {options.map((o: any, idx: number) => (
+              <button
+                key={o.eco + o.name}
+                type="button"
+                role="option"
+                onClick={() => onPick(idx)}
+              >
+                {o.eco} — {o.name}
+              </button>
+            ))}
+          </div>
+        </div>
+      );
+    },
+  };
+});
+
+vi.mock("../components/openings/BoardPreview", () => ({
+  default: () => <div data-testid="board-preview" />,
+}));
+
+vi.mock("../components/openings/DashboardTile", () => ({
+  __esModule: true,
+  default: ({ tile, icon, title, subtitle, cta, customBody }: any) => {
+    return (
+      <section>
+        {tile ?? customBody}
+        {icon ? <img alt={icon?.props?.alt ?? "icon"} /> : null}
+        {cta}
+        {title ? <h2>{title}</h2> : null}
+        {subtitle ? <p>{subtitle}</p> : null}
+      </section>
+    );
+  },
+}));
 
 type Opening = { name: string; eco: string };
 
@@ -64,6 +121,47 @@ describe("Dashboard", () => {
     (api.post as unknown as ReturnType<typeof vi.fn>).mockReset();
   });
 
+  it("picking an opening updates description and Start button label", async () => {
+    const user = userEvent.setup();
+
+    const openings = [
+      { eco: "B10", name: "Caro-Kann", description: "A solid start." },
+      { eco: "B20", name: "Sicilian", description: "Sharp and tactical." },
+    ];
+    (api.get as any).mockResolvedValueOnce({ data: openings });
+
+    render(
+      <MemoryRouter>
+        <Dashboard />
+      </MemoryRouter>,
+    );
+
+    const input = screen.getByRole("combobox", { name: /search openings/i });
+
+    // Open/focus the combobox so suggestions appear
+    await user.click(input);
+    const fourteenBackspaces = Array.from(
+      { length: 16 },
+      () => "{Backspace}",
+    ).join("");
+
+    // Update controlled value reliably
+    user.type(input, `${fourteenBackspaces}Sicilian`);
+
+    // Now wait for the suggestion text to appear inside the listbox
+    const listbox = screen.getByRole("listbox", { name: /options/i });
+    const option = await within(listbox).findByText("B20 — Sicilian");
+    await user.click(option);
+
+    // Description should update
+    expect(await screen.findByText("Sharp and tactical.")).toBeInTheDocument();
+
+    // Start button label should reflect selected opening
+    expect(
+      screen.getByRole("button", { name: "Start Sicilian" }),
+    ).toBeInTheDocument();
+  });
+
   it("loads openings and selects the first opening by default", async () => {
     (api.get as any).mockResolvedValueOnce({ data: openings });
 
@@ -77,25 +175,18 @@ describe("Dashboard", () => {
       name: "Search openings",
     });
 
-    // Wait until the query is set to the first opening
     await waitFor(() => {
       expect((input as HTMLInputElement).value).toBe(
         `${openings[0].eco} — ${openings[0].name}`,
       );
     });
 
-    // Open the dropdown (the component opens on click)
-    await user.click(input);
-
-    // Now options should exist
-    expect(
-      screen.getByRole("option", { name: "B10 — Caro-Kann" }),
-    ).toBeInTheDocument();
-    await waitFor(() => {
-      expect(
-        screen.queryByRole("option", { name: "B20 — Sicilian" }),
-      ).not.toBeInTheDocument();
+    // Don’t click; your OpeningCombo mock always renders options.
+    // This will also show you what text is actually being rendered if it fails.
+    const firstOption = await screen.findByRole("option", {
+      name: `${openings[0].eco} — ${openings[0].name}`,
     });
+    expect(firstOption).toBeInTheDocument();
   });
 
   it("clicking the Start button launches a training session and navigates to /training/:id", async () => {
@@ -108,13 +199,10 @@ describe("Dashboard", () => {
       </MemoryRouter>,
     );
 
-    // Only the first tile Start is wired (Start Training)
-    const startButtons = await screen.findAllByRole("button", {
-      name: "Start",
+    const startButton = await screen.findByRole("button", {
+      name: `Start ${openings[0].name}`,
     });
-    expect(startButtons.length).toBeGreaterThan(0);
-
-    await user.click(startButtons[0]);
+    await user.click(startButton);
 
     await waitFor(() => {
       expect(api.post).toHaveBeenCalledWith("/training-sessions", {
@@ -124,7 +212,119 @@ describe("Dashboard", () => {
     });
   });
 
-  it("uses the username from localStorage in the greeting", async () => {
+  describe("Greetings", () => {
+    beforeEach(() => {
+      vi.useFakeTimers();
+    });
+
+    afterEach(() => {
+      vi.useRealTimers();
+    });
+
+    it("uses the username from localStorage in the greeting", async () => {
+      localStorage.setItem("username", "Chris");
+      (api.get as any).mockResolvedValueOnce({ data: openings });
+
+      render(
+        <MemoryRouter>
+          <Dashboard />
+        </MemoryRouter>,
+      );
+
+      screen.getByRole("heading", { name: /Chris/i });
+    });
+
+    const setSystemHour = (hour: number) => {
+      vi.setSystemTime(
+        new Date(`2026-01-01T${String(hour).padStart(2, "0")}:00:00Z`),
+      );
+    };
+
+    it("shows morning greeting when hour < 12 and includes username", async () => {
+      localStorage.setItem("username", "Chris");
+      setSystemHour(9);
+
+      (api.get as any).mockResolvedValueOnce({ data: [] });
+
+      render(
+        <MemoryRouter>
+          <Dashboard />
+        </MemoryRouter>,
+      );
+
+      expect(
+        screen.getByRole("heading", { name: /Good morning/i }),
+      ).toHaveTextContent("Good morning ☀️, Chris");
+    });
+
+    it("shows afternoon greeting when 12 <= hour < 18 (no username)", async () => {
+      setSystemHour(14);
+      localStorage.removeItem("username");
+
+      (api.get as any).mockResolvedValueOnce({ data: [] });
+
+      render(
+        <MemoryRouter>
+          <Dashboard />
+        </MemoryRouter>,
+      );
+
+      expect(
+        screen.getByRole("heading", { name: /Good afternoon/i }),
+      ).toHaveTextContent("Good afternoon 🌤️");
+    });
+
+    it("shows evening greeting when hour >= 18 and includes username", async () => {
+      setSystemHour(20);
+      localStorage.setItem("username", "Chris");
+
+      (api.get as any).mockResolvedValueOnce({ data: [] });
+
+      render(
+        <MemoryRouter>
+          <Dashboard />
+        </MemoryRouter>,
+      );
+
+      expect(
+        screen.getByRole("heading", { name: /Good evening/i }),
+      ).toHaveTextContent("Good evening 🌙, Chris");
+    });
+  });
+
+  it("handles empty openings: clears query and passes null openingName to startSession", async () => {
+    (api.get as any).mockResolvedValueOnce({ data: [] });
+    (api.post as any).mockResolvedValueOnce({ data: { id: 123 } });
+
+    render(
+      <MemoryRouter>
+        <Dashboard />
+      </MemoryRouter>,
+    );
+
+    const input = (await screen.findByRole("combobox", {
+      name: "Search openings",
+    })) as HTMLInputElement;
+    expect(input.value).toBe("");
+
+    const startBtn = await screen.findByRole("button", { name: "Start" });
+    expect(startBtn).toHaveTextContent(/^Start$/);
+
+    await user.click(startBtn);
+
+    await waitFor(() => {
+      expect(api.post).toHaveBeenCalledWith("/training-sessions", {
+        openingName: null,
+      });
+      expect(mockNavigate).toHaveBeenCalledWith("/training/123");
+    });
+  });
+
+  it("renders opening description when selectedOpeningDescription is provided", async () => {
+    const openings = [
+      { eco: "B10", name: "Caro-Kann", description: "A solid start." },
+      { eco: "B20", name: "Sicilian", description: "Sharp and tactical." },
+    ];
     (api.get as any).mockResolvedValueOnce({ data: openings });
 
     render(
@@ -133,7 +333,59 @@ describe("Dashboard", () => {
       </MemoryRouter>,
     );
 
-    // greeting is synchronous; no need to wait for openings
-    await screen.findByRole("heading", { name: /Chris/i })
+    expect(await screen.findByText("A solid start.")).toBeInTheDocument();
+  });
+
+  it("renders empty-state description element when description is missing", async () => {
+    const openings = [{ eco: "B10", name: "Caro-Kann" }];
+    (api.get as any).mockResolvedValueOnce({ data: openings });
+
+    render(
+      <MemoryRouter>
+        <Dashboard />
+      </MemoryRouter>,
+    );
+
+    // Your empty-state is a p with classes including opening-description--empty
+    const emptyDesc = await screen.findByText("", {
+      selector: ".opening-description--empty",
+    });
+    expect(emptyDesc).toBeInTheDocument();
+  });
+
+  it("filters options based on query and updates the visible option list", async () => {
+    const openings = [
+      { eco: "B10", name: "Caro-Kann", description: "x" },
+      { eco: "B20", name: "Sicilian", description: "y" },
+    ];
+    (api.get as any).mockResolvedValueOnce({ data: openings });
+
+    render(
+      <MemoryRouter>
+        <Dashboard />
+      </MemoryRouter>,
+    );
+
+    const input = await screen.findByRole("combobox", {
+      name: "Search openings",
+    });
+
+    // Initially the combo shows both options because query starts at first opening
+    expect(
+      screen.getByRole("option", { name: "B10 — Caro-Kann" }),
+    ).toBeInTheDocument();
+
+    await user.clear(input);
+    await user.type(input, "Sicilian");
+
+    await waitFor(() => {
+      expect(
+        screen.queryByRole("option", { name: "B10 — Caro-Kann" }),
+      ).not.toBeInTheDocument();
+
+      expect(
+        screen.getByRole("option", { name: "B20 — Sicilian" }),
+      ).toBeInTheDocument();
+    });
   });
 });

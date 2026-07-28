@@ -1,0 +1,67 @@
+/* src/styles/training.css */
+
+.training-board-wrap {
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.training-opening {
+  margin: 12px 0 0;
+  font-weight: 700;
+}
+
+.training-form {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.text-input {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  min-width: 140px;
+}
+
+.text-input::placeholder {
+  color: var(--muted, var(--text));
+  opacity: 0.8;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-h);
+}
+
+.btn:disabled,
+.btn-secondary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.training-feedback {
+  margin-top: 10px;
+  font-weight: 700;
+}
+
+.training-p {
+  margin-top: 8px;
+}
+
+.opening-label {
+  margin: 0 0 16px;
+  font-size: 24px;
+  line-height: 1.15;
+  letter-spacing: -0.24px;
+  color: var(--text-h);
+  font-family: var(--heading);
+  font-weight: 650;
+
+  overflow-wrap: anywhere;
+  max-width: 100%;
+}

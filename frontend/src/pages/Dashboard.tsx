@@ -102,8 +102,10 @@ export const Dashboard = () => {
   return (
     <main className="page">
       <div className="card">
-        <p className="title" role="heading">{greeting}</p>
-        <p className="subtitle">Ready to practice your lines?</p>
+        <div className="title" role="heading">
+          {greeting}
+        </div>
+        <div className="subtitle">Ready to practice your lines?</div>
 
         <div className="dashboard-layout">
           <DashboardTile
@@ -213,7 +215,7 @@ export const Dashboard = () => {
             }
           />
 
-          <DashboardTile          
+          <DashboardTile
             className="dashboard-tile--tall tile-right"
             compact
             rightArrowIcon={
@@ -251,6 +253,8 @@ export const Dashboard = () => {
                     </span>
                     <span className="next-review-in">in 1 day</span>
                   </div>
+                  <div className="tile-spacer" />
+
                   <button
                     className="tile-action tile-action--ghost"
                     type="button"
