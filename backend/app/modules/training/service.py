@@ -29,24 +29,34 @@ class SubmitResult:
     session_completed: bool = False
 
 
-def create_training_session(db: Session, user_id: int, batch_size: int = 1) -> TrainingSession:
-    opening = db.execute(
-        select(Opening)
-        .outerjoin(
-            TrainingSession,
-            and_(
-                TrainingSession.user_id == user_id,
-                TrainingSession.opening_eco == Opening.eco,
-                TrainingSession.opening_name == Opening.name,
-            ),
-        )
-        .where(Opening.uci_moves.is_not(None))
-        .where(Opening.eco.is_not(None))
-        .where(Opening.name.is_not(None))
-        .where(TrainingSession.id.is_(None))
-        .order_by(func.random())
-        .limit(1)
-    ).scalar_one_or_none()
+def create_training_session(
+    db: Session, user_id: int, opening_name: str, batch_size: int = 1
+) -> TrainingSession:
+    if opening_name:
+        opening = db.execute(
+            select(Opening)
+            .where(Opening.name == opening_name)
+            .where(Opening.uci_moves.is_not(None))
+            .limit(1)
+        ).scalar_one_or_none()
+    else:
+        opening = db.execute(
+            select(Opening)
+            .outerjoin(
+                TrainingSession,
+                and_(
+                    TrainingSession.user_id == user_id,
+                    TrainingSession.opening_eco == Opening.eco,
+                    TrainingSession.opening_name == Opening.name,
+                ),
+            )
+            .where(Opening.uci_moves.is_not(None))
+            .where(Opening.eco.is_not(None))
+            .where(Opening.name.is_not(None))
+            .where(TrainingSession.id.is_(None))
+            .order_by(func.random())
+            .limit(1)
+        ).scalar_one_or_none()
 
     if not opening or not opening.uci_moves:
         raise HTTPException(status_code=404, detail="No openings found in database")

@@ -354,9 +354,8 @@ describe("Training Page", () => {
       expect((capturedOptions as any).squareStyles["e2"]).toBeDefined();
       expect((capturedOptions as any).squareStyles["e4"]).toBeUndefined();
 
-      const moreHintBtn = screen.getByRole("button", { name: /more hint/i });
-      await user.click(moreHintBtn);
-
+      await user.click(hintBtn);
+      
       expect((capturedOptions as any).squareStyles["e2"]).toBeDefined();
       expect((capturedOptions as any).squareStyles["e4"]).toBeDefined();
 

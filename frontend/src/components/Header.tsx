@@ -7,7 +7,7 @@ import { ThemeToggle } from "./ThemeToggle";
 
 export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(
-    () => !!localStorage.getItem("token")
+    () => !!localStorage.getItem("token"),
   );
 
   useEffect(() => {
@@ -23,7 +23,9 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="site-header">
+    <header
+      className="site-header"
+    >
       <div className="site-header-inner">
         <div className="site-header-brand">
           <KnightSchoolIcon height="64px" />

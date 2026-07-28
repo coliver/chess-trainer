@@ -2,6 +2,11 @@
 
 A web-based chess openings trainer designed to drill specific lines and track performance metrics.
 
+This is a work in progress.
+
+![Screentshot of Knight School Dashboard](image.png)
+
+
 ### 📂 Project Navigation
 - **[Backend](./backend/README.md)**: API logic, Database schema, and Chess engine rules.
 - **[Frontend](./frontend/README.md)**: React components, State management, and UI/UX.
