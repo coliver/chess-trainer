@@ -8,6 +8,12 @@ import { MemoryRouter } from "react-router-dom";
 import { Dashboard } from "./Dashboard";
 import api from "../api";
 
+type Opening = {
+  name: string;
+  eco: string;
+  description?: string | null;
+};
+
 vi.mock("../api", () => ({
   default: {
     get: vi.fn(),
@@ -43,6 +49,20 @@ vi.mock("../components/KnightSchoolIcon", () => ({
     </div>
   ),
 }));
+
+type OpeningComboOption = { eco: string; name: string };
+
+type OpeningComboProps = {
+  rootLabel: string;
+  query: string;
+  setQuery: React.Dispatch<React.SetStateAction<string>>;
+  isOpen?: boolean;
+  setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  options: OpeningComboOption[];
+  selectedOpeningName?: string | null;
+  onPick: (idx: number) => void;
+};
+
 vi.mock("../components/openings/OpeningCombo", () => {
   return {
     default: ({
@@ -51,8 +71,7 @@ vi.mock("../components/openings/OpeningCombo", () => {
       setQuery,
       options,
       onPick,
-      // these props exist in your component but not needed for interaction
-    }: any) => {
+    }: OpeningComboProps) => {
       return (
         <div>
           <label htmlFor="opening-search">{rootLabel}</label>
@@ -63,9 +82,9 @@ vi.mock("../components/openings/OpeningCombo", () => {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
-          {/* options are rendered so we can assert filtering */}
+
           <div role="listbox" aria-label="options">
-            {options.map((o: any, idx: number) => (
+            {options.map((o, idx) => (
               <button
                 key={o.eco + o.name}
                 type="button"
@@ -86,13 +105,32 @@ vi.mock("../components/openings/BoardPreview", () => ({
   default: () => <div data-testid="board-preview" />,
 }));
 
+type DashboardTileProps = {
+  tile?: React.ReactNode;
+  icon?: React.ReactElement<{ alt?: string }>;
+  title?: string;
+  subtitle?: string;
+  cta?: React.ReactNode;
+  customBody?: React.ReactNode;
+  className?: string;
+  compact?: boolean;
+  rightArrowIcon?: React.ReactNode;
+};
+
 vi.mock("../components/openings/DashboardTile", () => ({
   __esModule: true,
-  default: ({ tile, icon, title, subtitle, cta, customBody }: any) => {
+  default: ({
+    tile,
+    icon,
+    title,
+    subtitle,
+    cta,
+    customBody,
+  }: DashboardTileProps) => {
     return (
       <section>
         {tile ?? customBody}
-        {icon ? <img alt={icon?.props?.alt ?? "icon"} /> : null}
+        {icon ? <img alt={icon.props.alt ?? "icon"} /> : null}
         {cta}
         {title ? <h2>{title}</h2> : null}
         {subtitle ? <p>{subtitle}</p> : null}
@@ -100,8 +138,6 @@ vi.mock("../components/openings/DashboardTile", () => ({
     );
   },
 }));
-
-type Opening = { name: string; eco: string };
 
 describe("Dashboard", () => {
   const user = userEvent.setup();
@@ -128,7 +164,9 @@ describe("Dashboard", () => {
       { eco: "B10", name: "Caro-Kann", description: "A solid start." },
       { eco: "B20", name: "Sicilian", description: "Sharp and tactical." },
     ];
-    (api.get as any).mockResolvedValueOnce({ data: openings });
+    (api.get as unknown as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+      data: openings,
+    });
 
     render(
       <MemoryRouter>
@@ -163,7 +201,9 @@ describe("Dashboard", () => {
   });
 
   it("loads openings and selects the first opening by default", async () => {
-    (api.get as any).mockResolvedValueOnce({ data: openings });
+    (api.get as unknown as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+      data: openings,
+    });
 
     render(
       <MemoryRouter>
@@ -190,9 +230,12 @@ describe("Dashboard", () => {
   });
 
   it("clicking the Start button launches a training session and navigates to /training/:id", async () => {
-    (api.get as any).mockResolvedValueOnce({ data: openings });
-    (api.post as any).mockResolvedValueOnce({ data: { id: 123 } });
-
+    (api.get as unknown as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+      data: openings,
+    });
+    (api.post as unknown as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+      data: { id: 123 },
+    });
     render(
       <MemoryRouter>
         <Dashboard />
@@ -223,7 +266,9 @@ describe("Dashboard", () => {
 
     it("uses the username from localStorage in the greeting", async () => {
       localStorage.setItem("username", "Chris");
-      (api.get as any).mockResolvedValueOnce({ data: openings });
+      (api.get as unknown as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        data: openings,
+      });
 
       render(
         <MemoryRouter>
@@ -244,7 +289,9 @@ describe("Dashboard", () => {
       localStorage.setItem("username", "Chris");
       setSystemHour(9);
 
-      (api.get as any).mockResolvedValueOnce({ data: [] });
+      (api.get as unknown as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        data: [],
+      });
 
       render(
         <MemoryRouter>
@@ -261,7 +308,9 @@ describe("Dashboard", () => {
       setSystemHour(14);
       localStorage.removeItem("username");
 
-      (api.get as any).mockResolvedValueOnce({ data: [] });
+      (api.get as unknown as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        data: [],
+      });
 
       render(
         <MemoryRouter>
@@ -278,7 +327,9 @@ describe("Dashboard", () => {
       setSystemHour(20);
       localStorage.setItem("username", "Chris");
 
-      (api.get as any).mockResolvedValueOnce({ data: [] });
+      (api.get as unknown as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        data: [],
+      });
 
       render(
         <MemoryRouter>
@@ -293,8 +344,12 @@ describe("Dashboard", () => {
   });
 
   it("handles empty openings: clears query and passes null openingName to startSession", async () => {
-    (api.get as any).mockResolvedValueOnce({ data: [] });
-    (api.post as any).mockResolvedValueOnce({ data: { id: 123 } });
+    (api.get as unknown as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+      data: [],
+    });
+    (api.post as unknown as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+      data: { id: 123 },
+    });
 
     render(
       <MemoryRouter>
@@ -321,11 +376,13 @@ describe("Dashboard", () => {
   });
 
   it("renders opening description when selectedOpeningDescription is provided", async () => {
-    const openings = [
+    const openings: Opening[] = [
       { eco: "B10", name: "Caro-Kann", description: "A solid start." },
       { eco: "B20", name: "Sicilian", description: "Sharp and tactical." },
     ];
-    (api.get as any).mockResolvedValueOnce({ data: openings });
+    (api.get as unknown as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+      data: openings,
+    });
 
     render(
       <MemoryRouter>
@@ -337,8 +394,11 @@ describe("Dashboard", () => {
   });
 
   it("renders empty-state description element when description is missing", async () => {
-    const openings = [{ eco: "B10", name: "Caro-Kann" }];
-    (api.get as any).mockResolvedValueOnce({ data: openings });
+    const openings: Opening[] = [{ eco: "B10", name: "Caro-Kann" }];
+
+    (api.get as unknown as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+      data: openings,
+    });
 
     render(
       <MemoryRouter>
@@ -346,7 +406,6 @@ describe("Dashboard", () => {
       </MemoryRouter>,
     );
 
-    // Your empty-state is a p with classes including opening-description--empty
     const emptyDesc = await screen.findByText("", {
       selector: ".opening-description--empty",
     });
@@ -354,11 +413,13 @@ describe("Dashboard", () => {
   });
 
   it("filters options based on query and updates the visible option list", async () => {
-    const openings = [
+    const openings: Opening[] = [
       { eco: "B10", name: "Caro-Kann", description: "x" },
       { eco: "B20", name: "Sicilian", description: "y" },
     ];
-    (api.get as any).mockResolvedValueOnce({ data: openings });
+    (api.get as unknown as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+      data: openings,
+    });
 
     render(
       <MemoryRouter>
