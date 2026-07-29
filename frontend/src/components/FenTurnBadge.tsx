@@ -1,8 +1,6 @@
-import React from "react";
-
 type Turn = "w" | "b";
 
-export function fenTurn(fen: string): Turn | null {
+function fenTurn(fen: string): Turn | null {
   const parts = fen.trim().split(/\s+/);
   if (parts.length < 2) return null;
 

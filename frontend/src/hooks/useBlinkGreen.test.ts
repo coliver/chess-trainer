@@ -10,14 +10,16 @@ beforeEach(() => {
   // deterministic perf
   vi.spyOn(globalThis, "performance", "get").mockReturnValue({
     now: () => 0,
-  } as any);
+  } as unknown as Performance);
 
   // deterministic RAF: queue callbacks, run them manually
   rafQueue.length = 0;
-  vi.spyOn(globalThis, "requestAnimationFrame").mockImplementation((cb: any) => {
-    rafQueue.push(cb);
-    return rafQueue.length; // fake id
-  });
+  vi.spyOn(globalThis, "requestAnimationFrame").mockImplementation(
+    (cb: FrameRequestCallback) => {
+      rafQueue.push(cb);
+      return rafQueue.length; // fake id
+    },
+  );
 
   vi.spyOn(globalThis, "cancelAnimationFrame").mockImplementation(() => {});
   vi.spyOn(globalThis, "clearTimeout").mockImplementation(() => {});

@@ -1,6 +1,6 @@
 // frontend/src/pages/Dashboard.test.tsx
 import React from "react";
-import { render, screen, waitFor, within } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi, describe, it, expect, beforeEach, afterEach } from "vitest";
 import { MemoryRouter } from "react-router-dom";
@@ -164,63 +164,44 @@ describe("Dashboard", () => {
       { eco: "B10", name: "Caro-Kann", description: "A solid start." },
       { eco: "B20", name: "Sicilian", description: "Sharp and tactical." },
     ];
+
     (api.get as unknown as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
       data: openings,
     });
 
-    render(
-      <MemoryRouter>
-        <Dashboard />
-      </MemoryRouter>,
-    );
-
-    const input = screen.getByRole("combobox", { name: /search openings/i });
-
-    // Open/focus the combobox so suggestions appear
-    await user.click(input);
-    const fourteenBackspaces = Array.from(
-      { length: 16 },
-      () => "{Backspace}",
-    ).join("");
-
-    // Update controlled value reliably
-    user.type(input, `${fourteenBackspaces}Sicilian`);
-
-    // Now wait for the suggestion text to appear inside the listbox
-    const listbox = screen.getByRole("listbox", { name: /options/i });
-    const option = await within(listbox).findByText("B20 — Sicilian");
-    await user.click(option);
-
-    // Description should update
-    expect(await screen.findByText("Sharp and tactical.")).toBeInTheDocument();
-
-    // Start button label should reflect selected opening
-    expect(
-      screen.getByRole("button", { name: "Start Sicilian" }),
-    ).toBeInTheDocument();
-  });
-
-  it("clicking the Start button launches a training session and navigates to /training/:id", async () => {
-    (api.get as unknown as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
-      data: openings,
-    });
+    // if your Dashboard navigates after the post, mock it
     (api.post as unknown as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
       data: { id: 123 },
     });
+
     render(
       <MemoryRouter>
         <Dashboard />
       </MemoryRouter>,
     );
 
-    const startButton = await screen.findByRole("button", {
-      name: `Start ${openings[0].name}`,
+    const option = await screen.findByRole("option", {
+      name: /B10\s*—\s*Caro-Kann/i,
     });
+
+    await user.click(option);
+
+    // description should update
+    expect(await screen.findByText(/A solid start\./i)).toBeInTheDocument();
+
+    // button label should update
+    const startButton = await screen.findByRole("button", {
+      name: /Start\s+Caro-Kann/i,
+    });
+    expect(startButton).toBeEnabled();
+
+    // click should post correct payload + navigate
     await user.click(startButton);
 
     await waitFor(() => {
       expect(api.post).toHaveBeenCalledWith("/training-sessions", {
-        openingName: openings[0].name,
+        openingEco: "B10",
+        openingName: "Caro-Kann",
       });
       expect(mockNavigate).toHaveBeenCalledWith("/training/123");
     });
@@ -314,12 +295,9 @@ describe("Dashboard", () => {
     });
   });
 
-  it("handles empty openings: clears query and passes null openingName to startSession", async () => {
+  it("handles empty openings: cannot start session with null openingName", async () => {
     (api.get as unknown as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
       data: [],
-    });
-    (api.post as unknown as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
-      data: { id: 123 },
     });
 
     render(
@@ -328,32 +306,35 @@ describe("Dashboard", () => {
       </MemoryRouter>,
     );
 
-    const input = (await screen.findByRole("combobox", {
+    const input = await screen.findByRole("combobox", {
       name: "Search openings",
-    })) as HTMLInputElement;
-    expect(input.value).toBe("");
+    });
+    expect((input as HTMLInputElement).value).toBe("");
 
-    const startBtn = await screen.findByRole("button", { name: "Start" });
-    expect(startBtn).toHaveTextContent(/^Start$/);
+    // Start button should be disabled
+    const startBtn = await screen.findByRole("button", {
+      name: /choose an opening|start/i,
+    });
+    expect(startBtn).toBeDisabled();
 
     await user.click(startBtn);
 
-    await waitFor(() => {
-      expect(api.post).toHaveBeenCalledWith("/training-sessions", {
-        openingName: null,
-      });
-      expect(mockNavigate).toHaveBeenCalledWith("/training/123");
+    expect(api.post).not.toHaveBeenCalledWith("/training-sessions", {
+      openingName: null,
     });
   });
 
   it("renders opening description when selectedOpeningDescription is provided", async () => {
-    const openings: Opening[] = [
+    const openings = [
       { eco: "B10", name: "Caro-Kann", description: "A solid start." },
       { eco: "B20", name: "Sicilian", description: "Sharp and tactical." },
     ];
+
     (api.get as unknown as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
       data: openings,
     });
+
+    const user = userEvent.setup();
 
     render(
       <MemoryRouter>
@@ -361,7 +342,21 @@ describe("Dashboard", () => {
       </MemoryRouter>,
     );
 
-    expect(await screen.findByText("A solid start.")).toBeInTheDocument();
+    // combobox exists even when list is closed
+    const combo = await screen.findByRole("combobox", {
+      name: "Search openings",
+    });
+
+    // make list open and filtered so options render
+    await user.click(combo);
+    await user.type(combo, "B10"); // triggers query change and isOpen=true
+
+    const option = await screen.findByRole("option", {
+      name: /B10\s*—\s*Caro-Kann/i,
+    });
+    await user.click(option);
+
+    expect(await screen.findByText(/A solid start\./i)).toBeInTheDocument();
   });
 
   it("renders empty-state description element when description is missing", async () => {
@@ -381,5 +376,5 @@ describe("Dashboard", () => {
       selector: ".opening-description--empty",
     });
     expect(emptyDesc).toBeInTheDocument();
-  });  
+  });
 });

@@ -170,14 +170,14 @@ describe("useTrainingSession", () => {
     const nextTimeoutCallbacks: Array<() => Promise<void>> = [];
     const clearTimeoutFn = vi.fn();
 
-    const setTimeoutFn = (cb: () => void, _ms: number) => {
+    const setTimeoutFn = (cb: () => void) => {
       // Wrap to match "async callback" behavior inside the hook
       nextTimeoutCallbacks.push(async () => {
         await cb();
       });
 
       // Return a dummy handle
-      return { handle: nextTimeoutCallbacks.length - 1 } as any;
+      return { handle: nextTimeoutCallbacks.length - 1 };
     };
 
     const apiTimeoutMs = 10;
@@ -251,9 +251,9 @@ describe("useTrainingSession", () => {
     // Capture scheduled timeout callback(s)
     const scheduled: Array<() => void> = [];
 
-    const setTimeoutFn = (cb: () => void, _ms: number) => {
+    const setTimeoutFn = (cb: () => void) => {
       scheduled.push(cb);
-      return (scheduled.length - 1) as any;
+      return (scheduled.length - 1);
     };
 
     const clearTimeoutFn = vi.fn();
@@ -339,9 +339,9 @@ describe("useTrainingSession", () => {
   it("submitMove correct: when component unmounts, advance timeout callback early-returns", async () => {
     const scheduled: Array<() => void> = [];
 
-    const setTimeoutFn = (cb: () => void, _ms: number) => {
+    const setTimeoutFn = (cb: () => void) => {
       scheduled.push(cb);
-      return (scheduled.length - 1) as any;
+      return (scheduled.length - 1);
     };
     const clearTimeoutFn = vi.fn();
 

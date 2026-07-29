@@ -3,7 +3,7 @@ import { Chess } from "chess.js";
 import { Chessboard, type ChessboardOptions } from "react-chessboard";
 import type { Opening } from "../../pages/Dashboard";
 
-function uciToMove(uci: string) {
+function uciToMove(uci: string): { from: string; to: string; promotion?: string } | null {
   const u = uci.trim();
   if (!u || u.length < 4) return null;
 
@@ -48,7 +48,7 @@ export default function BoardPreview({
     const moveObj = uciToMove(firstUci);
     if (!moveObj) return game.fen();
 
-    const ok = game.move(moveObj as any);
+    const ok = game.move(moveObj);
     if (!ok) return game.fen();
 
     return game.fen();

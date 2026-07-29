@@ -1,5 +1,5 @@
 // frontend/src/components/openings/OpeningCombo.tsx
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Opening } from "../../pages/Dashboard";
 
 type Props = {
@@ -28,13 +28,6 @@ export default function OpeningCombo({
 }: Props) {
   const [highlightIndex, setHighlightIndex] = useState(0);
   const rootRef = useRef<HTMLDivElement | null>(null);
-  const inputRef = useRef<HTMLInputElement | null>(null);
-
-  useEffect(() => {
-    if (query.trim().length > 0 && options.length > 0) {
-      setIsOpen(true);
-    }
-  }, [query, options.length, setIsOpen]);
 
   useEffect(() => {
     const onMouseDown = (e: MouseEvent) => {
@@ -45,20 +38,17 @@ export default function OpeningCombo({
     return () => document.removeEventListener("mousedown", onMouseDown);
   }, [setIsOpen]);
 
-  useEffect(() => {
-    // keep highlight valid when filtering
-    setHighlightIndex((i) => Math.min(i, Math.max(0, options.length - 1)));
-  }, [options.length]);
-
-  useEffect(() => {
-    if (!isOpen) setHighlightIndex(0);
-  }, [isOpen]);
-
   const canNavigate = options.length > 0;
+
+  const clampedHighlightIndex = canNavigate
+    ? Math.min(highlightIndex, options.length - 1)
+    : 0;
+
+  const activeHighlightIndex = isOpen ? clampedHighlightIndex : 0;
 
   const pickHighlighted = () => {
     if (!canNavigate) return;
-    onPick(highlightIndex);
+    onPick(activeHighlightIndex);
   };
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -122,7 +112,7 @@ export default function OpeningCombo({
             ) : (
               options.map((o, idx) => {
                 const isSelected = o.name === selectedOpeningName;
-                const isHighlighted = idx === highlightIndex;
+                const isHighlighted = idx === activeHighlightIndex;
 
                 return (
                   <button
@@ -134,7 +124,10 @@ export default function OpeningCombo({
                       "combo-item",
                       isHighlighted ? "combo-item--selected" : "",
                     ].join(" ")}
-                    onMouseEnter={() => setHighlightIndex(idx)}
+                    onMouseEnter={() => {
+                      if (!canNavigate) return;
+                      setHighlightIndex(idx);
+                    }}
                     onMouseDown={(ev) => ev.preventDefault()} // keep focus
                     onClick={() => onPick(idx)}
                   >

@@ -30,11 +30,12 @@ class SubmitResult:
 
 
 def create_training_session(
-    db: Session, user_id: int, opening_name: str, batch_size: int = 1
+    db: Session, user_id: int, opening_eco: str, opening_name: str,  batch_size: int = 1
 ) -> TrainingSession:
-    if opening_name:
+    if opening_name and opening_eco:
         opening = db.execute(
             select(Opening)
+            .where(Opening.eco == opening_eco)
             .where(Opening.name == opening_name)
             .where(Opening.uci_moves.is_not(None))
             .limit(1)

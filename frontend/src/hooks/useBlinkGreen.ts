@@ -51,13 +51,12 @@ export function useBlinkGreen() {
 
       const within = t % cycleMs;
 
-      let o = 0;
-      if (within <= fadeInMs) o = within / fadeInMs;
-      else if (within <= fadeInMs + holdMs) o = 1;
-      else {
-        const outT = within - (fadeInMs + holdMs);
-        o = 1 - outT / fadeOutMs;
-      }
+      const o =
+        within <= fadeInMs
+          ? within / fadeInMs
+          : within <= fadeInMs + holdMs
+            ? 1
+            : 1 - (within - (fadeInMs + holdMs)) / fadeOutMs;
 
       if (isMountedRef.current) {
         setBlinkOpacity(Math.max(0, Math.min(1, o)));

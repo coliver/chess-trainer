@@ -1,3 +1,4 @@
+// \frontend\src\pages\Dashboard.tsx
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api";
@@ -29,8 +30,13 @@ export const Dashboard = () => {
   const [selectedOpeningName, setSelectedOpeningName] = useState<string | null>(
     null,
   );
+  const [selectedOpeningEco, setSelectedOpeningEco] = useState<string | null>(
+    null,
+  );
   const [selectedOpeningDescription, setSelectedOpeningDescription] =
     useState("");
+
+  const [selectedEco, setSelectedEco] = useState<string | null>(null);
 
   const [query, setQuery] = useState("");
   const [isComboOpen, setIsComboOpen] = useState(false);
@@ -43,19 +49,30 @@ export const Dashboard = () => {
         setOpenings(list);
 
         setSelectedOpeningName(null);
+        setSelectedOpeningEco(null);
         setSelectedOpeningDescription("");
+        setSelectedEco(null);
 
-        setQuery(""); // ✅ don’t pre-fill query (prevents filtering to 1 option)
-        setIsComboOpen(false); // or true if your test expects it open immediately
+        setQuery("");
+        setIsComboOpen(false);
       })
       .catch((e) => console.error("Error loading openings:", e));
   }, []);
 
   const filteredOpenings = useMemo(() => {
     const q = query.trim().toLowerCase();
-    if (!q) return openings;
 
-    return openings.filter((o) => {
+    let list = openings;
+
+    // filter by exact ECO first
+    if (selectedEco) {
+      list = list.filter((o) => o.eco === selectedEco);
+    }
+
+    // then apply text search (optional)
+    if (!q) return list;
+
+    return list.filter((o) => {
       const full = `${o.eco} — ${o.name}`.toLowerCase();
       return (
         full.includes(q) ||
@@ -63,21 +80,25 @@ export const Dashboard = () => {
         o.eco.toLowerCase().includes(q)
       );
     });
-  }, [openings, query]);
+  }, [openings, query, selectedEco]);
 
   const pickOpeningByIndex = (idx: number) => {
     const picked = filteredOpenings[idx];
     if (!picked) return;
 
     setSelectedOpeningName(picked.name);
+    setSelectedOpeningEco(picked.eco);
     setSelectedOpeningDescription(picked.description ?? "");
     setQuery(`${picked.eco} — ${picked.name}`);
     setIsComboOpen(false);
   };
 
-  const startSession = async (openingName: string | null) => {
+  const startSession = async (openingEco: string, openingName: string) => {
     try {
-      const response = await api.post("/training-sessions", { openingName });
+      const response = await api.post("/training-sessions", {
+        openingEco,
+        openingName,
+      });
       navigate(`/training/${response.data.id}`);
     } catch (error) {
       console.error("Error starting session:", error);
@@ -118,14 +139,38 @@ export const Dashboard = () => {
             }
             customBody={
               <div>
-                
                 <BoardPreview
                   openings={filteredOpenings}
                   selectedOpeningName={selectedOpeningName}
                   size={400}
                 />
-                
+
                 <div className="tile-spacer" />
+                
+                <div className="eco-picker">
+                  <label className="eco-label" htmlFor="eco-select">
+                    ECO:
+                  </label>
+
+                  <select
+                    className="eco-select"
+                    id="eco-select"
+                    value={selectedEco ?? ""}
+                    onChange={(e) => {
+                      const nextEco = e.target.value || null;
+
+                      setSelectedEco(nextEco);
+                      setSelectedOpeningName(null);
+                      setSelectedOpeningEco(nextEco);
+                      setSelectedOpeningDescription("");
+                      setQuery("");
+                      setIsComboOpen(false);
+                    }}
+                  ></select>
+                </div>
+
+                <div className="tile-spacer" />
+
                 <OpeningCombo
                   rootLabel="Search openings"
                   query={query}
@@ -145,14 +190,15 @@ export const Dashboard = () => {
                   <p className="opening-description opening-description--empty" />
                 )}
 
-                
                 <div className="tile-spacer" />
-                
+
                 <Button
                   className="tile-action"
                   disabled={!selectedOpeningName}
                   onClick={() =>
-                    selectedOpeningName && startSession(selectedOpeningName)
+                    selectedOpeningName &&
+                    selectedOpeningEco &&
+                    startSession(selectedOpeningEco, selectedOpeningName)
                   }
                   type="button"
                 >
