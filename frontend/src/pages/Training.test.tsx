@@ -379,4 +379,25 @@ describe("Training Page", () => {
       expect(capturedOptions.customArrows).toBeUndefined();
     });
   });
+
+  it("resets hint level after feedback is '✅ Correct!'", async () => {
+    const { rerender } = render(<Training />);
+    await waitFor(() => expect(capturedOptions).toBeDefined());
+
+    const hintBtn = screen.getByRole("button", { name: /hint/i });
+    await user.click(hintBtn);
+
+    expect(capturedOptions.squareStyles["e2"]).toBeDefined();
+    expect(capturedOptions.squareStyles["e4"]).toBeUndefined();
+
+    useTrainingSession.mockReturnValue({
+      ...baseHookValue,
+      feedback: "✅ Correct!",
+    });
+
+    rerender(<Training />);
+
+    expect(capturedOptions.squareStyles["e2"]).toBeUndefined();
+    expect(capturedOptions.squareStyles["e4"]).toBeUndefined();
+  });
 });
