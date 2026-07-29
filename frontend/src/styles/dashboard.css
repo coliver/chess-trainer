@@ -43,7 +43,7 @@
 
 /* ===== Start tile (top row, left spanning 4 cols) ===== */
 .tile-start {
-  grid-column: 1 / span 4; /* was span 3 */
+  grid-column: 1 / span 4; 
   grid-row: 1;
 
   display: flex;

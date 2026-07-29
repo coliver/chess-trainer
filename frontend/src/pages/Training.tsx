@@ -13,8 +13,6 @@ import {
   type PieceDropHandlerArgs,
   type SquareHandlerArgs,
 } from "react-chessboard";
-import api from "../api";
-import { StartNewTrainingButton } from "../components/StartNewTrainingButton";
 import FenTurnBadge from "../components/FenTurnBadge";
 import { useBlinkGreen } from "../hooks/useBlinkGreen";
 import { useTrainingSession } from "../hooks/useTrainingSession";
@@ -40,8 +38,7 @@ export const Training = () => {
   } = useTrainingSession(id, handle401);
 
   const [moveInput, setMoveInput] = useState("");
-  const [showAnimations, setShowAnimations] = useState(true);
-  const [showPanel, setShowPanel] = useState(false);
+  const [showAnimations] = useState(true);
   const [hintLevel, setHintLevel] = useState(-1);
   const [localFeedback, setLocalFeedback] = useState("");
   const shownFeedback = localFeedback || feedback;
@@ -71,7 +68,6 @@ export const Training = () => {
   useEffect(() => {
     moveFromRef.current = null;
   }, [itemId]);
-
 
   useEffect(() => {
     if (
@@ -167,14 +163,6 @@ export const Training = () => {
     [processMove],
   );
 
-  const startSession = async () => {
-    try {
-      const response = await api.post("/training-sessions");
-      navigate(`/training/${response.data.id}`);
-    } catch (error) {
-      console.error("Error starting session:", error);
-    }
-  };
 
   const combinedSquareStyles = useMemo(() => {
     const styles: Record<string, React.CSSProperties> = { ...squareStyles };
@@ -271,8 +259,6 @@ export const Training = () => {
       squareStyles: combinedSquareStyles,
       showAnimations: showAnimations,
 
-      // Your pasted ChessboardOptions type doesn't have `areArrowsAllowed`.
-      // Arrow enabling is done via `allowDrawingArrows`.
       allowDrawingArrows: true,
     }),
     [fen, handlePieceDrop, onSquareClick, combinedSquareStyles, showAnimations],
@@ -281,20 +267,21 @@ export const Training = () => {
   return (
     <main className="page">
       <div className="card">
-        <h1 className="title">Training</h1>
-        <h2 className="opening-label">{openingLabel}</h2>
+        <div className="dashboard-layout">
+          <div className="dashboard-tile tile-start">
+            <div className="tile-start-text">
+              <div className="tile-title">Training</div>
+              <div className="tile-subtitle">{openingLabel}</div>
+            </div>
 
-        <div style={{ marginTop: 16 }}>
-          <div style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div
-                className="training-board-wrap"
-                style={{ position: "relative", marginTop: 0 }}
-              >
+            <div className="tile-spacer" />
+
+            <div className="training-start-body">
+              <div className="training-board-wrap">
                 <Chessboard options={chessboardOptions} />
               </div>
 
-              <div style={{ marginTop: 20 }}>
+              <div className="training-form-wrap">
                 <form className="training-form" onSubmit={handleSubmit}>
                   <input
                     className="text-input"
@@ -303,62 +290,35 @@ export const Training = () => {
                     placeholder="e.g. e2e4"
                     disabled={isSubmitting}
                   />
-                  <button
-                    className="btn"
-                    type="submit"
-                    disabled={isSubmitting || isAdvancing || !moveInput.trim()}
-                  >
-                    Submit
-                  </button>
 
-                  <button
-                    className="btn btn-secondary"
-                    type="button"
-                    onClick={() => {
-                      if (isSubmitting || isAdvancing || !itemId) return;
-                      setHintLevel((h) => (h < 0 ? 0 : 1));
-                    }}
-                    disabled={isSubmitting || isAdvancing || !itemId}
-                  >
-                    {"Hint"}
-                  </button>
+                  <div className="training-form-actions">
+                    <button
+                      className="btn"
+                      type="submit"
+                      disabled={
+                        isSubmitting || isAdvancing || !moveInput.trim()
+                      }
+                    >
+                      Submit
+                    </button>
+
+                    <button
+                      className="btn btn-secondary"
+                      type="button"
+                      onClick={() => {
+                        if (isSubmitting || isAdvancing || !itemId) return;
+                        setHintLevel((h) => (h < 0 ? 0 : 1));
+                      }}
+                      disabled={isSubmitting || isAdvancing || !itemId}
+                    >
+                      Hint
+                    </button>
+                  </div>
 
                   <FenTurnBadge fen={fen} />
                 </form>
 
                 <p className="training-feedback">{shownFeedback}</p>
-              </div>
-            </div>
-
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <button className="btn" onClick={() => setShowPanel((s) => !s)}>
-                {showPanel ? "Hide" : "Show"} Panel
-              </button>
-
-              <div
-                style={{ marginTop: 12, display: showPanel ? "block" : "none" }}
-              >
-                <StartNewTrainingButton className="btn" onClick={startSession}>
-                  Start New Training Session
-                </StartNewTrainingButton>
-
-                <h2 style={{ marginTop: 12 }}>{correctMoveUci}</h2>
-
-                <label
-                  style={{
-                    marginTop: 12,
-                    display: "inline-flex",
-                    gap: 8,
-                    alignItems: "center",
-                  }}
-                >
-                  <input
-                    type="checkbox"
-                    checked={showAnimations}
-                    onChange={() => setShowAnimations((v) => !v)}
-                  />
-                  Show animations
-                </label>
               </div>
             </div>
           </div>

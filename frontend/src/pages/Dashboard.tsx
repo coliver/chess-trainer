@@ -148,7 +148,7 @@ export const Dashboard = () => {
                 <BoardPreview
                   openings={filteredOpenings}
                   selectedOpeningName={selectedOpeningName}
-                  size={400}
+                  
                 />
 
                 <div className="tile-spacer" />

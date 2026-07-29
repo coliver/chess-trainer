@@ -2,7 +2,6 @@
 import { describe, it, expect, vi, afterEach, beforeEach } from "vitest";
 import { render, waitFor, act, screen, cleanup } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import api from "../api";
 import { Training } from "./Training";
 import { useTrainingSession } from "../hooks/useTrainingSession";
 import { useBlinkGreen } from "../hooks/useBlinkGreen";
@@ -12,7 +11,6 @@ import type { ChessboardOptions } from "react-chessboard";
 
 import type { PieceDropHandlerArgs } from "react-chessboard";
 import type { ComponentProps } from "react";
-import type { StartNewTrainingButton } from "../components/StartNewTrainingButton";
 
 vi.mock("../hooks/useTrainingSession");
 vi.mock("../hooks/useBlinkGreen");
@@ -145,19 +143,6 @@ describe("Training Page", () => {
     expect(mockBlinkGreen).toHaveBeenCalledWith("e2e4q", 2);
   });
 
-  it("toggles the info panel visibility back and forth", async () => {
-    render(<Training />);
-    const toggleBtn = screen.getByRole("button", { name: /show panel/i });
-
-    await user.click(toggleBtn);
-    expect(screen.getByText(/start new training session/i)).toBeVisible();
-    expect(toggleBtn).toHaveTextContent(/hide/i);
-
-    await user.click(toggleBtn);
-    expect(screen.getByText(/start new training session/i)).not.toBeVisible();
-    expect(toggleBtn).toHaveTextContent(/show/i);
-  });
-
   describe("Move Interactions", () => {
     it("submits move via drag and drop (onPieceDrop)", async () => {
       moveMock.mockReturnValue({ promotion: "q" });
@@ -236,25 +221,6 @@ describe("Training Page", () => {
       await user.click(submitBtn);
 
       expect(mockSubmitMove).toHaveBeenCalledWith("e2e4", "start-fen");
-    });
-  });
-
-  describe("UI & Session Controls", () => {
-    it("toggles the info panel and starts a new session", async () => {
-      api.post.mockResolvedValue({ data: { id: "sess-new" } });
-      render(<Training />);
-      await user.click(screen.getByRole("button", { name: /show panel/i }));
-      await user.click(screen.getByText(/start new training session/i));
-      expect(api.post).toHaveBeenCalledWith("/training-sessions");
-    });
-
-    it("toggles animations state on checkbox change", async () => {
-      render(<Training />);
-      const checkbox = screen.getByLabelText(/show animations/i);
-      await waitFor(() => expect(capturedOptions.showAnimations).toBe(true));
-      await user.click(checkbox);
-
-      expect(capturedOptions.showAnimations).toBe(false);
     });
   });
 
