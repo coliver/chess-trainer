@@ -54,6 +54,7 @@ export const Training = () => {
   const isSubmittingRef = useRef(isSubmitting);
   const isAdvancingRef = useRef(isAdvancing);
   const lastAutoplayedItemIdRef = useRef<string | null>(null);
+  const prevFeedbackRef = useRef<string>(feedback);
 
   useEffect(() => {
     fenRef.current = fen;
@@ -70,6 +71,17 @@ export const Training = () => {
   useEffect(() => {
     moveFromRef.current = null;
   }, [itemId]);
+
+
+  useEffect(() => {
+    if (
+      prevFeedbackRef.current !== "✅ Correct!" &&
+      feedback === "✅ Correct!"
+    ) {
+      setHintLevel(-1);
+    }
+    prevFeedbackRef.current = feedback;
+  }, [feedback]);
 
   useEffect(() => {
     if (feedback === "✅ Correct!" && lastSubmittedMoveUciRef.current) {
