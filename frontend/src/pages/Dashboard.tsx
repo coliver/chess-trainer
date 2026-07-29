@@ -82,6 +82,12 @@ export const Dashboard = () => {
     });
   }, [openings, query, selectedEco]);
 
+  const ecoOptions = useMemo(() => {
+    return Array.from(
+      new Set(openings.map((o) => o.eco).filter(Boolean)),
+    ).sort();
+  }, [openings]);
+
   const pickOpeningByIndex = (idx: number) => {
     const picked = filteredOpenings[idx];
     if (!picked) return;
@@ -146,7 +152,7 @@ export const Dashboard = () => {
                 />
 
                 <div className="tile-spacer" />
-                
+
                 <div className="eco-picker">
                   <label className="eco-label" htmlFor="eco-select">
                     ECO:
@@ -166,7 +172,14 @@ export const Dashboard = () => {
                       setQuery("");
                       setIsComboOpen(false);
                     }}
-                  ></select>
+                  >
+                    <option value="">All ECOs</option>
+                    {ecoOptions.map((eco) => (
+                      <option key={eco} value={eco}>
+                        {eco}
+                      </option>
+                    ))}
+                  </select>
                 </div>
 
                 <div className="tile-spacer" />
