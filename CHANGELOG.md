@@ -1,3 +1,11 @@
+## 2026-07-28
+- feat(dashboard): add prominent opening board preview and selection gating
+- refactor(dashboard): initialize selection state to empty
+- ui(dashboard): reorganize dashboard CSS and improve board preview sizing
+- test(dashboard): add/expand Dashboard test coverage
+- fix: resolve eslint/type issues in `useTrainingSession`, `Dashboard.test.tsx`, and `Training.test.tsx`
+- ui(dashboard): add dark/light mode screenshots and dashboard random quotes; update icons to SVG components
+
 ## 2026-07-26
 - Add lots of missing typing
 
@@ -8,30 +16,12 @@
 - fix(training): remove custom arrows/hint arrow logic and update chessboard options + expectations in tests
 - feat(training): add optional `nextNextPgn` to `NextItem`
 
-## 2026-07-24
-- Add CamelCasing to all api returns
-- Fix lots of frontend tests
-- Add lots of test coverage on the frontend
-- refactor: Remove Retry button and backing logic
-- feat(training): track session completion with isSessionCompleted
-- refactor(training): change hintLevel to -1/0 (Hint/More Hint) and highlight from/to squares only
-- fix(training): remove custom arrows/hint arrow logic and update chessboard options + expectations in tests
-- feat(training): add optional nextNextPgn to NextItem
-
-
 ## 2026-07-21
 - test: refactor auth tests and improve pytest configuration
   - Add `pythonpath = .` to pytest.ini to fix module resolution
   - Introduce `test_user` fixture in conftest.py
   - Refactor `test_auth_refresh.py` to use the new user fixture
   - Clean up unused imports in auth router and test files
-- Add refresh tokens
-- Add env.example
-- Run black / ruff
-
-## 2026-07-21
-- fix Click to Move functionality
-- test: refactor auth tests and improve pytest configuration
 - Add refresh tokens
 - Add env.example
 - Run black / ruff
