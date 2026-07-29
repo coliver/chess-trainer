@@ -51,8 +51,9 @@ export default function BoardPreview({
       if (!entry) return;
 
       const w = entry.contentRect.width;
-      // Keep a sensible minimum so it doesn't collapse
-      setSizePx(Math.max(180, Math.floor(w)));
+      // leave some breathing room inside the container
+      const scale = 0.85; // tweak: 0.95–0.98
+      setSizePx(Math.max(180, Math.floor(w * scale)));
     });
 
     ro.observe(el);
@@ -121,13 +122,14 @@ export default function BoardPreview({
       return gameFromStart.fen();
     }
 
-    return (opening?.epd
-      ? gameFromEpd
-      : (() => {
-          const g = new Chess();
-          applyMoves(g);
-          return g;
-        })()
+    return (
+      opening?.epd
+        ? gameFromEpd
+        : (() => {
+            const g = new Chess();
+            applyMoves(g);
+            return g;
+          })()
     ).fen();
   }, [current.opening, current.moveList, selectedPly]);
 
