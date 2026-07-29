@@ -11,16 +11,27 @@
   max-width: 100%;
   margin: 0 auto;
   padding: 14px 20px;
+  box-sizing: border-box;
+
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
+  justify-content: space-between; /* keep */
+}
+
+.site-header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* control spacing between greeting and nav */
 }
 
 .site-header-brand {
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.site-header-greeting {
+  font-size: 0.7rem;
 }
 
 .site-header-nav {

@@ -1,5 +1,5 @@
 // frontend/src/components/Header.tsx
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import profileIcon from "../assets/profile.svg";
 import { KnightSchoolIcon } from "./KnightSchoolIcon";
@@ -22,29 +22,39 @@ export default function Header() {
     return () => window.removeEventListener("storage", syncFromStorage);
   }, []);
 
-  return (
-    <header
-      className="site-header"
-    >
-      <div className="site-header-inner">
-        <div className="site-header-brand">
-          <KnightSchoolIcon height="64px" />
-          <Link to="/dashboard" className="site-header-title">
-            Knight&nbsp;School
-          </Link>
-        </div>
+  const username = localStorage.getItem("username");
+  const greeting = useMemo(() => {
+    const hour = new Date().getHours();
+    const base =
+      hour < 12
+        ? "Good morning ☀️"
+        : hour < 18
+          ? "Good afternoon 🌤️"
+          : "Good evening 🌙";
+    const who = username ? `, ${username}` : "";
+    return `${base}${who}`;
+  }, [username]);
 
-        <nav className="site-header-nav" aria-label="Primary">
-          {!isLoggedIn ? (
-            <>
-              <Link to="/login" className="site-header-link">
-                Login
-              </Link>
-              <Link to="/register" className="site-header-link">
-                Register
-              </Link>
-            </>
-          ) : (
+  return (
+    <header className="site-header">
+  <div className="site-header-inner">
+    <div className="site-header-brand">
+      <KnightSchoolIcon height="64px" />
+      <Link to="/dashboard" className="site-header-title">
+        Knight&nbsp;School
+      </Link>
+    </div>
+
+    <div className="site-header-right">
+      <div role="heading" className="site-header-greeting">{greeting}</div>
+
+      <nav className="site-header-nav" aria-label="Primary">
+        {!isLoggedIn ? (
+          <>
+            <Link to="/login" className="site-header-link">Login</Link>
+            <Link to="/register" className="site-header-link">Register</Link>
+          </>
+        ) : (
             <>
               <Link
                 to="/profile"
@@ -59,8 +69,9 @@ export default function Header() {
           <div className="site-header-actions">
             <ThemeToggle />
           </div>
-        </nav>
-      </div>
-    </header>
+      </nav>
+    </div>
+  </div>
+</header>
   );
 }

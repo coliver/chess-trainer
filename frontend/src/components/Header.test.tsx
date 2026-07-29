@@ -1,11 +1,20 @@
 // frontend/src/components/Header.test.tsx
-import { describe, it, beforeEach, afterEach, expect } from "vitest";
+import { vi, describe, it, beforeEach, afterEach, expect } from "vitest";
 import { render, screen, cleanup, act } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import Header from "./Header";
+import api from "../api";
 
 const renderWithRouter = (ui: React.ReactElement) =>
   render(<MemoryRouter>{ui}</MemoryRouter>);
+
+vi.mock("../api", () => ({
+  default: {
+    get: vi.fn(),
+    post: vi.fn(),
+  },
+}));
+
 
 describe("Header auth UI", () => {
   beforeEach(() => {
@@ -37,5 +46,93 @@ describe("Header auth UI", () => {
     expect(screen.queryByText("Login")).not.toBeInTheDocument();
     expect(screen.queryByText("Register")).not.toBeInTheDocument();
     expect(screen.getByLabelText("Profile")).toBeInTheDocument();
+  });
+
+    describe("Greetings", () => {
+    beforeEach(() => {
+      vi.useFakeTimers();
+    });
+
+    afterEach(() => {
+      vi.useRealTimers();
+    });
+
+    it("uses the username from localStorage in the greeting", async () => {
+      localStorage.setItem("username", "Chris");
+      (api.get as unknown as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        data: [],
+      });
+
+      render(
+        <MemoryRouter>
+          <Header />
+        </MemoryRouter>,
+      );
+
+      screen.getByRole("heading", { name: /Chris/i });
+    });
+
+    const setSystemHour = (hour: number) => {
+      vi.setSystemTime(
+        new Date(`2026-01-01T${String(hour).padStart(2, "0")}:00:00Z`),
+      );
+    };
+
+    it("shows morning greeting when hour < 12 and includes username", async () => {
+      localStorage.setItem("username", "Chris");
+      setSystemHour(9);
+
+      (api.get as unknown as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        data: [],
+      });
+
+      render(
+        <MemoryRouter>
+          <Header />
+        </MemoryRouter>,
+      );
+
+      expect(
+        screen.getByRole("heading", { name: /Good morning/i }),
+      ).toHaveTextContent("Good morning ☀️, Chris");
+    });
+
+    it("shows afternoon greeting when 12 <= hour < 18 (no username)", async () => {
+      setSystemHour(14);
+      localStorage.removeItem("username");
+
+      (api.get as unknown as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        data: [],
+      });
+
+      render(
+        <MemoryRouter>
+          <Header />
+        </MemoryRouter>,
+      );
+
+      expect(
+        screen.getByRole("heading", { name: /Good afternoon/i }),
+      ).toHaveTextContent("Good afternoon 🌤️");
+    });
+
+    it("shows evening greeting when hour >= 18 and includes username", async () => {
+      setSystemHour(20);
+      localStorage.setItem("username", "Chris");
+
+      (api.get as unknown as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        data: [],
+      });
+
+      render(
+        <MemoryRouter>
+          <Header />
+        </MemoryRouter>,
+      );
+
+      expect(
+        screen.getByRole("heading", { name: /Good evening/i }),
+      ).toHaveTextContent("Good evening 🌙, Chris");
+    });
   });
 });

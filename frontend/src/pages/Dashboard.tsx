@@ -112,26 +112,11 @@ export const Dashboard = () => {
     }
   };
 
-  const username = localStorage.getItem("username");
-  const greeting = useMemo(() => {
-    const hour = new Date().getHours();
-    const base =
-      hour < 12
-        ? "Good morning ☀️"
-        : hour < 18
-          ? "Good afternoon 🌤️"
-          : "Good evening 🌙";
-    const who = username ? `, ${username}` : "";
-    return `${base}${who}`;
-  }, [username]);
+
 
   return (
     <main className="page">
-      <div className="card">
-        <div className="tile-title" role="heading">
-          {greeting}
-        </div>
-        <div className="tile-subtitle">Ready to practice your lines?</div>
+      <div className="card">       
 
         <div className="dashboard-layout">
           <DashboardTile
