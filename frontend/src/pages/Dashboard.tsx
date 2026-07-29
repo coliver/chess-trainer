@@ -42,9 +42,8 @@ export const Dashboard = () => {
         const list: Opening[] = res.data ?? [];
         setOpenings(list);
 
-        const first = list[0];
-        setSelectedOpeningName(first?.name ?? null);
-        setSelectedOpeningDescription(first?.description ?? "");
+        setSelectedOpeningName(null);
+        setSelectedOpeningDescription("");
 
         setQuery(""); // ✅ don’t pre-fill query (prevents filtering to 1 option)
         setIsComboOpen(false); // or true if your test expects it open immediately
@@ -111,7 +110,7 @@ export const Dashboard = () => {
           <DashboardTile
             className="tile-start"
             icon={<TrainingIcon />}
-            title="Training"
+            title="Start Training an Opening"
             subtitle={
               <span className="tile-subtitle italics">
                 <RandomQuote />
@@ -119,6 +118,13 @@ export const Dashboard = () => {
             }
             customBody={
               <div>
+                
+                <BoardPreview
+                  openings={filteredOpenings}
+                  selectedOpeningName={selectedOpeningName}
+                  size={400}
+                />
+                
                 <div className="tile-spacer" />
                 <OpeningCombo
                   rootLabel="Search openings"
@@ -139,19 +145,20 @@ export const Dashboard = () => {
                   <p className="opening-description opening-description--empty" />
                 )}
 
-                <div className="margin12">
-                  <BoardPreview
-                    openings={openings}
-                    selectedOpeningName={selectedOpeningName}
-                  />
-                </div>
-
+                
+                <div className="tile-spacer" />
+                
                 <Button
                   className="tile-action"
-                  onClick={() => startSession(selectedOpeningName)}
+                  disabled={!selectedOpeningName}
+                  onClick={() =>
+                    selectedOpeningName && startSession(selectedOpeningName)
+                  }
                   type="button"
                 >
-                  Start {selectedOpeningName}
+                  {selectedOpeningName
+                    ? `Start ${selectedOpeningName}`
+                    : `Choose An Opening`}
                 </Button>
               </div>
             }
@@ -163,8 +170,13 @@ export const Dashboard = () => {
             title="Daily Drill"
             subtitle="A focused tactical challenge just for today."
             cta={
-              <Button className="tile-action" onClick={() => {}} type="button">
-                Start Daily Drill
+              <Button
+                className="tile-action btn-secondary"
+                onClick={() => {}}
+                type="button"
+                disabled
+              >
+                Coming Soon
               </Button>
             }
           />
@@ -175,8 +187,13 @@ export const Dashboard = () => {
             title="Recommended Line"
             subtitle="Study prompt picked for you"
             cta={
-              <Button className="tile-action" onClick={() => {}} type="button">
-                Start Recommended Line
+              <Button
+                className="tile-action btn-secondary"
+                onClick={() => {}}
+                type="button"
+                disabled
+              >
+                Coming Soon
               </Button>
             }
           />
@@ -187,8 +204,13 @@ export const Dashboard = () => {
             title="Classics Practice"
             subtitle="Re-learn the classics"
             cta={
-              <Button className="tile-action" onClick={() => {}} type="button">
-                Start Classics
+              <Button
+                className="tile-action btn-secondary"
+                onClick={() => {}}
+                type="button"
+                disabled
+              >
+                Coming Soon
               </Button>
             }
           />
@@ -197,44 +219,7 @@ export const Dashboard = () => {
             className="dashboard-tile tile-right"
             icon={<ProgressIcon />}
             title="Progress"
-            customBody={
-              <div>
-                <div className="skills-gauge">
-                  <div className="progress-value">82%</div>
-                  <div className="progress-label">Accuracy</div>
-                  <div className="progress-micro">Best so far: last 7 days</div>
-                </div>
-
-                <div className="tile-spacer" />
-
-                <div className="streak-row">
-                  <div className="streak-value">12 days</div>
-                  <div className="streak-label">Current Streak</div>
-                  <div className="streak-micro">Best: 23 days</div>
-                </div>
-
-                <div className="tile-spacer" />
-
-                <div className="next-review">
-                  <div className="next-review-title">Next Review</div>
-                  <div className="next-review-item">
-                    <span className="next-review-name">
-                      Sicilian Defense: Najdorf Variation
-                    </span>
-                    <span className="next-review-in">in 1 day</span>
-                  </div>
-                  <div className="tile-spacer" />
-
-                  <button
-                    className="tile-action tile-action--ghost"
-                    type="button"
-                    onClick={() => navigate("/reviews")}
-                  >
-                    View All Reviews →
-                  </button>
-                </div>
-              </div>
-            }
+            subtitle="(Placeholder)"
           />
         </div>
       </div>

@@ -1,7 +1,7 @@
 /* tokens.css */
 /* Soft Light Theme (default) */
 :root {
-  --text: #5b6472;        /* softer than #6b7280 */
+  --text: hsl(230, 11%, 40%);        /* softer than #6b7280 */
   --text-h: #0f172a;      /* dark slate */
   --bg: hsl(220, 14%, 94%);          /* near-white, not bluish-gray bright */
   --card-bg: hsl(240, 25%, 98%);     /* gentle lift over bg */

@@ -24,11 +24,13 @@ function uciToMove(uci: string) {
 export default function BoardPreview({
   openings,
   selectedOpeningName,
+  size = 280,
 }: {
   openings: Opening[];
   selectedOpeningName: string | null;
+  size?: number;
 }) {
-  const previewFen = useMemo(() => {
+    const previewFen = useMemo(() => {
     const opening = openings.find((o) => o.name === selectedOpeningName);
     const game = new Chess();
 
@@ -55,8 +57,8 @@ export default function BoardPreview({
   const previewChessboardOptions: ChessboardOptions = {
     position: previewFen,
     boardStyle: {
-      width: "140px",
-      height: "140px",
+      width: `${size}px`,
+      height: `${size}px`,
       maxWidth: "100%",
     },
     allowDragging: false,
