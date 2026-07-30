@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import api from "../api";
 
 export default function Login() {
@@ -38,52 +38,42 @@ export default function Login() {
   };
 
   return (
-    <div
-      style={{ maxWidth: 420, margin: "40px auto", fontFamily: "sans-serif" }}
-    >
-      <h1>Login</h1>
+    <main className="page">
+      <div className="card" style={{ maxWidth: 520, marginTop: 20 }}>
+        <h1 className="title" style={{ marginBottom: 6 }}>Login</h1>
+        <p className="subtitle">Welcome back.</p>
 
-      <form onSubmit={handleSubmit}>
-        <label style={{ display: "block", marginTop: 12 }}>
-          Username
-          <input
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </label>
+        <form className="auth-form" onSubmit={handleSubmit}>
+          <label className="auth-field">
+            <span className="auth-label">Username</span>
+            <input
+              className="text-input"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              autoComplete="username"
+            />
+          </label>
 
-        <label style={{ display: "block", marginTop: 12 }}>
-          Password
-          <input
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-            required
-          />
-        </label>
+          <label className="auth-field">
+            <span className="auth-label">Password</span>
+            <input
+              className="text-input"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              required
+              autoComplete="current-password"
+            />
+          </label>
 
-        <button
-          className="btn"
-          disabled={submitting}
-          type="submit"
-          style={{ marginTop: 16 }}
-        >
-          {submitting ? "Submitting..." : "Submit"}
-        </button>
+          <button className="btn" disabled={submitting} type="submit" style={{ marginTop: 14 }}>
+            {submitting ? "Submitting..." : "Submit"}
+          </button>
 
-        {error && (
-          <div
-            style={{
-              marginTop: 12,
-              color: "crimson",
-              whiteSpace: "pre-wrap",
-            }}
-          >
-            {error}
-          </div>
-        )}
-      </form>
-    </div>
+          {error && <div className="auth-error">{error}</div>}
+        </form>
+      </div>
+    </main>
   );
 }

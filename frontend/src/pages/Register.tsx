@@ -11,7 +11,7 @@ export default function Register() {
   const [success, setSuccess] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {    
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
     setSubmitting(true);
@@ -31,69 +31,66 @@ const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
       setSuccess(true);
       navigate("/login");
     } catch (err) {
-      console.error(err)
       setError("Failed to register. Please try again later.");
+      console.error(err)
     } finally {
       setSubmitting(false);
     }
   };
 
   return (
-    <div
-      style={{ maxWidth: 420, margin: "40px auto", fontFamily: "sans-serif" }}
-    >
-      <h1>Register</h1>
+    <main className="page">
+      <div className="card" style={{ maxWidth: 520, marginTop: 20 }}>
+        <h1 className="title" style={{ marginBottom: 6 }}>Register</h1>
+        <p className="subtitle">Create your account.</p>
 
-      {success ? (
-        <p>Registered—now log in.</p>
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <label>
-            Email
-            <input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              type="email"
-              required
-            />
-          </label>
+        {success ? (
+          <p>Registered—now log in.</p>
+        ) : (
+          <form className="auth-form" onSubmit={handleSubmit}>
+            <label className="auth-field">
+              <span className="auth-label">Email</span>
+              <input
+                className="text-input"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                required
+                autoComplete="email"
+              />
+            </label>
 
-          <label style={{ display: "block", marginTop: 12 }}>
-            Username
-            <input
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-          </label>
+            <label className="auth-field">
+              <span className="auth-label">Username</span>
+              <input
+                className="text-input"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+                autoComplete="username"
+              />
+            </label>
 
-          <label style={{ display: "block", marginTop: 12 }}>
-            Password
-            <input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              type="password"
-              required
-            />
-          </label>
+            <label className="auth-field">
+              <span className="auth-label">Password</span>
+              <input
+                className="text-input"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                type="password"
+                required
+                autoComplete="new-password"
+              />
+            </label>
 
-          <button disabled={submitting} type="submit" className="btn" style={{ marginTop: 16 }}>
-            {submitting ? "Registering..." : "Register"}
-          </button>
+            <button className="btn" disabled={submitting} type="submit" style={{ marginTop: 6 }}>
+              {submitting ? "Registering..." : "Register"}
+            </button>
 
-          {error && (
-            <div
-              style={{
-                marginTop: 12,
-                color: "crimson",
-                whiteSpace: "pre-wrap",
-              }}
-            >
-              {error}
-            </div>
-          )}
-        </form>
-      )}
-    </div>
+            {error && <div className="auth-error">{error}</div>}
+          </form>
+        )}
+      </div>
+    </main>
   );
 }

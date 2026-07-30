@@ -4,8 +4,12 @@ import { Link } from "react-router-dom";
 import profileIcon from "../assets/profile.svg";
 import { KnightSchoolIcon } from "./KnightSchoolIcon";
 import { ThemeToggle } from "./ThemeToggle";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../auth";
 
 export default function Header() {
+  const navigate = useNavigate();
+
   const [isLoggedIn, setIsLoggedIn] = useState(
     () => !!localStorage.getItem("token"),
   );
@@ -21,6 +25,11 @@ export default function Header() {
 
     return () => window.removeEventListener("storage", syncFromStorage);
   }, []);
+
+  const onLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
   const username = localStorage.getItem("username");
   const greeting = useMemo(() => {
@@ -69,6 +78,7 @@ export default function Header() {
                 >
                   <img src={profileIcon} alt="" width={28} height={28} />
                 </Link>
+                <button className="site-header-profile-link" onClick={onLogout}>Logout</button>
               </>
             )}
 
