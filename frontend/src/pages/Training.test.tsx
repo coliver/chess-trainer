@@ -20,26 +20,40 @@ const moveMock = vi.fn();
 const fenMock = vi.fn();
 const turnMock = vi.fn();
 
+type MoveResult = { to: string };
+
 type ChessInstance = {
-  move: (...args: unknown[]) => unknown;
+  move: (...args: unknown[]) => { promotion?: string | null } | null;
   fen: (...args: unknown[]) => string;
   turn: () => string;
   get: (square: string) => { color: "w" | "b" } | null;
+  moves: (args: { square: string; verbose: true }) => MoveResult[];
 };
 
-function ChessMock(this: ChessInstance) {
-  this.move = moveMock as ChessInstance["move"];
-  this.fen = fenMock as ChessInstance["fen"];
-  this.turn = turnMock as ChessInstance["turn"];
-  this.get = vi.fn().mockReturnValue({ color: "w" });
-}
+vi.mock("chess.js", () => {
+  const ChessMockCtor = vi.fn().mockImplementation(function ChessCtor(
+    this: ChessInstance,
+  ) {
+    this.move = moveMock as ChessInstance["move"];
+    this.fen = fenMock as ChessInstance["fen"];
+    this.turn = turnMock as ChessInstance["turn"];
 
-// Mock dat constructor
-vi.mock("chess.js", () => ({
-  Chess: vi.fn().mockImplementation(function ChessCtor(this: ChessInstance) {
-    ChessMock.call(this);
-  }),
-}));
+    this.get = vi.fn().mockReturnValue({ color: "w" });
+
+    this.moves = vi
+      .fn()
+      .mockImplementation(({ square }: { square: string; verbose: true }) => {
+        if (square === "e2") return [{ to: "e4" }];
+        return [];
+      });
+  });
+
+  return {
+    __esModule: true,
+    Chess: ChessMockCtor,
+    default: { Chess: ChessMockCtor },
+  };
+});
 
 vi.mock("react-chessboard", () => ({
   Chessboard: (props: { options: ChessboardOptions }) => {
@@ -258,6 +272,16 @@ describe("Training Page", () => {
           if (sq === "e2") return { color: "w" };
           return null;
         });
+
+        this.moves = vi
+          .fn()
+          .mockImplementation(
+            ({ square }: { square: string; verbose?: boolean }) => {
+              // after selecting e2, allow e4 as a legal target
+              if (square === "e2") return [{ to: "e4" }];
+              return [];
+            },
+          );
       });
 
       render(<Training />);
@@ -278,6 +302,15 @@ describe("Training Page", () => {
       Chess.mockImplementation(function () {
         this.turn = () => "w";
         this.get = vi.fn().mockReturnValue({ color: "w" });
+
+        this.moves = vi
+          .fn()
+          .mockImplementation(
+            ({ square }: { square: string; verbose?: boolean }) => {
+              if (square === "e2") return [{ to: "e4" }];
+              return [];
+            },
+          );
       });
 
       render(<Training />);

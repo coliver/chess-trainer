@@ -45,6 +45,7 @@ export const Dashboard = () => {
     api
       .get("/openings")
       .then((res) => {
+        console.log("openings res.data:", res.data, "isArray:", Array.isArray(res.data));
         const list: Opening[] = res.data ?? [];
         setOpenings(list);
 
@@ -111,8 +112,6 @@ export const Dashboard = () => {
       alert("Failed to start session. Check your connection or token.");
     }
   };
-
-
 
   return (
     <main className="page">

@@ -2,7 +2,7 @@
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { vi, describe, it, expect, beforeEach, afterEach } from "vitest";
+import { vi, describe, it, expect, beforeEach } from "vitest";
 import { MemoryRouter } from "react-router-dom";
 
 import { Dashboard } from "./Dashboard";
@@ -142,11 +142,6 @@ vi.mock("../components/openings/DashboardTile", () => ({
 describe("Dashboard", () => {
   const user = userEvent.setup();
 
-  const openings: Opening[] = [
-    { eco: "B10", name: "Caro-Kann" },
-    { eco: "B20", name: "Sicilian" },
-  ];
-
   beforeEach(() => {
     mockNavigate.mockReset();
     localStorage.clear();
@@ -193,7 +188,7 @@ describe("Dashboard", () => {
     const startButton = await screen.findByRole("button", {
       name: /Start\s+Caro-Kann/i,
     });
-    expect(startButton).toBeEnabled();
+    await expect(startButton).toBeEnabled();
 
     // click should post correct payload + navigate
     await user.click(startButton);
@@ -227,7 +222,7 @@ describe("Dashboard", () => {
     const startBtn = await screen.findByRole("button", {
       name: /choose an opening|start/i,
     });
-    expect(startBtn).toBeDisabled();
+    await expect(startBtn).toBeDisabled();
 
     await user.click(startBtn);
 

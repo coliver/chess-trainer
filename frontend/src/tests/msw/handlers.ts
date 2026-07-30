@@ -48,4 +48,27 @@ export const defaultHandlers = [
     console.log("MSW hit: post training-sessions");
     return HttpResponse.json({ id: 1 });
   }),
+
+  http.get("/api/openings", () => {
+  console.log("MSW hit: openings");
+  return HttpResponse.json([
+    {
+      eco: "C20",
+      name: "King's Pawn Game",
+      epd: null,
+      pgn: null,
+      uci_moves: "e2e4 e7e5",
+      description: "Mock opening",
+    },
+    {
+      eco: "B33",
+      name: "Sicilian Defense",
+      epd: null,
+      pgn: null,
+      uci_moves: "e2e4 c7c5",
+      description: "Mock opening",
+    },
+  ]);
+}),
+
 ];

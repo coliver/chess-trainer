@@ -35,6 +35,7 @@ export const Training = () => {
     isAdvancing,
     submitMove,
     takeAutoplayOnce,
+    isSessionCompleted,
   } = useTrainingSession(id, handle401);
 
   const [moveInput, setMoveInput] = useState("");
@@ -42,7 +43,6 @@ export const Training = () => {
   const [hintLevel, setHintLevel] = useState(-1);
   const [localFeedback, setLocalFeedback] = useState("");
   const shownFeedback = localFeedback || feedback;
-
   const [moveFrom, setMoveFrom] = useState<string | null>(null);
 
   const moveFromRef = useRef<string | null>(null);
@@ -52,6 +52,28 @@ export const Training = () => {
   const isAdvancingRef = useRef(isAdvancing);
   const lastAutoplayedItemIdRef = useRef<string | null>(null);
   const prevFeedbackRef = useRef<string>(feedback);
+
+  // Timeline: keep both state (for UI render) and a ref (for sync checks in effects)
+  const [timeline, setTimeline] = useState(() => ({
+    fens: [fen],
+    indices: 0,
+  }));
+  const timelineRef = useRef(timeline);
+
+  useEffect(() => {
+    setTimeline((t) => {
+      const current = t.fens[t.indices];
+      if (current === fen) return t;
+
+      const next = { fens: [fen], indices: 0 };
+      timelineRef.current = next;
+      return next;
+    });
+  }, [fen]);
+
+  useEffect(() => {
+    timelineRef.current = timeline;
+  }, [timeline]);
 
   useEffect(() => {
     fenRef.current = fen;
@@ -86,23 +108,136 @@ export const Training = () => {
   }, [feedback, blinkGreen]);
 
   const isWhiteToMove = useMemo(() => new Chess(fen).turn() === "w", [fen]);
+  const atLatest = timeline.indices === timeline.fens.length - 1;
+
+  const appendTimelineFen = useCallback((nextFen: string) => {
+    setTimeline((t) => {
+      const prefix = t.fens.slice(0, t.indices + 1);
+      if (prefix[prefix.length - 1] === nextFen) {
+        return t;
+      }
+      const next = { fens: [...prefix, nextFen], indices: prefix.length };
+      timelineRef.current = next; // sync ref immediately
+      return next;
+    });
+  }, []);
+
+  const resetUiForJump = useCallback(() => {
+    setLocalFeedback("");
+    setMoveInput("");
+    setMoveFrom(null);
+    moveFromRef.current = null;
+    setHintLevel(-1);
+  }, []);
+
+  const jumpToIndex = useCallback(
+    (nextIndex: number) => {
+      const { fens, indices } = timelineRef.current;
+      const clamped = Math.max(0, Math.min(nextIndex, fens.length - 1));
+      if (clamped === indices) return;
+
+      const nextFen = fens[clamped] ?? fens[0];
+
+      const next = { fens, indices: clamped };
+      timelineRef.current = next;
+      setTimeline(next);
+
+      setFen(nextFen);
+      resetUiForJump();
+    },
+    [resetUiForJump, setFen],
+  );
 
   useEffect(() => {
-    if (!id || !itemId || isSubmitting || isAdvancing || !correctMoveUci)
+    if (
+      !id ||
+      !itemId ||
+      isSubmitting ||
+      isAdvancing ||
+      !correctMoveUci ||
+      isSessionCompleted
+    ) {
+      console.log("autoplay: early return (missing)", {
+        id,
+        itemId,
+        isSubmitting,
+        isAdvancing,
+        hasCorrectMove: !!correctMoveUci,
+        isSessionCompleted,
+      });
       return;
-    if (lastAutoplayedItemIdRef.current === itemId) return;
+    }
 
-    const game = new Chess(fen);
-    if (game.turn() !== "b") return;
+    console.log("autoplay: start", {
+      itemId,
+      correctMoveUci,
+      fen: fenRef.current,
+      fenTurn: new Chess(fenRef.current).turn(),
+    });
 
-    if (!takeAutoplayOnce(itemId)) return;
+    if (lastAutoplayedItemIdRef.current === itemId) {
+      console.log("autoplay: blocked by lastAutoplayedItemIdRef", {
+        lastAutoplayedItemId: lastAutoplayedItemIdRef.current,
+        itemId,
+      });
+      return;
+    }
+    // Critical: autoplay MUST only run when we're at the latest timeline position
+    const tl = timelineRef.current;
+    console.log("autoplay: timeline gate", {
+      indices: tl.indices,
+      len: tl.fens.length,
+      latest: tl.fens.length - 1,
+    });
+    if (tl.indices !== tl.fens.length - 1) {
+      console.log("autoplay: blocked by timeline not latest");
+      return;
+    }
+    const game = new Chess(fenRef.current);
+    if (game.turn() !== "b") {
+      console.log("autoplay: blocked by turn not black", { turn: game.turn() });
+      return;
+    }
 
+    const can = takeAutoplayOnce(itemId);
+    console.log("autoplay: takeAutoplayOnce", { can });
     lastAutoplayedItemIdRef.current = itemId;
-
     lastSubmittedMoveUciRef.current = correctMoveUci;
-    void submitMove(correctMoveUci, fen);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, itemId, fen, correctMoveUci, takeAutoplayOnce, submitMove]);
+    if (!can) return;
+
+    // Build next fen locally to keep timeline consistent
+    const uci = correctMoveUci;
+    const from = uci.substring(0, 2);
+    const to = uci.substring(2, 4);
+
+    // UCI promotion is like e7e8q. If no promo char exists, don't force "q".
+    const promoChar = uci.length > 4 ? uci[4] : undefined;
+    try {
+      const move = game.move({
+        from,
+        to,
+        ...(promoChar ? { promotion: promoChar } : {}),
+      });
+
+      if (move) {
+        appendTimelineFen(game.fen());
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    void submitMove(uci, fenRef.current);
+  }, [
+    id,
+    itemId,
+    fen,
+    correctMoveUci,
+    takeAutoplayOnce,
+    submitMove,
+    isSubmitting,
+    isAdvancing,
+    appendTimelineFen,
+    isSessionCompleted,
+  ]);
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -111,7 +246,7 @@ export const Training = () => {
 
     setLocalFeedback("");
     lastSubmittedMoveUciRef.current = uci;
-    await submitMove(uci, fen);
+    await submitMove(uci, fenRef.current);
     setMoveInput("");
   };
 
@@ -120,49 +255,82 @@ export const Training = () => {
       if (isSubmittingRef.current || isAdvancingRef.current || !itemId)
         return false;
 
-      const uciPrefix = `${sourceSquare}${targetSquare}`;
-      const expectedPromo = correctMoveUci.startsWith(uciPrefix)
-        ? correctMoveUci.slice(uciPrefix.length)
-        : "";
-      const promoForMove = expectedPromo ? expectedPromo : "q";
+      if (!sourceSquare || !targetSquare) return false;
 
-      const game = new Chess(fenRef.current);
-      const move = game.move({
-        from: sourceSquare,
-        to: targetSquare,
-        promotion: promoForMove,
-      });
+      // ✅ prevent chess.js from being called with from===to
+      if (sourceSquare === targetSquare) return false;
 
-      if (move === null) {
+      try {
+        const uciPrefix = `${sourceSquare}${targetSquare}`;
+        const expectedPromo = correctMoveUci.startsWith(uciPrefix)
+          ? correctMoveUci.slice(uciPrefix.length)
+          : "";
+
+        // Don’t force promotion unless we actually have one
+        const promoForMove = expectedPromo ? expectedPromo : undefined;
+
+        const game = new Chess(fenRef.current);
+        const move = game.move({
+          from: sourceSquare,
+          to: targetSquare,
+          ...(promoForMove ? { promotion: promoForMove } : {}),
+        });
+
+        if (move === null) {
+          setLocalFeedback("❌ Illegal move");
+          return false;
+        }
+
+        const nextFen = game.fen();
+        setFen(nextFen);
+        appendTimelineFen(nextFen);
+
+        const promotionChar = move.promotion
+          ? String(move.promotion).toLowerCase()
+          : "";
+        const uci = `${sourceSquare}${targetSquare}${promotionChar}`;
+
+        setLocalFeedback("");
+        lastSubmittedMoveUciRef.current = uci;
+        setMoveInput(uci);
+        void submitMove(uci, fenRef.current);
+
+        setMoveFrom(null);
+        moveFromRef.current = null;
+
+        return true;
+      } catch {
         setLocalFeedback("❌ Illegal move");
         return false;
       }
-
-      const preFen = fenRef.current;
-      setFen(game.fen());
-
-      const promotionChar = move.promotion
-        ? String(move.promotion).toLowerCase()
-        : "";
-      const uci = `${sourceSquare}${targetSquare}${promotionChar}`;
-
-      setLocalFeedback("");
-      lastSubmittedMoveUciRef.current = uci;
-      setMoveInput(uci);
-      void submitMove(uci, preFen);
-
-      return true;
     },
-    [itemId, setFen, submitMove, correctMoveUci],
+    [
+      appendTimelineFen,
+      correctMoveUci,
+      itemId,
+      setFen,
+      submitMove,
+    ],
   );
 
   const handlePieceDrop = useCallback(
     ({ sourceSquare, targetSquare }: PieceDropHandlerArgs): boolean => {
+      if (!targetSquare) return false;
+      if (sourceSquare === targetSquare) return false;
       return processMove(sourceSquare, targetSquare);
     },
     [processMove],
   );
 
+  const legalTargets = useMemo((): Set<string> => {
+    if (!moveFrom) return new Set<string>();
+    const game = new Chess(fen);
+    const result = game.moves({ square: moveFrom, verbose: true });
+    const targets = result
+      .map((m) => m.to)
+      .filter((to): to is string => typeof to === "string");
+    return new Set(targets);
+  }, [fen, moveFrom]);
 
   const combinedSquareStyles = useMemo(() => {
     const styles: Record<string, React.CSSProperties> = { ...squareStyles };
@@ -171,14 +339,20 @@ export const Training = () => {
       styles[moveFrom] = { backgroundColor: "rgba(255, 255, 0, 0.35)" };
     }
 
+    for (const to of legalTargets) {
+      styles[to] = {
+        background:
+          "radial-gradient(circle, rgba(0,0,0,.1) 25%, transparent 25%)",
+        borderRadius: "50%",
+      };
+    }
+
     if (correctMoveUci && hintLevel >= 0) {
       const fromSquare = correctMoveUci.substring(0, 2);
       const toSquare = correctMoveUci.substring(2, 4);
       const highlightStyle = { backgroundColor: "rgba(255, 255, 0, 0.35)" };
 
-      if (hintLevel === 0) {
-        styles[fromSquare] = highlightStyle;
-      }
+      if (hintLevel === 0) styles[fromSquare] = highlightStyle;
       if (hintLevel === 1) {
         styles[fromSquare] = highlightStyle;
         styles[toSquare] = highlightStyle;
@@ -186,12 +360,15 @@ export const Training = () => {
     }
 
     return styles;
-  }, [squareStyles, moveFrom, correctMoveUci, hintLevel]);
+  }, [squareStyles, moveFrom, correctMoveUci, hintLevel, legalTargets]);
 
   const onSquareClick = useCallback(
     ({ square }: SquareHandlerArgs): void => {
       const selectedSquare = square as Square;
       if (!selectedSquare) return;
+
+      // If user is not at latest timeline, prevent interaction (avoids confusing state)
+      if (!atLatest) return;
 
       if (
         isSubmittingRef.current ||
@@ -204,7 +381,6 @@ export const Training = () => {
 
       const currentFrom = moveFromRef.current;
 
-      // No "from" selected yet: choose it if it's a white piece.
       if (currentFrom === null) {
         const game = new Chess(fenRef.current);
         const piece = game.get(selectedSquare);
@@ -219,23 +395,21 @@ export const Training = () => {
         return;
       }
 
-      // "from" selected: clicking it again toggles off.
       if (currentFrom === selectedSquare) {
         setMoveFrom(null);
         moveFromRef.current = null;
         return;
       }
 
-      // Try the move.
-      const from: string = currentFrom; // currentFrom is not null here due to the early return
+      const from: string = currentFrom;
       const success = processMove(from, selectedSquare);
+
       if (success) {
         setMoveFrom(null);
         moveFromRef.current = null;
         return;
       }
 
-      // Move failed: allow selecting a new from-square (only if it's white).
       const game = new Chess(fenRef.current);
       const piece = game.get(selectedSquare);
 
@@ -247,7 +421,7 @@ export const Training = () => {
         moveFromRef.current = null;
       }
     },
-    [itemId, isWhiteToMove, processMove],
+    [atLatest, itemId, isWhiteToMove, processMove],
   );
 
   const chessboardOptions: ChessboardOptions = useMemo(
@@ -255,10 +429,8 @@ export const Training = () => {
       position: fen,
       onPieceDrop: handlePieceDrop,
       onSquareClick: onSquareClick,
-
       squareStyles: combinedSquareStyles,
       showAnimations: showAnimations,
-
       allowDrawingArrows: true,
     }),
     [fen, handlePieceDrop, onSquareClick, combinedSquareStyles, showAnimations],
@@ -267,7 +439,8 @@ export const Training = () => {
   return (
     <main className="page">
       <div className="card">
-        <div className="dashboard-layout">
+        {/* remount per itemId so timeline starts fresh for that training position */}
+        <div key={itemId ?? "none"} className="dashboard-layout">
           <div className="dashboard-tile tile-start">
             <div className="tile-start-text">
               <div className="tile-title">Training</div>
@@ -293,10 +466,42 @@ export const Training = () => {
 
                   <div className="training-form-actions">
                     <button
+                      className="btn btn-secondary"
+                      type="button"
+                      onClick={() => jumpToIndex(timeline.indices - 1)}
+                      disabled={
+                        isSubmitting || isAdvancing || timeline.indices <= 0
+                      }
+                    >
+                      Prev
+                    </button>
+
+                    <button
+                      className="btn btn-secondary"
+                      type="button"
+                      onClick={() => jumpToIndex(timeline.indices + 1)}
+                      disabled={
+                        isSubmitting ||
+                        isAdvancing ||
+                        timeline.indices >= timeline.fens.length - 1
+                      }
+                    >
+                      Next
+                    </button>
+
+                    <button
                       className="btn"
                       type="submit"
                       disabled={
-                        isSubmitting || isAdvancing || !moveInput.trim()
+                        isSubmitting ||
+                        isAdvancing ||
+                        !moveInput.trim() ||
+                        !atLatest
+                      }
+                      title={
+                        !atLatest
+                          ? "Jump to latest before submitting"
+                          : undefined
                       }
                     >
                       Submit
@@ -306,7 +511,12 @@ export const Training = () => {
                       className="btn btn-secondary"
                       type="button"
                       onClick={() => {
-                        if (isSubmitting || isAdvancing || !itemId) return;
+                        if (
+                          isSubmittingRef.current ||
+                          isAdvancingRef.current ||
+                          !itemId
+                        )
+                          return;
                         setHintLevel((h) => (h < 0 ? 0 : 1));
                       }}
                       disabled={isSubmitting || isAdvancing || !itemId}

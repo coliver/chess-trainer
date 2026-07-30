@@ -7,13 +7,13 @@ This is a work in progress.
 <details>
   <summary>Light mode</summary>
 
-  ![Light mode](./LightMode.png)
+  ![Light mode](./frontend/dashboard-light.png)
 </details>
 
-<details>
+<details open>
   <summary>Dark mode</summary>
 
-  ![Dark mode](./DarkMode.png)
+  ![Dark mode](./frontend/dashboard-dark.png)
 </details>
 
 ### 📂 Project Navigation

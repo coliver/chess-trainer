@@ -116,7 +116,7 @@ describe("useTrainingSession", () => {
     expect(result.current.itemId).toBe(String(prevItemId));
 
     await act(async () => {
-      await result.current.submitMove("e2e4");
+      await result.current.submitMove("e2e4", prevFen);
     });
 
     // Fire the advance timeout, which triggers the next GET /next
@@ -156,9 +156,10 @@ describe("useTrainingSession", () => {
     );
 
     await waitFor(() => expect(result.current.itemId).toBe("1"));
+    const prevFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
     await act(async () => {
-      await result.current.submitMove("e2e4");
+      await result.current.submitMove("e2e4", prevFen);
     });
 
     expect(result.current.feedback).toBe("✅ Session completed.");
@@ -227,15 +228,16 @@ describe("useTrainingSession", () => {
     );
 
     await waitFor(() => expect(result.current.itemId).toBe("1"));
+    const prevFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
     // First correct move schedules an advance timeout (A)
     await act(async () => {
-      await result.current.submitMove("e2e4");
+      await result.current.submitMove("e2e4", prevFen);
     });
 
     // Second correct move before advancing time should clear timeout A
     await act(async () => {
-      await result.current.submitMove("e2e4");
+      await result.current.submitMove("e2e4", prevFen);
     });
 
     // This is the branch we want to cover:
@@ -312,7 +314,7 @@ describe("useTrainingSession", () => {
 
     // submitMove correct => schedules advance timeout
     await act(async () => {
-      await result.current.submitMove("e2e4");
+      await result.current.submitMove("e2e4", prevFen);
     });
 
     // Ensure we scheduled the advance callback
@@ -374,10 +376,11 @@ describe("useTrainingSession", () => {
     );
 
     await waitFor(() => expect(result.current.itemId).toBe("1"));
+    const prevFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
     // schedules advance timeout callback
     await act(async () => {
-      await result.current.submitMove("e2e4");
+      await result.current.submitMove("e2e4", prevFen);
     });
 
     expect(scheduled).toHaveLength(1);

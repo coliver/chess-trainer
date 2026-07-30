@@ -161,10 +161,16 @@ export function useTrainingSession(
   };
 
   const submitMove = useCallback(
-    async (moveUci: string, preFen?: string) => {
+    async (moveUci: string, preFen: string) => {
       if (!id || itemId == null) return;
 
-      const revertFen = preFen ?? fen;
+      if (!preFen) {
+        // If you ever see this, callers are not passing fenRef.current correctly.
+        // (Prefer fail-fast over silently reverting to a stale fen.)
+        throw new Error("submitMove requires preFen (current position fen).");
+      }
+
+      const revertFen = preFen;
       const prevItemId = itemId;
 
       setIsSubmitting(true);
@@ -174,7 +180,7 @@ export function useTrainingSession(
           `training-sessions/${id}/responses`,
           {
             moveUci,
-            itemId: itemId, // type whatever your itemId really is
+            itemId: itemId,
           },
         );
 
@@ -188,12 +194,18 @@ export function useTrainingSession(
           if (fenAfterNorm) setFen(fenAfterNorm);
 
           if (data.sessionCompleted) {
+            // Prevent any queued timeout from firing after session end
+            if (advanceTimeoutRef.current) {
+              clearTimeoutFn(advanceTimeoutRef.current);
+              advanceTimeoutRef.current = null;
+            }
+
             setFeedback("✅ Session completed.");
             setIsSessionCompleted(true);
+            setIsAdvancing(false);
             setIsSubmitting(false);
             return;
           }
-
           setIsAdvancing(true);
 
           const nextPromise = fetchNextItem();
@@ -221,7 +233,6 @@ export function useTrainingSession(
               if (!isMountedRef.current) return;
 
               const err = unknownErr as AxiosError<ApiErrorBody>;
-
               const status = err.response?.status;
               if (status === 401) on401Navigate();
 
@@ -235,6 +246,7 @@ export function useTrainingSession(
           return;
         }
 
+        // incorrect move => revert to the exact fen used to submit
         setFen(revertFen);
         setFeedback(`❌ ${data.reason ?? "Incorrect move"}`);
       } catch (unknownErr) {
@@ -259,7 +271,6 @@ export function useTrainingSession(
     [
       id,
       itemId,
-      fen,
       fetchNextItem,
       applyNextItemState,
       on401Navigate,
@@ -268,6 +279,7 @@ export function useTrainingSession(
       timeoutMs,
     ],
   );
+
 
   const shouldAutoplay = useCallback(() => {
     const normalized = normalizeFen(fen);
