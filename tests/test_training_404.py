@@ -66,6 +66,7 @@ def test_submit_response_non_current_item_id_returns_404(tmp_path):
             session_id=session.id,
             item_id=item1.id,  # NOT the current item
             move_uci="thiswon'tbeparsedbutshouldnotmatter",
+            current_user_id=1,
         )
 
         assert res.http_status == 404

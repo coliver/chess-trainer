@@ -34,10 +34,10 @@ def test_post_training_sessions_returns_id(client: any, monkeypatch: pytest.Monk
     monkeypatch.setattr(
         training_router,
         "create_training_session",
-        lambda db, user_id: FakeSession(),
+        lambda db, user_id, opening_eco=None, opening_name=None: FakeSession(),
     )
 
-    r = client.post("/training-sessions")
+    r = client.post("/training-sessions", json={})
     assert r.status_code == 200
     assert r.json() == {"id": 123}
 
@@ -60,6 +60,7 @@ def test_get_training_next_404_when_session_missing(client: any, monkeypatch: py
 def test_get_training_next_404_when_no_current_item(client: any, monkeypatch: pytest.MonkeyPatch):
     class FakeSession:
         id = 10
+        user_id = 1
         opening_eco = "C20"
         opening_name = "Test Opening"
 
@@ -93,6 +94,7 @@ def test_get_training_next_404_when_no_current_item(client: any, monkeypatch: py
 def test_get_training_next_success_maps_fields(client: any, monkeypatch: pytest.MonkeyPatch):
     class FakeSession:
         id = 10
+        user_id = 1
         opening_eco = "C20"
         opening_name = "Test Opening"
 
@@ -130,20 +132,33 @@ def test_get_training_next_success_maps_fields(client: any, monkeypatch: pytest.
     r = client.get("/training-sessions/10/next")
     assert r.status_code == 200
     assert r.json() == {
-        "session_id": 10,
-        "item_id": 55,
-        "order_index": 2,
+        "sessionId": 10,
+        "itemId": 55,
+        "orderIndex": 2,
         "fen": "the-fen",
-        "move_count_limit": None,
-        "opening_eco": "C20",
-        "opening_name": "Test Opening",
-        "correct_move_uci": "e2e4",  # TODO Remove me. DEBUG ONLY.
+        "moveCountLimit": None,
+        "openingEco": "C20",
+        "openingName": "Test Opening",
+        "correctMoveUci": "e2e4",  # TODO Remove me. DEBUG ONLY.
     }
 
 
 def test_post_training_response_400_when_service_returns_400(
     client: any, monkeypatch: pytest.MonkeyPatch
 ):
+    class FakeSession:
+        id = 1
+        user_id = 1
+
+    class FakeDB:
+        def get(self, model, id):
+            return FakeSession()
+
+    def _get_db_override():
+        yield FakeDB()
+
+    app.dependency_overrides[get_db] = _get_db_override
+
     class Result:
         http_status = 400
         error_message = "invalid uci"
@@ -154,7 +169,7 @@ def test_post_training_response_400_when_service_returns_400(
     monkeypatch.setattr(
         training_router,
         "submit_training_response",
-        lambda db, session_id, item_id, move_uci: Result(),
+        lambda db, session_id, item_id, move_uci, current_user_id: Result(),
     )
 
     r = client.post(
@@ -168,6 +183,19 @@ def test_post_training_response_400_when_service_returns_400(
 def test_post_training_response_404_uses_reason_when_error_message_missing(
     client: any, monkeypatch: pytest.MonkeyPatch
 ):
+    class FakeSession:
+        id = 1
+        user_id = 1
+
+    class FakeDB:
+        def get(self, model, id):
+            return FakeSession()
+
+    def _get_db_override():
+        yield FakeDB()
+
+    app.dependency_overrides[get_db] = _get_db_override
+
     class Result:
         http_status = 404
         error_message = None
@@ -178,7 +206,7 @@ def test_post_training_response_404_uses_reason_when_error_message_missing(
     monkeypatch.setattr(
         training_router,
         "submit_training_response",
-        lambda db, session_id, item_id, move_uci: Result(),
+        lambda db, session_id, item_id, move_uci, current_user_id: Result(),
     )
 
     r = client.post(
@@ -190,6 +218,19 @@ def test_post_training_response_404_uses_reason_when_error_message_missing(
 
 
 def test_post_training_response_success_maps_fields(client: any, monkeypatch: pytest.MonkeyPatch):
+    class FakeSession:
+        id = 1
+        user_id = 1
+
+    class FakeDB:
+        def get(self, model, id):
+            return FakeSession()
+
+    def _get_db_override():
+        yield FakeDB()
+
+    app.dependency_overrides[get_db] = _get_db_override
+
     class Result:
         http_status = 200
         error_message = None
@@ -201,7 +242,7 @@ def test_post_training_response_success_maps_fields(client: any, monkeypatch: py
     monkeypatch.setattr(
         training_router,
         "submit_training_response",
-        lambda db, session_id, item_id, move_uci: Result(),
+        lambda db, session_id, item_id, move_uci, current_user_id: Result(),
     )
 
     r = client.post(
@@ -212,8 +253,8 @@ def test_post_training_response_success_maps_fields(client: any, monkeypatch: py
     assert r.json() == {
         "correct": False,
         "reason": "wrong move",
-        "fen_after": "afterfen",
-        "session_completed": False,
+        "fenAfter": "afterfen",
+        "sessionCompleted": False,
     }
 
 
@@ -240,6 +281,7 @@ def test_post_training_items_400_when_session_not_initialized(
 ):
     class FakeSession:
         id = 10
+        user_id = 1
         opening_eco = None
         opening_name = None
 
@@ -268,6 +310,7 @@ def test_post_training_items_success_returns_created_and_session_id(
 ):
     class FakeSession:
         id = 10
+        user_id = 1
         opening_eco = "C20"
         opening_name = "Test Opening"
 
@@ -287,4 +330,4 @@ def test_post_training_items_success_returns_created_and_session_id(
         json=[{"order_index": 0, "fen": "f", "correct_move_uci": "e2e4"}],
     )
     assert r.status_code == 200
-    assert r.json() == {"created": 7, "session_id": 10}
+    assert r.json() == {"created": 7, "sessionId": 10}

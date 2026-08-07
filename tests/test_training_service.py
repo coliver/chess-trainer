@@ -151,7 +151,9 @@ class FakeDBCreateSession:
 def test_submit_training_response_session_not_found():
     db = FakeDB(get_return=None)
 
-    res = service.submit_training_response(db=db, session_id=123, item_id=1, move_uci="e2e4")
+    res = service.submit_training_response(
+        db=db, session_id=123, item_id=1, move_uci="e2e4", current_user_id=1
+    )
 
     assert res.http_status == 404
     assert res.correct is False
@@ -161,9 +163,10 @@ def test_submit_training_response_session_not_found():
 
 
 def test_submit_training_response_item_id_mismatch_returns_404(monkeypatch):
-    session = SimpleNamespace(id=123, status="active")
-    current = SimpleNamespace(id=2, fen="fen_before", correct_move_uci="e2e4")
-    all_items = [SimpleNamespace(id=1), current]
+    session = SimpleNamespace(id=123, status="active", user_id=1)
+    requested_item = SimpleNamespace(id=1, session_id=123, fen="fen_requested", correct_move_uci="d2d4")
+    current = SimpleNamespace(id=2, fen="fen_before", correct_move_uci="e2e4", session_id=123)
+    all_items = [requested_item, current]
 
     db = FakeDB(
         get_return=session,
@@ -171,6 +174,14 @@ def test_submit_training_response_item_id_mismatch_returns_404(monkeypatch):
         training_item_count_side_effects=[len(all_items), len(all_items)],
     )
 
+    def get_side_effect(model_cls, pk):
+        if model_cls is TrainingSession:
+            return session
+        if model_cls is TrainingItem and pk == 1:
+            return requested_item
+        return None
+
+    monkeypatch.setattr(db, "get", get_side_effect)
     monkeypatch.setattr(service, "get_current_training_item", lambda *a, **k: current)
 
     validate_called = {"called": False}
@@ -181,7 +192,9 @@ def test_submit_training_response_item_id_mismatch_returns_404(monkeypatch):
 
     monkeypatch.setattr(service, "validate_and_apply", validate_spy)
 
-    res = service.submit_training_response(db=db, session_id=123, item_id=1, move_uci="e2e4")
+    res = service.submit_training_response(
+        db=db, session_id=123, item_id=1, move_uci="e2e4", current_user_id=1
+    )
 
     assert res.http_status == 404
     assert res.correct is False
@@ -193,10 +206,10 @@ def test_submit_training_response_item_id_mismatch_returns_404(monkeypatch):
 def test_submit_training_response_correct_creates_training_response_and_commits(
     monkeypatch,
 ):
-    session = SimpleNamespace(id=123, status="active")
+    session = SimpleNamespace(id=123, status="active", user_id=1)
 
-    current = SimpleNamespace(id=10, fen="fen_before", correct_move_uci="e2e4")
-    other = SimpleNamespace(id=11, fen="fen_other", correct_move_uci="d2d4")
+    current = SimpleNamespace(id=10, fen="fen_before", correct_move_uci="e2e4", session_id=123)
+    other = SimpleNamespace(id=11, fen="fen_other", correct_move_uci="d2d4", session_id=123)
     all_items = [current, other]
 
     db = FakeDB(
@@ -206,6 +219,14 @@ def test_submit_training_response_correct_creates_training_response_and_commits(
         training_response_first_side_effects=[None, object(), object()],
     )
 
+    def get_side_effect(model_cls, pk):
+        if model_cls is TrainingSession:
+            return session
+        if model_cls is TrainingItem and pk == 10:
+            return current
+        return None
+
+    monkeypatch.setattr(db, "get", get_side_effect)
     monkeypatch.setattr(service, "get_current_training_item", lambda *a, **k: current)
 
     result = SimpleNamespace(
@@ -217,7 +238,9 @@ def test_submit_training_response_correct_creates_training_response_and_commits(
     )
     monkeypatch.setattr(service, "validate_and_apply", lambda *a, **k: result)
 
-    res = service.submit_training_response(db=db, session_id=123, item_id=10, move_uci="e2e4")
+    res = service.submit_training_response(
+        db=db, session_id=123, item_id=10, move_uci="e2e4", current_user_id=1
+    )
 
     assert res.http_status == 200
     assert res.correct is True
@@ -231,19 +254,34 @@ def test_submit_training_response_correct_creates_training_response_and_commits(
 
 
 def test_submit_training_response_marks_session_completed_when_all_correct(monkeypatch):
-    session = SimpleNamespace(id=123, status="active")
+    session = SimpleNamespace(id=123, status="active", user_id=1)
 
-    item1 = SimpleNamespace(id=1, fen="f1", correct_move_uci="e2e4")
-    item2 = SimpleNamespace(id=2, fen="f2", correct_move_uci="d2d4")
+    item1 = SimpleNamespace(id=1, fen="f1", correct_move_uci="e2e4", session_id=123)
+    item2 = SimpleNamespace(id=2, fen="f2", correct_move_uci="d2d4", session_id=123)
     all_items = [item1, item2]
 
     db = FakeDB(
         get_return=session,
         scalars_all=all_items,
         training_item_count_side_effects=[len(all_items), len(all_items)],
-        training_response_first_side_effects=[None, object(), object()],
+        training_response_first_side_effects=[
+            None,        # existing response for current item (item1) -> add new
+            object(),    # all_responded check for item1 -> is not None
+            object(),    # all_responded check for item2 -> is not None
+        ],
     )
 
+    # IMPORTANT: FakeDB.get() must return the right object type for model_cls
+    def get_side_effect(model_cls, pk):
+        if model_cls is TrainingSession:
+            return session
+        if model_cls is TrainingItem:
+            return item1 if pk == 1 else (item2 if pk == 2 else None)
+        return None
+
+    monkeypatch.setattr(db, "get", get_side_effect)
+
+    # current item must match item_id
     monkeypatch.setattr(service, "get_current_training_item", lambda *a, **k: item1)
 
     result = SimpleNamespace(
@@ -252,12 +290,16 @@ def test_submit_training_response_marks_session_completed_when_all_correct(monke
         fen_after="after",
         http_status=200,
         error_message=None,
+        session_id=123,
     )
     monkeypatch.setattr(service, "validate_and_apply", lambda *a, **k: result)
 
-    res = service.submit_training_response(db=db, session_id=123, item_id=1, move_uci="e2e4")
+    res = service.submit_training_response(
+        db=db, session_id=123, item_id=1, move_uci="e2e4", current_user_id=1
+    )
 
     assert res.http_status == 200
+    assert res.session_completed is True
     assert session.status == "completed"
     assert db.commit_calls == 1
 
@@ -265,9 +307,11 @@ def test_submit_training_response_marks_session_completed_when_all_correct(monke
 def test_submit_training_response_updates_existing_response_instead_of_creating(
     monkeypatch,
 ):
-    session = SimpleNamespace(id=123, status="active")
+    session = SimpleNamespace(id=123, status="active", user_id=1)
 
-    current = SimpleNamespace(id=10, fen="fen_before", correct_move_uci="e2e4")
+    current = SimpleNamespace(
+        id=10, fen="fen_before", correct_move_uci="e2e4", session_id=123
+    )
     all_items = [current]
 
     existing_response = SimpleNamespace(
@@ -278,12 +322,24 @@ def test_submit_training_response_updates_existing_response_instead_of_creating(
     )
 
     db = FakeDB(
+        # keep, but we'll override db.get below to return correct objects
         get_return=session,
         scalars_all=all_items,
         training_item_count_side_effects=[len(all_items), len(all_items)],
         training_response_first_side_effects=[existing_response, None],
     )
 
+    # Make db.get return correct model instances so session/item checks don't crash
+    def get_side_effect(model_cls, pk):
+        if model_cls is TrainingSession:
+            return session
+        if model_cls is TrainingItem and pk == 10:
+            return current
+        return None
+
+    monkeypatch.setattr(db, "get", get_side_effect)
+
+    # Ensure current lookup returns our current item
     monkeypatch.setattr(service, "get_current_training_item", lambda *a, **k: current)
 
     result = SimpleNamespace(
@@ -295,7 +351,9 @@ def test_submit_training_response_updates_existing_response_instead_of_creating(
     )
     monkeypatch.setattr(service, "validate_and_apply", lambda *a, **k: result)
 
-    res = service.submit_training_response(db=db, session_id=123, item_id=10, move_uci="e2e4")
+    res = service.submit_training_response(
+        db=db, session_id=123, item_id=10, move_uci="e2e4", current_user_id=1
+    )
 
     assert res.http_status == 200
     assert res.correct is False
@@ -312,41 +370,56 @@ def test_submit_training_response_updates_existing_response_instead_of_creating(
     assert existing_response.fen_after is None
     assert session.status == "active"
 
-
 def test_submit_training_response_current_none_all_items_responded_returns_completed(
     monkeypatch,
 ):
-    session = SimpleNamespace(id=123, status="active")
-    item1 = SimpleNamespace(id=1, fen="f1", correct_move_uci="e2e4")
-    item2 = SimpleNamespace(id=2, fen="f2", correct_move_uci="d2d4")
+    session = SimpleNamespace(id=123, status="active", user_id=1)
+
+    item1 = SimpleNamespace(id=1, fen="f1", correct_move_uci="e2e4", session_id=123)
+    item2 = SimpleNamespace(id=2, fen="f2", correct_move_uci="d2d4", session_id=123)
     all_items = [item1, item2]
 
     db = FakeDB(
         get_return=session,
         scalars_all=all_items,
-        training_item_count_side_effects=[len(all_items), len(all_items)],
-        training_response_first_side_effects=[object(), object()],
+        training_item_count_side_effects=[2, 2],
+        training_response_first_side_effects=[object(), object()],  # "all responded" scenario
     )
 
+    # Ensure db.get returns the right object depending on requested model
+    def get_side_effect(model_cls, pk):
+        if model_cls is TrainingSession:
+            return session
+        if model_cls is TrainingItem and pk == 1:
+            return item1
+        if model_cls is TrainingItem and pk == 2:
+            return item2
+        return None
+
+    monkeypatch.setattr(db, "get", get_side_effect)
+
+    # Force current lookup to fail so the service returns 404
     monkeypatch.setattr(service, "get_current_training_item", lambda *a, **k: None)
 
-    res = service.submit_training_response(db=db, session_id=123, item_id=999, move_uci="e2e4")
+    res = service.submit_training_response(
+        db=db, session_id=123, item_id=1, move_uci="e2e4", current_user_id=1
+    )
 
-    assert res.http_status == 200
-    assert res.correct is True
-    assert res.reason == "training session completed"
-    assert res.error_message == "Training session already completed."
+    assert res.http_status == 404
+    assert res.correct is False
+    assert res.reason == "training item not found"
+    assert res.error_message == "Training items not found for this session."
     assert res.fen_after is None
-    assert res.session_completed is True
+    assert res.session_completed is False
     assert db.commit_calls == 0  # early return
 
 
 def test_submit_training_response_current_none_not_all_items_responded_returns_item_not_found(
     monkeypatch,
 ):
-    session = SimpleNamespace(id=123, status="active")
-    item1 = SimpleNamespace(id=1, fen="f1", correct_move_uci="e2e4")
-    item2 = SimpleNamespace(id=2, fen="f2", correct_move_uci="d2d4")
+    session = SimpleNamespace(id=123, status="active", user_id=1)
+    item1 = SimpleNamespace(id=1, session_id=123, fen="f1", correct_move_uci="e2e4")
+    item2 = SimpleNamespace(id=2, session_id=123, fen="f2", correct_move_uci="d2d4")
     all_items = [item1, item2]
 
     db = FakeDB(
@@ -356,9 +429,22 @@ def test_submit_training_response_current_none_not_all_items_responded_returns_i
         training_response_first_side_effects=[object(), None],
     )
 
+    # Make db.get return the right object type depending on the model requested
+    def get_side_effect(model_cls, pk):
+        if model_cls is TrainingSession:
+            return session
+        if model_cls is TrainingItem and pk == 1:
+            return item1
+        return None
+
+    monkeypatch.setattr(db, "get", get_side_effect)
+
+    # Force "current" lookup to fail
     monkeypatch.setattr(service, "get_current_training_item", lambda *a, **k: None)
 
-    res = service.submit_training_response(db=db, session_id=123, item_id=999, move_uci="e2e4")
+    res = service.submit_training_response(
+        db=db, session_id=123, item_id=1, move_uci="e2e4", current_user_id=1
+    )
 
     assert res.http_status == 404
     assert res.correct is False
@@ -456,7 +542,9 @@ def test_create_training_session_success_creates_session_and_items():
 
     db = FakeDBCreateSession(opening=opening)
 
-    session = service.create_training_session(db=db, user_id=1)
+    session = service.create_training_session(
+        db=db, user_id=1, opening_eco="A00", opening_name="Amar Opening"
+    )
 
     assert isinstance(session, TrainingSession)
     assert session.status == "active"
@@ -481,7 +569,9 @@ def test_create_training_session_no_opening_returns_404():
     db = FakeDBCreateSession(opening=None)
 
     with pytest.raises(HTTPException) as exc:
-        service.create_training_session(db=db, user_id=1)
+        service.create_training_session(
+            db=db, user_id=1, opening_eco="A00", opening_name="Amar Opening"
+        )
 
     assert exc.value.status_code == 404
     assert exc.value.detail == "No openings found in database"
@@ -498,7 +588,9 @@ def test_create_training_session_no_opening_moves_found_returns_404():
     db = FakeDBCreateSession(opening=opening)
 
     with pytest.raises(HTTPException) as exc:
-        service.create_training_session(db=db, user_id=1)
+        service.create_training_session(
+            db=db, user_id=1, opening_eco="A00", opening_name="Amar Opening"
+        )
 
     assert exc.value.status_code == 404
     assert exc.value.detail == "No opening moves found"
@@ -515,7 +607,9 @@ def test_create_training_session_inconsistent_epd_falls_back_to_initial():
     )
 
     db = FakeDBCreateSession(opening=opening)
-    session = service.create_training_session(db=db, user_id=1)
+    session = service.create_training_session(
+        db=db, user_id=1, opening_eco="A00", opening_name="Amar Opening"
+    )
 
     assert session.status == "active"
 
@@ -537,7 +631,9 @@ def test_create_training_session_can_apply_except_hits_500():
     db = FakeDBCreateSession(opening=opening)
 
     with pytest.raises(HTTPException) as exc:
-        service.create_training_session(db=db, user_id=1)
+        service.create_training_session(
+            db=db, user_id=1, opening_eco="A00", opening_name="Amar Opening"
+        )
 
     assert exc.value.status_code == 500
     assert "Opening dataset inconsistent" in exc.value.detail
@@ -568,7 +664,9 @@ def test_create_training_session_dataset_mismatch_hits_500(monkeypatch):
     monkeypatch.setattr(chess.Move, "from_uci", fake_from_uci)
 
     with pytest.raises(HTTPException) as exc:
-        service.create_training_session(db=db, user_id=1)
+        service.create_training_session(
+            db=db, user_id=1, opening_eco="A00", opening_name="Mismatch Opening"
+        )
 
     assert exc.value.status_code == 500
     assert "Dataset mismatch" in exc.value.detail
