@@ -5,7 +5,7 @@ The backend for Knight School is a FastAPI application that provides chess train
 ## Tech Stack
 - **Framework:** FastAPI
 - **Server:** Uvicorn
-- **Database:** PostgreSQL
+- **Database:** PostgreSQL (via `psycopg` v3)
 - **ORM:** SQLAlchemy
 - **Migrations:** Alembic
 - **Chess logic:** `python-chess`
@@ -20,16 +20,20 @@ This project is designed to run entirely within Docker.
 Create a `.env` file in the project root. The `docker-compose.yml` relies on these variables:
 
     # Database Configuration
-    DATABASE_URL=postgresql://postgres:password@db:5432/knight_school
     DB_NAME=knight_school
     DB_USER=postgres
     DB_PASSWORD=password
     DB_HOST=db
     DB_PORT=5432
     DB_SCHEMA=public
+    DATABASE_URL="postgresql+psycopg://$DB_USER:$DB_PASSWORD@$DB_HOST:$DB_PORT/$DB_NAME"
 
     # Security
     JWT_SECRET=your_super_secret_random_string
+
+Note the `+psycopg` in `DATABASE_URL` — the app depends on `psycopg` (v3), not `psycopg2`, so the scheme must include the driver name.
+
+Optional auth tuning (defaults shown): `JWT_ALGORITHM=HS256`, `JWT_EXPIRES_MINUTES=60`, `JWT_REFRESH_EXPIRES_DAYS=7`.
 
 ### 2) Launch the Stack
 Run:
@@ -59,31 +63,47 @@ Auth routes are under `/auth`:
 | `POST` | `/auth/register` | Create account |
 | `POST` | `/auth/login` | Authenticate user (returns JWTs) |
 | `POST` | `/auth/refresh` | Exchange a refresh token for a new access token |
+| `GET` | `/auth/me` | Return the authenticated user's `id` and `username` |
 
 ## Training Endpoints
 
-Training routes are under `/training-sessions`:
+Training routes are under `/training-sessions`. All of them require a
+`Authorization: Bearer <access_token>` header, and every session/item lookup
+is scoped to the authenticated user — a mismatched or missing token returns
+`404 Training session not found` rather than leaking another user's data.
 
 | Method | Endpoint | Description |
 |---|---|---|
-| `POST` | `/training-sessions` | Start new session (random opening) |
-| `GET` | `/training-sessions/{id}/next` | Fetch next pending move |
-| `POST` | `/training-sessions/{id}/responses` | Submit move (UCI) |
-| `POST` | `/training-sessions/{id}/items` | Bulk add items to session |
+| `POST` | `/training-sessions` | Start a new session. Optional JSON body `{"openingEco": "...", "openingName": "..."}` picks a specific opening; omit both to get a random opening the user hasn't trained on yet |
+| `GET` | `/training-sessions/{id}/next` | Fetch the next pending move for the session |
+| `POST` | `/training-sessions/{id}/responses` | Submit a move (`{"itemId": ..., "moveUci": "..."}`) |
+| `POST` | `/training-sessions/{id}/items` | Bulk add items to an already-initialized session |
 
 Notes:
+- Requests/responses use camelCase JSON (e.g. `moveUci`, `sessionCompleted`); the Python layer underneath is snake_case.
+- `GET .../next` includes `correctMoveUci` in its response. A stale test comment labels this "DEBUG ONLY" but the frontend's hint feature (`Training.tsx`) actually depends on it — don't remove it as cleanup.
 - The backend expects and validates moves using UCI strings.
-- A session is marked `completed` when all training items have correct responses.
+- A session is marked `completed` when all of its training items have a correct response.
+- `POST .../items` returns `400` if the session has no `opening_eco`/`opening_name` set yet (i.e. wasn't created via `POST /training-sessions`).
+
+## Openings Endpoints
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/openings` | List all openings that have parsed UCI moves (no auth required) |
 
 ## Testing
 
-Tests are executed inside the API container:
+Tests are executed inside the API container. Coverage (HTML + terminal) is
+enabled by default via `pytest.ini`'s `addopts`, so a plain run already
+produces a report — no separate `--cov` invocation is needed:
 
-    # Run all tests
     docker compose exec api pytest
 
-    # Run tests with coverage report
-    docker compose exec api pytest --cov=backend.app tests/
+    # Skip coverage for a faster run
+    docker compose exec api pytest --no-cov
+
+The generated `htmlcov/` report is served by nginx at `http://localhost/htmlcov/`.
 
 ## Development Tools
 - **Linting/Formatting:** `ruff` and `black`
