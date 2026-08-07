@@ -26,7 +26,7 @@ This is a work in progress.
 ## 🛠 Tech Stack
 | Layer | Technologies |
 | :--- | :--- |
-| **Backend** | Python 3.10+, FastAPI, SQLAlchemy, Alembic, `python-chess` |
+| **Backend** | Python 3.12, FastAPI, SQLAlchemy, Alembic, `python-chess` |
 | **Frontend** | TypeScript, React, Vite, `chess.js`, `react-chessboard` |
 | **Infrastructure** | PostgreSQL 16, Nginx, Docker |
 
