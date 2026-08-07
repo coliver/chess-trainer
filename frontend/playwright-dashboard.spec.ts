@@ -21,6 +21,18 @@ test.describe("Dashboard screenshots (light/dark)", () => {
         if (el) el.setAttribute("data-theme", t);
       }, theme);
 
+      // RequireAuth gates /dashboard on a valid GET /auth/me response. This
+      // test hits the Vite dev server directly (no nginx /api proxy), so
+      // that request must be mocked explicitly rather than accidentally
+      // passing via a 200 SPA-fallback response.
+      await page.route("**/api/auth/me", async (route) => {
+        await route.fulfill({
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify({ id: 1, username: "demo" }),
+        });
+      });
+
       await page.route("**/api/openings", async (route) => {
         await route.fulfill({
           status: 200,

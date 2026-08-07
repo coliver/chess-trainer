@@ -9,8 +9,17 @@ export function RequireAuth({ children }: { children: JSX.Element }) {
   useEffect(() => {
     (async () => {
       try {
-        await api.get("/auth/me");
-        setAuthed(true);
+        const { data } = await api.get("/auth/me");
+        // GET /auth/me returns { id, username } on success. Any other
+        // shape (e.g. an HTML fallback page from a dev server that doesn't
+        // proxy /api, returned with a 200 status) must not count as
+        // authenticated just because the request didn't throw.
+        const isValidUser =
+          data != null &&
+          typeof data === "object" &&
+          "id" in data &&
+          typeof data.username === "string";
+        setAuthed(isValidUser);
       } catch {
         setAuthed(false);
       } finally {
