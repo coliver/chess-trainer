@@ -45,7 +45,6 @@ export const Dashboard = () => {
     api
       .get("/openings")
       .then((res) => {
-        console.log("openings res.data:", res.data, "isArray:", Array.isArray(res.data));
         const list: Opening[] = res.data ?? [];
         setOpenings(list);
 

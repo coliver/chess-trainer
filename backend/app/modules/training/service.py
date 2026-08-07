@@ -66,16 +66,6 @@ def create_training_session(
     if not moves:
         raise HTTPException(status_code=404, detail="No opening moves found")
 
-    print(
-        "CREATE_TRAINING_SESSION opening:",
-        opening.eco,
-        opening.name,
-        "first_uci:",
-        moves[0],
-        "all_uci:",
-        opening.uci_moves,
-    )
-
     def can_apply(start_board: chess.Board) -> bool:
         b = start_board.copy()
         try:
@@ -165,18 +155,10 @@ def get_current_training_item(db, training_session, all_items):
             )
             .first()
         )
-        print(
-            "NEXT_ITEM check:",
-            "item_id=",
-            item.id,
-            "exists_correct=",
-            exists_correct is not None,
-        )
 
         if exists_correct is None:
             return item
 
-    print("NEXT_ITEM all correct -> returning last_item id=", None)
     return None
 
 

@@ -157,50 +157,23 @@ export const Training = () => {
       !correctMoveUci ||
       isSessionCompleted
     ) {
-      console.log("autoplay: early return (missing)", {
-        id,
-        itemId,
-        isSubmitting,
-        isAdvancing,
-        hasCorrectMove: !!correctMoveUci,
-        isSessionCompleted,
-      });
       return;
     }
 
-    console.log("autoplay: start", {
-      itemId,
-      correctMoveUci,
-      fen: fenRef.current,
-      fenTurn: new Chess(fenRef.current).turn(),
-    });
-
     if (lastAutoplayedItemIdRef.current === itemId) {
-      console.log("autoplay: blocked by lastAutoplayedItemIdRef", {
-        lastAutoplayedItemId: lastAutoplayedItemIdRef.current,
-        itemId,
-      });
       return;
     }
     // Critical: autoplay MUST only run when we're at the latest timeline position
     const tl = timelineRef.current;
-    console.log("autoplay: timeline gate", {
-      indices: tl.indices,
-      len: tl.fens.length,
-      latest: tl.fens.length - 1,
-    });
     if (tl.indices !== tl.fens.length - 1) {
-      console.log("autoplay: blocked by timeline not latest");
       return;
     }
     const game = new Chess(fenRef.current);
     if (game.turn() !== "b") {
-      console.log("autoplay: blocked by turn not black", { turn: game.turn() });
       return;
     }
 
     const can = takeAutoplayOnce(itemId);
-    console.log("autoplay: takeAutoplayOnce", { can });
     lastAutoplayedItemIdRef.current = itemId;
     lastSubmittedMoveUciRef.current = correctMoveUci;
     if (!can) return;
@@ -223,7 +196,7 @@ export const Training = () => {
         appendTimelineFen(game.fen());
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
     void submitMove(uci, fenRef.current);
   }, [
