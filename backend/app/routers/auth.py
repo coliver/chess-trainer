@@ -190,3 +190,8 @@ def refresh(req: RefreshRequest, db=Depends(get_db)):
         }
     except jwt.PyJWTError:
         raise HTTPException(status_code=401, detail="Invalid refresh token")
+
+
+@router.get("/me")
+def me(current_user=Depends(get_current_user)):
+    return {"id": current_user.id, "username": current_user.username}
