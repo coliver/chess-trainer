@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import api from "../api";
+import { login } from "../auth";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -19,11 +20,7 @@ export default function Login() {
     try {
       const { data } = await api.post("/auth/login", { username, password });
 
-      localStorage.setItem("token", data.access_token);
-      localStorage.setItem("refresh_token", data.refresh_token);
-      localStorage.setItem("user_id", String(data.id));
-      localStorage.setItem("username", data.username);
-      localStorage.setItem("email", data.email);
+      login(data);
 
       navigate("/dashboard");
     } catch (err: unknown) {

@@ -4,6 +4,7 @@ import { render, screen, cleanup, act } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import Header from "./Header";
 import api from "../api";
+import { login } from "../auth";
 
 const renderWithRouter = (ui: React.ReactElement) =>
   render(<MemoryRouter>{ui}</MemoryRouter>);
@@ -40,6 +41,29 @@ describe("Header auth UI", () => {
         })
       );
 
+      await new Promise<void>((r) => setTimeout(r, 0));
+    });
+
+    expect(screen.queryByText("Login")).not.toBeInTheDocument();
+    expect(screen.queryByText("Register")).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Profile")).toBeInTheDocument();
+  });
+
+  it("switches to profile on same-tab login (no native storage event fires)", async () => {
+    renderWithRouter(<Header />);
+
+    expect(screen.getByText("Login")).toBeInTheDocument();
+
+    // The browser never fires "storage" for changes made by the current
+    // document — this is what a real same-tab login looks like.
+    await act(async () => {
+      login({
+        access_token: "abc",
+        refresh_token: "def",
+        id: 1,
+        username: "Chris",
+        email: "chris@example.com",
+      });
       await new Promise<void>((r) => setTimeout(r, 0));
     });
 

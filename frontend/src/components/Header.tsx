@@ -5,7 +5,7 @@ import profileIcon from "../assets/profile.svg";
 import { KnightSchoolIcon } from "./KnightSchoolIcon";
 import { ThemeToggle } from "./ThemeToggle";
 import { useNavigate } from "react-router-dom";
-import { logout } from "../auth";
+import { logout, AUTH_CHANGED_EVENT } from "../auth";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -18,12 +18,17 @@ export default function Header() {
     const syncFromStorage = () =>
       setIsLoggedIn(!!localStorage.getItem("token"));
 
+    // "storage" only fires for other tabs/documents; AUTH_CHANGED_EVENT
+    // covers same-tab login/logout (see auth.ts).
     window.addEventListener("storage", syncFromStorage);
+    window.addEventListener(AUTH_CHANGED_EVENT, syncFromStorage);
 
-    // also sync immediately (covers same-tab login without relying on "storage" event)
     syncFromStorage();
 
-    return () => window.removeEventListener("storage", syncFromStorage);
+    return () => {
+      window.removeEventListener("storage", syncFromStorage);
+      window.removeEventListener(AUTH_CHANGED_EVENT, syncFromStorage);
+    };
   }, []);
 
   const onLogout = () => {
