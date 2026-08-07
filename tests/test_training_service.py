@@ -164,7 +164,9 @@ def test_submit_training_response_session_not_found():
 
 def test_submit_training_response_item_id_mismatch_returns_404(monkeypatch):
     session = SimpleNamespace(id=123, status="active", user_id=1)
-    requested_item = SimpleNamespace(id=1, session_id=123, fen="fen_requested", correct_move_uci="d2d4")
+    requested_item = SimpleNamespace(
+        id=1, session_id=123, fen="fen_requested", correct_move_uci="d2d4"
+    )
     current = SimpleNamespace(id=2, fen="fen_before", correct_move_uci="e2e4", session_id=123)
     all_items = [requested_item, current]
 
@@ -265,9 +267,9 @@ def test_submit_training_response_marks_session_completed_when_all_correct(monke
         scalars_all=all_items,
         training_item_count_side_effects=[len(all_items), len(all_items)],
         training_response_first_side_effects=[
-            None,        # existing response for current item (item1) -> add new
-            object(),    # all_responded check for item1 -> is not None
-            object(),    # all_responded check for item2 -> is not None
+            None,  # existing response for current item (item1) -> add new
+            object(),  # all_responded check for item1 -> is not None
+            object(),  # all_responded check for item2 -> is not None
         ],
     )
 
@@ -309,9 +311,7 @@ def test_submit_training_response_updates_existing_response_instead_of_creating(
 ):
     session = SimpleNamespace(id=123, status="active", user_id=1)
 
-    current = SimpleNamespace(
-        id=10, fen="fen_before", correct_move_uci="e2e4", session_id=123
-    )
+    current = SimpleNamespace(id=10, fen="fen_before", correct_move_uci="e2e4", session_id=123)
     all_items = [current]
 
     existing_response = SimpleNamespace(
@@ -369,6 +369,7 @@ def test_submit_training_response_updates_existing_response_instead_of_creating(
     assert existing_response.reason == "Wrong move"
     assert existing_response.fen_after is None
     assert session.status == "active"
+
 
 def test_submit_training_response_current_none_all_items_responded_returns_completed(
     monkeypatch,
