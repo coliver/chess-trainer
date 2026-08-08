@@ -1,0 +1,53 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+
+    # Same env the app/compose expect. DB_HOST is localhost here because the
+    # Postgres service is published on the runner, not on a compose network.
+    env:
+      DATABASE_URL: postgresql+psycopg://postgres:postgres@localhost:5432/chess
+      JWT_SECRET: ci-test-secret
+      JWT_ALGORITHM: HS256
+
+    services:
+      db:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: chess
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      # Install the exact pinned deps (psycopg v3 stays psycopg v3 — no drift).
+      - name: Install dependencies
+        run: pip install --no-cache-dir -r requirements.txt
+
+      # Build the schema; the test db fixture assumes tables already exist.
+      - name: Run migrations
+        run: PYTHONPATH=. alembic -c backend/app/migrations/alembic.ini upgrade head
+
+      - name: Run tests
+        run: PYTHONPATH=. pytest
