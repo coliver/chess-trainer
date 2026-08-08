@@ -25,7 +25,7 @@ frontend/
 │   ├── App.tsx                 # Routes: /login, /register, /dashboard, /training/:id, * -> Dashboard
 │   ├── main.tsx                # React root / entrypoint
 │   └── index.css / App.css     # Global styles
-├── public/                     # favicon.svg, icons.svg, quotes.txt (static assets)
+├── public/                     # favicon.svg, quotes.txt (static assets)
 ├── playwright-dashboard.spec.ts  # Playwright E2E spec
 ├── vite.config.ts               # Vite configuration
 ├── vitest.config.ts             # Vitest configuration (jsdom, MSW-backed unit tests)

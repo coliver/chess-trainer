@@ -33,13 +33,6 @@ vi.mock("react-router-dom", async () => {
   };
 });
 
-// SVG imports are used as URLs; mock them to simple strings
-vi.mock("../assets/classics.svg", () => ({ default: "classics.svg" }));
-vi.mock("../assets/up-right-arrow.svg", () => ({
-  default: "up-right-arrow.svg",
-}));
-vi.mock("../assets/target.svg", () => ({ default: "target.svg" }));
-vi.mock("../assets/branch.svg", () => ({ default: "branch.svg" }));
 
 // Mock KnightSchoolIcon (it’s a component import, not an svg URL)
 vi.mock("../components/KnightSchoolIcon", () => ({
