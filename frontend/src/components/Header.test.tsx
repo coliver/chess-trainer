@@ -97,9 +97,10 @@ describe("Header auth UI", () => {
     });
 
     const setSystemHour = (hour: number) => {
-      vi.setSystemTime(
-        new Date(`2026-01-01T${String(hour).padStart(2, "0")}:00:00Z`),
-      );
+      // Build the date from LOCAL components (not a UTC "Z" string) so it
+      // matches the component's use of Date#getHours(), which is local time.
+      // A UTC time would shift across greeting boundaries on non-UTC runners.
+      vi.setSystemTime(new Date(2026, 0, 1, hour, 0, 0));
     };
 
     it("shows morning greeting when hour < 12 and includes username", async () => {
