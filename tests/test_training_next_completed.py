@@ -1,19 +1,12 @@
-import os
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 from fastapi.testclient import TestClient
 
 
-def setup_db_sqlite(tmp_path):
-    db_file = tmp_path / "test.sqlite"
-    os.environ["DATABASE_URL"] = f"sqlite+pysqlite:///{db_file}"
-
-    from backend.app.modules.shared import db as shared_db
-
-    return shared_db
-
-
 def test_get_next_after_completion_does_not_fallback(tmp_path):
-    shared_db = setup_db_sqlite(tmp_path)
-
+    # Self-contained: isolated SQLite DB with the app's schema, and point the
+    # app's get_db at it, so the test needs no external Postgres / seeded user.
+    from backend.app.modules.shared.db import Base, get_db
     from backend.app.modules.training.models import (
         TrainingSession,
         TrainingItem,
@@ -21,11 +14,12 @@ def test_get_next_after_completion_does_not_fallback(tmp_path):
     )
     from backend.app.app import app
 
-    shared_db.Base.metadata.create_all(bind=shared_db.engine)
+    engine = create_engine(f"sqlite+pysqlite:///{tmp_path / 'test.sqlite'}")
+    Base.metadata.create_all(bind=engine)
+    db = sessionmaker(bind=engine)()
 
+    app.dependency_overrides[get_db] = lambda: db
     client = TestClient(app)
-
-    db = shared_db.SessionLocal()
     try:
         session = TrainingSession(status="active", user_id=1)
         db.add(session)
@@ -78,3 +72,4 @@ def test_get_next_after_completion_does_not_fallback(tmp_path):
         assert "item_id" not in data
     finally:
         db.close()
+        app.dependency_overrides.pop(get_db, None)

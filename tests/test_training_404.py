@@ -1,21 +1,11 @@
-import os
-
-
-def setup_db_sqlite(tmp_path):
-    # Must be set BEFORE importing anything that reads DATABASE_URL at import-time.
-    db_file = tmp_path / "test.sqlite"
-    os.environ["DATABASE_URL"] = f"sqlite+pysqlite:///{db_file}"
-
-    from backend.app.modules.shared import db as shared_db
-
-    return shared_db
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 
 def test_submit_response_non_current_item_id_returns_404(tmp_path):
-    shared_db = setup_db_sqlite(tmp_path)
-
-    # Imports after DATABASE_URL is set
-    from sqlalchemy.orm import Session
+    # Self-contained: build an isolated SQLite DB with the app's schema so the
+    # test needs no external Postgres and no pre-existing user row.
+    from backend.app.modules.shared.db import Base
     from backend.app.modules.training.models import (
         TrainingSession,
         TrainingItem,
@@ -23,10 +13,9 @@ def test_submit_response_non_current_item_id_returns_404(tmp_path):
     )
     from backend.app.modules.training.service import submit_training_response
 
-    # Create schema
-    shared_db.Base.metadata.create_all(bind=shared_db.engine)
-
-    db: Session = shared_db.SessionLocal()
+    engine = create_engine(f"sqlite+pysqlite:///{tmp_path / 'test.sqlite'}")
+    Base.metadata.create_all(bind=engine)
+    db = sessionmaker(bind=engine)()
     try:
         # Session + two items
         session = TrainingSession(status="active", user_id=1)

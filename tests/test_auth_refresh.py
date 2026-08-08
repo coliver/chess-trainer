@@ -1,7 +1,6 @@
 from fastapi.testclient import TestClient
 from backend.app.app import app
 from backend.app.routers.auth import create_refresh_token
-from backend.app.modules.users.models import User
 
 client = TestClient(app)
 
@@ -23,10 +22,10 @@ def test_login_returns_both_tokens(db, test_user):
     assert "refresh_token" in data
 
 
-def test_refresh_token_cannot_access_protected_route(db):
-    # 1. Create a refresh token manually
-    user = db.query(User).first()
-    refresh_token = create_refresh_token(user.id)
+def test_refresh_token_cannot_access_protected_route():
+    # A refresh token is rejected on type ("refresh" != "access") before any
+    # user lookup, so no user needs to exist for this test.
+    refresh_token = create_refresh_token(1)
 
     # 2. Try to use it as a Bearer token for the protected POST endpoint
     response = client.post(
@@ -39,9 +38,11 @@ def test_refresh_token_cannot_access_protected_route(db):
     assert response.json()["detail"] == "Invalid token"
 
 
-def test_refresh_endpoint_success(db):
-    user = db.query(User).first()
-    refresh_token = create_refresh_token(user.id)
+def test_refresh_endpoint_success(db, test_user):
+    # /auth/refresh validates that the user still exists and is active, so this
+    # test creates its own user (via the transactional fixture) rather than
+    # relying on any pre-existing row.
+    refresh_token = create_refresh_token(test_user.id)
 
     response = client.post("/auth/refresh", json={"refresh_token": refresh_token})
 
