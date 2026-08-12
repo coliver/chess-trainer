@@ -24,7 +24,7 @@ frontend/
 │   ├── RequireAuth.tsx         # Route guard: calls GET /auth/me, redirects to /login on failure
 │   ├── App.tsx                 # Routes: /login, /register, /dashboard, /training/:id, * -> Dashboard
 │   ├── main.tsx                # React root / entrypoint
-│   └── index.css / App.css     # Global styles
+│   └── index.css               # Global styles (imports src/styles/*.css)
 ├── public/                     # favicon.svg, quotes.txt (static assets)
 ├── playwright-dashboard.spec.ts  # Playwright E2E spec
 ├── vite.config.ts               # Vite configuration

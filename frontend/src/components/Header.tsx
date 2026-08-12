@@ -53,7 +53,7 @@ export default function Header() {
     <header className="site-header">
       <div className="site-header-inner">
         <div className="site-header-brand">
-          <KnightSchoolIcon height="64px" />
+          <KnightSchoolIcon height="64px" className="site-header-logo" />
           <Link to="/dashboard" className="site-header-title">
             Knight&nbsp;School
           </Link>

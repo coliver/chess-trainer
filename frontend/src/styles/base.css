@@ -73,6 +73,22 @@ h2 {
   }
 }
 
+@media (max-width: 600px) {
+  .page {
+    padding: 20px 14px 32px;
+  }
+
+  h1 {
+    font-size: 28px;
+    letter-spacing: -0.8px;
+    margin: 16px 0;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+}
+
 p {
   margin: 0;
 }
