@@ -149,6 +149,13 @@
   flex: 0 0 auto;
 }
 
+/* Scale the glyph to the box so it never overflows (e.g. 64px svg in 56px box) */
+.tile-icon-inline svg {
+  width: 94%;
+  height: 94%;
+  display: block;
+}
+
 /* space between title and subtitle when stacked */
 .tile-title {
   display: block;
@@ -248,6 +255,36 @@
   .tile-right {
     grid-column: 1 / span 2; /* was grid-column: 4 */
     grid-row: 4;
+  }
+}
+
+/* Phones: single-column stack */
+@media (max-width: 600px) {
+  .dashboard-layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: none; /* let tiles flow in source order */
+    gap: 12px;
+  }
+
+  /* Every tile spans the single column and stacks in order */
+  .tile-start,
+  .tile-1,
+  .tile-2,
+  .tile-3,
+  .tile-right {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .tile-icon-inline {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+  }
+
+  .dashboard-tile {
+    padding: 14px;
+    min-height: 0;
   }
 }
 
@@ -360,7 +397,14 @@
 .boardPreview {
   display: grid;
   place-items: center;
+  justify-content: center; /* center the track, not just items within it */
   margin: 0 auto;
+}
+
+/* Center the board element itself and cap it to the container at low widths */
+.boardPreview .react-chessboard {
+  margin: 0 auto;
+  max-width: 100%;
 }
 
 .boardPreview .react-chessboard svg {

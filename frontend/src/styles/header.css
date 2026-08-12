@@ -125,3 +125,45 @@
   display: flex;
   align-items: center;
 }
+
+/* ===== Phone layout ===== */
+@media (max-width: 600px) {
+  .site-header-inner {
+    flex-wrap: wrap;
+    gap: 10px 12px;
+    padding: 10px 14px;
+  }
+
+  .site-header-brand {
+    gap: 8px;
+  }
+
+  /* CSS height overrides the SVG's inline height attribute */
+  .site-header-logo {
+    height: 40px;
+  }
+
+  .site-header-title {
+    font-size: clamp(26px, 8vw, 40px);
+    letter-spacing: -0.2px;
+  }
+
+  .site-header-right {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .site-header-nav {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* Greeting is nice-to-have; drop it to reclaim width on phones */
+  .site-header-greeting {
+    display: none;
+  }
+
+  .site-header-link {
+    padding: 8px 10px;
+  }
+}
