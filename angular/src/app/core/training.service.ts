@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
+import { normalizeFen } from '@knight-school/chess-core';
 
 /** Shape of `GET /api/training-sessions/:id/next` (camelCase, see backend). */
 export interface NextItemResponse {
@@ -31,38 +32,20 @@ export interface TrainingItem {
   correctMoveUci: string;
 }
 
-const START_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
-
-function normalizeFen(raw: unknown): string {
-  if (raw == null) return START_FEN;
-  const s = String(raw).trim();
-  if (!s) return START_FEN;
-  const clean = s.split('|')[0].split(';')[0].trim();
-  return clean || START_FEN;
-}
-
 /**
  * Thin API layer for a training session — the Angular counterpart of the
  * request half of react's `useTrainingSession`. Session state (advance,
- * autoplay, feedback) is orchestrated by the Training page component.
+ * autoplay, feedback) is orchestrated by the Training page component. FEN
+ * helpers come from the shared @knight-school/chess-core package.
  */
 @Injectable({ providedIn: 'root' })
 export class TrainingService {
   private readonly http = inject(HttpClient);
 
   next(sessionId: string): Observable<TrainingItem> {
-    return new Observable<TrainingItem>((subscriber) => {
-      const sub = this.http
-        .get<NextItemResponse>(`/api/training-sessions/${sessionId}/next`)
-        .subscribe({
-          next: (data) => {
-            subscriber.next(this.toItem(data));
-            subscriber.complete();
-          },
-          error: (err) => subscriber.error(err),
-        });
-      return () => sub.unsubscribe();
-    });
+    return this.http
+      .get<NextItemResponse>(`/api/training-sessions/${sessionId}/next`)
+      .pipe(map((data) => this.toItem(data)));
   }
 
   submit(
@@ -81,15 +64,11 @@ export class TrainingService {
     const itemIdRaw = data.itemId ?? data.id;
     return {
       fen: normalizeFen(rawFen),
-      itemId:
-        itemIdRaw == null || itemIdRaw === '' ? null : String(itemIdRaw),
+      itemId: itemIdRaw == null || itemIdRaw === '' ? null : String(itemIdRaw),
       openingLabel: data.openingName
         ? `${data.openingEco ?? ''} ${data.openingName}`.trim()
         : 'Opening: (unknown)',
       correctMoveUci: data.correctMoveUci ?? '',
     };
   }
-
-  static readonly START_FEN = START_FEN;
-  static normalizeFen = normalizeFen;
 }

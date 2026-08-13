@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import {
+  START_FEN,
+  normalizeFen,
   applyMove,
   applyUci,
   legalMoves,
@@ -158,7 +160,7 @@ export class TrainingComponent implements OnInit, OnDestroy {
   private readonly training = inject(TrainingService);
 
   sessionId = '';
-  fen = TrainingService.START_FEN;
+  fen = START_FEN;
   itemId: string | null = null;
   correctMoveUci = '';
   openingLabel = '';
@@ -261,7 +263,7 @@ export class TrainingComponent implements OnInit, OnDestroy {
         if (data.correct) {
           this.feedback = '✅ Correct!';
           if (data.fenAfter) {
-            this.fen = TrainingService.normalizeFen(data.fenAfter);
+            this.fen = normalizeFen(data.fenAfter);
           }
           if (data.sessionCompleted) {
             this.feedback = '✅ Session completed.';
