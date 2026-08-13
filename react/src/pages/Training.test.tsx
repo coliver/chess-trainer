@@ -198,8 +198,8 @@ describe("Training Page", () => {
 
     it("submits move via text input", async () => {
       render(<Training />);
-      const input = screen.getByPlaceholderText("e.g. e2e4");
-      const submitBtn = screen.getByRole("button", { name: /submit/i });
+      const input = screen.getByPlaceholderText(/e2e4/);
+      const submitBtn = screen.getByRole("button", { name: /play/i });
 
       await user.type(input, "e2e4");
       await user.click(submitBtn);

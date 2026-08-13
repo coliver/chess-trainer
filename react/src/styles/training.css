@@ -1,83 +1,248 @@
-/* src/styles/training.css */
+/* src/styles/training.css — training screen: board + right rail */
+
+/* Semantic feedback colors (accent stays separate). */
+:root {
+  --good: #2f8f5b;
+  --good-bg: rgba(47, 143, 91, 0.12);
+  --bad: #c0453f;
+  --bad-bg: rgba(192, 69, 63, 0.12);
+  --hint-c: #b7791f;
+  --hint-bg: rgba(183, 121, 31, 0.14);
+}
+html[data-theme="dark"] {
+  --good: #4cc38a;
+  --good-bg: rgba(76, 195, 138, 0.15);
+  --bad: #e26d67;
+  --bad-bg: rgba(226, 109, 103, 0.15);
+  --hint-c: #e0b341;
+  --hint-bg: rgba(224, 179, 65, 0.15);
+}
+
+/* Two-pane layout */
+.train {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 22px;
+  align-items: start;
+  width: 100%;
+}
+.train-board-col {
+  min-width: 0;
+}
 .training-board-wrap {
   width: 100%;
-  margin: 0; /* dashboard tile controls centering */
-}
-
-.training-form {
-  width: 100%;
-}
-.training-form-wrap {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.training-form-actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-}
-
-.tile-start .training-start-body {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 12px;
-}
-
-.training-opening {
-  margin: 12px 0 0;
-  font-weight: 700;
-}
-
-.text-input {
-  padding: 10px 12px;
   border-radius: 10px;
+  overflow: hidden;
   border: 1px solid var(--border);
-  background: transparent;
+}
+.training-board-wrap .cm-chessboard {
+  width: 100%;
+  display: block;
+}
+
+/* Turn indicator under the board */
+.board-under {
+  margin-top: 12px;
+}
+.turn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13.5px;
+  font-weight: 600;
   color: var(--text);
-  min-width: 140px;
+}
+.turn-dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: #fff;
+}
+.turn.black .turn-dot {
+  background: #2c2c30;
 }
 
-.text-input::placeholder {
-  color: var(--muted, var(--text));
-  opacity: 0.8;
+/* Rail */
+.train-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.rail-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.rail-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 5px;
+}
+.rail-title h1 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  color: var(--text-h);
+  overflow-wrap: anywhere;
 }
 
-.btn-secondary {
-  background: transparent;
+/* Status banner */
+.train-status {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 13px 15px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+}
+.train-status-ic {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+  font-weight: 800;
+  flex: 0 0 auto;
+  color: #fff;
+  background: var(--accent);
+}
+.train-status-msg {
+  font-size: 14.5px;
+  font-weight: 650;
+  color: var(--text-h);
+  line-height: 1.25;
+}
+.train-status-sub {
+  font-size: 12.5px;
+  color: var(--text);
+}
+.train-status.your {
+  background: var(--accent-bg);
+  border-color: var(--accent-border);
+}
+.train-status.good {
+  background: var(--good-bg);
+  border-color: var(--good);
+}
+.train-status.good .train-status-ic {
+  background: var(--good);
+}
+.train-status.bad {
+  background: var(--bad-bg);
+  border-color: var(--bad);
+}
+.train-status.bad .train-status-ic {
+  background: var(--bad);
+}
+.train-status.hint {
+  background: var(--hint-bg);
+  border-color: var(--hint-c);
+}
+.train-status.hint .train-status-ic {
+  background: var(--hint-c);
+}
+.train-status.done {
+  background: var(--good-bg);
+  border-color: var(--good);
+}
+.train-status.done .train-status-ic {
+  background: var(--good);
+}
+
+/* Controls */
+.train-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.train-stepper {
+  display: flex;
+  gap: 8px;
+}
+.train-controls .btn {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 650;
+  padding: 10px 14px;
+  border-radius: 11px;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
   color: var(--text-h);
 }
-
-.btn:disabled,
-.btn-secondary:disabled {
-  opacity: 0.6;
+.train-controls .btn:hover {
+  border-color: var(--accent-border);
+}
+.train-stepper .btn {
+  flex: 1;
+}
+.train-controls .btn.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.train-controls .btn.primary:hover {
+  filter: brightness(1.06);
+}
+.train-controls .btn.hint {
+  border-color: var(--hint-c);
+  color: var(--hint-c);
+  background: var(--hint-bg);
+}
+.train-controls .btn:disabled {
+  opacity: 0.5;
   cursor: not-allowed;
 }
-
-.training-feedback {
-  margin-top: 10px;
-  font-weight: 700;
+.train-type-move {
+  display: flex;
+  gap: 8px;
 }
-
-.training-p {
-  margin-top: 8px;
-}
-
-.opening-label {
-  margin: 0 0 16px;
-  font-size: 24px;
-  line-height: 1.15;
-  letter-spacing: -0.24px;
+.text-input {
+  flex: 1;
+  height: 42px;
+  padding: 0 13px;
+  border-radius: 11px;
+  border: 1px solid var(--border);
+  background: var(--bg);
   color: var(--text-h);
-  font-family: var(--heading);
-  font-weight: 650;
+  font: inherit;
+  font-size: 14px;
+  outline: none;
+}
+.text-input::placeholder {
+  color: var(--text);
+  opacity: 0.8;
+}
+.text-input:focus-visible {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
 
-  overflow-wrap: anywhere;
-  max-width: 100%;
+.train-exit {
+  background: none;
+  border: 0;
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 0;
+  text-align: left;
+}
+.train-exit:hover {
+  color: var(--accent);
+}
+
+/* Mobile: board on top, rail below */
+@media (max-width: 900px) {
+  .train {
+    grid-template-columns: 1fr;
+  }
 }
