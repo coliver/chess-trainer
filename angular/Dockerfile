@@ -1,6 +1,13 @@
 FROM node:20
 
 WORKDIR /app
+
+# Build the shared chess-core package first (its own isolated install + build).
+# Angular depends on it via file:../packages/chess-core, resolved from /app to
+# /packages/chess-core.
+COPY packages/chess-core /packages/chess-core
+RUN cd /packages/chess-core && npm ci && npm run build
+
 COPY angular/package*.json ./
 RUN npm ci
 
