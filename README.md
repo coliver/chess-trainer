@@ -6,7 +6,7 @@
 
 A web-based chess openings trainer designed to drill specific lines and track performance metrics.
 
-This is a work in progress.
+This is a work in progress — see the [Roadmap](./ROADMAP.md) for planned work.
 
 <details>
   <summary>Light mode</summary>
