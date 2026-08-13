@@ -1,3 +1,7 @@
+/* cm-chessboard board + markers (used by BoardComponent). @import must lead. */
+@import 'cm-chessboard/assets/chessboard.css';
+@import 'cm-chessboard/assets/extensions/markers/markers.css';
+
 :root {
   --bg: #f7f7f8;
   --surface: #ffffff;
@@ -55,4 +59,17 @@ body {
 .btn:disabled {
   opacity: 0.6;
   cursor: default;
+}
+
+/* Board host + custom cm-chessboard markers (hint / correct-move blink). */
+.board-host {
+  width: 100%;
+}
+.cm-chessboard .markers .marker.marker-square-hint {
+  fill: gold;
+  opacity: 0.4;
+}
+.cm-chessboard .markers .marker.marker-square-blink {
+  fill: rgb(0, 200, 0);
+  opacity: 0.45;
 }
