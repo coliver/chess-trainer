@@ -3,8 +3,7 @@ import { useCallback, useEffect, useRef, useState, useMemo } from "react";
 import api from "../api";
 import { Chess } from "chess.js";
 import { AxiosError } from "axios";
-
-const START_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+import { START_FEN, normalizeFen } from "../core/fen";
 
 export type NextItem = {
   nextFen: string;
@@ -12,15 +11,6 @@ export type NextItem = {
   nextOpeningLabel: string;
   nextCorrectMoveUci: string;
 };
-
-function normalizeFen(raw: unknown) {
-  if (raw == null) return START_FEN;
-  const s = String(raw).trim();
-  if (!s) return START_FEN;
-
-  const clean = s.split("|")[0].split(";")[0].trim();
-  return clean || START_FEN;
-}
 
 type TrainingSessionDeps = {
   setTimeoutFn?: typeof window.setTimeout;

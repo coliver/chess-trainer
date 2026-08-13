@@ -1,33 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Chess } from "chess.js";
 import Board from "../Board";
+import { uciToMove, uciListToMoves } from "../../core/moves";
 import type { Opening } from "../../pages/Dashboard";
-
-function uciToMove(
-  uci: string,
-): { from: string; to: string; promotion?: string } | null {
-  const u = uci.trim();
-  if (!u || u.length < 4) return null;
-
-  const from = u.slice(0, 2);
-  const to = u.slice(2, 4);
-
-  // promotion like e7e8q
-  if (u.length === 5) {
-    const promotionChar = u[4].toLowerCase();
-    if (!["q", "r", "b", "n"].includes(promotionChar)) return null;
-    return { from, to, promotion: promotionChar };
-  }
-
-  if (u.length === 4) return { from, to };
-  return null;
-}
-
-function uciListToMoves(uciMoves?: string | null): string[] {
-  if (!uciMoves) return [];
-  const arr = uciMoves.trim().split(/\s+/).filter(Boolean);
-  return arr;
-}
 
 export default function BoardPreview({
   openings,
