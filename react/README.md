@@ -7,13 +7,14 @@ The frontend for chess-trainer is a TypeScript + React application providing an 
 ## 📸 Screenshots
 
 <details>
-<summary>Show dashboard screenshots — light &amp; dark</summary>
+<summary>Show dashboard screenshot</summary>
 
-| Light | Dark |
-| --- | --- |
-| ![Dashboard — light](dashboard-light-1440.png) | ![Dashboard — dark](dashboard-dark-1440.png) |
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="dashboard-dark-1440.png">
+  <img alt="Knight School dashboard" src="dashboard-light-1440.png">
+</picture>
 
-<sub>Desktop (1440px). Rendered by <code>playwright-dashboard.spec.ts</code>, which also captures the training page and tablet/mobile variants locally; regenerate with <code>npm run test:playwright</code>.</sub>
+<sub>Desktop (1440px); follows your GitHub light/dark theme. Rendered by <code>playwright-dashboard.spec.ts</code>, which also captures the training page and tablet/mobile variants locally; regenerate with <code>npm run test:playwright</code>.</sub>
 
 </details>
 
