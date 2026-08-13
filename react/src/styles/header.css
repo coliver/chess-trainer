@@ -31,7 +31,14 @@
 }
 
 .site-header-greeting {
+  display: none;
   font-size: 0.7rem;
+}
+
+@media (min-width: 1200px) {
+  .site-header-greeting {
+    display: block;
+  }
 }
 
 .site-header-nav {
@@ -63,7 +70,10 @@
   border-radius: 12px;
   border: 1px solid transparent;
   background: var(--social-bg);
+  color: var(--text-h);
+  cursor: pointer;
   transition: border-color 0.2s, transform 0.05s;
+  padding: 0;
 }
 
 .site-header-profile-link:hover {
@@ -165,5 +175,15 @@
 
   .site-header-link {
     padding: 8px 10px;
+  }
+
+  .site-header-profile-link {
+    width: 36px;
+    height: 36px;
+  }
+
+  .theme-toggle-btn {
+    width: 36px;
+    height: 36px;
   }
 }

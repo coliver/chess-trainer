@@ -1,7 +1,6 @@
 // frontend/src/components/Header.tsx
 import { useEffect, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
-import profileIcon from "../assets/profile.svg";
 import { KnightSchoolIcon } from "./KnightSchoolIcon";
 import { ThemeToggle } from "./ThemeToggle";
 import { useNavigate } from "react-router-dom";
@@ -75,22 +74,34 @@ export default function Header() {
                 </Link>
               </>
             ) : (
-              <>
-                <Link
-                  to="/profile"
-                  className="site-header-profile-link"
-                  aria-label="Profile"
+              <button
+                className="site-header-profile-link"
+                onClick={onLogout}
+                aria-label="Logout"
+                title="Logout"
+              >
+                <svg
+                  width={22}
+                  height={22}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
                 >
-                  <img src={profileIcon} alt="" width={28} height={28} />
-                </Link>
-                <button className="site-header-profile-link" onClick={onLogout}>Logout</button>
-              </>
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                  <polyline points="16 17 21 12 16 7" />
+                  <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+              </button>
             )}
 
             <div className="site-header-actions">
               <a
                 href="https://github.com/coliver/chess-trainer"
-                className="site-header-link"
+                className="site-header-profile-link"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="View source on GitHub"
