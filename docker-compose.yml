@@ -44,6 +44,19 @@ services:
       - api
     restart: unless-stopped
 
+  angular:
+    build:
+      context: .
+      dockerfile: angular/Dockerfile
+    volumes:
+      - ./angular:/app             # Syncs the code
+      - /app/node_modules          # Keeps container modules separate
+    expose:
+      - "4200"
+    depends_on:
+      - api
+    restart: unless-stopped
+
   nginx:
     image: nginx:1.27
     depends_on:
