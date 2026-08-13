@@ -5,52 +5,38 @@ import userEvent from "@testing-library/user-event";
 import { Training } from "./Training";
 import { useTrainingSession } from "../hooks/useTrainingSession";
 import { useBlinkGreen } from "../hooks/useBlinkGreen";
-import { Chess } from "chess.js";
 import "@testing-library/jest-dom";
 import type { BoardProps } from "../components/Board";
 
 vi.mock("../hooks/useTrainingSession");
 vi.mock("../hooks/useBlinkGreen");
 
+// The chess logic now lives in @knight-school/chess-core (its own package, its
+// own tests against real chess.js). Here we mock that boundary so the Training
+// tests exercise the component's wiring, not chess rules.
+const {
+  applyMoveMock,
+  applyUciMock,
+  legalMovesMock,
+  pieceColorAtMock,
+  sideToMoveMock,
+} = vi.hoisted(() => ({
+  applyMoveMock: vi.fn(),
+  applyUciMock: vi.fn(),
+  legalMovesMock: vi.fn(),
+  pieceColorAtMock: vi.fn(),
+  sideToMoveMock: vi.fn(),
+}));
+
+vi.mock("@knight-school/chess-core", () => ({
+  applyMove: applyMoveMock,
+  applyUci: applyUciMock,
+  legalMoves: legalMovesMock,
+  pieceColorAt: pieceColorAtMock,
+  sideToMove: sideToMoveMock,
+}));
+
 let capturedProps: BoardProps;
-const moveMock = vi.fn();
-const fenMock = vi.fn();
-const turnMock = vi.fn();
-
-type MoveResult = { to: string };
-
-type ChessInstance = {
-  move: (...args: unknown[]) => { promotion?: string | null } | null;
-  fen: (...args: unknown[]) => string;
-  turn: () => string;
-  get: (square: string) => { color: "w" | "b" } | null;
-  moves: (args: { square: string; verbose: true }) => MoveResult[];
-};
-
-vi.mock("chess.js", () => {
-  const ChessMockCtor = vi.fn().mockImplementation(function ChessCtor(
-    this: ChessInstance,
-  ) {
-    this.move = moveMock as ChessInstance["move"];
-    this.fen = fenMock as ChessInstance["fen"];
-    this.turn = turnMock as ChessInstance["turn"];
-
-    this.get = vi.fn().mockReturnValue({ color: "w" });
-
-    this.moves = vi
-      .fn()
-      .mockImplementation(({ square }: { square: string; verbose: true }) => {
-        if (square === "e2") return [{ to: "e4" }];
-        return [];
-      });
-  });
-
-  return {
-    __esModule: true,
-    Chess: ChessMockCtor,
-    default: { Chess: ChessMockCtor },
-  };
-});
 
 // The Board wrapper (cm-chessboard) is replaced with a prop-capturing stub.
 // Both drag and click reach the app through `onMove`, so tests drive that.
@@ -114,10 +100,22 @@ describe("Training Page", () => {
 
     useTrainingSession.mockReturnValue(baseHookValue);
 
-    moveMock.mockReset();
-    moveMock.mockReturnValue({ promotion: "q" });
-    fenMock.mockReturnValue("after-fen");
-    turnMock.mockReturnValue("w");
+    // Defaults: white to move; a legal move producing "<from><to>q"; a white
+    // piece anywhere; e2 has one legal target.
+    sideToMoveMock.mockReset().mockReturnValue("w");
+    applyMoveMock
+      .mockReset()
+      .mockImplementation((_fen: string, from: string, to: string) => ({
+        nextFen: "after-fen",
+        uci: `${from}${to}q`,
+      }));
+    applyUciMock.mockReset().mockReturnValue({ nextFen: "after-fen" });
+    legalMovesMock
+      .mockReset()
+      .mockImplementation((_fen: string, square: string) =>
+        square === "e2" ? [{ to: "e4", promotion: undefined }] : [],
+      );
+    pieceColorAtMock.mockReset().mockReturnValue("w");
   });
 
   afterEach(() => {
@@ -155,7 +153,6 @@ describe("Training Page", () => {
 
   describe("Move Interactions", () => {
     it("submits move via onMove (drag or click)", async () => {
-      moveMock.mockReturnValue({ promotion: "q" });
       render(<Training />);
       await waitFor(() => expect(capturedProps).toBeDefined());
 
@@ -166,8 +163,8 @@ describe("Training Page", () => {
       expect(mockSubmitMove).toHaveBeenCalledWith("e2e4q", "start-fen");
     });
 
-    it("sets local illegal-move feedback when chess.js returns null", async () => {
-      moveMock.mockReturnValue(null);
+    it("sets local illegal-move feedback when the move is rejected", async () => {
+      applyMoveMock.mockReturnValueOnce(null);
       render(<Training />);
       await waitFor(() => expect(capturedProps).toBeDefined());
 
@@ -180,13 +177,12 @@ describe("Training Page", () => {
       expect(await screen.findByText(/illegal move/i)).toBeTruthy();
     });
 
-    it("handles specific promotion characters from correctMoveUci", async () => {
+    it("submits the promotion uci returned by applyMove", async () => {
       useTrainingSession.mockReturnValue({
         ...baseHookValue,
         correctMoveUci: "a7a8n",
       });
-
-      moveMock.mockReturnValue({ promotion: "n" });
+      applyMoveMock.mockReturnValueOnce({ nextFen: "after-fen", uci: "a7a8n" });
 
       render(<Training />);
       await waitFor(() => expect(capturedProps).not.toBeUndefined());
@@ -214,7 +210,7 @@ describe("Training Page", () => {
 
   describe("Autoplay Logic", () => {
     it("automatically submits the correct move when it is black's turn", async () => {
-      turnMock.mockReturnValue("b");
+      sideToMoveMock.mockReturnValue("b");
       mockTakeAutoplayOnce.mockReturnValue(true);
       render(<Training />);
       await waitFor(() => {
@@ -223,7 +219,7 @@ describe("Training Page", () => {
     });
 
     it("does not autoplay if isSubmitting is true", async () => {
-      turnMock.mockReturnValue("b");
+      sideToMoveMock.mockReturnValue("b");
       mockTakeAutoplayOnce.mockReturnValue(true);
 
       useTrainingSession.mockReturnValue({
@@ -238,21 +234,6 @@ describe("Training Page", () => {
 
   describe("Piece pickup rules (onMoveStart)", () => {
     it("allows picking up a white piece and submits the move", async () => {
-      Chess.mockImplementation(function () {
-        this.turn = () => "w";
-        this.move = moveMock;
-        this.fen = fenMock;
-        this.get = vi.fn().mockImplementation((sq: string) => {
-          if (sq === "e2") return { color: "w" };
-          return null;
-        });
-        this.moves = vi
-          .fn()
-          .mockImplementation(({ square }: { square: string }) =>
-            square === "e2" ? [{ to: "e4" }] : [],
-          );
-      });
-
       render(<Training />);
       await waitFor(() => expect(capturedProps).toBeDefined());
 
@@ -266,14 +247,9 @@ describe("Training Page", () => {
     });
 
     it("blocks picking up black pieces or empty squares", async () => {
-      Chess.mockImplementation(function () {
-        this.turn = () => "w";
-        this.get = vi.fn().mockImplementation((sq: string) => {
-          if (sq === "e5") return { color: "b" };
-          return null;
-        });
-        this.moves = vi.fn().mockReturnValue([]);
-      });
+      pieceColorAtMock.mockImplementation((_fen: string, sq: string) =>
+        sq === "e5" ? "b" : null,
+      );
 
       render(<Training />);
       await waitFor(() => expect(capturedProps).toBeDefined());
@@ -283,16 +259,6 @@ describe("Training Page", () => {
     });
 
     it("exposes legal targets for the picked-up piece", async () => {
-      Chess.mockImplementation(function () {
-        this.turn = () => "w";
-        this.get = vi.fn().mockReturnValue({ color: "w" });
-        this.moves = vi
-          .fn()
-          .mockImplementation(({ square }: { square: string }) =>
-            square === "e2" ? [{ to: "e4" }] : [],
-          );
-      });
-
       render(<Training />);
       await waitFor(() => expect(capturedProps).toBeDefined());
 

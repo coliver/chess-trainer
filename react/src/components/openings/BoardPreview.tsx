@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Board from "../Board";
-import { uciListToMoves } from "../../core/moves";
-import { previewFen } from "../../core/preview";
+import { uciListToMoves, previewFen } from "@knight-school/chess-core";
 import type { Opening } from "../../pages/Dashboard";
 
 export default function BoardPreview({

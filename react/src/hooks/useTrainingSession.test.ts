@@ -5,7 +5,6 @@ import { waitFor } from "@testing-library/react";
 import { http, HttpResponse } from "msw";
 import { server } from "../tests/msw/server";
 import { useTrainingSession } from "./useTrainingSession";
-import { Chess } from "chess.js";
 
 describe("useTrainingSession", () => {
   const id = "1";
@@ -61,12 +60,6 @@ describe("useTrainingSession", () => {
   it("submitMove correct: advance path shows 'Opening complete.' when nextItemId equals prev itemId", async () => {
     vi.useFakeTimers();
 
-    type Turn = "w" | "b";
-
-    vi.spyOn(
-      Chess.prototype as unknown as { turn: () => Turn },
-      "turn",
-    ).mockReturnValue("b");
     const prevItemId = 10; // must match what the first GET /next returns
     const prevFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
     const nextFen =

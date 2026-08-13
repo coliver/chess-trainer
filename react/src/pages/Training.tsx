@@ -7,8 +7,13 @@ import React, {
 } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Board, { type BoardMarker } from "../components/Board";
-import { sideToMove } from "../core/fen";
-import { applyMove, applyUci, legalMoves, pieceColorAt } from "../core/moves";
+import {
+  sideToMove,
+  applyMove,
+  applyUci,
+  legalMoves,
+  pieceColorAt,
+} from "@knight-school/chess-core";
 import FenTurnBadge from "../components/FenTurnBadge";
 import { useBlinkGreen } from "../hooks/useBlinkGreen";
 import { useTrainingSession } from "../hooks/useTrainingSession";
