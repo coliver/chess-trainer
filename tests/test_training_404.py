@@ -7,9 +7,9 @@ def test_submit_response_non_current_item_id_returns_404(tmp_path):
     # test needs no external Postgres and no pre-existing user row.
     from backend.app.modules.shared.db import Base
     from backend.app.modules.training.models import (
-        TrainingSession,
         TrainingItem,
         TrainingResponse,
+        TrainingSession,
     )
     from backend.app.modules.training.service import submit_training_response
 

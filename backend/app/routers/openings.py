@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
 from sqlalchemy import select
+from sqlalchemy.orm import Session
 
-from backend.app.modules.shared.db import get_db
 from backend.app.modules.openings.models import Opening
+from backend.app.modules.shared.db import get_db
 
 router = APIRouter(prefix="", tags=["openings"])
 

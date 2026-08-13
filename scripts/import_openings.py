@@ -1,13 +1,14 @@
 from __future__ import annotations
-import re
+
 import csv
+import io
 import os
+import re
 import urllib.request
 from pathlib import Path
-import io
+
 import chess
 import chess.pgn
-
 from psycopg import connect
 from psycopg.rows import dict_row
 

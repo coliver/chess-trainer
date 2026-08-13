@@ -1,18 +1,18 @@
+from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from fastapi.testclient import TestClient
 
 
 def test_get_next_after_completion_does_not_fallback(tmp_path):
     # Self-contained: isolated SQLite DB with the app's schema, and point the
     # app's get_db at it, so the test needs no external Postgres / seeded user.
+    from backend.app.app import app
     from backend.app.modules.shared.db import Base, get_db
     from backend.app.modules.training.models import (
-        TrainingSession,
         TrainingItem,
         TrainingResponse,
+        TrainingSession,
     )
-    from backend.app.app import app
 
     engine = create_engine(f"sqlite+pysqlite:///{tmp_path / 'test.sqlite'}")
     Base.metadata.create_all(bind=engine)

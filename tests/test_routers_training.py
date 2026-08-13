@@ -3,11 +3,11 @@ from types import SimpleNamespace
 
 import pytest
 from fastapi.testclient import TestClient
-from backend.app.routers.auth import get_current_user
-from backend.app.app import app
-from backend.app.modules.shared.db import get_db
 
 import backend.app.routers.training as training_router
+from backend.app.app import app
+from backend.app.modules.shared.db import get_db
+from backend.app.routers.auth import get_current_user
 
 
 @pytest.fixture

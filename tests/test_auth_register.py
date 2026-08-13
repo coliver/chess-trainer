@@ -1,21 +1,21 @@
 # tests/test_auth_router.py
 import operator
-import pytest
 import os
-import jwt
-from fastapi import HTTPException
-from backend.app.routers.auth import _jwt_secret
 
-from backend.app.routers.auth import (
-    register,
-    login,
-    get_current_user,
-    RegisterRequest,
-    LoginRequest,
-    hash_password,
-)
+import jwt
+import pytest
+from fastapi import HTTPException
 
 from backend.app.modules.users.models import User
+from backend.app.routers.auth import (
+    LoginRequest,
+    RegisterRequest,
+    _jwt_secret,
+    get_current_user,
+    hash_password,
+    login,
+    register,
+)
 
 
 class FakeQuery:
@@ -25,7 +25,7 @@ class FakeQuery:
 
     def _build_pred(self, clause):
         # OR/AND groups
-        if hasattr(clause, "clauses") and isinstance(getattr(clause, "clauses"), (list, tuple)):
+        if hasattr(clause, "clauses") and isinstance(clause.clauses, (list, tuple)):
             sub_preds = [self._build_pred(c) for c in clause.clauses]
             op = getattr(clause, "operator", None)
             op_s = str(op)

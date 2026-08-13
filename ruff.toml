@@ -1,4 +1,9 @@
 line-length = 100
 
 [lint]
-ignore = ["E402"]
+ignore = ["E402", "EXE002"]
+
+[lint.flake8-bugbear]
+# FastAPI dependency-injection defaults — Depends(...) in argument defaults is
+# the idiomatic pattern, not a mutable-default bug, so exempt it from B008.
+extend-immutable-calls = ["fastapi.Depends"]
