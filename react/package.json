@@ -9,15 +9,15 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest",
-    "test:playwright":  "playwright test playwright-dashboard.spec.ts",
+    "test:playwright": "playwright test playwright-dashboard.spec.ts",
     "test:watch": "vitest --watch",
     "purgecss": "purgecss --config purgecss.config.cjs"
   },
   "dependencies": {
     "axios": "^1.18.1",
     "chess.js": "^1.4.0",
+    "cm-chessboard": "^8.12.19",
     "react": "^19.2.7",
-    "react-chessboard": "^5.10.0",
     "react-dom": "^19.2.7",
     "react-router": "^8.3.0",
     "react-router-dom": "^7.18.2"

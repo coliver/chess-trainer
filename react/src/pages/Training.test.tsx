@@ -7,15 +7,12 @@ import { useTrainingSession } from "../hooks/useTrainingSession";
 import { useBlinkGreen } from "../hooks/useBlinkGreen";
 import { Chess } from "chess.js";
 import "@testing-library/jest-dom";
-import type { ChessboardOptions } from "react-chessboard";
-
-import type { PieceDropHandlerArgs } from "react-chessboard";
-import type { ComponentProps } from "react";
+import type { BoardProps } from "../components/Board";
 
 vi.mock("../hooks/useTrainingSession");
 vi.mock("../hooks/useBlinkGreen");
 
-let capturedOptions: ChessboardOptions;
+let capturedProps: BoardProps;
 const moveMock = vi.fn();
 const fenMock = vi.fn();
 const turnMock = vi.fn();
@@ -55,10 +52,12 @@ vi.mock("chess.js", () => {
   };
 });
 
-vi.mock("react-chessboard", () => ({
-  Chessboard: (props: { options: ChessboardOptions }) => {
-    capturedOptions = props.options;
-    return <div data-testid="chessboard" />;
+// The Board wrapper (cm-chessboard) is replaced with a prop-capturing stub.
+// Both drag and click reach the app through `onMove`, so tests drive that.
+vi.mock("../components/Board", () => ({
+  default: (props: BoardProps) => {
+    capturedProps = props;
+    return <div data-testid="board" />;
   },
 }));
 
@@ -71,11 +70,6 @@ vi.mock("react-router-dom", () => ({
   useNavigate: () => vi.fn(),
 }));
 
-vi.mock("../components/StartNewTrainingButton", () => ({
-  StartNewTrainingButton: (
-    p: ComponentProps<typeof StartNewTrainingButton>,
-  ) => <button {...p} />,
-}));
 type FenTurnBadgeProps = { fen: string };
 
 vi.mock("../components/FenTurnBadge", () => ({
@@ -83,6 +77,11 @@ vi.mock("../components/FenTurnBadge", () => ({
     <div data-testid="fen-badge">{fen}</div>
   ),
 }));
+
+const hasMarker = (square: string, type: "hint" | "blink") =>
+  (capturedProps.markers ?? []).some(
+    (m) => m.square === square && m.type === type,
+  );
 
 describe("Training Page", () => {
   let user: ReturnType<typeof userEvent.setup>;
@@ -106,11 +105,11 @@ describe("Training Page", () => {
   beforeEach(() => {
     user = userEvent.setup();
     vi.clearAllMocks();
-    capturedOptions = undefined;
+    capturedProps = undefined as unknown as BoardProps;
 
     useBlinkGreen.mockReturnValue({
       blinkGreen: vi.fn(),
-      squareStyles: {},
+      blinkSquare: null,
     });
 
     useTrainingSession.mockReturnValue(baseHookValue);
@@ -129,7 +128,7 @@ describe("Training Page", () => {
     const mockBlinkGreen = vi.fn();
     useBlinkGreen.mockReturnValue({
       blinkGreen: mockBlinkGreen,
-      squareStyles: {},
+      blinkSquare: null,
     });
 
     useTrainingSession.mockReturnValue({
@@ -138,13 +137,10 @@ describe("Training Page", () => {
     });
 
     const { rerender } = render(<Training />);
-    await waitFor(() => expect(capturedOptions).toBeDefined());
+    await waitFor(() => expect(capturedProps).toBeDefined());
 
     act(() => {
-      (capturedOptions as ChessboardOptions).onPieceDrop({
-        sourceSquare: "e2",
-        targetSquare: "e4",
-      });
+      capturedProps.onMove?.("e2", "e4");
     });
 
     useTrainingSession.mockReturnValue({
@@ -158,21 +154,13 @@ describe("Training Page", () => {
   });
 
   describe("Move Interactions", () => {
-    it("submits move via drag and drop (onPieceDrop)", async () => {
+    it("submits move via onMove (drag or click)", async () => {
       moveMock.mockReturnValue({ promotion: "q" });
       render(<Training />);
-      await waitFor(() => expect(capturedOptions).toBeDefined());
+      await waitFor(() => expect(capturedProps).toBeDefined());
 
       act(() => {
-        (capturedOptions as ChessboardOptions).onPieceDrop({
-          sourceSquare: "e2",
-          targetSquare: "e4",
-          piece: {
-            isSparePiece: false,
-            position: "",
-            pieceType: "",
-          },
-        });
+        capturedProps.onMove?.("e2", "e4");
       });
 
       expect(mockSubmitMove).toHaveBeenCalledWith("e2e4q", "start-fen");
@@ -181,20 +169,14 @@ describe("Training Page", () => {
     it("sets local illegal-move feedback when chess.js returns null", async () => {
       moveMock.mockReturnValue(null);
       render(<Training />);
-      await waitFor(() => expect(capturedOptions).toBeDefined());
+      await waitFor(() => expect(capturedProps).toBeDefined());
 
+      let result: boolean | undefined;
       act(() => {
-        capturedOptions.onPieceDrop({
-          sourceSquare: "e2",
-          targetSquare: "e4",
-          piece: {
-            isSparePiece: false,
-            position: "",
-            pieceType: "",
-          },
-        } satisfies PieceDropHandlerArgs);
+        result = capturedProps.onMove?.("e2", "e4");
       });
 
+      expect(result).toBe(false);
       expect(await screen.findByText(/illegal move/i)).toBeTruthy();
     });
 
@@ -207,18 +189,10 @@ describe("Training Page", () => {
       moveMock.mockReturnValue({ promotion: "n" });
 
       render(<Training />);
-      await waitFor(() => expect(capturedOptions).not.toBeUndefined());
+      await waitFor(() => expect(capturedProps).not.toBeUndefined());
 
       act(() => {
-        capturedOptions.onPieceDrop({
-          sourceSquare: "a7",
-          targetSquare: "a8",
-          piece: {
-            isSparePiece: false,
-            position: "",
-            pieceType: "",
-          },
-        } satisfies PieceDropHandlerArgs);
+        capturedProps.onMove?.("a7", "a8");
       });
 
       await waitFor(() =>
@@ -262,8 +236,8 @@ describe("Training Page", () => {
     });
   });
 
-  describe("Click-to-Move Logic", () => {
-    it("selects a white piece on first click and submits on second click", async () => {
+  describe("Piece pickup rules (onMoveStart)", () => {
+    it("allows picking up a white piece and submits the move", async () => {
       Chess.mockImplementation(function () {
         this.turn = () => "w";
         this.move = moveMock;
@@ -272,122 +246,91 @@ describe("Training Page", () => {
           if (sq === "e2") return { color: "w" };
           return null;
         });
-
         this.moves = vi
           .fn()
-          .mockImplementation(
-            ({ square }: { square: string; verbose?: boolean }) => {
-              // after selecting e2, allow e4 as a legal target
-              if (square === "e2") return [{ to: "e4" }];
-              return [];
-            },
+          .mockImplementation(({ square }: { square: string }) =>
+            square === "e2" ? [{ to: "e4" }] : [],
           );
       });
 
       render(<Training />);
-      await waitFor(() => expect(capturedOptions).toBeDefined());
+      await waitFor(() => expect(capturedProps).toBeDefined());
+
+      expect(capturedProps.onMoveStart?.("e2")).toBe(true);
 
       act(() => {
-        capturedOptions.onSquareClick({ square: "e2" });
-      });
-
-      act(() => {
-        capturedOptions.onSquareClick({ square: "e4" });
+        capturedProps.onMove?.("e2", "e4");
       });
 
       expect(mockSubmitMove).toHaveBeenCalledWith("e2e4q", "start-fen");
     });
 
-    it("deselects the piece if the same square is clicked twice", async () => {
-      Chess.mockImplementation(function () {
-        this.turn = () => "w";
-        this.get = vi.fn().mockReturnValue({ color: "w" });
-
-        this.moves = vi
-          .fn()
-          .mockImplementation(
-            ({ square }: { square: string; verbose?: boolean }) => {
-              if (square === "e2") return [{ to: "e4" }];
-              return [];
-            },
-          );
-      });
-
-      render(<Training />);
-      await waitFor(() => expect(capturedOptions).toBeDefined());
-
-      act(() => {
-        capturedOptions.onSquareClick({ square: "e2" });
-      });
-      act(() => {
-        capturedOptions.onSquareClick({ square: "e2" });
-      });
-
-      act(() => {
-        capturedOptions.onSquareClick({ square: "e4" });
-      });
-
-      expect(mockSubmitMove).not.toHaveBeenCalled();
-    });
-
-    it("ignores clicks on black pieces or empty squares for the first selection", async () => {
+    it("blocks picking up black pieces or empty squares", async () => {
       Chess.mockImplementation(function () {
         this.turn = () => "w";
         this.get = vi.fn().mockImplementation((sq: string) => {
           if (sq === "e5") return { color: "b" };
           return null;
         });
+        this.moves = vi.fn().mockReturnValue([]);
       });
 
       render(<Training />);
-      await waitFor(() => expect(capturedOptions).toBeDefined());
+      await waitFor(() => expect(capturedProps).toBeDefined());
 
-      act(() => {
-        capturedOptions.onSquareClick({ square: "e5" });
-      });
-      act(() => {
-        capturedOptions.onSquareClick({ square: "a1" });
-      });
-      act(() => {
-        capturedOptions.onSquareClick({ square: "e4" });
+      expect(capturedProps.onMoveStart?.("e5")).toBe(false); // black piece
+      expect(capturedProps.onMoveStart?.("a1")).toBe(false); // empty square
+    });
+
+    it("exposes legal targets for the picked-up piece", async () => {
+      Chess.mockImplementation(function () {
+        this.turn = () => "w";
+        this.get = vi.fn().mockReturnValue({ color: "w" });
+        this.moves = vi
+          .fn()
+          .mockImplementation(({ square }: { square: string }) =>
+            square === "e2" ? [{ to: "e4" }] : [],
+          );
       });
 
-      expect(mockSubmitMove).not.toHaveBeenCalled();
+      render(<Training />);
+      await waitFor(() => expect(capturedProps).toBeDefined());
+
+      const targets = capturedProps.getLegalMoves?.("e2");
+      expect(targets).toEqual([{ to: "e4", promotion: undefined }]);
     });
   });
 
-  describe("Hint System (2 levels, no arrows)", () => {
-    it("shows only from-square on Hint and from+to on More Hint", async () => {
+  describe("Hint System (2 levels, markers)", () => {
+    it("marks only the from-square on Hint and from+to on More Hint", async () => {
       render(<Training />);
-      await waitFor(() => expect(capturedOptions).toBeDefined());
+      await waitFor(() => expect(capturedProps).toBeDefined());
 
-      expect(capturedOptions.squareStyles?.["e2"]).toBeUndefined();
-      expect(capturedOptions.squareStyles?.["e4"]).toBeUndefined();
+      expect(hasMarker("e2", "hint")).toBe(false);
+      expect(hasMarker("e4", "hint")).toBe(false);
 
       const hintBtn = screen.getByRole("button", { name: /hint/i });
       await user.click(hintBtn);
 
-      expect(capturedOptions.squareStyles["e2"]).toBeDefined();
-      expect(capturedOptions.squareStyles["e4"]).toBeUndefined();
+      expect(hasMarker("e2", "hint")).toBe(true);
+      expect(hasMarker("e4", "hint")).toBe(false);
 
       await user.click(hintBtn);
 
-      expect(capturedOptions.squareStyles["e2"]).toBeDefined();
-      expect(capturedOptions.squareStyles["e4"]).toBeDefined();
-
-      expect(capturedOptions.customArrows).toBeUndefined();
+      expect(hasMarker("e2", "hint")).toBe(true);
+      expect(hasMarker("e4", "hint")).toBe(true);
     });
   });
 
   it("resets hint level after feedback is '✅ Correct!'", async () => {
     const { rerender } = render(<Training />);
-    await waitFor(() => expect(capturedOptions).toBeDefined());
+    await waitFor(() => expect(capturedProps).toBeDefined());
 
     const hintBtn = screen.getByRole("button", { name: /hint/i });
     await user.click(hintBtn);
 
-    expect(capturedOptions.squareStyles["e2"]).toBeDefined();
-    expect(capturedOptions.squareStyles["e4"]).toBeUndefined();
+    expect(hasMarker("e2", "hint")).toBe(true);
+    expect(hasMarker("e4", "hint")).toBe(false);
 
     useTrainingSession.mockReturnValue({
       ...baseHookValue,
@@ -396,7 +339,7 @@ describe("Training Page", () => {
 
     rerender(<Training />);
 
-    expect(capturedOptions.squareStyles["e2"]).toBeUndefined();
-    expect(capturedOptions.squareStyles["e4"]).toBeUndefined();
+    expect(hasMarker("e2", "hint")).toBe(false);
+    expect(hasMarker("e4", "hint")).toBe(false);
   });
 });

@@ -401,16 +401,14 @@
   margin: 0 auto;
 }
 
-/* Center the board element itself and cap it to the container at low widths */
-.boardPreview .react-chessboard {
+/* Center the board and cap it to the container at low widths */
+.boardPreview-board {
   margin: 0 auto;
   max-width: 100%;
 }
 
-.boardPreview .react-chessboard svg {
+.boardPreview .cm-chessboard {
   width: 100%;
-  height: auto !important;
-  display: block;
 }
 
 .eco-select {

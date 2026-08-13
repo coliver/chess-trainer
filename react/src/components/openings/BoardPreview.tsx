@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Chess } from "chess.js";
-import { Chessboard, type ChessboardOptions } from "react-chessboard";
+import Board from "../Board";
 import type { Opening } from "../../pages/Dashboard";
 
 function uciToMove(
@@ -133,21 +133,18 @@ export default function BoardPreview({
     ).fen();
   }, [current.opening, current.moveList, selectedPly]);
 
-  const previewChessboardOptions: ChessboardOptions = {
-    position: previewFen,
-    boardStyle: {
-      width: `${sizePx}px`,
-      height: `${sizePx}px`,
-      maxWidth: "100%",
-    },
-    allowDragging: false,
-    allowDrawingArrows: false,
-    showNotation: false,
-  };
-
   return (
     <div className="boardPreview" ref={containerRef}>
-      <Chessboard options={previewChessboardOptions} />
+      <div
+        className="boardPreview-board"
+        style={{ width: `${sizePx}px`, maxWidth: "100%" }}
+      >
+        <Board
+          position={previewFen}
+          interactive={false}
+          showCoordinates={false}
+        />
+      </div>
 
       <div style={{ marginTop: 12, display: "flex", flexWrap: "wrap", gap: 8 }}>
         <button

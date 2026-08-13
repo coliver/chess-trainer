@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Generated Playwright screenshots
+/dashboard-*.png
+/training-*.png
