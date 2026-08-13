@@ -106,5 +106,10 @@ produces a report — no separate `--cov` invocation is needed:
 The generated `htmlcov/` report is served by nginx at `http://localhost/htmlcov/`.
 
 ## Development Tools
-- **Linting/Formatting:** `ruff` and `black`
+- **Linting/Formatting:** `ruff` + `black` (line-length 100), enforced in CI
+  (`.github/workflows/tests.yml`). Run locally in the API container:
+
+      docker compose exec api ruff check .
+      docker compose exec api black --check .
+
 - **ER Diagrams:** If the repo includes the `erd` service, it generates `schema.svg` under `backend/app/docs`.
