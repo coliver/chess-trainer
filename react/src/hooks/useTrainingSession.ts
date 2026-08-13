@@ -1,10 +1,8 @@
 //frontend/src/hooks/useTrainingSession.ts
-import { useCallback, useEffect, useRef, useState, useMemo } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import api from "../api";
-import { Chess } from "chess.js";
 import { AxiosError } from "axios";
-
-const START_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+import { START_FEN, normalizeFen } from "../core/fen";
 
 export type NextItem = {
   nextFen: string;
@@ -13,19 +11,9 @@ export type NextItem = {
   nextCorrectMoveUci: string;
 };
 
-function normalizeFen(raw: unknown) {
-  if (raw == null) return START_FEN;
-  const s = String(raw).trim();
-  if (!s) return START_FEN;
-
-  const clean = s.split("|")[0].split(";")[0].trim();
-  return clean || START_FEN;
-}
-
 type TrainingSessionDeps = {
   setTimeoutFn?: typeof window.setTimeout;
   clearTimeoutFn?: typeof window.clearTimeout;
-  chessFactory?: (fen: string) => { turn: () => string };
   timeoutMs?: number;
 };
 
@@ -36,10 +24,6 @@ export function useTrainingSession(
 ) {
   const setTimeoutFn = deps.setTimeoutFn ?? window.setTimeout;
   const clearTimeoutFn = deps.clearTimeoutFn ?? window.clearTimeout;
-  const chessFactory = useMemo(
-    () => deps.chessFactory ?? ((fen: string) => new Chess(fen)),
-    [deps.chessFactory],
-  );
   const timeoutMs = deps.timeoutMs ?? 500;
 
   const [itemId, setItemId] = useState<string | null>(null);
@@ -272,16 +256,6 @@ export function useTrainingSession(
   );
 
 
-  const shouldAutoplay = useCallback(() => {
-    const normalized = normalizeFen(fen);
-    try {
-      const game = chessFactory(normalized);
-      return game.turn() === "b";
-    } catch {
-      return false;
-    }
-  }, [fen, chessFactory]);
-
   const takeAutoplayOnce = useCallback((currentItemId: string | number) => {
     const key = String(currentItemId);
     if (autoPlayedItemIdRef.current === key) return false;
@@ -302,7 +276,6 @@ export function useTrainingSession(
     isSessionCompleted,
     normalizeFen,
     submitMove,
-    shouldAutoplay,
     takeAutoplayOnce,
     prevFenRef,
   };

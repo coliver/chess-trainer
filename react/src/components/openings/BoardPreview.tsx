@@ -1,33 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Chess } from "chess.js";
 import Board from "../Board";
+import { uciListToMoves } from "../../core/moves";
+import { previewFen } from "../../core/preview";
 import type { Opening } from "../../pages/Dashboard";
-
-function uciToMove(
-  uci: string,
-): { from: string; to: string; promotion?: string } | null {
-  const u = uci.trim();
-  if (!u || u.length < 4) return null;
-
-  const from = u.slice(0, 2);
-  const to = u.slice(2, 4);
-
-  // promotion like e7e8q
-  if (u.length === 5) {
-    const promotionChar = u[4].toLowerCase();
-    if (!["q", "r", "b", "n"].includes(promotionChar)) return null;
-    return { from, to, promotion: promotionChar };
-  }
-
-  if (u.length === 4) return { from, to };
-  return null;
-}
-
-function uciListToMoves(uciMoves?: string | null): string[] {
-  if (!uciMoves) return [];
-  const arr = uciMoves.trim().split(/\s+/).filter(Boolean);
-  return arr;
-}
 
 export default function BoardPreview({
   openings,
@@ -60,78 +35,21 @@ export default function BoardPreview({
     return () => ro.disconnect();
   }, []);
 
-  const current = useMemo(() => {
-    const opening = openings.find((o) => o.name === selectedOpeningName);
+  const opening = useMemo(
+    (): Opening | null =>
+      openings.find((o) => o.name === selectedOpeningName) ?? null,
+    [openings, selectedOpeningName],
+  );
 
-    const baseGame = new Chess();
+  const moveList = useMemo(
+    () => uciListToMoves(opening?.uci_moves),
+    [opening],
+  );
 
-    if (!opening) {
-      return {
-        opening: null as Opening | null,
-        moveList: [] as string[],
-        baseFen: baseGame.fen(),
-      };
-    }
-
-    if (opening.epd) {
-      baseGame.load(opening.epd.trim());
-    }
-
-    const moveList = uciListToMoves(opening.uci_moves);
-
-    return {
-      opening,
-      moveList,
-      baseFen: baseGame.fen(),
-    };
-  }, [openings, selectedOpeningName]);
-
-  const previewFen = useMemo(() => {
-    const opening = current.opening;
-    const moveList = current.moveList;
-
-    const applyMoves = (game: Chess) => {
-      const upto = Math.min(selectedPly, moveList.length);
-      let applied = 0;
-
-      for (let i = 0; i < upto; i++) {
-        const moveObj = uciToMove(moveList[i]);
-        if (!moveObj) break;
-
-        try {
-          const ok = game.move(moveObj);
-          if (!ok) break;
-          applied++;
-        } catch {
-          break;
-        }
-      }
-
-      return applied;
-    };
-
-    const gameFromEpd = new Chess();
-    if (opening?.epd) {
-      gameFromEpd.load(opening.epd.trim());
-    }
-    const appliedFromEpd = opening ? applyMoves(gameFromEpd) : 0;
-
-    if (opening && opening.epd && selectedPly > 0 && appliedFromEpd === 0) {
-      const gameFromStart = new Chess();
-      applyMoves(gameFromStart);
-      return gameFromStart.fen();
-    }
-
-    return (
-      opening?.epd
-        ? gameFromEpd
-        : (() => {
-            const g = new Chess();
-            applyMoves(g);
-            return g;
-          })()
-    ).fen();
-  }, [current.opening, current.moveList, selectedPly]);
+  const previewPosition = useMemo(
+    () => previewFen(opening, selectedPly),
+    [opening, selectedPly],
+  );
 
   return (
     <div className="boardPreview" ref={containerRef}>
@@ -140,7 +58,7 @@ export default function BoardPreview({
         style={{ width: `${sizePx}px`, maxWidth: "100%" }}
       >
         <Board
-          position={previewFen}
+          position={previewPosition}
           interactive={false}
           showCoordinates={false}
         />
@@ -155,7 +73,7 @@ export default function BoardPreview({
           Start
         </button>
 
-        {current.moveList.map((uci, idx) => {
+        {moveList.map((uci, idx) => {
           const plyNumber = idx + 1;
           const isActive = selectedPly === plyNumber;
 

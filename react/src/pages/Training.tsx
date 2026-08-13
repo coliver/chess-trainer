@@ -6,8 +6,9 @@ import React, {
   useState,
 } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Chess, type Square } from "chess.js";
 import Board, { type BoardMarker } from "../components/Board";
+import { sideToMove } from "../core/fen";
+import { applyMove, applyUci, legalMoves, pieceColorAt } from "../core/moves";
 import FenTurnBadge from "../components/FenTurnBadge";
 import { useBlinkGreen } from "../hooks/useBlinkGreen";
 import { useTrainingSession } from "../hooks/useTrainingSession";
@@ -96,7 +97,7 @@ export const Training = () => {
     }
   }, [feedback, blinkGreen]);
 
-  const isWhiteToMove = useMemo(() => new Chess(fen).turn() === "w", [fen]);
+  const isWhiteToMove = useMemo(() => sideToMove(fen) === "w", [fen]);
   const atLatest = timeline.indices === timeline.fens.length - 1;
 
   const appendTimelineFen = useCallback((nextFen: string) => {
@@ -155,8 +156,7 @@ export const Training = () => {
     if (tl.indices !== tl.fens.length - 1) {
       return;
     }
-    const game = new Chess(fenRef.current);
-    if (game.turn() !== "b") {
+    if (sideToMove(fenRef.current) !== "b") {
       return;
     }
 
@@ -165,25 +165,11 @@ export const Training = () => {
     lastSubmittedMoveUciRef.current = correctMoveUci;
     if (!can) return;
 
-    // Build next fen locally to keep timeline consistent
+    // Play the opponent's reply locally to keep the timeline consistent.
     const uci = correctMoveUci;
-    const from = uci.substring(0, 2);
-    const to = uci.substring(2, 4);
-
-    // UCI promotion is like e7e8q. If no promo char exists, don't force "q".
-    const promoChar = uci.length > 4 ? uci[4] : undefined;
-    try {
-      const move = game.move({
-        from,
-        to,
-        ...(promoChar ? { promotion: promoChar } : {}),
-      });
-
-      if (move) {
-        appendTimelineFen(game.fen());
-      }
-    } catch (err) {
-      console.error(err);
+    const applied = applyUci(fenRef.current, uci);
+    if (applied) {
+      appendTimelineFen(applied.nextFen);
     }
     void submitMove(uci, fenRef.current);
   }, [
@@ -220,46 +206,26 @@ export const Training = () => {
       // ✅ prevent chess.js from being called with from===to
       if (sourceSquare === targetSquare) return false;
 
-      try {
-        const uciPrefix = `${sourceSquare}${targetSquare}`;
-        const expectedPromo = correctMoveUci.startsWith(uciPrefix)
-          ? correctMoveUci.slice(uciPrefix.length)
-          : "";
-
-        // Don’t force promotion unless we actually have one
-        const promoForMove = expectedPromo ? expectedPromo : undefined;
-
-        const game = new Chess(fenRef.current);
-        const move = game.move({
-          from: sourceSquare,
-          to: targetSquare,
-          ...(promoForMove ? { promotion: promoForMove } : {}),
-        });
-
-        if (move === null) {
-          setLocalFeedback("❌ Illegal move");
-          return false;
-        }
-
-        const nextFen = game.fen();
-        setFen(nextFen);
-        appendTimelineFen(nextFen);
-
-        const promotionChar = move.promotion
-          ? String(move.promotion).toLowerCase()
-          : "";
-        const uci = `${sourceSquare}${targetSquare}${promotionChar}`;
-
-        setLocalFeedback("");
-        lastSubmittedMoveUciRef.current = uci;
-        setMoveInput(uci);
-        void submitMove(uci, fenRef.current);
-
-        return true;
-      } catch {
+      const result = applyMove(
+        fenRef.current,
+        sourceSquare,
+        targetSquare,
+        correctMoveUci,
+      );
+      if (!result) {
         setLocalFeedback("❌ Illegal move");
         return false;
       }
+
+      setFen(result.nextFen);
+      appendTimelineFen(result.nextFen);
+
+      setLocalFeedback("");
+      lastSubmittedMoveUciRef.current = result.uci;
+      setMoveInput(result.uci);
+      void submitMove(result.uci, fenRef.current);
+
+      return true;
     },
     [
       appendTimelineFen,
@@ -289,21 +255,15 @@ export const Training = () => {
       if (isSubmittingRef.current || isAdvancingRef.current || !itemId)
         return false;
       if (!isWhiteToMove) return false;
-      const game = new Chess(fenRef.current);
-      const piece = game.get(square as Square);
-      return !!piece && piece.color === "w";
+      return pieceColorAt(fenRef.current, square) === "w";
     },
     [atLatest, itemId, isWhiteToMove],
   );
 
   // Legal targets for the picked-up piece — rendered as dots by cm-chessboard.
   const getLegalMoves = useCallback(
-    (square: string): { to: string; promotion?: string }[] => {
-      const game = new Chess(fenRef.current);
-      return game
-        .moves({ square: square as Square, verbose: true })
-        .map((m) => ({ to: m.to, promotion: m.promotion }));
-    },
+    (square: string): { to: string; promotion?: string }[] =>
+      legalMoves(fenRef.current, square),
     [],
   );
 
