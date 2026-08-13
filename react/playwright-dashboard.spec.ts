@@ -65,12 +65,39 @@ test.describe("Dashboard screenshots (breakpoints × theme)", () => {
             contentType: "application/json",
             body: JSON.stringify([
               {
-                eco: "C20",
-                name: "King's Pawn Game",
+                eco: "B20",
+                name: "Sicilian Defense",
                 epd: null,
-                pgn: null,
-                uci_moves: "e2e4 e7e5",
-                description: "mock",
+                uci_moves: "e2e4 c7c5",
+                description: null,
+              },
+              {
+                eco: "B90",
+                name: "Sicilian Defense: Najdorf Variation",
+                epd: null,
+                uci_moves: "e2e4 c7c5 g1f3 d7d6 d2d4 c5d4 f3d4 g8f6 b1c3 a7a6",
+                description: null,
+              },
+              {
+                eco: "C60",
+                name: "Ruy Lopez",
+                epd: null,
+                uci_moves: "e2e4 e7e5 g1f3 b8c6 f1b5",
+                description: null,
+              },
+              {
+                eco: "C00",
+                name: "French Defense",
+                epd: null,
+                uci_moves: "e2e4 e7e6",
+                description: null,
+              },
+              {
+                eco: "D30",
+                name: "Queen's Gambit Declined",
+                epd: null,
+                uci_moves: "d2d4 d7d5 c2c4 e7e6",
+                description: null,
               },
             ]),
           });
@@ -82,9 +109,8 @@ test.describe("Dashboard screenshots (breakpoints × theme)", () => {
 
         await page.waitForSelector("#root", { timeout: 15000 });
         await page.waitForSelector("main.page .card", { timeout: 15000 });
-        await page
-          .getByText("Start Training an Opening", { exact: true })
-          .waitFor();
+        await page.getByRole("heading", { name: "Openings" }).waitFor();
+        await page.getByText("Sicilian Defense", { exact: true }).waitFor();
 
         await page.waitForTimeout(300);
 

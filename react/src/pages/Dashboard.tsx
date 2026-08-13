@@ -3,101 +3,83 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api";
 
-import DailyDrillIcon from "../components/DailyDrillIcon";
 import BoardPreview from "../components/openings/BoardPreview";
-import OpeningCombo from "../components/openings/OpeningCombo";
-import DashboardTile from "../components/openings/DashboardTile";
-
+import OpeningCard from "../components/openings/OpeningCard";
+import VariationList from "../components/openings/VariationList";
 import { Button } from "../components/Button";
-import { RandomQuote } from "../components/RandomQuote";
-import RecommendedLineIcon from "../components/RecommendedLineIcon";
-import ProgressIcon from "../components/ProgressIcon";
-import ClassicsIcon from "../components/ClassicsIcon";
-import TrainingIcon from "../components/TrainingIcon";
+import {
+  groupByBase,
+  baseNameOf,
+  variationLabelOf,
+  type OpeningGroup,
+} from "../lib/groupOpenings";
+import { describeOpening } from "../data/openingText";
 
 export type Opening = {
   name: string;
   eco: string;
-  description?: string;
+  description?: string | null;
   uci_moves?: string | null;
   epd?: string | null;
 };
+
+const SEARCH_PAGE = 60;
 
 export const Dashboard = () => {
   const navigate = useNavigate();
 
   const [openings, setOpenings] = useState<Opening[]>([]);
-  const [selectedOpeningName, setSelectedOpeningName] = useState<string | null>(
-    null,
-  );
-  const [selectedOpeningEco, setSelectedOpeningEco] = useState<string | null>(
-    null,
-  );
-  const [selectedOpeningDescription, setSelectedOpeningDescription] =
-    useState("");
-
-  const [selectedEco, setSelectedEco] = useState<string | null>(null);
-
   const [query, setQuery] = useState("");
-  const [isComboOpen, setIsComboOpen] = useState(false);
+  const [activeBase, setActiveBase] = useState<string | null>(null);
+  const [selected, setSelected] = useState<Opening | null>(null);
+  const [sortAZ, setSortAZ] = useState(false);
+  const [searchLimit, setSearchLimit] = useState(SEARCH_PAGE);
 
   useEffect(() => {
     api
       .get("/openings")
       .then((res) => {
-        const list: Opening[] = res.data ?? [];
-        setOpenings(list);
-
-        setSelectedOpeningName(null);
-        setSelectedOpeningEco(null);
-        setSelectedOpeningDescription("");
-        setSelectedEco(null);
-
+        setOpenings(res.data ?? []);
         setQuery("");
-        setIsComboOpen(false);
+        setActiveBase(null);
+        setSelected(null);
       })
       .catch((e) => console.error("Error loading openings:", e));
   }, []);
 
-  const filteredOpenings = useMemo(() => {
-    const q = query.trim().toLowerCase();
+  const groups = useMemo(() => groupByBase(openings), [openings]);
 
-    let list = openings;
+  const sortedGroups = useMemo(() => {
+    if (!sortAZ) return groups; // groupByBase already sorts by popularity
+    return [...groups].sort((a, b) => a.base.localeCompare(b.base));
+  }, [groups, sortAZ]);
 
-    // filter by exact ECO first
-    if (selectedEco) {
-      list = list.filter((o) => o.eco === selectedEco);
-    }
+  const activeGroup: OpeningGroup | undefined = useMemo(
+    () => groups.find((g) => g.base === activeBase),
+    [groups, activeBase],
+  );
 
-    // then apply text search (optional)
-    if (!q) return list;
+  const q = query.trim().toLowerCase();
+  const searchMatches = useMemo(() => {
+    if (!q) return [];
+    return openings.filter(
+      (o) =>
+        o.name.toLowerCase().includes(q) || o.eco.toLowerCase().includes(q),
+    );
+  }, [openings, q]);
 
-    return list.filter((o) => {
-      const full = `${o.eco} — ${o.name}`.toLowerCase();
-      return (
-        full.includes(q) ||
-        o.name.toLowerCase().includes(q) ||
-        o.eco.toLowerCase().includes(q)
-      );
-    });
-  }, [openings, query, selectedEco]);
+  const view: "search" | "variations" | "bases" = q
+    ? "search"
+    : activeBase
+      ? "variations"
+      : "bases";
 
-  const ecoOptions = useMemo(() => {
-    return Array.from(
-      new Set(openings.map((o) => o.eco).filter(Boolean)),
-    ).sort();
-  }, [openings]);
-
-  const pickOpeningByIndex = (idx: number) => {
-    const picked = filteredOpenings[idx];
-    if (!picked) return;
-
-    setSelectedOpeningName(picked.name);
-    setSelectedOpeningEco(picked.eco);
-    setSelectedOpeningDescription(picked.description ?? "");
-    setQuery(`${picked.eco} — ${picked.name}`);
-    setIsComboOpen(false);
-  };
+  const subText =
+    view === "search"
+      ? `${searchMatches.length} match${searchMatches.length === 1 ? "" : "es"}`
+      : view === "variations" && activeGroup
+        ? `${activeGroup.count} variations in the full library`
+        : `${groups.length} openings · pick one to train`;
 
   const startSession = async (openingEco: string, openingName: string) => {
     try {
@@ -112,159 +94,210 @@ export const Dashboard = () => {
     }
   };
 
+  const openBase = (group: OpeningGroup) => {
+    setActiveBase(group.base);
+    setSelected(group.representative);
+  };
+
+  // Selecting a search result also anchors the active base, so clearing the
+  // search returns to that opening's variation list (consistent with the
+  // preview) rather than a stale, unrelated base.
+  const pickFromSearch = (o: Opening) => {
+    setSelected(o);
+    setActiveBase(baseNameOf(o.name));
+  };
+
+  const goHome = () => {
+    setActiveBase(null);
+  };
+
+  const startLabel = selected
+    ? `Start ${
+        variationLabelOf(selected.name) === "Main line"
+          ? baseNameOf(selected.name)
+          : variationLabelOf(selected.name)
+      }`
+    : "Choose an opening";
+
+  const previewFullName = selected
+    ? variationLabelOf(selected.name) === "Main line"
+      ? baseNameOf(selected.name)
+      : `${baseNameOf(selected.name)}: ${variationLabelOf(selected.name)}`
+    : "";
+
   return (
     <main className="page">
-      <div className="card">       
-
-        <div className="dashboard-layout">
-          <DashboardTile
-            className="tile-start"
-            icon={<TrainingIcon />}
-            title="Start Training an Opening"
-            subtitle={
-              <span className="tile-subtitle italics">
-                <RandomQuote />
+      <div className="card">
+        <section className="opening-browser">
+          <header className="ob-toolbar">
+            <div className="ob-heading">
+              <h1 className="ob-title">Openings</h1>
+              <p className="ob-sub">{subText}</p>
+            </div>
+            <span className="ob-grow" />
+            <div className="ob-search">
+              <span className="ob-search-icon" aria-hidden="true">
+                ⌕
               </span>
-            }
-            customBody={
-              <div>
-                <BoardPreview
-                  openings={filteredOpenings}
-                  selectedOpeningName={selectedOpeningName}
-                  
-                />
+              <input
+                type="search"
+                aria-label="Search openings"
+                placeholder="Search openings or ECO…"
+                value={query}
+                autoComplete="off"
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  setSearchLimit(SEARCH_PAGE);
+                }}
+              />
+            </div>
+            {view === "bases" && (
+              <button
+                type="button"
+                className="ob-sort"
+                onClick={() => setSortAZ((s) => !s)}
+              >
+                Sort: {sortAZ ? "A–Z" : "Popular"}
+              </button>
+            )}
+          </header>
 
-                <div className="tile-spacer" />
-
-                <div className="eco-picker">
-                  <label className="eco-label" htmlFor="eco-select">
-                    ECO:
-                  </label>
-
-                  <select
-                    className="eco-select"
-                    id="eco-select"
-                    value={selectedEco ?? ""}
-                    onChange={(e) => {
-                      const nextEco = e.target.value || null;
-
-                      setSelectedEco(nextEco);
-                      setSelectedOpeningName(null);
-                      setSelectedOpeningEco(nextEco);
-                      setSelectedOpeningDescription("");
-                      setQuery("");
-                      setIsComboOpen(false);
-                    }}
-                  >
-                    <option value="">All ECOs</option>
-                    {ecoOptions.map((eco) => (
-                      <option key={eco} value={eco}>
-                        {eco}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="tile-spacer" />
-
-                <OpeningCombo
-                  rootLabel="Search openings"
+          <div className="ob-body">
+            <div className="ob-content">
+              {view === "search" && (
+                <SearchResults
+                  matches={searchMatches}
+                  limit={searchLimit}
+                  selectedName={selected?.name ?? null}
                   query={query}
-                  setQuery={setQuery}
-                  isOpen={isComboOpen}
-                  setIsOpen={setIsComboOpen}
-                  options={filteredOpenings}
-                  selectedOpeningName={selectedOpeningName}
-                  onPick={pickOpeningByIndex}
+                  onPick={pickFromSearch}
+                  onMore={() => setSearchLimit((n) => n + SEARCH_PAGE)}
                 />
+              )}
 
-                {selectedOpeningDescription ? (
+              {view === "variations" && activeGroup && (
+                <>
+                  <nav className="ob-crumbs" aria-label="Breadcrumb">
+                    <button type="button" onClick={goHome}>
+                      All openings
+                    </button>
+                    <span className="sep">/</span>
+                    <span className="here">{activeGroup.base}</span>
+                  </nav>
+                  <VariationList
+                    rows={activeGroup.members}
+                    selectedName={selected?.name ?? null}
+                    onPick={setSelected}
+                  />
+                </>
+              )}
+
+              {view === "bases" && (
+                <div className="opening-grid">
+                  {sortedGroups.map((g) => (
+                    <OpeningCard
+                      key={g.base}
+                      group={g}
+                      selected={
+                        selected != null && baseNameOf(selected.name) === g.base
+                      }
+                      onSelect={() => openBase(g)}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <aside className={`ob-preview${selected ? "" : " is-empty"}`}>
+              {selected ? (
+                <div className="ob-preview-inner">
+                  <BoardPreview
+                    key={selected.name}
+                    openings={[selected]}
+                    selectedOpeningName={selected.name}
+                  />
+                  <h2 className="pv-title">{previewFullName}</h2>
+                  <p className="pv-eco">{selected.eco}</p>
                   <p className="opening-description">
-                    {selectedOpeningDescription}
+                    {describeOpening(selected)}
                   </p>
-                ) : (
-                  <p className="opening-description opening-description--empty" />
-                )}
+                </div>
+              ) : (
+                <div className="ob-empty-state">
+                  <span className="ob-empty-glyph" aria-hidden="true">
+                    ♞
+                  </span>
+                  <p className="opening-description opening-description--empty">
+                    Pick an opening to preview the line and start training.
+                  </p>
+                </div>
+              )}
 
-                <div className="tile-spacer" />
-
-                <Button
-                  className="tile-action"
-                  disabled={!selectedOpeningName}
-                  onClick={() =>
-                    selectedOpeningName &&
-                    selectedOpeningEco &&
-                    startSession(selectedOpeningEco, selectedOpeningName)
-                  }
-                  type="button"
-                >
-                  {selectedOpeningName
-                    ? `Start ${selectedOpeningName}`
-                    : `Choose An Opening`}
-                </Button>
-              </div>
-            }
-          />
-
-          <DashboardTile
-            className="tile-1"
-            icon={<DailyDrillIcon />}
-            title="Daily Drill"
-            subtitle="A focused tactical challenge just for today."
-            cta={
               <Button
-                className="tile-action btn-secondary"
-                onClick={() => {}}
+                className="tile-action ob-start"
                 type="button"
-                disabled
+                disabled={!selected}
+                onClick={() =>
+                  selected && startSession(selected.eco, selected.name)
+                }
               >
-                Coming Soon
+                {startLabel}
               </Button>
-            }
-          />
-
-          <DashboardTile
-            className="tile-2"
-            icon={<RecommendedLineIcon />}
-            title="Recommended Line"
-            subtitle="Study prompt picked for you"
-            cta={
-              <Button
-                className="tile-action btn-secondary"
-                onClick={() => {}}
-                type="button"
-                disabled
-              >
-                Coming Soon
-              </Button>
-            }
-          />
-
-          <DashboardTile
-            className="tile-3"
-            icon={<ClassicsIcon />}
-            title="Classics Practice"
-            subtitle="Re-learn the classics"
-            cta={
-              <Button
-                className="tile-action btn-secondary"
-                onClick={() => {}}
-                type="button"
-                disabled
-              >
-                Coming Soon
-              </Button>
-            }
-          />
-
-          <DashboardTile
-            className="dashboard-tile tile-right"
-            icon={<ProgressIcon />}
-            title="Progress"
-            subtitle="(Placeholder)"
-          />
-        </div>
+            </aside>
+          </div>
+        </section>
       </div>
     </main>
   );
 };
+
+function SearchResults({
+  matches,
+  limit,
+  selectedName,
+  query,
+  onPick,
+  onMore,
+}: {
+  matches: Opening[];
+  limit: number;
+  selectedName: string | null;
+  query: string;
+  onPick: (o: Opening) => void;
+  onMore: () => void;
+}) {
+  if (matches.length === 0) {
+    return (
+      <div className="ob-noresults">
+        No openings match “{query.trim()}”.
+        <br />
+        Try a name (Sicilian) or an ECO code (B90).
+      </div>
+    );
+  }
+  const shown = matches.slice(0, limit);
+  return (
+    <>
+      <div className="variation-rows" role="list">
+        {shown.map((o) => (
+          <button
+            key={o.eco + o.name}
+            type="button"
+            role="listitem"
+            className={`variation-row${selectedName === o.name ? " selected" : ""}`}
+            onClick={() => onPick(o)}
+            aria-pressed={selectedName === o.name}
+          >
+            <span className="r-eco">{o.eco}</span>
+            <span className="r-name">{o.name}</span>
+          </button>
+        ))}
+      </div>
+      {matches.length > limit && (
+        <button type="button" className="ob-showmore" onClick={onMore}>
+          Show {matches.length - limit} more
+        </button>
+      )}
+    </>
+  );
+}

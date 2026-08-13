@@ -10,6 +10,9 @@ export default function BoardPreview({
   openings: Opening[];
   selectedOpeningName: string | null;
 }) {
+  // Callers remount this via a `key` on the selected opening, so selectedPly
+  // starts at 0 (the start position) for each newly previewed line — a ply
+  // index never leaks from a longer line onto a shorter one.
   const [selectedPly, setSelectedPly] = useState(0);
 
   // Measure container width and use it for board sizing
@@ -63,11 +66,11 @@ export default function BoardPreview({
         />
       </div>
 
-      <div style={{ marginTop: 12, display: "flex", flexWrap: "wrap", gap: 8 }}>
+      <div className="ply-stepper">
         <button
           type="button"
+          className={`ply-btn${selectedPly === 0 ? " active" : ""}`}
           onClick={() => setSelectedPly(0)}
-          style={{ opacity: selectedPly === 0 ? 1 : 0.7 }}
         >
           Start
         </button>
@@ -80,8 +83,8 @@ export default function BoardPreview({
             <button
               key={`${uci}-${idx}`}
               type="button"
+              className={`ply-btn${isActive ? " active" : ""}`}
               onClick={() => setSelectedPly(plyNumber)}
-              style={{ opacity: isActive ? 1 : 0.7 }}
               title={`After ply ${plyNumber}`}
             >
               {uci}
