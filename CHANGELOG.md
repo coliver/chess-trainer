@@ -1,3 +1,10 @@
+## 2026-08-13
+- feat(react): replace `react-chessboard` with `cm-chessboard` behind a reusable `Board` wrapper — a framework-neutral board that eases the planned Angular port
+- refactor(training): route drag + click through cm-chessboard's move-input into the existing `chess.js` validation; migrate `squareStyles` highlights to markers; drop right-click arrow drawing
+- refactor(training): trim `NextItem` to the fields actually used (remove unused `nextPgn`/`nextEpd`/`nextNextPgn`/`data`) and fix a duplicate `epd` key in the next-item response type
+- test(react): mock `Board` in the Training tests and assert `onMove`/markers; Playwright now screenshots dashboard + training across the CSS breakpoints (desktop/tablet/mobile) × light/dark
+- docs: add a theme-aware (`<picture>`) collapsible dashboard screenshot to the React README; refresh READMEs for cm-chessboard
+
 ## 2026-07-28
 - feat(dashboard): add prominent opening board preview and selection gating
 - refactor(dashboard): initialize selection state to empty

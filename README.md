@@ -104,5 +104,5 @@ No backend changes are ever required.
 
 ## 📜 Project Credits
 
-- **Frontend:** React, React Router, Axios, Chess.js, React-Chessboard.
+- **Frontend:** React, React Router, Axios, Chess.js, cm-chessboard.
 - **Backend:** FastAPI, SQLAlchemy, Python-Chess, Uvicorn, PyJWT, Pydantic.
