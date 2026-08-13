@@ -398,32 +398,6 @@ describe("useTrainingSession", () => {
     expect(on401Navigate).not.toHaveBeenCalled();
   });
 
-  it("shouldAutoplay: returns true when it's black to move", async () => {
-    server.use(
-      http.get(`/api/training-sessions/${id}/next`, () => {
-        return HttpResponse.json({
-          itemId: "1",
-          fenAfter: "8/8/8/8/8/8/4K3/4k3 w - - 0 1",
-          openingEco: "C20",
-          openingName: "Test Opening",
-          correctMoveUci: "e2e4",
-        });
-      }),
-    );
-
-    const { result } = renderHook(() => useTrainingSession(id, on401Navigate));
-
-    act(() => {
-      result.current.setFen("8/8/8/8/8/8/4K3/4k3 w - - 0 1");
-    });
-    expect(result.current.shouldAutoplay()).toBe(false);
-
-    act(() => {
-      result.current.setFen("8/8/8/8/8/8/4K3/4k3 b - - 0 1");
-    });
-    expect(result.current.shouldAutoplay()).toBe(true);
-  });
-
   it("takeAutoplayOnce: only allows one autoplay per itemId", () => {
     server.use(
       http.get(`/api/training-sessions/${id}/next`, () => {

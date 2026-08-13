@@ -1,7 +1,6 @@
 //frontend/src/hooks/useTrainingSession.ts
-import { useCallback, useEffect, useRef, useState, useMemo } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import api from "../api";
-import { Chess } from "chess.js";
 import { AxiosError } from "axios";
 import { START_FEN, normalizeFen } from "../core/fen";
 
@@ -15,7 +14,6 @@ export type NextItem = {
 type TrainingSessionDeps = {
   setTimeoutFn?: typeof window.setTimeout;
   clearTimeoutFn?: typeof window.clearTimeout;
-  chessFactory?: (fen: string) => { turn: () => string };
   timeoutMs?: number;
 };
 
@@ -26,10 +24,6 @@ export function useTrainingSession(
 ) {
   const setTimeoutFn = deps.setTimeoutFn ?? window.setTimeout;
   const clearTimeoutFn = deps.clearTimeoutFn ?? window.clearTimeout;
-  const chessFactory = useMemo(
-    () => deps.chessFactory ?? ((fen: string) => new Chess(fen)),
-    [deps.chessFactory],
-  );
   const timeoutMs = deps.timeoutMs ?? 500;
 
   const [itemId, setItemId] = useState<string | null>(null);
@@ -262,16 +256,6 @@ export function useTrainingSession(
   );
 
 
-  const shouldAutoplay = useCallback(() => {
-    const normalized = normalizeFen(fen);
-    try {
-      const game = chessFactory(normalized);
-      return game.turn() === "b";
-    } catch {
-      return false;
-    }
-  }, [fen, chessFactory]);
-
   const takeAutoplayOnce = useCallback((currentItemId: string | number) => {
     const key = String(currentItemId);
     if (autoPlayedItemIdRef.current === key) return false;
@@ -292,7 +276,6 @@ export function useTrainingSession(
     isSessionCompleted,
     normalizeFen,
     submitMove,
-    shouldAutoplay,
     takeAutoplayOnce,
     prevFenRef,
   };
