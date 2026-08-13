@@ -14,7 +14,6 @@ import {
   legalMoves,
   pieceColorAt,
 } from "@knight-school/chess-core";
-import FenTurnBadge from "../components/FenTurnBadge";
 import { useBlinkGreen } from "../hooks/useBlinkGreen";
 import { useTrainingSession } from "../hooks/useTrainingSession";
 
@@ -288,111 +287,153 @@ export const Training = () => {
     return arr;
   }, [correctMoveUci, hintLevel, blinkSquare]);
 
+  // Split "C50 Italian Game" into an ECO chip + name for the rail header.
+  const ecoMatch = openingLabel.match(/^([A-E]\d{2})\s+(.*)$/);
+  const eco = ecoMatch ? ecoMatch[1] : "";
+  const openingName = ecoMatch ? ecoMatch[2] : openingLabel || "Training";
+
+  // Derive the status banner from the existing feedback / turn / hint state.
+  let statusKind = "your";
+  let statusIcon = "♔";
+  let statusMsg = "Your move";
+  let statusSub = isWhiteToMove
+    ? "Play the correct move for White."
+    : "Waiting for the reply…";
+
+  if (isSessionCompleted) {
+    statusKind = "done";
+    statusIcon = "⚑";
+    statusMsg = "Session complete";
+    statusSub = "You played the line. Well done.";
+  } else if (shownFeedback.startsWith("✅")) {
+    statusKind = "good";
+    statusIcon = "✓";
+    statusMsg = shownFeedback.replace(/^✅\s*/, "");
+    statusSub = "";
+  } else if (shownFeedback.startsWith("❌")) {
+    statusKind = "bad";
+    statusIcon = "✗";
+    statusMsg = shownFeedback.replace(/^❌\s*/, "");
+    statusSub = "Try a different move.";
+  } else if (shownFeedback) {
+    statusMsg = shownFeedback;
+    statusSub = "";
+  } else if (hintLevel >= 0) {
+    statusKind = "hint";
+    statusIcon = "💡";
+    statusMsg = "Hint";
+    statusSub = "Look at the highlighted square.";
+  }
+
+  const busy = isSubmitting || isAdvancing;
+
   return (
     <main className="page">
       <div className="card">
         {/* remount per itemId so timeline starts fresh for that training position */}
-        <div key={itemId ?? "none"} className="dashboard-layout">
-          <div className="dashboard-tile tile-start">
-            <div className="tile-start-text">
-              <div className="tile-title">Training</div>
-              <div className="tile-subtitle">{openingLabel}</div>
+        <div key={itemId ?? "none"} className="train">
+          <div className="train-board-col">
+            <div className="training-board-wrap">
+              <Board
+                position={fen}
+                interactive
+                animated={showAnimations}
+                moveColor="white"
+                markers={markers}
+                getLegalMoves={getLegalMoves}
+                onMoveStart={canPickUp}
+                onMove={onMove}
+              />
             </div>
-
-            <div className="tile-spacer" />
-
-            <div className="training-start-body">
-              <div className="training-board-wrap">
-                <Board
-                  position={fen}
-                  interactive
-                  animated={showAnimations}
-                  moveColor="white"
-                  markers={markers}
-                  getLegalMoves={getLegalMoves}
-                  onMoveStart={canPickUp}
-                  onMove={onMove}
-                />
-              </div>
-
-              <div className="training-form-wrap">
-                <form className="training-form" onSubmit={handleSubmit}>
-                  <input
-                    className="text-input"
-                    value={moveInput}
-                    onChange={(e) => setMoveInput(e.target.value)}
-                    placeholder="e.g. e2e4"
-                    disabled={isSubmitting}
-                  />
-
-                  <div className="training-form-actions">
-                    <button
-                      className="btn btn-secondary"
-                      type="button"
-                      onClick={() => jumpToIndex(timeline.indices - 1)}
-                      disabled={
-                        isSubmitting || isAdvancing || timeline.indices <= 0
-                      }
-                    >
-                      Prev
-                    </button>
-
-                    <button
-                      className="btn btn-secondary"
-                      type="button"
-                      onClick={() => jumpToIndex(timeline.indices + 1)}
-                      disabled={
-                        isSubmitting ||
-                        isAdvancing ||
-                        timeline.indices >= timeline.fens.length - 1
-                      }
-                    >
-                      Next
-                    </button>
-
-                    <button
-                      className="btn"
-                      type="submit"
-                      disabled={
-                        isSubmitting ||
-                        isAdvancing ||
-                        !moveInput.trim() ||
-                        !atLatest
-                      }
-                      title={
-                        !atLatest
-                          ? "Jump to latest before submitting"
-                          : undefined
-                      }
-                    >
-                      Submit
-                    </button>
-
-                    <button
-                      className="btn btn-secondary"
-                      type="button"
-                      onClick={() => {
-                        if (
-                          isSubmittingRef.current ||
-                          isAdvancingRef.current ||
-                          !itemId
-                        )
-                          return;
-                        setHintLevel((h) => (h < 0 ? 0 : 1));
-                      }}
-                      disabled={isSubmitting || isAdvancing || !itemId}
-                    >
-                      Hint
-                    </button>
-                  </div>
-
-                  <FenTurnBadge fen={fen} />
-                </form>
-
-                <p className="training-feedback">{shownFeedback}</p>
-              </div>
+            <div className="board-under">
+              <span className={`turn${isWhiteToMove ? "" : " black"}`}>
+                <span className="turn-dot" aria-hidden="true" />
+                {isWhiteToMove ? "White to move" : "Black to move"}
+              </span>
             </div>
           </div>
+
+          <aside className="train-rail">
+            <div className="rail-head">
+              <div className="rail-eyebrow">Training</div>
+              <div className="rail-title">
+                <h1>{openingName}</h1>
+                {eco && <span className="eco-chip">{eco}</span>}
+              </div>
+            </div>
+
+            <div className={`train-status ${statusKind}`} role="status">
+              <span className="train-status-ic" aria-hidden="true">
+                {statusIcon}
+              </span>
+              <div>
+                <div className="train-status-msg">{statusMsg}</div>
+                {statusSub && (
+                  <div className="train-status-sub">{statusSub}</div>
+                )}
+              </div>
+            </div>
+
+            <div className="train-controls">
+              <div className="train-stepper">
+                <button
+                  className="btn"
+                  type="button"
+                  onClick={() => jumpToIndex(timeline.indices - 1)}
+                  disabled={busy || timeline.indices <= 0}
+                >
+                  ‹ Prev
+                </button>
+                <button
+                  className="btn"
+                  type="button"
+                  onClick={() => jumpToIndex(timeline.indices + 1)}
+                  disabled={busy || timeline.indices >= timeline.fens.length - 1}
+                >
+                  Next ›
+                </button>
+              </div>
+
+              <button
+                className="btn hint"
+                type="button"
+                onClick={() => {
+                  if (isSubmittingRef.current || isAdvancingRef.current || !itemId)
+                    return;
+                  setHintLevel((h) => (h < 0 ? 0 : 1));
+                }}
+                disabled={busy || !itemId}
+              >
+                💡 Show a hint
+              </button>
+
+              <form className="train-type-move" onSubmit={handleSubmit}>
+                <input
+                  className="text-input"
+                  value={moveInput}
+                  onChange={(e) => setMoveInput(e.target.value)}
+                  placeholder="or type a move, e.g. e2e4"
+                  disabled={isSubmitting}
+                />
+                <button
+                  className="btn primary"
+                  type="submit"
+                  disabled={busy || !moveInput.trim() || !atLatest}
+                  title={!atLatest ? "Jump to latest before submitting" : undefined}
+                >
+                  Play
+                </button>
+              </form>
+            </div>
+
+            <button
+              className="train-exit"
+              type="button"
+              onClick={() => navigate("/dashboard")}
+            >
+              ← Back to openings
+            </button>
+          </aside>
         </div>
       </div>
     </main>
