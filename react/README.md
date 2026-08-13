@@ -4,6 +4,27 @@
 
 The frontend for chess-trainer is a TypeScript + React application providing an interactive, position-based chess drilling interface with real-time move validation.
 
+## 📸 Screenshots
+
+<details>
+<summary>Show screenshots — dashboard &amp; training, light &amp; dark</summary>
+
+### Dashboard
+
+| Light | Dark |
+| --- | --- |
+| ![Dashboard — light](dashboard-light-1440.png) | ![Dashboard — dark](dashboard-dark-1440.png) |
+
+### Training
+
+| Light | Dark |
+| --- | --- |
+| ![Training — light](training-light-1440.png) | ![Training — dark](training-dark-1440.png) |
+
+<sub>Captured at 1440px wide by <code>playwright-dashboard.spec.ts</code>. That spec also renders tablet (900px) and mobile (375px) variants locally; regenerate all of them with <code>npm run test:playwright</code>.</sub>
+
+</details>
+
 ## 📂 Project Navigation
 
 - **Root**: Full-stack overview and Docker orchestration.
