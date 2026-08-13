@@ -28,7 +28,8 @@ The frontend for chess-trainer is a TypeScript + React application providing an 
 ```text
 react/
 ├── src/
-│   ├── components/            # Reusable UI elements (Header, Button, icons, theme toggle...)
+│   ├── components/            # Reusable UI elements (Board, Header, Button, icons, theme toggle...)
+│   │   ├── Board.tsx           # cm-chessboard wrapper (the seam the Angular board mirrors)
 │   │   └── openings/          # BoardPreview, OpeningCombo, DashboardTile
 │   ├── pages/                 # Login, Register, Dashboard, Training (+ *.test.tsx alongside each)
 │   ├── hooks/                 # useTrainingSession, useBlinkGreen (+ *.test.ts alongside each)
@@ -37,11 +38,12 @@ react/
 │   ├── assets/                 # SVG/JPG art used by dashboard tiles and icons
 │   ├── api.ts                  # Axios instance, auth header injection, 401 refresh interceptor
 │   ├── auth.ts                 # logout() — clears all auth-related localStorage keys
+│   ├── cm-chessboard.d.ts      # Ambient types for cm-chessboard (the package ships none)
 │   ├── RequireAuth.tsx         # Route guard: calls GET /auth/me, redirects to /login on failure
 │   ├── App.tsx                 # Routes: /login, /register, /dashboard, /training/:id, * -> Dashboard
 │   ├── main.tsx                # React root / entrypoint
 │   └── index.css               # Global styles (imports src/styles/*.css)
-├── public/                     # favicon.svg, quotes.txt (static assets)
+├── public/                     # favicon.svg, quotes.txt, cm-chessboard-assets/ (board sprites)
 ├── playwright-dashboard.spec.ts  # Playwright E2E spec
 ├── vite.config.ts               # Vite configuration
 ├── vitest.config.ts             # Vitest configuration (jsdom, MSW-backed unit tests)
@@ -168,7 +170,7 @@ The frontend derives:
 - item id from `data.itemId` (falls back to `data.id`, also unused by this endpoint)
 - correct move from `data.correctMoveUci`
 
-`useTrainingSession`'s `NextItem` also carries `nextPgn`/`nextEpd` (read from `data.pgn`/`data.epd`, which are likewise never present on this endpoint) and a `nextNextPgn` field that's declared but never populated at all. None of the three are read anywhere downstream (`Training.tsx` doesn't reference them) — this looks like scaffolding for a not-yet-wired feature (an "opening complete, preview the next one" hint, matching a `feat(training): add optional nextNextPgn to NextItem` changelog entry) rather than a bug, so it hasn't been removed — but don't assume it does anything today.
+`NextItem` is deliberately narrow — `nextFen`, `nextItemId`, `nextOpeningLabel`, `nextCorrectMoveUci`. (Earlier unused `nextPgn`/`nextEpd`/`nextNextPgn` scaffolding fields were removed.)
 
 ### Submit Move
 

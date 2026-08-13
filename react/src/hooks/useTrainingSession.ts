@@ -7,14 +7,10 @@ import { AxiosError } from "axios";
 const START_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
 export type NextItem = {
-  data: unknown;
   nextFen: string;
   nextItemId: string | null;
   nextOpeningLabel: string;
   nextCorrectMoveUci: string;
-  nextNextPgn?: string;
-  nextPgn: string;
-  nextEpd: string;
 };
 
 function normalizeFen(raw: unknown) {
@@ -84,8 +80,6 @@ export function useTrainingSession(
       openingEco?: string | null;
 
       correctMoveUci?: string;
-      pgn?: string;
-      epd?: string | null;
 
       // include anything else you might get
       [k: string]: unknown;
@@ -110,13 +104,10 @@ export function useTrainingSession(
       : "Opening: (unknown)";
 
     return {
-      data,
       nextFen,
       nextItemId,
       nextOpeningLabel,
       nextCorrectMoveUci: (data.correctMoveUci ?? "") as string,
-      nextPgn: (data.pgn ?? "") as string,
-      nextEpd: (data.epd ?? "") as string,
     };
   }, [id]);
 
