@@ -23,6 +23,10 @@ dist-ssr
 *.sln
 *.sw?
 
+# Playwright run output
+/test-results
+/playwright-report
+
 # Generated Playwright screenshots. Only the desktop dashboard shots embedded
 # in README.md are kept tracked (they must be committed to render on GitHub);
 # every other generated screenshot stays ignored.
