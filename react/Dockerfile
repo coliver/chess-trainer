@@ -1,10 +1,10 @@
 FROM mcr.microsoft.com/playwright:v1.62.0-jammy
 
 WORKDIR /app
-COPY frontend/package*.json ./
+COPY react/package*.json ./
 RUN npm ci
 
-COPY frontend/ .
+COPY react/ .
 
 RUN npx playwright install
 

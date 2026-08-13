@@ -1,4 +1,6 @@
-# 🎨 Knight School (Chess Trainer) Frontend
+# 🎨 Knight School (Chess Trainer) — React Frontend
+
+> One of two interchangeable frontends against the same `/api` backend (the other is [`../angular`](../angular/README.md)). Served by nginx at `/`.
 
 The frontend for chess-trainer is a TypeScript + React application providing an interactive, position-based chess drilling interface with real-time move validation.
 
@@ -10,7 +12,7 @@ The frontend for chess-trainer is a TypeScript + React application providing an 
 ## 📦 Project Structure
 
 ```text
-frontend/
+react/
 ├── src/
 │   ├── components/            # Reusable UI elements (Header, Button, icons, theme toggle...)
 │   │   └── openings/          # BoardPreview, OpeningCombo, DashboardTile
@@ -45,7 +47,7 @@ If you are working on UI/UX and want Hot Module Replacement (HMR), run the front
 docker compose up -d db api
 
 # 2. Install and start frontend
-cd frontend
+cd react
 npm install
 npm run dev
 ```

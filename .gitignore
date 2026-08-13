@@ -71,4 +71,7 @@ tmp_openings_tsv/d.tsv
 tmp_openings_tsv/e.tsv
 clippyFiles.ps1
 bootstrap.ps1
-frontend/coverage
+react/coverage
+
+# Angular
+.angular/

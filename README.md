@@ -1,7 +1,7 @@
 # ♟️ Knight School (Chess Trainer)
 
 [![tests](https://github.com/coliver/chess-trainer/actions/workflows/tests.yml/badge.svg)](https://github.com/coliver/chess-trainer/actions/workflows/tests.yml)
-[![frontend](https://github.com/coliver/chess-trainer/actions/workflows/frontend.yml/badge.svg)](https://github.com/coliver/chess-trainer/actions/workflows/frontend.yml)
+[![react](https://github.com/coliver/chess-trainer/actions/workflows/react.yml/badge.svg)](https://github.com/coliver/chess-trainer/actions/workflows/react.yml)
 
 A web-based chess openings trainer designed to drill specific lines and track performance metrics.
 
@@ -10,18 +10,19 @@ This is a work in progress.
 <details>
   <summary>Light mode</summary>
 
-  ![Light mode](./frontend/dashboard-light.png)
+  ![Light mode](./react/dashboard-light.png)
 </details>
 
 <details open>
   <summary>Dark mode</summary>
 
-  ![Dark mode](./frontend/dashboard-dark.png)
+  ![Dark mode](./react/dashboard-dark.png)
 </details>
 
 ### 📂 Project Navigation
 - **[Backend](./backend/README.md)**: API logic, Database schema, and Chess engine rules.
-- **[Frontend](./frontend/README.md)**: React components, State management, and UI/UX.
+- **[React frontend](./react/README.md)**: React components, State management, and UI/UX.
+- **[Angular frontend](./angular/README.md)**: Alternate frontend against the same API.
 - **[Infrastructure](./nginx)**: Nginx configuration and Docker orchestration.
 
 ---
@@ -74,7 +75,7 @@ Knight School uses a decoupled architecture to separate the chess engine from th
 
 ## 🤝 Contribution
 
-- **Development:** Please refer to the [Backend](./backend/README.md) and [Frontend](./frontend/README.md) guides for specific coding standards.
+- **Development:** Please refer to the [Backend](./backend/README.md), [React](./react/README.md), and [Angular](./angular/README.md) guides for specific coding standards.
 - **Commits:** Use conventional commits (`feat:`, `fix:`, `docs:`, `test:`).
 - **PRs:** Ensure all new logic is covered by tests.
 
