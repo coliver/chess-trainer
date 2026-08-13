@@ -123,5 +123,4 @@ positions — all `chess.js`, no framework code) lives in a standalone package,
   vitest suite exercises the real `chess.js`. The UIs mock the package boundary and test only
   their own wiring. Its CI job is `.github/workflows/core.yml`.
 - **Docker.** `react/Dockerfile` builds the package (its own isolated install + build) before
-  installing React, which resolves the `file:` dep against it. Angular adds the same pattern
-  when it grows a board/training page.
+  installing React, which resolves the `file:` dep against it.
