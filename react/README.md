@@ -9,19 +9,11 @@ The frontend for chess-trainer is a TypeScript + React application providing an 
 <details>
 <summary>Show dashboard screenshots — light &amp; dark</summary>
 
-**Desktop — 1440px**
-
 | Light | Dark |
 | --- | --- |
-| ![Dashboard — light, desktop](dashboard-light-1440.png) | ![Dashboard — dark, desktop](dashboard-dark-1440.png) |
+| ![Dashboard — light](dashboard-light-1440.png) | ![Dashboard — dark](dashboard-dark-1440.png) |
 
-**Tablet — 900px**
-
-| Light | Dark |
-| --- | --- |
-| ![Dashboard — light, tablet](dashboard-light-900.png) | ![Dashboard — dark, tablet](dashboard-dark-900.png) |
-
-<sub>Widths track the app's CSS breakpoints (max-width 1024px and 600px). Rendered by <code>playwright-dashboard.spec.ts</code>, which also captures the training page and a 375px mobile variant locally; regenerate with <code>npm run test:playwright</code>.</sub>
+<sub>Desktop (1440px). Rendered by <code>playwright-dashboard.spec.ts</code>, which also captures the training page and tablet/mobile variants locally; regenerate with <code>npm run test:playwright</code>.</sub>
 
 </details>
 
