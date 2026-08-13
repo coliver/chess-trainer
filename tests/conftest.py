@@ -1,14 +1,16 @@
-from pathlib import Path
 import sys
+from pathlib import Path
+
 from backend.app.app import app
-from backend.app.routers.auth import hash_password
 from backend.app.modules.users.models import User
+from backend.app.routers.auth import hash_password
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 import pytest
 from sqlalchemy.orm import sessionmaker
+
 from backend.app.modules.shared.db import engine, get_db
 
 

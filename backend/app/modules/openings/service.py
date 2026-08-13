@@ -1,5 +1,6 @@
-from sqlalchemy import select
 import chess
+from sqlalchemy import select
+
 from backend.app.modules.openings.models import Opening
 
 

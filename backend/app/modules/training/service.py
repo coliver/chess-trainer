@@ -1,19 +1,19 @@
 # backend/app/modules/training/service.py
 from dataclasses import dataclass
-from sqlalchemy.orm import Session
-from sqlalchemy import select, func, and_
-from fastapi import HTTPException
-import chess
+from typing import TYPE_CHECKING
 
+import chess
+from fastapi import HTTPException
+from sqlalchemy import and_, func, select
+from sqlalchemy.orm import Session
+
+from backend.app.modules.openings.models import Opening
+from backend.app.modules.training.chess_rules import validate_and_apply
 from backend.app.modules.training.models import (
-    TrainingSession,
     TrainingItem,
     TrainingResponse,
+    TrainingSession,
 )
-from backend.app.modules.training.chess_rules import validate_and_apply
-from backend.app.modules.openings.models import Opening
-
-from typing import TYPE_CHECKING, List
 
 if TYPE_CHECKING:
     from backend.app.routers.training import TrainingItemCreate
@@ -75,7 +75,7 @@ def create_training_session(
                     return False
                 b.push(move)
             return True
-        except Exception:
+        except ValueError:
             return False
 
     def epd_to_fen(epd: str) -> str:
@@ -110,8 +110,6 @@ def create_training_session(
     db.add(session)
     db.flush()
 
-    order_index = 0
-
     for idx, move_uci in enumerate(moves):
         current_fen = board.fen()
 
@@ -128,12 +126,11 @@ def create_training_session(
         db.add(
             TrainingItem(
                 session_id=session.id,
-                order_index=order_index,
+                order_index=idx,
                 fen=current_fen,
                 correct_move_uci=move_uci,
             )
         )
-        order_index += 1
 
         board.push(move)
 
@@ -269,7 +266,7 @@ def submit_training_response(
     )
 
 
-def create_training_items(db: Session, session_id: int, items: List["TrainingItemCreate"]) -> int:
+def create_training_items(db: Session, session_id: int, items: list["TrainingItemCreate"]) -> int:
     session = db.get(TrainingSession, session_id)
     if session is None:
         raise HTTPException(status_code=404, detail="Training session not found")

@@ -45,6 +45,13 @@ jobs:
       - name: Install dependencies
         run: pip install --no-cache-dir -r requirements.txt
 
+      # Linters need no DB — run them first so style failures fail fast.
+      - name: Lint (ruff)
+        run: ruff check .
+
+      - name: Format check (black)
+        run: black --check .
+
       # Build the schema; the test db fixture assumes tables already exist.
       - name: Run migrations
         run: PYTHONPATH=. alembic -c backend/app/migrations/alembic.ini upgrade head

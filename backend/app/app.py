@@ -3,9 +3,9 @@ from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 
-from backend.app.routers.training import router as training_router
 from backend.app.routers.auth import router as auth_router
 from backend.app.routers.openings import router as openings_router
+from backend.app.routers.training import router as training_router
 
 app = FastAPI(title="Knight School")
 

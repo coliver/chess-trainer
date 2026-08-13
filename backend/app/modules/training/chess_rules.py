@@ -1,6 +1,6 @@
-import chess
 from dataclasses import dataclass
-from typing import Optional
+
+import chess
 
 
 @dataclass
@@ -8,8 +8,8 @@ class ValidationResult:
     http_status: int
     correct: bool
     reason: str
-    fen_after: Optional[str] = None
-    error_message: Optional[str] = None
+    fen_after: str | None = None
+    error_message: str | None = None
 
 
 def parse_move_uci(move_uci: str) -> chess.Move:
@@ -21,7 +21,7 @@ def validate_and_apply(fen: str, move_uci: str, expected_correct_uci: str) -> Va
 
     try:
         move = parse_move_uci(move_uci)
-    except Exception:
+    except ValueError:
         return ValidationResult(
             http_status=400,
             correct=False,

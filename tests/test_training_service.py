@@ -1,15 +1,15 @@
 # tests/test_training_service.py
-import pytest
-import chess
 from types import SimpleNamespace
 
+import chess
+import pytest
 from fastapi import HTTPException
 
 from backend.app.modules.training import service
 from backend.app.modules.training.models import (
     TrainingItem,
-    TrainingSession,
     TrainingResponse,
+    TrainingSession,
 )
 
 
@@ -190,7 +190,6 @@ def test_submit_training_response_item_id_mismatch_returns_404(monkeypatch):
 
     def validate_spy(*args, **kwargs):
         validate_called["called"] = True
-        return None
 
     monkeypatch.setattr(service, "validate_and_apply", validate_spy)
 

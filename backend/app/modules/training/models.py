@@ -1,8 +1,7 @@
-from sqlalchemy import String, Integer, Boolean, ForeignKey, DateTime, func
+from sqlalchemy import Boolean, DateTime, ForeignKey, Integer, String, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from backend.app.modules.shared.db import Base
 
-from typing import Optional
+from backend.app.modules.shared.db import Base
 
 
 class TrainingSession(Base):
@@ -14,8 +13,8 @@ class TrainingSession(Base):
         DateTime(timezone=True), server_default=func.now()
     )
 
-    opening_eco: Mapped[Optional[str]] = mapped_column(String, nullable=True)
-    opening_name: Mapped[Optional[str]] = mapped_column(String, nullable=True)
+    opening_eco: Mapped[str | None] = mapped_column(String, nullable=True)
+    opening_name: Mapped[str | None] = mapped_column(String, nullable=True)
 
     items = relationship("TrainingItem", back_populates="session", cascade="all, delete-orphan")
 

@@ -1,16 +1,17 @@
 # backend/app/routers/auth.py
 import base64
 import hashlib
-import os
 import hmac
-import jwt
+import os
+from datetime import datetime, timedelta, timezone  # Update your imports
 from typing import Any
-from fastapi import APIRouter, Depends, HTTPException, Header
+
+import jwt
+from fastapi import APIRouter, Depends, Header, HTTPException
 from pydantic import BaseModel, EmailStr, constr
-from typing import Optional
+
 from backend.app.modules.shared.db import get_db
 from backend.app.modules.users.models import User
-from datetime import datetime, timedelta, timezone  # Update your imports
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -55,8 +56,8 @@ def register(req: RegisterRequest, db=Depends(get_db)):
 
 
 class LoginRequest(BaseModel):
-    email: Optional[EmailStr] = None
-    username: Optional[constr(min_length=1, strip_whitespace=True)] = None
+    email: EmailStr | None = None
+    username: constr(min_length=1, strip_whitespace=True) | None = None
     password: constr(min_length=1)
 
 

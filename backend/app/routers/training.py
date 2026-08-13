@@ -1,5 +1,6 @@
 # /backend/app/routers/training.py
 from pydantic import BaseModel, ConfigDict
+
 from backend.app.utils import to_camel
 
 
@@ -7,21 +8,20 @@ class CamelModel(BaseModel):
     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
 
 
-from sqlalchemy import select
-from backend.app.modules.training.models import TrainingItem, TrainingSession
-
 from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy import select
 from sqlalchemy.orm import Session
-from typing import List
+
+from backend.app.modules.training.models import TrainingItem, TrainingSession
 
 router = APIRouter()
 
 from backend.app.modules.shared.db import get_db
 from backend.app.modules.training.service import (
+    create_training_items,
     create_training_session,
     get_current_training_item,
     submit_training_response,
-    create_training_items,
 )
 from backend.app.routers.auth import get_current_user
 
@@ -160,7 +160,7 @@ def post_training_response(
 )
 def post_training_items(
     id: int,
-    items: List[TrainingItemCreate],
+    items: list[TrainingItemCreate],
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user),
 ):

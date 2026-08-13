@@ -1,9 +1,9 @@
 import os
+import pkgutil
 import sys
+from importlib import import_module
 from logging.config import fileConfig
 from pathlib import Path
-from importlib import import_module
-import pkgutil
 
 # ----------------------------------------------------------------------
 # Load environment variables from .env (project root)
@@ -28,13 +28,13 @@ sys.path.insert(0, str(backend_root))
 from alembic import context
 from sqlalchemy import engine_from_config, pool
 
-# Import Base so Alembic can see all models
-from backend.app.modules.shared.db import Base
-
 # ----------------------------------------------------------------------
 # Dynamically import every “…modules.*.models” module
 # ----------------------------------------------------------------------
-import backend.app.modules as modules_pkg  # noqa: E402
+import backend.app.modules as modules_pkg
+
+# Import Base so Alembic can see all models
+from backend.app.modules.shared.db import Base
 
 for mod in pkgutil.walk_packages(modules_pkg.__path__, modules_pkg.__name__ + "."):
     if mod.name.endswith(".models"):
