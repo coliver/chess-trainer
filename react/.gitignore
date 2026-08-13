@@ -23,11 +23,20 @@ dist-ssr
 *.sln
 *.sw?
 
-# Generated Playwright screenshots — ignore all except the 1440px shots
-# embedded in README.md (kept tracked so they render on GitHub).
+# Generated Playwright screenshots. The dashboard/training shots at each
+# breakpoint are embedded in README.md, so keep those tracked (they must be
+# committed to render on GitHub). Any other stray *.png screenshot stays ignored.
 /dashboard-*.png
 /training-*.png
 !/dashboard-light-1440.png
 !/dashboard-dark-1440.png
+!/dashboard-light-900.png
+!/dashboard-dark-900.png
+!/dashboard-light-375.png
+!/dashboard-dark-375.png
 !/training-light-1440.png
 !/training-dark-1440.png
+!/training-light-900.png
+!/training-dark-900.png
+!/training-light-375.png
+!/training-dark-375.png

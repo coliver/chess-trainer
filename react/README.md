@@ -7,21 +7,49 @@ The frontend for chess-trainer is a TypeScript + React application providing an 
 ## 📸 Screenshots
 
 <details>
-<summary>Show screenshots — dashboard &amp; training, light &amp; dark</summary>
+<summary>Show screenshots — every breakpoint, light &amp; dark</summary>
 
 ### Dashboard
 
+**Desktop — 1440px**
+
 | Light | Dark |
 | --- | --- |
-| ![Dashboard — light](dashboard-light-1440.png) | ![Dashboard — dark](dashboard-dark-1440.png) |
+| ![Dashboard — light, desktop](dashboard-light-1440.png) | ![Dashboard — dark, desktop](dashboard-dark-1440.png) |
+
+**Tablet — 900px**
+
+| Light | Dark |
+| --- | --- |
+| ![Dashboard — light, tablet](dashboard-light-900.png) | ![Dashboard — dark, tablet](dashboard-dark-900.png) |
+
+**Mobile — 375px**
+
+| Light | Dark |
+| --- | --- |
+| ![Dashboard — light, mobile](dashboard-light-375.png) | ![Dashboard — dark, mobile](dashboard-dark-375.png) |
 
 ### Training
 
+**Desktop — 1440px**
+
 | Light | Dark |
 | --- | --- |
-| ![Training — light](training-light-1440.png) | ![Training — dark](training-dark-1440.png) |
+| ![Training — light, desktop](training-light-1440.png) | ![Training — dark, desktop](training-dark-1440.png) |
 
-<sub>Captured at 1440px wide by <code>playwright-dashboard.spec.ts</code>. That spec also renders tablet (900px) and mobile (375px) variants locally; regenerate all of them with <code>npm run test:playwright</code>.</sub>
+**Tablet — 900px**
+
+| Light | Dark |
+| --- | --- |
+| ![Training — light, tablet](training-light-900.png) | ![Training — dark, tablet](training-dark-900.png) |
+
+**Mobile — 375px**
+
+| Light | Dark |
+| --- | --- |
+| ![Training — light, mobile](training-light-375.png) | ![Training — dark, mobile](training-dark-375.png) |
+
+<sub>The three widths correspond to the app's CSS breakpoints (max-width 1024px and 600px). Rendered by <code>playwright-dashboard.spec.ts</code>; regenerate with <code>npm run test:playwright</code>.</sub>
 
 </details>
 
