@@ -23,6 +23,12 @@ jobs:
           cache: npm
           cache-dependency-path: react/package-lock.json
 
+      # React depends on @knight-school/chess-core via file:../packages/chess-core,
+      # so build the package first (its own isolated install + tsup build).
+      - name: Build chess-core package
+        working-directory: packages/chess-core
+        run: npm ci && npm run build
+
       # Clean, reproducible install straight from the lockfile.
       - name: Install dependencies
         run: npm ci

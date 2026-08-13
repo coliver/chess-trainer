@@ -11,19 +11,20 @@ This is a work in progress.
 <details>
   <summary>Light mode</summary>
 
-  ![Light mode](./react/dashboard-light.png)
+  ![Light mode](./react/dashboard-light-1440.png)
 </details>
 
 <details open>
   <summary>Dark mode</summary>
 
-  ![Dark mode](./react/dashboard-dark.png)
+  ![Dark mode](./react/dashboard-dark-1440.png)
 </details>
 
 ### 📂 Project Navigation
 - **[Backend](./backend/README.md)**: API logic, Database schema, and Chess engine rules.
 - **[React frontend](./react/README.md)**: React components, State management, and UI/UX.
 - **[Angular frontend](./angular/README.md)**: Alternate frontend against the same API.
+- **[Shared core](./packages/chess-core)**: Framework-neutral chess logic (`chess.js`) shared by both frontends.
 - **[Infrastructure](./nginx)**: Nginx configuration and Docker orchestration.
 
 ---
@@ -33,6 +34,7 @@ This is a work in progress.
 | :--- | :--- |
 | **Backend** | Python 3.12, FastAPI, SQLAlchemy, Alembic, `python-chess` |
 | **Frontends** | React + Vite (`/`) and Angular 19 (`/angular/`) — both against the same API |
+| **Shared** | `@knight-school/chess-core` — framework-neutral chess logic (`chess.js`) used by both frontends |
 | **Infrastructure** | PostgreSQL 16, Nginx, Docker |
 
 ---
@@ -91,6 +93,16 @@ frontend-agnostic. Because both share the `localhost` origin they also share
 4. Add a CI workflow (copy `.github/workflows/angular.yml`).
 
 No backend changes are ever required.
+
+### 🧩 Shared chess logic (`packages/chess-core`)
+
+The framework-neutral chess logic — FEN handling, move validation, and opening-preview
+positions, all built on `chess.js` with **no** framework code — lives in a standalone package,
+[`@knight-school/chess-core`](./packages/chess-core). Each frontend pulls it in with a **`file:`
+dependency**, so they share **one source of truth without sharing `node_modules`**: React and
+Angular keep entirely separate dependency trees. The package builds to an ESM bundle + type
+declarations and is unit-tested against real `chess.js` independently of either UI, so the UIs
+only test their own wiring (mocking the package boundary).
 
 ---
 

@@ -1,0 +1,30 @@
+{
+  "name": "@knight-school/chess-core",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Framework-neutral chess logic (chess.js) shared by the React and Angular frontends.",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --clean",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "chess.js": "^1.4.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.0",
+    "typescript": "~5.7.2",
+    "vitest": "^4.1.10"
+  }
+}

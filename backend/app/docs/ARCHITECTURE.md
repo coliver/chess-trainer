@@ -104,3 +104,24 @@ references it.
 | Persistence and migrations | Central DB plumbing in `modules/shared/db.py`, Alembic migrations in `app/migrations/` |
 | Authorization | JWT bearer tokens (`routers/auth.py`); training/item lookups are scoped to `current_user.id` via `TrainingSession.user_id` |
 | Opening data import | Offline script (`scripts/import_openings.py`) using raw `psycopg`, run manually via `docker compose exec api python scripts/import_openings.py` — not part of the request path |
+
+## Frontends & Shared Chess Core
+
+The backend is UI-agnostic: two interchangeable SPAs — `react/` (Vite, served at `/`) and
+`angular/` (Angular 19, served at `/angular/`) — call the same root-absolute `/api`, so
+everything is same-origin (no CORS). nginx is the only integration point.
+
+Chess logic that is **not** UI-specific (FEN handling, move validation, opening-preview
+positions — all `chess.js`, no framework code) lives in a standalone package,
+`packages/chess-core` (`@knight-school/chess-core`):
+
+- **Shared, not copied.** Each frontend depends on it via a **`file:` dependency**
+  (`file:../packages/chess-core`), giving one source of truth.
+- **Isolated `node_modules`.** No npm workspaces / hoisting — React and Angular keep entirely
+  separate dependency trees; only the built package is shared.
+- **Built + tested independently.** `tsup` emits an ESM bundle + `.d.ts`; the package's own
+  vitest suite exercises the real `chess.js`. The UIs mock the package boundary and test only
+  their own wiring. Its CI job is `.github/workflows/core.yml`.
+- **Docker.** `react/Dockerfile` builds the package (its own isolated install + build) before
+  installing React, which resolves the `file:` dep against it. Angular adds the same pattern
+  when it grows a board/training page.

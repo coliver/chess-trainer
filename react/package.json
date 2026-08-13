@@ -14,8 +14,8 @@
     "purgecss": "purgecss --config purgecss.config.cjs"
   },
   "dependencies": {
+    "@knight-school/chess-core": "file:../packages/chess-core",
     "axios": "^1.18.1",
-    "chess.js": "^1.4.0",
     "cm-chessboard": "^8.12.19",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",

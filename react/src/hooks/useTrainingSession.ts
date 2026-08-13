@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import api from "../api";
 import { AxiosError } from "axios";
-import { START_FEN, normalizeFen } from "../core/fen";
+import { START_FEN, normalizeFen } from "@knight-school/chess-core";
 
 export type NextItem = {
   nextFen: string;
