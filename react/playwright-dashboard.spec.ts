@@ -1,64 +1,165 @@
-import { test } from "@playwright/test";
+import { test, type Page } from "@playwright/test";
 
-test.describe("Dashboard screenshots (light/dark)", () => {
-  const baseURL = process.env.BASE_URL ?? "http://localhost:5173";
+const baseURL = process.env.BASE_URL ?? "http://localhost:5173";
 
-  for (const theme of ["light", "dark"] as const) {
-    test(`dashboard (${theme})`, async ({ page }) => {
-      page.on("console", (msg) => {
-        if (msg.type() === "error" || msg.type() === "warning") {
-          console.log(`[console:${theme}]`, msg.text());
-        }
-      });
+// One representative width per CSS breakpoint band. The app's media queries
+// break at max-width 1024px and max-width 600px (see styles/*.css), giving
+// three bands: desktop (>1024), tablet (601–1024), mobile (≤600).
+const VIEWPORTS = [
+  { label: "desktop", width: 1440, height: 900 },
+  { label: "tablet", width: 900, height: 1000 },
+  { label: "mobile", width: 375, height: 812 },
+] as const;
 
-      page.on("pageerror", (err) => {
-        console.log(`[pageerror:${theme}]`, err.message);
-      });
+const THEMES = ["light", "dark"] as const;
 
-      await page.addInitScript((t) => {
-        localStorage.setItem("theme", t);
-        const el = document.documentElement;
-        if (el) el.setAttribute("data-theme", t);
-      }, theme);
+const START_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
-      // RequireAuth gates /dashboard on a valid GET /auth/me response. This
-      // test hits the Vite dev server directly (no nginx /api proxy), so
-      // that request must be mocked explicitly rather than accidentally
-      // passing via a 200 SPA-fallback response.
-      await page.route("**/api/auth/me", async (route) => {
-        await route.fulfill({
-          status: 200,
-          contentType: "application/json",
-          body: JSON.stringify({ id: 1, username: "demo" }),
-        });
-      });
+function logPageIssues(page: Page, tag: string) {
+  page.on("console", (msg) => {
+    if (msg.type() === "error" || msg.type() === "warning") {
+      console.log(`[console:${tag}]`, msg.text());
+    }
+  });
+  page.on("pageerror", (err) => {
+    console.log(`[pageerror:${tag}]`, err.message);
+  });
+}
 
-      await page.route("**/api/openings", async (route) => {
-        await route.fulfill({
-          status: 200,
-          contentType: "application/json",
-          body: JSON.stringify([
-            {
-              eco: "C20",
-              name: "King's Pawn Game",
-              epd: null,
-              pgn: null,
-              uci_moves: "e2e4 e7e5",
-              description: "mock",
-            },
-          ]),
-        });
-      });
+async function applyTheme(page: Page, theme: (typeof THEMES)[number]) {
+  await page.addInitScript((t) => {
+    localStorage.setItem("theme", t);
+    const el = document.documentElement;
+    if (el) el.setAttribute("data-theme", t);
+  }, theme);
+}
 
-      await page.goto(`${baseURL}/dashboard`, { waitUntil: "domcontentloaded" });
-
-      await page.waitForSelector("#root", { timeout: 15000 });
-      await page.waitForSelector("main.page .card", { timeout: 15000 });
-      await page.getByText("Start Training an Opening", { exact: true }).waitFor();
-
-      await page.waitForTimeout(300);
-
-      await page.screenshot({ path: `dashboard-${theme}.png`, fullPage: true });
+// RequireAuth gates protected routes on a valid GET /auth/me response. These
+// tests hit the Vite dev server directly (no nginx /api proxy), so that
+// request must be mocked explicitly rather than passing via SPA fallback.
+async function mockAuth(page: Page) {
+  await page.route("**/api/auth/me", async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({ id: 1, username: "demo" }),
     });
+  });
+}
+
+test.describe("Dashboard screenshots (breakpoints × theme)", () => {
+  for (const vp of VIEWPORTS) {
+    for (const theme of THEMES) {
+      test(`dashboard ${theme} @ ${vp.label} (${vp.width}px)`, async ({
+        page,
+      }) => {
+        const tag = `${theme}:${vp.label}`;
+        logPageIssues(page, tag);
+        await page.setViewportSize({ width: vp.width, height: vp.height });
+        await applyTheme(page, theme);
+        await mockAuth(page);
+
+        await page.route("**/api/openings", async (route) => {
+          await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify([
+              {
+                eco: "C20",
+                name: "King's Pawn Game",
+                epd: null,
+                pgn: null,
+                uci_moves: "e2e4 e7e5",
+                description: "mock",
+              },
+            ]),
+          });
+        });
+
+        await page.goto(`${baseURL}/dashboard`, {
+          waitUntil: "domcontentloaded",
+        });
+
+        await page.waitForSelector("#root", { timeout: 15000 });
+        await page.waitForSelector("main.page .card", { timeout: 15000 });
+        await page
+          .getByText("Start Training an Opening", { exact: true })
+          .waitFor();
+
+        await page.waitForTimeout(300);
+
+        await page.screenshot({
+          path: `dashboard-${theme}-${vp.width}.png`,
+          fullPage: true,
+        });
+      });
+    }
+  }
+});
+
+test.describe("Training board screenshots (breakpoints × theme)", () => {
+  for (const vp of VIEWPORTS) {
+    for (const theme of THEMES) {
+      test(`training ${theme} @ ${vp.label} (${vp.width}px)`, async ({
+        page,
+      }) => {
+        const tag = `${theme}:${vp.label}`;
+        logPageIssues(page, tag);
+        await page.setViewportSize({ width: vp.width, height: vp.height });
+        await applyTheme(page, theme);
+        await mockAuth(page);
+
+        // First (and any) training item: white to move, so no autoplay fires.
+        await page.route(
+          "**/api/training-sessions/*/next",
+          async (route) => {
+            await route.fulfill({
+              status: 200,
+              contentType: "application/json",
+              body: JSON.stringify({
+                itemId: "item-1",
+                fen: START_FEN,
+                correctMoveUci: "e2e4",
+                openingName: "Italian Game",
+                openingEco: "C50",
+                pgn: "",
+              }),
+            });
+          },
+        );
+
+        await page.route(
+          "**/api/training-sessions/*/responses",
+          async (route) => {
+            await route.fulfill({
+              status: 200,
+              contentType: "application/json",
+              body: JSON.stringify({ correct: true, fenAfter: START_FEN }),
+            });
+          },
+        );
+
+        await page.goto(`${baseURL}/training/sess-1`, {
+          waitUntil: "domcontentloaded",
+        });
+
+        await page.waitForSelector("#root", { timeout: 15000 });
+        await page.waitForSelector("main.page .card", { timeout: 15000 });
+        // The board host holds the cm-chessboard <svg>. Matching the SVG's
+        // class directly is unreliable in Playwright, so wait for the svg via
+        // the plain HTML host, then give the piece sprites a moment to paint.
+        await page.waitForSelector(".board-host svg", {
+          state: "attached",
+          timeout: 15000,
+        });
+
+        await page.waitForTimeout(600);
+
+        await page.screenshot({
+          path: `training-${theme}-${vp.width}.png`,
+          fullPage: true,
+        });
+      });
+    }
   }
 });

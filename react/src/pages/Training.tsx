@@ -7,12 +7,7 @@ import React, {
 } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Chess, type Square } from "chess.js";
-import {
-  Chessboard,
-  type ChessboardOptions,
-  type PieceDropHandlerArgs,
-  type SquareHandlerArgs,
-} from "react-chessboard";
+import Board, { type BoardMarker } from "../components/Board";
 import FenTurnBadge from "../components/FenTurnBadge";
 import { useBlinkGreen } from "../hooks/useBlinkGreen";
 import { useTrainingSession } from "../hooks/useTrainingSession";
@@ -21,7 +16,7 @@ export const Training = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const { blinkGreen, squareStyles } = useBlinkGreen();
+  const { blinkGreen, blinkSquare } = useBlinkGreen();
   const handle401 = useCallback(() => navigate("/login"), [navigate]);
 
   const {
@@ -43,9 +38,7 @@ export const Training = () => {
   const [hintLevel, setHintLevel] = useState(-1);
   const [localFeedback, setLocalFeedback] = useState("");
   const shownFeedback = localFeedback || feedback;
-  const [moveFrom, setMoveFrom] = useState<string | null>(null);
 
-  const moveFromRef = useRef<string | null>(null);
   const fenRef = useRef(fen);
   const lastSubmittedMoveUciRef = useRef<string>("");
   const isSubmittingRef = useRef(isSubmitting);
@@ -88,10 +81,6 @@ export const Training = () => {
   }, [isAdvancing]);
 
   useEffect(() => {
-    moveFromRef.current = null;
-  }, [itemId]);
-
-  useEffect(() => {
     if (
       prevFeedbackRef.current !== "✅ Correct!" &&
       feedback === "✅ Correct!"
@@ -125,8 +114,6 @@ export const Training = () => {
   const resetUiForJump = useCallback(() => {
     setLocalFeedback("");
     setMoveInput("");
-    setMoveFrom(null);
-    moveFromRef.current = null;
     setHintLevel(-1);
   }, []);
 
@@ -268,9 +255,6 @@ export const Training = () => {
         setMoveInput(uci);
         void submitMove(uci, fenRef.current);
 
-        setMoveFrom(null);
-        moveFromRef.current = null;
-
         return true;
       } catch {
         setLocalFeedback("❌ Illegal move");
@@ -286,128 +270,58 @@ export const Training = () => {
     ],
   );
 
-  const handlePieceDrop = useCallback(
-    ({ sourceSquare, targetSquare }: PieceDropHandlerArgs): boolean => {
-      if (!targetSquare) return false;
-      if (sourceSquare === targetSquare) return false;
-      return processMove(sourceSquare, targetSquare);
+  // Drag and click both funnel through cm-chessboard's move-input validation
+  // into the same processMove (chess.js stays the source of truth).
+  const onMove = useCallback(
+    (from: string, to: string): boolean => {
+      if (!from || !to || from === to) return false;
+      return processMove(from, to);
     },
     [processMove],
   );
 
-  const legalTargets = useMemo((): Set<string> => {
-    if (!moveFrom) return new Set<string>();
-    const game = new Chess(fen);
-    const result = game.moves({ square: moveFrom, verbose: true });
-    const targets = result
-      .map((m) => m.to)
-      .filter((to): to is string => typeof to === "string");
-    return new Set(targets);
-  }, [fen, moveFrom]);
+  // Whether the user may pick up the piece on `square` (mirrors the old
+  // click/drag guards). Blocks past-timeline positions, in-flight submits,
+  // non-white pieces, and off-turn moves.
+  const canPickUp = useCallback(
+    (square: string): boolean => {
+      if (!atLatest) return false;
+      if (isSubmittingRef.current || isAdvancingRef.current || !itemId)
+        return false;
+      if (!isWhiteToMove) return false;
+      const game = new Chess(fenRef.current);
+      const piece = game.get(square as Square);
+      return !!piece && piece.color === "w";
+    },
+    [atLatest, itemId, isWhiteToMove],
+  );
 
-  const combinedSquareStyles = useMemo(() => {
-    const styles: Record<string, React.CSSProperties> = { ...squareStyles };
+  // Legal targets for the picked-up piece — rendered as dots by cm-chessboard.
+  const getLegalMoves = useCallback(
+    (square: string): { to: string; promotion?: string }[] => {
+      const game = new Chess(fenRef.current);
+      return game
+        .moves({ square: square as Square, verbose: true })
+        .map((m) => ({ to: m.to, promotion: m.promotion }));
+    },
+    [],
+  );
 
-    if (moveFrom) {
-      styles[moveFrom] = { backgroundColor: "rgba(255, 255, 0, 0.35)" };
-    }
-
-    for (const to of legalTargets) {
-      styles[to] = {
-        background:
-          "radial-gradient(circle, rgba(0,0,0,.1) 25%, transparent 25%)",
-        borderRadius: "50%",
-      };
-    }
+  // Persistent highlights: hint (from, then from+to) and correct-move blink.
+  const markers = useMemo((): BoardMarker[] => {
+    const arr: BoardMarker[] = [];
 
     if (correctMoveUci && hintLevel >= 0) {
       const fromSquare = correctMoveUci.substring(0, 2);
       const toSquare = correctMoveUci.substring(2, 4);
-      const highlightStyle = { backgroundColor: "rgba(255, 255, 0, 0.35)" };
-
-      if (hintLevel === 0) styles[fromSquare] = highlightStyle;
-      if (hintLevel === 1) {
-        styles[fromSquare] = highlightStyle;
-        styles[toSquare] = highlightStyle;
-      }
+      arr.push({ square: fromSquare, type: "hint" });
+      if (hintLevel === 1) arr.push({ square: toSquare, type: "hint" });
     }
 
-    return styles;
-  }, [squareStyles, moveFrom, correctMoveUci, hintLevel, legalTargets]);
+    if (blinkSquare) arr.push({ square: blinkSquare, type: "blink" });
 
-  const onSquareClick = useCallback(
-    ({ square }: SquareHandlerArgs): void => {
-      const selectedSquare = square as Square;
-      if (!selectedSquare) return;
-
-      // If user is not at latest timeline, prevent interaction (avoids confusing state)
-      if (!atLatest) return;
-
-      if (
-        isSubmittingRef.current ||
-        isAdvancingRef.current ||
-        !itemId ||
-        !isWhiteToMove
-      ) {
-        return;
-      }
-
-      const currentFrom = moveFromRef.current;
-
-      if (currentFrom === null) {
-        const game = new Chess(fenRef.current);
-        const piece = game.get(selectedSquare);
-
-        if (piece && piece.color === "w") {
-          setMoveFrom(selectedSquare);
-          moveFromRef.current = selectedSquare;
-        } else {
-          setMoveFrom(null);
-          moveFromRef.current = null;
-        }
-        return;
-      }
-
-      if (currentFrom === selectedSquare) {
-        setMoveFrom(null);
-        moveFromRef.current = null;
-        return;
-      }
-
-      const from: string = currentFrom;
-      const success = processMove(from, selectedSquare);
-
-      if (success) {
-        setMoveFrom(null);
-        moveFromRef.current = null;
-        return;
-      }
-
-      const game = new Chess(fenRef.current);
-      const piece = game.get(selectedSquare);
-
-      if (piece && piece.color === "w") {
-        setMoveFrom(selectedSquare);
-        moveFromRef.current = selectedSquare;
-      } else {
-        setMoveFrom(null);
-        moveFromRef.current = null;
-      }
-    },
-    [atLatest, itemId, isWhiteToMove, processMove],
-  );
-
-  const chessboardOptions: ChessboardOptions = useMemo(
-    () => ({
-      position: fen,
-      onPieceDrop: handlePieceDrop,
-      onSquareClick: onSquareClick,
-      squareStyles: combinedSquareStyles,
-      showAnimations: showAnimations,
-      allowDrawingArrows: true,
-    }),
-    [fen, handlePieceDrop, onSquareClick, combinedSquareStyles, showAnimations],
-  );
+    return arr;
+  }, [correctMoveUci, hintLevel, blinkSquare]);
 
   return (
     <main className="page">
@@ -424,7 +338,16 @@ export const Training = () => {
 
             <div className="training-start-body">
               <div className="training-board-wrap">
-                <Chessboard options={chessboardOptions} />
+                <Board
+                  position={fen}
+                  interactive
+                  animated={showAnimations}
+                  moveColor="white"
+                  markers={markers}
+                  getLegalMoves={getLegalMoves}
+                  onMoveStart={canPickUp}
+                  onMove={onMove}
+                />
               </div>
 
               <div className="training-form-wrap">

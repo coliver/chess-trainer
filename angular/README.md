@@ -1,11 +1,8 @@
 # ♞ Knight School (Chess Trainer) — Angular Frontend
 
-> One of two interchangeable frontends against the same `/api` backend (the other is
-> [`../react`](../react/README.md)). Served by nginx under **`/angular/`**.
-
-A minimal Angular 19 (standalone) app that demonstrates the same-origin `/api` contract:
-log in, then list the openings library — talking to the exact same FastAPI backend as the
-React app, with **no backend or CORS changes**.
+An Angular 19 (standalone) frontend for the Knight School chess-trainer backend. It lets a
+user log in and browse the openings library, talking to the FastAPI backend over its `/api`
+routes. Served by nginx under **`/angular/`**.
 
 ## 📂 Structure
 
@@ -14,9 +11,9 @@ angular/
 ├── src/
 │   ├── app/
 │   │   ├── core/
-│   │   │   ├── auth.service.ts        # login/logout, token storage (shared keys with React)
-│   │   │   ├── auth.interceptor.ts    # attaches Bearer, refreshes on 401 (mirrors react/src/api.ts)
-│   │   │   ├── auth.guard.ts          # calls GET /auth/me (mirrors react/src/RequireAuth.tsx)
+│   │   │   ├── auth.service.ts        # login/logout, token storage
+│   │   │   ├── auth.interceptor.ts    # attaches Bearer, refreshes on 401
+│   │   │   ├── auth.guard.ts          # guards routes via GET /auth/me
 │   │   │   └── openings.service.ts    # GET /api/openings
 │   │   ├── pages/
 │   │   │   ├── login/                 # POST /api/auth/login
@@ -32,10 +29,20 @@ angular/
 
 ## 🌐 Network architecture
 
-Identical to the React app: all API calls use the **root-absolute `/api`** path. nginx
-serves this app under `/angular/` and proxies `/api/` to FastAPI, so everything is
-**same-origin** — no CORS. Because both frontends share the `localhost` origin, they also
-share `localStorage`, so a login in one frontend is recognised by the other.
+All API calls use the **root-absolute `/api`** path. nginx serves this app under `/angular/`
+and proxies `/api/` to the FastAPI backend, so requests are **same-origin** — there is no CORS
+to configure. On login, the access and refresh tokens are stored in `localStorage`; the HTTP
+interceptor attaches the access token as a `Bearer` header and, on a `401`, performs a single
+`POST /api/auth/refresh` and retries the request before falling back to `/login`.
+
+### API contract used
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| `POST` | `/api/auth/login` | Authenticate; returns `{ id, email, username, access_token, refresh_token }` |
+| `POST` | `/api/auth/refresh` | Exchange a refresh token for a new access token |
+| `GET`  | `/api/auth/me` | Confirm the current user (used by the route guard) |
+| `GET`  | `/api/openings` | List openings for the dashboard (no auth) |
 
 ## 🚧 Development
 
@@ -55,7 +62,7 @@ npm start -- --serve-path /angular/ --base-href /angular/   # http://localhost:4
 
 ## 🧪 Testing & linting
 
-Run inside the container (Docker-only workflow):
+Run inside the container:
 
 ```bash
 docker compose exec angular ./node_modules/.bin/ng lint
@@ -64,5 +71,5 @@ docker compose exec angular ./node_modules/.bin/ng build
 ```
 
 - **Lint:** ESLint via `@angular-eslint`.
-- **Unit tests:** Karma + Jasmine (`*.spec.ts`), e.g. `auth.service.spec.ts` asserts the
-  login flow stores tokens; `app.component.spec.ts` renders the shell.
+- **Unit tests:** Karma + Jasmine (`*.spec.ts`) — e.g. `auth.service.spec.ts` asserts the login
+  flow stores tokens; `app.component.spec.ts` renders the shell.
