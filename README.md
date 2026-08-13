@@ -1,7 +1,8 @@
 # ♟️ Knight School (Chess Trainer)
 
 [![tests](https://github.com/coliver/chess-trainer/actions/workflows/tests.yml/badge.svg)](https://github.com/coliver/chess-trainer/actions/workflows/tests.yml)
-[![frontend](https://github.com/coliver/chess-trainer/actions/workflows/frontend.yml/badge.svg)](https://github.com/coliver/chess-trainer/actions/workflows/frontend.yml)
+[![react](https://github.com/coliver/chess-trainer/actions/workflows/react.yml/badge.svg)](https://github.com/coliver/chess-trainer/actions/workflows/react.yml)
+[![angular](https://github.com/coliver/chess-trainer/actions/workflows/angular.yml/badge.svg)](https://github.com/coliver/chess-trainer/actions/workflows/angular.yml)
 
 A web-based chess openings trainer designed to drill specific lines and track performance metrics.
 
@@ -10,18 +11,19 @@ This is a work in progress.
 <details>
   <summary>Light mode</summary>
 
-  ![Light mode](./frontend/dashboard-light.png)
+  ![Light mode](./react/dashboard-light.png)
 </details>
 
 <details open>
   <summary>Dark mode</summary>
 
-  ![Dark mode](./frontend/dashboard-dark.png)
+  ![Dark mode](./react/dashboard-dark.png)
 </details>
 
 ### 📂 Project Navigation
 - **[Backend](./backend/README.md)**: API logic, Database schema, and Chess engine rules.
-- **[Frontend](./frontend/README.md)**: React components, State management, and UI/UX.
+- **[React frontend](./react/README.md)**: React components, State management, and UI/UX.
+- **[Angular frontend](./angular/README.md)**: Alternate frontend against the same API.
 - **[Infrastructure](./nginx)**: Nginx configuration and Docker orchestration.
 
 ---
@@ -30,7 +32,7 @@ This is a work in progress.
 | Layer | Technologies |
 | :--- | :--- |
 | **Backend** | Python 3.12, FastAPI, SQLAlchemy, Alembic, `python-chess` |
-| **Frontend** | TypeScript, React, Vite, `chess.js`, `react-chessboard` |
+| **Frontends** | React + Vite (`/`) and Angular 19 (`/angular/`) — both against the same API |
 | **Infrastructure** | PostgreSQL 16, Nginx, Docker |
 
 ---
@@ -57,7 +59,8 @@ Once the containers are running, populate the database with the chess openings:
 
 ### 4. Access the App
 
-- **Web Interface:** http://localhost (via Nginx)
+- **React frontend:** http://localhost (via Nginx)
+- **Angular frontend:** http://localhost/angular/
 - **API Documentation:** http://localhost:8000/docs
 
 ---
@@ -66,15 +69,34 @@ Once the containers are running, populate the database with the chess openings:
 
 Knight School uses a decoupled architecture to separate the chess engine from the user interface:
 
-1. **Frontend:** A React SPA that handles the board visualization and user interaction.
+1. **Frontends:** Two independent SPAs — [React](./react) at `/` and [Angular](./angular) at `/angular/` — that handle board visualization and user interaction.
 2. **Backend:** A modular FastAPI server that validates moves against the `python-chess` library and manages user sessions in PostgreSQL.
 3. **Reverse Proxy:** Nginx handles routing and serves the production frontend build. SSL is configured in the Nginx container (the repo’s default config points to self-signed certificate files).
+
+### 🔁 Swappable frontends
+
+Both frontends talk to the backend the same way: they call the **root-absolute `/api`**
+path, and nginx (the single integration point) serves each SPA and proxies `/api/` to
+FastAPI. Everything is **same-origin**, so there is **no CORS** and the backend is
+frontend-agnostic. Because both share the `localhost` origin they also share
+`localStorage`, so a login in one frontend carries over to the other.
+
+**To add another frontend** (e.g. Vue, Svelte), follow the convention:
+
+1. Create a **named folder** (e.g. `vue/`) whose app calls `/api` and serves under `/vue/`.
+2. Add a **named compose service** in `docker-compose.yml` (build context `.`, its own
+   dev-server port), mirroring the `react`/`angular` services.
+3. Add **one nginx `location /vue/` block** in [`nginx/default.conf`](nginx/default.conf)
+   pointing at that service (copy the `/angular/` block).
+4. Add a CI workflow (copy `.github/workflows/angular.yml`).
+
+No backend changes are ever required.
 
 ---
 
 ## 🤝 Contribution
 
-- **Development:** Please refer to the [Backend](./backend/README.md) and [Frontend](./frontend/README.md) guides for specific coding standards.
+- **Development:** Please refer to the [Backend](./backend/README.md), [React](./react/README.md), and [Angular](./angular/README.md) guides for specific coding standards.
 - **Commits:** Use conventional commits (`feat:`, `fix:`, `docs:`, `test:`).
 - **PRs:** Ensure all new logic is covered by tests.
 

@@ -1,6 +1,7 @@
 # .dockerignore
 node_modules/
-frontend/node_modules/
+react/node_modules/
+angular/node_modules/
 **/node_modules/
 .git
 .venv

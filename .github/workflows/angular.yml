@@ -1,4 +1,4 @@
-name: frontend
+name: angular
 
 on:
   push:
@@ -7,11 +7,11 @@ on:
     branches: [main]
 
 jobs:
-  frontend:
+  angular:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: frontend
+        working-directory: angular
 
     steps:
       - uses: actions/checkout@v4
@@ -21,14 +21,17 @@ jobs:
         with:
           node-version: "20"
           cache: npm
-          cache-dependency-path: frontend/package-lock.json
+          cache-dependency-path: angular/package-lock.json
 
       # Clean, reproducible install straight from the lockfile.
       - name: Install dependencies
         run: npm ci
 
       - name: Lint
-        run: npm run lint
+        run: npx ng lint
 
-      - name: Unit / component tests
-        run: npx vitest run
+      - name: Build
+        run: npx ng build
+
+      - name: Unit tests (headless Chrome)
+        run: npx ng test --watch=false --browsers=ChromeHeadlessNoSandbox

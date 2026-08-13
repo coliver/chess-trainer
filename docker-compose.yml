@@ -31,17 +31,28 @@ services:
     command: sh -c "PYTHONPATH=/app alembic -c backend/app/migrations/alembic.ini upgrade head && uvicorn backend.app.app:app --host=0.0.0.0 --port=8000 --reload"
     restart: unless-stopped
 
-  frontend:
+  react:
     build:
       context: .
-      dockerfile: frontend/Dockerfile
+      dockerfile: react/Dockerfile
     volumes:
-      - ./frontend:/app            # Syncs the code
+      - ./react:/app               # Syncs the code
       - /app/node_modules          # Keeps container modules separate
-    environment:
-      VITE_BACKEND_URL: http://api:8000
     expose:
       - "5173"
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  angular:
+    build:
+      context: .
+      dockerfile: angular/Dockerfile
+    volumes:
+      - ./angular:/app             # Syncs the code
+      - /app/node_modules          # Keeps container modules separate
+    expose:
+      - "4200"
     depends_on:
       - api
     restart: unless-stopped
@@ -57,7 +68,7 @@ services:
       - ./nginx:/etc/nginx/conf.d:ro
       - ./letsencrypt:/etc/nginx/certs:ro
       - ./htmlcov:/app/htmlcov:ro
-      - ./frontend/dist:/usr/share/nginx/html:ro
+      - ./react/dist:/usr/share/nginx/html:ro
     restart: unless-stopped
 
   erd:
