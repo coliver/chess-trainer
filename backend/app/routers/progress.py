@@ -40,8 +40,8 @@ class DuePositionResponse(CamelModel):
 
 
 class WeakSpotResponse(CamelModel):
-    fen: str
-    correct_move_uci: str
+    fen: str | None = None
+    correct_move_uci: str | None = None
     opening_eco: str | None = None
     opening_name: str | None = None
     attempts: int

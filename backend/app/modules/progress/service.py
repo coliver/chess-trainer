@@ -1,3 +1,4 @@
+import dataclasses
 import datetime
 
 from sqlalchemy import select
@@ -156,7 +157,20 @@ def get_due(
     )
 
 
-def get_weak_spots(db: Session, user_id: int, limit: int = 20) -> list[PositionProgress]:
+@dataclasses.dataclass
+class WeakSpot:
+    fen: str | None
+    correct_move_uci: str | None
+    opening_eco: str | None
+    opening_name: str | None
+    attempts: int
+    correct_count: int
+    incorrect_count: int
+
+
+def get_weak_spots(db: Session, user_id: int, limit: int = 20) -> list[WeakSpot]:
+    """Aggregate per-position attempts by opening, so a weak opening with several
+    difficult positions surfaces as one entry instead of one per position."""
     rows = list(
         db.scalars(
             select(PositionProgress).where(
@@ -164,5 +178,27 @@ def get_weak_spots(db: Session, user_id: int, limit: int = 20) -> list[PositionP
             )
         ).all()
     )
-    rows.sort(key=lambda r: ((r.correct_count / r.attempts), -r.attempts))
-    return rows[:limit]
+
+    groups: dict[str, WeakSpot] = {}
+    order: list[str] = []
+    for r in rows:
+        key = r.opening_name if r.opening_name else f"__position_{r.id}"
+        if key not in groups:
+            groups[key] = WeakSpot(
+                fen=r.fen if not r.opening_name else None,
+                correct_move_uci=r.correct_move_uci if not r.opening_name else None,
+                opening_eco=r.opening_eco,
+                opening_name=r.opening_name,
+                attempts=0,
+                correct_count=0,
+                incorrect_count=0,
+            )
+            order.append(key)
+        group = groups[key]
+        group.attempts += r.attempts
+        group.correct_count += r.correct_count
+        group.incorrect_count += r.incorrect_count
+
+    spots = [groups[key] for key in order]
+    spots.sort(key=lambda s: ((s.correct_count / s.attempts), -s.attempts))
+    return spots[:limit]

@@ -88,6 +88,33 @@ def test_get_weak_spots_orders_by_lowest_accuracy(db, test_user):
     assert weak[0].fen == "bad"
 
 
+def test_get_weak_spots_groups_by_opening_name(db, test_user):
+    service.record_attempt(
+        db,
+        user_id=test_user.id,
+        fen="fen1",
+        correct_move_uci="e2e4",
+        is_correct=False,
+        opening_name="French Defense",
+    )
+    service.record_attempt(
+        db,
+        user_id=test_user.id,
+        fen="fen2",
+        correct_move_uci="d2d4",
+        is_correct=True,
+        opening_name="French Defense",
+    )
+
+    weak = service.get_weak_spots(db, test_user.id)
+    assert len(weak) == 1
+    assert weak[0].opening_name == "French Defense"
+    assert weak[0].attempts == 2
+    assert weak[0].correct_count == 1
+    assert weak[0].incorrect_count == 1
+    assert weak[0].fen is None
+
+
 def test_record_attempt_advances_streak(db, test_user):
     service.record_attempt(
         db, user_id=test_user.id, fen="fen1", correct_move_uci="e2e4", is_correct=True

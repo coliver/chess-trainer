@@ -34,8 +34,8 @@ type ProgressSummary = {
 };
 
 type WeakSpot = {
-  fen: string;
-  correctMoveUci: string;
+  fen?: string | null;
+  correctMoveUci?: string | null;
   openingEco?: string | null;
   openingName?: string | null;
   attempts: number;
@@ -231,7 +231,7 @@ export const Dashboard = () => {
               <span className="progress-stat-label">Weak spots</span>
               <ul>
                 {weakSpots.map((w) => (
-                  <li key={w.fen + w.correctMoveUci}>
+                  <li key={`${w.openingName ?? "Opening"}-${w.fen ?? ""}-${w.correctMoveUci ?? ""}`}>
                     {w.openingName ?? "Opening"} — {w.correctCount}/{w.attempts}{" "}
                     correct
                   </li>
