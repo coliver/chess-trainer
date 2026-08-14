@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactElement } from "react";
 import { Navigate } from "react-router-dom";
 import api from "./api";
 
-export function RequireAuth({ children }: { children: JSX.Element }) {
+export function RequireAuth({ children }: { children: ReactElement }) {
   const [loading, setLoading] = useState(true);
   const [authed, setAuthed] = useState(false);
 
