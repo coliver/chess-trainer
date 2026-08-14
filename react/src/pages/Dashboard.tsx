@@ -25,6 +25,22 @@ export type Opening = {
 
 const SEARCH_PAGE = 60;
 
+type ProgressSummary = {
+  positionsSeen: number;
+  overallAccuracy: number;
+  mastered: number;
+};
+
+type WeakSpot = {
+  fen: string;
+  correctMoveUci: string;
+  openingEco?: string | null;
+  openingName?: string | null;
+  attempts: number;
+  correctCount: number;
+  incorrectCount: number;
+};
+
 export const Dashboard = () => {
   const navigate = useNavigate();
 
@@ -34,6 +50,10 @@ export const Dashboard = () => {
   const [selected, setSelected] = useState<Opening | null>(null);
   const [sortAZ, setSortAZ] = useState(false);
   const [searchLimit, setSearchLimit] = useState(SEARCH_PAGE);
+
+  const [summary, setSummary] = useState<ProgressSummary | null>(null);
+  const [dueCount, setDueCount] = useState(0);
+  const [weakSpots, setWeakSpots] = useState<WeakSpot[]>([]);
 
   useEffect(() => {
     api
@@ -45,6 +65,21 @@ export const Dashboard = () => {
         setSelected(null);
       })
       .catch((e) => console.error("Error loading openings:", e));
+  }, []);
+
+  useEffect(() => {
+    api
+      .get("/progress/summary")
+      .then((res) => setSummary(res.data ?? null))
+      .catch((e) => console.error("Error loading progress summary:", e));
+    api
+      .get("/progress/due")
+      .then((res) => setDueCount((res.data ?? []).length))
+      .catch((e) => console.error("Error loading due positions:", e));
+    api
+      .get("/progress/weak-spots")
+      .then((res) => setWeakSpots((res.data ?? []).slice(0, 5)))
+      .catch((e) => console.error("Error loading weak spots:", e));
   }, []);
 
   const groups = useMemo(() => groupByBase(openings), [openings]);
@@ -128,6 +163,44 @@ export const Dashboard = () => {
   return (
     <main className="page">
       <div className="card">
+        <section className="progress-strip" aria-label="Training progress">
+          <div className="progress-stat">
+            <span className="progress-stat-value">
+              {summary?.positionsSeen ?? 0}
+            </span>
+            <span className="progress-stat-label">Positions trained</span>
+          </div>
+          <div className="progress-stat">
+            <span className="progress-stat-value">
+              {summary
+                ? `${Math.round(summary.overallAccuracy * 100)}%`
+                : "—"}
+            </span>
+            <span className="progress-stat-label">Accuracy</span>
+          </div>
+          <div className="progress-stat">
+            <span className="progress-stat-value">{summary?.mastered ?? 0}</span>
+            <span className="progress-stat-label">Mastered</span>
+          </div>
+          <div className="progress-stat">
+            <span className="progress-stat-value">{dueCount}</span>
+            <span className="progress-stat-label">Due for review</span>
+          </div>
+          {weakSpots.length > 0 && (
+            <div className="progress-weak-spots">
+              <span className="progress-stat-label">Weak spots</span>
+              <ul>
+                {weakSpots.map((w) => (
+                  <li key={w.fen + w.correctMoveUci}>
+                    {w.openingName ?? "Opening"} — {w.correctCount}/{w.attempts}{" "}
+                    correct
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </section>
+
         <section className="opening-browser">
           <header className="ob-toolbar">
             <div className="ob-heading">

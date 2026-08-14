@@ -1,4 +1,5 @@
 # backend/app/modules/training/service.py
+import logging
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
@@ -8,6 +9,7 @@ from sqlalchemy import and_, func, select
 from sqlalchemy.orm import Session
 
 from backend.app.modules.openings.models import Opening
+from backend.app.modules.progress.service import record_attempt
 from backend.app.modules.training.chess_rules import validate_and_apply
 from backend.app.modules.training.models import (
     TrainingItem,
@@ -17,6 +19,8 @@ from backend.app.modules.training.models import (
 
 if TYPE_CHECKING:
     from backend.app.routers.training import TrainingItemCreate
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -239,6 +243,22 @@ def submit_training_response(
         )
 
     db.flush()
+
+    try:
+        with db.begin_nested():
+            record_attempt(
+                db,
+                user_id=current_user_id,
+                fen=current.fen,
+                correct_move_uci=current.correct_move_uci,
+                is_correct=result.correct,
+                opening_eco=session.opening_eco,
+                opening_name=session.opening_name,
+            )
+    except Exception:
+        logger.exception(
+            "record_attempt failed for user_id=%s item_id=%s", current_user_id, item_id
+        )
 
     all_responded = all(
         db.query(TrainingResponse)
