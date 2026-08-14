@@ -9,18 +9,25 @@ import { AuthService } from '../../core/auth.service';
   template: `
     <main class="page">
       <div class="card">
-        <h1>Log in</h1>
+        <h1 class="title">Login</h1>
         <p class="subtitle">Welcome back.</p>
 
-        <form (ngSubmit)="submit()">
-          <label>
-            <span>Username</span>
-            <input name="username" [(ngModel)]="username" required autocomplete="username" />
+        <form class="auth-form" (ngSubmit)="submit()">
+          <label class="auth-field">
+            <span class="auth-label">Username</span>
+            <input
+              class="text-input"
+              name="username"
+              [(ngModel)]="username"
+              required
+              autocomplete="username"
+            />
           </label>
 
-          <label>
-            <span>Password</span>
+          <label class="auth-field">
+            <span class="auth-label">Password</span>
             <input
+              class="text-input"
               name="password"
               type="password"
               [(ngModel)]="password"
@@ -34,59 +41,12 @@ import { AuthService } from '../../core/auth.service';
           </button>
 
           @if (error) {
-            <div class="error" role="alert">{{ error }}</div>
+            <div class="auth-error" role="alert">{{ error }}</div>
           }
         </form>
       </div>
     </main>
   `,
-  styles: [
-    `
-      .page {
-        display: flex;
-        justify-content: center;
-        padding: 2.5rem 1rem;
-      }
-      .card {
-        width: 100%;
-        max-width: 420px;
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 14px;
-        padding: 1.75rem;
-      }
-      h1 {
-        margin: 0 0 0.25rem;
-      }
-      .subtitle {
-        margin: 0 0 1.25rem;
-        color: var(--muted);
-      }
-      form {
-        display: flex;
-        flex-direction: column;
-        gap: 0.9rem;
-      }
-      label {
-        display: flex;
-        flex-direction: column;
-        gap: 0.35rem;
-        font-size: 0.9rem;
-      }
-      input {
-        padding: 0.6rem 0.7rem;
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        background: var(--bg);
-        color: inherit;
-        font: inherit;
-      }
-      .error {
-        color: #dc2626;
-        font-size: 0.9rem;
-      }
-    `,
-  ],
 })
 export class LoginComponent {
   private readonly auth = inject(AuthService);

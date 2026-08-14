@@ -42,6 +42,14 @@ export interface TrainingItem {
 export class TrainingService {
   private readonly http = inject(HttpClient);
 
+  /** POST /api/training-sessions — starts a session for the given opening. */
+  start(openingEco: string, openingName: string): Observable<{ id: string | number }> {
+    return this.http.post<{ id: string | number }>('/api/training-sessions', {
+      openingEco,
+      openingName,
+    });
+  }
+
   next(sessionId: string): Observable<TrainingItem> {
     return this.http
       .get<NextItemResponse>(`/api/training-sessions/${sessionId}/next`)

@@ -1,15 +1,3 @@
-<header class="topbar">
-  <a class="brand" routerLink="/dashboard">
-    ♞ Knight School <span class="tag">Angular</span>
-  </a>
-  <nav>
-    @if (isLoggedIn) {
-      <span class="user">{{ username }}</span>
-      <button class="link" type="button" (click)="logout()">Log out</button>
-    } @else {
-      <a class="link" routerLink="/login">Log in</a>
-    }
-  </nav>
-</header>
+<app-header />
 
 <router-outlet />

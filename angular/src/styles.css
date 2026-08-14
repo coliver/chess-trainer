@@ -2,74 +2,11 @@
 @import 'cm-chessboard/assets/chessboard.css';
 @import 'cm-chessboard/assets/extensions/markers/markers.css';
 
-:root {
-  --bg: #f7f7f8;
-  --surface: #ffffff;
-  --border: #e4e4e7;
-  --muted: #6b7280;
-  --accent: #7702ff;
-  color-scheme: light dark;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0f0f12;
-    --surface: #17171b;
-    --border: #2a2a30;
-    --muted: #9ca3af;
-    --accent: #c084fc;
-  }
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  margin: 0;
-  min-height: 100%;
-}
-
-body {
-  background: var(--bg);
-  color: #18181b;
-  font-family:
-    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-
-@media (prefers-color-scheme: dark) {
-  body {
-    color: #ededed;
-  }
-}
-
-.btn {
-  padding: 0.6rem 0.9rem;
-  border: none;
-  border-radius: 8px;
-  background: var(--accent);
-  color: #fff;
-  font: inherit;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.btn:disabled {
-  opacity: 0.6;
-  cursor: default;
-}
-
-/* Board host + custom cm-chessboard markers (hint / correct-move blink). */
-.board-host {
-  width: 100%;
-}
-.cm-chessboard .markers .marker.marker-square-hint {
-  fill: gold;
-  opacity: 0.4;
-}
-.cm-chessboard .markers .marker.marker-square-blink {
-  fill: rgb(0, 200, 0);
-  opacity: 0.45;
-}
+@import './styles/tokens.css';
+@import './styles/base.css';
+@import './styles/header.css';
+@import './styles/ui.css';
+@import './styles/training.css';
+@import './styles/dashboard.css';
+@import './styles/login.css';
+@import './styles/board.css';

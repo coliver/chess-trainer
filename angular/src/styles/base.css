@@ -1,0 +1,113 @@
+/* src/styles/base.css */
+
+/* Shared page layout */
+.page {
+  width: 1126px;
+  max-width: 100%;
+  margin: 0 auto;
+  flex: 1;
+  padding: 32px 20px 48px;
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+#root {
+  width: 1126px;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  border-inline: 1px solid var(--border);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text-h);
+}
+
+a {
+  color: var(--accent);
+}
+
+body {
+  margin: 0;
+}
+
+h1 {
+  font-size: 56px;
+  letter-spacing: -1.68px;
+  margin: 32px 0;
+}
+
+h2 {
+  font-size: 24px;
+  line-height: 118%;
+  letter-spacing: -0.24px;
+  margin: 0 0 8px;
+}
+
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .page {
+    padding: 20px 14px 32px;
+  }
+
+  h1 {
+    font-size: 28px;
+    letter-spacing: -0.8px;
+    margin: 16px 0;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+}
+
+p {
+  margin: 0;
+}
+
+code,
+.counter {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 4px;
+  color: var(--text-h);
+}
+
+code {
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}
+
+.italics {
+  font-style: italic;
+}

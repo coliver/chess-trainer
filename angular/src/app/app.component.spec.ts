@@ -21,13 +21,13 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const el: HTMLElement = fixture.nativeElement;
-    expect(el.querySelector('.brand')?.textContent).toContain('Knight School');
+    expect(el.querySelector('.site-header-title')?.textContent).toContain('Knight');
   });
 
-  it('shows a Log in link when logged out', () => {
+  it('shows a Login link when logged out', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const el: HTMLElement = fixture.nativeElement;
-    expect(el.querySelector('nav')?.textContent).toContain('Log in');
+    expect(el.querySelector('a[aria-label="Login"]')).toBeTruthy();
   });
 });

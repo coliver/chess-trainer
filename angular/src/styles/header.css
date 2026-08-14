@@ -1,0 +1,195 @@
+/* src/styles/header.css */
+
+.site-header {
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in oklab, var(--bg) 92%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+.site-header-inner {
+  width: 1126px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 14px 20px;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* keep */
+}
+
+.site-header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* control spacing between greeting and nav */
+}
+
+.site-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.site-header-greeting {
+  display: none;
+  font-size: 0.7rem;
+}
+
+@media (min-width: 1200px) {
+  .site-header-greeting {
+    display: block;
+  }
+}
+
+.site-header-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.site-header-link {
+  color: var(--text-h);
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: var(--social-bg);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.site-header-link:hover {
+  border-color: var(--accent-border);
+}
+
+.site-header-profile-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background: var(--social-bg);
+  color: var(--text-h);
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.05s;
+  padding: 0;
+}
+
+.site-header-profile-link:hover {
+  border-color: var(--accent-border);
+}
+
+.site-header-profile-link:active {
+  transform: none;
+}
+
+.site-header-profile-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* theme toggle */
+.theme-toggle-btn {
+  height: 40px;
+  width: 40px;
+  padding: 0;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background: var(--social-bg);
+  color: var(--text-h);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.theme-toggle-btn:hover {
+  border-color: var(--accent-border);
+}
+
+.theme-toggle-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.site-header-title {
+  font-family: var(--heading);
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  font-size: 64px;
+  text-decoration: none;
+
+  display: block;
+
+  background-repeat: repeat-x;
+  background-size: 100% auto;
+  background-position: 0% 15%;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Keeping your original selector as-is */
+.site-header-title Link {
+  border: 1px solid white;
+  opacity: 1;
+}
+
+.site-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ===== Phone layout ===== */
+@media (max-width: 600px) {
+  .site-header-inner {
+    flex-wrap: wrap;
+    gap: 10px 12px;
+    padding: 10px 14px;
+  }
+
+  .site-header-brand {
+    gap: 8px;
+  }
+
+  /* CSS height overrides the SVG's inline height attribute */
+  .site-header-logo {
+    height: 40px;
+  }
+
+  .site-header-title {
+    font-size: clamp(26px, 8vw, 40px);
+    letter-spacing: -0.2px;
+  }
+
+  .site-header-right {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .site-header-nav {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* Greeting is nice-to-have; drop it to reclaim width on phones */
+  .site-header-greeting {
+    display: none;
+  }
+
+  .site-header-link {
+    padding: 8px 10px;
+  }
+
+  .site-header-profile-link {
+    width: 36px;
+    height: 36px;
+  }
+
+  .theme-toggle-btn {
+    width: 36px;
+    height: 36px;
+  }
+}

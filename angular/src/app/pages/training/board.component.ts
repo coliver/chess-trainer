@@ -55,9 +55,6 @@ const CUSTOM_MARKER: Record<
         display: block;
         width: 100%;
       }
-      .board-host {
-        width: 100%;
-      }
     `,
   ],
 })
