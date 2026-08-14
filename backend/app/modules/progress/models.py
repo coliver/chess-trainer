@@ -1,6 +1,6 @@
 import datetime
 
-from sqlalchemy import DateTime, Float, ForeignKey, Integer, String, UniqueConstraint, func
+from sqlalchemy import Date, DateTime, Float, ForeignKey, Integer, String, UniqueConstraint, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from backend.app.modules.shared.db import Base
@@ -40,3 +40,18 @@ class PositionProgress(Base):
     )
 
     user = relationship("User", back_populates="position_progress")
+
+
+class UserStreak(Base):
+    __tablename__ = "user_streaks"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(
+        ForeignKey("users.id", ondelete="CASCADE"), unique=True, index=True
+    )
+
+    current_streak: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    longest_streak: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    last_active_date: Mapped[datetime.date | None] = mapped_column(Date, nullable=True)
+
+    user = relationship("User", back_populates="streak")

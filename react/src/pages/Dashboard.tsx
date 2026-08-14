@@ -29,6 +29,8 @@ type ProgressSummary = {
   positionsSeen: number;
   overallAccuracy: number;
   mastered: number;
+  currentStreak: number;
+  longestStreak: number;
 };
 
 type WeakSpot = {
@@ -129,6 +131,16 @@ export const Dashboard = () => {
     }
   };
 
+  const startReviewSession = async () => {
+    try {
+      const response = await api.post("/training-sessions/from-due");
+      navigate(`/training/${response.data.id}`);
+    } catch (error) {
+      console.error("Error starting review session:", error);
+      alert("No positions due for review yet.");
+    }
+  };
+
   const openBase = (group: OpeningGroup) => {
     setActiveBase(group.base);
     setSelected(group.representative);
@@ -179,12 +191,40 @@ export const Dashboard = () => {
             <span className="progress-stat-label">Accuracy</span>
           </div>
           <div className="progress-stat">
+            <span className="progress-stat-value">
+              {summary?.currentStreak ?? 0}
+              {(summary?.currentStreak ?? 0) > 0 ? " 🔥" : ""}
+            </span>
+            <span className="progress-stat-label">
+              Day streak{summary?.longestStreak ? ` · best ${summary.longestStreak}` : ""}
+            </span>
+          </div>
+          <div className="progress-stat progress-stat--mastery">
             <span className="progress-stat-value">{summary?.mastered ?? 0}</span>
             <span className="progress-stat-label">Mastered</span>
+            {summary && summary.positionsSeen > 0 && (
+              <div className="mastery-bar" aria-hidden="true">
+                <div
+                  className="mastery-bar-fill"
+                  style={{
+                    width: `${Math.min(
+                      100,
+                      Math.round((summary.mastered / summary.positionsSeen) * 100),
+                    )}%`,
+                  }}
+                />
+              </div>
+            )}
           </div>
           <div className="progress-stat">
-            <span className="progress-stat-value">{dueCount}</span>
-            <span className="progress-stat-label">Due for review</span>
+            <button
+              type="button"
+              className="progress-review-btn"
+              disabled={dueCount === 0}
+              onClick={startReviewSession}
+            >
+              Review due ({dueCount})
+            </button>
           </div>
           {weakSpots.length > 0 && (
             <div className="progress-weak-spots">

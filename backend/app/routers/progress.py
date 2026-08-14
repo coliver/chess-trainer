@@ -27,6 +27,8 @@ class ProgressSummaryResponse(CamelModel):
     overall_accuracy: float
     mastered: int
     opening_breakdown: list[OpeningBreakdown]
+    current_streak: int
+    longest_streak: int
 
 
 class DuePositionResponse(CamelModel):

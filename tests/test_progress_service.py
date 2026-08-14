@@ -88,6 +88,54 @@ def test_get_weak_spots_orders_by_lowest_accuracy(db, test_user):
     assert weak[0].fen == "bad"
 
 
+def test_record_attempt_advances_streak(db, test_user):
+    service.record_attempt(
+        db, user_id=test_user.id, fen="fen1", correct_move_uci="e2e4", is_correct=True
+    )
+    streak = service.get_streak(db, test_user.id)
+    assert streak.current_streak == 1
+    assert streak.longest_streak == 1
+
+    summary = service.get_summary(db, test_user.id)
+    assert summary["current_streak"] == 1
+    assert summary["longest_streak"] == 1
+
+
+def test_create_session_from_due_seeds_items_from_due_positions(db, test_user):
+    from backend.app.modules.training import service as training_service
+
+    row = service.record_attempt(
+        db,
+        user_id=test_user.id,
+        fen="fen1",
+        correct_move_uci="e2e4",
+        is_correct=True,
+        opening_eco="C00",
+        opening_name="French Defense",
+    )
+    # simulate the review interval having already elapsed
+    row.due_at = datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=1)
+    db.commit()
+
+    session = training_service.create_session_from_due(db, test_user.id)
+
+    assert session.opening_name == "Review"
+    items = list(session.items)
+    assert len(items) == 1
+    assert items[0].fen == "fen1"
+    assert items[0].correct_move_uci == "e2e4"
+
+
+def test_create_session_from_due_404_when_nothing_due(db, test_user):
+    import pytest
+    from fastapi import HTTPException
+
+    from backend.app.modules.training import service as training_service
+
+    with pytest.raises(HTTPException):
+        training_service.create_session_from_due(db, test_user.id)
+
+
 def test_progress_scoped_to_user(db, test_user):
     from backend.app.modules.users.models import User
     from backend.app.routers.auth import hash_password

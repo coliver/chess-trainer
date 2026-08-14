@@ -3,8 +3,9 @@ import datetime
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from backend.app.modules.progress.models import PositionProgress
+from backend.app.modules.progress.models import PositionProgress, UserStreak
 from backend.app.modules.progress.srs import SrsState, next_state, quality_from_correctness
+from backend.app.modules.progress.streak import next_streak
 
 
 def record_attempt(
@@ -71,7 +72,36 @@ def record_attempt(
     row.last_seen_at = now
 
     db.flush()
+
+    record_streak(db, user_id=user_id, today=now.date())
+
     return row
+
+
+def record_streak(db: Session, user_id: int, today: datetime.date) -> UserStreak:
+    """Upsert the user's daily streak counter."""
+    row = db.execute(select(UserStreak).where(UserStreak.user_id == user_id)).scalar_one_or_none()
+
+    if row is None:
+        row = UserStreak(user_id=user_id, current_streak=0, longest_streak=0, last_active_date=None)
+        db.add(row)
+
+    result = next_streak(
+        today=today,
+        prev_last_active=row.last_active_date,
+        prev_current=row.current_streak,
+        prev_longest=row.longest_streak,
+    )
+    row.current_streak = result.current_streak
+    row.longest_streak = result.longest_streak
+    row.last_active_date = result.last_active_date
+
+    db.flush()
+    return row
+
+
+def get_streak(db: Session, user_id: int) -> UserStreak | None:
+    return db.execute(select(UserStreak).where(UserStreak.user_id == user_id)).scalar_one_or_none()
 
 
 def get_summary(db: Session, user_id: int) -> dict:
@@ -101,11 +131,15 @@ def get_summary(db: Session, user_id: int) -> dict:
         for b in by_opening.values()
     ]
 
+    streak = get_streak(db, user_id)
+
     return {
         "positions_seen": positions_seen,
         "overall_accuracy": overall_accuracy,
         "mastered": mastered,
         "opening_breakdown": opening_breakdown,
+        "current_streak": streak.current_streak if streak else 0,
+        "longest_streak": streak.longest_streak if streak else 0,
     }
 
 
