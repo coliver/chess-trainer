@@ -1,0 +1,14 @@
+# Production overlay. Use instead of docker-compose.override.yml:
+#   npm --prefix packages/chess-core run build
+#   npm --prefix react run build         # writes react/dist
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build db api nginx
+#
+# Only db, api, and nginx run in prod — react/angular are dev-server-only
+# services and are intentionally not started.
+services:
+  nginx:
+    volumes:
+      - ./nginx/prod.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./letsencrypt:/etc/nginx/certs:ro
+      - ./htmlcov:/app/htmlcov:ro
+      - ./react/dist:/usr/share/nginx/html:ro
