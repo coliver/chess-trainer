@@ -1,6 +1,7 @@
 # Production overlay. Use instead of docker-compose.override.yml, once a TLS
 # cert already exists (see docker-compose.prod-bootstrap.yml for a brand-new
-# host's first cert):
+# host's first cert — and scripts/certbot-deploy-hook.sh so renewals reload
+# nginx instead of silently sitting unused on disk):
 #   npm --prefix packages/chess-core run build
 #   npm --prefix react run build         # writes react/dist
 #   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build db api nginx
