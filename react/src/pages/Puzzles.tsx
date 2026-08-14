@@ -138,7 +138,7 @@ export const Puzzles = () => {
           <Board
             position={fen}
             interactive={!!puzzleId && !isSubmitting}
-            moveColor={solverColor}
+            moveColor={solverColor === "b" ? "black" : "white"}
             onMoveStart={canPickUp}
             getLegalMoves={getLegalMoves}
             onMove={onMove}
