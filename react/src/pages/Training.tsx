@@ -13,6 +13,13 @@ import {
   applyUci,
   legalMoves,
   pieceColorAt,
+  createTimeline,
+  appendTimelineFen as coreAppendTimelineFen,
+  jumpToIndex as coreJumpToIndex,
+  isAtLatest,
+  deriveStatus,
+  splitOpeningLabel,
+  deriveHintMarkers,
 } from "@knight-school/chess-core";
 import { useBlinkGreen } from "../hooks/useBlinkGreen";
 import { useTrainingSession } from "../hooks/useTrainingSession";
@@ -52,18 +59,15 @@ export const Training = () => {
   const prevFeedbackRef = useRef<string>(feedback);
 
   // Timeline: keep both state (for UI render) and a ref (for sync checks in effects)
-  const [timeline, setTimeline] = useState(() => ({
-    fens: [fen],
-    indices: 0,
-  }));
+  const [timeline, setTimeline] = useState(() => createTimeline(fen));
   const timelineRef = useRef(timeline);
 
   useEffect(() => {
     setTimeline((t) => {
-      const current = t.fens[t.indices];
+      const current = t.fens[t.index];
       if (current === fen) return t;
 
-      const next = { fens: [fen], indices: 0 };
+      const next = createTimeline(fen);
       timelineRef.current = next;
       return next;
     });
@@ -102,15 +106,11 @@ export const Training = () => {
   }, [feedback, blinkGreen]);
 
   const isWhiteToMove = useMemo(() => sideToMove(fen) === "w", [fen]);
-  const atLatest = timeline.indices === timeline.fens.length - 1;
+  const atLatest = isAtLatest(timeline);
 
   const appendTimelineFen = useCallback((nextFen: string) => {
     setTimeline((t) => {
-      const prefix = t.fens.slice(0, t.indices + 1);
-      if (prefix[prefix.length - 1] === nextFen) {
-        return t;
-      }
-      const next = { fens: [...prefix, nextFen], indices: prefix.length };
+      const next = coreAppendTimelineFen(t, nextFen);
       timelineRef.current = next; // sync ref immediately
       return next;
     });
@@ -124,13 +124,12 @@ export const Training = () => {
 
   const jumpToIndex = useCallback(
     (nextIndex: number) => {
-      const { fens, indices } = timelineRef.current;
-      const clamped = Math.max(0, Math.min(nextIndex, fens.length - 1));
-      if (clamped === indices) return;
+      const current = timelineRef.current;
+      const next = coreJumpToIndex(current, nextIndex);
+      if (next.index === current.index) return;
 
-      const nextFen = fens[clamped] ?? fens[0];
+      const nextFen = next.fens[next.index] ?? next.fens[0];
 
-      const next = { fens, indices: clamped };
       timelineRef.current = next;
       setTimeline(next);
 
@@ -157,7 +156,7 @@ export const Training = () => {
     }
     // Critical: autoplay MUST only run when we're at the latest timeline position
     const tl = timelineRef.current;
-    if (tl.indices !== tl.fens.length - 1) {
+    if (tl.index !== tl.fens.length - 1) {
       return;
     }
     if (sideToMove(fenRef.current) !== "b") {
@@ -275,11 +274,10 @@ export const Training = () => {
   const markers = useMemo((): BoardMarker[] => {
     const arr: BoardMarker[] = [];
 
-    if (correctMoveUci && hintLevel >= 0 && !isSessionCompleted) {
-      const fromSquare = correctMoveUci.substring(0, 2);
-      const toSquare = correctMoveUci.substring(2, 4);
-      arr.push({ square: fromSquare, type: "hint" });
-      if (hintLevel === 1) arr.push({ square: toSquare, type: "hint" });
+    const hint = deriveHintMarkers(correctMoveUci, hintLevel, isSessionCompleted);
+    if (hint) {
+      arr.push({ square: hint.from, type: "hint" });
+      if (hint.to) arr.push({ square: hint.to, type: "hint" });
     }
 
     if (blinkSquare) arr.push({ square: blinkSquare, type: "blink" });
@@ -288,42 +286,16 @@ export const Training = () => {
   }, [correctMoveUci, hintLevel, blinkSquare, isSessionCompleted]);
 
   // Split "C50 Italian Game" into an ECO chip + name for the rail header.
-  const ecoMatch = openingLabel.match(/^([A-E]\d{2})\s+(.*)$/);
-  const eco = ecoMatch ? ecoMatch[1] : "";
-  const openingName = ecoMatch ? ecoMatch[2] : openingLabel || "Training";
+  const { eco, openingName } = splitOpeningLabel(openingLabel);
 
   // Derive the status banner from the existing feedback / turn / hint state.
-  let statusKind = "your";
-  let statusIcon = "♔";
-  let statusMsg = "Your move";
-  let statusSub = isWhiteToMove
-    ? "Play the correct move for White."
-    : "Waiting for the reply…";
-
-  if (isSessionCompleted) {
-    statusKind = "done";
-    statusIcon = "⚑";
-    statusMsg = "Session complete";
-    statusSub = "You played the line. Well done.";
-  } else if (shownFeedback.startsWith("✅")) {
-    statusKind = "good";
-    statusIcon = "✓";
-    statusMsg = shownFeedback.replace(/^✅\s*/, "");
-    statusSub = "";
-  } else if (shownFeedback.startsWith("❌")) {
-    statusKind = "bad";
-    statusIcon = "✗";
-    statusMsg = shownFeedback.replace(/^❌\s*/, "");
-    statusSub = "Try a different move.";
-  } else if (shownFeedback) {
-    statusMsg = shownFeedback;
-    statusSub = "";
-  } else if (hintLevel >= 0) {
-    statusKind = "hint";
-    statusIcon = "💡";
-    statusMsg = "Hint";
-    statusSub = "Look at the highlighted square.";
-  }
+  const status = deriveStatus({
+    isSessionCompleted,
+    feedback: shownFeedback,
+    hintLevel,
+    isWhiteToMove,
+  });
+  const { kind: statusKind, icon: statusIcon, message: statusMsg, sub: statusSub } = status;
 
   const busy = isSubmitting || isAdvancing;
 
@@ -379,16 +351,16 @@ export const Training = () => {
                 <button
                   className="btn"
                   type="button"
-                  onClick={() => jumpToIndex(timeline.indices - 1)}
-                  disabled={busy || timeline.indices <= 0}
+                  onClick={() => jumpToIndex(timeline.index - 1)}
+                  disabled={busy || timeline.index <= 0}
                 >
                   ‹ Prev
                 </button>
                 <button
                   className="btn"
                   type="button"
-                  onClick={() => jumpToIndex(timeline.indices + 1)}
-                  disabled={busy || timeline.indices >= timeline.fens.length - 1}
+                  onClick={() => jumpToIndex(timeline.index + 1)}
+                  disabled={busy || timeline.index >= timeline.fens.length - 1}
                 >
                   Next ›
                 </button>

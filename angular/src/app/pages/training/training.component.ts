@@ -9,6 +9,14 @@ import {
   pieceColorAt,
   sideToMove,
   START_FEN,
+  Timeline,
+  createTimeline,
+  appendTimelineFen as coreAppendTimelineFen,
+  jumpToIndex as coreJumpToIndex,
+  isAtLatest,
+  deriveStatus,
+  splitOpeningLabel,
+  deriveHintMarkers,
 } from '@knight-school/chess-core';
 import { BoardComponent, BoardMarker } from './board.component';
 import { TrainingItem, TrainingService } from '../../core/training.service';
@@ -75,16 +83,16 @@ const BLINK_CYCLE_MS = 420; // fadeIn(120) + hold(120) + fadeOut(180), matches r
                 <button
                   class="btn"
                   type="button"
-                  (click)="jumpToIndex(timelineIndex - 1)"
-                  [disabled]="busy || timelineIndex <= 0"
+                  (click)="jumpToIndex(timeline.index - 1)"
+                  [disabled]="busy || timeline.index <= 0"
                 >
                   ‹ Prev
                 </button>
                 <button
                   class="btn"
                   type="button"
-                  (click)="jumpToIndex(timelineIndex + 1)"
-                  [disabled]="busy || timelineIndex >= timelineFens.length - 1"
+                  (click)="jumpToIndex(timeline.index + 1)"
+                  [disabled]="busy || timeline.index >= timeline.fens.length - 1"
                 >
                   Next ›
                 </button>
@@ -143,8 +151,7 @@ export class TrainingComponent implements OnInit, OnDestroy {
   hintLevel = -1;
   markers: BoardMarker[] = [];
 
-  timelineFens: string[] = [START_FEN];
-  timelineIndex = 0;
+  timeline: Timeline = createTimeline(START_FEN);
 
   private blinkSquare: string | null = null;
   private blinkTimer: ReturnType<typeof setTimeout> | null = null;
@@ -160,56 +167,48 @@ export class TrainingComponent implements OnInit, OnDestroy {
   }
 
   get atLatest(): boolean {
-    return this.timelineIndex === this.timelineFens.length - 1;
+    return isAtLatest(this.timeline);
   }
 
   get busy(): boolean {
     return this.isSubmitting || this.isAdvancing;
   }
 
+  private get openingParts() {
+    return splitOpeningLabel(this.openingLabel);
+  }
+
   get eco(): string {
-    return this.openingLabel.match(/^([A-E]\d{2})\s+(.*)$/)?.[1] ?? '';
+    return this.openingParts.eco;
   }
 
   get openingName(): string {
-    const m = this.openingLabel.match(/^([A-E]\d{2})\s+(.*)$/);
-    return m ? m[2] : this.openingLabel || 'Training';
+    return this.openingParts.openingName;
+  }
+
+  private get status() {
+    return deriveStatus({
+      isSessionCompleted: this.isSessionCompleted,
+      feedback: this.feedback,
+      hintLevel: this.hintLevel,
+      isWhiteToMove: this.isWhiteToMove,
+    });
   }
 
   get statusKind(): string {
-    if (this.isSessionCompleted) return 'done';
-    if (this.feedback.startsWith('✅')) return 'good';
-    if (this.feedback.startsWith('❌')) return 'bad';
-    if (this.feedback) return 'your';
-    if (this.hintLevel >= 0) return 'hint';
-    return 'your';
+    return this.status.kind;
   }
 
   get statusIcon(): string {
-    if (this.isSessionCompleted) return '⚑';
-    if (this.feedback.startsWith('✅')) return '✓';
-    if (this.feedback.startsWith('❌')) return '✗';
-    if (this.feedback) return '♔';
-    if (this.hintLevel >= 0) return '💡';
-    return '♔';
+    return this.status.icon;
   }
 
   get statusMsg(): string {
-    if (this.isSessionCompleted) return 'Session complete';
-    if (this.feedback.startsWith('✅')) return this.feedback.replace(/^✅\s*/, '');
-    if (this.feedback.startsWith('❌')) return this.feedback.replace(/^❌\s*/, '');
-    if (this.feedback) return this.feedback;
-    if (this.hintLevel >= 0) return 'Hint';
-    return 'Your move';
+    return this.status.message;
   }
 
   get statusSub(): string {
-    if (this.isSessionCompleted) return 'You played the line. Well done.';
-    if (this.feedback.startsWith('✅')) return '';
-    if (this.feedback.startsWith('❌')) return 'Try a different move.';
-    if (this.feedback) return '';
-    if (this.hintLevel >= 0) return 'Look at the highlighted square.';
-    return this.isWhiteToMove ? 'Play the correct move for White.' : 'Waiting for the reply…';
+    return this.status.sub;
   }
 
   ngOnInit(): void {
@@ -247,21 +246,18 @@ export class TrainingComponent implements OnInit, OnDestroy {
   }
 
   private resetTimeline(fen: string): void {
-    this.timelineFens = [fen];
-    this.timelineIndex = 0;
+    this.timeline = createTimeline(fen);
   }
 
   private appendTimelineFen(nextFen: string): void {
-    if (this.timelineFens[this.timelineFens.length - 1] === nextFen) return;
-    this.timelineFens = [...this.timelineFens.slice(0, this.timelineIndex + 1), nextFen];
-    this.timelineIndex = this.timelineFens.length - 1;
+    this.timeline = coreAppendTimelineFen(this.timeline, nextFen);
   }
 
   jumpToIndex(nextIndex: number): void {
-    const clamped = Math.max(0, Math.min(nextIndex, this.timelineFens.length - 1));
-    if (clamped === this.timelineIndex) return;
-    this.timelineIndex = clamped;
-    this.fen = this.timelineFens[clamped] ?? this.timelineFens[0];
+    const next = coreJumpToIndex(this.timeline, nextIndex);
+    if (next === this.timeline) return;
+    this.timeline = next;
+    this.fen = this.timeline.fens[this.timeline.index] ?? this.timeline.fens[0];
     this.feedback = '';
     this.moveInput = '';
     this.hintLevel = -1;
@@ -415,11 +411,10 @@ export class TrainingComponent implements OnInit, OnDestroy {
 
   private updateMarkers(): void {
     const arr: BoardMarker[] = [];
-    if (this.correctMoveUci && this.hintLevel >= 0) {
-      arr.push({ square: this.correctMoveUci.substring(0, 2), type: 'hint' });
-      if (this.hintLevel === 1) {
-        arr.push({ square: this.correctMoveUci.substring(2, 4), type: 'hint' });
-      }
+    const hint = deriveHintMarkers(this.correctMoveUci, this.hintLevel, this.isSessionCompleted);
+    if (hint) {
+      arr.push({ square: hint.from, type: 'hint' });
+      if (hint.to) arr.push({ square: hint.to, type: 'hint' });
     }
     if (this.blinkSquare) arr.push({ square: this.blinkSquare, type: 'blink' });
     this.markers = arr;

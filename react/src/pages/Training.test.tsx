@@ -28,13 +28,19 @@ const {
   sideToMoveMock: vi.fn(),
 }));
 
-vi.mock("@knight-school/chess-core", () => ({
-  applyMove: applyMoveMock,
-  applyUci: applyUciMock,
-  legalMoves: legalMovesMock,
-  pieceColorAt: pieceColorAtMock,
-  sideToMove: sideToMoveMock,
-}));
+vi.mock("@knight-school/chess-core", async (importOriginal) => {
+  // Keep the real pure helpers (timeline/status/opening-label/next-item) —
+  // only the chess.js-backed board logic is mocked above.
+  const actual = await importOriginal<typeof import("@knight-school/chess-core")>();
+  return {
+    ...actual,
+    applyMove: applyMoveMock,
+    applyUci: applyUciMock,
+    legalMoves: legalMovesMock,
+    pieceColorAt: pieceColorAtMock,
+    sideToMove: sideToMoveMock,
+  };
+});
 
 let capturedProps: BoardProps;
 

@@ -1,20 +1,14 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
-import { normalizeFen } from '@knight-school/chess-core';
+import {
+  NextItemResponse,
+  TrainingItem,
+  deriveNextItem,
+} from '@knight-school/chess-core';
 
-/** Shape of `GET /api/training-sessions/:id/next` (camelCase, see backend). */
-export interface NextItemResponse {
-  sessionId?: number | string;
-  itemId?: string | number | null;
-  id?: string | number | null;
-  fen?: string | null;
-  fenAfter?: string | null;
-  epd?: string | null;
-  openingEco?: string | null;
-  openingName?: string | null;
-  correctMoveUci?: string;
-}
+// Re-export for use in components
+export type { TrainingItem };
 
 /** Shape of `POST /api/training-sessions/:id/responses`. */
 export interface MoveResponse {
@@ -22,14 +16,6 @@ export interface MoveResponse {
   reason?: string;
   fenAfter?: string | null;
   sessionCompleted?: boolean;
-}
-
-/** Normalized training item consumed by the Training page. */
-export interface TrainingItem {
-  fen: string;
-  itemId: string | null;
-  openingLabel: string;
-  correctMoveUci: string;
 }
 
 /**
@@ -68,15 +54,6 @@ export class TrainingService {
   }
 
   private toItem(data: NextItemResponse): TrainingItem {
-    const rawFen = data.fenAfter ?? data.fen ?? data.epd;
-    const itemIdRaw = data.itemId ?? data.id;
-    return {
-      fen: normalizeFen(rawFen),
-      itemId: itemIdRaw == null || itemIdRaw === '' ? null : String(itemIdRaw),
-      openingLabel: data.openingName
-        ? `${data.openingEco ?? ''} ${data.openingName}`.trim()
-        : 'Opening: (unknown)',
-      correctMoveUci: data.correctMoveUci ?? '',
-    };
+    return deriveNextItem(data);
   }
 }

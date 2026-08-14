@@ -2,7 +2,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import api from "../api";
 import { AxiosError } from "axios";
-import { START_FEN, normalizeFen } from "@knight-school/chess-core";
+import {
+  START_FEN,
+  normalizeFen,
+  deriveNextItem,
+  type NextItemResponse,
+} from "@knight-school/chess-core";
 
 export type NextItem = {
   nextFen: string;
@@ -53,45 +58,19 @@ export function useTrainingSession(
   const fetchNextItem = useCallback(async (): Promise<NextItem> => {
     if (!id) throw new Error("Missing training session id");
 
-    type NextItemResponse = {
-      fenAfter?: string | null;
-      fen?: string | null;
-      epd?: string | null;
-      itemId?: string | null;
-      id?: string | null;
-
-      openingName?: string | null;
-      openingEco?: string | null;
-
-      correctMoveUci?: string;
-
-      // include anything else you might get
-      [k: string]: unknown;
-    };
-
     const response = await api.get<NextItemResponse>(
       `training-sessions/${id}/next`,
     );
     const data = response.data;
 
-    const raw = data.fenAfter ?? data.fen ?? data.epd;
-    const nextFen = normalizeFen(raw);
-
-    const nextItemIdRaw = data.itemId ?? data.id;
-    const nextItemId =
-      nextItemIdRaw == null || nextItemIdRaw === ""
-        ? null
-        : String(nextItemIdRaw);
-
-    const nextOpeningLabel = data.openingName
-      ? `${data.openingEco ?? ""} ${data.openingName}`.trim()
-      : "Opening: (unknown)";
+    // Use the core function to parse the response
+    const derived = deriveNextItem(data);
 
     return {
-      nextFen,
-      nextItemId,
-      nextOpeningLabel,
-      nextCorrectMoveUci: (data.correctMoveUci ?? "") as string,
+      nextFen: derived.fen,
+      nextItemId: derived.itemId,
+      nextOpeningLabel: derived.openingLabel,
+      nextCorrectMoveUci: derived.correctMoveUci,
     };
   }, [id]);
 
