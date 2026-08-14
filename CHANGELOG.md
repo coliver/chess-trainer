@@ -1,4 +1,10 @@
 ## 2026-08-13
+- feat(training): dataset-driven training-item selection — `create_training_session()` builds items from real `Opening` rows (gated UI always supplies eco+name, so selection is deterministic; `func.random()` is a no-opening fallback), replacing the MVP static items
+- feat(angular): build the Angular training page against the shared `@knight-school/chess-core` package — board, move input, hint/timeline, and session flow at parity with React
+- feat(angular): mirror the React `Board` over `cm-chessboard` as an Angular component with the same prop/marker surface; add the `chess-core` build step to `angular/Dockerfile`
+- feat(angular): bring header/dashboard/training/login to parity with React
+- feat(header): replace the `/profile` link with a logout button icon (drops the dead `/profile` route)
+- feat(auth): add cross-links between login and register
 - feat(react): replace `react-chessboard` with `cm-chessboard` behind a reusable `Board` wrapper — a framework-neutral board that eases the planned Angular port
 - refactor(training): route drag + click through cm-chessboard's move-input into the existing `chess.js` validation; migrate `squareStyles` highlights to markers; drop right-click arrow drawing
 - refactor(training): trim `NextItem` to the fields actually used (remove unused `nextPgn`/`nextEpd`/`nextNextPgn`/`data`) and fix a duplicate `epd` key in the next-item response type
