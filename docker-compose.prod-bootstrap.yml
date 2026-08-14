@@ -12,6 +12,5 @@ services:
   nginx:
     volumes:
       - ./nginx/conf-bootstrap:/etc/nginx/conf.d:ro
-      - ./htmlcov:/app/htmlcov:ro
       - ./react/dist:/usr/share/nginx/html:ro
       - ./certbot-www:/var/www/certbot:ro

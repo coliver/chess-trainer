@@ -21,6 +21,5 @@ services:
     volumes:
       - ./nginx/conf-prod:/etc/nginx/conf.d:ro
       - /etc/letsencrypt:/etc/nginx/certs:ro
-      - ./htmlcov:/app/htmlcov:ro
       - ./react/dist:/usr/share/nginx/html:ro
       - ./certbot-www:/var/www/certbot:ro
