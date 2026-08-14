@@ -275,7 +275,7 @@ export const Training = () => {
   const markers = useMemo((): BoardMarker[] => {
     const arr: BoardMarker[] = [];
 
-    if (correctMoveUci && hintLevel >= 0) {
+    if (correctMoveUci && hintLevel >= 0 && !isSessionCompleted) {
       const fromSquare = correctMoveUci.substring(0, 2);
       const toSquare = correctMoveUci.substring(2, 4);
       arr.push({ square: fromSquare, type: "hint" });
@@ -285,7 +285,7 @@ export const Training = () => {
     if (blinkSquare) arr.push({ square: blinkSquare, type: "blink" });
 
     return arr;
-  }, [correctMoveUci, hintLevel, blinkSquare]);
+  }, [correctMoveUci, hintLevel, blinkSquare, isSessionCompleted]);
 
   // Split "C50 Italian Game" into an ECO chip + name for the rail header.
   const ecoMatch = openingLabel.match(/^([A-E]\d{2})\s+(.*)$/);
@@ -398,11 +398,16 @@ export const Training = () => {
                 className="btn hint"
                 type="button"
                 onClick={() => {
-                  if (isSubmittingRef.current || isAdvancingRef.current || !itemId)
+                  if (
+                    isSubmittingRef.current ||
+                    isAdvancingRef.current ||
+                    !itemId ||
+                    isSessionCompleted
+                  )
                     return;
                   setHintLevel((h) => (h < 0 ? 0 : 1));
                 }}
-                disabled={busy || !itemId}
+                disabled={busy || !itemId || isSessionCompleted}
               >
                 💡 Show a hint
               </button>
