@@ -1,5 +1,11 @@
 import { describe, it, expect } from "vitest";
-import { baseNameOf, variationLabelOf, groupByBase } from "./groupOpenings";
+import {
+  baseNameOf,
+  variationLabelOf,
+  subVariationLabelOf,
+  groupByBase,
+  groupVariations,
+} from "./groupOpenings";
 import type { Opening } from "../pages/Dashboard";
 
 const op = (name: string, eco: string, uci_moves = ""): Opening => ({
@@ -70,5 +76,51 @@ describe("groupByBase", () => {
     ]);
     expect(groups).toHaveLength(1);
     expect(groups[0].representative.eco).toBe("C65"); // fewer plies
+  });
+});
+
+describe("subVariationLabelOf", () => {
+  it("returns Main line when there is no comma", () => {
+    expect(subVariationLabelOf("Sicilian Defense: Najdorf Variation")).toBe(
+      "Main line",
+    );
+  });
+  it("returns the text after the comma", () => {
+    expect(
+      subVariationLabelOf("Sicilian Defense: Najdorf Variation, 6.Be3"),
+    ).toBe("6.Be3");
+  });
+});
+
+describe("groupVariations", () => {
+  it("clusters rows by their first comma-separated segment", () => {
+    const groups = groupVariations([
+      op("Sicilian Defense", "B20"),
+      op("Sicilian Defense: Najdorf Variation", "B90"),
+      op("Sicilian Defense: Najdorf Variation, 6.Be3", "B90"),
+      op("Sicilian Defense: Najdorf Variation, 6.Bg5", "B90"),
+      op("Sicilian Defense: Dragon Variation", "B70"),
+    ]);
+    expect(groups.map((g) => g.label)).toEqual([
+      "Main line",
+      "Najdorf Variation", // 3 rows, beats Dragon (1) and sorts first among the rest
+      "Dragon Variation",
+    ]);
+    const najdorf = groups.find((g) => g.label === "Najdorf Variation")!;
+    expect(najdorf.rows).toHaveLength(3);
+  });
+
+  it("sorts Main line first, then by size, then alphabetically", () => {
+    const groups = groupVariations([
+      op("French Defense: Tarrasch, Open", "C07"),
+      op("French Defense: Advance", "C02"),
+      op("French Defense", "C00"),
+      op("French Defense: Tarrasch, Closed", "C05"),
+    ]);
+    expect(groups.map((g) => g.label)).toEqual([
+      "Main line",
+      "Tarrasch", // 2 rows
+      "Advance", // 1 row
+    ]);
   });
 });

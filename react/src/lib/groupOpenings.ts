@@ -31,6 +31,50 @@ export function variationLabelOf(name: string): string {
   return name.slice(name.indexOf(":") + 1).trim();
 }
 
+export type VariationGroup = {
+  /** Sub-variation cluster label within a base, e.g. "Najdorf Variation". */
+  label: string;
+  /** All rows sharing that first comma-separated segment. */
+  rows: Opening[];
+};
+
+/**
+ * Clusters a base opening's variation rows by the first comma-separated
+ * segment of their label (e.g. "Najdorf Variation, 6.Be3" and "Najdorf
+ * Variation, 6.Bg5" both land under "Najdorf Variation"), so a base with
+ * hundreds of flat lines collapses into a handful of sub-variation groups.
+ * "Main line" is always sorted first; the rest by size, then alphabetically.
+ */
+export function groupVariations(rows: Opening[]): VariationGroup[] {
+  const buckets = new Map<string, Opening[]>();
+  for (const o of rows) {
+    const label = variationLabelOf(o.name);
+    const sub = label === "Main line" ? label : label.split(",")[0].trim();
+    const arr = buckets.get(sub);
+    if (arr) arr.push(o);
+    else buckets.set(sub, [o]);
+  }
+
+  const groups = Array.from(buckets, ([label, groupRows]) => ({
+    label,
+    rows: groupRows,
+  }));
+  groups.sort((a, b) => {
+    if (a.label === "Main line") return -1;
+    if (b.label === "Main line") return 1;
+    return b.rows.length - a.rows.length || a.label.localeCompare(b.label);
+  });
+  return groups;
+}
+
+/** Label for a row within its sub-variation group ("Main line" for the root of the group). */
+export function subVariationLabelOf(name: string): string {
+  const label = variationLabelOf(name);
+  const i = label.indexOf(",");
+  if (i === -1) return "Main line";
+  return label.slice(i + 1).trim();
+}
+
 function plyCount(o: Opening): number {
   const m = o.uci_moves?.trim();
   return m ? m.split(/\s+/).length : 0;
