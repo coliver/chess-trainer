@@ -41,3 +41,9 @@
   white-space: pre-wrap;
   font-size: 14px;
 }
+
+.auth-alt {
+  margin-top: 16px;
+  font-size: 14px;
+  text-align: center;
+}

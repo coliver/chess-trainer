@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import api from "../api";
 import { login } from "../auth";
@@ -70,6 +70,10 @@ export default function Login() {
 
           {error && <div className="auth-error">{error}</div>}
         </form>
+
+        <p className="auth-alt">
+          Need an account? <Link to="/register">Register</Link>
+        </p>
       </div>
     </main>
   );

@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/auth.service';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   template: `
     <main class="page">
       <div class="card">
@@ -44,6 +44,10 @@ import { AuthService } from '../../core/auth.service';
             <div class="auth-error" role="alert">{{ error }}</div>
           }
         </form>
+
+        <p class="auth-alt">
+          Need an account? <a routerLink="/register">Register</a>
+        </p>
       </div>
     </main>
   `,
