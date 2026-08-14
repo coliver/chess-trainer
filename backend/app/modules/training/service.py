@@ -1,4 +1,5 @@
 # backend/app/modules/training/service.py
+import logging
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
@@ -8,6 +9,7 @@ from sqlalchemy import and_, func, select
 from sqlalchemy.orm import Session
 
 from backend.app.modules.openings.models import Opening
+from backend.app.modules.progress.service import get_due, record_attempt
 from backend.app.modules.training.chess_rules import validate_and_apply
 from backend.app.modules.training.models import (
     TrainingItem,
@@ -17,6 +19,8 @@ from backend.app.modules.training.models import (
 
 if TYPE_CHECKING:
     from backend.app.routers.training import TrainingItemCreate
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -139,6 +143,39 @@ def create_training_session(
     return session
 
 
+def create_session_from_due(db: Session, user_id: int, limit: int = 10) -> TrainingSession:
+    """Start a review session seeded directly from the user's due positions."""
+    due_rows = get_due(db, user_id)[:limit]
+    if not due_rows:
+        raise HTTPException(status_code=404, detail="No positions due for review")
+
+    # opening_eco/opening_name form a composite FK into the openings table, so a
+    # synthetic "Review" session (spanning positions from many openings) must leave
+    # both unset rather than reference a single due row's opening.
+    session = TrainingSession(
+        status="active",
+        opening_eco=None,
+        opening_name="Review",
+        user_id=user_id,
+    )
+    db.add(session)
+    db.flush()
+
+    for idx, row in enumerate(due_rows):
+        db.add(
+            TrainingItem(
+                session_id=session.id,
+                order_index=idx,
+                fen=row.fen,
+                correct_move_uci=row.correct_move_uci,
+            )
+        )
+
+    db.commit()
+    db.refresh(session)
+    return session
+
+
 def get_current_training_item(db, training_session, all_items):
     if not all_items:
         return None
@@ -239,6 +276,22 @@ def submit_training_response(
         )
 
     db.flush()
+
+    try:
+        with db.begin_nested():
+            record_attempt(
+                db,
+                user_id=current_user_id,
+                fen=current.fen,
+                correct_move_uci=current.correct_move_uci,
+                is_correct=result.correct,
+                opening_eco=session.opening_eco,
+                opening_name=session.opening_name,
+            )
+    except Exception:
+        logger.exception(
+            "record_attempt failed for user_id=%s item_id=%s", current_user_id, item_id
+        )
 
     all_responded = all(
         db.query(TrainingResponse)

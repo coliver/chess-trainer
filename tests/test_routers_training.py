@@ -42,6 +42,21 @@ def test_post_training_sessions_returns_id(client: any, monkeypatch: pytest.Monk
     assert r.json() == {"id": 123}
 
 
+def test_post_training_sessions_from_due_returns_id(client: any, monkeypatch: pytest.MonkeyPatch):
+    class FakeSession:
+        id = 456
+
+    monkeypatch.setattr(
+        training_router,
+        "create_session_from_due",
+        lambda db, user_id: FakeSession(),
+    )
+
+    r = client.post("/training-sessions/from-due")
+    assert r.status_code == 200
+    assert r.json() == {"id": 456}
+
+
 def test_get_training_next_404_when_session_missing(client: any, monkeypatch: pytest.MonkeyPatch):
     class FakeDB:
         def get(self, model, id):

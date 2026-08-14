@@ -18,6 +18,7 @@ router = APIRouter()
 
 from backend.app.modules.shared.db import get_db
 from backend.app.modules.training.service import (
+    create_session_from_due,
     create_training_items,
     create_training_session,
     get_current_training_item,
@@ -41,8 +42,8 @@ class TrainingNextResponse(CamelModel):
     order_index: int
     fen: str
     move_count_limit: int | None = None
-    opening_eco: str
-    opening_name: str
+    opening_eco: str | None = None
+    opening_name: str | None = None
     correct_move_uci: str
 
 
@@ -81,6 +82,15 @@ def post_training_sessions(
         opening_eco=req.opening_eco,
         opening_name=req.opening_name,
     )
+    return {"id": session.id}
+
+
+@router.post("/training-sessions/from-due", response_model=TrainingSessionCreateResponse)
+def post_training_sessions_from_due(
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user),
+):
+    session = create_session_from_due(db, current_user.id)
     return {"id": session.id}
 
 
