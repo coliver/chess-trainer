@@ -323,6 +323,68 @@
   font-size: 14px;
   font-weight: 550;
 }
+
+/* ===== Variation group (collapsible sections) ===== */
+.variation-group {
+  display: flex;
+  flex-direction: column;
+}
+.variation-group-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 9px 11px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: var(--accent-bg);
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: var(--text-h);
+  transition: background 0.12s ease;
+  font-weight: 600;
+  opacity: 0.85;
+}
+.variation-group-header:hover {
+  background: var(--accent-bg);
+  opacity: 1;
+}
+.variation-group-header .vg-caret {
+  flex: 0 0 auto;
+  width: 16px;
+  text-align: center;
+  color: var(--text);
+  opacity: 0.6;
+  font-size: 13px;
+}
+.variation-group-header .vg-label {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 550;
+}
+.variation-group-header .vg-count {
+  flex: 0 0 auto;
+  min-width: 32px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 2px 6px;
+  border-radius: 999px;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.7;
+}
+.variation-group-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--border);
+  margin-left: 0;
+}
 .ob-showmore,
 .ob-noresults {
   display: block;
