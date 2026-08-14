@@ -1,14 +1,25 @@
-# Production overlay. Use instead of docker-compose.override.yml:
+# Production overlay. Use instead of docker-compose.override.yml, once a TLS
+# cert already exists (see docker-compose.prod-bootstrap.yml for a brand-new
+# host's first cert):
 #   npm --prefix packages/chess-core run build
 #   npm --prefix react run build         # writes react/dist
 #   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build db api nginx
 #
 # Only db, api, and nginx run in prod — react/angular are dev-server-only
 # services and are intentionally not started.
+#
+# nginx/conf.d note: the base compose file bind-mounts the whole ./nginx
+# directory at /etc/nginx/conf.d, and nginx's `include conf.d/*.conf` picks
+# up every .conf file in there. Overriding only default.conf as a single
+# file would NOT hide nginx/default.conf's sibling files (they're still
+# bind-mounted in from the directory-level base mount and still get
+# included) — so this mounts a whole replacement directory at the exact
+# same target instead, which fully replaces the base mount.
 services:
   nginx:
     volumes:
-      - ./nginx/prod.conf:/etc/nginx/conf.d/default.conf:ro
-      - ./letsencrypt:/etc/nginx/certs:ro
+      - ./nginx/conf-prod:/etc/nginx/conf.d:ro
+      - /etc/letsencrypt:/etc/nginx/certs:ro
       - ./htmlcov:/app/htmlcov:ro
       - ./react/dist:/usr/share/nginx/html:ro
+      - ./certbot-www:/var/www/certbot:ro
