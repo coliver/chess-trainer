@@ -64,6 +64,11 @@ export default function Header() {
           </div>
 
           <nav className="site-header-nav" aria-label="Primary">
+            {isLoggedIn && (
+              <Link to="/puzzles" className="site-header-nav-link">
+                Puzzles
+              </Link>
+            )}
             {!isLoggedIn ? (
               <>
                 <Link

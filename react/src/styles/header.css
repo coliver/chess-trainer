@@ -61,6 +61,23 @@
   border-color: var(--accent-border);
 }
 
+.site-header-nav-link {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 12px;
+  color: var(--text-h);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.site-header-nav-link:hover {
+  background: var(--social-bg);
+}
+
 .site-header-profile-link {
   display: inline-flex;
   align-items: center;

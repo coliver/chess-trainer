@@ -1,0 +1,38 @@
+/* ===== Puzzles page ===== */
+.puzzles-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+}
+
+.puzzles-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 480px;
+}
+
+.puzzles-header h1 {
+  margin: 0;
+}
+
+.puzzles-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.puzzles-board-wrap {
+  width: 100%;
+  max-width: 480px;
+}
+
+.puzzles-feedback {
+  min-height: 20px;
+  font-weight: 600;
+  color: var(--text-h);
+}
