@@ -1,3 +1,6 @@
+## 2026-08-14
+- refactor(training): extract timeline history and session-state derivation (status banner, eco/opening-name split, hint markers, next-item parsing) out of React-specific files into pure `@knight-school/chess-core` modules (`timeline.ts`, `next-item.ts`, `status.ts`); rewire both React's `Training.tsx`/`useTrainingSession.ts` and Angular's `training.component.ts`/`training.service.ts` to share the same logic — fixes a latent Angular bug where hint markers didn't hide on session completion
+
 ## 2026-08-13
 - feat(training): dataset-driven training-item selection — `create_training_session()` builds items from real `Opening` rows (gated UI always supplies eco+name, so selection is deterministic; `func.random()` is a no-opening fallback), replacing the MVP static items
 - feat(angular): build the Angular training page against the shared `@knight-school/chess-core` package — board, move input, hint/timeline, and session flow at parity with React
