@@ -29,7 +29,7 @@ describe("Header auth UI", () => {
   it("switches to profile when token is set", async () => {
     renderWithRouter(<Header />);
 
-    expect(screen.getByText("Login")).toBeInTheDocument();
+    expect(screen.getByLabelText("Login")).toBeInTheDocument();
 
     await act(async () => {
       localStorage.setItem("token", "abc");
@@ -44,15 +44,15 @@ describe("Header auth UI", () => {
       await new Promise<void>((r) => setTimeout(r, 0));
     });
 
-    expect(screen.queryByText("Login")).not.toBeInTheDocument();
-    expect(screen.queryByText("Register")).not.toBeInTheDocument();
-    expect(screen.getByLabelText("Profile")).toBeInTheDocument();
+    expect(screen.queryByLabelText("Login")).not.toBeInTheDocument();
+    expect(screen.queryByLabelText("Register")).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Logout")).toBeInTheDocument();
   });
 
   it("switches to profile on same-tab login (no native storage event fires)", async () => {
     renderWithRouter(<Header />);
 
-    expect(screen.getByText("Login")).toBeInTheDocument();
+    expect(screen.getByLabelText("Login")).toBeInTheDocument();
 
     // The browser never fires "storage" for changes made by the current
     // document — this is what a real same-tab login looks like.
@@ -67,9 +67,9 @@ describe("Header auth UI", () => {
       await new Promise<void>((r) => setTimeout(r, 0));
     });
 
-    expect(screen.queryByText("Login")).not.toBeInTheDocument();
-    expect(screen.queryByText("Register")).not.toBeInTheDocument();
-    expect(screen.getByLabelText("Profile")).toBeInTheDocument();
+    expect(screen.queryByLabelText("Login")).not.toBeInTheDocument();
+    expect(screen.queryByLabelText("Register")).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Logout")).toBeInTheDocument();
   });
 
     describe("Greetings", () => {
