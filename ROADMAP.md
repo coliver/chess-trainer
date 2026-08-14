@@ -14,6 +14,14 @@ living in React-specific files:
   submit / advance) into a framework-neutral module that emits state, so React and Angular only
   supply the thin reactivity layer (hooks vs. signals/RxJS).
 
+## ♞ Phase 4 — Engine analysis
+
+Integrate a chess engine (e.g. Stockfish via WASM) so users get position
+evaluations and best-move suggestions, and can review training mistakes with
+engine feedback instead of just right/wrong against the opening line. Not yet
+designed in detail (Phases 1–3 — progress tracking, streaks/mastery/review-due,
+Lichess puzzles — are shipped; see CHANGELOG.md).
+
 ## 🌱 Smaller / nice-to-have
 
 - **User-drawn arrows** on the board (right-click drag) — dropped in the cm-chessboard swap; revisit
