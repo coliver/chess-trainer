@@ -41,3 +41,8 @@ class User(Base):
         cascade="all, delete-orphan",
         uselist=False,
     )
+    puzzle_progress = relationship(
+        "PuzzleProgress",
+        back_populates="user",
+        cascade="all, delete-orphan",
+    )

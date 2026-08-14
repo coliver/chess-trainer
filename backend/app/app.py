@@ -6,6 +6,7 @@ from pydantic import BaseModel
 from backend.app.routers.auth import router as auth_router
 from backend.app.routers.openings import router as openings_router
 from backend.app.routers.progress import router as progress_router
+from backend.app.routers.puzzles import router as puzzles_router
 from backend.app.routers.training import router as training_router
 
 app = FastAPI(title="Knight School")
@@ -14,6 +15,7 @@ app.include_router(training_router, prefix="")
 app.include_router(auth_router, prefix="")
 app.include_router(openings_router, prefix="")
 app.include_router(progress_router, prefix="")
+app.include_router(puzzles_router, prefix="")
 
 
 class PingResponse(BaseModel):

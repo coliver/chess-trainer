@@ -3,6 +3,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { Dashboard } from "./pages/Dashboard";
 import { Training } from "./pages/Training";
+import { Puzzles } from "./pages/Puzzles";
 import Header from "./components/Header";
 import { RequireAuth } from "./RequireAuth";
 
@@ -26,6 +27,14 @@ function App() {
           element={
             <RequireAuth>
               <Training />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/puzzles"
+          element={
+            <RequireAuth>
+              <Puzzles />
             </RequireAuth>
           }
         />
