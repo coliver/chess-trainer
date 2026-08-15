@@ -40,6 +40,7 @@ services:
       dockerfile: react/Dockerfile
     volumes:
       - ./react:/app               # Syncs the code
+      - ./packages:/packages       # Shared workspace packages (chess-core, shared-styles)
       - /app/node_modules          # Keeps container modules separate
     expose:
       - "5173"
@@ -53,6 +54,7 @@ services:
       dockerfile: angular/Dockerfile
     volumes:
       - ./angular:/app             # Syncs the code
+      - ./packages:/packages       # Shared workspace packages (chess-core, shared-styles)
       - /app/node_modules          # Keeps container modules separate
     expose:
       - "4200"

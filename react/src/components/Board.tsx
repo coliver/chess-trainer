@@ -12,7 +12,7 @@ import {
 } from "cm-chessboard/src/extensions/markers/Markers.js";
 import "cm-chessboard/assets/chessboard.css";
 import "cm-chessboard/assets/extensions/markers/markers.css";
-import "../styles/board.css";
+import "../../../packages/shared-styles/board.css";
 
 // Sprites are served from react/public (copied from the cm-chessboard package).
 const ASSETS_URL = "/cm-chessboard-assets/";

@@ -1,4 +1,6 @@
 ## 2026-08-15
+- feat(angular): port the React dashboard's progress strip (positions trained, accuracy, day streak, mastery bar, review-due button, weak spots) to Angular via a new `ProgressService` and `TrainingService.startFromDue()`, closing the feature gap between the two frontends
+- refactor(css): centralize the CSS that's shared verbatim between React and Angular (`tokens`, `base`, `header`, `ui`, `training`, `dashboard`, `puzzles`, `login`, `board`) into `packages/shared-styles/`; mount `./packages:/packages` into both dev containers so the shared files are visible without a rebuild
 - test(e2e): add a prod smoke test (`playwright-prod-smoke.spec.ts`, `npm run test:smoke`) that logs into a persistent test account and checks the dashboard + puzzles pages load for real after a deploy; registration is split into a separate one-off spec (`playwright-prod-register.spec.ts`) so smoke runs don't keep creating throwaway accounts on prod
 
 ## 2026-08-14

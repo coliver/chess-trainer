@@ -36,6 +36,11 @@ export class TrainingService {
     });
   }
 
+  /** POST /api/training-sessions/from-due — starts a review session from due positions. */
+  startFromDue(): Observable<{ id: string | number }> {
+    return this.http.post<{ id: string | number }>('/api/training-sessions/from-due', {});
+  }
+
   next(sessionId: string): Observable<TrainingItem> {
     return this.http
       .get<NextItemResponse>(`/api/training-sessions/${sessionId}/next`)

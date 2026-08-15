@@ -2,12 +2,12 @@
 @import 'cm-chessboard/assets/chessboard.css';
 @import 'cm-chessboard/assets/extensions/markers/markers.css';
 
-@import './styles/tokens.css';
-@import './styles/base.css';
-@import './styles/header.css';
-@import './styles/ui.css';
-@import './styles/training.css';
-@import './styles/dashboard.css';
-@import './styles/puzzles.css';
-@import './styles/login.css';
-@import './styles/board.css';
+@import '../../packages/shared-styles/tokens.css';
+@import '../../packages/shared-styles/base.css';
+@import '../../packages/shared-styles/header.css';
+@import '../../packages/shared-styles/ui.css';
+@import '../../packages/shared-styles/training.css';
+@import '../../packages/shared-styles/dashboard.css';
+@import '../../packages/shared-styles/puzzles.css';
+@import '../../packages/shared-styles/login.css';
+@import '../../packages/shared-styles/board.css';

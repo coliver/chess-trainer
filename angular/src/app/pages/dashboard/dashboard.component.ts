@@ -1,8 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Opening, OpeningsService } from '../../core/openings.service';
 import { TrainingService } from '../../core/training.service';
+import { ProgressService, ProgressSummary, WeakSpot } from '../../core/progress.service';
 import { baseNameOf, groupByBase, OpeningGroup, variationLabelOf } from '../../lib/group-openings';
 import { describeOpening } from '../../lib/opening-text';
 import { OpeningCardComponent } from './opening-card.component';
@@ -19,10 +21,63 @@ const SEARCH_PAGE = 60;
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [FormsModule, OpeningCardComponent, VariationListComponent, BoardPreviewComponent],
+  imports: [FormsModule, DecimalPipe, OpeningCardComponent, VariationListComponent, BoardPreviewComponent],
   template: `
     <main class="page">
       <div class="card">
+        <section class="progress-strip" aria-label="Training progress">
+          <div class="progress-stat">
+            <span class="progress-stat-value">{{ summary?.positionsSeen ?? 0 }}</span>
+            <span class="progress-stat-label">Positions trained</span>
+          </div>
+          <div class="progress-stat">
+            <span class="progress-stat-value">
+              {{ summary ? (summary.overallAccuracy * 100 | number: '1.0-0') + '%' : '—' }}
+            </span>
+            <span class="progress-stat-label">Accuracy</span>
+          </div>
+          <div class="progress-stat">
+            <span class="progress-stat-value">
+              {{ summary?.currentStreak ?? 0 }}{{ (summary?.currentStreak ?? 0) > 0 ? ' 🔥' : '' }}
+            </span>
+            <span class="progress-stat-label">
+              Day streak{{ summary?.longestStreak ? ' · best ' + summary!.longestStreak : '' }}
+            </span>
+          </div>
+          <div class="progress-stat progress-stat--mastery">
+            <span class="progress-stat-value">{{ summary?.mastered ?? 0 }}</span>
+            <span class="progress-stat-label">Mastered</span>
+            @if (summary && summary.positionsSeen > 0) {
+              <div class="mastery-bar" aria-hidden="true">
+                <div
+                  class="mastery-bar-fill"
+                  [style.width.%]="masteryPct"
+                ></div>
+              </div>
+            }
+          </div>
+          <div class="progress-stat">
+            <button
+              type="button"
+              class="progress-review-btn"
+              [disabled]="dueCount === 0"
+              (click)="startReviewSession()"
+            >
+              Review due ({{ dueCount }})
+            </button>
+          </div>
+          @if (weakSpots.length > 0) {
+            <div class="progress-weak-spots">
+              <span class="progress-stat-label">Weak spots</span>
+              <ul>
+                @for (w of weakSpots; track (w.openingName ?? 'Opening') + (w.fen ?? '') + (w.correctMoveUci ?? '')) {
+                  <li>{{ w.openingName ?? 'Opening' }} — {{ w.correctCount }}/{{ w.attempts }} correct</li>
+                }
+              </ul>
+            </div>
+          }
+        </section>
+
         <section class="opening-browser">
           <header class="ob-toolbar">
             <div class="ob-heading">
@@ -145,6 +200,7 @@ const SEARCH_PAGE = 60;
 export class DashboardComponent implements OnInit {
   private readonly openingsService = inject(OpeningsService);
   private readonly trainingService = inject(TrainingService);
+  private readonly progressService = inject(ProgressService);
   private readonly router = inject(Router);
 
   openings: Opening[] = [];
@@ -153,6 +209,10 @@ export class DashboardComponent implements OnInit {
   selected: Opening | null = null;
   sortAZ = false;
   searchLimit = SEARCH_PAGE;
+
+  summary: ProgressSummary | null = null;
+  dueCount = 0;
+  weakSpots: WeakSpot[] = [];
 
   readonly baseNameOf = baseNameOf;
   readonly describeOpening = describeOpening;
@@ -166,6 +226,34 @@ export class DashboardComponent implements OnInit {
         this.selected = null;
       },
       error: (e) => console.error('Error loading openings:', e),
+    });
+
+    this.progressService.getSummary().subscribe({
+      next: (data) => (this.summary = data ?? null),
+      error: (e) => console.error('Error loading progress summary:', e),
+    });
+    this.progressService.getDue().subscribe({
+      next: (data) => (this.dueCount = (data ?? []).length),
+      error: (e) => console.error('Error loading due positions:', e),
+    });
+    this.progressService.getWeakSpots().subscribe({
+      next: (data) => (this.weakSpots = (data ?? []).slice(0, 5)),
+      error: (e) => console.error('Error loading weak spots:', e),
+    });
+  }
+
+  get masteryPct(): number {
+    if (!this.summary || this.summary.positionsSeen === 0) return 0;
+    return Math.min(100, Math.round((this.summary.mastered / this.summary.positionsSeen) * 100));
+  }
+
+  startReviewSession(): void {
+    this.trainingService.startFromDue().subscribe({
+      next: (res) => this.router.navigate(['/training', res.id]),
+      error: (err) => {
+        console.error('Error starting review session:', err);
+        alert('No positions due for review yet.');
+      },
     });
   }
 
