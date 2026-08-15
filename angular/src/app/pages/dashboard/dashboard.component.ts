@@ -119,8 +119,8 @@ const SEARCH_PAGE = 60;
                         type="button"
                         role="listitem"
                         class="variation-row"
-                        [class.selected]="selected?.name === o.name"
-                        [attr.aria-pressed]="selected?.name === o.name"
+                        [class.selected]="selected !== null && selected.eco + selected.name === o.eco + o.name"
+                        [attr.aria-pressed]="selected !== null && selected.eco + selected.name === o.eco + o.name"
                         (click)="pickFromSearch(o)"
                       >
                         <span class="r-eco">{{ o.eco }}</span>
@@ -144,7 +144,7 @@ const SEARCH_PAGE = 60;
                 </nav>
                 <app-variation-list
                   [rows]="activeGroup.members"
-                  [selectedName]="selected?.name ?? null"
+                  [selectedKey]="selected ? selected.eco + selected.name : null"
                   (pick)="selected = $event"
                 ></app-variation-list>
               }

@@ -281,7 +281,7 @@ export const Dashboard = () => {
                 <SearchResults
                   matches={searchMatches}
                   limit={searchLimit}
-                  selectedName={selected?.name ?? null}
+                  selectedKey={selected ? selected.eco + selected.name : null}
                   query={query}
                   onPick={pickFromSearch}
                   onMore={() => setSearchLimit((n) => n + SEARCH_PAGE)}
@@ -299,7 +299,7 @@ export const Dashboard = () => {
                   </nav>
                   <VariationList
                     rows={activeGroup.members}
-                    selectedName={selected?.name ?? null}
+                    selectedKey={selected ? selected.eco + selected.name : null}
                     onPick={setSelected}
                   />
                 </>
@@ -367,14 +367,14 @@ export const Dashboard = () => {
 function SearchResults({
   matches,
   limit,
-  selectedName,
+  selectedKey,
   query,
   onPick,
   onMore,
 }: {
   matches: Opening[];
   limit: number;
-  selectedName: string | null;
+  selectedKey: string | null;
   query: string;
   onPick: (o: Opening) => void;
   onMore: () => void;
@@ -397,9 +397,9 @@ function SearchResults({
             key={o.eco + o.name}
             type="button"
             role="listitem"
-            className={`variation-row${selectedName === o.name ? " selected" : ""}`}
+            className={`variation-row${selectedKey === o.eco + o.name ? " selected" : ""}`}
             onClick={() => onPick(o)}
-            aria-pressed={selectedName === o.name}
+            aria-pressed={selectedKey === o.eco + o.name}
           >
             <span className="r-eco">{o.eco}</span>
             <span className="r-name">{o.name}</span>

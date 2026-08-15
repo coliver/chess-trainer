@@ -40,13 +40,20 @@ function Row({
  * (e.g. "Najdorf Variation, 6.Be3" / "…, 6.Bg5") are clustered under a
  * collapsible header instead of dumped as one flat list.
  */
+/** Identity key for an opening row — `name` alone isn't unique (108 names
+ * are shared across different ECO codes, e.g. "Sicilian Defense" spans
+ * B20/B27/B50), so selection and grouping must key on eco+name. */
+function rowKey(o: Opening): string {
+  return o.eco + o.name;
+}
+
 export default function VariationList({
   rows,
-  selectedName,
+  selectedKey,
   onPick,
 }: {
   rows: Opening[];
-  selectedName: string | null;
+  selectedKey: string | null;
   onPick: (o: Opening) => void;
 }) {
   const groups = groupVariations(rows);
@@ -67,16 +74,16 @@ export default function VariationList({
           const o = g.rows[0];
           return (
             <Row
-              key={o.eco + o.name}
+              key={rowKey(o)}
               o={o}
               label={variationLabelOf(o.name)}
-              selected={selectedName === o.name}
+              selected={selectedKey === rowKey(o)}
               onPick={onPick}
             />
           );
         }
 
-        const containsSelected = g.rows.some((o) => o.name === selectedName);
+        const containsSelected = g.rows.some((o) => rowKey(o) === selectedKey);
         const open = expanded.has(g.label) || containsSelected;
 
         return (
@@ -97,10 +104,10 @@ export default function VariationList({
               <div className="variation-group-rows" role="list">
                 {g.rows.map((o) => (
                   <Row
-                    key={o.eco + o.name}
+                    key={rowKey(o)}
                     o={o}
                     label={subVariationLabelOf(o.name)}
-                    selected={selectedName === o.name}
+                    selected={selectedKey === rowKey(o)}
                     onPick={onPick}
                   />
                 ))}

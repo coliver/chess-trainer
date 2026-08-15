@@ -71,7 +71,7 @@ describe('VariationListComponent', () => {
       opening({ name: 'Sicilian Defense: Najdorf Variation, 6.Bg5' }),
     ];
     const fixture = create(rows);
-    fixture.componentInstance.selectedName = rows[1].name;
+    fixture.componentInstance.selectedKey = rows[1].eco + rows[1].name;
     fixture.detectChanges();
 
     const group = fixture.componentInstance.groups[0];

@@ -12,7 +12,7 @@ describe("VariationList", () => {
     const onPick = vi.fn();
     const rows = [op("Sicilian Defense", "B20"), op("Sicilian Defense: Dragon Variation", "B70")];
 
-    render(<VariationList rows={rows} selectedName={null} onPick={onPick} />);
+    render(<VariationList rows={rows} selectedKey={null} onPick={onPick} />);
 
     expect(screen.getByText("Main line")).toBeInTheDocument();
     const dragonRow = screen.getByText("Dragon Variation");
@@ -29,7 +29,7 @@ describe("VariationList", () => {
       op("Sicilian Defense: Najdorf Variation, 6.Bg5", "B90"),
     ];
 
-    render(<VariationList rows={rows} selectedName={null} onPick={onPick} />);
+    render(<VariationList rows={rows} selectedKey={null} onPick={onPick} />);
 
     const header = screen.getByRole("button", { name: /Najdorf Variation/i });
     expect(header).toHaveAttribute("aria-expanded", "false");
@@ -58,7 +58,7 @@ describe("VariationList", () => {
     render(
       <VariationList
         rows={rows}
-        selectedName="Sicilian Defense: Najdorf Variation, 6.Be3"
+        selectedKey="B90Sicilian Defense: Najdorf Variation, 6.Be3"
         onPick={vi.fn()}
       />,
     );
@@ -72,7 +72,7 @@ describe("VariationList", () => {
     const rows = [op("Sicilian Defense", "B20"), op("Sicilian Defense: Dragon Variation", "B70")];
 
     render(
-      <VariationList rows={rows} selectedName="Sicilian Defense" onPick={vi.fn()} />,
+      <VariationList rows={rows} selectedKey="B20Sicilian Defense" onPick={vi.fn()} />,
     );
 
     const mainLineBtn = screen.getByText("Main line").closest("button")!;

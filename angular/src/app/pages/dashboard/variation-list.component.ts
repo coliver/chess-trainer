@@ -26,8 +26,8 @@ import type { VariationGroup } from '../../lib/group-openings';
           type="button"
           role="listitem"
           class="variation-row"
-          [class.selected]="selectedName === g.rows[0].name"
-          [attr.aria-pressed]="selectedName === g.rows[0].name"
+          [class.selected]="selectedKey === g.rows[0].eco + g.rows[0].name"
+          [attr.aria-pressed]="selectedKey === g.rows[0].eco + g.rows[0].name"
           (click)="pick.emit(g.rows[0])"
         >
           <span class="r-eco">{{ g.rows[0].eco }}</span>
@@ -58,8 +58,8 @@ import type { VariationGroup } from '../../lib/group-openings';
               type="button"
               role="listitem"
               class="variation-row"
-              [class.selected]="selectedName === o.name"
-              [attr.aria-pressed]="selectedName === o.name"
+              [class.selected]="selectedKey === o.eco + o.name"
+              [attr.aria-pressed]="selectedKey === o.eco + o.name"
               (click)="pick.emit(o)"
             >
               <span class="r-eco">{{ o.eco }}</span>
@@ -74,7 +74,7 @@ import type { VariationGroup } from '../../lib/group-openings';
 })
 export class VariationListComponent {
   @Input({ required: true }) rows!: Opening[];
-  @Input() selectedName: string | null = null;
+  @Input() selectedKey: string | null = null;
   @Output() pick = new EventEmitter<Opening>();
 
   variationLabelOf = variationLabelOf;
@@ -95,7 +95,7 @@ export class VariationListComponent {
   }
 
   isOpen(g: VariationGroup): boolean {
-    return this.expanded.has(g.label) || g.rows.some(o => o.name === this.selectedName);
+    return this.expanded.has(g.label) || g.rows.some(o => o.eco + o.name === this.selectedKey);
   }
 
   trackByGroup(index: number, g: VariationGroup): string {
