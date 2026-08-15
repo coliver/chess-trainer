@@ -7,11 +7,12 @@ from datetime import datetime, timedelta, timezone  # Update your imports
 from typing import Any
 
 import jwt
-from fastapi import APIRouter, Depends, Header, HTTPException
+from fastapi import APIRouter, BackgroundTasks, Depends, Header, HTTPException
 from pydantic import BaseModel, EmailStr, constr
 
 from backend.app.modules.shared.db import get_db
 from backend.app.modules.users.models import User
+from backend.app.modules.email.sender import send_verification_email
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -36,7 +37,7 @@ def verify_password(password: str, password_hash: str) -> bool:
 
 
 @router.post("/register")
-def register(req: RegisterRequest, db=Depends(get_db)):
+def register(req: RegisterRequest, background_tasks: BackgroundTasks, db=Depends(get_db)):
     existing = (
         db.query(User).filter((User.email == req.email) | (User.username == req.username)).first()
     )
@@ -48,10 +49,14 @@ def register(req: RegisterRequest, db=Depends(get_db)):
         username=req.username,
         password_hash=hash_password(req.password),
         is_active=True,
+        email_verified=False,
     )
     db.add(user)
     db.commit()
     db.refresh(user)
+    background_tasks.add_task(
+        send_verification_email, user.email, create_email_verification_token(user.id)
+    )
     return {"id": user.id, "email": user.email, "username": user.username}
 
 
@@ -78,6 +83,9 @@ def login(req: LoginRequest, db=Depends(get_db)):
 
     if not verify_password(req.password, user.password_hash):
         raise HTTPException(status_code=401, detail="Invalid credentials")
+
+    if not user.email_verified:
+        raise HTTPException(status_code=403, detail="Email not verified")
 
     access_token = create_access_token(user.id)
     refresh_token = create_refresh_token(user.id)
@@ -126,6 +134,20 @@ def create_refresh_token(user_id: int) -> str:
     payload: dict[str, Any] = {
         "sub": str(user_id),
         "type": "refresh",  # Mark as refresh token
+        "iat": int(now.timestamp()),
+        "exp": int(exp.timestamp()),
+    }
+    return jwt.encode(payload, _jwt_secret(), algorithm=_jwt_algorithm())
+
+
+def create_email_verification_token(user_id: int) -> str:
+    now = datetime.now(timezone.utc)
+    exp_hours = int(os.getenv("EMAIL_VERIFY_EXPIRES_HOURS", "24"))
+    exp = now + timedelta(hours=exp_hours)
+
+    payload: dict[str, Any] = {
+        "sub": str(user_id),
+        "type": "email_verify",
         "iat": int(now.timestamp()),
         "exp": int(exp.timestamp()),
     }
@@ -196,3 +218,52 @@ def refresh(req: RefreshRequest, db=Depends(get_db)):
 @router.get("/me")
 def me(current_user=Depends(get_current_user)):
     return {"id": current_user.id, "username": current_user.username}
+
+
+@router.get("/verify-email")
+def verify_email(token: str, db=Depends(get_db)):
+    try:
+        payload = jwt.decode(token, _jwt_secret(), algorithms=[_jwt_algorithm()])
+        if payload.get("type") != "email_verify":
+            raise HTTPException(status_code=400, detail="Invalid or expired token")
+        user_id = int(payload.get("sub"))
+    except jwt.PyJWTError:
+        raise HTTPException(status_code=400, detail="Invalid or expired token")
+
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=400, detail="Invalid or expired token")
+
+    if not user.email_verified:
+        user.email_verified = True
+        db.commit()
+
+    return {"email": user.email, "verified": True}
+
+
+class ResendVerificationRequest(BaseModel):
+    email: EmailStr | None = None
+    username: constr(min_length=1, strip_whitespace=True) | None = None
+
+
+@router.post("/resend-verification")
+def resend_verification(
+    req: ResendVerificationRequest, background_tasks: BackgroundTasks, db=Depends(get_db)
+):
+    if not req.email and not req.username:
+        raise HTTPException(status_code=400, detail="Provide email or username")
+
+    user = None
+    if req.email:
+        user = db.query(User).filter(User.email == req.email).first()
+    else:
+        user = db.query(User).filter(User.username == req.username).first()
+
+    if user and not user.email_verified:
+        background_tasks.add_task(
+            send_verification_email, user.email, create_email_verification_token(user.id)
+        )
+
+    return {
+        "message": "If that account exists and is unverified, a verification email has been sent."
+    }
