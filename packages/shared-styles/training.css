@@ -21,8 +21,8 @@ html[data-theme="dark"] {
 /* Two-pane layout */
 .train {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 340px;
-  gap: 22px;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 26px;
   align-items: start;
   width: 100%;
 }
@@ -34,15 +34,18 @@ html[data-theme="dark"] {
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid var(--border);
+  box-shadow:
+    0 10px 26px -14px rgba(20, 16, 10, 0.28),
+    0 2px 6px -2px rgba(20, 16, 10, 0.12);
 }
 .training-board-wrap .cm-chessboard {
   width: 100%;
   display: block;
 }
 
-/* Turn indicator under the board */
+/* Turn indicator + icon toolbar under the board */
 .board-under {
-  margin-top: 12px;
+  margin-top: 14px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -72,11 +75,59 @@ html[data-theme="dark"] {
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Rail */
+/* Grouped icon toolbar (flip, hint) — ghost buttons, not solid CTAs,
+   so they don't compete visually with the primary "Play" action. */
+.board-toolbar {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 12px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+}
+.board-toolbar .btn {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 9px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-h);
+  font-size: 16px;
+  font-weight: 500;
+  box-shadow: none;
+}
+.board-toolbar .btn:hover {
+  background: var(--accent-bg);
+  border-color: var(--accent-border);
+  color: var(--accent);
+}
+.board-toolbar .btn.hint-icon {
+  color: var(--hint-c);
+}
+.board-toolbar .btn.hint-icon:hover {
+  background: var(--hint-bg);
+  border-color: var(--hint-c);
+  color: var(--hint-c);
+}
+.board-toolbar .btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  background: transparent;
+  border-color: transparent;
+}
+
+/* Rail: its own panel surface, distinct from the outer card, so it reads
+   as a side panel rather than an unbounded column of loose controls. */
 .train-rail {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  padding: 18px;
+  border-radius: 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
 }
 .rail-eyebrow {
   font-size: 11px;
@@ -93,7 +144,7 @@ html[data-theme="dark"] {
 }
 .rail-title h1 {
   margin: 0;
-  font-size: 19px;
+  font-size: 21px;
   font-weight: 750;
   letter-spacing: -0.02em;
   color: var(--text-h);
@@ -109,6 +160,7 @@ html[data-theme="dark"] {
   border-radius: 12px;
   border: 1px solid var(--border);
   background: var(--card-bg);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 .train-status-ic {
   width: 26px;
@@ -219,7 +271,7 @@ html[data-theme="dark"] {
   padding: 0 13px;
   border-radius: 11px;
   border: 1px solid var(--border);
-  background: var(--bg);
+  background: var(--card-bg);
   color: var(--text-h);
   font: inherit;
   font-size: 14px;

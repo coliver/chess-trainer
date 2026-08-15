@@ -3,9 +3,10 @@ import { Button } from "./Button";
 
 type FlipBoardButtonProps = {
   onClick?: () => void;
+  className?: string;
 };
 
-export function FlipBoardButton({ onClick }: FlipBoardButtonProps) {
+export function FlipBoardButton({ onClick, className }: FlipBoardButtonProps) {
   // Accumulate rotation (rather than toggling 0/180) so repeated clicks keep
   // spinning forward instead of snapping back.
   const turns = useRef(0);
@@ -21,6 +22,7 @@ export function FlipBoardButton({ onClick }: FlipBoardButtonProps) {
     <Button
       type="button"
       variant="secondary"
+      className={className}
       onClick={handleClick}
       aria-label="Flip board"
       title="Flip board"

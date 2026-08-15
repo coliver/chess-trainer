@@ -338,26 +338,28 @@ export const Training = () => {
                 <span className="turn-dot" aria-hidden="true" />
                 {isWhiteToMove ? "White to move" : "Black to move"}
               </span>
-              <FlipBoardButton onClick={flip} />
-              <button
-                className="btn hint"
-                type="button"
-                onClick={() => {
-                  if (
-                    isSubmittingRef.current ||
-                    isAdvancingRef.current ||
-                    !itemId ||
-                    isSessionCompleted
-                  )
-                    return;
-                  setHintLevel((h) => (h < 0 ? 0 : 1));
-                }}
-                disabled={busy || !itemId || isSessionCompleted}
-                aria-label="Show a hint"
-                title="Show a hint"
-              >
-                💡
-              </button>
+              <div className="board-toolbar">
+                <FlipBoardButton className="icon-btn" onClick={flip} />
+                <button
+                  className="btn icon-btn hint-icon"
+                  type="button"
+                  onClick={() => {
+                    if (
+                      isSubmittingRef.current ||
+                      isAdvancingRef.current ||
+                      !itemId ||
+                      isSessionCompleted
+                    )
+                      return;
+                    setHintLevel((h) => (h < 0 ? 0 : 1));
+                  }}
+                  disabled={busy || !itemId || isSessionCompleted}
+                  aria-label="Show a hint"
+                  title="Show a hint"
+                >
+                  💡
+                </button>
+              </div>
             </div>
           </div>
 
