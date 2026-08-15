@@ -136,9 +136,9 @@ describe("Dashboard", () => {
     expect(
       await screen.findByRole("button", { name: /Start\s+Najdorf Variation/i }),
     ).toBeEnabled();
-    // no DB description on the variation -> factual fallback text
+    // no DB description on the variation -> authored variation-specific text
     expect(
-      screen.getByText(/a variation of the Sicilian Defense/i),
+      screen.getByText(/most deeply analysed line in chess/i),
     ).toBeInTheDocument();
   });
 
