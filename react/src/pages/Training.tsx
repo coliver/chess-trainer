@@ -60,6 +60,7 @@ export const Training = () => {
   const isAdvancingRef = useRef(isAdvancing);
   const lastAutoplayedItemIdRef = useRef<string | null>(null);
   const prevFeedbackRef = useRef<string>(feedback);
+  const prevItemIdRef = useRef<string | null>(itemId);
 
   // Timeline: keep both state (for UI render) and a ref (for sync checks in effects)
   const [timeline, setTimeline] = useState(() => createTimeline(fen));
@@ -128,9 +129,12 @@ export const Training = () => {
   // Reset per-item UI state when advancing to a new training item, without
   // remounting the board (a remount here would flash/reload cm-chessboard).
   useEffect(() => {
-    setLocalFeedback("");
-    setMoveInput("");
-    setHintLevel(-1);
+    if (prevItemIdRef.current !== itemId) {
+      setLocalFeedback("");
+      setMoveInput("");
+      setHintLevel(-1);
+    }
+    prevItemIdRef.current = itemId;
   }, [itemId]);
 
   const jumpToIndex = useCallback(
