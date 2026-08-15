@@ -103,9 +103,9 @@ export default function Board({
     if (!board) return;
     const desired = orientation === "black" ? COLOR.black : COLOR.white;
     if (board.getOrientation() !== desired) {
-      void board.setOrientation(desired, false);
+      void board.setOrientation(desired, animated);
     }
-  }, [orientation]);
+  }, [orientation, animated]);
 
   // Position: only re-set when the piece placement actually changes, so an
   // accepted user move (already reflected on the board) does not re-animate.

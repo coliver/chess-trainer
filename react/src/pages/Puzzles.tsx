@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
 import api from "../api";
 import Board from "../components/Board";
+import { FlipBoardButton } from "../components/FlipBoardButton";
+import { useBoardOrientation } from "../hooks/useBoardOrientation";
 import {
   START_FEN,
   applyMove,
@@ -30,6 +32,7 @@ export const Puzzles = () => {
   const [feedback, setFeedback] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [solved, setSolved] = useState(0);
+  const { orientation, flip } = useBoardOrientation();
 
   const fenRef = useRef(fen);
   useEffect(() => {
@@ -137,12 +140,20 @@ export const Puzzles = () => {
         <div className="puzzles-board-wrap">
           <Board
             position={fen}
+            orientation={orientation}
             interactive={!!puzzleId && !isSubmitting}
             moveColor={solverColor === "b" ? "black" : "white"}
             onMoveStart={canPickUp}
             getLegalMoves={getLegalMoves}
             onMove={onMove}
           />
+        </div>
+        <div className="board-under">
+          <span className={`turn${solverColor === "b" ? " black" : ""}`}>
+            <span className="turn-dot" aria-hidden="true" />
+            {solverColor === "b" ? "Black to move" : "White to move"}
+          </span>
+          <FlipBoardButton onClick={flip} />
         </div>
 
         <p className="puzzles-feedback" role="status">

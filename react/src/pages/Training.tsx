@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Board, { type BoardMarker } from "../components/Board";
+import { FlipBoardButton } from "../components/FlipBoardButton";
 import {
   sideToMove,
   applyMove,
@@ -23,6 +24,7 @@ import {
 } from "@knight-school/chess-core";
 import { useBlinkGreen } from "../hooks/useBlinkGreen";
 import { useTrainingSession } from "../hooks/useTrainingSession";
+import { useBoardOrientation } from "../hooks/useBoardOrientation";
 
 export const Training = () => {
   const { id } = useParams();
@@ -47,6 +49,7 @@ export const Training = () => {
 
   const [moveInput, setMoveInput] = useState("");
   const [showAnimations] = useState(true);
+  const { orientation, flip } = useBoardOrientation();
   const [hintLevel, setHintLevel] = useState(-1);
   const [localFeedback, setLocalFeedback] = useState("");
   const shownFeedback = localFeedback || feedback;
@@ -308,6 +311,7 @@ export const Training = () => {
             <div className="training-board-wrap">
               <Board
                 position={fen}
+                orientation={orientation}
                 interactive
                 animated={showAnimations}
                 moveColor="white"
@@ -322,6 +326,7 @@ export const Training = () => {
                 <span className="turn-dot" aria-hidden="true" />
                 {isWhiteToMove ? "White to move" : "Black to move"}
               </span>
+              <FlipBoardButton onClick={flip} />
             </div>
           </div>
 
