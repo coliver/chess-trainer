@@ -125,6 +125,14 @@ export const Training = () => {
     setHintLevel(-1);
   }, []);
 
+  // Reset per-item UI state when advancing to a new training item, without
+  // remounting the board (a remount here would flash/reload cm-chessboard).
+  useEffect(() => {
+    setLocalFeedback("");
+    setMoveInput("");
+    setHintLevel(-1);
+  }, [itemId]);
+
   const jumpToIndex = useCallback(
     (nextIndex: number) => {
       const current = timelineRef.current;
@@ -305,8 +313,7 @@ export const Training = () => {
   return (
     <main className="page">
       <div className="card">
-        {/* remount per itemId so timeline starts fresh for that training position */}
-        <div key={itemId ?? "none"} className="train">
+        <div className="train">
           <div className="train-board-col">
             <div className="training-board-wrap">
               <Board
