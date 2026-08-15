@@ -1,6 +1,6 @@
 // frontend/src/components/Header.tsx
 import { useEffect, useState, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { KnightSchoolIcon } from "./KnightSchoolIcon";
 import { ThemeToggle } from "./ThemeToggle";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ import { logout, AUTH_CHANGED_EVENT } from "../auth";
 
 export default function Header() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [isLoggedIn, setIsLoggedIn] = useState(
     () => !!localStorage.getItem("token"),
@@ -66,10 +67,10 @@ export default function Header() {
           <nav className="site-header-nav" aria-label="Primary">
             {isLoggedIn && (
               <>
-                <Link to="/dashboard" className="site-header-nav-link">
+                <Link to="/dashboard" className={`site-header-nav-link${location.pathname.startsWith("/dashboard") ? " active" : ""}`}>
                   Openings
                 </Link>
-                <Link to="/puzzles" className="site-header-nav-link">
+                <Link to="/puzzles" className={`site-header-nav-link${location.pathname.startsWith("/puzzles") ? " active" : ""}`}>
                   Puzzles
                 </Link>
               </>

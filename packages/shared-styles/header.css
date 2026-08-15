@@ -1,16 +1,17 @@
 /* src/styles/header.css */
 
 .site-header {
-  border-bottom: 1px solid var(--border);
+  border-bottom: 2px solid var(--border);
   background: color-mix(in oklab, var(--bg) 92%, transparent);
   backdrop-filter: blur(8px);
+  box-shadow: 0 1px 3px rgba(35,30,20,0.05);
 }
 
 .site-header-inner {
   width: 1126px;
   max-width: 100%;
   margin: 0 auto;
-  padding: 14px 20px;
+  padding: 18px 20px;
   box-sizing: border-box;
 
   display: flex;
@@ -27,15 +28,17 @@
 .site-header-brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
+  line-height: 1;
 }
 
 .site-header-greeting {
   display: none;
-  font-size: 0.7rem;
+  font-size: 0.875rem;
+  font-weight: 500;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1024px) {
   .site-header-greeting {
     display: block;
   }
@@ -71,11 +74,18 @@
   font-weight: 600;
   font-size: 14px;
   text-decoration: none;
-  transition: background 0.2s;
+  transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
 }
 
 .site-header-nav-link:hover {
   background: var(--social-bg);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(35,30,20,0.08);
+}
+
+.site-header-nav-link.active {
+  background: var(--social-bg);
+  border-bottom: 2px solid var(--accent);
 }
 
 .site-header-profile-link {
@@ -86,10 +96,10 @@
   height: 40px;
   border-radius: 12px;
   border: 1px solid transparent;
-  background: var(--social-bg);
+  background: rgba(125, 44, 88, 0.12);
   color: var(--text-h);
   cursor: pointer;
-  transition: border-color 0.2s, transform 0.05s;
+  transition: border-color 0.15s, background 0.15s, transform 0.05s;
   padding: 0;
 }
 
@@ -136,6 +146,7 @@
   letter-spacing: -0.4px;
   font-size: 64px;
   text-decoration: none;
+  line-height: 1.1;
 
   display: block;
 
@@ -164,7 +175,7 @@
   .site-header-inner {
     flex-wrap: wrap;
     gap: 10px 12px;
-    padding: 10px 14px;
+    padding: 12px 14px;
   }
 
   .site-header-brand {
@@ -177,7 +188,7 @@
   }
 
   .site-header-title {
-    font-size: clamp(26px, 8vw, 40px);
+    font-size: clamp(28px, 6vw, 56px);
     letter-spacing: -0.2px;
   }
 
@@ -193,7 +204,12 @@
 
   /* Greeting is nice-to-have; drop it to reclaim width on phones */
   .site-header-greeting {
-    display: none;
+    display: block;
+    font-size: 0.75rem;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .site-header-link {

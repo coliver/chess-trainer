@@ -200,5 +200,6 @@ def get_weak_spots(db: Session, user_id: int, limit: int = 20) -> list[WeakSpot]
         group.incorrect_count += r.incorrect_count
 
     spots = [groups[key] for key in order]
+    spots = [s for s in spots if s.correct_count < s.attempts]
     spots.sort(key=lambda s: ((s.correct_count / s.attempts), -s.attempts))
     return spots[:limit]

@@ -38,11 +38,14 @@ async function applyTheme(page: Page, theme: (typeof THEMES)[number]) {
 // tests hit the Vite dev server directly (no nginx /api proxy), so that
 // request must be mocked explicitly rather than passing via SPA fallback.
 async function mockAuth(page: Page) {
+  await page.addInitScript(() => {
+    localStorage.setItem("username", "lobter");
+  });
   await page.route("**/api/auth/me", async (route) => {
     await route.fulfill({
       status: 200,
       contentType: "application/json",
-      body: JSON.stringify({ id: 1, username: "demo" }),
+      body: JSON.stringify({ id: 1, username: "lobter" }),
     });
   });
 }
@@ -98,6 +101,77 @@ test.describe("Dashboard screenshots (breakpoints × theme)", () => {
                 epd: null,
                 uci_moves: "d2d4 d7d5 c2c4 e7e6",
                 description: null,
+              },
+            ]),
+          });
+        });
+
+        await page.route("**/api/progress/summary", async (route) => {
+          await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({
+              positionsSeen: 15,
+              overallAccuracy: 0.85,
+              mastered: 4,
+              currentStreak: 2,
+              longestStreak: 2,
+            }),
+          });
+        });
+        await page.route("**/api/progress/due", async (route) => {
+          await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify([
+              {
+                fen: "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq c6 0 2",
+                correctMoveUci: "g1f3",
+                openingEco: "B20",
+                openingName: "Sicilian Defense",
+                dueAt: "2026-08-14T09:00:00Z",
+              },
+              {
+                fen: "rnbqkbnr/pppp1ppp/4p3/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+                correctMoveUci: "d2d4",
+                openingEco: "C00",
+                openingName: "French Defense",
+                dueAt: "2026-08-14T09:00:00Z",
+              },
+              {
+                fen: "rnbqkbnr/ppp1pppp/8/3p4/2PP4/8/PP2PPPP/RNBQKBNR b KQkq c3 0 2",
+                correctMoveUci: "e7e6",
+                openingEco: "D30",
+                openingName: "Queen's Gambit Declined",
+                dueAt: "2026-08-14T09:00:00Z",
+              },
+              {
+                fen: "r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3",
+                correctMoveUci: "a7a6",
+                openingEco: "C60",
+                openingName: "Ruy Lopez",
+                dueAt: "2026-08-14T09:00:00Z",
+              },
+            ]),
+          });
+        });
+        await page.route("**/api/progress/weak-spots", async (route) => {
+          await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify([
+              {
+                openingName: "Nimzo-Larsen Attack: Dutch Variation",
+                attempts: 3,
+                correctCount: 2,
+                incorrectCount: 1,
+              },
+              { openingName: "Review", attempts: 9, correctCount: 7, incorrectCount: 2 },
+              {
+                openingName: "French Defense",
+                attempts: 8,
+                correctCount: 7,
+                incorrectCount: 1,
               },
             ]),
           });
