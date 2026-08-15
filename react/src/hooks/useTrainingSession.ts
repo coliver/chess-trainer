@@ -163,6 +163,9 @@ export function useTrainingSession(
           setIsAdvancing(true);
 
           const nextPromise = fetchNextItem();
+          // Attach a no-op handler so an early rejection doesn't surface as an
+          // unhandled rejection before the setTimeout callback below awaits it.
+          nextPromise.catch(() => {});
 
           if (advanceTimeoutRef.current) {
             clearTimeoutFn(advanceTimeoutRef.current);
