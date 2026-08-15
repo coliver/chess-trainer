@@ -338,6 +338,23 @@ export const Training = () => {
                 {isWhiteToMove ? "White to move" : "Black to move"}
               </span>
               <FlipBoardButton onClick={flip} />
+              <button
+                className="btn hint"
+                type="button"
+                onClick={() => {
+                  if (
+                    isSubmittingRef.current ||
+                    isAdvancingRef.current ||
+                    !itemId ||
+                    isSessionCompleted
+                  )
+                    return;
+                  setHintLevel((h) => (h < 0 ? 0 : 1));
+                }}
+                disabled={busy || !itemId || isSessionCompleted}
+              >
+                💡 Show a hint
+              </button>
             </div>
           </div>
 
@@ -381,24 +398,6 @@ export const Training = () => {
                   Next ›
                 </button>
               </div>
-
-              <button
-                className="btn hint"
-                type="button"
-                onClick={() => {
-                  if (
-                    isSubmittingRef.current ||
-                    isAdvancingRef.current ||
-                    !itemId ||
-                    isSessionCompleted
-                  )
-                    return;
-                  setHintLevel((h) => (h < 0 ? 0 : 1));
-                }}
-                disabled={busy || !itemId || isSessionCompleted}
-              >
-                💡 Show a hint
-              </button>
 
               <form className="train-type-move" onSubmit={handleSubmit}>
                 <input
