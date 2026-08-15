@@ -11,9 +11,13 @@ export default function BoardPreview({
   selectedOpeningName: string | null;
 }) {
   // Callers remount this via a `key` on the selected opening, so selectedPly
-  // starts at 0 (the start position) for each newly previewed line — a ply
-  // index never leaks from a longer line onto a shorter one.
-  const [selectedPly, setSelectedPly] = useState(0);
+  // starts fresh for each newly previewed line — a ply index never leaks
+  // from a longer line onto a shorter one. Default to the final ply so the
+  // preview opens showing the completed line, not the start position.
+  const [selectedPly, setSelectedPly] = useState(() => {
+    const opening = openings.find((o) => o.name === selectedOpeningName);
+    return uciListToMoves(opening?.uci_moves).length;
+  });
 
   // Measure container width and use it for board sizing
   const containerRef = useRef<HTMLDivElement | null>(null);

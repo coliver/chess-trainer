@@ -38,7 +38,7 @@ describe('BoardPreviewComponent', () => {
     expect(cmp.moveList).toEqual(['e2e4', 'c7c5', 'g1f3', 'd7d6']);
   });
 
-  it('resets the ply when the selected opening name changes', () => {
+  it('defaults the ply to the final move when the selected opening name changes', () => {
     const fixture = TestBed.createComponent(BoardPreviewComponent);
     const cmp = fixture.componentInstance;
     const sicilian = opening({ name: 'Sicilian Defense' });
@@ -57,7 +57,7 @@ describe('BoardPreviewComponent', () => {
     });
 
     expect(cmp.opening).toBe(french);
-    expect(cmp.selectedPly).toBe(0);
+    expect(cmp.selectedPly).toBe(2);
   });
 
   it('exposes null opening when no match is found', () => {

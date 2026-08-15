@@ -91,10 +91,13 @@ export class BoardPreviewComponent
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['selectedOpeningName'] || changes['openings']) {
       this.updateOpening();
-      // Reset ply when opening changes
+      this.updateMoveList();
+      // Default to the final ply when the opening changes, so the preview
+      // opens showing the completed line, not the start position.
       if (changes['selectedOpeningName']?.currentValue !== changes['selectedOpeningName']?.previousValue) {
-        this._selectedPly = 0;
+        this._selectedPly = this.moveList.length;
       }
+      return;
     }
     this.updateMoveList();
   }
