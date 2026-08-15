@@ -43,6 +43,10 @@ html[data-theme="dark"] {
 /* Turn indicator under the board */
 .board-under {
   margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 .turn {
   display: inline-flex;
@@ -61,6 +65,11 @@ html[data-theme="dark"] {
 }
 .turn.black .turn-dot {
   background: #2c2c30;
+}
+
+.flip-icon {
+  display: inline-block;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* Rail */
@@ -244,5 +253,14 @@ html[data-theme="dark"] {
 @media (max-width: 900px) {
   .train {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Cap the board so it doesn't push controls off-screen once the rail drops
+   below it (matches the Puzzles page's 480px cap). */
+@media (max-width: 900px) {
+  .training-board-wrap {
+    max-width: 480px;
+    margin: 0 auto;
   }
 }

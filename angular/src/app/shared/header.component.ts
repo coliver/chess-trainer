@@ -25,6 +25,10 @@ import { ThemeToggleComponent } from './theme-toggle.component';
           <div role="heading" aria-level="2" class="site-header-greeting">{{ greeting }}</div>
 
           <nav class="site-header-nav" aria-label="Primary">
+            @if (auth.isLoggedIn) {
+              <a routerLink="/dashboard" class="site-header-nav-link">Openings</a>
+              <a routerLink="/puzzles" class="site-header-nav-link">Puzzles</a>
+            }
             @if (!auth.isLoggedIn) {
               <a routerLink="/login" class="site-header-profile-link" aria-label="Login" title="Login">
                 <svg

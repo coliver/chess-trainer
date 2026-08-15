@@ -20,6 +20,7 @@ import {
 } from '@knight-school/chess-core';
 import { BoardComponent, BoardMarker } from './board.component';
 import { TrainingItem, TrainingService } from '../../core/training.service';
+import { FlipBoardButtonComponent } from '../../shared/flip-board-button.component';
 
 const BLINK_CYCLE_MS = 420; // fadeIn(120) + hold(120) + fadeOut(180), matches react's useBlinkGreen
 
@@ -32,7 +33,7 @@ const BLINK_CYCLE_MS = 420; // fadeIn(120) + hold(120) + fadeOut(180), matches r
 @Component({
   selector: 'app-training',
   standalone: true,
-  imports: [FormsModule, BoardComponent],
+  imports: [FormsModule, BoardComponent, FlipBoardButtonComponent],
   template: `
     <main class="page">
       <div class="card">
@@ -41,6 +42,7 @@ const BLINK_CYCLE_MS = 420; // fadeIn(120) + hold(120) + fadeOut(180), matches r
             <div class="training-board-wrap">
               <app-board
                 [position]="fen"
+                [orientation]="orientation"
                 [interactive]="true"
                 moveColor="white"
                 [markers]="markers"
@@ -54,6 +56,7 @@ const BLINK_CYCLE_MS = 420; // fadeIn(120) + hold(120) + fadeOut(180), matches r
                 <span class="turn-dot" aria-hidden="true"></span>
                 {{ isWhiteToMove ? 'White to move' : 'Black to move' }}
               </span>
+              <app-flip-board-button (flip)="flipBoard()" />
             </div>
           </div>
 
@@ -150,6 +153,7 @@ export class TrainingComponent implements OnInit, OnDestroy {
   isSessionCompleted = false;
   hintLevel = -1;
   markers: BoardMarker[] = [];
+  orientation: 'white' | 'black' = 'white';
 
   timeline: Timeline = createTimeline(START_FEN);
 
@@ -393,6 +397,10 @@ export class TrainingComponent implements OnInit, OnDestroy {
 
   exit(): void {
     this.router.navigate(['/dashboard']);
+  }
+
+  flipBoard(): void {
+    this.orientation = this.orientation === 'white' ? 'black' : 'white';
   }
 
   private blinkGreen(uci: string, times: number): void {
