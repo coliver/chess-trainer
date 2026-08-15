@@ -10,11 +10,15 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [emailNotVerified, setEmailNotVerified] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [resendingVerification, setResendingVerification] = useState(false);
+  const [verificationSent, setVerificationSent] = useState(false);
 
   const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
+    setEmailNotVerified(false);
     setSubmitting(true);
 
     try {
@@ -25,12 +29,36 @@ export default function Login() {
       navigate("/dashboard");
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {
-        setError(err.response?.data?.detail || "Failed to Login");
+        if (err.response?.status === 403 && err.response?.data?.detail === "Email not verified") {
+          setEmailNotVerified(true);
+        } else {
+          setError(err.response?.data?.detail || "Failed to Login");
+        }
       } else {
         setError("An unexpected error occurred.");
       }
     } finally {
       setSubmitting(false);
+    }
+  };
+
+  const handleResendVerification = async () => {
+    setResendingVerification(true);
+    setVerificationSent(false);
+
+    try {
+      await api.post("/auth/resend-verification", { username });
+
+      setVerificationSent(true);
+      setTimeout(() => setVerificationSent(false), 3000);
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        setError(err.response?.data?.detail || "Failed to resend verification email");
+      } else {
+        setError("An unexpected error occurred.");
+      }
+    } finally {
+      setResendingVerification(false);
     }
   };
 
@@ -67,6 +95,21 @@ export default function Login() {
           <button className="btn" disabled={submitting} type="submit" style={{ marginTop: 14 }}>
             {submitting ? "Submitting..." : "Submit"}
           </button>
+
+          {emailNotVerified && (
+            <div style={{ marginTop: 14 }}>
+              <div className="auth-error">Please verify your email before logging in</div>
+              <button
+                className="btn"
+                type="button"
+                disabled={resendingVerification || verificationSent}
+                onClick={handleResendVerification}
+                style={{ marginTop: 10, opacity: verificationSent ? 0.6 : 1 }}
+              >
+                {verificationSent ? "Sent!" : resendingVerification ? "Sending..." : "Resend verification email"}
+              </button>
+            </div>
+          )}
 
           {error && <div className="auth-error">{error}</div>}
         </form>
