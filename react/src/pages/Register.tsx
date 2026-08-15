@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import api from "../api";
 
 export default function Register() {
-  const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -17,22 +17,14 @@ export default function Register() {
     setSubmitting(true);
 
     try {
-      const resp = await fetch("/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, username, password }),
-      });
-
-      if (!resp.ok) {
-        setError(await resp.text());
-        return;
-      }
-
+      await api.post("/auth/register", { email, username, password });
       setSuccess(true);
-      navigate("/login");
-    } catch (err) {
-      setError("Failed to register. Please try again later.");
-      console.error(err)
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        setError(err.response?.data?.detail || "Failed to register. Please try again later.");
+      } else {
+        setError("Failed to register. Please try again later.");
+      }
     } finally {
       setSubmitting(false);
     }
@@ -45,7 +37,12 @@ export default function Register() {
         <p className="subtitle">Create your account.</p>
 
         {success ? (
-          <p>Registered—now log in.</p>
+          <div>
+            <p>Registration successful! Check your inbox at <strong>{email}</strong> for a verification link before logging in.</p>
+            <p className="auth-alt" style={{ marginTop: 20 }}>
+              <Link to="/login">Return to login</Link>
+            </p>
+          </div>
         ) : (
           <form className="auth-form" onSubmit={handleSubmit}>
             <label className="auth-field">

@@ -4,7 +4,7 @@ import os
 
 import jwt
 import pytest
-from fastapi import HTTPException
+from fastapi import BackgroundTasks, HTTPException
 
 from backend.app.modules.users.models import User
 from backend.app.routers.auth import (
@@ -104,16 +104,44 @@ def jwt_env(monkeypatch):
 
 def test_register_creates_user_when_unique(jwt_env):
     db = FakeDB(users=[])
+    background_tasks = BackgroundTasks()
 
     req = RegisterRequest(email="a@example.com", username="alice", password="pw123")
-    out = register(req, db=db)
+    out = register(req, background_tasks=background_tasks, db=db)
 
     assert "id" in out and out["email"] == "a@example.com" and out["username"] == "alice"
     assert len(db.users) == 1
     assert db.users[0].email == "a@example.com"
     assert db.users[0].username == "alice"
     assert db.users[0].is_active is True
+    assert db.users[0].email_verified is False
     assert db.users[0].password_hash != "pw123"
+    assert len(background_tasks.tasks) == 1
+
+
+def test_register_schedules_verification_email(jwt_env, monkeypatch):
+    import backend.app.routers.auth as auth_mod
+
+    sent = {}
+    monkeypatch.setattr(
+        auth_mod,
+        "send_verification_email",
+        lambda email, token: sent.update(email=email, token=token),
+    )
+
+    db = FakeDB(users=[])
+    background_tasks = BackgroundTasks()
+    req = RegisterRequest(email="a@example.com", username="alice", password="pw123")
+    register(req, background_tasks=background_tasks, db=db)
+
+    # Run the scheduled task the way FastAPI would after the response is sent.
+    for task in background_tasks.tasks:
+        task.func(*task.args, **task.kwargs)
+
+    assert sent["email"] == "a@example.com"
+    payload = jwt.decode(sent["token"], os.environ["JWT_SECRET"], algorithms=["HS256"])
+    assert payload["type"] == "email_verify"
+    assert payload["sub"] == str(db.users[0].id)
 
 
 def test_register_duplicate_email_409(jwt_env):
@@ -123,12 +151,13 @@ def test_register_duplicate_email_409(jwt_env):
         username="bob",
         password_hash=hash_password("pw"),
         is_active=True,
+        email_verified=True,
     )
     db = FakeDB(users=[existing])
 
     req = RegisterRequest(email="a@example.com", username="alice", password="pw123")
     with pytest.raises(HTTPException) as e:
-        register(req, db=db)
+        register(req, background_tasks=BackgroundTasks(), db=db)
 
     assert e.value.status_code == 409
     assert e.value.detail == "Email or username already exists"
@@ -174,6 +203,25 @@ def test_login_wrong_password_401(jwt_env):
     assert e.value.detail == "Invalid credentials"
 
 
+def test_login_unverified_email_403(jwt_env):
+    u = User(
+        id=1,
+        email="a@example.com",
+        username="alice",
+        password_hash=hash_password("correct"),
+        is_active=True,
+        email_verified=False,
+    )
+    db = FakeDB(users=[u])
+
+    req = LoginRequest(email="a@example.com", username=None, password="correct")
+    with pytest.raises(HTTPException) as e:
+        login(req, db=db)
+
+    assert e.value.status_code == 403
+    assert e.value.detail == "Email not verified"
+
+
 def test_login_success_returns_access_token(jwt_env):
     u = User(
         id=1,
@@ -181,6 +229,7 @@ def test_login_success_returns_access_token(jwt_env):
         username="alice",
         password_hash=hash_password("correct"),
         is_active=True,
+        email_verified=True,
     )
     db = FakeDB(users=[u])
 
@@ -209,6 +258,7 @@ def test_login_by_username_success_returns_access_token(jwt_env):
         username="alice",
         password_hash=hash_password("correct"),
         is_active=True,
+        email_verified=True,
     )
     db = FakeDB(users=[u])
 

@@ -51,6 +51,21 @@ def test_user(db):
         email="test@example.com",
         password_hash=hash_password("password123"),
         is_active=True,
+        email_verified=True,
+    )
+    db.add(user)
+    db.commit()
+    return user
+
+
+@pytest.fixture
+def unverified_user(db):
+    user = User(
+        username="unverifieduser",
+        email="unverified@example.com",
+        password_hash=hash_password("password123"),
+        is_active=True,
+        email_verified=False,
     )
     db.add(user)
     db.commit()
