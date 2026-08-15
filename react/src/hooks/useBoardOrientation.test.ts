@@ -22,4 +22,14 @@ describe("useBoardOrientation", () => {
     act(() => result.current.flip());
     expect(result.current.orientation).toBe("white");
   });
+
+  it("setOrientation sets orientation directly", () => {
+    const { result } = renderHook(() => useBoardOrientation());
+
+    act(() => result.current.setOrientation("black"));
+    expect(result.current.orientation).toBe("black");
+
+    act(() => result.current.setOrientation("white"));
+    expect(result.current.orientation).toBe("white");
+  });
 });

@@ -1,48 +1,30 @@
-/* ===== Puzzles page ===== */
-.puzzles-card {
+/* ===== Puzzles page =====
+   Layout reuses the training.css two-pane grid (.train / .train-board-col /
+   .training-board-wrap / .train-rail) so puzzles and training share one
+   professional desktop skin instead of drifting apart. */
+
+.puzzles-stats {
   display: flex;
-  flex-direction: column;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.stat-pill {
+  display: inline-flex;
   align-items: center;
-  gap: 16px;
-  padding: 24px;
-}
-
-.puzzles-header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 480px;
-}
-
-.puzzles-header h1 {
-  margin: 0;
-}
-
-.puzzles-meta {
-  display: flex;
-  gap: 16px;
-  font-size: 13px;
+  gap: 4px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  font-size: 12.5px;
+  font-weight: 650;
   color: var(--text);
 }
-
-.puzzles-board-wrap {
-  width: 100%;
-  max-width: 480px;
-}
-
-.puzzles-feedback {
-  min-height: 20px;
-  font-weight: 600;
-  color: var(--text-h);
-}
-
-.puzzles-streak {
-  color: var(--text);
-}
-.puzzles-streak.is-active {
+.stat-pill.is-active {
+  border-color: var(--accent-border);
+  background: var(--accent-bg);
   color: var(--accent);
-  font-weight: 700;
 }
 
 .puzzles-skip {
@@ -54,6 +36,7 @@
   border: 0;
   cursor: pointer;
   padding: 4px 0;
+  text-align: left;
 }
 .puzzles-skip:hover {
   color: var(--accent);

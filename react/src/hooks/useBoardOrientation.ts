@@ -9,5 +9,5 @@ export function useBoardOrientation(initial: BoardOrientation = "white") {
     () => setOrientation((o) => (o === "white" ? "black" : "white")),
     [],
   );
-  return { orientation, flip };
+  return { orientation, flip, setOrientation };
 }

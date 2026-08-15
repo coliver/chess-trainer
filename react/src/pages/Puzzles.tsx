@@ -35,7 +35,7 @@ export const Puzzles = () => {
   const [streak, setStreak] = useState(0);
   const [bestStreak, setBestStreak] = useState(0);
   const [noPuzzlesDue, setNoPuzzlesDue] = useState(false);
-  const { orientation, flip } = useBoardOrientation();
+  const { orientation, flip, setOrientation } = useBoardOrientation();
 
   const fenRef = useRef(fen);
   useEffect(() => {
@@ -51,6 +51,7 @@ export const Puzzles = () => {
       setFen(res.data.fen);
       setCorrectMoveUci(res.data.correctMoveUci);
       setRating(res.data.rating);
+      setOrientation(sideToMove(res.data.fen) === "b" ? "black" : "white");
     } catch (err) {
       const e = err as AxiosError;
       if (e.response?.status === 401) {
@@ -65,7 +66,7 @@ export const Puzzles = () => {
       }
       setFeedback("Failed to load a puzzle. Check your connection.");
     }
-  }, [navigate]);
+  }, [navigate, setOrientation]);
 
   useEffect(() => {
     const run = async () => {
@@ -118,6 +119,15 @@ export const Puzzles = () => {
 
   const solverColor = sideToMove(fen);
 
+  const statusKind = feedback.startsWith("✅")
+    ? "good"
+    : feedback.startsWith("❌")
+      ? "bad"
+      : "your";
+  const statusIcon =
+    statusKind === "good" ? "✓" : statusKind === "bad" ? "✕" : "♟";
+  const statusMsg = feedback || (puzzleId ? "Find the best move." : "");
+
   const onMove = useCallback(
     (from: string, to: string): boolean => {
       if (isSubmitting || !puzzleId || from === to) return false;
@@ -146,59 +156,84 @@ export const Puzzles = () => {
 
   return (
     <main className="page">
-      <div className="card puzzles-card">
-        <header className="puzzles-header">
-          <h1>Puzzles</h1>
-          <div className="puzzles-meta">
-            {rating != null && <span>Rating ~{rating}</span>}
-            <span>Solved: {solved}</span>
-            <span className={streak > 0 ? "puzzles-streak is-active" : "puzzles-streak"}>
-              Streak: {streak}
-              {streak > 0 ? " 🔥" : ""}
-              {bestStreak > 0 ? ` · best ${bestStreak}` : ""}
-            </span>
+      <div className="card">
+        <div className="train">
+          <div className="train-board-col">
+            <div className="training-board-wrap">
+              <Board
+                position={fen}
+                orientation={orientation}
+                interactive={!!puzzleId && !isSubmitting}
+                moveColor={solverColor === "b" ? "black" : "white"}
+                onMoveStart={canPickUp}
+                getLegalMoves={getLegalMoves}
+                onMove={onMove}
+              />
+            </div>
+            <div className="board-under">
+              <span className={`turn${solverColor === "b" ? " black" : ""}`}>
+                <span className="turn-dot" aria-hidden="true" />
+                {solverColor === "b" ? "Black to move" : "White to move"}
+              </span>
+              <div className="board-toolbar">
+                <FlipBoardButton className="icon-btn" onClick={flip} />
+              </div>
+            </div>
           </div>
-        </header>
 
-        <div className="puzzles-board-wrap">
-          <Board
-            position={fen}
-            orientation={orientation}
-            interactive={!!puzzleId && !isSubmitting}
-            moveColor={solverColor === "b" ? "black" : "white"}
-            onMoveStart={canPickUp}
-            getLegalMoves={getLegalMoves}
-            onMove={onMove}
-          />
+          <aside className="train-rail">
+            <div className="rail-head">
+              <div className="rail-eyebrow">Puzzles</div>
+              <div className="rail-title">
+                <h1>Puzzle Training</h1>
+                {rating != null && (
+                  <span className="eco-chip">Rating ~{rating}</span>
+                )}
+              </div>
+            </div>
+
+            <div className="puzzles-stats">
+              <span className="stat-pill">Solved: {solved}</span>
+              <span
+                className={
+                  streak > 0 ? "stat-pill is-active" : "stat-pill"
+                }
+              >
+                Streak: {streak}
+                {streak > 0 ? " 🔥" : ""}
+                {bestStreak > 0 ? ` · best ${bestStreak}` : ""}
+              </span>
+            </div>
+
+            {statusMsg && (
+              <div className={`train-status ${statusKind}`} role="status">
+                <span className="train-status-ic" aria-hidden="true">
+                  {statusIcon}
+                </span>
+                <div>
+                  <div className="train-status-msg">{statusMsg}</div>
+                </div>
+              </div>
+            )}
+
+            {puzzleId && (
+              <button
+                type="button"
+                className="puzzles-skip"
+                onClick={skip}
+                disabled={isSubmitting}
+              >
+                Skip puzzle ›
+              </button>
+            )}
+
+            {noPuzzlesDue && (
+              <Link to="/dashboard" className="puzzles-back-link">
+                ← Back to dashboard
+              </Link>
+            )}
+          </aside>
         </div>
-        <div className="board-under">
-          <span className={`turn${solverColor === "b" ? " black" : ""}`}>
-            <span className="turn-dot" aria-hidden="true" />
-            {solverColor === "b" ? "Black to move" : "White to move"}
-          </span>
-          <FlipBoardButton onClick={flip} />
-        </div>
-
-        <p className="puzzles-feedback" role="status">
-          {feedback || (puzzleId ? "Find the best move." : "")}
-        </p>
-
-        {noPuzzlesDue && (
-          <Link to="/dashboard" className="puzzles-back-link">
-            Back to dashboard
-          </Link>
-        )}
-
-        {puzzleId && (
-          <button
-            type="button"
-            className="puzzles-skip"
-            onClick={skip}
-            disabled={isSubmitting}
-          >
-            Skip puzzle ›
-          </button>
-        )}
       </div>
     </main>
   );
