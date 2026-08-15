@@ -79,6 +79,56 @@ describe("groupByBase", () => {
   });
 });
 
+describe("groupByBase extra branches", () => {
+  it("falls back to the shortest line, picking b when b has fewer plies than a", () => {
+    const groups = groupByBase([
+      op("Ruy Lopez: Exchange", "C68", "e2e4 e7e5 g1f3 b8c6 f1b5 a7a6 b5c6"),
+      op("Ruy Lopez: Berlin Defense", "C65", "e2e4 e7e5 g1f3 b8c6 f1b5 g8f6"),
+    ]);
+    expect(groups[0].representative.eco).toBe("C65");
+  });
+
+  it("treats a missing/empty uci_moves as 0 plies", () => {
+    const groups = groupByBase([
+      op("Irregular Opening", "A00", ""),
+      op("Irregular Opening: Sub", "A00", "a2a3"),
+    ]);
+    expect(groups[0].representative.name).toBe("Irregular Opening");
+  });
+
+  it("treats a whitespace-only uci_moves as 0 plies too", () => {
+    const groups = groupByBase([
+      op("Whitespace Opening", "A00", "   "),
+      op("Whitespace Opening: Sub", "A00", "a2a3"),
+    ]);
+    expect(groups[0].representative.name).toBe("Whitespace Opening");
+  });
+
+  it("treats a fully-undefined uci_moves field as 0 plies too", () => {
+    const noMoves: Opening = { name: "No Moves", eco: "A00" };
+    const groups = groupByBase([
+      noMoves,
+      op("No Moves: Sub", "A00", "a2a3"),
+    ]);
+    expect(groups[0].representative.name).toBe("No Moves");
+  });
+});
+
+describe("groupVariations extra branches", () => {
+  it("breaks ties in size with alphabetical order", () => {
+    const groups = groupVariations([
+      op("French Defense", "C00"),
+      op("French Defense: Zeta Variation", "C09"),
+      op("French Defense: Alpha Variation", "C01"),
+    ]);
+    expect(groups.map((g) => g.label)).toEqual([
+      "Main line",
+      "Alpha Variation",
+      "Zeta Variation",
+    ]);
+  });
+});
+
 describe("subVariationLabelOf", () => {
   it("returns Main line when there is no comma", () => {
     expect(subVariationLabelOf("Sicilian Defense: Najdorf Variation")).toBe(

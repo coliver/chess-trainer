@@ -57,9 +57,10 @@ vi.mock("../api", () => ({
   default: { get: vi.fn(), post: vi.fn() },
 }));
 
+const mockNavigate = vi.fn();
 vi.mock("react-router-dom", () => ({
   useParams: () => ({ id: "sess-1" }),
-  useNavigate: () => vi.fn(),
+  useNavigate: () => mockNavigate,
 }));
 
 type FenTurnBadgeProps = { fen: string };
@@ -105,6 +106,7 @@ describe("Training Page", () => {
     });
 
     useTrainingSession.mockReturnValue(baseHookValue);
+    mockNavigate.mockClear();
 
     // Defaults: white to move; a legal move producing "<from><to>q"; a white
     // piece anywhere; e2 has one legal target.
@@ -224,6 +226,53 @@ describe("Training Page", () => {
       });
     });
 
+    it("does not re-trigger autoplay for an itemId it has already autoplayed", async () => {
+      sideToMoveMock.mockReturnValue("b");
+      mockTakeAutoplayOnce.mockReturnValue(true);
+
+      const { rerender } = render(<Training />);
+      await waitFor(() => {
+        expect(mockSubmitMove).toHaveBeenCalledWith("e2e4", "start-fen");
+      });
+      mockSubmitMove.mockClear();
+
+      // Re-render with the same itemId but a different fen so the autoplay
+      // effect re-runs; lastAutoplayedItemIdRef already matches -> skip.
+      useTrainingSession.mockReturnValue({
+        ...baseHookValue,
+        fen: "start-fen-2",
+      });
+      rerender(<Training />);
+
+      expect(mockSubmitMove).not.toHaveBeenCalled();
+    });
+
+    it("does not autoplay when the timeline is not at its latest position", async () => {
+      const { rerender } = render(<Training />);
+      await waitFor(() => expect(capturedProps).toBeDefined());
+
+      // Extend the timeline by one ply, then step back so we're not at latest.
+      act(() => {
+        capturedProps.onMove?.("e2", "e4");
+      });
+      mockSubmitMove.mockClear();
+
+      await user.click(screen.getByRole("button", { name: /‹ Prev/i }));
+
+      // Now switch to black-to-move with a fresh item — autoplay should be
+      // skipped because the timeline isn't at the latest position.
+      sideToMoveMock.mockReturnValue("b");
+      mockTakeAutoplayOnce.mockReturnValue(true);
+      useTrainingSession.mockReturnValue({
+        ...baseHookValue,
+        itemId: 11,
+        correctMoveUci: "e7e5",
+      });
+      rerender(<Training />);
+
+      expect(mockSubmitMove).not.toHaveBeenCalledWith("e7e5", expect.anything());
+    });
+
     it("does not autoplay if isSubmitting is true", async () => {
       sideToMoveMock.mockReturnValue("b");
       mockTakeAutoplayOnce.mockReturnValue(true);
@@ -313,5 +362,94 @@ describe("Training Page", () => {
 
     expect(hasMarker("e2", "hint")).toBe(false);
     expect(hasMarker("e4", "hint")).toBe(false);
+  });
+
+  it("navigates back to the dashboard via the exit button", async () => {
+    render(<Training />);
+    await waitFor(() => expect(capturedProps).toBeDefined());
+
+    await user.click(screen.getByRole("button", { name: /back to openings/i }));
+    expect(mockNavigate).toHaveBeenCalledWith("/dashboard");
+  });
+
+  it("hint button is disabled while a session is completed and does nothing on stray clicks", async () => {
+    useTrainingSession.mockReturnValue({
+      ...baseHookValue,
+      isSessionCompleted: true,
+    });
+
+    render(<Training />);
+    await waitFor(() => expect(capturedProps).toBeDefined());
+
+    const hintBtn = screen.getByRole("button", { name: /hint/i });
+    expect(hintBtn).toBeDisabled();
+  });
+
+  it("onMoveStart blocked while submitting, and onMove is a no-op for same-square drops", async () => {
+    useTrainingSession.mockReturnValue({
+      ...baseHookValue,
+      isSubmitting: true,
+    });
+
+    render(<Training />);
+    await waitFor(() => expect(capturedProps).toBeDefined());
+
+    expect(capturedProps.onMoveStart?.("e2")).toBe(false);
+    expect(capturedProps.onMove?.("e2", "e2")).toBe(false);
+    expect(mockSubmitMove).not.toHaveBeenCalled();
+  });
+
+  it("hint button click is a no-op when there is no itemId", async () => {
+    useTrainingSession.mockReturnValue({
+      ...baseHookValue,
+      itemId: null,
+    });
+
+    render(<Training />);
+    await waitFor(() => expect(capturedProps).toBeDefined());
+
+    const hintBtn = screen.getByRole("button", { name: /hint/i });
+    await user.click(hintBtn);
+    expect(hasMarker("e2", "hint")).toBe(false);
+  });
+
+  describe("Timeline stepper (Prev/Next)", () => {
+    it("Prev is disabled at the start of the timeline; Next steps forward and Prev becomes enabled", async () => {
+      render(<Training />);
+      await waitFor(() => expect(capturedProps).toBeDefined());
+
+      const prevBtn = screen.getByRole("button", { name: /‹ Prev/i });
+      const nextBtn = screen.getByRole("button", { name: /Next ›/i });
+
+      expect(prevBtn).toBeDisabled();
+      expect(nextBtn).toBeDisabled(); // only one fen in the timeline so far
+
+      // Add a move to extend the timeline, then Next should become usable.
+      act(() => {
+        capturedProps.onMove?.("e2", "e4");
+      });
+
+      await waitFor(() => expect(prevBtn).toBeEnabled());
+      expect(nextBtn).toBeDisabled(); // now at latest again
+
+      await user.click(prevBtn);
+      expect(nextBtn).toBeEnabled();
+
+      await user.click(nextBtn);
+      expect(nextBtn).toBeDisabled();
+    });
+
+    it("stepper buttons are disabled while busy (submitting/advancing)", async () => {
+      useTrainingSession.mockReturnValue({
+        ...baseHookValue,
+        isSubmitting: true,
+      });
+
+      render(<Training />);
+      await waitFor(() => expect(capturedProps).toBeDefined());
+
+      expect(screen.getByRole("button", { name: /‹ Prev/i })).toBeDisabled();
+      expect(screen.getByRole("button", { name: /Next ›/i })).toBeDisabled();
+    });
   });
 });

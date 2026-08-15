@@ -13,6 +13,7 @@ describe("useTrainingSession", () => {
   beforeEach(() => {
     on401Navigate.mockReset();
     server.resetHandlers();
+    localStorage.clear();
   });
 
   afterEach(() => {
@@ -331,6 +332,144 @@ describe("useTrainingSession", () => {
     expect(clearTimeoutFn).not.toHaveBeenCalled();
   });
 
+  it("submitMove correct: does not update fen when the response has no fenAfter", async () => {
+    server.use(
+      http.get(`/api/training-sessions/${id}/next`, () => {
+        return HttpResponse.json({
+          itemId: "1",
+          fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+          openingEco: "C20",
+          openingName: "Opening A",
+          correctMoveUci: "e2e4",
+        });
+      }),
+      http.post(`/api/training-sessions/${id}/responses`, () => {
+        return HttpResponse.json({ correct: true, sessionCompleted: false });
+      }),
+    );
+
+    const { result } = renderHook(() =>
+      useTrainingSession(id, on401Navigate, { timeoutMs: 100_000 }),
+    );
+    await waitFor(() => expect(result.current.itemId).toBe("1"));
+    const prevFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
+    await act(async () => {
+      await result.current.submitMove("e2e4", prevFen);
+    });
+
+    expect(result.current.fen).toBe(prevFen);
+    expect(result.current.feedback).toBe("✅ Correct!");
+    expect(result.current.isAdvancing).toBe(true);
+  });
+
+  it("advance timeout: unmount before the callback runs early-returns in its catch branch", async () => {
+    let nextGetCalls = 0;
+    server.use(
+      http.get(`/api/training-sessions/${id}/next`, () => {
+        nextGetCalls += 1;
+        if (nextGetCalls === 1) {
+          return HttpResponse.json({
+            itemId: "1",
+            fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+            openingEco: "C20",
+            openingName: "Opening A",
+            correctMoveUci: "e2e4",
+          });
+        }
+        return HttpResponse.json({ detail: "boom" }, { status: 500 });
+      }),
+      http.post(`/api/training-sessions/${id}/responses`, () => {
+        return HttpResponse.json({
+          correct: true,
+          sessionCompleted: false,
+          fenAfter:
+            "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1",
+        });
+      }),
+    );
+
+    const scheduled: Array<() => void> = [];
+    const setTimeoutFn = (cb: () => void) => {
+      scheduled.push(cb);
+      return scheduled.length - 1;
+    };
+
+    const { result, unmount } = renderHook(() =>
+      useTrainingSession(id, on401Navigate, { timeoutMs: 10, setTimeoutFn }),
+    );
+    await waitFor(() => expect(result.current.itemId).toBe("1"));
+    const prevFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
+    await act(async () => {
+      await result.current.submitMove("e2e4", prevFen);
+    });
+    expect(scheduled).toHaveLength(1);
+
+    unmount();
+
+    await act(async () => {
+      scheduled[0]();
+      await Promise.resolve();
+      await Promise.resolve();
+    });
+
+    expect(on401Navigate).not.toHaveBeenCalled();
+  });
+
+  it("submitMove correct: sessionCompleted clears a pending advance timeout scheduled by a prior correct move", async () => {
+    const clearTimeoutFn = vi.fn();
+    let getCalls = 0;
+    let postCalls = 0;
+
+    server.use(
+      http.get(`/api/training-sessions/${id}/next`, () => {
+        getCalls += 1;
+        return HttpResponse.json({
+          itemId: getCalls === 1 ? "1" : "2",
+          fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+          openingEco: "C20",
+          openingName: "Opening A",
+          correctMoveUci: "e2e4",
+        });
+      }),
+      http.post(`/api/training-sessions/${id}/responses`, () => {
+        postCalls += 1;
+        // First response: correct but not completed -> schedules an advance timeout.
+        // Second response: correct AND sessionCompleted -> must clear that timeout.
+        return HttpResponse.json({
+          correct: true,
+          sessionCompleted: postCalls === 2,
+          fenAfter:
+            "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1",
+        });
+      }),
+    );
+
+    const { result } = renderHook(() =>
+      useTrainingSession(id, on401Navigate, {
+        timeoutMs: 100_000, // long enough that it never fires during the test
+        clearTimeoutFn,
+      }),
+    );
+
+    await waitFor(() => expect(result.current.itemId).toBe("1"));
+    const prevFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
+    await act(async () => {
+      await result.current.submitMove("e2e4", prevFen);
+    });
+    expect(result.current.isAdvancing).toBe(true);
+
+    await act(async () => {
+      await result.current.submitMove("e2e4", prevFen);
+    });
+
+    expect(result.current.feedback).toBe("✅ Session completed.");
+    expect(result.current.isSessionCompleted).toBe(true);
+    expect(clearTimeoutFn).toHaveBeenCalled();
+  });
+
   it("submitMove correct: when component unmounts, advance timeout callback early-returns", async () => {
     const scheduled: Array<() => void> = [];
 
@@ -389,6 +528,337 @@ describe("useTrainingSession", () => {
     });
 
     expect(on401Navigate).not.toHaveBeenCalled();
+  });
+
+  it("initial load 401 triggers on401Navigate and shows expiry feedback", async () => {
+    // api.ts's own interceptor swallows a bare 401 by attempting a token
+    // refresh + one retry; give it a refresh token so the refresh succeeds
+    // and the *retried* request (marked `_retry`) is the one that surfaces
+    // its 401 to the hook.
+    localStorage.setItem("refresh_token", "refresh-abc");
+    server.use(
+      http.get(`/api/training-sessions/${id}/next`, () => {
+        return HttpResponse.json({ detail: "unauthorized" }, { status: 401 });
+      }),
+      http.post("/api/auth/refresh", () => {
+        return HttpResponse.json({ access_token: "new-token" });
+      }),
+    );
+
+    const { result } = renderHook(() => useTrainingSession(id, on401Navigate));
+
+    await waitFor(() =>
+      expect(result.current.feedback).toBe(
+        "No more moves in this session or session expired.",
+      ),
+    );
+    expect(on401Navigate).toHaveBeenCalled();
+  });
+
+  it("initial load: unmounting before the failed fetch resolves early-returns in the catch branch", async () => {
+    server.use(
+      http.get(`/api/training-sessions/${id}/next`, () => {
+        return HttpResponse.json({ detail: "boom" }, { status: 500 });
+      }),
+    );
+
+    const { unmount } = renderHook(() =>
+      useTrainingSession(id, on401Navigate),
+    );
+
+    unmount();
+
+    await act(async () => {
+      await Promise.resolve();
+      await Promise.resolve();
+      await Promise.resolve();
+    });
+
+    expect(on401Navigate).not.toHaveBeenCalled();
+  });
+
+  it("submitMove is a no-op without an id or itemId", async () => {
+    const { result } = renderHook(() =>
+      useTrainingSession(undefined, on401Navigate),
+    );
+
+    await act(async () => {
+      await result.current.submitMove("e2e4", "somefen");
+    });
+
+    expect(result.current.feedback).toBe("");
+  });
+
+  it("submitMove throws if preFen is empty", async () => {
+    server.use(
+      http.get(`/api/training-sessions/${id}/next`, () => {
+        return HttpResponse.json({
+          itemId: "1",
+          fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+          openingEco: "C20",
+          openingName: "Opening A",
+          correctMoveUci: "e2e4",
+        });
+      }),
+    );
+
+    const { result } = renderHook(() => useTrainingSession(id, on401Navigate));
+    await waitFor(() => expect(result.current.itemId).toBe("1"));
+
+    await expect(result.current.submitMove("e2e4", "")).rejects.toThrow(
+      "submitMove requires preFen",
+    );
+  });
+
+  it("submitMove incorrect move reverts fen and shows the reason", async () => {
+    server.use(
+      http.get(`/api/training-sessions/${id}/next`, () => {
+        return HttpResponse.json({
+          itemId: "1",
+          fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+          openingEco: "C20",
+          openingName: "Opening A",
+          correctMoveUci: "e2e4",
+        });
+      }),
+      http.post(`/api/training-sessions/${id}/responses`, () => {
+        return HttpResponse.json({ correct: false, reason: "Wrong piece" });
+      }),
+    );
+
+    const { result } = renderHook(() => useTrainingSession(id, on401Navigate));
+    await waitFor(() => expect(result.current.itemId).toBe("1"));
+    const prevFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
+    await act(async () => {
+      await result.current.submitMove("e2e4", prevFen);
+    });
+
+    expect(result.current.fen).toBe(prevFen);
+    expect(result.current.feedback).toBe("❌ Wrong piece");
+    expect(result.current.isSubmitting).toBe(false);
+  });
+
+  it("submitMove request error with 404 shows the server detail", async () => {
+    server.use(
+      http.get(`/api/training-sessions/${id}/next`, () => {
+        return HttpResponse.json({
+          itemId: "1",
+          fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+          openingEco: "C20",
+          openingName: "Opening A",
+          correctMoveUci: "e2e4",
+        });
+      }),
+      http.post(`/api/training-sessions/${id}/responses`, () => {
+        return HttpResponse.json({ detail: "Session completed." }, { status: 404 });
+      }),
+    );
+
+    const { result } = renderHook(() => useTrainingSession(id, on401Navigate));
+    await waitFor(() => expect(result.current.itemId).toBe("1"));
+    const prevFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
+    await act(async () => {
+      await result.current.submitMove("e2e4", prevFen);
+    });
+
+    expect(result.current.feedback).toBe("Session completed.");
+  });
+
+  it("submitMove request error with 404 and no detail falls back to generic text", async () => {
+    server.use(
+      http.get(`/api/training-sessions/${id}/next`, () => {
+        return HttpResponse.json({
+          itemId: "1",
+          fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+          openingEco: "C20",
+          openingName: "Opening A",
+          correctMoveUci: "e2e4",
+        });
+      }),
+      http.post(`/api/training-sessions/${id}/responses`, () => {
+        return HttpResponse.json({}, { status: 404 });
+      }),
+    );
+
+    const { result } = renderHook(() => useTrainingSession(id, on401Navigate));
+    await waitFor(() => expect(result.current.itemId).toBe("1"));
+    const prevFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
+    await act(async () => {
+      await result.current.submitMove("e2e4", prevFen);
+    });
+
+    expect(result.current.feedback).toBe("Session completed.");
+  });
+
+  it("submitMove incorrect move with no reason falls back to 'Incorrect move'", async () => {
+    server.use(
+      http.get(`/api/training-sessions/${id}/next`, () => {
+        return HttpResponse.json({
+          itemId: "1",
+          fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+          openingEco: "C20",
+          openingName: "Opening A",
+          correctMoveUci: "e2e4",
+        });
+      }),
+      http.post(`/api/training-sessions/${id}/responses`, () => {
+        return HttpResponse.json({ correct: false });
+      }),
+    );
+
+    const { result } = renderHook(() => useTrainingSession(id, on401Navigate));
+    await waitFor(() => expect(result.current.itemId).toBe("1"));
+    const prevFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
+    await act(async () => {
+      await result.current.submitMove("e2e4", prevFen);
+    });
+
+    expect(result.current.feedback).toBe("❌ Incorrect move");
+  });
+
+  it("submitMove request error after unmount does not update state (early return in catch/finally)", async () => {
+    server.use(
+      http.get(`/api/training-sessions/${id}/next`, () => {
+        return HttpResponse.json({
+          itemId: "1",
+          fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+          openingEco: "C20",
+          openingName: "Opening A",
+          correctMoveUci: "e2e4",
+        });
+      }),
+      http.post(`/api/training-sessions/${id}/responses`, async () => {
+        return HttpResponse.json({ detail: "boom" }, { status: 500 });
+      }),
+    );
+
+    const { result, unmount } = renderHook(() =>
+      useTrainingSession(id, on401Navigate),
+    );
+    await waitFor(() => expect(result.current.itemId).toBe("1"));
+    const prevFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
+    const pending = result.current.submitMove("e2e4", prevFen);
+    unmount();
+
+    await act(async () => {
+      await pending;
+    });
+
+    // No assertion on state (component is unmounted); just verify it doesn't throw.
+  });
+
+  it("submitMove request error with a non-404/401 status shows a generic error and calls on401Navigate on 401", async () => {
+    server.use(
+      http.get(`/api/training-sessions/${id}/next`, () => {
+        return HttpResponse.json({
+          itemId: "1",
+          fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+          openingEco: "C20",
+          openingName: "Opening A",
+          correctMoveUci: "e2e4",
+        });
+      }),
+      http.post(`/api/training-sessions/${id}/responses`, () => {
+        return HttpResponse.json({ detail: "boom" }, { status: 500 });
+      }),
+    );
+
+    const { result } = renderHook(() => useTrainingSession(id, on401Navigate));
+    await waitFor(() => expect(result.current.itemId).toBe("1"));
+    const prevFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
+    await act(async () => {
+      await result.current.submitMove("e2e4", prevFen);
+    });
+
+    expect(result.current.feedback).toBe("Error submitting move");
+    expect(on401Navigate).not.toHaveBeenCalled();
+  });
+
+  it("submitMove request error with 401 calls on401Navigate", async () => {
+    localStorage.setItem("refresh_token", "refresh-abc");
+    server.use(
+      http.get(`/api/training-sessions/${id}/next`, () => {
+        return HttpResponse.json({
+          itemId: "1",
+          fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+          openingEco: "C20",
+          openingName: "Opening A",
+          correctMoveUci: "e2e4",
+        });
+      }),
+      http.post(`/api/training-sessions/${id}/responses`, () => {
+        return HttpResponse.json({ detail: "unauthorized" }, { status: 401 });
+      }),
+      http.post("/api/auth/refresh", () => {
+        return HttpResponse.json({ access_token: "new-token" });
+      }),
+    );
+
+    const { result } = renderHook(() => useTrainingSession(id, on401Navigate));
+    await waitFor(() => expect(result.current.itemId).toBe("1"));
+    const prevFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
+    await act(async () => {
+      await result.current.submitMove("e2e4", prevFen);
+    });
+
+    expect(on401Navigate).toHaveBeenCalled();
+  });
+
+  it("advance timeout fetch error with 401 calls on401Navigate", async () => {
+    localStorage.setItem("refresh_token", "refresh-abc");
+    let nextCall = 0;
+    server.use(
+      http.get(`/api/training-sessions/${id}/next`, () => {
+        nextCall += 1;
+        if (nextCall === 1) {
+          return HttpResponse.json({
+            itemId: "1",
+            fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+            openingEco: "C20",
+            openingName: "Opening A",
+            correctMoveUci: "e2e4",
+          });
+        }
+        return HttpResponse.json({ detail: "unauthorized" }, { status: 401 });
+      }),
+      http.post("/api/auth/refresh", () => {
+        return HttpResponse.json({ access_token: "new-token" });
+      }),
+      http.post(`/api/training-sessions/${id}/responses`, () => {
+        return HttpResponse.json({
+          correct: true,
+          sessionCompleted: false,
+          fenAfter:
+            "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1",
+        });
+      }),
+    );
+
+    const { result } = renderHook(() =>
+      useTrainingSession(id, on401Navigate, { timeoutMs: 10 }),
+    );
+    await waitFor(() => expect(result.current.itemId).toBe("1"));
+    const prevFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
+    await act(async () => {
+      await result.current.submitMove("e2e4", prevFen);
+    });
+
+    await waitFor(
+      () =>
+        expect(result.current.feedback).toBe(
+          "No more moves in this session or session expired.",
+        ),
+      { timeout: 2000 },
+    );
+    expect(on401Navigate).toHaveBeenCalled();
   });
 
   it("takeAutoplayOnce: only allows one autoplay per itemId", () => {

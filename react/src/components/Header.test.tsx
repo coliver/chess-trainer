@@ -1,6 +1,7 @@
 // frontend/src/components/Header.test.tsx
 import { vi, describe, it, beforeEach, afterEach, expect } from "vitest";
 import { render, screen, cleanup, act } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import Header from "./Header";
 import api from "../api";
@@ -8,6 +9,15 @@ import { login } from "../auth";
 
 const renderWithRouter = (ui: React.ReactElement) =>
   render(<MemoryRouter>{ui}</MemoryRouter>);
+
+const mockNavigate = vi.fn();
+vi.mock("react-router-dom", async () => {
+  const actual =
+    await vi.importActual<typeof import("react-router-dom")>(
+      "react-router-dom",
+    );
+  return { ...actual, useNavigate: () => mockNavigate };
+});
 
 vi.mock("../api", () => ({
   default: {
@@ -24,6 +34,20 @@ describe("Header auth UI", () => {
 
   afterEach(() => {
     cleanup();
+  });
+
+  it("logs out, clears the token, and navigates to /login", async () => {
+    const user = userEvent.setup();
+    mockNavigate.mockReset();
+    localStorage.setItem("token", "abc");
+
+    renderWithRouter(<Header />);
+
+    const logoutBtn = await screen.findByLabelText("Logout");
+    await user.click(logoutBtn);
+
+    expect(localStorage.getItem("token")).toBeNull();
+    expect(mockNavigate).toHaveBeenCalledWith("/login");
   });
 
   it("switches to profile when token is set", async () => {

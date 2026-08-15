@@ -67,9 +67,15 @@ describe("Dashboard", () => {
     mockNavigate.mockReset();
     (api.get as unknown as ReturnType<typeof vi.fn>).mockReset();
     (api.post as unknown as ReturnType<typeof vi.fn>).mockReset();
-    (api.get as unknown as ReturnType<typeof vi.fn>).mockResolvedValue({
-      data: openings,
-    });
+    (api.get as unknown as ReturnType<typeof vi.fn>).mockImplementation(
+      (url: string) => {
+        if (url === "/openings") return Promise.resolve({ data: openings });
+        // progress/summary, progress/due, progress/weak-spots: no fixture
+        // data by default so we don't produce duplicate React keys from
+        // stray `openings` rows that lack the progress-summary shape.
+        return Promise.resolve({ data: null });
+      },
+    );
     (api.post as unknown as ReturnType<typeof vi.fn>).mockResolvedValue({
       data: { id: 123 },
     });
@@ -157,5 +163,229 @@ describe("Dashboard", () => {
         openingName: "Sicilian Defense: Najdorf Variation",
       });
     });
+  });
+
+  it("search with no matches shows the no-results message", async () => {
+    const user = userEvent.setup();
+    renderDashboard();
+
+    await screen.findByText("Sicilian Defense");
+    const search = screen.getByRole("searchbox", { name: "Search openings" });
+    await user.type(search, "zzzznotfound");
+
+    expect(
+      await screen.findByText(/No openings match/i),
+    ).toBeInTheDocument();
+  });
+
+  it("search pagination shows a 'Show N more' button and reveals more matches", async () => {
+    const many = Array.from({ length: 65 }, (_, i) => ({
+      name: `Test Opening ${i}`,
+      eco: "Z99",
+      uci_moves: "e2e4",
+    }));
+    (api.get as unknown as ReturnType<typeof vi.fn>).mockImplementation(
+      (url: string) => {
+        if (url === "/openings") return Promise.resolve({ data: many });
+        return Promise.resolve({ data: null });
+      },
+    );
+
+    const user = userEvent.setup();
+    renderDashboard();
+
+    const search = await screen.findByRole("searchbox", {
+      name: "Search openings",
+    });
+    await user.type(search, "test opening");
+
+    const more = await screen.findByText(/Show 5 more/i);
+    await user.click(more);
+    expect(screen.queryByText(/Show \d+ more/i)).not.toBeInTheDocument();
+  });
+
+  it("sorting toggles between Popular and A-Z", async () => {
+    const user = userEvent.setup();
+    renderDashboard();
+
+    await screen.findByText("Sicilian Defense");
+    const sortBtn = screen.getByRole("button", { name: /Sort: Popular/i });
+    await user.click(sortBtn);
+    expect(
+      screen.getByRole("button", { name: /Sort: A–Z/i }),
+    ).toBeInTheDocument();
+  });
+
+  it("renders progress summary stats, mastery bar, and weak spots when present", async () => {
+    (api.get as unknown as ReturnType<typeof vi.fn>).mockImplementation(
+      (url: string) => {
+        if (url === "/openings") return Promise.resolve({ data: openings });
+        if (url === "/progress/summary")
+          return Promise.resolve({
+            data: {
+              positionsSeen: 40,
+              overallAccuracy: 0.755,
+              mastered: 10,
+              currentStreak: 3,
+              longestStreak: 7,
+            },
+          });
+        if (url === "/progress/due")
+          return Promise.resolve({ data: [{ id: 1 }, { id: 2 }] });
+        if (url === "/progress/weak-spots")
+          return Promise.resolve({
+            data: [
+              {
+                openingName: "Sicilian Defense",
+                fen: "fen1",
+                correctMoveUci: "e2e4",
+                attempts: 5,
+                correctCount: 2,
+                incorrectCount: 3,
+              },
+            ],
+          });
+        return Promise.resolve({ data: null });
+      },
+    );
+
+    renderDashboard();
+
+    expect(await screen.findByText("40")).toBeInTheDocument();
+    expect(screen.getByText("76%")).toBeInTheDocument();
+    expect(screen.getByText(/3 🔥/)).toBeInTheDocument();
+    expect(screen.getByText(/best 7/)).toBeInTheDocument();
+    expect(screen.getByText(/Sicilian Defense — 2\/5 correct/)).toBeInTheDocument();
+
+    const reviewBtn = screen.getByRole("button", { name: /Review due \(2\)/i });
+    expect(reviewBtn).toBeEnabled();
+  });
+
+  it("startSession failure shows an alert", async () => {
+    const alertSpy = vi.spyOn(window, "alert").mockImplementation(() => {});
+    (api.post as unknown as ReturnType<typeof vi.fn>).mockRejectedValueOnce(
+      new Error("network fail"),
+    );
+
+    const user = userEvent.setup();
+    renderDashboard();
+
+    await user.click(await screen.findByText("Sicilian Defense"));
+    const start = await screen.findByRole("button", {
+      name: /Start\s+Sicilian Defense/i,
+    });
+    await user.click(start);
+
+    await waitFor(() =>
+      expect(alertSpy).toHaveBeenCalledWith(
+        "Failed to start session. Check your connection or token.",
+      ),
+    );
+    alertSpy.mockRestore();
+  });
+
+  it("startReviewSession navigates on success and alerts on failure", async () => {
+    const user = userEvent.setup();
+    (api.get as unknown as ReturnType<typeof vi.fn>).mockImplementation(
+      (url: string) => {
+        if (url === "/openings") return Promise.resolve({ data: openings });
+        if (url === "/progress/due")
+          return Promise.resolve({ data: [{ id: 1 }] });
+        return Promise.resolve({ data: null });
+      },
+    );
+
+    renderDashboard();
+
+    const reviewBtn = await screen.findByRole("button", {
+      name: /Review due \(1\)/i,
+    });
+    await user.click(reviewBtn);
+
+    await waitFor(() => {
+      expect(api.post).toHaveBeenCalledWith("/training-sessions/from-due");
+      expect(mockNavigate).toHaveBeenCalledWith("/training/123");
+    });
+  });
+
+  it("startReviewSession alerts on failure", async () => {
+    const alertSpy = vi.spyOn(window, "alert").mockImplementation(() => {});
+    (api.get as unknown as ReturnType<typeof vi.fn>).mockImplementation(
+      (url: string) => {
+        if (url === "/openings") return Promise.resolve({ data: openings });
+        if (url === "/progress/due")
+          return Promise.resolve({ data: [{ id: 1 }] });
+        return Promise.resolve({ data: null });
+      },
+    );
+    (api.post as unknown as ReturnType<typeof vi.fn>).mockRejectedValueOnce(
+      new Error("fail"),
+    );
+
+    const user = userEvent.setup();
+    renderDashboard();
+
+    const reviewBtn = await screen.findByRole("button", {
+      name: /Review due \(1\)/i,
+    });
+    await user.click(reviewBtn);
+
+    await waitFor(() =>
+      expect(alertSpy).toHaveBeenCalledWith("No positions due for review yet."),
+    );
+    alertSpy.mockRestore();
+  });
+
+  it("breadcrumb 'All openings' returns to the base grid", async () => {
+    const user = userEvent.setup();
+    renderDashboard();
+
+    await user.click(await screen.findByText("Sicilian Defense"));
+    expect(screen.getByText("Main line")).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: /All openings/i }));
+    expect(screen.getByText("2 variations")).toBeInTheDocument();
+  });
+
+  it("defaults to an empty opening list when the API returns no data", async () => {
+    (api.get as unknown as ReturnType<typeof vi.fn>).mockImplementation(
+      (url: string) => {
+        if (url === "/openings") return Promise.resolve({ data: undefined });
+        return Promise.resolve({ data: null });
+      },
+    );
+
+    renderDashboard();
+
+    expect(await screen.findByText("0 openings · pick one to train")).toBeInTheDocument();
+  });
+
+  it("weak spots fall back to 'Opening' and an empty fen/move in the list key when fields are missing", async () => {
+    (api.get as unknown as ReturnType<typeof vi.fn>).mockImplementation(
+      (url: string) => {
+        if (url === "/openings") return Promise.resolve({ data: openings });
+        if (url === "/progress/weak-spots")
+          return Promise.resolve({
+            data: [{ attempts: 3, correctCount: 1, incorrectCount: 2 }],
+          });
+        return Promise.resolve({ data: null });
+      },
+    );
+
+    renderDashboard();
+
+    expect(await screen.findByText(/Opening — 1\/3 correct/)).toBeInTheDocument();
+  });
+
+  it("logs and swallows errors when the openings/progress requests fail", async () => {
+    const errSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    (api.get as unknown as ReturnType<typeof vi.fn>).mockRejectedValue(
+      new Error("boom"),
+    );
+
+    renderDashboard();
+
+    await waitFor(() => expect(errSpy).toHaveBeenCalled());
+    errSpy.mockRestore();
   });
 });
