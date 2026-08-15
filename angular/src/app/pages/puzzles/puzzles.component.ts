@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import {
   START_FEN,
   applyMove,
@@ -20,7 +20,7 @@ import { NextPuzzle, PuzzlesService } from '../../core/puzzles.service';
 @Component({
   selector: 'app-puzzles',
   standalone: true,
-  imports: [BoardComponent, FlipBoardButtonComponent],
+  imports: [BoardComponent, FlipBoardButtonComponent, RouterLink],
   template: `
     <main class="page">
       <div class="card puzzles-card">
@@ -63,6 +63,10 @@ import { NextPuzzle, PuzzlesService } from '../../core/puzzles.service';
           {{ feedback || (puzzleId ? 'Find the best move.' : '') }}
         </p>
 
+        @if (noPuzzlesDue) {
+          <a routerLink="/dashboard" class="puzzles-back-link">Back to dashboard</a>
+        }
+
         @if (puzzleId) {
           <button
             type="button"
@@ -90,6 +94,7 @@ export class PuzzlesComponent implements OnInit {
   solved = 0;
   streak = 0;
   bestStreak = 0;
+  noPuzzlesDue = false;
   orientation: 'white' | 'black' = 'white';
   markers: BoardMarker[] = [];
 
@@ -111,6 +116,7 @@ export class PuzzlesComponent implements OnInit {
 
   private loadNext(): void {
     this.feedback = '';
+    this.noPuzzlesDue = false;
     this.puzzles.next().subscribe({
       next: (data: NextPuzzle) => {
         this.puzzleId = data.puzzleId;
@@ -125,6 +131,7 @@ export class PuzzlesComponent implements OnInit {
         }
         if (err?.status === 404) {
           this.puzzleId = null;
+          this.noPuzzlesDue = true;
           this.feedback = 'No puzzles due right now — check back later.';
           return;
         }

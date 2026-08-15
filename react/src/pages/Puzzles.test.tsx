@@ -2,6 +2,7 @@
 import { describe, it, expect, vi, afterEach, beforeEach } from "vitest";
 import { render, waitFor, act, screen, cleanup } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { MemoryRouter } from "react-router-dom";
 import { Puzzles } from "./Puzzles";
 import api from "../api";
 import "@testing-library/jest-dom";
@@ -45,9 +46,13 @@ vi.mock("../api", () => ({
 }));
 
 const mockNavigate = vi.fn();
-vi.mock("react-router-dom", () => ({
-  useNavigate: () => mockNavigate,
-}));
+vi.mock("react-router-dom", async () => {
+  const actual =
+    await vi.importActual<typeof import("react-router-dom")>(
+      "react-router-dom",
+    );
+  return { ...actual, useNavigate: () => mockNavigate };
+});
 
 const NEXT_PUZZLE = {
   puzzleId: "p1",
@@ -72,7 +77,12 @@ describe("Puzzles Page", () => {
     cleanup();
   });
 
-  const renderPuzzles = () => render(<Puzzles />);
+  const renderPuzzles = () =>
+    render(
+      <MemoryRouter>
+        <Puzzles />
+      </MemoryRouter>,
+    );
 
   it("loads the first puzzle and shows rating + zeroed streak", async () => {
     (api.get as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
@@ -136,6 +146,20 @@ describe("Puzzles Page", () => {
     await screen.findByText("❌ wrong move");
     expect(screen.getByText(/Streak: 0/)).toBeInTheDocument();
     expect(screen.queryByText(/best/)).not.toBeInTheDocument();
+    expect(capturedProps.position).toBe(NEXT_PUZZLE.fen);
+  });
+
+  it("shows a Back to dashboard link when no puzzles are due", async () => {
+    (api.get as ReturnType<typeof vi.fn>).mockRejectedValueOnce({
+      response: { status: 404 },
+    });
+
+    renderPuzzles();
+
+    const link = await screen.findByRole("link", {
+      name: /Back to dashboard/,
+    });
+    expect(link).toHaveAttribute("href", "/dashboard");
   });
 
   it("skipping loads the next puzzle and resets the streak", async () => {

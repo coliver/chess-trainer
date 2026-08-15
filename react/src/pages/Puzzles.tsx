@@ -1,6 +1,6 @@
 // react/src/pages/Puzzles.tsx
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
 import api from "../api";
 import Board from "../components/Board";
@@ -34,6 +34,7 @@ export const Puzzles = () => {
   const [solved, setSolved] = useState(0);
   const [streak, setStreak] = useState(0);
   const [bestStreak, setBestStreak] = useState(0);
+  const [noPuzzlesDue, setNoPuzzlesDue] = useState(false);
   const { orientation, flip } = useBoardOrientation();
 
   const fenRef = useRef(fen);
@@ -43,6 +44,7 @@ export const Puzzles = () => {
 
   const loadNext = useCallback(async () => {
     setFeedback("");
+    setNoPuzzlesDue(false);
     try {
       const res = await api.get<NextPuzzle>("/puzzles/next");
       setPuzzleId(res.data.puzzleId);
@@ -57,6 +59,7 @@ export const Puzzles = () => {
       }
       if (e.response?.status === 404) {
         setPuzzleId(null);
+        setNoPuzzlesDue(true);
         setFeedback("No puzzles due right now — check back later.");
         return;
       }
@@ -72,7 +75,7 @@ export const Puzzles = () => {
   }, [loadNext]);
 
   const submit = useCallback(
-    async (moveUci: string) => {
+    async (moveUci: string, preFen: string) => {
       if (!puzzleId || isSubmitting) return;
       setIsSubmitting(true);
       try {
@@ -93,7 +96,7 @@ export const Puzzles = () => {
           setTimeout(() => void loadNext(), 600);
         } else {
           setFeedback(`❌ ${res.data.reason || "Not quite — try again."}`);
-          setFen(fenRef.current); // snap back to the puzzle position
+          setFen(preFen); // snap back to the puzzle position
           setStreak(0);
         }
       } catch (err) {
@@ -118,10 +121,11 @@ export const Puzzles = () => {
   const onMove = useCallback(
     (from: string, to: string): boolean => {
       if (isSubmitting || !puzzleId || from === to) return false;
-      const result = applyMove(fenRef.current, from, to, correctMoveUci);
+      const preFen = fenRef.current;
+      const result = applyMove(preFen, from, to, correctMoveUci);
       if (!result) return false;
       setFen(result.nextFen);
-      void submit(result.uci);
+      void submit(result.uci, preFen);
       return true;
     },
     [isSubmitting, puzzleId, correctMoveUci, submit],
@@ -178,6 +182,12 @@ export const Puzzles = () => {
         <p className="puzzles-feedback" role="status">
           {feedback || (puzzleId ? "Find the best move." : "")}
         </p>
+
+        {noPuzzlesDue && (
+          <Link to="/dashboard" className="puzzles-back-link">
+            Back to dashboard
+          </Link>
+        )}
 
         {puzzleId && (
           <button
