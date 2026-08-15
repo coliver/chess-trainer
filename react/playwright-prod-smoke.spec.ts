@@ -40,7 +40,7 @@ test("login and exercise core features", async ({ page }) => {
 
   // Puzzles: nav to the new puzzle trainer and confirm a real puzzle loads.
   await page.getByRole("link", { name: /puzzle/i }).click();
-  await expect(page.getByRole("heading", { name: "Puzzles" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Puzzle Training" })).toBeVisible();
   await page.waitForSelector(".board-host svg, svg", { timeout: 15000 });
 
   const fatalErrors = consoleErrors.filter(
