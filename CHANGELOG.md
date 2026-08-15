@@ -1,3 +1,6 @@
+## 2026-08-15
+- test(e2e): add a prod smoke test (`playwright-prod-smoke.spec.ts`, `npm run test:smoke`) that logs into a persistent test account and checks the dashboard + puzzles pages load for real after a deploy; registration is split into a separate one-off spec (`playwright-prod-register.spec.ts`) so smoke runs don't keep creating throwaway accounts on prod
+
 ## 2026-08-14
 - refactor(training): extract timeline history and session-state derivation (status banner, eco/opening-name split, hint markers, next-item parsing) out of React-specific files into pure `@knight-school/chess-core` modules (`timeline.ts`, `next-item.ts`, `status.ts`); rewire both React's `Training.tsx`/`useTrainingSession.ts` and Angular's `training.component.ts`/`training.service.ts` to share the same logic — fixes a latent Angular bug where hint markers didn't hide on session completion
 

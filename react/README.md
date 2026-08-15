@@ -81,6 +81,7 @@ docker compose up -d --build
 - **Unit/component tests:** `npm run test` (Vitest + Testing Library + jsdom). API calls are mocked via MSW (`src/tests/msw/`), not a live backend.
 - **Watch mode:** `npm run test:watch`
 - **E2E:** `npm run test:playwright` (runs `playwright-dashboard.spec.ts`; the Docker image is built from `mcr.microsoft.com/playwright:v1.62.0-jammy` so browsers are preinstalled in the container).
+- **Prod smoke test:** `npm run test:smoke` (runs `playwright-prod-smoke.spec.ts` against `https://knightschool.click` by default, override with `BASE_URL`). Logs into the persistent `smoketest-persistent` account and walks dashboard → puzzles to confirm a real deploy actually works, without registering a fresh throwaway account each run. If that account ever needs recreating, run `playwright-prod-register.spec.ts` once with `SMOKE_USERNAME`/`SMOKE_PASSWORD` set (it's a no-op skip otherwise, and isn't part of `test:smoke`).
 - **Lint:** `npm run lint` (ESLint, including `eslint-plugin-playwright` for the E2E spec).
 
 ## 🌐 Network Architecture
