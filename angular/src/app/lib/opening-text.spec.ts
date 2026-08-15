@@ -30,10 +30,15 @@ describe('describeOpening', () => {
   });
 
   it('prefixes a known base blurb for a variation', () => {
-    const o = opening({ name: 'Sicilian Defense: Najdorf Variation', description: '' });
+    const o = opening({ name: 'Sicilian Defense: Kalashnikov Variation', description: '' });
     const text = describeOpening(o);
-    expect(text.startsWith('Najdorf Variation — a variation of the Sicilian Defense.')).toBe(true);
+    expect(text.startsWith('Kalashnikov Variation — a variation of the Sicilian Defense.')).toBe(true);
     expect(text).toContain("Black's most popular");
+  });
+
+  it('uses the authored variation text when a specific blurb exists for the full name', () => {
+    const o = opening({ name: 'Sicilian Defense: Najdorf Variation', description: '' });
+    expect(describeOpening(o)).toContain('most deeply analysed line in chess');
   });
 
   it('falls back to a bare variation label when the base is unknown', () => {

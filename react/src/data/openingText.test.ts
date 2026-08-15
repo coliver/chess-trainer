@@ -32,10 +32,17 @@ describe("describeOpening", () => {
 
   it("prefixes the variation label and appends authored base text when available", () => {
     const text = describeOpening(
+      op({ name: "Sicilian Defense: Kalashnikov Variation" }),
+    );
+    expect(text).toMatch(/^Kalashnikov Variation — a variation of the Sicilian Defense\./);
+    expect(text).toMatch(/Black's most popular/);
+  });
+
+  it("uses the authored variation text when a specific blurb exists for the full name", () => {
+    const text = describeOpening(
       op({ name: "Sicilian Defense: Najdorf Variation" }),
     );
-    expect(text).toMatch(/^Najdorf Variation — a variation of the Sicilian Defense\./);
-    expect(text).toMatch(/Black's most popular/);
+    expect(text).toMatch(/most deeply analysed line in chess/);
   });
 
   it("uses only the lead sentence for a variation with no authored base text", () => {

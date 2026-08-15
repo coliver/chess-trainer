@@ -314,10 +314,233 @@ const BASE_TEXT: Record<string, string> = {
     "A generic setup pattern rather than a specific named opening, describing a pawn-and-piece formation reachable by several move orders.",
 };
 
+// Authored blurbs for specific well-known variations (keyed by the full
+// opening name). Checked before falling back to the BASE_TEXT template.
+const VARIATION_TEXT: Record<string, string> = {
+  // Sicilian Defense
+  "Sicilian Defense: Najdorf Variation":
+    "5...a6 — the most deeply analysed line in chess. Black delays commitment, preparing ...e5 or ...b5 while keeping every option open. Kasparov's and Fischer's main weapon.",
+  "Sicilian Defense: Dragon Variation":
+    "Black fianchettoes with ...g6 and ...Bg7, aiming the bishop down the long diagonal. Leads to the razor-sharp Yugoslav Attack, where both kings often run for their lives.",
+  "Sicilian Defense: Scheveningen Variation":
+    "Black sets up pawns on d6 and e6, a flexible 'small centre' that can absorb pressure and strike back with ...d5 or ...b5 later.",
+  "Sicilian Defense: Lasker-Pelikan Variation, Sveshnikov Variation":
+    "Black plays an early ...e5, conceding the d5-square but gaining piece activity and a healthy pawn majority. Once considered dubious, now a top-level main line.",
+  "Sicilian Defense: Kan Variation":
+    "2...e6 and 4...a6 keep Black's structure maximally flexible, delaying ...Nc6 or ...Nf6 to react to White's setup.",
+  "Sicilian Defense: Taimanov Variation":
+    "Black develops with ...Nc6 and ...e6 without committing the d-pawn, aiming for quick piece play and central counterstrikes.",
+  "Sicilian Defense: Accelerated Dragon":
+    "Black fianchettoes the bishop before playing ...d6, hoping to meet the Maroczy Bind setup with faster counterplay against c4.",
+  "Sicilian Defense: Closed":
+    "White avoids the main-line theory battles with 2.Nc3 and a kingside fianchetto, aiming for a slower, strategic game.",
+  "Sicilian Defense: Alapin Variation":
+    "2.c3 stakes a claim for a full d4 centre next move, sidestepping the main Open Sicilian theory. Solid and popular at club and top level alike.",
+  "Sicilian Defense: Smith-Morra Gambit":
+    "White sacrifices a pawn with 2.d4 cxd4 3.c3 for rapid development and open lines, hoping to overwhelm Black before the extra pawn matters.",
+  "Sicilian Defense: Nyezhmetdinov-Rossolimo Attack":
+    "3.Bb5 pins or trades off Black's knight, avoiding heavy main-line Sicilian theory while keeping a small, lasting structural edge.",
+  "Sicilian Defense: Nimzowitsch Variation":
+    "2...Nf6 provokes e5, then Black hits back at the advanced pawn — a sharp, direct alternative to the main lines.",
+  "Sicilian Defense: Four Knights Variation":
+    "Both sides develop knights early (2...Nc6, 3...Nf6), often transposing into Sveshnikov- or Taimanov-related structures.",
+  "Sicilian Defense: Grand Prix Attack":
+    "White plays an early f4, going straight for a kingside pawn storm and quick attack rather than the slow manoeuvring of the Open Sicilian.",
+  "Sicilian Defense: Wing Gambit":
+    "White offers the b-pawn with 2.b4 to divert Black's c-pawn and seize the centre with tempo. Enterprising but theoretically dubious.",
+  "Sicilian Defense: Chekhover Variation":
+    "White recaptures on d4 with the queen, sidestepping some Open Sicilian theory while keeping central control.",
+  "Sicilian Defense: Modern Variations":
+    "A catch-all for early sideline tries that deviate from the main Open Sicilian battlegrounds.",
+
+  // Ruy Lopez
+  "Ruy Lopez: Closed":
+    "The main battleground of the Ruy Lopez: both sides castle and manoeuvre for space before opening the centre. Deep strategic chess, historically the main line at the top level.",
+  "Ruy Lopez: Berlin Defense":
+    "3...Nf6 heading for an early queen trade after 4.O-O Nxe4 5.d4 Nd6 6.Bxc6 dxc6 7.dxe5 Nf5. The 'Berlin Wall' — famously used by Kramnik to neutralise Kasparov in 2000.",
+  "Ruy Lopez: Exchange Variation":
+    "White trades on c6 to double Black's pawns, banking on the long-term structural edge in a simplified position with a healthy pawn majority.",
+  "Ruy Lopez: Open":
+    "Black grabs the e4-pawn with 5...Nxe4, accepting an isolated pawn structure later for active piece play down the e-file.",
+  "Ruy Lopez: Marshall Attack":
+    "Black sacrifices a pawn with 8...d5, offering material for a fierce, long-lasting initiative against White's king. A perennial main-line battleground.",
+  "Ruy Lopez: Schliemann Defense":
+    "3...f5 strikes back immediately, offering sharp, unbalanced play at the cost of structural risk — Black fights for the initiative from move three.",
+  "Ruy Lopez: Steinitz Defense":
+    "3...d6 shores up e5 immediately, a solid but passive setup that cedes space for a compact, hard-to-crack structure.",
+  "Ruy Lopez: Classical Variation":
+    "3...Bc5 develops actively and pins nothing down, inviting sharp central play rather than the slow manoeuvring of the main lines.",
+  "Ruy Lopez: Cozio Defense":
+    "3...Nge7 develops the knight to a slightly awkward square to avoid the main theoretical debates, keeping the position flexible.",
+  "Ruy Lopez: Bird Variation":
+    "3...Nd4 offers a pawn sacrifice by inviting Nxd4, aiming for quick piece activity in return for the structural concession.",
+  "Ruy Lopez: Morphy Defense, Norwegian Variation":
+    "An early ...Na5 or delayed development idea named for Carlsen's use of offbeat Ruy Lopez tries.",
+
+  // Italian Game / Two Knights
+  "Italian Game: Giuoco Piano":
+    "The 'quiet game' — both sides develop naturally with 3...Bc5, leading to rich strategic middlegames rather than immediate fireworks.",
+  "Italian Game: Two Knights Defense":
+    "3...Nf6 counterattacks e4 at once, inviting sharp tactical lines like the Fried Liver Attack after 4.Ng5.",
+  "Italian Game: Evans Gambit":
+    "White offers the b-pawn with 4.b4 to gain a tempo and a big centre, a romantic 19th-century weapon revived occasionally by elite players.",
+  "Italian Game: Hungarian Defense":
+    "3...Be7 is a modest, solid try that avoids early tactics, conceding some activity for safety.",
+  "Italian Game: Scotch Gambit":
+    "White meets the Italian setup with an early d4 sacrifice, trading a pawn for rapid development and central control.",
+
+  // Scotch Game
+  "Scotch Game: Classical Variation":
+    "Black develops naturally with ...Bc5 after the central exchange, aiming for quick piece activity against White's centralised queen or pawns.",
+  "Scotch Game: Mieses Variation":
+    "Black plays an early ...Qh4, hitting e4 and disrupting White's development after the central trade.",
+  "Scotch Game: Scotch Gambit":
+    "White declines to retreat the attacked knight and instead develops with tempo, offering a pawn for rapid piece activity.",
+
+  // French Defense
+  "French Defense: Winawer Variation":
+    "3...Bb4 pins the knight and provokes structural weaknesses, leading to the sharpest, most theoretically loaded French lines — often with opposite-side attacks.",
+  "French Defense: Tarrasch Variation":
+    "3.Nd2 avoids the Winawer pin entirely, aiming for a slower strategic game with a small, safe edge.",
+  "French Defense: Advance Variation":
+    "3.e5 grabs space immediately, locking the centre and setting up a long strategic battle around the resulting pawn chains.",
+  "French Defense: Exchange Variation":
+    "3.exd5 simplifies the structure into a symmetrical position, generally viewed as solid but drawish unless spiced up with active piece play.",
+  "French Defense: Classical Variation":
+    "3...Nf6 develops naturally, meeting White's centre with direct pressure rather than the Winawer's structural complications.",
+  "French Defense: Rubinstein Variation":
+    "3...dxe4 simplifies at once, aiming for a solid, slightly passive structure that's hard for White to crack.",
+  "French Defense: Steinitz Variation":
+    "A Tarrasch-related structure with an early ...Nf6 and central tension, leading to rich middlegame manoeuvring.",
+
+  // Caro-Kann
+  "Caro-Kann Defense: Advance Variation":
+    "3.e5 grabs space and locks the centre, similar in spirit to the French Advance but with Black's light-squared bishop already outside the pawn chain.",
+  "Caro-Kann Defense: Classical Variation":
+    "Black develops the light-squared bishop to f5 before ...e6, the defence's signature idea that avoids the French's chronic bishop problem.",
+  "Caro-Kann Defense: Exchange Variation":
+    "3.exd5 cxd5 creates a symmetrical centre where White often targets the resulting minority-attack structure.",
+  "Caro-Kann Defense: Panov Attack":
+    "White meets ...d5 with an IQP structure via c4, mirroring Queen's Gambit-style plans for active piece play against Black's centre.",
+  "Caro-Kann Defense: Two Knights Attack":
+    "White develops both knights before committing the centre, keeping options flexible against Black's solid setup.",
+  "Caro-Kann Defense: Main Line":
+    "3.Nc3 (or Nd2) dxe4 4.Nxe4 Bf5 is the classical tabiya, where Black's bishop escapes before the pawn chain locks it in.",
+
+  // Queen's Gambit Declined family
+  "Queen's Gambit Declined: Exchange Variation":
+    "White trades on d5 to fix the pawn structure, often preparing a minority attack with b4-b5 to create weaknesses on Black's queenside.",
+  "Queen's Gambit Declined: Lasker Defense":
+    "Black trades pieces with ...Ne4 early to relieve the position, a tried-and-tested equalising method against the QGD's main lines.",
+  "Queen's Gambit Declined: Cambridge Springs Defense":
+    "Black pins White's knight with ...Qa5 after a well-timed ...Nbd7 and ...c6, generating quick counterplay against the centre.",
+  "Queen's Gambit Declined: Tartakower Defense":
+    "Black plays ...b6 and ...Bb7, fianchettoing to complete development flexibly while keeping the centre solid.",
+  "Queen's Gambit Declined: Orthodox Defense":
+    "Black completes development classically with ...Be7 and ...O-O before deciding on a central plan — a bedrock of QGD theory since the 19th century.",
+
+  // Slav / Semi-Slav
+  "Slav Defense: Chebanenko Variation":
+    "An early ...a6 gives Black's queenside extra flexibility, preparing ...b5 or ...Bf5 without committing to a specific main line.",
+  "Slav Defense: Czech Variation":
+    "Black develops the bishop to f5 early, echoing the Caro-Kann's approach to avoid the light-squared bishop being shut in.",
+  "Semi-Slav Defense: Meran Variation":
+    "Black strikes with ...c5 and ...b5 for dynamic queenside counterplay, one of the sharpest and most respected main-line battlegrounds in queen's-pawn chess.",
+  "Semi-Slav Defense: Botvinnik Variation":
+    "An extremely sharp, forcing line where both sides sacrifice material for attacking chances — among the most heavily analysed positions in chess.",
+  "Semi-Slav Defense: Moscow Variation":
+    "White pins with Bg5 against the Semi-Slav setup, provoking ...h6 and steering toward well-charted, safer waters than the Botvinnik.",
+
+  // King's Indian
+  "King's Indian Defense: Orthodox Variation, Classical System":
+    "Both sides commit to the centre before racing on opposite wings — White pushes queenside, Black storms the kingside. The defence's iconic middlegame.",
+  "King's Indian Defense: Sämisch Variation":
+    "White plays an early f3 and Be3, building a broad centre and preparing a quick kingside attack with g4, while restraining Black's typical ...Ne4/...Nc5 ideas.",
+  "King's Indian Defense: Four Pawns Attack":
+    "White grabs maximum central space with c4, d4, e4 and f4, betting on overwhelming force before Black can counterattack the overextended centre.",
+  "King's Indian Defense: Fianchetto Variation":
+    "White meets the King's Indian setup with a matching g3 fianchetto, aiming for a calmer, more positional battle than the Classical or Sämisch.",
+  "King's Indian Defense: Averbakh Variation":
+    "White develops Be2 and Bg5 before committing the centre, pinning down Black's typical plans and delaying the critical central tension.",
+  "King's Indian Defense: Petrosian Variation":
+    "White closes the centre early with d5, aiming for a slow manoeuvring battle where piece placement matters more than immediate tactics.",
+
+  // Nimzo-Indian
+  "Nimzo-Indian Defense: Classical Variation":
+    "4.Qc2 avoids doubled pawns by preparing to meet ...Bxc3 with the queen, keeping the structure intact at the cost of development time.",
+  "Nimzo-Indian Defense: Rubinstein System":
+    "4.e3 is the most flexible, popular main line, developing naturally and postponing the decision about how to meet the bishop pin.",
+  "Nimzo-Indian Defense: Sämisch Variation":
+    "White accepts doubled c-pawns with 4.a3 Bxc3+ 5.bxc3 in exchange for the bishop pair and a broad pawn centre.",
+  "Nimzo-Indian Defense: Leningrad Variation":
+    "White develops Bg5 immediately, pinning the knight and aiming for quick piece pressure rather than the main Rubinstein plans.",
+
+  // Grünfeld
+  "Grünfeld Defense: Exchange Variation":
+    "White accepts an isolated but mobile centre after the central trades, while Black bombards it with pieces from the flanks — the defence's main theoretical battlefield.",
+  "Grünfeld Defense: Russian Variation":
+    "White plays an early Qb3, pressuring d5 and b7 simultaneously to punish Black's hypermodern approach before it's fully set up.",
+
+  // English / Reti / flank
+  "English Opening: Symmetrical Variation":
+    "Black mirrors with 1...c5, leading to rich, flexible structures that can resemble a reversed Sicilian or transpose into many other openings.",
+  "English Opening: King's English Variation, Four Knights Variation":
+    "Both sides develop knights symmetrically, a calm, flexible tabiya that can head toward numerous English pawn structures.",
+  "English Opening: King's English Variation, Reversed Sicilian":
+    "White effectively plays a Sicilian Defense with an extra tempo, aiming for a favourable version of Black's usual counterattacking setups.",
+  "Réti Opening: Advance Variation":
+    "White advances the fianchettoed knight's support pawns gradually, pressuring d5 from a distance in true hypermodern fashion.",
+
+  // Petrov
+  "Petrov's Defense: Classical Attack":
+    "White presses for an edge with 3.Nxe5 d6 4.Nf3, aiming to exploit Black's symmetrical, slightly passive setup.",
+  "Petrov's Defense: Modern Attack, Steinitz Variation":
+    "White meets the Petrov head-on with an early d4, fighting for the centre rather than settling for the drawish main lines.",
+
+  // Alekhine
+  "Alekhine Defense: Four Pawns Attack":
+    "White accepts the invitation to overextend, building a huge pawn centre for Black to attack — the sharpest test of the whole opening.",
+  "Alekhine Defense: Exchange Variation":
+    "White trades on d6, simplifying the structure to neutralise the provocative ideas behind 1...Nf6.",
+  "Alekhine Defense: Modern Variation":
+    "White develops naturally with Nf3 and g3, meeting the provocation with sound development rather than an immediate pawn storm.",
+
+  // Pirc / Modern
+  "Pirc Defense: Austrian Attack":
+    "White meets the Pirc setup with an aggressive f4-f5 pawn storm, punishing Black's slow development with a direct kingside assault.",
+  "Pirc Defense: Classical Variation":
+    "White develops naturally with Nf3, Be2 and O-O, aiming for a calm positional edge rather than an immediate attack.",
+
+  // Benoni / Benko
+  "Benoni Defense: Modern Variation":
+    "The main Benoni tabiya, where Black accepts a cramped but resilient structure for dynamic piece play down the long diagonal and half-open e-file.",
+  "Benoni Defense: Czech Benoni Defense":
+    "Black locks the centre completely and plays for a slow kingside expansion with ...g6, ...Bg7, and eventually ...f5, rather than the sharp piece play of the Modern Benoni.",
+
+  // Scandinavian
+  "Scandinavian Defense: Main Line":
+    "After 2...Qxd5 3.Nc3, Black retreats the queen (commonly to a5 or d6/d8) having traded central tension for quick, simple development.",
+
+  // Vienna / King's Gambit / Danish
+  "Vienna Game: Vienna Gambit":
+    "White supports an early f4 push with Nc3 first, aiming for a King's Gambit-style attack while sidestepping some of its sharpest defences.",
+
+  // Bogo-Indian, Catalan
+  "Bogo-Indian Defense":
+    "Black's characteristic ...Bb4+ check after Nf3, aiming to trade off the dark-squared bishop or gain time for a solid, low-theory setup.",
+  "Catalan Opening: Open Defense":
+    "Black takes the c4-pawn, and White regains it with long-term pressure on the queenside and the long light-square diagonal.",
+  "Catalan Opening: Closed":
+    "Black keeps the tension by supporting d5, leading to a slow strategic struggle for control of the light squares.",
+};
+
 /** A short, non-empty, non-fabricated description for any opening. */
 export function describeOpening(o: Opening): string {
   const dbText = o.description?.trim();
   if (dbText) return dbText;
+
+  const variationText = VARIATION_TEXT[o.name];
+  if (variationText) return variationText;
 
   const base = baseNameOf(o.name);
   const authored = BASE_TEXT[base];
