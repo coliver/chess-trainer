@@ -1,0 +1,1002 @@
+[
+  {
+    "eco": "A00",
+    "name": "Amar Opening: Paris Gambit",
+    "description": "White plays an unconventional knight to h3 and fianchetto-like pawn advances, then gambles with f4 to grab kingside space."
+  },
+  {
+    "eco": "A00",
+    "name": "Amar Opening: Paris Gambit, Gent Gambit",
+    "description": "Black captures the misplaced h3 knight and accepts multiple pawns on f4 and g3, exploiting White's weak kingside structure."
+  },
+  {
+    "eco": "A00",
+    "name": "Anderssen's Opening: Polish Gambit",
+    "description": "Both sides advance queenside pawns, with White pushing a3 and b4 in a rare flank-based opening strategy."
+  },
+  {
+    "eco": "A00",
+    "name": "Barnes Opening: Fool's Mate",
+    "description": "White fatally weakens the kingside with f3 and g4, allowing Black's queen to deliver immediate checkmate on h4."
+  },
+  {
+    "eco": "A00",
+    "name": "Barnes Opening: Gedult Gambit",
+    "description": "White weakens f3, then sacrifices the central e-pawn to Black while developing Nc3 for counterplay."
+  },
+  {
+    "eco": "A00",
+    "name": "Barnes Opening: Hammerschlag",
+    "description": "White plays the bizarre f3 followed by the dangerous king move Kf2, abandoning safety for unclear attacking ideas."
+  },
+  {
+    "eco": "A00",
+    "name": "Clemenz Opening: Spike Lee Gambit",
+    "description": "Both sides push h-pawns in an irregular opening, then White seizes kingside space with g4."
+  },
+  {
+    "eco": "A00",
+    "name": "Creepy Crawly Formation: Classical Defense",
+    "description": "White maneuvers with flank pawns h3 and a3, while Black seizes central space with d5 and e5."
+  },
+  {
+    "eco": "A00",
+    "name": "Formation: Hippopotamus Attack",
+    "description": "White methodically advances all pawns in a solid formation while Black develops normally with pieces and castles."
+  },
+  {
+    "eco": "A00",
+    "name": "Formation: Shy Attack",
+    "description": "White builds a fianchettoed position with Bg2 and careful pawn structure as Black occupies the center and develops."
+  },
+  {
+    "eco": "A00",
+    "name": "Grob Opening: Alessi Gambit",
+    "description": "White advances g4 to seize kingside space, but Black immediately counters the kingside thrust with f5."
+  },
+  {
+    "eco": "A00",
+    "name": "Grob Opening: Double Grob",
+    "description": "Both sides push g-pawns toward each other, creating a unique doubled pawn structure on the kingside."
+  },
+  {
+    "eco": "A00",
+    "name": "Grob Opening: Double Grob, Coca-Cola Gambit",
+    "description": "After g4 and g5, White sacrifices further kingside pawns with f4, offering wild tactical complications."
+  },
+  {
+    "eco": "A00",
+    "name": "Grob Opening: Grob Gambit",
+    "description": "White sacrifices the g-pawn and fianchettoes the bishop, allowing Black central expansion with d5."
+  },
+  {
+    "eco": "A00",
+    "name": "Grob Opening: Grob Gambit, Basman Gambit",
+    "description": "Black attacks White's g-pawn with h5, and White captures, opening the h-file for tactical play."
+  },
+  {
+    "eco": "A00",
+    "name": "Grob Opening: Grob Gambit Declined",
+    "description": "Black declines the g-pawn, instead solidifying the center with d5 and c6 for a solid setup."
+  },
+  {
+    "eco": "A00",
+    "name": "Grob Opening: Grob Gambit, Fritz Gambit",
+    "description": "White fianchettoes, Black captures on the kingside, and White strikes the center with c4."
+  },
+  {
+    "eco": "A00",
+    "name": "Grob Opening: Grob Gambit, Fritz Gambit, Romford Countergambit",
+    "description": "Both sides sacrifice material furiously: White's bishop invades the queenside while Black's queen recaptures from a8."
+  },
+  {
+    "eco": "A00",
+    "name": "Grob Opening: Grob Gambit, Keres Gambit",
+    "description": "White fianchettoes, then sacrifices the d-pawn with d4, supporting the center with c3."
+  },
+  {
+    "eco": "A00",
+    "name": "Grob Opening: Grob Gambit, Richter-Grob Gambit",
+    "description": "White sacrifices the c-pawn to maintain central pressure while Black supports d5 with c6."
+  },
+  {
+    "eco": "A00",
+    "name": "Grob Opening: Keene Defense",
+    "description": "White advances kingside pawns before fianchettoing, while Black establishes a solid central duo with supporting moves."
+  },
+  {
+    "eco": "A00",
+    "name": "Grob Opening: Keene Defense, Main Line",
+    "description": "White plays d4 to undermine Black's center, then c4, while Black develops the bishop and knight defensively."
+  },
+  {
+    "eco": "A00",
+    "name": "Grob Opening: London Defense",
+    "description": "White advances kingside pawns while Black seizes the center with e5 and develops the knight."
+  },
+  {
+    "eco": "A00",
+    "name": "Grob Opening: Romford Countergambit",
+    "description": "After Black captures on g4, White's c4 thrust is met by Black's d4 advance, deepening the center struggle."
+  },
+  {
+    "eco": "A00",
+    "name": "Grob Opening: Spike Attack",
+    "description": "White fianchettoes and then aggressively advances g5, attempting to open lines on the kingside."
+  },
+  {
+    "eco": "A00",
+    "name": "Grob Opening: Spike, Hurst Attack",
+    "description": "Black's dual central pawns are challenged by White's c4 thrust, creating tactical skirmishes."
+  },
+  {
+    "eco": "A00",
+    "name": "Grob Opening: Zilbermints Gambit",
+    "description": "White sacrifices the central e-pawn with e4, offering material to develop Nc3 and build attacking play."
+  },
+  {
+    "eco": "A00",
+    "name": "Grob Opening: Zilbermints Gambit, Schiller Defense",
+    "description": "Black captures the e-pawn and counterattacks White's kingside with h5, creating threats on both flanks."
+  },
+  {
+    "eco": "A00",
+    "name": "Grob Opening: Zilbermints Gambit, Zilbermints-Hartlaub Gambit",
+    "description": "Black strengthens the center with e5 while White solidifies with d3, creating a balanced pawn structure."
+  },
+  {
+    "eco": "A00",
+    "name": "Hungarian Opening: Asten Gambit",
+    "description": "White and Black clash in the center with d4 and e5, then White sacrifices the knight with Ne4 while Black advances f5."
+  },
+  {
+    "eco": "A00",
+    "name": "Hungarian Opening: Bücker Gambit",
+    "description": "White fianchettoes while Black seizes the center with d5 and e5, and White counterattacks with b4."
+  },
+  {
+    "eco": "A00",
+    "name": "Hungarian Opening: Burk Gambit",
+    "description": "Black establishes a strong pawn center, and White maneuvers the knight to h4 while supporting with d3."
+  },
+  {
+    "eco": "A00",
+    "name": "Hungarian Opening: Catalan Formation",
+    "description": "White fianchettoes while Black builds a solid structure with d5 and e6, resembling the Catalan Defense."
+  },
+  {
+    "eco": "A00",
+    "name": "Hungarian Opening: Dutch Defense",
+    "description": "White fianchettoes while Black advances the f-pawn, establishing a Dutch Defense-like kingside structure."
+  },
+  {
+    "eco": "A00",
+    "name": "Hungarian Opening: Indian Defense",
+    "description": "White fianchettoes as Black plays the flexible knight to f6, a typical Indian Defense approach."
+  },
+  {
+    "eco": "A00",
+    "name": "Hungarian Opening: Myers Defense",
+    "description": "Both sides advance the g-pawn, creating an unusual mirror structure on the kingside."
+  },
+  {
+    "eco": "A00",
+    "name": "Hungarian Opening: Pachman Gambit",
+    "description": "White sacrifices the e-pawn with e4 and launches a checking attack with Qh5, forcing Black to block on g6."
+  },
+  {
+    "eco": "A00",
+    "name": "Hungarian Opening: Paris Gambit",
+    "description": "White sacrifices the knight and f-pawn for rapid kingside attacking chances, castling to secure the king."
+  },
+  {
+    "eco": "A00",
+    "name": "Hungarian Opening: Reversed Alekhine",
+    "description": "White fianchettoes while Black expands the center; White develops the knight in a Reversed Alekhine setup."
+  },
+  {
+    "eco": "A00",
+    "name": "Hungarian Opening: Reversed Brooklyn Defense, Brooklyn Benko Gambit",
+    "description": "Black's e4 forces White's knight retreat to g1, then White counterattacks with b4 on the queenside."
+  },
+  {
+    "eco": "A00",
+    "name": "Hungarian Opening: Reversed Modern Defense",
+    "description": "White fianchettoes while Black expands with d5 and c5, controlling both the center and queenside."
+  },
+  {
+    "eco": "A00",
+    "name": "Hungarian Opening: Reversed Norwegian Defense",
+    "description": "Black's e4 advance forces the developed knight away to h4, maneuvering away from the advanced pawn."
+  },
+  {
+    "eco": "A00",
+    "name": "Hungarian Opening: Sicilian Invitation",
+    "description": "White fianchettoes while Black immediately claims the queenside with c5, inverting the typical Sicilian."
+  },
+  {
+    "eco": "A00",
+    "name": "Hungarian Opening: Slav Formation",
+    "description": "White fianchettoes as Black establishes a solid Slav-like structure with d5 and c6."
+  },
+  {
+    "eco": "A00",
+    "name": "Hungarian Opening: Symmetrical Variation",
+    "description": "Both sides advance the g-pawn, creating a perfect mirror of the fianchetto structure."
+  },
+  {
+    "eco": "A00",
+    "name": "Hungarian Opening: Van Kuijk Gambit",
+    "description": "Black aggressively advances h-pawns while White develops the knight, creating kingside complications."
+  },
+  {
+    "eco": "A00",
+    "name": "Hungarian Opening: Winterberg Gambit",
+    "description": "White sacrifices the c-pawn with c4 to maintain pressure, and after Black captures, White plays b3 to reclaim."
+  },
+  {
+    "eco": "A00",
+    "name": "Kádas Opening: Beginner's Trap",
+    "description": "White plays the unusual h4 opening, then moves the rook to h3 in a dubious, trap-prone setup."
+  },
+  {
+    "eco": "A00",
+    "name": "Kádas Opening: Kádas Gambit",
+    "description": "White opens with h4 and sacrifices the central d-pawn with d4, supporting the center with c3."
+  },
+  {
+    "eco": "A00",
+    "name": "Kádas Opening: Koola-Koola Variation",
+    "description": "White's offbeat h4 is met by Black's a5, both sides advancing flank pawns without central engagement."
+  },
+  {
+    "eco": "A00",
+    "name": "Kádas Opening: Myers Variation",
+    "description": "White opens with rare h4, meeting Black's d5 with d4 and e4 to stake a claim in the center."
+  },
+  {
+    "eco": "A00",
+    "name": "Kádas Opening: Schneider Gambit",
+    "description": "White's h4 meets Black's aggressive g5, with both sides immediately seizing space on the kingside."
+  },
+  {
+    "eco": "A00",
+    "name": "Kádas Opening: Steinbok Gambit",
+    "description": "White sacrifices the e4 pawn to open lines after Black's f5; d3 maintains central presence."
+  },
+  {
+    "eco": "A00",
+    "name": "Mieses Opening: Myers Spike Attack",
+    "description": "White plays quiet d3, then storms the kingside with g4 while maintaining a flexible setup."
+  },
+  {
+    "eco": "A00",
+    "name": "Mieses Opening: Reversed Rat",
+    "description": "White plays the quiet d3, and Black responds with central e5, both sides preparing flexible structures."
+  },
+  {
+    "eco": "A00",
+    "name": "Mieses Opening: Venezolana Variation",
+    "description": "White develops with d3 and Nc3 as Black counters with c5 and Nc6, creating balanced piece activity."
+  },
+  {
+    "eco": "A00",
+    "name": "Polish Opening: Baltic Defense",
+    "description": "White's unusual b4 setup prepares fianchetto while Black quickly seizes the center with d5 and develops the bishop to f5."
+  },
+  {
+    "eco": "A00",
+    "name": "Polish Opening: Birmingham Gambit",
+    "description": "White's unusual queenside b4 is met by Black's immediate central c5 counterattack, creating immediate imbalance."
+  },
+  {
+    "eco": "A00",
+    "name": "Polish Opening: Bugayev Advance Variation",
+    "description": "White advances the queenside pawn to b5 while Black defends e5 with f6, creating strategic tension."
+  },
+  {
+    "eco": "A00",
+    "name": "Polish Opening: Bugayev Attack",
+    "description": "After b4 and Black's e5, White consolidates with a3, preventing knight moves and keeping options open."
+  },
+  {
+    "eco": "A00",
+    "name": "Polish Opening: Czech Defense",
+    "description": "Black solidifies the center with e5 and d6, creating a solid structure against White's fianchetto."
+  },
+  {
+    "eco": "A00",
+    "name": "Polish Opening: Dutch Defense",
+    "description": "Black immediately counterattacks the kingside with f5 in response to White's unusual queenside b4 opening."
+  },
+  {
+    "eco": "A00",
+    "name": "Polish Opening: German Defense",
+    "description": "Black seizes the center with d5 and develops the queen to d6, meeting White's fianchetto setup."
+  },
+  {
+    "eco": "A00",
+    "name": "Polish Opening: Grigorian Variation",
+    "description": "Black immediately develops a knight to c6, meeting White's unusual b4 with central piece coordination."
+  },
+  {
+    "eco": "A00",
+    "name": "Polish Opening: Karniewski Variation",
+    "description": "Black develops the knight to the rim with Nh6, responding to White's unusual queenside b4."
+  },
+  {
+    "eco": "A00",
+    "name": "Polish Opening: King's Indian Variation",
+    "description": "Black develops in King's Indian style with Nf6 and g6, preparing fianchetto against White's queenside setup."
+  },
+  {
+    "eco": "A00",
+    "name": "Polish Opening: King's Indian Variation, Schiffler Attack",
+    "description": "White launches e4 to break the center while Black fianchettoes with g6, creating tactical complications."
+  },
+  {
+    "eco": "A00",
+    "name": "Polish Opening: King's Indian Variation, Sokolsky Attack",
+    "description": "White builds a classical center (c4, d4, e3) while Black fianchettoes solidly and castles kingside."
+  },
+  {
+    "eco": "A00",
+    "name": "Polish Opening: Myers Variation",
+    "description": "White advances queenside pawns with b4 and a4 while Black seizes the center with d5 and c6."
+  },
+  {
+    "eco": "A00",
+    "name": "Polish Opening: Outflank Variation",
+    "description": "Black responds to White's b4 with c6, preparing to advance d5 and establish central control."
+  },
+  {
+    "eco": "A00",
+    "name": "Polish Opening: Outflank Variation, Schuehler Gambit",
+    "description": "White sacrifices the b5 pawn attacking c6, while Black counters with a5 for queenside activity."
+  },
+  {
+    "eco": "A00",
+    "name": "Polish Opening: Queenside Defense",
+    "description": "Black plays solid e6 and develops Nf6, countering White's b5 push with a6 to fix the pawn."
+  },
+  {
+    "eco": "A00",
+    "name": "Polish Opening: Queen's Indian Variation",
+    "description": "Black mirrors White's queenside expansion with b6, creating a Queen's Indian structure from the Polish opening."
+  },
+  {
+    "eco": "A00",
+    "name": "Polish Opening: Rooks Swap Line",
+    "description": "Rapid pawn and piece exchanges characterize this line, leading to a sharp endgame with queenside pawns."
+  },
+  {
+    "eco": "A00",
+    "name": "Polish Opening: Schiffler-Sokolsky Variation",
+    "description": "Black stakes a central d5 while White builds structure with e3, creating tension-filled strategic play."
+  },
+  {
+    "eco": "A00",
+    "name": "Polish Opening: Schuehler Gambit",
+    "description": "White sacrifices the b-pawn with b5 and follows e4 to seize the center after Black captures."
+  },
+  {
+    "eco": "A00",
+    "name": "Polish Opening: Symmetrical Variation",
+    "description": "Both sides mirror each other's queenside b-pawn advances, creating an unusual and highly symmetrical position."
+  },
+  {
+    "eco": "A00",
+    "name": "Polish Opening: Tartakower Gambit",
+    "description": "White launches e4 after Black's kingside f6, creating immediate central tension from an unconventional opening."
+  },
+  {
+    "eco": "A00",
+    "name": "Polish Opening: Wolferts Gambit",
+    "description": "Black strikes at both the center and queenside with e5 and c5, meeting White's unusual fianchetto setup."
+  },
+  {
+    "eco": "A00",
+    "name": "Sodium Attack: Celadon Variation",
+    "description": "Black captures White's misplaced knight, but White compensates with a3 and central structure (e3, d3)."
+  },
+  {
+    "eco": "A00",
+    "name": "Sodium Attack: Chenoboskion Variation",
+    "description": "White plays unconventionally with Na3, then storms the kingside with g4 while Black prepares fianchetto."
+  },
+  {
+    "eco": "A00",
+    "name": "Sodium Attack: Durkin Gambit",
+    "description": "White reroutes the knight to c4 and seizes the center with e4; Black counters with kingside f5."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Battambang Variation",
+    "description": "White opens quietly with a3, then develops Nc3 to meet Black's central e5 with solid piece play."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Billockus-Johansen Gambit",
+    "description": "Black develops the bishop actively to c5 after playing e5, meeting White's pieces with rapid kingside counterplay."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Damhaug Gambit",
+    "description": "White sacrifices the f-pawn in a flank gambit, while Black immediately counters with central e5."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Dougherty Gambit",
+    "description": "White sacrifices e4 to open lines after Black's d5; f3 prepares to dominate the center."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Dunst-Perrenet Gambit",
+    "description": "White sacrifices e4 with d3 follow-up, accepting the pawn but maintaining central tension and piece activity."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Düsseldorf Gambit",
+    "description": "Black's Sicilian-like c5 immediately meets White's queenside gambit b4, creating immediate and sharp asymmetrical play."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Gladbacher Gambit",
+    "description": "White plays quiet moves (b3, e4, d3) while Black seizes space, sacrificing to White's emerging center."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Hector Gambit",
+    "description": "White sacrifices e4 and rapidly develops the bishop to c4, launching a kingside attack on Black's king."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Hergert Gambit",
+    "description": "White launches the f-pawn gambit sacrificing space to open lines, while Black develops and counterattacks."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Hulsemann Gambit",
+    "description": "White places the queen aggressively on h5 after quiet e3, while Black solidifies with d5 and Be6."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Jendrossek Gambit",
+    "description": "White sacrifices the f-pawn with active knight maneuvers, while Black pushes in center and queenside."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Kluever Gambit",
+    "description": "White sacrifices e4 to open the center after Black's kingside f5; d3 maintains White's presence."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Laroche Gambit",
+    "description": "Black gambles a queenside pawn with b5, launching an unusual and highly risky queenside attack."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Liebig Gambit",
+    "description": "White places the queen aggressively on h5, while Black solidifies the center with e5 and d5."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Melleby Gambit",
+    "description": "White sacrifices the f-pawn, while Black responds with d4 and c5, seizing space from the setup."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Myers Attack",
+    "description": "White storms the kingside with h4 while Black fianchettoes with g6, creating immediate tactical pressure."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Napoleon Attack",
+    "description": "A solid mainstream setup where White builds the center with d4 against Black's e5 and Nc6."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Novosibirsk Variation",
+    "description": "White sacrifices the center with d4, regains it with Qxd4, and aggressively positions the queen on h4."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Nowokunski Gambit",
+    "description": "White sacrifices the f-pawn with 2.f4, inviting Black to capture while White establishes a strong central pawn on e4. An unsound gambiting try from an eccentric opening."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Pfeiffer Gambit",
+    "description": "White plays 2.f4 against 1...d5, offering a pawn while rerouting the c3-knight to e4 for active centralization. A speculative gambit from an unconventional setup."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Pfeiffer Gambit, Sleipnir Countergambit",
+    "description": "After 3.Ne4, White continues developing with 4.Nf3, supporting the center and adding piece activity. A modest positional approach to the gambit line."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Reversed Nimzowitsch",
+    "description": "White plays the highly unusual 1.Nc3, placing the knight before any pawns move. Black responds with the standard 1...e5, securing central space."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Reversed Scandinavian",
+    "description": "After 2.d4 exd4 3.Qxd4, White's queen enters early on d4, and 4.Qa4 places it on the edge attacking Black's pieces. An aggressive but loose placement."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Sicilian Two Knights",
+    "description": "White reaches a center-pawn structure (d4) after Black's 1...c5, leading to a Sicilian-like position with Nc3 developed first instead of Nf3."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Sleipnir Gambit",
+    "description": "White builds a solid pawn center with 2.e3 and 3.d4 while Black advances d5 and pins the c3-knight with 3...Bb4. A modest gambit structure."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Tübingen Gambit",
+    "description": "White plays the kingside-storming 2.g4, immediately seizing space and weakening the light squares around the king. A provocative and unsound aggressive try."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Twyble Attack",
+    "description": "White plays 2.Rb1, an offbeat rook deployment preparing a potential b-pawn advance. Unconventional and without clear purpose against Black's Sicilian-style c5."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Venezolana Variation",
+    "description": "White adopts a quiet setup with 2.d3 and 3.g3, preparing a fianchetto structure and modest development. A restrained and positional approach."
+  },
+  {
+    "eco": "A00",
+    "name": "Van Geet Opening: Warsteiner Gambit",
+    "description": "White plays 2.f4 followed by Black's sharp 2...g5, offering immediate tactical clashes on the kingside. A wild, complications-seeking gambit."
+  },
+  {
+    "eco": "A00",
+    "name": "Van't Kruijs Opening: Bouncing Bishop Variation",
+    "description": "White's bishop swings from c4 to b3 after Black's queenside pawn break 2...b5. The bishop remains active on the long diagonal from b3."
+  },
+  {
+    "eco": "A00",
+    "name": "Van't Kruijs Opening: Keoni-Hiva Gambit, Akahi Variation",
+    "description": "White sacrifices the f-pawn with 3.f4, inviting Black to capture while maintaining central control and developing the knight to f3. A pawn-offering setup."
+  },
+  {
+    "eco": "A00",
+    "name": "Van't Kruijs Opening: Keoni-Hiva Gambit, Alua Variation",
+    "description": "White offers the f-pawn via 3.f4 after Black develops the c6-knight. Development and the gambit proceed along similar lines as other Keoni-Hiva variations."
+  },
+  {
+    "eco": "A00",
+    "name": "Van't Kruijs Opening: Keoni-Hiva Gambit, Ekolu Variation",
+    "description": "White's 3.f4 gambit is met by Black's central counter 2...d5, challenging the center while White continues with nf3 after fxe4. A tactical struggle."
+  },
+  {
+    "eco": "A00",
+    "name": "Ware Opening: Cologne Gambit",
+    "description": "White launches an extreme queenside attack with 1.a4, followed by a central gambit 2.d4. Black responds with d5 and develops the knight to d7, accepting the chaos."
+  },
+  {
+    "eco": "A00",
+    "name": "Ware Opening: Crab Variation",
+    "description": "White plays 1.a4 and 2.h4, attacking on both flanks with pawns. An offbeat kingside-focused attempt that weakens the center severely."
+  },
+  {
+    "eco": "A00",
+    "name": "Ware Opening: Meadow Hay Trap",
+    "description": "White plays 2.Ra3, an unusual rook placement on the third rank. This eccentric setup offers no clear strategic purpose."
+  },
+  {
+    "eco": "A00",
+    "name": "Ware Opening: Symmetric Variation",
+    "description": "Both sides play 1.a4 and 1...a5, creating a perfectly symmetric position. An equilibrium opening with neither side claiming any advantage."
+  },
+  {
+    "eco": "A00",
+    "name": "Ware Opening: Ware Gambit",
+    "description": "White's a-pawn advances to a5 and later a6, offering a flank gambit while Black counters in the center with d5 and f5. Complications ensue."
+  },
+  {
+    "eco": "A00",
+    "name": "Ware Opening: Wing Gambit",
+    "description": "White sacrifices the a-pawn with 2.axb5, allowing Black to develop with Bb7 and gain space. A queenside pawn-offering gambit."
+  },
+  {
+    "eco": "A01",
+    "name": "Nimzo-Larsen Attack: Classical Variation",
+    "description": "White plays 1.b3, preparing a fianchetto bishop on b2 while Black stakes the center immediately with 1...d5. A flexible hypermodern approach."
+  },
+  {
+    "eco": "A01",
+    "name": "Nimzo-Larsen Attack: Dutch Variation",
+    "description": "White's 1.b3 meets Black's Dutch-style 1...f5, controlling the central e4 square from the kingside. A solid Dutch setup against the Larsen."
+  },
+  {
+    "eco": "A01",
+    "name": "Nimzo-Larsen Attack: English Variation",
+    "description": "Black responds to 1.b3 with the Sicilian-like 1...c5, challenging the center from the flank. A conventional central counter to White's offbeat opening."
+  },
+  {
+    "eco": "A01",
+    "name": "Nimzo-Larsen Attack: Graz Attack",
+    "description": "White develops the bishop to a3 after 1.b3, pinning Black's central d5-pawn and controlling key light squares. An aggressive pin-based setup."
+  },
+  {
+    "eco": "A01",
+    "name": "Nimzo-Larsen Attack: Indian Variation",
+    "description": "Black develops the knight to f6 in response to 1.b3, adopting a modest Indian-style setup. A solid developmental approach."
+  },
+  {
+    "eco": "A01",
+    "name": "Nimzo-Larsen Attack: Modern Variation",
+    "description": "White fianchettos the bishop on b2, plays c4 for central control, and develops a kingside-heavy setup with careful piece placement. A well-structured modern approach."
+  },
+  {
+    "eco": "A01",
+    "name": "Nimzo-Larsen Attack: Pachman Gambit",
+    "description": "White sacrifices the f-pawn with 3.f4 after fianchettoing, offering material for aggressive kingside attack. A sharp tactical gambit."
+  },
+  {
+    "eco": "A01",
+    "name": "Nimzo-Larsen Attack: Polish Variation",
+    "description": "Black mirrors White's queenside strategy with 1...b5, creating symmetric pawn moves on the queenside. Both sides advance the b-pawns."
+  },
+  {
+    "eco": "A01",
+    "name": "Nimzo-Larsen Attack: Ringelbach Gambit",
+    "description": "White plays 3.e4, striking at Black's f5 pawn and opening the center after Black has advanced kingside pawns. A central counter-gambit."
+  },
+  {
+    "eco": "A01",
+    "name": "Nimzo-Larsen Attack: Spike Variation",
+    "description": "After Black's fianchetto with g6, White launches a kingside pawn storm with 3.g4, attacking space aggressively. An unsound kingside assault."
+  },
+  {
+    "eco": "A01",
+    "name": "Nimzo-Larsen Attack: Symmetrical Variation",
+    "description": "Both sides fianchetto their kingside bishops after 1.b3 b6, establishing a symmetric and positional setup. A balanced hypermodern structure."
+  },
+  {
+    "eco": "A02",
+    "name": "Bird Opening: Batavo-Polish Attack",
+    "description": "After Black develops Nf6 and prepares a fianchetto with g6, White plays 3.b4, launching a queenside pawn attack. An unusual wing gambit."
+  },
+  {
+    "eco": "A02",
+    "name": "Bird Opening: Double Duck Formation",
+    "description": "Both sides mirror each other's f and d pawn advances (f4-f5, d4-d5), creating a symmetric pawn skeleton. A balanced classical structure."
+  },
+  {
+    "eco": "A02",
+    "name": "Bird Opening: From's Gambit",
+    "description": "White plays 1.f4, the Bird Opening, and Black immediately counterattacks with 1...e5. A direct challenge to White's kingside control."
+  },
+  {
+    "eco": "A02",
+    "name": "Bird Opening: From's Gambit, Bahr Gambit",
+    "description": "White develops Nc3 instead of capturing on e5, allowing Black to maintain central tension. A flexible knight-development approach to the gambit."
+  },
+  {
+    "eco": "A02",
+    "name": "Bird Opening: From's Gambit, Langheld Gambit",
+    "description": "White captures on e5 and again on d6, establishing a strong pawn on d6 while Black develops naturally with Nf6. White maintains a material advantage."
+  },
+  {
+    "eco": "A02",
+    "name": "Bird Opening: From's Gambit, Lasker Variation",
+    "description": "After Black recaptures on d6 with the bishop, Black launches a kingside counterattack with g5. A sharp, complications-rich variation."
+  },
+  {
+    "eco": "A02",
+    "name": "Bird Opening: From's Gambit, Lipke Variation",
+    "description": "White establishes a pawn on d4 after Black develops the knight to h6 and bishop to d6. White centralizes while Black's knight sits on the rim."
+  },
+  {
+    "eco": "A02",
+    "name": "Bird Opening: Hobbs Gambit",
+    "description": "Black immediately plays 1...g5, attacking White's f4 pawn and launching a bold kingside assault. A sharp, speculative counterattack."
+  },
+  {
+    "eco": "A02",
+    "name": "Bird Opening: Hobbs-Zilbermints Gambit",
+    "description": "Black first plays h6, then follows with g5, preparing a kingside pawn storm against White's opening move. A delayed but aggressive kingside attack."
+  },
+  {
+    "eco": "A02",
+    "name": "Bird Opening: Horsefly Defense",
+    "description": "Black develops the knight to h6, an unconventional and passive square that abandons central play. A slow, sideline defensive setup."
+  },
+  {
+    "eco": "A02",
+    "name": "Bird Opening: Lasker Gambit",
+    "description": "Black plays f6, attacking White's captured e5 pawn while preparing to recapture and open lines. A counterattacking gambit defense."
+  },
+  {
+    "eco": "A02",
+    "name": "Bird Opening: Mujannah",
+    "description": "White combines f4 with an immediate queenside expansion via c4, establishing control on both flanks. A broad opening strategy."
+  },
+  {
+    "eco": "A02",
+    "name": "Bird Opening: Myers Defense",
+    "description": "Black plays b5, launching an immediate queenside pawn attack against White's kingside-focused Bird Opening. A counterflank strategy."
+  },
+  {
+    "eco": "A02",
+    "name": "Bird Opening: Platz Gambit",
+    "description": "Black develops Ne7 after White captures on e5, positioning the knight for future f5 or g6 maneuvers. A flexible knight placement."
+  },
+  {
+    "eco": "A02",
+    "name": "Bird Opening: Schlechter Gambit",
+    "description": "Black develops the knight to c6 after e5 is captured, establishing central piece activity. A standard developmental response to the gambit."
+  },
+  {
+    "eco": "A02",
+    "name": "Bird Opening: Siegener Gambit",
+    "description": "White plays d4 (not fxe5), maintaining central tension; after exd4 and Nf3, White plays c3 to support a future pawn center. A flexible gambit approach."
+  },
+  {
+    "eco": "A02",
+    "name": "Bird Opening: Swiss Gambit",
+    "description": "White plays e4, challenging Black's f5 pawn, followed by a kingside pawn storm with g4. An aggressive central and flank combination."
+  },
+  {
+    "eco": "A02",
+    "name": "Bird Opening: Wagner-Zwitersch Gambit",
+    "description": "White plays e4, attacking Black's f5 pawn and opening the center after Black mirrors f4 with f5. A sharp central counter-gambit."
+  },
+  {
+    "eco": "A03",
+    "name": "Bird Opening: Dutch Variation",
+    "description": "White flank thrust with 1.f4, Black counters with central 1...d5 for early pawn contact."
+  },
+  {
+    "eco": "A03",
+    "name": "Bird Opening: Dutch Variation, Dudweiler Gambit",
+    "description": "White sacrifices the g-pawn with 2.g4 to open kingside lines after 1.f4 d5."
+  },
+  {
+    "eco": "A03",
+    "name": "Bird Opening: Lasker Variation",
+    "description": "After 1.f4 d5 2.Nf3 Nf6 3.e3, Black strikes center with 3...c5, disrupting White's setup."
+  },
+  {
+    "eco": "A03",
+    "name": "Bird Opening: Sturm Gambit",
+    "description": "White supports the center with 2.c4 after 1.f4 d5, adopting a queen's gambit structure."
+  },
+  {
+    "eco": "A03",
+    "name": "Bird Opening: Thomas Gambit",
+    "description": "White fianchettoes with 2.b3 and Bb2, allowing Black's 3...d4 before pivoting with 5.e3."
+  },
+  {
+    "eco": "A03",
+    "name": "Bird Opening: Williams Gambit",
+    "description": "White sacrifices e4 to open central lines and mobilize pieces with Nc3 and Qe2."
+  },
+  {
+    "eco": "A03",
+    "name": "Bird Opening: Williams-Zilbermints Gambit",
+    "description": "White sacrifices e4 and activates both knights (Nc3, Nge2) for rapid attacking chances."
+  },
+  {
+    "eco": "A04",
+    "name": "Colle System: Rhamphorhynchus Variation",
+    "description": "Black fianchettoes kingside then checks with 4...Qa5+, immediately disrupting White's position."
+  },
+  {
+    "eco": "A04",
+    "name": "Modern Defense: Semi-Averbakh Variation, Polish Variation",
+    "description": "White builds strong center with e4 while Black fianchettoes kingside and pressures queenside with Qb6."
+  },
+  {
+    "eco": "A04",
+    "name": "Modern Defense: Semi-Averbakh Variation, Pterodactyl Variation",
+    "description": "Black fianchettoes and checks immediately with 4...Qa5+, forcing White's pieces into complications."
+  },
+  {
+    "eco": "A04",
+    "name": "Modern Defense: Semi-Averbakh Variation, Pterodactyl Variation Accepted",
+    "description": "White dominates center with d4, e4, c4; Black fianchettoes and maintains complex tension with checks."
+  },
+  {
+    "eco": "A04",
+    "name": "Zukertort Defense: Kingside Variation",
+    "description": "Black develops h-knight and fianchettoes kingside, a hypermodern approach delaying central commitment."
+  },
+  {
+    "eco": "A04",
+    "name": "Zukertort Defense: Sicilian Knight Variation",
+    "description": "Black develops a-knight early, then plays Sicilian 2...c5, challenging White's center from the flank."
+  },
+  {
+    "eco": "A04",
+    "name": "Zukertort Opening: Arctic Defense",
+    "description": "Black plays the unusual 1...f6, preemptively weakening kingside while eyeing the e5 square."
+  },
+  {
+    "eco": "A04",
+    "name": "Zukertort Opening: Arctic Defense, Drunken Knight Variation",
+    "description": "After 1...f6 and 2...Nh6, Black continues 3...Nf7 awkwardly while White seizes central space."
+  },
+  {
+    "eco": "A04",
+    "name": "Zukertort Opening: Basman Defense",
+    "description": "Black plays the oddball 1...h6, sidestep established theory while keeping all options maximally open."
+  },
+  {
+    "eco": "A04",
+    "name": "Zukertort Opening: Black Mustang Defense",
+    "description": "Black develops the c-knight immediately with 1...Nc6, a straightforward reply to White's setup."
+  },
+  {
+    "eco": "A04",
+    "name": "Zukertort Opening: Drunken Cavalry Variation",
+    "description": "Black develops both side knights unusually (1...Na6, 2...Nh6), adopting an eccentric flexible setup."
+  },
+  {
+    "eco": "A04",
+    "name": "Zukertort Opening: Dutch Variation",
+    "description": "Black commits to the Dutch Defense with 1...f5, staking a strong claim to the e4 square."
+  },
+  {
+    "eco": "A04",
+    "name": "Zukertort Opening: Herrstrom Gambit",
+    "description": "Black immediately weakens the kingside with 1...g5, an ultra-aggressive and objectively dubious gambit."
+  },
+  {
+    "eco": "A04",
+    "name": "Zukertort Opening: Kingside Fianchetto",
+    "description": "Black fianchettoes kingside with 1...g6, building a solid hypermodern setup with long-diagonal control."
+  },
+  {
+    "eco": "A04",
+    "name": "Zukertort Opening: Lisitsyn Gambit",
+    "description": "White sacrifices e4 against Black's Dutch 1...f5, opening the center and long diagonal for pieces."
+  },
+  {
+    "eco": "A04",
+    "name": "Zukertort Opening: Lisitsyn Gambit Deferred",
+    "description": "White delays the e4 push with 2.d3, playing 3.e4 gradually against Black's Dutch formation."
+  },
+  {
+    "eco": "A04",
+    "name": "Zukertort Opening: Pirc Invitation",
+    "description": "Black plays 1...d6, inviting a Pirc-like structure with flexible central tension."
+  },
+  {
+    "eco": "A04",
+    "name": "Zukertort Opening: Polish Defense",
+    "description": "Black immediately expands the queenside with 1...b5, a hypermodern flank push avoiding central contact."
+  },
+  {
+    "eco": "A04",
+    "name": "Zukertort Opening: Queen's Gambit Invitation",
+    "description": "Black plays 1...e6, inviting a Queen's Gambit structure while maintaining central flexibility."
+  },
+  {
+    "eco": "A04",
+    "name": "Zukertort Opening: Queenside Fianchetto Variation",
+    "description": "Black fianchettoes queenside with 1...b6, an unconventional setup giving the bishop a powerful diagonal."
+  },
+  {
+    "eco": "A04",
+    "name": "Zukertort Opening: Ross Gambit",
+    "description": "Black stakes the center immediately with 1...e5, a classical and aggressive response."
+  },
+  {
+    "eco": "A04",
+    "name": "Zukertort Opening: Shabalov Gambit",
+    "description": "Black challenges center with 3...c5 and expands queenside with 2...a6 and 4...b5 simultaneously."
+  },
+  {
+    "eco": "A04",
+    "name": "Zukertort Opening: Sicilian Invitation",
+    "description": "Black invites Sicilian-type play with 1...c5, attacking the center from the flank immediately."
+  },
+  {
+    "eco": "A04",
+    "name": "Zukertort Opening: Slav Invitation",
+    "description": "Black plays 1...c6, supporting a future d5 advance in Slav style while remaining flexible."
+  },
+  {
+    "eco": "A04",
+    "name": "Zukertort Opening: Speelsmet Gambit",
+    "description": "White sacrifices d4 with 2.d4 cxd4 3.e3, retaining central control and rapid piece activity."
+  },
+  {
+    "eco": "A04",
+    "name": "Zukertort Opening: St. George Defense",
+    "description": "Black plays 1...a6, preparing queenside expansion while keeping the position maximally flexible."
+  },
+  {
+    "eco": "A04",
+    "name": "Zukertort Opening: The Walrus",
+    "description": "White captures e5 then c6 (2.Nxe5 Nc6 3.Nxc6), sacrificing the knight to disrupt Black's pawn structure."
+  },
+  {
+    "eco": "A04",
+    "name": "Zukertort Opening: Vos Gambit",
+    "description": "Black plays 1...d6 then 2...e5, attacking White's d4 and seeking active counterplay."
+  },
+  {
+    "eco": "A04",
+    "name": "Zukertort Opening: Wade Defense",
+    "description": "Black plays 2...Bg4, immediately pinning and attacking White's knight before consolidation."
+  },
+  {
+    "eco": "A04",
+    "name": "Zukertort Opening: Ware Defense",
+    "description": "Black plays 1...a5, expanding the queenside quietly while keeping all strategic options open."
+  },
+  {
+    "eco": "A05",
+    "name": "King's Indian Attack: Smyslov Variation",
+    "description": "White establishes KIA with g3 and fianchetto, then expands queenside with 3.b4."
+  },
+  {
+    "eco": "A05",
+    "name": "King's Indian Attack: Spassky Variation",
+    "description": "White begins KIA setup while Black counters with immediate queenside expansion via 2...b5."
+  },
+  {
+    "eco": "A05",
+    "name": "King's Indian Attack: Symmetrical Defense",
+    "description": "Both players fianchetto kingside, creating a symmetrical hypermodern structure with balanced prospects."
+  },
+  {
+    "eco": "A05",
+    "name": "King's Indian Attack: Wahls Defense",
+    "description": "Black mirrors White's fianchetto setup and breaks symmetry with 5...d5, contesting the center."
+  },
+  {
+    "eco": "A05",
+    "name": "Polish Opening: Zukertort System",
+    "description": "White plays unusual Polish 1.b4 and fianchettoes the queenside bishop for a hypermodern setup."
+  },
+  {
+    "eco": "A05",
+    "name": "Zukertort Opening: Double Fianchetto Attack",
+    "description": "White fianchettoes both kingside and queenside bishops for a quiet, solid setup."
+  },
+  {
+    "eco": "A05",
+    "name": "Zukertort Opening: Lemberger Gambit",
+    "description": "White plays 2.e4, immediately seizing the center and departing from quiet Zukertort approach."
+  },
+  {
+    "eco": "A05",
+    "name": "Zukertort Opening: Myers Polish Attack",
+    "description": "White expands queenside with pawns (2.a4, 3.b4) while Black fianchettoes kingside for space."
+  },
+  {
+    "eco": "A05",
+    "name": "Zukertort Opening: Nimzo-Larsen Variation",
+    "description": "White plays Nimzo-Larsen 2.b3, preparing to fianchetto and control the center indirectly."
+  },
+  {
+    "eco": "A05",
+    "name": "Zukertort Opening: Quiet System",
+    "description": "White adopts a quiet, positional 2.e3 approach, avoiding early tactical complications."
+  },
+  {
+    "eco": "A06",
+    "name": "Nimzo-Larsen Attack: Classical Variation",
+    "description": "White responds to Black's 1...d5 with Nimzo-Larsen 2.b3, preparing a kingside fianchetto."
+  },
+  {
+    "eco": "A06",
+    "name": "Nimzo-Larsen Attack: Norfolk Gambit",
+    "description": "White sacrifices e4 while Black plays central ...c5, creating tactical complications and opportunities."
+  },
+  {
+    "eco": "A06",
+    "name": "Zukertort Opening: Ampel Variation",
+    "description": "White plays the extraordinary 2.Rg1, preparing kingside operations with an offbeat rook placement."
+  }
+]
