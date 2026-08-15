@@ -36,6 +36,15 @@ def verify_password(password: str, password_hash: str) -> bool:
     return hmac.compare_digest(dk, dk_stored)
 
 
+def _email_verification_required() -> bool:
+    return os.getenv("EMAIL_VERIFICATION_REQUIRED", "false").strip().lower() in (
+        "1",
+        "true",
+        "yes",
+        "on",
+    )
+
+
 @router.post("/register")
 def register(req: RegisterRequest, background_tasks: BackgroundTasks, db=Depends(get_db)):
     existing = (
@@ -44,19 +53,21 @@ def register(req: RegisterRequest, background_tasks: BackgroundTasks, db=Depends
     if existing:
         raise HTTPException(status_code=409, detail="Email or username already exists")
 
+    verification_required = _email_verification_required()
     user = User(
         email=req.email,
         username=req.username,
         password_hash=hash_password(req.password),
         is_active=True,
-        email_verified=False,
+        email_verified=not verification_required,
     )
     db.add(user)
     db.commit()
     db.refresh(user)
-    background_tasks.add_task(
-        send_verification_email, user.email, create_email_verification_token(user.id)
-    )
+    if verification_required:
+        background_tasks.add_task(
+            send_verification_email, user.email, create_email_verification_token(user.id)
+        )
     return {"id": user.id, "email": user.email, "username": user.username}
 
 
@@ -84,7 +95,7 @@ def login(req: LoginRequest, db=Depends(get_db)):
     if not verify_password(req.password, user.password_hash):
         raise HTTPException(status_code=401, detail="Invalid credentials")
 
-    if not user.email_verified:
+    if _email_verification_required() and not user.email_verified:
         raise HTTPException(status_code=403, detail="Email not verified")
 
     access_token = create_access_token(user.id)
