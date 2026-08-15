@@ -11,6 +11,26 @@ RUN cd /packages/chess-core && npm ci && npm run build
 COPY angular/package*.json ./
 RUN npm ci
 
+# Chromium's shared-lib deps, installed directly (not via the `chromium` apt
+# package, whose Recommends chain pulls in a perl postinst that fails to
+# configure under this build sandbox). --reinstall on libglib2.0-0 works
+# around a truncated copy in the base node:20 image (0-byte .so on disk).
+# fontconfig/libpango/libcairo's own postinst also fails here (same sandbox
+# restriction, unrelated to the package contents) — their .so files still land
+# on disk during unpack, so `|| true` lets the build continue past the
+# dpkg-configure error rather than treating it as fatal.
+RUN apt-get update && (apt-get install -y --no-install-recommends --reinstall \
+    libglib2.0-0 libnspr4 libnss3 libdbus-1-3 libatk1.0-0 libatk-bridge2.0-0 \
+    libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 \
+    libxrandr2 libgbm1 libasound2 libpango-1.0-0 libcairo2 || true) \
+  && rm -rf /var/lib/apt/lists/*
+
+# Chromium binary itself for karma-chrome-launcher (`ng test`) and Playwright
+# (`playwright test`) — neither ships a browser of its own. karma.conf.js
+# resolves CHROME_BIN from this install at runtime (no hardcoded revision path).
+ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
+RUN npx playwright install chromium
+
 COPY angular/ .
 
 EXPOSE 4200

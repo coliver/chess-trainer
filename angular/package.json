@@ -7,6 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "test:ci": "ng test --watch=false --browsers=ChromeHeadlessNoSandbox",
+    "test:playwright": "playwright test",
     "lint": "ng lint"
   },
   "private": true,
@@ -28,6 +30,7 @@
     "@angular-devkit/build-angular": "^19.2.27",
     "@angular/cli": "^19.2.27",
     "@angular/compiler-cli": "^19.2.0",
+    "@playwright/test": "^1.62.0",
     "@types/jasmine": "~5.1.0",
     "angular-eslint": "19.8.1",
     "eslint": "^9.28.0",
