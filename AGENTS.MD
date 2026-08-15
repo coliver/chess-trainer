@@ -32,8 +32,10 @@ Chess rules:
 ## Status (MVP done)
 
 ### Auth (FastAPI paths; nginx exposes them under `/api`)
-- `POST /auth/register`
-- `POST /auth/login`
+- `POST /auth/register` — creates an unverified account and emails a verification link
+- `POST /auth/login` — rejects unverified accounts with 403 "Email not verified"
+- `GET /auth/verify-email` — confirms a verification token, idempotent
+- `POST /auth/resend-verification` — resends the verification email (email or username)
 
 ### Training MVP (position prompt + answer validation; FastAPI paths; nginx exposes them under `/api`)
 - `POST /training-sessions`

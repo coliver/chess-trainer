@@ -13,7 +13,8 @@ depends_on = None
 
 def upgrade():
     op.add_column(
-        "users", sa.Column("email_verified", sa.Boolean(), nullable=False, server_default=sa.text("false"))
+        "users",
+        sa.Column("email_verified", sa.Boolean(), nullable=False, server_default=sa.text("false")),
     )
     # Grandfather existing users so they aren't locked out by new verification requirement
     op.execute("UPDATE users SET email_verified = true")

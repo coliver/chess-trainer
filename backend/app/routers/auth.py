@@ -10,9 +10,9 @@ import jwt
 from fastapi import APIRouter, BackgroundTasks, Depends, Header, HTTPException
 from pydantic import BaseModel, EmailStr, constr
 
+from backend.app.modules.email.sender import send_verification_email
 from backend.app.modules.shared.db import get_db
 from backend.app.modules.users.models import User
-from backend.app.modules.email.sender import send_verification_email
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
