@@ -1,7 +1,21 @@
 import datetime
 
+import pytest
+from sqlalchemy import delete
+
 from backend.app.modules.puzzles import service
 from backend.app.modules.puzzles.models import Puzzle, PuzzleProgress
+
+
+@pytest.fixture(autouse=True)
+def _empty_puzzles_table(db):
+    # The dev DB carries a real seeded puzzle dataset (thousands of rows) that
+    # the `db` fixture's transaction rollback doesn't hide, since it was
+    # committed outside any test. Clear it here so selection/count
+    # assertions are deterministic; this runs inside the same rolled-back
+    # transaction, so nothing here persists past the test.
+    db.execute(delete(Puzzle))
+    db.commit()
 
 
 def make_puzzle(db, id="p1", rating=1200, popularity=90):
