@@ -20,6 +20,13 @@
   animation: board-blink 0.42s ease-in-out 0s 4;
 }
 
+/* Last-move highlight (from / to squares of the most recently played move,
+   opponent replies included) — subtle, persistent, no animation. */
+.cm-chessboard .markers .marker.marker-square-lastmove {
+  fill: rgb(255, 200, 0);
+  opacity: 0.28;
+}
+
 @keyframes board-blink {
   0% {
     opacity: 0.1;

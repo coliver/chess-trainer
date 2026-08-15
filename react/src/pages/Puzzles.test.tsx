@@ -60,6 +60,7 @@ const NEXT_PUZZLE = {
   rating: 1500,
   themes: "fork",
   correctMoveUci: "e2e4",
+  lastMoveUci: "e7e5",
 };
 
 describe("Puzzles Page", () => {

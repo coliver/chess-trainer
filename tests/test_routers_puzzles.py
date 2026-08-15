@@ -41,6 +41,7 @@ def test_get_puzzles_next_success_maps_fields(client, monkeypatch: pytest.Monkey
         puzzle_id: str = "p1"
         fen: str = "the-fen"
         correct_move_uci: str = "e7e5"
+        setup_move_uci: str = "e2e4"
         rating: int = 1200
         themes: str | None = "opening"
 
@@ -54,6 +55,7 @@ def test_get_puzzles_next_success_maps_fields(client, monkeypatch: pytest.Monkey
         "rating": 1200,
         "themes": "opening",
         "correctMoveUci": "e7e5",
+        "lastMoveUci": "e2e4",
     }
 
 

@@ -16,19 +16,20 @@ class PuzzlePosition:
     puzzle_id: str
     fen: str
     correct_move_uci: str
+    setup_move_uci: str
     rating: int
     themes: str | None
 
 
-def _solve_position(puzzle: Puzzle) -> tuple[str, str]:
-    """Apply the opponent's setup move and return (fen_to_solve, correct_move_uci)."""
+def _solve_position(puzzle: Puzzle) -> tuple[str, str, str]:
+    """Apply the opponent's setup move and return (fen_to_solve, setup_move_uci, correct_move_uci)."""
     moves = puzzle.moves.split()
     if len(moves) < 2:
         raise ValueError(f"Puzzle {puzzle.id} has too few moves to solve")
 
     board = chess.Board(puzzle.fen)
     board.push(chess.Move.from_uci(moves[0]))
-    return board.fen(), moves[1]
+    return board.fen(), moves[0], moves[1]
 
 
 def get_next_puzzle(db: Session, user_id: int) -> PuzzlePosition | None:
@@ -56,11 +57,12 @@ def get_next_puzzle(db: Session, user_id: int) -> PuzzlePosition | None:
     if puzzle is None:
         return None
 
-    fen, correct_move_uci = _solve_position(puzzle)
+    fen, setup_move_uci, correct_move_uci = _solve_position(puzzle)
     return PuzzlePosition(
         puzzle_id=puzzle.id,
         fen=fen,
         correct_move_uci=correct_move_uci,
+        setup_move_uci=setup_move_uci,
         rating=puzzle.rating,
         themes=puzzle.themes,
     )
@@ -71,7 +73,7 @@ def submit_puzzle_attempt(db: Session, user_id: int, puzzle_id: str, move_uci: s
     if puzzle is None:
         return None
 
-    fen, correct_move_uci = _solve_position(puzzle)
+    fen, _setup_move_uci, correct_move_uci = _solve_position(puzzle)
     result = validate_and_apply(fen=fen, move_uci=move_uci, expected_correct_uci=correct_move_uci)
 
     row = db.execute(

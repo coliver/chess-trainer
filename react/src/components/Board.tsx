@@ -17,7 +17,7 @@ import "../../../packages/shared-styles/board.css";
 // Sprites are served from react/public (copied from the cm-chessboard package).
 const ASSETS_URL = "/cm-chessboard-assets/";
 
-export type BoardMarkerKind = "hint" | "blink";
+export type BoardMarkerKind = "hint" | "blink" | "lastmove";
 export type BoardMarker = { square: string; type: BoardMarkerKind };
 
 // Custom marker types (defined in styles/board.css). Kept as stable object
@@ -25,6 +25,7 @@ export type BoardMarker = { square: string; type: BoardMarkerKind };
 const CUSTOM_MARKER = {
   hint: { class: "marker-square-hint", slice: "markerSquare" },
   blink: { class: "marker-square-blink", slice: "markerSquare" },
+  lastmove: { class: "marker-square-lastmove", slice: "markerSquare" },
 } as const;
 
 export type BoardProps = {
@@ -177,6 +178,7 @@ export default function Board({
     if (!board) return;
     board.removeMarkers(CUSTOM_MARKER.hint);
     board.removeMarkers(CUSTOM_MARKER.blink);
+    board.removeMarkers(CUSTOM_MARKER.lastmove);
     for (const m of markers ?? []) {
       board.addMarker(CUSTOM_MARKER[m.type], m.square);
     }

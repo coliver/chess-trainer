@@ -51,6 +51,9 @@ export const Training = () => {
   const [showAnimations] = useState(true);
   const { orientation, flip } = useBoardOrientation();
   const [hintLevel, setHintLevel] = useState(-1);
+  const [lastMove, setLastMove] = useState<{ from: string; to: string } | null>(
+    null,
+  );
   const [localFeedback, setLocalFeedback] = useState("");
   const shownFeedback = localFeedback || feedback;
 
@@ -124,6 +127,7 @@ export const Training = () => {
     setLocalFeedback("");
     setMoveInput("");
     setHintLevel(-1);
+    setLastMove(null);
   }, []);
 
   // Reset per-item UI state when advancing to a new training item, without
@@ -133,6 +137,7 @@ export const Training = () => {
       setLocalFeedback("");
       setMoveInput("");
       setHintLevel(-1);
+      setLastMove(null);
     }
     prevItemIdRef.current = itemId;
   }, [itemId]);
@@ -188,6 +193,7 @@ export const Training = () => {
     const applied = applyUci(fenRef.current, uci);
     if (applied) {
       appendTimelineFen(applied.nextFen);
+      setLastMove({ from: uci.slice(0, 2), to: uci.slice(2, 4) });
     }
     // Opponent's reply, not the player's turn — don't show the "Correct!" banner for it.
     void submitMove(uci, fenRef.current, { silent: true });
@@ -238,6 +244,7 @@ export const Training = () => {
 
       setFen(result.nextFen);
       appendTimelineFen(result.nextFen);
+      setLastMove({ from: sourceSquare, to: targetSquare });
 
       setLocalFeedback("");
       lastSubmittedMoveUciRef.current = result.uci;
@@ -290,6 +297,11 @@ export const Training = () => {
   const markers = useMemo((): BoardMarker[] => {
     const arr: BoardMarker[] = [];
 
+    if (lastMove) {
+      arr.push({ square: lastMove.from, type: "lastmove" });
+      arr.push({ square: lastMove.to, type: "lastmove" });
+    }
+
     const hint = deriveHintMarkers(correctMoveUci, hintLevel, isSessionCompleted);
     if (hint) {
       arr.push({ square: hint.from, type: "hint" });
@@ -299,7 +311,7 @@ export const Training = () => {
     if (blinkSquare) arr.push({ square: blinkSquare, type: "blink" });
 
     return arr;
-  }, [correctMoveUci, hintLevel, blinkSquare, isSessionCompleted]);
+  }, [correctMoveUci, hintLevel, blinkSquare, isSessionCompleted, lastMove]);
 
   // Split "C50 Italian Game" into an ECO chip + name for the rail header.
   const { eco, openingName } = splitOpeningLabel(openingLabel);

@@ -22,6 +22,7 @@ class PuzzleNextResponse(CamelModel):
     rating: int
     themes: str | None = None
     correct_move_uci: str  # TODO Remove me. DEBUG ONLY. (matches training/next)
+    last_move_uci: str  # opponent's setup move that produced `fen`, for board highlighting
 
 
 class PuzzleAttemptRequest(CamelModel):
@@ -49,6 +50,7 @@ def get_puzzles_next(
         rating=puzzle.rating,
         themes=puzzle.themes,
         correct_move_uci=puzzle.correct_move_uci,
+        last_move_uci=puzzle.setup_move_uci,
     )
 
 

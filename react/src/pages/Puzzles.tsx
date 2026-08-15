@@ -1,9 +1,9 @@
 // react/src/pages/Puzzles.tsx
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
 import api from "../api";
-import Board from "../components/Board";
+import Board, { type BoardMarker } from "../components/Board";
 import { FlipBoardButton } from "../components/FlipBoardButton";
 import { useBoardOrientation } from "../hooks/useBoardOrientation";
 import {
@@ -20,6 +20,7 @@ type NextPuzzle = {
   rating: number;
   themes?: string | null;
   correctMoveUci: string;
+  lastMoveUci: string;
 };
 
 export const Puzzles = () => {
@@ -28,6 +29,7 @@ export const Puzzles = () => {
   const [puzzleId, setPuzzleId] = useState<string | null>(null);
   const [fen, setFen] = useState(START_FEN);
   const [correctMoveUci, setCorrectMoveUci] = useState("");
+  const [lastMoveUci, setLastMoveUci] = useState("");
   const [rating, setRating] = useState<number | null>(null);
   const [feedback, setFeedback] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -50,6 +52,7 @@ export const Puzzles = () => {
       setPuzzleId(res.data.puzzleId);
       setFen(res.data.fen);
       setCorrectMoveUci(res.data.correctMoveUci);
+      setLastMoveUci(res.data.lastMoveUci);
       setRating(res.data.rating);
       setOrientation(sideToMove(res.data.fen) === "b" ? "black" : "white");
     } catch (err) {
@@ -60,10 +63,12 @@ export const Puzzles = () => {
       }
       if (e.response?.status === 404) {
         setPuzzleId(null);
+        setLastMoveUci("");
         setNoPuzzlesDue(true);
         setFeedback("No puzzles due right now — check back later.");
         return;
       }
+      setLastMoveUci("");
       setFeedback("Failed to load a puzzle. Check your connection.");
     }
   }, [navigate, setOrientation]);
@@ -154,6 +159,15 @@ export const Puzzles = () => {
     [],
   );
 
+  // Highlight the enemy's setup move (from/to) that produced this puzzle position.
+  const markers = useMemo((): BoardMarker[] => {
+    if (!lastMoveUci || lastMoveUci.length < 4) return [];
+    return [
+      { square: lastMoveUci.slice(0, 2), type: "lastmove" },
+      { square: lastMoveUci.slice(2, 4), type: "lastmove" },
+    ];
+  }, [lastMoveUci]);
+
   return (
     <main className="page">
       <div className="card">
@@ -165,6 +179,7 @@ export const Puzzles = () => {
                 orientation={orientation}
                 interactive={!!puzzleId && !isSubmitting}
                 moveColor={solverColor === "b" ? "black" : "white"}
+                markers={markers}
                 onMoveStart={canPickUp}
                 getLegalMoves={getLegalMoves}
                 onMove={onMove}
