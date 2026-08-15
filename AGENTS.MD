@@ -32,10 +32,11 @@ Chess rules:
 ## Status (MVP done)
 
 ### Auth (FastAPI paths; nginx exposes them under `/api`)
-- `POST /auth/register` — creates an unverified account and emails a verification link
+- `POST /auth/register` — creates an account and emails a verification link
 - `POST /auth/login` — rejects unverified accounts with 403 "Email not verified"
 - `GET /auth/verify-email` — confirms a verification token, idempotent
 - `POST /auth/resend-verification` — resends the verification email (email or username)
+- Enforcement is gated by `EMAIL_VERIFICATION_REQUIRED` (env var, default off). When off, `register()` auto-verifies and skips sending the email, and `login()` never checks `email_verified` — this is the current prod state while SES is still in the sandbox / awaiting production access. `verify-email` and `resend-verification` stay live either way.
 
 ### Training MVP (position prompt + answer validation; FastAPI paths; nginx exposes them under `/api`)
 - `POST /training-sessions`

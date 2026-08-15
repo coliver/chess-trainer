@@ -16,6 +16,7 @@ jobs:
       DATABASE_URL: postgresql+psycopg://postgres:postgres@localhost:5432/chess
       JWT_SECRET: ci-test-secret
       JWT_ALGORITHM: HS256
+      EMAIL_VERIFICATION_REQUIRED: "true"
 
     services:
       db:

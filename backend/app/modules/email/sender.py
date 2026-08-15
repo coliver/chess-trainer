@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def _frontend_url() -> str:
-    return os.getenv("FRONTEND_URL", "http://localhost")
+    return os.getenv("FRONTEND_URL") or "http://localhost"
 
 
 def send_verification_email(to_email: str, token: str) -> None:
@@ -29,7 +29,7 @@ def send_verification_email(to_email: str, token: str) -> None:
 
     msg = MIMEMultipart("alternative")
     msg["Subject"] = "Verify your Knight School email"
-    msg["From"] = os.getenv("SMTP_FROM_ADDRESS", "no-reply@knightschool.click")
+    msg["From"] = os.getenv("SMTP_FROM_ADDRESS") or "no-reply@knightschool.click"
     msg["To"] = to_email
     msg.attach(MIMEText(text_body, "plain"))
     msg.attach(MIMEText(html_body, "html"))
@@ -39,7 +39,7 @@ def send_verification_email(to_email: str, token: str) -> None:
         logger.info("SMTP_HOST not configured; skipping send. Verify link: %s", verify_link)
         return
 
-    port = int(os.getenv("SMTP_PORT", "587"))
+    port = int(os.getenv("SMTP_PORT") or "587")
     user = os.getenv("SMTP_USER")
     password = os.getenv("SMTP_PASSWORD")
 

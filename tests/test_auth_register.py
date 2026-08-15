@@ -100,6 +100,7 @@ def jwt_env(monkeypatch):
     monkeypatch.setenv("JWT_SECRET", "testsecret")
     monkeypatch.setenv("JWT_ALGORITHM", "HS256")
     monkeypatch.setenv("JWT_EXPIRES_MINUTES", "60")
+    monkeypatch.setenv("EMAIL_VERIFICATION_REQUIRED", "true")
 
 
 def test_register_creates_user_when_unique(jwt_env):
@@ -161,6 +162,43 @@ def test_register_duplicate_email_409(jwt_env):
 
     assert e.value.status_code == 409
     assert e.value.detail == "Email or username already exists"
+
+
+def test_register_auto_verifies_when_flag_disabled(monkeypatch):
+    monkeypatch.setenv("JWT_SECRET", "testsecret")
+    monkeypatch.setenv("JWT_ALGORITHM", "HS256")
+    monkeypatch.delenv("EMAIL_VERIFICATION_REQUIRED", raising=False)
+
+    db = FakeDB(users=[])
+    background_tasks = BackgroundTasks()
+
+    req = RegisterRequest(email="a@example.com", username="alice", password="pw123")
+    register(req, background_tasks=background_tasks, db=db)
+
+    assert db.users[0].email_verified is True
+    assert len(background_tasks.tasks) == 0
+
+
+def test_login_succeeds_when_unverified_and_flag_disabled(monkeypatch):
+    monkeypatch.setenv("JWT_SECRET", "testsecret")
+    monkeypatch.setenv("JWT_ALGORITHM", "HS256")
+    monkeypatch.delenv("EMAIL_VERIFICATION_REQUIRED", raising=False)
+
+    u = User(
+        id=1,
+        email="a@example.com",
+        username="alice",
+        password_hash=hash_password("correct"),
+        is_active=True,
+        email_verified=False,
+    )
+    db = FakeDB(users=[u])
+
+    req = LoginRequest(email="a@example.com", username=None, password="correct")
+    out = login(req, db=db)
+
+    assert out["id"] == 1
+    assert "access_token" in out
 
 
 def test_login_requires_email_or_username_400(jwt_env):
