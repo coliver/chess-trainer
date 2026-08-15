@@ -352,8 +352,10 @@ export const Training = () => {
                   setHintLevel((h) => (h < 0 ? 0 : 1));
                 }}
                 disabled={busy || !itemId || isSessionCompleted}
+                aria-label="Show a hint"
+                title="Show a hint"
               >
-                💡 Show a hint
+                💡
               </button>
             </div>
           </div>

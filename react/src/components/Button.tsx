@@ -7,6 +7,8 @@ type Props = {
   disabled?: boolean;
   type?: "button" | "submit";
   className?: string;
+  "aria-label"?: string;
+  title?: string;
 };
 
 export function Button({
@@ -16,6 +18,8 @@ export function Button({
   disabled,
   type = "button",
   className,
+  "aria-label": ariaLabel,
+  title,
 }: Props) {
   const base = variant === "secondary" ? "btn btn-secondary" : "btn";
   return (
@@ -24,6 +28,8 @@ export function Button({
       className={`${base}${className ? ` ${className}` : ""}`}
       onClick={onClick}
       disabled={disabled}
+      aria-label={ariaLabel}
+      title={title}
     >
       {children}
     </button>

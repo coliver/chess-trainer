@@ -9,11 +9,16 @@ import { Component, EventEmitter, Output } from '@angular/core';
   selector: 'app-flip-board-button',
   standalone: true,
   template: `
-    <button type="button" class="btn btn-secondary" (click)="handleClick()">
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="handleClick()"
+      aria-label="Flip board"
+      title="Flip board"
+    >
       <span class="flip-icon" [style.transform]="'rotate(' + rotation + 'deg)'" aria-hidden="true">
-        ⇅
+        ⟳
       </span>
-      Flip board
     </button>
   `,
 })

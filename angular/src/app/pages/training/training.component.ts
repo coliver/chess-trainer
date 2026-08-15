@@ -106,8 +106,10 @@ const BLINK_CYCLE_MS = 420; // fadeIn(120) + hold(120) + fadeOut(180), matches r
                 type="button"
                 (click)="hint()"
                 [disabled]="busy || !itemId"
+                aria-label="Show a hint"
+                title="Show a hint"
               >
-                💡 Show a hint
+                💡
               </button>
 
               <form class="train-type-move" (ngSubmit)="onTextSubmit()">

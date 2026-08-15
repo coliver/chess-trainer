@@ -18,15 +18,20 @@ export function FlipBoardButton({ onClick }: FlipBoardButtonProps) {
   };
 
   return (
-    <Button type="button" variant="secondary" onClick={handleClick}>
+    <Button
+      type="button"
+      variant="secondary"
+      onClick={handleClick}
+      aria-label="Flip board"
+      title="Flip board"
+    >
       <span
         className="flip-icon"
         style={{ transform: `rotate(${rotation}deg)` }}
         aria-hidden="true"
       >
-        ⇅
-      </span>{" "}
-      Flip board
+        ⟳
+      </span>
     </Button>
   );
 }
