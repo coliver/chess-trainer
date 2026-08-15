@@ -65,26 +65,14 @@ export default function Header() {
 
           <nav className="site-header-nav" aria-label="Primary">
             {isLoggedIn && (
-              <Link
-                to="/puzzles"
-                className="site-header-profile-link"
-                aria-label="Puzzles"
-                title="Puzzles"
-              >
-                <svg
-                  width={22}
-                  height={22}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M19.439 7.85c-.049.322.059.648.289.878l1.568 1.568c.47.47.706 1.087.706 1.704s-.235 1.233-.706 1.704l-1.611 1.611a.98.98 0 0 1-.837.276c-.47-.07-.802-.48-.968-.925a2.501 2.501 0 1 0-3.214 3.214c.446.166.855.497.925.968a.979.979 0 0 1-.276.837l-1.61 1.61a2.404 2.404 0 0 1-3.408 0l-1.568-1.568a1.026 1.026 0 0 0-.877-.29c-.493.074-.84.504-1.02.968a2.5 2.5 0 1 1-3.237-3.237c.464-.18.894-.527.967-1.02a1.026 1.026 0 0 0-.289-.877l-1.568-1.568C1.235 12.483 1 11.866 1 11.249s.235-1.233.706-1.704L2.752 8.4a.98.98 0 0 1 .837-.276c.47.07.802.48.968.925a2.501 2.501 0 1 0 3.214-3.214c-.446-.166-.855-.497-.925-.968a.979.979 0 0 1 .276-.837l1.61-1.61a2.404 2.404 0 0 1 3.408 0l1.568 1.568c.23.23.556.339.877.29.493-.074.84-.504 1.02-.968a2.5 2.5 0 1 1 3.237 3.237c-.464.18-.894.527-.967 1.02z" />
-                </svg>
-              </Link>
+              <>
+                <Link to="/dashboard" className="site-header-nav-link">
+                  Openings
+                </Link>
+                <Link to="/puzzles" className="site-header-nav-link">
+                  Puzzles
+                </Link>
+              </>
             )}
             {!isLoggedIn ? (
               <>

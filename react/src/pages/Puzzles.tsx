@@ -32,6 +32,8 @@ export const Puzzles = () => {
   const [feedback, setFeedback] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [solved, setSolved] = useState(0);
+  const [streak, setStreak] = useState(0);
+  const [bestStreak, setBestStreak] = useState(0);
   const { orientation, flip } = useBoardOrientation();
 
   const fenRef = useRef(fen);
@@ -83,10 +85,16 @@ export const Puzzles = () => {
         if (res.data.correct) {
           setFeedback("✅ Correct!");
           setSolved((n) => n + 1);
+          setStreak((n) => {
+            const next = n + 1;
+            setBestStreak((best) => Math.max(best, next));
+            return next;
+          });
           setTimeout(() => void loadNext(), 600);
         } else {
           setFeedback(`❌ ${res.data.reason || "Not quite — try again."}`);
           setFen(fenRef.current); // snap back to the puzzle position
+          setStreak(0);
         }
       } catch (err) {
         const e = err as AxiosError;
@@ -98,6 +106,12 @@ export const Puzzles = () => {
     },
     [puzzleId, isSubmitting, loadNext, navigate],
   );
+
+  const skip = useCallback(() => {
+    if (!puzzleId || isSubmitting) return;
+    setStreak(0);
+    void loadNext();
+  }, [puzzleId, isSubmitting, loadNext]);
 
   const solverColor = sideToMove(fen);
 
@@ -133,7 +147,12 @@ export const Puzzles = () => {
           <h1>Puzzles</h1>
           <div className="puzzles-meta">
             {rating != null && <span>Rating ~{rating}</span>}
-            <span>Solved this session: {solved}</span>
+            <span>Solved: {solved}</span>
+            <span className={streak > 0 ? "puzzles-streak is-active" : "puzzles-streak"}>
+              Streak: {streak}
+              {streak > 0 ? " 🔥" : ""}
+              {bestStreak > 0 ? ` · best ${bestStreak}` : ""}
+            </span>
           </div>
         </header>
 
@@ -159,6 +178,17 @@ export const Puzzles = () => {
         <p className="puzzles-feedback" role="status">
           {feedback || (puzzleId ? "Find the best move." : "")}
         </p>
+
+        {puzzleId && (
+          <button
+            type="button"
+            className="puzzles-skip"
+            onClick={skip}
+            disabled={isSubmitting}
+          >
+            Skip puzzle ›
+          </button>
+        )}
       </div>
     </main>
   );

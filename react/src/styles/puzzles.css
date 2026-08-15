@@ -36,3 +36,29 @@
   font-weight: 600;
   color: var(--text-h);
 }
+
+.puzzles-streak {
+  color: var(--text);
+}
+.puzzles-streak.is-active {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.puzzles-skip {
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: 4px 0;
+}
+.puzzles-skip:hover {
+  color: var(--accent);
+}
+.puzzles-skip:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

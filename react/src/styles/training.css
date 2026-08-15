@@ -255,3 +255,12 @@ html[data-theme="dark"] {
     grid-template-columns: 1fr;
   }
 }
+
+/* Cap the board so it doesn't push controls off-screen once the rail drops
+   below it (matches the Puzzles page's 480px cap). */
+@media (max-width: 900px) {
+  .training-board-wrap {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+}
