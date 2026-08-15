@@ -222,7 +222,9 @@ describe("Training Page", () => {
       mockTakeAutoplayOnce.mockReturnValue(true);
       render(<Training />);
       await waitFor(() => {
-        expect(mockSubmitMove).toHaveBeenCalledWith("e2e4", "start-fen");
+        expect(mockSubmitMove).toHaveBeenCalledWith("e2e4", "start-fen", {
+          silent: true,
+        });
       });
     });
 
@@ -232,7 +234,9 @@ describe("Training Page", () => {
 
       const { rerender } = render(<Training />);
       await waitFor(() => {
-        expect(mockSubmitMove).toHaveBeenCalledWith("e2e4", "start-fen");
+        expect(mockSubmitMove).toHaveBeenCalledWith("e2e4", "start-fen", {
+          silent: true,
+        });
       });
       mockSubmitMove.mockClear();
 

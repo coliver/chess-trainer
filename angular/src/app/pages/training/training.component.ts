@@ -284,7 +284,8 @@ export class TrainingComponent implements OnInit, OnDestroy {
       this.fen = applied.nextFen;
       this.appendTimelineFen(applied.nextFen);
     }
-    this.submitMove(uci, preFen);
+    // Opponent's reply, not the player's turn — don't show the "Correct!" banner for it.
+    this.submitMove(uci, preFen, { silent: true });
   }
 
   processMove(from: string, to: string): boolean {
@@ -313,8 +314,9 @@ export class TrainingComponent implements OnInit, OnDestroy {
     return pieceColorAt(this.fen, square) === 'w';
   }
 
-  private submitMove(uci: string, preFen: string): void {
+  private submitMove(uci: string, preFen: string, options: { silent?: boolean } = {}): void {
     if (!this.itemId) return;
+    const silent = options.silent ?? false;
     const prevItemId = this.itemId;
     this.isSubmitting = true;
 
@@ -323,7 +325,7 @@ export class TrainingComponent implements OnInit, OnDestroy {
         this.isSubmitting = false;
 
         if (data.correct) {
-          this.feedback = '✅ Correct!';
+          if (!silent) this.feedback = '✅ Correct!';
           this.blinkGreen(uci, 2);
 
           if (data.fenAfter) {

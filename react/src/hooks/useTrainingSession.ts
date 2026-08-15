@@ -115,8 +115,9 @@ export function useTrainingSession(
   };
 
   const submitMove = useCallback(
-    async (moveUci: string, preFen: string) => {
+    async (moveUci: string, preFen: string, options: { silent?: boolean } = {}) => {
       if (!id || itemId == null) return;
+      const silent = options.silent ?? false;
 
       if (!preFen) {
         // If you ever see this, callers are not passing fenRef.current correctly.
@@ -141,7 +142,7 @@ export function useTrainingSession(
         const data = response.data;
 
         if (data.correct) {
-          setFeedback("✅ Correct!");
+          if (!silent) setFeedback("✅ Correct!");
 
           const fenAfterNorm =
             data.fenAfter != null ? normalizeFen(data.fenAfter) : "";

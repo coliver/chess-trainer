@@ -189,7 +189,8 @@ export const Training = () => {
     if (applied) {
       appendTimelineFen(applied.nextFen);
     }
-    void submitMove(uci, fenRef.current);
+    // Opponent's reply, not the player's turn — don't show the "Correct!" banner for it.
+    void submitMove(uci, fenRef.current, { silent: true });
   }, [
     id,
     itemId,

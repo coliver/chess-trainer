@@ -161,6 +161,41 @@ describe("useTrainingSession", () => {
     expect(on401Navigate).not.toHaveBeenCalled();
   });
 
+  it("submitMove correct with { silent: true } does not show the '✅ Correct!' banner (not the player's turn — an autoplayed opponent reply)", async () => {
+    server.use(
+      http.get(`/api/training-sessions/${id}/next`, () => {
+        return HttpResponse.json({
+          itemId: "1",
+          fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+          openingEco: "C20",
+          openingName: "Opening A",
+          correctMoveUci: "e7e5",
+        });
+      }),
+      http.post(`/api/training-sessions/${id}/responses`, () => {
+        return HttpResponse.json({
+          correct: true,
+          sessionCompleted: false,
+          fenAfter:
+            "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+        });
+      }),
+    );
+
+    const { result } = renderHook(() =>
+      useTrainingSession(id, on401Navigate, { timeoutMs: 10 }),
+    );
+
+    await waitFor(() => expect(result.current.itemId).toBe("1"));
+    const prevFen = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1";
+
+    await act(async () => {
+      await result.current.submitMove("e7e5", prevFen, { silent: true });
+    });
+
+    expect(result.current.feedback).toBe("");
+  });
+
   it("submitMove correct: clears existing advance timeout before scheduling a new one", async () => {
     const nextTimeoutCallbacks: Array<() => Promise<void>> = [];
     const clearTimeoutFn = vi.fn();
