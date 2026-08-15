@@ -473,10 +473,10 @@
 
 /* ===== Board preview (selected line) + ply stepper ===== */
 .boardPreview {
-  display: grid;
-  place-items: center;
-  justify-content: center;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 .boardPreview-board {
   margin: 0 auto;
