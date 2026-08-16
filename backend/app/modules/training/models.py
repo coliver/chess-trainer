@@ -35,6 +35,13 @@ class TrainingItem(Base):
     fen: Mapped[str] = mapped_column(String, nullable=False)
     correct_move_uci: Mapped[str] = mapped_column(String, nullable=False)
 
+    # Set only for items whose session spans multiple openings (review
+    # sessions from due positions); a single-opening session's items rely on
+    # TrainingSession.opening_eco/opening_name instead. See
+    # create_session_from_due and submit_training_response.
+    opening_eco: Mapped[str | None] = mapped_column(String, nullable=True)
+    opening_name: Mapped[str | None] = mapped_column(String, nullable=True)
+
     session = relationship("TrainingSession", back_populates="items")
     responses = relationship(
         "TrainingResponse", back_populates="item", cascade="all, delete-orphan"

@@ -168,6 +168,8 @@ def create_session_from_due(db: Session, user_id: int, limit: int = 10) -> Train
                 order_index=idx,
                 fen=row.fen,
                 correct_move_uci=row.correct_move_uci,
+                opening_eco=row.opening_eco,
+                opening_name=row.opening_name,
             )
         )
 
@@ -279,14 +281,18 @@ def submit_training_response(
 
     try:
         with db.begin_nested():
+            # Prefer the item's own opening (set for review sessions, which span
+            # many openings) over the session's, which is only meaningful for a
+            # single-opening session; a synthetic session (opening_name="Review")
+            # must never overwrite a position's real opening attribution.
             record_attempt(
                 db,
                 user_id=current_user_id,
                 fen=current.fen,
                 correct_move_uci=current.correct_move_uci,
                 is_correct=result.correct,
-                opening_eco=session.opening_eco,
-                opening_name=session.opening_name,
+                opening_eco=current.opening_eco or session.opening_eco,
+                opening_name=current.opening_name or session.opening_name,
             )
     except Exception:
         logger.exception(

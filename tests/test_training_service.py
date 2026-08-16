@@ -1,4 +1,5 @@
 # tests/test_training_service.py
+import contextlib
 from types import SimpleNamespace
 
 import chess
@@ -637,6 +638,191 @@ def test_create_training_session_can_apply_except_hits_500():
 
     assert exc.value.status_code == 500
     assert "Opening dataset inconsistent" in exc.value.detail
+
+
+def test_submit_training_response_uses_item_opening_over_session_for_record_attempt(
+    monkeypatch,
+):
+    # A "from due" review session spans many openings, so it's tagged with the
+    # synthetic opening_name="Review" (see create_session_from_due). If that
+    # synthetic label ever reached record_attempt, it would permanently overwrite
+    # the position's real opening_name in progress rows. The item itself carries
+    # the real per-position opening, and that must win.
+    session = SimpleNamespace(
+        id=123, status="active", user_id=1, opening_eco=None, opening_name="Review"
+    )
+    current = SimpleNamespace(
+        id=10,
+        fen="fen_before",
+        correct_move_uci="e2e4",
+        session_id=123,
+        opening_eco="B20",
+        opening_name="Sicilian Defense",
+    )
+    all_items = [current]
+
+    db = FakeDB(
+        get_return=session,
+        scalars_all=all_items,
+        training_item_count_side_effects=[len(all_items), len(all_items)],
+        training_response_first_side_effects=[None, object()],
+    )
+    monkeypatch.setattr(db, "begin_nested", lambda: contextlib.nullcontext(), raising=False)
+
+    def get_side_effect(model_cls, pk):
+        if model_cls is TrainingSession:
+            return session
+        if model_cls is TrainingItem and pk == 10:
+            return current
+        return None
+
+    monkeypatch.setattr(db, "get", get_side_effect)
+    monkeypatch.setattr(service, "get_current_training_item", lambda *a, **k: current)
+
+    result = SimpleNamespace(
+        correct=True, reason="Correct", fen_after="fen_after", http_status=200, error_message=None
+    )
+    monkeypatch.setattr(service, "validate_and_apply", lambda *a, **k: result)
+
+    record_attempt_calls = []
+
+    def fake_record_attempt(db, **kwargs):
+        record_attempt_calls.append(kwargs)
+
+    monkeypatch.setattr(service, "record_attempt", fake_record_attempt)
+
+    service.submit_training_response(
+        db=db, session_id=123, item_id=10, move_uci="e2e4", current_user_id=1
+    )
+
+    assert len(record_attempt_calls) == 1
+    assert record_attempt_calls[0]["opening_eco"] == "B20"
+    assert record_attempt_calls[0]["opening_name"] == "Sicilian Defense"
+
+
+def test_submit_training_response_falls_back_to_session_opening_when_item_has_none(
+    monkeypatch,
+):
+    # A normal single-opening session's items don't carry their own opening_eco/
+    # opening_name (only review-session items do), so record_attempt must fall
+    # back to the session's opening in that case.
+    session = SimpleNamespace(
+        id=123, status="active", user_id=1, opening_eco="C50", opening_name="Italian Game"
+    )
+    current = SimpleNamespace(
+        id=10,
+        fen="fen_before",
+        correct_move_uci="e2e4",
+        session_id=123,
+        opening_eco=None,
+        opening_name=None,
+    )
+    all_items = [current]
+
+    db = FakeDB(
+        get_return=session,
+        scalars_all=all_items,
+        training_item_count_side_effects=[len(all_items), len(all_items)],
+        training_response_first_side_effects=[None, object()],
+    )
+    monkeypatch.setattr(db, "begin_nested", lambda: contextlib.nullcontext(), raising=False)
+
+    def get_side_effect(model_cls, pk):
+        if model_cls is TrainingSession:
+            return session
+        if model_cls is TrainingItem and pk == 10:
+            return current
+        return None
+
+    monkeypatch.setattr(db, "get", get_side_effect)
+    monkeypatch.setattr(service, "get_current_training_item", lambda *a, **k: current)
+
+    result = SimpleNamespace(
+        correct=True, reason="Correct", fen_after="fen_after", http_status=200, error_message=None
+    )
+    monkeypatch.setattr(service, "validate_and_apply", lambda *a, **k: result)
+
+    record_attempt_calls = []
+
+    def fake_record_attempt(db, **kwargs):
+        record_attempt_calls.append(kwargs)
+
+    monkeypatch.setattr(service, "record_attempt", fake_record_attempt)
+
+    service.submit_training_response(
+        db=db, session_id=123, item_id=10, move_uci="e2e4", current_user_id=1
+    )
+
+    assert len(record_attempt_calls) == 1
+    assert record_attempt_calls[0]["opening_eco"] == "C50"
+    assert record_attempt_calls[0]["opening_name"] == "Italian Game"
+
+
+# ---------------- create_session_from_due tests ----------------
+
+
+class FakeDBFromDue:
+    def __init__(self):
+        self.added = []
+        self.commit_calls = 0
+        self.refresh_calls = 0
+
+    def add(self, obj):
+        self.added.append(obj)
+
+    def flush(self):
+        for obj in self.added:
+            if isinstance(obj, TrainingSession) and getattr(obj, "id", None) is None:
+                obj.id = 1
+
+    def commit(self):
+        self.commit_calls += 1
+
+    def refresh(self, obj):
+        self.refresh_calls += 1
+
+
+def test_create_session_from_due_carries_each_items_own_opening(monkeypatch):
+    due_rows = [
+        SimpleNamespace(
+            fen="fen1",
+            correct_move_uci="e2e4",
+            opening_eco="B20",
+            opening_name="Sicilian Defense",
+        ),
+        SimpleNamespace(
+            fen="fen2",
+            correct_move_uci="d2d4",
+            opening_eco="D30",
+            opening_name="Queen's Gambit Declined",
+        ),
+    ]
+    monkeypatch.setattr(service, "get_due", lambda db, user_id: due_rows)
+
+    db = FakeDBFromDue()
+    session = service.create_session_from_due(db=db, user_id=1)
+
+    # The session itself spans many openings, so it stays untagged/synthetic...
+    assert session.opening_eco is None
+    assert session.opening_name == "Review"
+
+    # ...but each item keeps its own real opening, not the synthetic "Review" label.
+    items = [o for o in db.added if isinstance(o, TrainingItem)]
+    assert [i.opening_name for i in items] == [
+        "Sicilian Defense",
+        "Queen's Gambit Declined",
+    ]
+    assert [i.opening_eco for i in items] == ["B20", "D30"]
+
+
+def test_create_session_from_due_no_due_rows_raises_404(monkeypatch):
+    monkeypatch.setattr(service, "get_due", lambda db, user_id: [])
+
+    with pytest.raises(HTTPException) as exc:
+        service.create_session_from_due(db=FakeDBFromDue(), user_id=1)
+
+    assert exc.value.status_code == 404
+    assert exc.value.detail == "No positions due for review"
 
 
 def test_create_training_session_dataset_mismatch_hits_500(monkeypatch):

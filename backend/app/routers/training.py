@@ -122,8 +122,8 @@ def get_training_next(
         order_index=item.order_index,
         fen=item.fen,
         move_count_limit=None,
-        opening_eco=training_session.opening_eco,
-        opening_name=training_session.opening_name,
+        opening_eco=item.opening_eco or training_session.opening_eco,
+        opening_name=item.opening_name or training_session.opening_name,
         correct_move_uci=item.correct_move_uci,
     )
 

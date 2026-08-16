@@ -119,6 +119,8 @@ def test_get_training_next_success_maps_fields(client: any, monkeypatch: pytest.
         order_index = 2
         fen = "the-fen"
         correct_move_uci = "e2e4"
+        opening_eco = None
+        opening_name = None
 
     class FakeScalarResult:
         def all(self):
