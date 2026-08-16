@@ -186,90 +186,107 @@ export const Dashboard = () => {
   return (
     <main className="page">
       <div className="card">
-        <section className="progress-strip" aria-label="Training progress">
-          <div className="progress-stat">
-            <span className="progress-stat-value">
-              {summary?.positionsSeen ?? 0}
-            </span>
-            <span className="progress-stat-label">Positions trained</span>
-          </div>
-          <div className="progress-stat">
-            <span className="progress-stat-value">
-              {summary
-                ? `${Math.round(summary.overallAccuracy * 100)}%`
-                : "—"}
-            </span>
-            <span className="progress-stat-label">Accuracy</span>
-          </div>
-          <div className="progress-stat">
-            <span className="progress-stat-value">
-              {summary?.currentStreak ?? 0}
-              {(summary?.currentStreak ?? 0) > 0 ? " 🔥" : ""}
-            </span>
-            <span className="progress-stat-label">
-              Day streak{summary?.longestStreak ? ` · best ${summary.longestStreak}` : ""}
-            </span>
-          </div>
-          <div className="progress-stat progress-stat--mastery">
-            <span className="progress-stat-value">{summary?.mastered ?? 0}</span>
-            <span className="progress-stat-label">Mastered</span>
-            {summary && summary.positionsSeen > 0 && (
-              <div className="mastery-bar" aria-hidden="true">
-                <div
-                  className="mastery-bar-fill"
-                  style={{
-                    width: `${Math.min(
-                      100,
-                      Math.round((summary.mastered / summary.positionsSeen) * 100),
-                    )}%`,
-                  }}
-                />
+        <section className="progress-overview" aria-label="Your progress">
+          <div className="progress-group" aria-label="Training progress">
+            <h2 className="progress-group-label">Training</h2>
+            <div className="progress-group-row">
+              <div className="progress-stat">
+                <span className="progress-stat-value">
+                  {summary?.positionsSeen ?? 0}
+                </span>
+                <span className="progress-stat-label">Positions trained</span>
               </div>
-            )}
-          </div>
-          <div className="progress-stat">
-            <button
-              type="button"
-              className="progress-review-btn"
-              disabled={dueCount === 0}
-              onClick={startReviewSession}
-            >
-              Review due ({dueCount})
-            </button>
-          </div>
-          {weakSpots.length > 0 && (
-            <div className="progress-weak-spots">
-              <span className="progress-stat-label">Weak spots</span>
-              <ul>
-                {weakSpots.map((w) => (
-                  <li key={`${w.openingName ?? "Opening"}-${w.fen ?? ""}-${w.correctMoveUci ?? ""}`}>
-                    {w.openingName ?? "Opening"} — {w.correctCount}/{w.attempts}{" "}
-                    correct
-                  </li>
-                ))}
-              </ul>
+              <div className="progress-stat">
+                <span className="progress-stat-value">
+                  {summary
+                    ? `${Math.round(summary.overallAccuracy * 100)}%`
+                    : "—"}
+                </span>
+                <span className="progress-stat-label">Accuracy</span>
+              </div>
+              <div className="progress-stat">
+                <span className="progress-stat-value">
+                  {summary?.currentStreak ?? 0}
+                  {(summary?.currentStreak ?? 0) > 0 ? " 🔥" : ""}
+                </span>
+                <span className="progress-stat-label">
+                  Day streak{summary?.longestStreak ? ` · best ${summary.longestStreak}` : ""}
+                </span>
+              </div>
+              <div className="progress-stat progress-stat--mastery">
+                <span className="progress-stat-value">{summary?.mastered ?? 0}</span>
+                <span className="progress-stat-label">Mastered</span>
+                {summary && summary.positionsSeen > 0 && (
+                  <div className="mastery-bar" aria-hidden="true">
+                    <div
+                      className="mastery-bar-fill"
+                      style={{
+                        width: `${Math.min(
+                          100,
+                          Math.round((summary.mastered / summary.positionsSeen) * 100),
+                        )}%`,
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
+              <div className="progress-stat">
+                <button
+                  type="button"
+                  className="progress-review-btn"
+                  disabled={dueCount === 0}
+                  onClick={startReviewSession}
+                >
+                  Review due ({dueCount})
+                </button>
+              </div>
+              {weakSpots.length > 0 && (
+                <div className="progress-weak-spots">
+                  <span className="progress-stat-label">Weak spots</span>
+                  <ul>
+                    {weakSpots.map((w) => (
+                      <li key={`${w.openingName ?? "Opening"}-${w.fen ?? ""}-${w.correctMoveUci ?? ""}`}>
+                        {w.openingName ?? "Opening"} — {w.correctCount}/{w.attempts}{" "}
+                        correct
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
-          )}
-        </section>
+          </div>
 
-        <section className="progress-strip" aria-label="Puzzle progress">
-          <div className="progress-stat">
-            <span className="progress-stat-value">
-              {puzzleSummary?.puzzlesSeen ?? 0}
-            </span>
-            <span className="progress-stat-label">Puzzles solved</span>
-          </div>
-          <div className="progress-stat">
-            <span className="progress-stat-value">
-              {puzzleSummary
-                ? `${Math.round(puzzleSummary.overallAccuracy * 100)}%`
-                : "—"}
-            </span>
-            <span className="progress-stat-label">Accuracy</span>
-          </div>
-          <div className="progress-stat">
-            <span className="progress-stat-value">{puzzleSummary?.mastered ?? 0}</span>
-            <span className="progress-stat-label">Mastered</span>
+          <div className="progress-group progress-group--puzzles" aria-label="Puzzle progress">
+            <h2 className="progress-group-label">Puzzles</h2>
+            <div className="progress-group-row">
+              <div className="progress-stat">
+                <span className="progress-stat-value">
+                  {puzzleSummary?.puzzlesSeen ?? 0}
+                </span>
+                <span className="progress-stat-label">Puzzles solved</span>
+              </div>
+              <div className="progress-stat">
+                <span className="progress-stat-value">
+                  {puzzleSummary
+                    ? `${Math.round(puzzleSummary.overallAccuracy * 100)}%`
+                    : "—"}
+                </span>
+                <span className="progress-stat-label">Accuracy</span>
+              </div>
+              <div className="progress-stat">
+                <span className="progress-stat-value">{puzzleSummary?.mastered ?? 0}</span>
+                <span className="progress-stat-label">Mastered</span>
+              </div>
+              <div className="progress-stat">
+                <button
+                  type="button"
+                  className="progress-review-btn"
+                  onClick={() => navigate("/puzzles")}
+                >
+                  Practice puzzles
+                </button>
+              </div>
+            </div>
           </div>
         </section>
 

@@ -26,73 +26,86 @@ const SEARCH_PAGE = 60;
   template: `
     <main class="page">
       <div class="card">
-        <section class="progress-strip" aria-label="Training progress">
-          <div class="progress-stat">
-            <span class="progress-stat-value">{{ summary?.positionsSeen ?? 0 }}</span>
-            <span class="progress-stat-label">Positions trained</span>
-          </div>
-          <div class="progress-stat">
-            <span class="progress-stat-value">
-              {{ summary ? (summary.overallAccuracy * 100 | number: '1.0-0') + '%' : '—' }}
-            </span>
-            <span class="progress-stat-label">Accuracy</span>
-          </div>
-          <div class="progress-stat">
-            <span class="progress-stat-value">
-              {{ summary?.currentStreak ?? 0 }}{{ (summary?.currentStreak ?? 0) > 0 ? ' 🔥' : '' }}
-            </span>
-            <span class="progress-stat-label">
-              Day streak{{ summary?.longestStreak ? ' · best ' + summary!.longestStreak : '' }}
-            </span>
-          </div>
-          <div class="progress-stat progress-stat--mastery">
-            <span class="progress-stat-value">{{ summary?.mastered ?? 0 }}</span>
-            <span class="progress-stat-label">Mastered</span>
-            @if (summary && summary.positionsSeen > 0) {
-              <div class="mastery-bar" aria-hidden="true">
-                <div
-                  class="mastery-bar-fill"
-                  [style.width.%]="masteryPct"
-                ></div>
+        <section class="progress-overview" aria-label="Your progress">
+          <div class="progress-group" aria-label="Training progress">
+            <h2 class="progress-group-label">Training</h2>
+            <div class="progress-group-row">
+              <div class="progress-stat">
+                <span class="progress-stat-value">{{ summary?.positionsSeen ?? 0 }}</span>
+                <span class="progress-stat-label">Positions trained</span>
               </div>
-            }
-          </div>
-          <div class="progress-stat">
-            <button
-              type="button"
-              class="progress-review-btn"
-              [disabled]="dueCount === 0"
-              (click)="startReviewSession()"
-            >
-              Review due ({{ dueCount }})
-            </button>
-          </div>
-          @if (weakSpots.length > 0) {
-            <div class="progress-weak-spots">
-              <span class="progress-stat-label">Weak spots</span>
-              <ul>
-                @for (w of weakSpots; track (w.openingName ?? 'Opening') + (w.fen ?? '') + (w.correctMoveUci ?? '')) {
-                  <li>{{ w.openingName ?? 'Opening' }} — {{ w.correctCount }}/{{ w.attempts }} correct</li>
+              <div class="progress-stat">
+                <span class="progress-stat-value">
+                  {{ summary ? (summary.overallAccuracy * 100 | number: '1.0-0') + '%' : '—' }}
+                </span>
+                <span class="progress-stat-label">Accuracy</span>
+              </div>
+              <div class="progress-stat">
+                <span class="progress-stat-value">
+                  {{ summary?.currentStreak ?? 0 }}{{ (summary?.currentStreak ?? 0) > 0 ? ' 🔥' : '' }}
+                </span>
+                <span class="progress-stat-label">
+                  Day streak{{ summary?.longestStreak ? ' · best ' + summary!.longestStreak : '' }}
+                </span>
+              </div>
+              <div class="progress-stat progress-stat--mastery">
+                <span class="progress-stat-value">{{ summary?.mastered ?? 0 }}</span>
+                <span class="progress-stat-label">Mastered</span>
+                @if (summary && summary.positionsSeen > 0) {
+                  <div class="mastery-bar" aria-hidden="true">
+                    <div
+                      class="mastery-bar-fill"
+                      [style.width.%]="masteryPct"
+                    ></div>
+                  </div>
                 }
-              </ul>
+              </div>
+              <div class="progress-stat">
+                <button
+                  type="button"
+                  class="progress-review-btn"
+                  [disabled]="dueCount === 0"
+                  (click)="startReviewSession()"
+                >
+                  Review due ({{ dueCount }})
+                </button>
+              </div>
+              @if (weakSpots.length > 0) {
+                <div class="progress-weak-spots">
+                  <span class="progress-stat-label">Weak spots</span>
+                  <ul>
+                    @for (w of weakSpots; track (w.openingName ?? 'Opening') + (w.fen ?? '') + (w.correctMoveUci ?? '')) {
+                      <li>{{ w.openingName ?? 'Opening' }} — {{ w.correctCount }}/{{ w.attempts }} correct</li>
+                    }
+                  </ul>
+                </div>
+              }
             </div>
-          }
-        </section>
+          </div>
 
-        <section class="progress-strip" aria-label="Puzzle progress">
-          <div class="progress-stat">
-            <span class="progress-stat-value">{{ puzzleSummary?.puzzlesSeen ?? 0 }}</span>
-            <span class="progress-stat-label">Puzzles solved</span>
-          </div>
-          <div class="progress-stat">
-            <span class="progress-stat-value">
-              {{ puzzleSummary ? (puzzleSummary.overallAccuracy * 100 | number: '1.0-0') + '%' : '—' }}
-            </span>
-            <span class="progress-stat-label">Accuracy</span>
-          </div>
-          <div class="progress-stat">
-            <span class="progress-stat-value">{{ puzzleSummary?.mastered ?? 0 }}</span>
-            <span class="progress-stat-label">Mastered</span>
+          <div class="progress-group progress-group--puzzles" aria-label="Puzzle progress">
+            <h2 class="progress-group-label">Puzzles</h2>
+            <div class="progress-group-row">
+              <div class="progress-stat">
+                <span class="progress-stat-value">{{ puzzleSummary?.puzzlesSeen ?? 0 }}</span>
+                <span class="progress-stat-label">Puzzles solved</span>
+              </div>
+              <div class="progress-stat">
+                <span class="progress-stat-value">
+                  {{ puzzleSummary ? (puzzleSummary.overallAccuracy * 100 | number: '1.0-0') + '%' : '—' }}
+                </span>
+                <span class="progress-stat-label">Accuracy</span>
+              </div>
+              <div class="progress-stat">
+                <span class="progress-stat-value">{{ puzzleSummary?.mastered ?? 0 }}</span>
+                <span class="progress-stat-label">Mastered</span>
+              </div>
+              <div class="progress-stat">
+                <button type="button" class="progress-review-btn" (click)="goToPuzzles()">
+                  Practice puzzles
+                </button>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -269,6 +282,10 @@ export class DashboardComponent implements OnInit {
   get masteryPct(): number {
     if (!this.summary || this.summary.positionsSeen === 0) return 0;
     return Math.min(100, Math.round((this.summary.mastered / this.summary.positionsSeen) * 100));
+  }
+
+  goToPuzzles(): void {
+    this.router.navigate(['/puzzles']);
   }
 
   startReviewSession(): void {

@@ -166,6 +166,16 @@ describe('DashboardComponent', () => {
     expect(navigateSpy).toHaveBeenCalledWith(['/training', 7]);
   });
 
+  it('navigates to the puzzles page', () => {
+    const cmp = create();
+    flushInit(cmp);
+    const navigateSpy = spyOn(router, 'navigate');
+
+    cmp.goToPuzzles();
+
+    expect(navigateSpy).toHaveBeenCalledWith(['/puzzles']);
+  });
+
   it('resets the search page size when the query changes', () => {
     const cmp = create();
     flushInit(cmp);
