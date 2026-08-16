@@ -3,7 +3,11 @@ from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, ConfigDict
 from sqlalchemy.orm import Session
 
-from backend.app.modules.puzzles.service import get_next_puzzle, submit_puzzle_attempt
+from backend.app.modules.puzzles.service import (
+    get_next_puzzle,
+    get_puzzle_summary,
+    submit_puzzle_attempt,
+)
 from backend.app.modules.shared.db import get_db
 from backend.app.routers.auth import get_current_user
 from backend.app.utils import to_camel
@@ -33,6 +37,12 @@ class PuzzleAttemptResponse(CamelModel):
     correct: bool
     reason: str
     fen_after: str | None = None
+
+
+class PuzzleSummaryResponse(CamelModel):
+    puzzles_seen: int
+    overall_accuracy: float
+    mastered: int
 
 
 @router.get("/puzzles/next", response_model=PuzzleNextResponse)
@@ -74,3 +84,11 @@ def post_puzzle_attempt(
         reason=result.reason,
         fen_after=result.fen_after,
     )
+
+
+@router.get("/puzzles/summary", response_model=PuzzleSummaryResponse)
+def get_puzzles_summary(
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user),
+):
+    return PuzzleSummaryResponse(**get_puzzle_summary(db, current_user.id))

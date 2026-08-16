@@ -53,6 +53,11 @@ describe('DashboardComponent', () => {
     httpMock.expectOne('/api/progress/weak-spots').flush([
       { attempts: 4, correctCount: 1, incorrectCount: 3, openingName: 'Sicilian Defense' },
     ]);
+    httpMock.expectOne('/api/puzzles/summary').flush({
+      puzzlesSeen: 8,
+      overallAccuracy: 0.6,
+      mastered: 2,
+    });
   }
 
   it('loads openings, summary, due count, and weak spots on init', () => {
@@ -63,6 +68,7 @@ describe('DashboardComponent', () => {
     expect(cmp.summary?.positionsSeen).toBe(10);
     expect(cmp.dueCount).toBe(1);
     expect(cmp.weakSpots.length).toBe(1);
+    expect(cmp.puzzleSummary?.puzzlesSeen).toBe(8);
   });
 
   it('computes mastery percentage from the summary', () => {

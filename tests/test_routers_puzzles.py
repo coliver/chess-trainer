@@ -91,3 +91,19 @@ def test_post_puzzle_attempt_success_maps_fields(client, monkeypatch: pytest.Mon
         "reason": "correct move",
         "fenAfter": "after-fen",
     }
+
+
+def test_get_puzzles_summary_maps_fields(client, monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setattr(
+        puzzles_router,
+        "get_puzzle_summary",
+        lambda db, user_id: {"puzzles_seen": 4, "overall_accuracy": 0.75, "mastered": 1},
+    )
+
+    r = client.get("/puzzles/summary")
+    assert r.status_code == 200
+    assert r.json() == {
+        "puzzlesSeen": 4,
+        "overallAccuracy": 0.75,
+        "mastered": 1,
+    }

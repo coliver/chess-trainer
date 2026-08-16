@@ -261,6 +261,26 @@ describe("Dashboard", () => {
     expect(reviewBtn).toBeEnabled();
   });
 
+  it("renders puzzle progress stats when present", async () => {
+    (api.get as unknown as ReturnType<typeof vi.fn>).mockImplementation(
+      (url: string) => {
+        if (url === "/openings") return Promise.resolve({ data: openings });
+        if (url === "/puzzles/summary")
+          return Promise.resolve({
+            data: { puzzlesSeen: 12, overallAccuracy: 0.6, mastered: 4 },
+          });
+        return Promise.resolve({ data: null });
+      },
+    );
+
+    renderDashboard();
+
+    expect(await screen.findByText("Puzzles solved")).toBeInTheDocument();
+    expect(screen.getByText("12")).toBeInTheDocument();
+    expect(screen.getByText("60%")).toBeInTheDocument();
+    expect(screen.getByText("4")).toBeInTheDocument();
+  });
+
   it("startSession failure shows an alert", async () => {
     const alertSpy = vi.spyOn(window, "alert").mockImplementation(() => {});
     (api.post as unknown as ReturnType<typeof vi.fn>).mockRejectedValueOnce(

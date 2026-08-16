@@ -123,3 +123,19 @@ def submit_puzzle_attempt(db: Session, user_id: int, puzzle_id: str, move_uci: s
     db.commit()
 
     return result
+
+
+def get_puzzle_summary(db: Session, user_id: int) -> dict:
+    rows = list(db.scalars(select(PuzzleProgress).where(PuzzleProgress.user_id == user_id)).all())
+
+    puzzles_seen = len(rows)
+    total_attempts = sum(r.attempts for r in rows)
+    total_correct = sum(r.correct_count for r in rows)
+    overall_accuracy = (total_correct / total_attempts) if total_attempts else 0.0
+    mastered = sum(1 for r in rows if r.repetitions >= 2)
+
+    return {
+        "puzzles_seen": puzzles_seen,
+        "overall_accuracy": overall_accuracy,
+        "mastered": mastered,
+    }

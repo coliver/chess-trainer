@@ -43,6 +43,12 @@ type WeakSpot = {
   incorrectCount: number;
 };
 
+type PuzzleSummary = {
+  puzzlesSeen: number;
+  overallAccuracy: number;
+  mastered: number;
+};
+
 export const Dashboard = () => {
   const navigate = useNavigate();
 
@@ -56,6 +62,7 @@ export const Dashboard = () => {
   const [summary, setSummary] = useState<ProgressSummary | null>(null);
   const [dueCount, setDueCount] = useState(0);
   const [weakSpots, setWeakSpots] = useState<WeakSpot[]>([]);
+  const [puzzleSummary, setPuzzleSummary] = useState<PuzzleSummary | null>(null);
 
   useEffect(() => {
     api
@@ -82,6 +89,10 @@ export const Dashboard = () => {
       .get("/progress/weak-spots")
       .then((res) => setWeakSpots((res.data ?? []).slice(0, 5)))
       .catch((e) => console.error("Error loading weak spots:", e));
+    api
+      .get("/puzzles/summary")
+      .then((res) => setPuzzleSummary(res.data ?? null))
+      .catch((e) => console.error("Error loading puzzle summary:", e));
   }, []);
 
   const groups = useMemo(() => groupByBase(openings), [openings]);
@@ -239,6 +250,27 @@ export const Dashboard = () => {
               </ul>
             </div>
           )}
+        </section>
+
+        <section className="progress-strip" aria-label="Puzzle progress">
+          <div className="progress-stat">
+            <span className="progress-stat-value">
+              {puzzleSummary?.puzzlesSeen ?? 0}
+            </span>
+            <span className="progress-stat-label">Puzzles solved</span>
+          </div>
+          <div className="progress-stat">
+            <span className="progress-stat-value">
+              {puzzleSummary
+                ? `${Math.round(puzzleSummary.overallAccuracy * 100)}%`
+                : "—"}
+            </span>
+            <span className="progress-stat-label">Accuracy</span>
+          </div>
+          <div className="progress-stat">
+            <span className="progress-stat-value">{puzzleSummary?.mastered ?? 0}</span>
+            <span className="progress-stat-label">Mastered</span>
+          </div>
         </section>
 
         <section className="opening-browser">

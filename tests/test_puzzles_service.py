@@ -106,3 +106,40 @@ def test_get_next_puzzle_prefers_due_review_over_unseen(db, test_user):
 
     result = service.get_next_puzzle(db, test_user.id)
     assert result.puzzle_id == "p1"
+
+
+def test_get_puzzle_summary_no_puzzles_is_all_zero(db, test_user):
+    summary = service.get_puzzle_summary(db, test_user.id)
+    assert summary == {"puzzles_seen": 0, "overall_accuracy": 0.0, "mastered": 0}
+
+
+def test_get_puzzle_summary_aggregates_across_puzzles(db, test_user):
+    make_puzzle(db, id="p1")
+    make_puzzle(db, id="p2")
+
+    service.submit_puzzle_attempt(db, user_id=test_user.id, puzzle_id="p1", move_uci="e7e5")
+    service.submit_puzzle_attempt(db, user_id=test_user.id, puzzle_id="p2", move_uci="e7e6")
+
+    summary = service.get_puzzle_summary(db, test_user.id)
+
+    assert summary["puzzles_seen"] == 2
+    assert summary["overall_accuracy"] == 0.5
+    assert summary["mastered"] == 0
+
+
+def test_get_puzzle_summary_counts_mastered_puzzles(db, test_user):
+    make_puzzle(db, id="p1")
+
+    row = PuzzleProgress(
+        user_id=test_user.id,
+        puzzle_id="p1",
+        attempts=3,
+        correct_count=3,
+        incorrect_count=0,
+        repetitions=2,
+    )
+    db.add(row)
+    db.commit()
+
+    summary = service.get_puzzle_summary(db, test_user.id)
+    assert summary["mastered"] == 1

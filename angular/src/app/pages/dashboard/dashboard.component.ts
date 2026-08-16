@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Opening, OpeningsService } from '../../core/openings.service';
 import { TrainingService } from '../../core/training.service';
 import { ProgressService, ProgressSummary, WeakSpot } from '../../core/progress.service';
+import { PuzzlesService, PuzzleSummary } from '../../core/puzzles.service';
 import { baseNameOf, groupByBase, OpeningGroup, variationLabelOf } from '../../lib/group-openings';
 import { describeOpening } from '../../lib/opening-text';
 import { OpeningCardComponent } from './opening-card.component';
@@ -76,6 +77,23 @@ const SEARCH_PAGE = 60;
               </ul>
             </div>
           }
+        </section>
+
+        <section class="progress-strip" aria-label="Puzzle progress">
+          <div class="progress-stat">
+            <span class="progress-stat-value">{{ puzzleSummary?.puzzlesSeen ?? 0 }}</span>
+            <span class="progress-stat-label">Puzzles solved</span>
+          </div>
+          <div class="progress-stat">
+            <span class="progress-stat-value">
+              {{ puzzleSummary ? (puzzleSummary.overallAccuracy * 100 | number: '1.0-0') + '%' : '—' }}
+            </span>
+            <span class="progress-stat-label">Accuracy</span>
+          </div>
+          <div class="progress-stat">
+            <span class="progress-stat-value">{{ puzzleSummary?.mastered ?? 0 }}</span>
+            <span class="progress-stat-label">Mastered</span>
+          </div>
         </section>
 
         <section class="opening-browser">
@@ -201,6 +219,7 @@ export class DashboardComponent implements OnInit {
   private readonly openingsService = inject(OpeningsService);
   private readonly trainingService = inject(TrainingService);
   private readonly progressService = inject(ProgressService);
+  private readonly puzzlesService = inject(PuzzlesService);
   private readonly router = inject(Router);
 
   openings: Opening[] = [];
@@ -213,6 +232,7 @@ export class DashboardComponent implements OnInit {
   summary: ProgressSummary | null = null;
   dueCount = 0;
   weakSpots: WeakSpot[] = [];
+  puzzleSummary: PuzzleSummary | null = null;
 
   readonly baseNameOf = baseNameOf;
   readonly describeOpening = describeOpening;
@@ -239,6 +259,10 @@ export class DashboardComponent implements OnInit {
     this.progressService.getWeakSpots().subscribe({
       next: (data) => (this.weakSpots = (data ?? []).slice(0, 5)),
       error: (e) => console.error('Error loading weak spots:', e),
+    });
+    this.puzzlesService.getSummary().subscribe({
+      next: (data) => (this.puzzleSummary = data ?? null),
+      error: (e) => console.error('Error loading puzzle summary:', e),
     });
   }
 

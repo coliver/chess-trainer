@@ -18,6 +18,13 @@ export interface PuzzleAttemptResult {
   fenAfter?: string | null;
 }
 
+/** Shape of `GET /api/puzzles/summary`. */
+export interface PuzzleSummary {
+  puzzlesSeen: number;
+  overallAccuracy: number;
+  mastered: number;
+}
+
 /**
  * Thin API layer for puzzles — the Angular counterpart of the request half
  * of react's Puzzles.tsx (`api.get('/puzzles/next')` /
@@ -35,5 +42,9 @@ export class PuzzlesService {
     return this.http.post<PuzzleAttemptResult>(`/api/puzzles/${puzzleId}/attempts`, {
       moveUci,
     });
+  }
+
+  getSummary(): Observable<PuzzleSummary> {
+    return this.http.get<PuzzleSummary>('/api/puzzles/summary');
   }
 }
