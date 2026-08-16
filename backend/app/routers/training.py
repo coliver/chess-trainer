@@ -30,6 +30,7 @@ from backend.app.routers.auth import get_current_user
 class TrainingSessionCreateRequest(CamelModel):
     opening_name: str | None = None
     opening_eco: str | None = None
+    player_color: str = "w"
 
 
 class TrainingSessionCreateResponse(CamelModel):
@@ -45,6 +46,7 @@ class TrainingNextResponse(CamelModel):
     opening_eco: str | None = None
     opening_name: str | None = None
     correct_move_uci: str
+    player_color: str
 
 
 class MoveResponseRequest(CamelModel):
@@ -81,6 +83,7 @@ def post_training_sessions(
         current_user.id,
         opening_eco=req.opening_eco,
         opening_name=req.opening_name,
+        player_color=req.player_color,
     )
     return {"id": session.id}
 
@@ -125,6 +128,7 @@ def get_training_next(
         opening_eco=item.opening_eco or training_session.opening_eco,
         opening_name=item.opening_name or training_session.opening_name,
         correct_move_uci=item.correct_move_uci,
+        player_color=training_session.player_color,
     )
 
 

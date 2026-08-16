@@ -25,7 +25,7 @@ class PuzzleNextResponse(CamelModel):
     fen: str
     rating: int
     themes: str | None = None
-    correct_move_uci: str  # TODO Remove me. DEBUG ONLY. (matches training/next)
+    correct_move_uci: str  # used client-side for move validation (matches training/next)
     last_move_uci: str  # opponent's setup move that produced `fen`, for board highlighting
 
 

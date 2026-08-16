@@ -38,6 +38,7 @@ export const Training = () => {
     setFen,
     itemId,
     correctMoveUci,
+    playerColor,
     openingLabel,
     feedback,
     isSubmitting,
@@ -49,7 +50,7 @@ export const Training = () => {
 
   const [moveInput, setMoveInput] = useState("");
   const [showAnimations] = useState(true);
-  const { orientation, flip } = useBoardOrientation();
+  const { orientation, flip, setOrientation } = useBoardOrientation();
   const [hintLevel, setHintLevel] = useState(-1);
   const [lastMove, setLastMove] = useState<{ from: string; to: string } | null>(
     null,
@@ -112,8 +113,16 @@ export const Training = () => {
     }
   }, [feedback, blinkGreen]);
 
-  const isWhiteToMove = useMemo(() => sideToMove(fen) === "w", [fen]);
+  const isPlayerToMove = useMemo(
+    () => sideToMove(fen) === playerColor,
+    [fen, playerColor],
+  );
   const atLatest = isAtLatest(timeline);
+
+  // Auto-orient the board to the trainee's color whenever a new session/item loads.
+  useEffect(() => {
+    setOrientation(playerColor === "b" ? "black" : "white");
+  }, [playerColor, setOrientation]);
 
   const appendTimelineFen = useCallback((nextFen: string) => {
     setTimeline((t) => {
@@ -179,7 +188,7 @@ export const Training = () => {
     if (tl.index !== tl.fens.length - 1) {
       return;
     }
-    if (sideToMove(fenRef.current) !== "b") {
+    if (sideToMove(fenRef.current) === playerColor) {
       return;
     }
 
@@ -202,6 +211,7 @@ export const Training = () => {
     itemId,
     fen,
     correctMoveUci,
+    playerColor,
     takeAutoplayOnce,
     submitMove,
     isSubmitting,
@@ -280,10 +290,10 @@ export const Training = () => {
       if (!atLatest) return false;
       if (isSubmittingRef.current || isAdvancingRef.current || !itemId)
         return false;
-      if (!isWhiteToMove) return false;
-      return pieceColorAt(fenRef.current, square) === "w";
+      if (!isPlayerToMove) return false;
+      return pieceColorAt(fenRef.current, square) === playerColor;
     },
-    [atLatest, itemId, isWhiteToMove],
+    [atLatest, itemId, isPlayerToMove, playerColor],
   );
 
   // Legal targets for the picked-up piece — rendered as dots by cm-chessboard.
@@ -321,7 +331,8 @@ export const Training = () => {
     isSessionCompleted,
     feedback: shownFeedback,
     hintLevel,
-    isWhiteToMove,
+    isPlayerToMove,
+    playerColor,
   });
   const { kind: statusKind, icon: statusIcon, message: statusMsg, sub: statusSub } = status;
 
@@ -338,7 +349,7 @@ export const Training = () => {
                 orientation={orientation}
                 interactive
                 animated={showAnimations}
-                moveColor="white"
+                moveColor={playerColor === "b" ? "black" : "white"}
                 markers={markers}
                 getLegalMoves={getLegalMoves}
                 onMoveStart={canPickUp}
@@ -346,9 +357,9 @@ export const Training = () => {
               />
             </div>
             <div className="board-under">
-              <span className={`turn${isWhiteToMove ? "" : " black"}`}>
+              <span className={`turn${sideToMove(fen) === "w" ? "" : " black"}`}>
                 <span className="turn-dot" aria-hidden="true" />
-                {isWhiteToMove ? "White to move" : "Black to move"}
+                {sideToMove(fen) === "w" ? "White to move" : "Black to move"}
               </span>
               <div className="board-toolbar">
                 <FlipBoardButton className="icon-btn" onClick={flip} />

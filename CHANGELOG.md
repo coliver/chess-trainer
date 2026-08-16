@@ -1,3 +1,7 @@
+## 2026-08-16
+- feat(training): support playing the Black side — training sessions now carry a `player_color` (migration `0008`), and both frontends generalize the White-only `isWhiteToMove`/`canPickUp`/autoplay/orientation logic in `Training.tsx`/`training.component.ts` (and `chess-core`'s `deriveStatus`) into a color-aware version driven by the session; add a White/Black picker to both dashboards
+- fix(angular): auto-orient the puzzles board to the solver's color on load, matching React's existing behavior
+
 ## 2026-08-15
 - fix(auth): harden email verification token model — add `email_verified_at` timestamp and an `email_verify_token_version` counter so resending a verification email invalidates the prior link instead of leaving it valid until its own 24h expiry
 - feat(auth): gate email verification behind `EMAIL_VERIFICATION_REQUIRED` (off by default in prod while SES is sandboxed) — register auto-verifies and login skips the check when disabled

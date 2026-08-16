@@ -86,6 +86,7 @@ describe("Training Page", () => {
     setFen: vi.fn(),
     itemId: 10,
     correctMoveUci: "e2e4",
+    playerColor: "w" as const,
     openingLabel: "Test Opening",
     feedback: "",
     isSubmitting: false,
@@ -288,6 +289,53 @@ describe("Training Page", () => {
 
       render(<Training />);
       expect(mockSubmitMove).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("Black-side play", () => {
+    it("autoplays White's move when the trainee is playing Black", async () => {
+      useTrainingSession.mockReturnValue({
+        ...baseHookValue,
+        playerColor: "b",
+      });
+      mockTakeAutoplayOnce.mockReturnValue(true);
+      // sideToMoveMock defaults to "w" — the opponent's (White's) turn.
+      render(<Training />);
+      await waitFor(() => {
+        expect(mockSubmitMove).toHaveBeenCalledWith("e2e4", "start-fen", {
+          silent: true,
+        });
+      });
+    });
+
+    it("allows picking up black pieces (not white) when playing Black", async () => {
+      useTrainingSession.mockReturnValue({
+        ...baseHookValue,
+        playerColor: "b",
+      });
+      sideToMoveMock.mockReturnValue("b");
+      pieceColorAtMock.mockImplementation((_fen: string, sq: string) =>
+        sq === "e7" ? "b" : "w",
+      );
+
+      render(<Training />);
+      await waitFor(() => expect(capturedProps).toBeDefined());
+
+      expect(capturedProps.onMoveStart?.("e7")).toBe(true);
+      expect(capturedProps.onMoveStart?.("e2")).toBe(false);
+    });
+
+    it("passes moveColor=black to the board when playing Black", async () => {
+      useTrainingSession.mockReturnValue({
+        ...baseHookValue,
+        playerColor: "b",
+      });
+
+      render(<Training />);
+      await waitFor(() => expect(capturedProps).toBeDefined());
+
+      expect(capturedProps.moveColor).toBe("black");
+      expect(capturedProps.orientation).toBe("black");
     });
   });
 

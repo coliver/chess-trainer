@@ -220,6 +220,35 @@ describe('TrainingComponent', () => {
     expect(cmp.fen).not.toBe(BLACK_TO_MOVE_FEN);
   }));
 
+  it('supports playing as Black: auto-orients, auto-plays White, and gates pickup to black pieces', fakeAsync(() => {
+    configure();
+    const cmp = create();
+    cmp.ngOnInit();
+    httpMock.expectOne('/api/training-sessions/sess1/next').flush({
+      fen: WHITE_TO_MOVE_FEN,
+      itemId: 'item1',
+      openingName: 'Italian Game',
+      openingEco: 'C50',
+      correctMoveUci: 'e2e4',
+      playerColor: 'b',
+    });
+
+    expect(cmp.playerColor).toBe('b');
+    expect(cmp.orientation).toBe('black');
+
+    // White's move auto-plays (opponent), and is submitted silently.
+    httpMock
+      .expectOne('/api/training-sessions/sess1/responses')
+      .flush({ correct: true, sessionCompleted: true });
+    tick(0);
+
+    expect(cmp.fen).not.toBe(WHITE_TO_MOVE_FEN);
+
+    // Trainee may only pick up black pieces once it is Black's turn.
+    expect(cmp.onMoveStart('e7')).toBe(true);
+    expect(cmp.onMoveStart('e2')).toBe(false);
+  }));
+
   it('submits a typed move via onTextSubmit when at the latest ply', () => {
     configure();
     const cmp = create();

@@ -34,4 +34,10 @@ describe("deriveNextItem", () => {
     expect(deriveNextItem({ correctMoveUci: "e2e4" }).correctMoveUci).toBe("e2e4");
     expect(deriveNextItem({}).correctMoveUci).toBe("");
   });
+
+  it("defaults playerColor to white unless the backend says black", () => {
+    expect(deriveNextItem({}).playerColor).toBe("w");
+    expect(deriveNextItem({ playerColor: "b" }).playerColor).toBe("b");
+    expect(deriveNextItem({ playerColor: "w" }).playerColor).toBe("w");
+  });
 });

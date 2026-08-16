@@ -6,7 +6,7 @@ describe("deriveStatus", () => {
     isSessionCompleted: false,
     feedback: "",
     hintLevel: -1,
-    isWhiteToMove: true,
+    isPlayerToMove: true,
   };
 
   it("shows the session-complete banner regardless of other state", () => {
@@ -43,8 +43,14 @@ describe("deriveStatus", () => {
 
   it("defaults to 'your move', varying sub by side to move", () => {
     expect(deriveStatus(base).sub).toBe("Play the correct move for White.");
-    expect(deriveStatus({ ...base, isWhiteToMove: false }).sub).toBe(
+    expect(deriveStatus({ ...base, isPlayerToMove: false }).sub).toBe(
       "Waiting for the reply…",
+    );
+  });
+
+  it("shows the trainee's actual color when playing Black", () => {
+    expect(deriveStatus({ ...base, playerColor: "b" }).sub).toBe(
+      "Play the correct move for Black.",
     );
   });
 });

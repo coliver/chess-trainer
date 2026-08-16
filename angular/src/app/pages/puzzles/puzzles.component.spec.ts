@@ -64,6 +64,20 @@ describe('PuzzlesComponent', () => {
     expect(cmp.feedback).toContain('No puzzles due');
   });
 
+  it('auto-orients the board to the solver color when a puzzle loads', () => {
+    const cmp = create();
+    cmp.ngOnInit();
+
+    httpMock.expectOne('/api/puzzles/next').flush({
+      puzzleId: 'p1',
+      fen: 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1',
+      correctMoveUci: 'e7e5',
+      rating: 1200,
+    });
+
+    expect(cmp.orientation).toBe('black');
+  });
+
   it('flips the board orientation', () => {
     const cmp = create();
     expect(cmp.orientation).toBe('white');

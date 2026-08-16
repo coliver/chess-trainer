@@ -475,6 +475,32 @@
   margin-bottom: 12px;
   color: var(--accent);
 }
+.ob-color-toggle {
+  display: flex;
+  gap: 6px;
+  margin-top: 12px;
+}
+.ob-color-btn {
+  flex: 1 1 auto;
+  height: 34px;
+  padding: 0 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-h);
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.ob-color-btn:hover {
+  border-color: var(--accent-border);
+}
+.ob-color-btn.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
 .ob-start {
   margin-top: auto;
 }

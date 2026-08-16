@@ -551,6 +551,7 @@ def test_create_training_session_success_creates_session_and_items():
     assert session.status == "active"
     assert session.opening_eco == "A00"
     assert session.opening_name == "Test Opening"
+    assert session.player_color == "w"
     assert db.commit_calls == 1
     assert db.refresh_calls == 1
 
@@ -564,6 +565,52 @@ def test_create_training_session_success_creates_session_and_items():
     assert added_items[0].correct_move_uci == "e2e4"
     assert added_items[0].session_id == session.id
     assert added_items[0].fen == start_board.fen()
+
+
+def test_create_training_session_player_color_black_is_stored():
+    moves = "e2e4 e7e5 g1f3"
+
+    opening = SimpleNamespace(
+        eco="A00",
+        name="Test Opening",
+        uci_moves=moves,
+        epd=None,
+    )
+
+    db = FakeDBCreateSession(opening=opening)
+
+    session = service.create_training_session(
+        db=db,
+        user_id=1,
+        opening_eco="A00",
+        opening_name="Amar Opening",
+        player_color="b",
+    )
+
+    assert session.player_color == "b"
+
+
+def test_create_training_session_player_color_invalid_defaults_to_white():
+    moves = "e2e4 e7e5 g1f3"
+
+    opening = SimpleNamespace(
+        eco="A00",
+        name="Test Opening",
+        uci_moves=moves,
+        epd=None,
+    )
+
+    db = FakeDBCreateSession(opening=opening)
+
+    session = service.create_training_session(
+        db=db,
+        user_id=1,
+        opening_eco="A00",
+        opening_name="Amar Opening",
+        player_color="not-a-color",
+    )
+
+    assert session.player_color == "w"
 
 
 def test_create_training_session_no_opening_returns_404():

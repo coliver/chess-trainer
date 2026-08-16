@@ -121,8 +121,30 @@ describe("Dashboard", () => {
       expect(api.post).toHaveBeenCalledWith("/training-sessions", {
         openingEco: "B20",
         openingName: "Sicilian Defense",
+        playerColor: "w",
       });
       expect(mockNavigate).toHaveBeenCalledWith("/training/123");
+    });
+  });
+
+  it("starts a session with playerColor 'b' after choosing Play as Black", async () => {
+    const user = userEvent.setup();
+    renderDashboard();
+
+    await user.click(await screen.findByText("Sicilian Defense"));
+    const start = await screen.findByRole("button", {
+      name: /Start\s+Sicilian Defense/i,
+    });
+
+    await user.click(screen.getByRole("radio", { name: /play as black/i }));
+    await user.click(start);
+
+    await waitFor(() => {
+      expect(api.post).toHaveBeenCalledWith("/training-sessions", {
+        openingEco: "B20",
+        openingName: "Sicilian Defense",
+        playerColor: "b",
+      });
     });
   });
 
@@ -161,6 +183,7 @@ describe("Dashboard", () => {
       expect(api.post).toHaveBeenCalledWith("/training-sessions", {
         openingEco: "B90",
         openingName: "Sicilian Defense: Najdorf Variation",
+        playerColor: "w",
       });
     });
   });

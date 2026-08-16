@@ -56,6 +56,7 @@ export const Dashboard = () => {
   const [query, setQuery] = useState("");
   const [activeBase, setActiveBase] = useState<string | null>(null);
   const [selected, setSelected] = useState<Opening | null>(null);
+  const [playerColor, setPlayerColor] = useState<"w" | "b">("w");
   const [sortAZ, setSortAZ] = useState(false);
   const [searchLimit, setSearchLimit] = useState(SEARCH_PAGE);
 
@@ -129,11 +130,16 @@ export const Dashboard = () => {
         ? `${activeGroup.count} variations in the full library`
         : `${groups.length} openings · pick one to train`;
 
-  const startSession = async (openingEco: string, openingName: string) => {
+  const startSession = async (
+    openingEco: string,
+    openingName: string,
+    playerColor: "w" | "b",
+  ) => {
     try {
       const response = await api.post("/training-sessions", {
         openingEco,
         openingName,
+        playerColor,
       });
       navigate(`/training/${response.data.id}`);
     } catch (error) {
@@ -395,12 +401,38 @@ export const Dashboard = () => {
                 </div>
               )}
 
+              <div
+                className="ob-color-toggle"
+                role="radiogroup"
+                aria-label="Play as"
+              >
+                <button
+                  type="button"
+                  role="radio"
+                  aria-checked={playerColor === "w"}
+                  className={`ob-color-btn${playerColor === "w" ? " selected" : ""}`}
+                  onClick={() => setPlayerColor("w")}
+                >
+                  Play as White
+                </button>
+                <button
+                  type="button"
+                  role="radio"
+                  aria-checked={playerColor === "b"}
+                  className={`ob-color-btn${playerColor === "b" ? " selected" : ""}`}
+                  onClick={() => setPlayerColor("b")}
+                >
+                  Play as Black
+                </button>
+              </div>
+
               <Button
                 className="tile-action ob-start"
                 type="button"
                 disabled={!selected}
                 onClick={() =>
-                  selected && startSession(selected.eco, selected.name)
+                  selected &&
+                  startSession(selected.eco, selected.name, playerColor)
                 }
               >
                 {startLabel}

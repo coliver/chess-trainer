@@ -44,7 +44,7 @@ const BLINK_CYCLE_MS = 420; // fadeIn(120) + hold(120) + fadeOut(180), matches r
                 [position]="fen"
                 [orientation]="orientation"
                 [interactive]="true"
-                moveColor="white"
+                [moveColor]="playerColor === 'b' ? 'black' : 'white'"
                 [markers]="markers"
                 [getLegalMoves]="getLegalMoves"
                 [onMoveStart]="onMoveStart"
@@ -147,6 +147,7 @@ export class TrainingComponent implements OnInit, OnDestroy {
   fen = START_FEN;
   itemId: string | null = null;
   correctMoveUci = '';
+  playerColor: 'w' | 'b' = 'w';
   openingLabel = '';
   feedback = '';
   moveInput = '';
@@ -170,6 +171,10 @@ export class TrainingComponent implements OnInit, OnDestroy {
 
   get isWhiteToMove(): boolean {
     return sideToMove(this.fen) === 'w';
+  }
+
+  get isPlayerToMove(): boolean {
+    return sideToMove(this.fen) === this.playerColor;
   }
 
   get atLatest(): boolean {
@@ -197,7 +202,8 @@ export class TrainingComponent implements OnInit, OnDestroy {
       isSessionCompleted: this.isSessionCompleted,
       feedback: this.feedback,
       hintLevel: this.hintLevel,
-      isWhiteToMove: this.isWhiteToMove,
+      isPlayerToMove: this.isPlayerToMove,
+      playerColor: this.playerColor,
     });
   }
 
@@ -247,6 +253,8 @@ export class TrainingComponent implements OnInit, OnDestroy {
     this.fen = item.fen;
     this.openingLabel = item.openingLabel;
     this.correctMoveUci = item.correctMoveUci;
+    this.playerColor = item.playerColor;
+    this.orientation = item.playerColor === 'b' ? 'black' : 'white';
     this.hintLevel = -1;
     this.updateMarkers();
   }
@@ -274,7 +282,7 @@ export class TrainingComponent implements OnInit, OnDestroy {
     if (!this.itemId || this.isSubmitting || this.isAdvancing) return;
     if (!this.correctMoveUci) return;
     if (this.autoplayedItemId === this.itemId) return;
-    if (sideToMove(this.fen) !== 'b') return;
+    if (sideToMove(this.fen) === this.playerColor) return;
 
     this.autoplayedItemId = this.itemId;
     const uci = this.correctMoveUci;
@@ -310,8 +318,8 @@ export class TrainingComponent implements OnInit, OnDestroy {
   private canPickUp(square: string): boolean {
     if (!this.atLatest) return false;
     if (this.isSubmitting || this.isAdvancing || !this.itemId) return false;
-    if (!this.isWhiteToMove) return false;
-    return pieceColorAt(this.fen, square) === 'w';
+    if (!this.isPlayerToMove) return false;
+    return pieceColorAt(this.fen, square) === this.playerColor;
   }
 
   private submitMove(uci: string, preFen: string, options: { silent?: boolean } = {}): void {
@@ -353,6 +361,8 @@ export class TrainingComponent implements OnInit, OnDestroy {
                   this.fen = next.fen;
                   this.openingLabel = next.openingLabel;
                   this.correctMoveUci = next.correctMoveUci;
+                  this.playerColor = next.playerColor;
+                  this.orientation = next.playerColor === 'b' ? 'black' : 'white';
                 } else {
                   this.applyItem(next);
                   this.feedback = '';

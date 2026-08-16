@@ -13,6 +13,7 @@ export type NextItemResponse = {
   openingName?: string | null;
   openingEco?: string | null;
   correctMoveUci?: string;
+  playerColor?: "w" | "b" | null;
   [k: string]: unknown;
 };
 
@@ -22,6 +23,7 @@ export type TrainingItem = {
   itemId: string | null;
   openingLabel: string;
   correctMoveUci: string;
+  playerColor: "w" | "b";
 };
 
 /** Parse a raw `next` response into a normalized TrainingItem. */
@@ -36,5 +38,6 @@ export function deriveNextItem(data: NextItemResponse): TrainingItem {
       ? `${data.openingEco ?? ""} ${data.openingName}`.trim()
       : "Opening: (unknown)",
     correctMoveUci: (data.correctMoveUci ?? "") as string,
+    playerColor: data.playerColor === "b" ? "b" : "w",
   };
 }

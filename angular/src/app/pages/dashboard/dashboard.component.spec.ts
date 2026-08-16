@@ -137,9 +137,25 @@ describe('DashboardComponent', () => {
     const navigateSpy = spyOn(router, 'navigate');
 
     cmp.startSession('B90', 'Sicilian Defense');
-    httpMock.expectOne('/api/training-sessions').flush({ id: 42 });
+    const req = httpMock.expectOne('/api/training-sessions');
+    expect(req.request.body.playerColor).toBe('w');
+    req.flush({ id: 42 });
 
     expect(navigateSpy).toHaveBeenCalledWith(['/training', 42]);
+  });
+
+  it('starts a training session as Black after toggling playerColor', () => {
+    const cmp = create();
+    flushInit(cmp);
+    const navigateSpy = spyOn(router, 'navigate');
+
+    cmp.playerColor = 'b';
+    cmp.startSession('B90', 'Sicilian Defense');
+    const req = httpMock.expectOne('/api/training-sessions');
+    expect(req.request.body.playerColor).toBe('b');
+    req.flush({ id: 43 });
+
+    expect(navigateSpy).toHaveBeenCalledWith(['/training', 43]);
   });
 
   it('alerts and does not navigate when starting a session fails', () => {

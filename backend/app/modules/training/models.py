@@ -15,6 +15,7 @@ class TrainingSession(Base):
 
     opening_eco: Mapped[str | None] = mapped_column(String, nullable=True)
     opening_name: Mapped[str | None] = mapped_column(String, nullable=True)
+    player_color: Mapped[str] = mapped_column(String(1), nullable=False, default="w")
 
     items = relationship("TrainingItem", back_populates="session", cascade="all, delete-orphan")
 

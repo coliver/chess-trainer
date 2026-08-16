@@ -46,6 +46,26 @@ describe("useTrainingSession", () => {
     expect(result.current.feedback).toBe("");
   });
 
+  it("defaults playerColor to white, and passes through 'b' from the backend", async () => {
+    server.use(
+      http.get(`/api/training-sessions/${id}/next`, () => {
+        return HttpResponse.json({
+          itemId: "3",
+          fen: "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1",
+          openingEco: "C20",
+          openingName: "Test Opening",
+          correctMoveUci: "e7e5",
+          playerColor: "b",
+        });
+      }),
+    );
+
+    const { result } = renderHook(() => useTrainingSession(id, on401Navigate));
+
+    await waitFor(() => expect(result.current.itemId).toBe("3"));
+    expect(result.current.playerColor).toBe("b");
+  });
+
   it("normalizeFen falls back to START_FEN for null/empty", () => {
     const { result } = renderHook(() =>
       useTrainingSession(undefined, on401Navigate),

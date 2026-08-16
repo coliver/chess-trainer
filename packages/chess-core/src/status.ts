@@ -16,9 +16,10 @@ export function deriveStatus(params: {
   isSessionCompleted: boolean;
   feedback: string;
   hintLevel: number;
-  isWhiteToMove: boolean;
+  isPlayerToMove: boolean;
+  playerColor?: "w" | "b";
 }): StatusInfo {
-  const { isSessionCompleted, feedback, hintLevel, isWhiteToMove } = params;
+  const { isSessionCompleted, feedback, hintLevel, isPlayerToMove, playerColor = "w" } = params;
 
   if (isSessionCompleted) {
     return {
@@ -64,7 +65,9 @@ export function deriveStatus(params: {
     kind: "your",
     icon: "♔",
     message: "Your move",
-    sub: isWhiteToMove ? "Play the correct move for White." : "Waiting for the reply…",
+    sub: isPlayerToMove
+      ? `Play the correct move for ${playerColor === "b" ? "Black" : "White"}.`
+      : "Waiting for the reply…",
   };
 }
 

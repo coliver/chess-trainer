@@ -123,6 +123,7 @@ export class PuzzlesComponent implements OnInit {
         this.fen = data.fen;
         this.correctMoveUci = data.correctMoveUci;
         this.rating = data.rating;
+        this.orientation = sideToMove(data.fen) === 'b' ? 'black' : 'white';
       },
       error: (err: { status?: number }) => {
         if (err?.status === 401) {

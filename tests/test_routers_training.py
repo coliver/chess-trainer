@@ -34,7 +34,7 @@ def test_post_training_sessions_returns_id(client: any, monkeypatch: pytest.Monk
     monkeypatch.setattr(
         training_router,
         "create_training_session",
-        lambda db, user_id, opening_eco=None, opening_name=None: FakeSession(),
+        lambda db, user_id, opening_eco=None, opening_name=None, player_color="w": FakeSession(),
     )
 
     r = client.post("/training-sessions", json={})
@@ -78,6 +78,7 @@ def test_get_training_next_404_when_no_current_item(client: any, monkeypatch: py
         user_id = 1
         opening_eco = "C20"
         opening_name = "Test Opening"
+        player_color = "w"
 
     class FakeScalarResult:
         def all(self):
@@ -112,6 +113,7 @@ def test_get_training_next_success_maps_fields(client: any, monkeypatch: pytest.
         user_id = 1
         opening_eco = "C20"
         opening_name = "Test Opening"
+        player_color = "b"
 
     class FakeItem:
         id = 55
@@ -156,7 +158,8 @@ def test_get_training_next_success_maps_fields(client: any, monkeypatch: pytest.
         "moveCountLimit": None,
         "openingEco": "C20",
         "openingName": "Test Opening",
-        "correctMoveUci": "e2e4",  # TODO Remove me. DEBUG ONLY.
+        "correctMoveUci": "e2e4",
+        "playerColor": "b",
     }
 
 

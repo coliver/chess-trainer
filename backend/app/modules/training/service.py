@@ -34,7 +34,12 @@ class SubmitResult:
 
 
 def create_training_session(
-    db: Session, user_id: int, opening_eco: str, opening_name: str, batch_size: int = 1
+    db: Session,
+    user_id: int,
+    opening_eco: str,
+    opening_name: str,
+    batch_size: int = 1,
+    player_color: str = "w",
 ) -> TrainingSession:
     if opening_name and opening_eco:
         opening = db.execute(
@@ -110,6 +115,7 @@ def create_training_session(
         opening_eco=opening.eco,
         opening_name=opening.name,
         user_id=user_id,
+        player_color="b" if player_color == "b" else "w",
     )
     db.add(session)
     db.flush()

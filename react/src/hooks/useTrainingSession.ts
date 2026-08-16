@@ -14,6 +14,7 @@ export type NextItem = {
   nextItemId: string | null;
   nextOpeningLabel: string;
   nextCorrectMoveUci: string;
+  nextPlayerColor: "w" | "b";
 };
 
 type TrainingSessionDeps = {
@@ -34,6 +35,7 @@ export function useTrainingSession(
   const [itemId, setItemId] = useState<string | null>(null);
   const [fen, setFen] = useState(START_FEN);
   const [correctMoveUci, setCorrectMoveUci] = useState("");
+  const [playerColor, setPlayerColor] = useState<"w" | "b">("w");
   const [feedback, setFeedback] = useState("");
   const [openingLabel, setOpeningLabel] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -71,6 +73,7 @@ export function useTrainingSession(
       nextItemId: derived.itemId,
       nextOpeningLabel: derived.openingLabel,
       nextCorrectMoveUci: derived.correctMoveUci,
+      nextPlayerColor: derived.playerColor,
     };
   }, [id]);
 
@@ -79,6 +82,7 @@ export function useTrainingSession(
     setFen(next.nextFen);
     setOpeningLabel(next.nextOpeningLabel);
     setCorrectMoveUci(next.nextCorrectMoveUci);
+    setPlayerColor(next.nextPlayerColor);
   }, []);
 
   // Load initial item
@@ -182,6 +186,7 @@ export function useTrainingSession(
                 setFen(next.nextFen);
                 setOpeningLabel(next.nextOpeningLabel);
                 setCorrectMoveUci(next.nextCorrectMoveUci);
+                setPlayerColor(next.nextPlayerColor);
               } else {
                 applyNextItemState(next);
                 setFeedback("");
@@ -252,6 +257,7 @@ export function useTrainingSession(
     setFen,
     itemId,
     correctMoveUci,
+    playerColor,
     feedback,
     openingLabel,
     isSubmitting,

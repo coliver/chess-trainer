@@ -213,6 +213,29 @@ const SEARCH_PAGE = 60;
                 </div>
               }
 
+              <div class="ob-color-toggle" role="radiogroup" aria-label="Play as">
+                <button
+                  type="button"
+                  role="radio"
+                  [attr.aria-checked]="playerColor === 'w'"
+                  class="ob-color-btn"
+                  [class.selected]="playerColor === 'w'"
+                  (click)="playerColor = 'w'"
+                >
+                  Play as White
+                </button>
+                <button
+                  type="button"
+                  role="radio"
+                  [attr.aria-checked]="playerColor === 'b'"
+                  class="ob-color-btn"
+                  [class.selected]="playerColor === 'b'"
+                  (click)="playerColor = 'b'"
+                >
+                  Play as Black
+                </button>
+              </div>
+
               <button
                 type="button"
                 class="btn tile-action ob-start"
@@ -239,6 +262,7 @@ export class DashboardComponent implements OnInit {
   query = '';
   activeBase: string | null = null;
   selected: Opening | null = null;
+  playerColor: 'w' | 'b' = 'w';
   sortAZ = false;
   searchLimit = SEARCH_PAGE;
 
@@ -379,7 +403,7 @@ export class DashboardComponent implements OnInit {
   }
 
   startSession(openingEco: string, openingName: string): void {
-    this.trainingService.start(openingEco, openingName).subscribe({
+    this.trainingService.start(openingEco, openingName, this.playerColor).subscribe({
       next: (res) => this.router.navigate(['/training', res.id]),
       error: (err) => {
         console.error('Error starting session:', err);

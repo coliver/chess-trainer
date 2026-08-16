@@ -20,16 +20,28 @@ describe('TrainingService', () => {
 
   afterEach(() => httpMock.verify());
 
-  it('POSTs to start a session for an opening', () => {
+  it('POSTs to start a session for an opening, defaulting playerColor to white', () => {
     let result: unknown;
     service.start('B90', 'Sicilian Defense').subscribe((r) => (result = r));
 
     const req = httpMock.expectOne('/api/training-sessions');
     expect(req.request.method).toBe('POST');
-    expect(req.request.body).toEqual({ openingEco: 'B90', openingName: 'Sicilian Defense' });
+    expect(req.request.body).toEqual({
+      openingEco: 'B90',
+      openingName: 'Sicilian Defense',
+      playerColor: 'w',
+    });
     req.flush({ id: 42 });
 
     expect(result).toEqual({ id: 42 });
+  });
+
+  it('POSTs the chosen playerColor when starting a session as Black', () => {
+    service.start('B90', 'Sicilian Defense', 'b').subscribe();
+
+    const req = httpMock.expectOne('/api/training-sessions');
+    expect(req.request.body.playerColor).toBe('b');
+    req.flush({ id: 42 });
   });
 
   it('POSTs to start a session from due positions', () => {
@@ -63,6 +75,7 @@ describe('TrainingService', () => {
       itemId: 'item-1',
       openingLabel: 'B20 Sicilian Defense',
       correctMoveUci: 'g1f3',
+      playerColor: 'w',
     });
   });
 
