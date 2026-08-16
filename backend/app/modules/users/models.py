@@ -1,6 +1,6 @@
 import datetime
 
-from sqlalchemy import Boolean, DateTime, String, func
+from sqlalchemy import Boolean, DateTime, Integer, String, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from backend.app.modules.shared.db import Base
@@ -18,6 +18,10 @@ class User(Base):
 
     is_active: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
     email_verified: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
+    email_verified_at: Mapped["datetime.datetime | None"] = mapped_column(
+        DateTime, nullable=True, default=None
+    )
+    email_verify_token_version: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime, nullable=False, server_default=func.now()

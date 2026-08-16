@@ -143,6 +143,8 @@ def test_register_schedules_verification_email(jwt_env, monkeypatch):
     payload = jwt.decode(sent["token"], os.environ["JWT_SECRET"], algorithms=["HS256"])
     assert payload["type"] == "email_verify"
     assert payload["sub"] == str(db.users[0].id)
+    assert payload["ver"] == 0
+    assert db.users[0].email_verify_token_version == 0
 
 
 def test_register_duplicate_email_409(jwt_env):

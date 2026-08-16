@@ -60,13 +60,17 @@ def register(req: RegisterRequest, background_tasks: BackgroundTasks, db=Depends
         password_hash=hash_password(req.password),
         is_active=True,
         email_verified=not verification_required,
+        email_verified_at=None if verification_required else datetime.now(timezone.utc),
+        email_verify_token_version=0,
     )
     db.add(user)
     db.commit()
     db.refresh(user)
     if verification_required:
         background_tasks.add_task(
-            send_verification_email, user.email, create_email_verification_token(user.id)
+            send_verification_email,
+            user.email,
+            create_email_verification_token(user.id, user.email_verify_token_version),
         )
     return {"id": user.id, "email": user.email, "username": user.username}
 
@@ -151,7 +155,7 @@ def create_refresh_token(user_id: int) -> str:
     return jwt.encode(payload, _jwt_secret(), algorithm=_jwt_algorithm())
 
 
-def create_email_verification_token(user_id: int) -> str:
+def create_email_verification_token(user_id: int, version: int) -> str:
     now = datetime.now(timezone.utc)
     exp_hours = int(os.getenv("EMAIL_VERIFY_EXPIRES_HOURS", "24"))
     exp = now + timedelta(hours=exp_hours)
@@ -159,6 +163,7 @@ def create_email_verification_token(user_id: int) -> str:
     payload: dict[str, Any] = {
         "sub": str(user_id),
         "type": "email_verify",
+        "ver": version,
         "iat": int(now.timestamp()),
         "exp": int(exp.timestamp()),
     }
@@ -238,6 +243,7 @@ def verify_email(token: str, db=Depends(get_db)):
         if payload.get("type") != "email_verify":
             raise HTTPException(status_code=400, detail="Invalid or expired token")
         user_id = int(payload.get("sub"))
+        token_version = payload.get("ver")
     except jwt.PyJWTError:
         raise HTTPException(status_code=400, detail="Invalid or expired token")
 
@@ -245,8 +251,12 @@ def verify_email(token: str, db=Depends(get_db)):
     if not user:
         raise HTTPException(status_code=400, detail="Invalid or expired token")
 
+    if token_version is None or int(token_version) != user.email_verify_token_version:
+        raise HTTPException(status_code=400, detail="Invalid or expired token")
+
     if not user.email_verified:
         user.email_verified = True
+        user.email_verified_at = datetime.now(timezone.utc)
         db.commit()
 
     return {"email": user.email, "verified": True}
@@ -271,8 +281,12 @@ def resend_verification(
         user = db.query(User).filter(User.username == req.username).first()
 
     if user and not user.email_verified:
+        user.email_verify_token_version += 1
+        db.commit()
         background_tasks.add_task(
-            send_verification_email, user.email, create_email_verification_token(user.id)
+            send_verification_email,
+            user.email,
+            create_email_verification_token(user.id, user.email_verify_token_version),
         )
 
     return {
