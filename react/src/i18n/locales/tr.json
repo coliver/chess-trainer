@@ -143,5 +143,14 @@
       "errorSubtitle": "Bu doğrulama bağlantısı geçersiz veya süresi dolmuş.",
       "returnToLogin": "Girişe dön"
     }
+  },
+  "email": {
+    "verify": {
+      "subject": "Knight School e-postanızı doğrulayın",
+      "heading": "Knight School'a hoş geldiniz!",
+      "instructions": "Lütfen aşağıdaki bağlantıyı ziyaret ederek e-posta adresinizi doğrulayın:",
+      "instructionsHtml": "Lütfen aşağıdaki bağlantıya tıklayarak e-posta adresinizi doğrulayın:",
+      "expires": "Bu bağlantının süresi 24 saat içinde dolacaktır."
+    }
   }
 }

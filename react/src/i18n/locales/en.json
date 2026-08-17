@@ -143,5 +143,14 @@
       "errorSubtitle": "This verification link is invalid or expired.",
       "returnToLogin": "Return to Login"
     }
+  },
+  "email": {
+    "verify": {
+      "subject": "Verify your Knight School email",
+      "heading": "Welcome to Knight School!",
+      "instructions": "Please verify your email address by visiting the link below:",
+      "instructionsHtml": "Please verify your email address by clicking the link below:",
+      "expires": "This link expires in 24 hours."
+    }
   }
 }

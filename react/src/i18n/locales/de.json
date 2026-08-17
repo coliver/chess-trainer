@@ -143,5 +143,14 @@
       "errorSubtitle": "Dieser Bestätigungslink ist ungültig oder abgelaufen.",
       "returnToLogin": "Zur Anmeldung zurück"
     }
+  },
+  "email": {
+    "verify": {
+      "subject": "Bestätige deine Knight-School-E-Mail",
+      "heading": "Willkommen bei Knight School!",
+      "instructions": "Bitte bestätige deine E-Mail-Adresse über den unten stehenden Link:",
+      "instructionsHtml": "Bitte bestätige deine E-Mail-Adresse, indem du auf den unten stehenden Link klickst:",
+      "expires": "Dieser Link läuft in 24 Stunden ab."
+    }
   }
 }

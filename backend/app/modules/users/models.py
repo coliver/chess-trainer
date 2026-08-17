@@ -22,6 +22,7 @@ class User(Base):
         DateTime, nullable=True, default=None
     )
     email_verify_token_version: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    language: Mapped[str] = mapped_column(String(20), nullable=False, default="en")
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime, nullable=False, server_default=func.now()

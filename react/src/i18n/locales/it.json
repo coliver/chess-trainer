@@ -143,5 +143,14 @@
       "errorSubtitle": "Questo link di verifica non è valido o è scaduto.",
       "returnToLogin": "Torna all’accesso"
     }
+  },
+  "email": {
+    "verify": {
+      "subject": "Verifica la tua email di Knight School",
+      "heading": "Benvenuto in Knight School!",
+      "instructions": "Verifica il tuo indirizzo email visitando il link qui sotto:",
+      "instructionsHtml": "Verifica il tuo indirizzo email cliccando sul link qui sotto:",
+      "expires": "Questo link scade tra 24 ore."
+    }
   }
 }

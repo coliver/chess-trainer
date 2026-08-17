@@ -143,5 +143,14 @@
       "errorSubtitle": "Este enlace de verificación no es válido o ha expirado.",
       "returnToLogin": "Volver a iniciar sesión"
     }
+  },
+  "email": {
+    "verify": {
+      "subject": "Verifica tu correo de Knight School",
+      "heading": "¡Bienvenido a Knight School!",
+      "instructions": "Verifica tu dirección de correo electrónico visitando el siguiente enlace:",
+      "instructionsHtml": "Verifica tu dirección de correo electrónico haciendo clic en el siguiente enlace:",
+      "expires": "Este enlace caduca en 24 horas."
+    }
   }
 }

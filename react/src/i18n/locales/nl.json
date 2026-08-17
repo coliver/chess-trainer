@@ -143,5 +143,14 @@
       "errorSubtitle": "Deze verificatielink is ongeldig of verlopen.",
       "returnToLogin": "Terug naar Inloggen"
     }
+  },
+  "email": {
+    "verify": {
+      "subject": "Bevestig je Knight School-e-mail",
+      "heading": "Welkom bij Knight School!",
+      "instructions": "Bevestig je e-mailadres door de onderstaande link te bezoeken:",
+      "instructionsHtml": "Bevestig je e-mailadres door op de onderstaande link te klikken:",
+      "expires": "Deze link verloopt over 24 uur."
+    }
   }
 }

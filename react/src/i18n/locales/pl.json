@@ -143,5 +143,14 @@
       "errorSubtitle": "Ten link weryfikacyjny jest nieprawidłowy lub wygasł.",
       "returnToLogin": "Wróć do logowania"
     }
+  },
+  "email": {
+    "verify": {
+      "subject": "Potwierdź swój e-mail w Knight School",
+      "heading": "Witamy w Knight School!",
+      "instructions": "Potwierdź swój adres e-mail, odwiedzając poniższy link:",
+      "instructionsHtml": "Potwierdź swój adres e-mail, klikając poniższy link:",
+      "expires": "Ten link wygasa za 24 godziny."
+    }
   }
 }

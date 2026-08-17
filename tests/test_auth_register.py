@@ -127,7 +127,7 @@ def test_register_schedules_verification_email(jwt_env, monkeypatch):
     monkeypatch.setattr(
         auth_mod,
         "send_verification_email",
-        lambda email, token: sent.update(email=email, token=token),
+        lambda email, token, language: sent.update(email=email, token=token, language=language),
     )
 
     db = FakeDB(users=[])
@@ -140,11 +140,30 @@ def test_register_schedules_verification_email(jwt_env, monkeypatch):
         task.func(*task.args, **task.kwargs)
 
     assert sent["email"] == "a@example.com"
+    assert sent["language"] == "en"
     payload = jwt.decode(sent["token"], os.environ["JWT_SECRET"], algorithms=["HS256"])
     assert payload["type"] == "email_verify"
     assert payload["sub"] == str(db.users[0].id)
     assert payload["ver"] == 0
     assert db.users[0].email_verify_token_version == 0
+
+
+def test_register_stores_requested_language_when_supported(jwt_env):
+    db = FakeDB(users=[])
+    req = RegisterRequest(email="a@example.com", username="alice", password="pw123", language="de")
+    register(req, background_tasks=BackgroundTasks(), db=db)
+
+    assert db.users[0].language == "de"
+
+
+def test_register_defaults_to_english_for_unsupported_language(jwt_env):
+    db = FakeDB(users=[])
+    req = RegisterRequest(
+        email="a@example.com", username="alice", password="pw123", language="not-a-locale"
+    )
+    register(req, background_tasks=BackgroundTasks(), db=db)
+
+    assert db.users[0].language == "en"
 
 
 def test_register_duplicate_email_409(jwt_env):

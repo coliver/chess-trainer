@@ -96,7 +96,7 @@
   height: 40px;
   border-radius: 12px;
   border: 1px solid transparent;
-  background: rgba(125, 44, 88, 0.12);
+  background: var(--social-bg);
   color: var(--text-h);
   cursor: pointer;
   transition: border-color 0.15s, background 0.15s, transform 0.05s;

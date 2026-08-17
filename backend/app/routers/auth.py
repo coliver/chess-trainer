@@ -10,7 +10,7 @@ import jwt
 from fastapi import APIRouter, BackgroundTasks, Depends, Header, HTTPException
 from pydantic import BaseModel, EmailStr, constr
 
-from backend.app.modules.email.sender import send_verification_email
+from backend.app.modules.email.sender import send_verification_email, supported_languages
 from backend.app.modules.shared.db import get_db
 from backend.app.modules.users.models import User
 
@@ -21,6 +21,7 @@ class RegisterRequest(BaseModel):
     email: EmailStr
     username: constr(min_length=1, strip_whitespace=True)
     password: constr(min_length=1)
+    language: str | None = None
 
 
 def hash_password(password: str) -> str:
@@ -54,6 +55,7 @@ def register(req: RegisterRequest, background_tasks: BackgroundTasks, db=Depends
         raise HTTPException(status_code=409, detail="Email or username already exists")
 
     verification_required = _email_verification_required()
+    language = req.language if req.language in supported_languages() else "en"
     user = User(
         email=req.email,
         username=req.username,
@@ -62,6 +64,7 @@ def register(req: RegisterRequest, background_tasks: BackgroundTasks, db=Depends
         email_verified=not verification_required,
         email_verified_at=None if verification_required else datetime.now(timezone.utc),
         email_verify_token_version=0,
+        language=language,
     )
     db.add(user)
     db.commit()
@@ -71,6 +74,7 @@ def register(req: RegisterRequest, background_tasks: BackgroundTasks, db=Depends
             send_verification_email,
             user.email,
             create_email_verification_token(user.id, user.email_verify_token_version),
+            user.language,
         )
     return {"id": user.id, "email": user.email, "username": user.username}
 
@@ -287,6 +291,7 @@ def resend_verification(
             send_verification_email,
             user.email,
             create_email_verification_token(user.id, user.email_verify_token_version),
+            user.language,
         )
 
     return {

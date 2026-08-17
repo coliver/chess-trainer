@@ -5,7 +5,7 @@ import axios from "axios";
 import api from "../api";
 
 export default function Register() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -19,7 +19,7 @@ export default function Register() {
     setSubmitting(true);
 
     try {
-      await api.post("/auth/register", { email, username, password });
+      await api.post("/auth/register", { email, username, password, language: i18n.language });
       setSuccess(true);
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {

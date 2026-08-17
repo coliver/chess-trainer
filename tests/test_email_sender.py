@@ -43,3 +43,47 @@ def test_send_verification_email_swallows_smtp_errors(monkeypatch):
 
     with patch("backend.app.modules.email.sender.smtplib.SMTP", mock_smtp_cls):
         sender.send_verification_email("user@example.com", "sometoken")  # must not raise
+
+
+def test_send_verification_email_uses_requested_language(monkeypatch):
+    monkeypatch.setenv("SMTP_HOST", "smtp.example.com")
+
+    mock_conn = MagicMock()
+    mock_smtp_cls = MagicMock()
+    mock_smtp_cls.return_value.__enter__.return_value = mock_conn
+
+    with patch("backend.app.modules.email.sender.smtplib.SMTP", mock_smtp_cls):
+        sender.send_verification_email("user@example.com", "sometoken", "de")
+
+    sent_msg = mock_conn.send_message.call_args[0][0]
+    assert sent_msg["Subject"] == "Bestätige deine Knight-School-E-Mail"
+
+    part = sent_msg.get_payload(0)
+    body = part.get_payload(decode=True).decode(part.get_content_charset() or "utf-8")
+
+    assert "Willkommen bei Knight School!" in body
+
+
+def test_send_verification_email_falls_back_to_english_for_unknown_language(monkeypatch):
+    monkeypatch.setenv("SMTP_HOST", "smtp.example.com")
+
+    mock_conn = MagicMock()
+    mock_smtp_cls = MagicMock()
+    mock_smtp_cls.return_value.__enter__.return_value = mock_conn
+
+    with patch("backend.app.modules.email.sender.smtplib.SMTP", mock_smtp_cls):
+        sender.send_verification_email("user@example.com", "sometoken", "xx-not-a-locale")
+
+    sent_msg = mock_conn.send_message.call_args[0][0]
+    assert sent_msg["Subject"] == "Verify your Knight School email"
+
+
+def test_verify_email_strings_skips_untranslated_todo_placeholders():
+    sender._load_translations.cache_clear()
+    strings = sender._verify_email_strings("en")  # en has no [TODO ..] placeholders
+    assert not any(v.startswith("[TODO") for v in strings.values())
+
+
+def test_supported_languages_includes_known_locales():
+    languages = sender.supported_languages()
+    assert {"en", "de", "es", "fr"}.issubset(languages)
