@@ -1,0 +1,1002 @@
+[
+  {
+    "eco": "A06",
+    "name": "Zukertort Opening: Old Indian Attack",
+    "description": "White establishes a kingside fianchetto with g3 and Bg2, meeting Black's Indian setup with a solid positional structure."
+  },
+  {
+    "eco": "A06",
+    "name": "Zukertort Opening: Pachman Gambit",
+    "description": "White sacrifices a pawn early to accelerate development and seize central control before Black can consolidate."
+  },
+  {
+    "eco": "A06",
+    "name": "Zukertort Opening: Regina-Nu Gambit",
+    "description": "White offers a pawn sacrifice to open lines and exploit piece activity in the resulting sharp position."
+  },
+  {
+    "eco": "A06",
+    "name": "Zukertort Opening: Reversed Mexican Defense",
+    "description": "White transposes into structures reminiscent of the Mexican Defense by employing Zukertort's flexible move order."
+  },
+  {
+    "eco": "A06",
+    "name": "Zukertort Opening: Santasiere's Folly",
+    "description": "White launches an ambitious but dubious queen sortie, overlooking Black's tactical opportunities in the ensuing complications."
+  },
+  {
+    "eco": "A06",
+    "name": "Zukertort Opening: Tennison Gambit",
+    "description": "After 1.Nf3 f5, White plays h3 and advances pawns on the kingside with g4 and f4, sacrificing material for attacking chances."
+  },
+  {
+    "eco": "A06",
+    "name": "Zukertort Opening: Tennison Gambit, Brigg's Trap",
+    "description": "White executes a tactical trap within the Tennison, luring Black into a forced sequence that wins material or delivers checkmate."
+  },
+  {
+    "eco": "A06",
+    "name": "Zukertort Opening: The Potato",
+    "description": "White constructs an unusual kingside-oriented setup with g3 and Bg2, supported by modest central presence and patient piece placement."
+  },
+  {
+    "eco": "A07",
+    "name": "Hungarian Opening: Wiedenhagen-Beta Gambit",
+    "description": "White sacrifices a pawn from the Hungarian Opening structure to accelerate piece development and activate kingside attacking prospects."
+  },
+  {
+    "eco": "A07",
+    "name": "King's Indian Attack: Double Fianchetto",
+    "description": "White fianchettoes both flanks with g3, Bg2, b3, and Bb2, controlling the long diagonal and central squares from a distance."
+  },
+  {
+    "eco": "A07",
+    "name": "King's Indian Attack: Keres Variation",
+    "description": "A precise move order popularized by Paul Keres within the King's Indian Attack, emphasizing controlled piece coordination and positional pressure."
+  },
+  {
+    "eco": "A07",
+    "name": "King's Indian Attack: Omega-Delta Gambit",
+    "description": "White sacrifices a flank pawn to disrupt Black's setup and create tactical opportunities within the King's Indian Attack framework."
+  },
+  {
+    "eco": "A07",
+    "name": "King's Indian Attack: Pachman System",
+    "description": "Pachman's systematic approach to the King's Indian Attack, balancing kingside fianchetto with flexible central piece placement and long-range control."
+  },
+  {
+    "eco": "A07",
+    "name": "King's Indian Attack: Sicilian Variation",
+    "description": "White deploys the King's Indian Attack setup against Black's Sicilian structure, combining kingside fianchetto with pressure along the long diagonal."
+  },
+  {
+    "eco": "A07",
+    "name": "King's Indian Attack: Yugoslav Variation",
+    "description": "Yugoslav players' pragmatic response to the King's Indian Attack, aiming to exploit weaknesses in White's fianchetto with active piece play."
+  },
+  {
+    "eco": "A08",
+    "name": "King's Indian Attack: French Variation",
+    "description": "White directs the King's Indian Attack against Black's French Defense setup, applying pressure from the kingside while maintaining central stability."
+  },
+  {
+    "eco": "A08",
+    "name": "King's Indian Attack: Sicilian Variation",
+    "description": "A second-move adaptation where White employs the King's Indian Attack system against Black's Sicilian-oriented central pawn placement."
+  },
+  {
+    "eco": "A08",
+    "name": "Zukertort Opening: Reversed Grünfeld",
+    "description": "White's move order creates a reversal of Grünfeld Defense structures, turning traditional roles and establishing spatial control before Black can consolidate."
+  },
+  {
+    "eco": "A09",
+    "name": "Réti Opening: Advance Variation, Michel Gambit",
+    "description": "White advances c4 early in the Réti and sacrifices a pawn to open lines, exploiting piece activity and the weakness of Black's center."
+  },
+  {
+    "eco": "A09",
+    "name": "Réti Opening: Advance Variation, Navara Gambit",
+    "description": "A modern gambit attempt in the Réti's advance variation, where White sacrifices material to accelerate development and create attacking imbalances."
+  },
+  {
+    "eco": "A09",
+    "name": "Réti Opening: Penguin Variation",
+    "description": "Black adopts an unorthodox defensive formation against the Réti, leading to unique positional struggles and unconventional piece arrangements."
+  },
+  {
+    "eco": "A09",
+    "name": "Réti Opening: Réti Accepted",
+    "description": "Black accepts White's flexible Réti setup and controls the center, forcing White to prove compensation through superior piece coordination."
+  },
+  {
+    "eco": "A09",
+    "name": "Réti Opening: Réti Gambit, Keres Variation",
+    "description": "Keres's approach to a gambit system within the Réti, sacrificing material to establish active piece placement and positional compensation."
+  },
+  {
+    "eco": "A09",
+    "name": "Réti Opening: Reversed Blumenfeld Gambit",
+    "description": "White's move order creates a mirror image of the Blumenfeld Gambit structure, with reversed piece colors and shifted strategic objectives."
+  },
+  {
+    "eco": "A09",
+    "name": "Réti Opening: Zilbermints Gambit",
+    "description": "A gambit sacrifice in the Réti framework where White offers a pawn to open lines and create rapid attacking possibilities."
+  },
+  {
+    "eco": "A10",
+    "name": "English Opening: Achilles-Omega Gambit",
+    "description": "White offers a pawn sacrifice in the English Opening's early moves, seeking rapid piece activation and central pressure over material."
+  },
+  {
+    "eco": "A10",
+    "name": "English Opening: Adorjan Defense",
+    "description": "A defensive setup against the English Opening where Black establishes a flexible pawn structure, avoiding early commitment to a specific plan."
+  },
+  {
+    "eco": "A10",
+    "name": "English Opening: Anglo-Dutch Defense",
+    "description": "Black responds to the English with a Dutch-like fianchetto structure, creating asymmetrical pawn chains and fighting for kingside control."
+  },
+  {
+    "eco": "A10",
+    "name": "English Opening: Anglo-Dutch Defense, Hickmann Gambit",
+    "description": "A gambit variation within the Anglo-Dutch where White sacrifices material to disrupt Black's fianchetto setup and seize the initiative."
+  },
+  {
+    "eco": "A10",
+    "name": "English Opening: Anglo-Dutch Variation, Chabanon Gambit",
+    "description": "White offers a gambit in the Anglo-Dutch system, accepting Black's center to accelerate piece development and create tactical opportunities."
+  },
+  {
+    "eco": "A10",
+    "name": "English Opening: Anglo-Dutch Variation, Ferenc Gambit",
+    "description": "A tactical gambit attempt in the Anglo-Dutch framework, where White sacrifices a pawn to open lines and activate attacking resources."
+  },
+  {
+    "eco": "A10",
+    "name": "English Opening: Anglo-Lithuanian Variation",
+    "description": "Black employs a Lithuanian defensive formation against the English, emphasizing solid pawn structure and controlled central counterplay."
+  },
+  {
+    "eco": "A10",
+    "name": "English Opening: Anglo-Scandinavian Defense",
+    "description": "Black meets the English with a Scandinavian-inspired structure, placing pawns on d5 and maintaining dynamic counterattacking possibilities."
+  },
+  {
+    "eco": "A10",
+    "name": "English Opening: Anglo-Scandinavian Defense, Löhn Gambit",
+    "description": "White sacrifices material in the Anglo-Scandinavian to disrupt Black's coordination and establish active piece placement."
+  },
+  {
+    "eco": "A10",
+    "name": "English Opening: Anglo-Scandinavian Defense, Malvinas Variation",
+    "description": "A regional variation of the Anglo-Scandinavian where Black devises a flexible defensive approach to counter White's English setup."
+  },
+  {
+    "eco": "A10",
+    "name": "English Opening: Anglo-Scandinavian Defense, Schulz Gambit",
+    "description": "White offers a gambit in the Anglo-Scandinavian system, seeking compensation through rapid piece activity and central control."
+  },
+  {
+    "eco": "A10",
+    "name": "English Opening: Great Snake Variation",
+    "description": "A serpentine pawn advance characterizes White's English setup, creating long-range pressure and maneuvering possibilities with a patient strategy."
+  },
+  {
+    "eco": "A10",
+    "name": "English Opening: Jaenisch Gambit",
+    "description": "White sacrifices a pawn early in the English Opening to open lines and establish active piece coordination before Black consolidates."
+  },
+  {
+    "eco": "A10",
+    "name": "English Opening: King's English Variation, Botvinnik System, Prickly Pawn Pass System",
+    "description": "Botvinnik's systematic approach in the English's King's English Variation, featuring a prickly pawn structure and careful positional maneuvering."
+  },
+  {
+    "eco": "A10",
+    "name": "English Opening: Myers Defense",
+    "description": "Black employs a sturdy defensive formation in response to the English Opening, prioritizing piece coordination and slow central counterplay."
+  },
+  {
+    "eco": "A10",
+    "name": "English Opening: Myers Gambit",
+    "description": "White offers a gambit in the English, sacrificing material to accelerate development and create attacking imbalances in the resulting position."
+  },
+  {
+    "eco": "A10",
+    "name": "English Opening: Porcupine Variation",
+    "description": "Black adopts a spiky defensive posture in response to the English, creating multiple tactical threats and prickly piece arrangements."
+  },
+  {
+    "eco": "A10",
+    "name": "English Opening: Wade Gambit",
+    "description": "Wade's gambit sacrifice in the English Opening offers a pawn for rapid piece development and long-range positional compensation."
+  },
+  {
+    "eco": "A10",
+    "name": "English Opening: Zilbermints Gambit",
+    "description": "A gambit system in the English where White sacrifices material to open lines and establish active piece placement against Black's position."
+  },
+  {
+    "eco": "A11",
+    "name": "English Opening: Caro-Kann Defensive System",
+    "description": "Black responds to the English with a Caro-Kann-inspired structure, emphasizing solid pawn defense and flexible piece coordination."
+  },
+  {
+    "eco": "A11",
+    "name": "Réti Opening: Anglo-Slav Variation, Gurevich System",
+    "description": "Gurevich's systematic approach in the Réti's Anglo-Slav, combining fianchetto setup with flexible central maneuvering and prophylactic moves."
+  },
+  {
+    "eco": "A11",
+    "name": "Réti Opening: Anglo-Slav Variation, with g3",
+    "description": "White employs a fianchetto with g3 in the Réti's Anglo-Slav framework, creating long-range control and positional pressure."
+  },
+  {
+    "eco": "A12",
+    "name": "Réti Opening: Anglo-Slav Variation",
+    "description": "White combines the Réti's flexible move order with pressure on Black's Slav-like structure, maintaining spatial advantage through patient positioning."
+  },
+  {
+    "eco": "A12",
+    "name": "Réti Opening: Anglo-Slav Variation, Bled Variation",
+    "description": "A specific continuation from Bled tournaments in the Réti's Anglo-Slav, emphasizing strategic maneuvering and long-term positional pressure."
+  },
+  {
+    "eco": "A12",
+    "name": "Réti Opening: Anglo-Slav Variation, Bogoljubow Variation",
+    "description": "Bogoljubow's approach to the Réti's Anglo-Slav, combining fianchetto elements with dynamic piece play and controlled central tension."
+  },
+  {
+    "eco": "A12",
+    "name": "Réti Opening: Anglo-Slav Variation, Capablanca Variation",
+    "description": "Capablanca's systematic method in the Réti's Anglo-Slav, featuring precise move orders, positional maneuvering, and endgame-friendly structures."
+  },
+  {
+    "eco": "A12",
+    "name": "Réti Opening: Anglo-Slav Variation, London Defensive System",
+    "description": "White establishes a positional setup with Bf4 and e3, building a solid pawn center while Black maintains Slav structure with c6 and d5."
+  },
+  {
+    "eco": "A12",
+    "name": "Réti Opening: Anglo-Slav Variation, New York System",
+    "description": "White combines Nf3 and c4 with a setup featuring Nd4 and Nc3, pressuring Black's Slav pawn structure from multiple angles."
+  },
+  {
+    "eco": "A12",
+    "name": "Réti Opening: Anglo-Slav Variation, Torre System",
+    "description": "White plays Bg5 early in the Réti, pinning the knight while maintaining the flexible c4 advance."
+  },
+  {
+    "eco": "A12",
+    "name": "Réti Opening: Anglo-Slav Variation, with dxc4",
+    "description": "White captures Black's c4 pawn, shifting to a more aggressive middlegame approach after ceding space control."
+  },
+  {
+    "eco": "A13",
+    "name": "English Opening: Agincourt Defense",
+    "description": "Black plays e6 against c4, preparing defensive structures while keeping d5 available as a counterbreak."
+  },
+  {
+    "eco": "A13",
+    "name": "English Opening: Agincourt Defense, Bogoljubow Defense",
+    "description": "Black emphasizes a4 and e5, gaining counterplay on the wings while White controls the center."
+  },
+  {
+    "eco": "A13",
+    "name": "English Opening: Agincourt Defense, Catalan Defense",
+    "description": "Black contests the center with d5 and c5, aiming for Catalan-like structures while maintaining e6 flexibility."
+  },
+  {
+    "eco": "A13",
+    "name": "English Opening: Agincourt Defense, Catalan Defense Accepted",
+    "description": "White captures on d5, accepting a tense pawn structure with a strong center-control orientation."
+  },
+  {
+    "eco": "A13",
+    "name": "English Opening: Agincourt Defense, Catalan Defense, Semi-Slav Defense",
+    "description": "Black combines Catalan ideas (d5, c5) with Slav structure (c6), creating a hybrid defensive formation."
+  },
+  {
+    "eco": "A13",
+    "name": "English Opening: Agincourt Defense, Kurajica Defense",
+    "description": "Black plays a solid defensive setup emphasizing b6 and Ba6, controlling key central squares indirectly."
+  },
+  {
+    "eco": "A13",
+    "name": "English Opening: Agincourt Defense, Tarrasch Defense",
+    "description": "Black advances c5 immediately, fighting for the center while maintaining d5 as a key outpost."
+  },
+  {
+    "eco": "A13",
+    "name": "English Opening: Agincourt Defense, Wimpy System",
+    "description": "Black adopts a cautious setup with Be7 and 0-0, prioritizing king safety over immediate central counterplay."
+  },
+  {
+    "eco": "A13",
+    "name": "English Opening: Neo-Catalan",
+    "description": "White plays Be2 and d4 in the English context, creating a Catalan-style structure with delayed d4."
+  },
+  {
+    "eco": "A13",
+    "name": "English Opening: Neo-Catalan Declined",
+    "description": "Black declines to enter the d4-centered structure, maintaining pressure on c4 instead."
+  },
+  {
+    "eco": "A13",
+    "name": "English Opening: Romanishin Gambit",
+    "description": "White sacrifices a pawn with an aggressive c4-d4 advance, seeking dynamic compensation through development and space."
+  },
+  {
+    "eco": "A14",
+    "name": "English Opening: Agincourt Defense, Keres Defense",
+    "description": "Black plays Nf6 and e6, preparing flexible development with central control through piece placement."
+  },
+  {
+    "eco": "A14",
+    "name": "English Opening: Agincourt Defense, Neo-Catalan Declined",
+    "description": "Black avoids d4 tension, maintaining c4 pressure while keeping Black's structure intact."
+  },
+  {
+    "eco": "A14",
+    "name": "English Opening: Agincourt Defense, Neo-Catalan Declined, Early b3",
+    "description": "White fianchettos early with b3, building a long-diagonal control while supporting the c4 pawn."
+  },
+  {
+    "eco": "A14",
+    "name": "Réti Opening: Anglo-Slav Variation",
+    "description": "White plays the Réti setup (Nf3, c4) against Black's Slav structure, maintaining flexibility in the center."
+  },
+  {
+    "eco": "A14",
+    "name": "Réti Opening: Anglo-Slav Variation, Bogoljubow Variation, Stonewall Line",
+    "description": "Black builds a Stonewall setup (d5, e6, f5, c6), creating a solid fortress while White seeks piece play."
+  },
+  {
+    "eco": "A15",
+    "name": "English Opening: Anglo-Indian Defense",
+    "description": "Black plays Nf6 and e6, preparing flexible Indian-style development while contesting White's c4 space."
+  },
+  {
+    "eco": "A15",
+    "name": "English Opening: Anglo-Indian Defense, Anti-Anti-Grünfeld",
+    "description": "White employs prophylactic moves to prevent Black's typical Grünfeld counterstructions and dynamic counterplay."
+  },
+  {
+    "eco": "A15",
+    "name": "English Opening: Anglo-Indian Defense, Grünfeld Formation",
+    "description": "Black plays d5 and Bg7, establishing a Grünfeld setup with fianchetto pressure on the long diagonal."
+  },
+  {
+    "eco": "A15",
+    "name": "English Opening: Anglo-Indian Defense, King's Indian Formation",
+    "description": "Black fianchettos with g6 and Bg7, building kingside pressure while maintaining central flexibility."
+  },
+  {
+    "eco": "A15",
+    "name": "English Opening: Anglo-Indian Defense, King's Indian Formation, Double Fianchetto",
+    "description": "Both sides fianchetto, creating symmetrical flank control with opposing long-diagonal bishops."
+  },
+  {
+    "eco": "A15",
+    "name": "English Opening: Anglo-Indian Defense, King's Knight Variation",
+    "description": "White plays Nc3 early, establishing a flexible piece setup that supports both e4 and d4 advances."
+  },
+  {
+    "eco": "A15",
+    "name": "English Opening: Anglo-Indian Defense, Old Indian Formation",
+    "description": "Black plays Be7 instead of fianchetto, maintaining a solid but passive defensive structure."
+  },
+  {
+    "eco": "A15",
+    "name": "English Opening: Anglo-Indian Defense, Queen's Indian Formation",
+    "description": "Black plays b6 and Ba6, controlling the long diagonal while preparing central counterplay with c5."
+  },
+  {
+    "eco": "A15",
+    "name": "English Opening: Anglo-Indian Defense, Romanishin Variation",
+    "description": "White implements a specific piece setup emphasizing Nd4 and tactical central pressure."
+  },
+  {
+    "eco": "A15",
+    "name": "English Opening: Anglo-Indian Defense, Scandinavian Defense",
+    "description": "Black plays d5 immediately against c4, seeking early central tension and tactical complications."
+  },
+  {
+    "eco": "A15",
+    "name": "English Opening: Anglo-Indian Defense, Scandinavian Defense, Exchange Variation",
+    "description": "White exchanges pawns on d5, simplifying into a positional endgame favoring clearer structure."
+  },
+  {
+    "eco": "A15",
+    "name": "English Opening: Anglo-Indian Defense, Slav Formation",
+    "description": "Black combines Slav structure (c6, d5) with the Anglo-Indian setup, creating a hybrid defensive formation."
+  },
+  {
+    "eco": "A16",
+    "name": "English Opening: Anglo-Grünfeld Defense",
+    "description": "Black contests d4 with c5 and Bg7, using Grünfeld tactics to challenge White's central authority."
+  },
+  {
+    "eco": "A16",
+    "name": "English Opening: Anglo-Grünfeld Defense, Korchnoi Variation",
+    "description": "White employs a specific setup emphasizing e4 and piece development after allowing Black's Grünfeld structure."
+  },
+  {
+    "eco": "A16",
+    "name": "English Opening: Anglo-Indian Defense, Anglo-Grünfeld Variation",
+    "description": "Black plays Grünfeld-style d5 and Bg7 within the broader Anglo-Indian framework."
+  },
+  {
+    "eco": "A16",
+    "name": "English Opening: Anglo-Indian Defense, Queen's Knight Variation",
+    "description": "White plays Nc3 and d4, establishing a central presence while developing with tempo."
+  },
+  {
+    "eco": "A17",
+    "name": "English Opening: Anglo-Indian Defense",
+    "description": "White plays Nc3 early, setting up flexible piece coordination against Black's Nf6 and e6."
+  },
+  {
+    "eco": "A17",
+    "name": "English Opening: Anglo-Indian Defense, Hedgehog System",
+    "description": "Black plays c5, e6, b6 with pawns arrayed defensively, preparing counterplay with a6 and b5."
+  },
+  {
+    "eco": "A17",
+    "name": "English Opening: Anglo-Indian Defense, Nimzo-English",
+    "description": "Black employs Nimzowitsch-inspired piece placement, contesting d4 and the center indirectly."
+  },
+  {
+    "eco": "A17",
+    "name": "English Opening: Anglo-Indian Defense, Queen's Indian Formation",
+    "description": "Black fianchettos on the queenside with b6 and Ba6, preparing central counterplay with c5."
+  },
+  {
+    "eco": "A17",
+    "name": "English Opening: Anglo-Indian Defense, Queen's Indian Variation",
+    "description": "Black develops with Queen's Indian ideas, maintaining a solid but active piece setup."
+  },
+  {
+    "eco": "A17",
+    "name": "English Opening: Anglo-Indian Defense, Zvjaginsev-Krasenkow Attack",
+    "description": "White pursues aggressive piece placement and tactics, immediately pressuring Black's setup with tempo."
+  },
+  {
+    "eco": "A18",
+    "name": "English Opening: Mikenas-Carls Variation",
+    "description": "White employs a specific sequence of moves emphasizing central control and kingside piece pressure."
+  },
+  {
+    "eco": "A19",
+    "name": "English Opening: Anglo-Indian Defense, Flohr-Mikenas-Carls Variation, Nei Gambit",
+    "description": "White sacrifices a pawn with a tactical d4 advance, seeking rapid development and attacking chances."
+  },
+  {
+    "eco": "A19",
+    "name": "English Opening: Mikenas-Carls, Sicilian",
+    "description": "Black transposes into Sicilian-like structures with e5, maintaining thematic counterplay against c4."
+  },
+  {
+    "eco": "A20",
+    "name": "English Opening: Drill Variation",
+    "description": "White systematically drills pressure on key squares, building a methodical positional advantage."
+  },
+  {
+    "eco": "A20",
+    "name": "English Opening: King's English Variation",
+    "description": "White plays 1.c4 e5, meeting Black's central pawn with queenside control and lateral pressure."
+  },
+  {
+    "eco": "A20",
+    "name": "English Opening: King's English Variation, Kahiko-Hula Gambit",
+    "description": "White sacrifices f4 to open lines and disrupt Black's e5 pawn, seeking rapid piece activity."
+  },
+  {
+    "eco": "A20",
+    "name": "English Opening: King's English Variation, Nimzowitsch-Flohr Variation",
+    "description": "White establishes a flexible position with Nf3, keeping d4 available while avoiding immediate central tension."
+  },
+  {
+    "eco": "A20",
+    "name": "English Opening: King's English Variation, Nimzowitsch Variation",
+    "description": "White adopts a waiting strategy with careful piece development, preparing a gradual central advance."
+  },
+  {
+    "eco": "A21",
+    "name": "English Opening: King's English Variation",
+    "description": "White continues the King's English with measured development, building central presence after 1.c4 e5 2.Nc3."
+  },
+  {
+    "eco": "A21",
+    "name": "English Opening: King's English Variation, Keres Defense",
+    "description": "Black plays ...e6 and ...a6 to prepare solid central control with ...e5, limiting White's space advantage while maintaining flexibility."
+  },
+  {
+    "eco": "A21",
+    "name": "English Opening: King's English Variation, Kramnik-Shirov Counterattack",
+    "description": "Black launches an aggressive counterattack with ...e5 and sharp piece play, challenging White's positional setup before White achieves a favorable pawn structure."
+  },
+  {
+    "eco": "A21",
+    "name": "English Opening: King's English Variation, Smyslov Defense",
+    "description": "Black establishes a solid pawn structure with ...e6 and ...a6, then gradually shifts to ...e5 to fight for central equality and counterplay."
+  },
+  {
+    "eco": "A21",
+    "name": "English Opening: King's English Variation, Troger Defense",
+    "description": "Black adopts a flexible defensive setup with ...e6 and ...c6, preparing to meet White's center control with solid prophylaxis."
+  },
+  {
+    "eco": "A22",
+    "name": "English Opening: Carls-Bremen System",
+    "description": "White develops methodically with controlled pawn advances and piece placement, establishing a stable positional advantage through space management."
+  },
+  {
+    "eco": "A22",
+    "name": "English Opening: King's English, Erbenheimer Gambit",
+    "description": "White sacrifices a pawn to open lines and generate rapid piece activity and attacking chances on the kingside."
+  },
+  {
+    "eco": "A22",
+    "name": "English Opening: King's English, Mazedonisch",
+    "description": "White employs an unconventional pawn structure and piece setup to create imbalance and long-term positional pressure."
+  },
+  {
+    "eco": "A22",
+    "name": "English Opening: King's English Variation, Adhiban Gambit",
+    "description": "White offers a pawn for rapid piece development and kingside initiative, seeking tactical opportunities before Black consolidates."
+  },
+  {
+    "eco": "A22",
+    "name": "English Opening: King's English Variation, Bellon Gambit",
+    "description": "White sacrifices material for open lines and attacking chances, relying on piece activity to overcome the material deficit."
+  },
+  {
+    "eco": "A22",
+    "name": "English Opening: King's English Variation, Two Knights Variation",
+    "description": "White develops both knights to natural squares (Nc3 and Nf3), establishing control of central squares and preparing flexible pawn play."
+  },
+  {
+    "eco": "A22",
+    "name": "English Opening: King's English Variation, Two Knights Variation, Reversed Dragon",
+    "description": "Black mirrors a Sicilian Dragon structure with reversed colors, fianchettoing the kingside bishop to control the long diagonal against White's center."
+  },
+  {
+    "eco": "A22",
+    "name": "English Opening: King's English Variation, Two Knights Variation, Smyslov System",
+    "description": "Black plays solidly with ...e6, ...Be7, and ...d6, creating a classical closed structure while maintaining flexibility for future piece maneuvers."
+  },
+  {
+    "eco": "A23",
+    "name": "English Opening: King's English Variation, Two Knights Variation, Keres Variation",
+    "description": "Black employs Keres's defensive approach with a solid pawn chain and carefully placed pieces, limiting White's spatial advantage."
+  },
+  {
+    "eco": "A24",
+    "name": "English Opening: King's English Variation, Two Knights Variation, Fianchetto Line",
+    "description": "White fianchettoes the kingside bishop and controls the long diagonal, combining classical development with flexible position management."
+  },
+  {
+    "eco": "A25",
+    "name": "English Opening: Closed, Taimanov Variation",
+    "description": "Black plays a closed system emphasizing solid structure and defensive piece coordination, accepting a backward position to maintain dynamic counterplay."
+  },
+  {
+    "eco": "A25",
+    "name": "English Opening: King's English Variation, Bremen-Hort Variation",
+    "description": "Black adopts a specific defensive setup combining solid pawn placement with piece maneuvering to neutralize White's positional pressure."
+  },
+  {
+    "eco": "A25",
+    "name": "English Opening: King's English Variation, Closed System",
+    "description": "Both sides establish closed pawn structures with methodical development, emphasizing piece maneuvers and gradual positional improvements over tactics."
+  },
+  {
+    "eco": "A25",
+    "name": "English Opening: King's English Variation, Hungarian Attack",
+    "description": "White launches an aggressive kingside assault with g3 and Bg2, combining fianchetto control of the long diagonal with f4 and piece pressure."
+  },
+  {
+    "eco": "A25",
+    "name": "English Opening: King's English Variation, Reversed Closed Sicilian",
+    "description": "Black mirrors White's Closed Sicilian setup with reversed colors, maintaining symmetry while positioning pieces for flexible responses."
+  },
+  {
+    "eco": "A25",
+    "name": "English Opening: King's English Variation, Taimanov Variation",
+    "description": "Black plays a closed defensive system based on Taimanov's principles, prioritizing piece coordination and solid structure over immediate counterplay."
+  },
+  {
+    "eco": "A26",
+    "name": "English Opening: King's English Variation, Botvinnik System",
+    "description": "White employs Botvinnik's systematic approach with careful piece development and pawn structure control, establishing long-term positional pressure."
+  },
+  {
+    "eco": "A26",
+    "name": "English Opening: King's English Variation, Closed System, Full Symmetry",
+    "description": "Black maintains complete symmetry with White's pawn structure, relying on matching development and preparation to break symmetry favorably later."
+  },
+  {
+    "eco": "A27",
+    "name": "English Opening: King's English Variation, Three Knights System",
+    "description": "White develops all three knights efficiently (after a3), maximizing piece coordination and controlling key central squares methodically."
+  },
+  {
+    "eco": "A28",
+    "name": "English Opening: Four Knights System, Nimzowitsch Variation",
+    "description": "Nimzowitsch's sophisticated setup emphasizing positional play and piece maneuvering over early tactical complications, building lasting advantages."
+  },
+  {
+    "eco": "A28",
+    "name": "English Opening: King's English Variation, Four Knights Variation, Bradley Beach Variation",
+    "description": "Black responds to White's four knights setup with a specific flexible arrangement, preparing to contest the center or shift play dynamically."
+  },
+  {
+    "eco": "A28",
+    "name": "English Opening: King's English Variation, Four Knights Variation, Flexible Line",
+    "description": "Black preserves maximum flexibility with reserved piece placement and pawn structure, adapting to White's plan while maintaining balanced positions."
+  },
+  {
+    "eco": "A28",
+    "name": "English Opening: King's English Variation, Four Knights Variation, Korchnoi Line",
+    "description": "Black adopts Korchnoi's pragmatic setup emphasizing solid structure and piece coordination, countering White's positional ambitions with steady defensive play."
+  },
+  {
+    "eco": "A28",
+    "name": "English Opening: King's English Variation, Four Knights Variation, Quiet Line",
+    "description": "Black responds calmly to four knights development with solid moves like ...e6 and ...Be7, achieving a balanced position without premature complications."
+  },
+  {
+    "eco": "A29",
+    "name": "English Opening: King's English Variation, Four Knights Variation, Fianchetto Line",
+    "description": "Black fianchettoes the kingside bishop and combines it with classical development, controlling the long diagonal while maintaining piece flexibility."
+  },
+  {
+    "eco": "A29",
+    "name": "English Opening: King's English Variation, Four Knights Variation, Fianchetto Line, Delayed .. Nc6",
+    "description": "Black fianchettoes first and delays knight development to c6, preserving maximum flexibility in piece placement and potential pawn pushes."
+  },
+  {
+    "eco": "A29",
+    "name": "English Opening: King's English Variation, Four Knights Variation, Fianchetto Line, with Bc5",
+    "description": "Black fianchettoes and places the bishop on c5, targeting f2 and creating piece pressure while controlling the long diagonal."
+  },
+  {
+    "eco": "A29",
+    "name": "English Opening: King's English Variation, Four Knights Variation, Fianchetto Line, with .. d6",
+    "description": "Black combines fianchetto with the solid ...d6 move, establishing a closed Pirc-like structure with kingside control via the long diagonal."
+  },
+  {
+    "eco": "A29",
+    "name": "English Opening: King's English Variation, Four Knights Variation, Fianchetto Line, with .. d6, a6",
+    "description": "Black plays ...d6 and ...a6 after fianchettoing, preparing a flexible defensive setup with potential queenside and kingside counterplay."
+  },
+  {
+    "eco": "A29",
+    "name": "English Opening: King's English Variation, Four Knights Variation, Fianchetto Line, with .. d6, Be7",
+    "description": "Black combines fianchetto with ...d6 and ...Be7, creating a solid classical structure while maintaining control of the long diagonal."
+  },
+  {
+    "eco": "A29",
+    "name": "English Opening: King's English Variation, Four Knights Variation, Fianchetto Line, with .. d6, h6",
+    "description": "Black plays ...d6, ...h6, and fianchetto, preparing a solid defensive formation with preemptive kingside luft against future White attacks."
+  },
+  {
+    "eco": "A29",
+    "name": "English Opening: King's English Variation, Four Knights Variation, Fianchetto Line, with Nb6",
+    "description": "Black develops the knight to b6 after fianchettoing, rerouting the piece to support the center and prepare flexible queenside expansion."
+  },
+  {
+    "eco": "A30",
+    "name": "English Opening: Symmetrical, Hedgehog, Flexible Formation",
+    "description": "Black maintains Hedgehog structure with ...b6, ...e6, and ...d6 while preserving piece flexibility, absorbing White's center and preparing piece counterplay."
+  },
+  {
+    "eco": "A30",
+    "name": "English Opening: Symmetrical Variation, Hedgehog Defense",
+    "description": "Black employs the Hedgehog pawn structure with ...b6, ...e6, and ...d6, establishing a closed position that restricts White's space while enabling later counterplay."
+  },
+  {
+    "eco": "A30",
+    "name": "English Opening: Symmetrical Variation, Napolitano Gambit",
+    "description": "White sacrifices a pawn to activate pieces rapidly and generate tactical complications before Black achieves a solid pawn structure."
+  },
+  {
+    "eco": "A30",
+    "name": "English Opening: Wing Gambit",
+    "description": "White advances the b-pawn to gambit or challenge Black's flank control, seeking piece activity and positional pressure via the queenside."
+  },
+  {
+    "eco": "A31",
+    "name": "English Opening: Symmetrical Variation, Anti-Benoni Variation",
+    "description": "White prevents Black's Benoni-like pawn breaks and central expansion, maintaining space and positional control through careful structure management."
+  },
+  {
+    "eco": "A32",
+    "name": "English Opening: Symmetrical Variation, Anti-Benoni Variation, Spielmann Defense",
+    "description": "Black employs Spielmann's defensive approach against White's anti-Benoni setup, combining solid structure with tactical piece maneuvers."
+  },
+  {
+    "eco": "A33",
+    "name": "English Opening: Symmetrical Variation, Anti-Benoni Variation, Geller Variation",
+    "description": "Geller's sophisticated response to White's anti-Benoni system, emphasizing dynamic piece play and subtle central counterplay."
+  },
+  {
+    "eco": "A33",
+    "name": "English Opening: Symmetrical Variation, Anti-Benoni Variation, Spielmann Defense",
+    "description": "Black maintains a solid Spielmann-style structure while resisting White's anti-Benoni pressure, preparing piece-based counterattack over pawn breaks."
+  },
+  {
+    "eco": "A34",
+    "name": "English Opening: Symmetrical Variation, Fianchetto Variation",
+    "description": "White fianchettoes the kingside bishop and combines it with symmetrical pawn placement, controlling the long diagonal while establishing space."
+  },
+  {
+    "eco": "A34",
+    "name": "English Opening: Symmetrical Variation, Normal Variation",
+    "description": "Both sides maintain symmetrical pawn structures and methodical development, with subtle maneuvering determining who breaks symmetry most favorably."
+  },
+  {
+    "eco": "A34",
+    "name": "English Opening: Symmetrical Variation, Rubinstein Variation",
+    "description": "Rubinstein's precise approach to the symmetrical position, emphasizing superior piece placement and timing of strategic breaks over raw force."
+  },
+  {
+    "eco": "A34",
+    "name": "English Opening: Symmetrical Variation, Three Knights Variation",
+    "description": "White develops three knights systematically in a symmetrical structure, maximizing piece coordination and maintaining flexibility in pawn advances."
+  },
+  {
+    "eco": "A35",
+    "name": "English Opening: Symmetrical Variation, Four Knights Variation",
+    "description": "White develops all four knights in the symmetrical system, establishing piece control of central squares and preparing measured pawn play."
+  },
+  {
+    "eco": "A35",
+    "name": "English Opening: Symmetrical Variation, Four Knights Variation, Keres-Parma System",
+    "description": "Keres and Parma's approach in the four knights symmetrical position, combining solid development with strategic depth and positional maneuvering."
+  },
+  {
+    "eco": "A35",
+    "name": "English Opening: Symmetrical Variation, Two Knights Variation",
+    "description": "White develops both knights in the symmetrical formation, achieving a balanced position with flexible options for pawn advances or piece repositioning."
+  },
+  {
+    "eco": "A36",
+    "name": "English Opening: Symmetrical Variation, Botvinnik System",
+    "description": "White fianchettoes the queenside bishop and controls the center with c4 and b3, adopting a flexible maneuvering setup."
+  },
+  {
+    "eco": "A36",
+    "name": "English Opening: Symmetrical Variation, Botvinnik System Reversed, with e3",
+    "description": "White plays e3 instead of d4, maintaining spatial control while keeping options for a delayed d4 or kingside attack."
+  },
+  {
+    "eco": "A36",
+    "name": "English Opening: Symmetrical Variation, Two Knights, Fianchetto Variation",
+    "description": "Both sides develop knights early and fianchetto bishops, creating a flexible position with spatial control from afar."
+  },
+  {
+    "eco": "A36",
+    "name": "English Opening: Symmetrical Variation, Ultra-Symmetrical Variation",
+    "description": "Both White and Black mirror each other's moves, creating a perfectly symmetrical pawn structure where piece placement determines the game's balance."
+  },
+  {
+    "eco": "A37",
+    "name": "English Opening: Symmetrical Variation, Botvinnik System Reversed, with Nf3",
+    "description": "White combines Botvinnik-style queenside fianchetto with Nf3 development, maintaining flexibility without committing to d4."
+  },
+  {
+    "eco": "A37",
+    "name": "English Opening: Symmetrical Variation, Three Knights, Fianchetto Variation",
+    "description": "All three available knights for each side develop early alongside fianchettoed bishops, aiming for flexible piece coordination and space control."
+  },
+  {
+    "eco": "A38",
+    "name": "English Opening: Symmetrical Variation, Double Fianchetto",
+    "description": "Both players fianchetto on both flanks, creating an extraordinarily symmetrical position with bishops controlling long diagonals."
+  },
+  {
+    "eco": "A38",
+    "name": "English Opening: Symmetrical Variation, Duchamp Variation",
+    "description": "White adopts a fianchetto-based setup with careful piece development, preparing flexible central expansion or queenside pressure."
+  },
+  {
+    "eco": "A38",
+    "name": "English Opening: Symmetrical Variation, Full Symmetry Line",
+    "description": "White and Black play entirely symmetrical moves, with the first deviation determining whether to play for advantage or rely on theoretical equality."
+  },
+  {
+    "eco": "A39",
+    "name": "English Opening: Symmetrical Variation, Mecking Variation",
+    "description": "White aggressively develops pieces and controls key central squares through fianchetto and knight placement, preparing active piece play."
+  },
+  {
+    "eco": "A40",
+    "name": "Benoni Defense: Franco-Sicilian Hybrid",
+    "description": "Black blends Benoni and Sicilian structures with e5 and e6 themes, aiming to transpose into familiar semi-open defensive positions."
+  },
+  {
+    "eco": "A40",
+    "name": "Borg Defense: Borg Gambit",
+    "description": "Black sacrifices a pawn early with an offbeat gambit to generate immediate counterplay and disrupt White's opening setup."
+  },
+  {
+    "eco": "A40",
+    "name": "Colle System: Pterodactyl Variation",
+    "description": "White adopts the solid Colle setup (d4, Nf3, e3, c3) while Black responds with d6 and e5, creating a tense game of maneuvering."
+  },
+  {
+    "eco": "A40",
+    "name": "Colle System: Siroccopteryx Variation",
+    "description": "White plays the classical Colle structure while Black employs an exotic defensive setup with d6 and fianchetto ideas."
+  },
+  {
+    "eco": "A40",
+    "name": "English Defense: Eastbourne Gambit",
+    "description": "Black sacrifices a pawn on the queenside to generate activity and counterplay against White's English Opening setup."
+  },
+  {
+    "eco": "A40",
+    "name": "English Defense: Hartlaub Gambit Accepted",
+    "description": "Black sacrifices material immediately to create rapid piece activity and compensate with aggressive kingside attacks."
+  },
+  {
+    "eco": "A40",
+    "name": "English Defense: Hartlaub Gambit Declined",
+    "description": "Black declines the offered gambit, maintaining a solid e6 and b6 structure while pursuing quiet, strategic play."
+  },
+  {
+    "eco": "A40",
+    "name": "English Defense: Perrin Variation",
+    "description": "Black plays a restrained defense with e6 and b6, aiming for solid piece coordination and queenside counterplay."
+  },
+  {
+    "eco": "A40",
+    "name": "English Defense: Poli Gambit",
+    "description": "Black offers an early pawn gambit to disrupt White's English Opening and seize the initiative through rapid piece activity."
+  },
+  {
+    "eco": "A40",
+    "name": "Englund Gambit Declined: Diemer Counterattack",
+    "description": "White declines Black's e5 pawn and counterattacks in the center, maintaining spatial and developmental advantage."
+  },
+  {
+    "eco": "A40",
+    "name": "Englund Gambit Declined: Reversed Alekhine",
+    "description": "White avoids the Englund Gambit pawn and transposes into reversed Alekhine structures where White maintains central control."
+  },
+  {
+    "eco": "A40",
+    "name": "Englund Gambit Declined: Reversed Brooklyn",
+    "description": "White sidesteps the Englund by playing reversed Brooklyn-type positions with careful central management and piece placement."
+  },
+  {
+    "eco": "A40",
+    "name": "Englund Gambit Declined: Reversed French",
+    "description": "White declines the gambit pawn and achieves a reversed French structure where extra space and control favor White."
+  },
+  {
+    "eco": "A40",
+    "name": "Englund Gambit Declined: Reversed Krebs",
+    "description": "White refuses the gambit pawn and establishes a reversed Krebs-like setup with solid central control and piece activity."
+  },
+  {
+    "eco": "A40",
+    "name": "Englund Gambit Declined: Reversed Mokele Mbembe",
+    "description": "White sidesteps the Englund with a reversed Mokele Mbembe structure, maintaining positional advantage and control."
+  },
+  {
+    "eco": "A40",
+    "name": "Englund Gambit: Felbecker Gambit",
+    "description": "Black initiates multiple early pawn breaks, creating complex tactical complications and dynamic counterplay."
+  },
+  {
+    "eco": "A40",
+    "name": "Englund Gambit: Hartlaub-Charlick Gambit",
+    "description": "Black plays an aggressive gambit line within the Englund, sacrificing material for rapid piece activity and kingside threats."
+  },
+  {
+    "eco": "A40",
+    "name": "Englund Gambit: Main Line",
+    "description": "Black sacrifices the e5 pawn immediately after c4, generating rapid piece development and central counterplay."
+  },
+  {
+    "eco": "A40",
+    "name": "Englund Gambit: Mosquito Gambit",
+    "description": "Black plays a small but aggressive gambit within the Englund structure, aiming for dynamic piece activity and tactical complications."
+  },
+  {
+    "eco": "A40",
+    "name": "Englund Gambit: Soller Gambit",
+    "description": "Black adds an additional pawn sacrifice to the Englund structure, creating extraordinary complexity and multiple tactical opportunities."
+  },
+  {
+    "eco": "A40",
+    "name": "Englund Gambit: Soller Gambit Deferred",
+    "description": "Black defers the Soller Gambit's second pawn sacrifice, maintaining dynamic play while keeping central tension unresolved."
+  },
+  {
+    "eco": "A40",
+    "name": "Englund Gambit: Stockholm Variation",
+    "description": "Black plays the main Englund Gambit with specific tactical motifs on e4 or h4, creating immediate piece activity and threats."
+  },
+  {
+    "eco": "A40",
+    "name": "Englund Gambit: Zilbermints Gambit",
+    "description": "Black combines the Englund with an additional queenside pawn sacrifice, generating multi-directional tactical and positional pressure."
+  },
+  {
+    "eco": "A40",
+    "name": "Horwitz Defense: Zilbermints Gambit",
+    "description": "Black employs a solid Horwitz setup but adds a gambit element, creating tension between defense and aggressive counterattack."
+  },
+  {
+    "eco": "A40",
+    "name": "Kangaroo Defense: Keres Defense, Transpositional Variation",
+    "description": "Black plays e5 with flexible piece placement, transposing into favorable defensive structures with counterplay potential."
+  },
+  {
+    "eco": "A40",
+    "name": "Mikenas Defense: Cannstatter Variation",
+    "description": "Black plays d6 and e5 with careful piece placement, aiming for a flexible setup that transposes or fights for the initiative."
+  },
+  {
+    "eco": "A40",
+    "name": "Mikenas Defense: Lithuanian Variation",
+    "description": "Black employs a quiet Mikenas setup focused on flexible piece development and gradual central counterplay."
+  },
+  {
+    "eco": "A40",
+    "name": "Mikenas Defense: Pozarek Gambit",
+    "description": "Black sacrifices material within the Mikenas structure to accelerate development and create immediate tactical complications."
+  },
+  {
+    "eco": "A40",
+    "name": "Modern Defense: Beefeater Variation",
+    "description": "Black fianchettoes and plays d6, adopting a hypermodern approach with flexible piece development and delayed central breaks."
+  },
+  {
+    "eco": "A40",
+    "name": "Modern Defense: Lizard Defense, Pirc-Diemer Gambit",
+    "description": "Black employs fianchetto and d6 while accepting a gambit, blending hypermodern defense with dynamic counterplay."
+  },
+  {
+    "eco": "A40",
+    "name": "Polish Defense: Spassky Gambit Accepted",
+    "description": "Black accepts a pawn gambit against the Polish opening, creating rapid piece activity and central pressure."
+  },
+  {
+    "eco": "A40",
+    "name": "Pterodactyl Defense: Central, Benoni Beefeater Pterodactyl",
+    "description": "Black plays d6 with a flexible setup combining Benoni and Pterodactyl structures, maintaining multiple central break options."
+  },
+  {
+    "eco": "A40",
+    "name": "Pterodactyl Defense: Central, Benoni Pterodactyl",
+    "description": "Black plays the Pterodactyl with Benoni-style central readiness, aiming for e5 while keeping positional flexibility."
+  },
+  {
+    "eco": "A40",
+    "name": "Pterodactyl Defense: Fianchetto, Queen Benoni Pterodactyl",
+    "description": "Black fianchettoes while maintaining Benoni counterplay options, creating a flexible setup with multiple central thrust possibilities."
+  },
+  {
+    "eco": "A40",
+    "name": "Pterodactyl Defense: Fianchetto, Queen Pteranodon",
+    "description": "Black fianchettoes on the queenside while maintaining central counterplay, blending hypermodern placement with tactical readiness."
+  },
+  {
+    "eco": "A40",
+    "name": "Pterodactyl Defense: Fianchetto, Queen Pterodactyl",
+    "description": "Black fianchettoes and plays d6 with full Pterodactyl flexibility, preparing multiple piece deployments and central breaks."
+  },
+  {
+    "eco": "A40",
+    "name": "Pterodactyl Defense: Queen Pterodactyl, Quiet Line",
+    "description": "Black plays the Pterodactyl setup quietly, avoiding immediate tactics and aiming for long-term positional advantage."
+  }
+]
