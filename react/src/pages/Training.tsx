@@ -58,10 +58,11 @@ export const Training = () => {
   const [localFeedback, setLocalFeedback] = useState("");
   const shownFeedback = localFeedback || feedback;
 
+  // Only the autoplay effect below needs this: eslint's set-state-in-effect
+  // rule flags an effect that reads reactive state directly and also calls
+  // setState, so this one spot deliberately reads fen via a ref instead.
   const fenRef = useRef(fen);
   const lastSubmittedMoveUciRef = useRef<string>("");
-  const isSubmittingRef = useRef(isSubmitting);
-  const isAdvancingRef = useRef(isAdvancing);
   const lastAutoplayedItemIdRef = useRef<string | null>(null);
   const prevFeedbackRef = useRef<string>(feedback);
   const prevItemIdRef = useRef<string | null>(itemId);
@@ -88,14 +89,6 @@ export const Training = () => {
   useEffect(() => {
     fenRef.current = fen;
   }, [fen]);
-
-  useEffect(() => {
-    isSubmittingRef.current = isSubmitting;
-  }, [isSubmitting]);
-
-  useEffect(() => {
-    isAdvancingRef.current = isAdvancing;
-  }, [isAdvancing]);
 
   useEffect(() => {
     if (
@@ -227,26 +220,20 @@ export const Training = () => {
 
     setLocalFeedback("");
     lastSubmittedMoveUciRef.current = uci;
-    await submitMove(uci, fenRef.current);
+    await submitMove(uci, fen);
     setMoveInput("");
   };
 
   const processMove = useCallback(
     (sourceSquare: string, targetSquare: string): boolean => {
-      if (isSubmittingRef.current || isAdvancingRef.current || !itemId)
-        return false;
+      if (isSubmitting || isAdvancing || !itemId) return false;
 
       if (!sourceSquare || !targetSquare) return false;
 
       // ✅ prevent chess.js from being called with from===to
       if (sourceSquare === targetSquare) return false;
 
-      const result = applyMove(
-        fenRef.current,
-        sourceSquare,
-        targetSquare,
-        correctMoveUci,
-      );
+      const result = applyMove(fen, sourceSquare, targetSquare, correctMoveUci);
       if (!result) {
         setLocalFeedback("❌ Illegal move");
         return false;
@@ -259,13 +246,16 @@ export const Training = () => {
       setLocalFeedback("");
       lastSubmittedMoveUciRef.current = result.uci;
       setMoveInput(result.uci);
-      void submitMove(result.uci, fenRef.current);
+      void submitMove(result.uci, fen);
 
       return true;
     },
     [
       appendTimelineFen,
       correctMoveUci,
+      fen,
+      isAdvancing,
+      isSubmitting,
       itemId,
       setFen,
       submitMove,
@@ -288,19 +278,18 @@ export const Training = () => {
   const canPickUp = useCallback(
     (square: string): boolean => {
       if (!atLatest) return false;
-      if (isSubmittingRef.current || isAdvancingRef.current || !itemId)
-        return false;
+      if (isSubmitting || isAdvancing || !itemId) return false;
       if (!isPlayerToMove) return false;
-      return pieceColorAt(fenRef.current, square) === playerColor;
+      return pieceColorAt(fen, square) === playerColor;
     },
-    [atLatest, itemId, isPlayerToMove, playerColor],
+    [atLatest, fen, isAdvancing, isSubmitting, itemId, isPlayerToMove, playerColor],
   );
 
   // Legal targets for the picked-up piece — rendered as dots by cm-chessboard.
   const getLegalMoves = useCallback(
     (square: string): { to: string; promotion?: string }[] =>
-      legalMoves(fenRef.current, square),
-    [],
+      legalMoves(fen, square),
+    [fen],
   );
 
   // Persistent highlights: hint (from, then from+to) and correct-move blink.
@@ -367,12 +356,7 @@ export const Training = () => {
                   className="btn icon-btn hint-icon"
                   type="button"
                   onClick={() => {
-                    if (
-                      isSubmittingRef.current ||
-                      isAdvancingRef.current ||
-                      !itemId ||
-                      isSessionCompleted
-                    )
+                    if (isSubmitting || isAdvancing || !itemId || isSessionCompleted)
                       return;
                     setHintLevel((h) => (h < 0 ? 0 : 1));
                   }}
