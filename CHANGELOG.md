@@ -1,3 +1,9 @@
+## 2026-08-17
+- feat(dashboard): add a White/Black filter above the opening cards grid — openings named "X Defense/Defence" classify as Black's repertoire (`colorOf` in `groupOpenings.ts`), everything else as White's, cutting the ~149-card grid down per color
+- feat(dashboard): auto-orient opening card thumbnails and the board preview to the selected opening's color (Black defenses render Black-at-bottom), and flip the preview live when the Play as White/Black toggle is changed — the toggle still defaults from the opening's color but stays user-overridable per selection
+- test(react): add `eslint-plugin-testing-library` (scoped to `**/*.test.{ts,tsx}`), fixing what it surfaced (missing `findBy` waits, redundant manual `cleanup()`, direct DOM node access in queries)
+- fix(react): guard `useTrainingSession.submitMove` and `Puzzles`'s `loadNext`/`submit` against post-unmount state updates, and clear `Puzzles`'s pending "next puzzle" timeout on unmount — the timeout leak was firing during later tests and intermittently stealing a queued mock response, which was the actual cause of an occasional Puzzles test failure
+
 ## 2026-08-16
 - feat(training): support playing the Black side — training sessions now carry a `player_color` (migration `0008`), and both frontends generalize the White-only `isWhiteToMove`/`canPickUp`/autoplay/orientation logic in `Training.tsx`/`training.component.ts` (and `chess-core`'s `deriveStatus`) into a color-aware version driven by the session; add a White/Black picker to both dashboards
 - fix(angular): auto-orient the puzzles board to the solver's color on load, matching React's existing behavior
