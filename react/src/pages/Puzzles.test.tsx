@@ -1,6 +1,6 @@
 // react/src/pages/Puzzles.test.tsx
-import { describe, it, expect, vi, afterEach, beforeEach } from "vitest";
-import { render, waitFor, act, screen, cleanup } from "@testing-library/react";
+import { describe, it, expect, vi, beforeEach } from "vitest";
+import { render, waitFor, act, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import { Puzzles } from "./Puzzles";
@@ -72,10 +72,6 @@ describe("Puzzles Page", () => {
     applyMoveMock.mockReset();
     (api.get as ReturnType<typeof vi.fn>).mockReset();
     (api.post as ReturnType<typeof vi.fn>).mockReset();
-  });
-
-  afterEach(() => {
-    cleanup();
   });
 
   const renderPuzzles = () =>

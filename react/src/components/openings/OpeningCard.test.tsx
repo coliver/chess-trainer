@@ -45,7 +45,7 @@ describe("OpeningCard", () => {
     render(<OpeningCard group={group} selected={false} onSelect={vi.fn()} />);
 
     expect(screen.getByText("5 variations")).toBeInTheDocument();
-    expect(document.querySelector(".oc-thumb-ph")).toBeInTheDocument();
+    expect(screen.getByTestId("oc-thumb-placeholder")).toBeInTheDocument();
     expect(screen.queryByTestId("board")).not.toBeInTheDocument();
 
     act(() => {

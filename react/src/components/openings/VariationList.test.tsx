@@ -75,7 +75,13 @@ describe("VariationList", () => {
       <VariationList rows={rows} selectedKey="B20Sicilian Defense" onPick={vi.fn()} />,
     );
 
-    const mainLineBtn = screen.getByText("Main line").closest("button")!;
+    // Row buttons carry an explicit role="listitem" (they live in a role="list"
+    // container), which drops the browser's name-from-contents behavior that
+    // getByRole's `name` option relies on for plain buttons — so match by
+    // rendered text instead of an accessible name.
+    const mainLineBtn = screen
+      .getAllByRole("listitem")
+      .find((el) => el.textContent?.includes("Main line"))!;
     expect(mainLineBtn).toHaveAttribute("aria-pressed", "true");
   });
 });

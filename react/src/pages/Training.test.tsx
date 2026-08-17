@@ -1,6 +1,6 @@
 //frontend/src/pages/Training.test.tsx
-import { describe, it, expect, vi, afterEach, beforeEach } from "vitest";
-import { render, waitFor, act, screen, cleanup } from "@testing-library/react";
+import { describe, it, expect, vi, beforeEach } from "vitest";
+import { render, waitFor, act, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Training } from "./Training";
 import { useTrainingSession } from "../hooks/useTrainingSession";
@@ -125,10 +125,6 @@ describe("Training Page", () => {
         square === "e2" ? [{ to: "e4", promotion: undefined }] : [],
       );
     pieceColorAtMock.mockReset().mockReturnValue("w");
-  });
-
-  afterEach(() => {
-    cleanup();
   });
 
   it("triggers blinkGreen animation when feedback is '✅ Correct!'", async () => {

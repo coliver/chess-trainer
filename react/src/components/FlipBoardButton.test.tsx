@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { FlipBoardButton } from "./FlipBoardButton";
 
@@ -10,7 +10,7 @@ describe("FlipBoardButton", () => {
     render(<FlipBoardButton onClick={onClick} />);
 
     const btn = screen.getByRole("button", { name: /flip board/i });
-    const icon = btn.querySelector(".flip-icon") as HTMLElement;
+    const icon = within(btn).getByText("⟳");
     expect(icon.style.transform).toBe("rotate(0deg)");
 
     await user.click(btn);

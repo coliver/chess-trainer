@@ -1,6 +1,6 @@
 // frontend/src/RequireAuth.test.tsx
 import { vi, describe, it, expect } from "vitest";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 import { RequireAuth } from "./RequireAuth";
 import api from "./api";
@@ -34,7 +34,7 @@ describe("RequireAuth", () => {
 
     renderGuarded();
 
-    await waitFor(() => expect(screen.getByText("Protected Content")).toBeInTheDocument());
+    expect(await screen.findByText("Protected Content")).toBeInTheDocument();
   });
 
   it("redirects to /login when /auth/me rejects (e.g. 401)", async () => {
@@ -42,7 +42,7 @@ describe("RequireAuth", () => {
 
     renderGuarded();
 
-    await waitFor(() => expect(screen.getByText("Login Page")).toBeInTheDocument());
+    expect(await screen.findByText("Login Page")).toBeInTheDocument();
   });
 
   it("redirects to /login when /auth/me resolves with a non-user body (e.g. an HTML SPA fallback)", async () => {
@@ -55,6 +55,6 @@ describe("RequireAuth", () => {
 
     renderGuarded();
 
-    await waitFor(() => expect(screen.getByText("Login Page")).toBeInTheDocument());
+    expect(await screen.findByText("Login Page")).toBeInTheDocument();
   });
 });

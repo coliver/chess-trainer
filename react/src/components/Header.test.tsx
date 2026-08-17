@@ -1,6 +1,6 @@
 // frontend/src/components/Header.test.tsx
 import { vi, describe, it, beforeEach, afterEach, expect } from "vitest";
-import { render, screen, cleanup, act } from "@testing-library/react";
+import { render, screen, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import Header from "./Header";
@@ -30,10 +30,6 @@ vi.mock("../api", () => ({
 describe("Header auth UI", () => {
   beforeEach(() => {
     localStorage.removeItem("token");
-  });
-
-  afterEach(() => {
-    cleanup();
   });
 
   it("logs out, clears the token, and navigates to /login", async () => {
