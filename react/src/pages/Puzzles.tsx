@@ -9,6 +9,7 @@ import { useBoardOrientation } from "../hooks/useBoardOrientation";
 import {
   START_FEN,
   applyMove,
+  classifyFeedback,
   legalMoves,
   pieceColorAt,
   sideToMove,
@@ -124,13 +125,10 @@ export const Puzzles = () => {
 
   const solverColor = sideToMove(fen);
 
-  const statusKind = feedback.startsWith("✅")
-    ? "good"
-    : feedback.startsWith("❌")
-      ? "bad"
-      : "your";
-  const statusIcon =
-    statusKind === "good" ? "✓" : statusKind === "bad" ? "✕" : "♟";
+  const { kind: feedbackKind, icon: feedbackIcon } = classifyFeedback(feedback);
+  const statusKind = feedbackKind === "neutral" ? "your" : feedbackKind;
+  // Puzzles keeps its own neutral icon (pawn) rather than deriveStatus's king.
+  const statusIcon = feedbackKind === "neutral" ? "♟" : feedbackIcon;
   const statusMsg = feedback || (puzzleId ? "Find the best move." : "");
 
   const onMove = useCallback(
