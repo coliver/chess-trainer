@@ -1,42 +1,23 @@
 // frontend/src/components/Header.tsx
-import { useEffect, useState, useMemo } from "react";
+import { useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { KnightSchoolIcon } from "./KnightSchoolIcon";
 import { ThemeToggle } from "./ThemeToggle";
 import { useNavigate } from "react-router-dom";
-import { logout, AUTH_CHANGED_EVENT } from "../auth";
+import { logout } from "../auth";
+import { useAuth } from "../hooks/useAuth";
 
 export default function Header() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    () => !!localStorage.getItem("token"),
-  );
-
-  useEffect(() => {
-    const syncFromStorage = () =>
-      setIsLoggedIn(!!localStorage.getItem("token"));
-
-    // "storage" only fires for other tabs/documents; AUTH_CHANGED_EVENT
-    // covers same-tab login/logout (see auth.ts).
-    window.addEventListener("storage", syncFromStorage);
-    window.addEventListener(AUTH_CHANGED_EVENT, syncFromStorage);
-
-    syncFromStorage();
-
-    return () => {
-      window.removeEventListener("storage", syncFromStorage);
-      window.removeEventListener(AUTH_CHANGED_EVENT, syncFromStorage);
-    };
-  }, []);
+  const { isLoggedIn, username } = useAuth();
 
   const onLogout = () => {
     logout();
     navigate("/login");
   };
 
-  const username = localStorage.getItem("username");
   const greeting = useMemo(() => {
     const hour = new Date().getHours();
     const base =
