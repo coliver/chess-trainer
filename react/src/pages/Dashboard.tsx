@@ -11,6 +11,7 @@ import { Button } from "../components/Button";
 import {
   groupByBase,
   baseNameOf,
+  colorOf,
   variationLabelOf,
   type OpeningGroup,
 } from "../lib/groupOpenings";
@@ -59,6 +60,7 @@ export const Dashboard = () => {
   const [selected, setSelected] = useState<Opening | null>(null);
   const [playerColor, setPlayerColor] = useState<"w" | "b">("w");
   const [sortAZ, setSortAZ] = useState(false);
+  const [colorFilter, setColorFilter] = useState<"all" | "w" | "b">("all");
   const [searchLimit, setSearchLimit] = useState(SEARCH_PAGE);
   const previewRef = useRef<HTMLElement | null>(null);
 
@@ -94,6 +96,12 @@ export const Dashboard = () => {
     return [...groups].sort((a, b) => a.base.localeCompare(b.base));
   }, [groups, sortAZ]);
 
+  const colorFilteredGroups = useMemo(() => {
+    return sortedGroups.filter(
+      (g) => colorFilter === "all" || colorOf(g.base) === colorFilter,
+    );
+  }, [sortedGroups, colorFilter]);
+
   const activeGroup: OpeningGroup | undefined = useMemo(
     () => groups.find((g) => g.base === activeBase),
     [groups, activeBase],
@@ -119,7 +127,7 @@ export const Dashboard = () => {
       ? `${searchMatches.length} match${searchMatches.length === 1 ? "" : "es"}`
       : view === "variations" && activeGroup
         ? `${activeGroup.count} variations in the full library`
-        : `${groups.length} openings · pick one to train`;
+        : `${colorFilteredGroups.length} openings · pick one to train`;
 
   const startSession = async (
     openingEco: string,
@@ -149,16 +157,24 @@ export const Dashboard = () => {
     }
   };
 
+  // Defaults the Play as White/Black toggle to match the opening's repertoire
+  // color (e.g. a "X Defense" line defaults to Black) on every new selection,
+  // while still leaving the toggle free for the user to override afterward.
+  const selectOpening = (o: Opening) => {
+    setSelected(o);
+    setPlayerColor(colorOf(baseNameOf(o.name)));
+  };
+
   const openBase = (group: OpeningGroup) => {
     setActiveBase(group.base);
-    setSelected(group.representative);
+    selectOpening(group.representative);
   };
 
   // Selecting a search result also anchors the active base, so clearing the
   // search returns to that opening's variation list (consistent with the
   // preview) rather than a stale, unrelated base.
   const pickFromSearch = (o: Opening) => {
-    setSelected(o);
+    selectOpening(o);
     setActiveBase(baseNameOf(o.name));
   };
 
@@ -322,13 +338,54 @@ export const Dashboard = () => {
               />
             </div>
             {view === "bases" && (
-              <button
-                type="button"
-                className="ob-sort"
-                onClick={() => setSortAZ((s) => !s)}
-              >
-                Sort: {sortAZ ? "A–Z" : "Popular"}
-              </button>
+              <>
+                <button
+                  type="button"
+                  className="ob-sort"
+                  onClick={() => setSortAZ((s) => !s)}
+                >
+                  Sort: {sortAZ ? "A–Z" : "Popular"}
+                </button>
+                <div
+                  className="ob-color-filter"
+                  role="radiogroup"
+                  aria-label="Filter by color"
+                >
+                  <button
+                    type="button"
+                    role="radio"
+                    aria-checked={colorFilter === "all"}
+                    className={`ob-color-filter-btn${
+                      colorFilter === "all" ? " selected" : ""
+                    }`}
+                    onClick={() => setColorFilter("all")}
+                  >
+                    All
+                  </button>
+                  <button
+                    type="button"
+                    role="radio"
+                    aria-checked={colorFilter === "w"}
+                    className={`ob-color-filter-btn${
+                      colorFilter === "w" ? " selected" : ""
+                    }`}
+                    onClick={() => setColorFilter("w")}
+                  >
+                    White
+                  </button>
+                  <button
+                    type="button"
+                    role="radio"
+                    aria-checked={colorFilter === "b"}
+                    className={`ob-color-filter-btn${
+                      colorFilter === "b" ? " selected" : ""
+                    }`}
+                    onClick={() => setColorFilter("b")}
+                  >
+                    Black
+                  </button>
+                </div>
+              </>
             )}
           </header>
 
@@ -357,14 +414,14 @@ export const Dashboard = () => {
                   <VariationList
                     rows={activeGroup.members}
                     selectedKey={selected ? selected.eco + selected.name : null}
-                    onPick={setSelected}
+                    onPick={selectOpening}
                   />
                 </>
               )}
 
               {view === "bases" && (
                 <div className="opening-grid">
-                  {sortedGroups.map((g) => (
+                  {colorFilteredGroups.map((g) => (
                     <OpeningCard
                       key={g.base}
                       group={g}
@@ -388,6 +445,7 @@ export const Dashboard = () => {
                     key={selected.name}
                     openings={[selected]}
                     selectedOpeningName={selected.name}
+                    playerColor={playerColor}
                   />
                   <h2 className="pv-title">{previewFullName}</h2>
                   <p className="pv-eco">{selected.eco}</p>

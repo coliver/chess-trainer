@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import {
   baseNameOf,
+  colorOf,
   variationLabelOf,
   subVariationLabelOf,
   groupByBase,
@@ -25,6 +26,24 @@ describe("baseNameOf", () => {
   });
   it("trims surrounding whitespace", () => {
     expect(baseNameOf("Ruy Lopez : Berlin")).toBe("Ruy Lopez");
+  });
+});
+
+describe("colorOf", () => {
+  it("classifies Defense openings as Black", () => {
+    expect(colorOf("Sicilian Defense")).toBe("b");
+  });
+  it("classifies Defence (British spelling) openings as Black", () => {
+    expect(colorOf("French Defence")).toBe("b");
+  });
+  it("classifies non-Defense openings as White", () => {
+    expect(colorOf("Ruy Lopez")).toBe("w");
+  });
+  it("classifies Queen's Gambit as White", () => {
+    expect(colorOf("Queen's Gambit")).toBe("w");
+  });
+  it("classifies King's Indian Defense as Black", () => {
+    expect(colorOf("King's Indian Defense")).toBe("b");
   });
 });
 

@@ -93,7 +93,7 @@ describe("Dashboard", () => {
     const start = screen.getByRole("button", { name: /choose an opening/i });
     expect(start).toBeDisabled();
     expect(
-      document.querySelector(".opening-description--empty"),
+      screen.getByText(/Pick an opening to preview the line/i),
     ).toBeInTheDocument();
   });
 
@@ -121,7 +121,7 @@ describe("Dashboard", () => {
       expect(api.post).toHaveBeenCalledWith("/training-sessions", {
         openingEco: "B20",
         openingName: "Sicilian Defense",
-        playerColor: "w",
+        playerColor: "b",
       });
       expect(mockNavigate).toHaveBeenCalledWith("/training/123");
     });
@@ -183,7 +183,7 @@ describe("Dashboard", () => {
       expect(api.post).toHaveBeenCalledWith("/training-sessions", {
         openingEco: "B90",
         openingName: "Sicilian Defense: Najdorf Variation",
-        playerColor: "w",
+        playerColor: "b",
       });
     });
   });

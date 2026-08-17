@@ -177,6 +177,34 @@
   border-color: var(--accent-border);
 }
 
+/* Filter: color selector */
+.ob-color-filter {
+  display: flex;
+  gap: 6px;
+}
+.ob-color-filter-btn {
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-h);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.14s ease, background-color 0.14s ease;
+}
+.ob-color-filter-btn:hover {
+  border-color: var(--accent-border);
+}
+.ob-color-filter-btn.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
 /* Body: content grid + preview aside */
 .ob-body {
   display: grid;
