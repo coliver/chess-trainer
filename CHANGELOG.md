@@ -3,6 +3,7 @@
 - feat(i18n): add French and German locales, and localize the remaining hardcoded strings (opening-card variation count, board-preview "Start" button and ply tooltip)
 - feat(i18n): add Italian, Dutch, Polish, Portuguese, Russian, and Turkish locales
 - feat(i18n): add a Klingon (`en-x-klingon`) locale — English flavored with canonical Klingon interjections, alongside `en-x-pirate`
+- feat(i18n): add a Groot (`en-x-groot`) locale — greetings/headings/labels replaced with "I am Groot" variants, technical/error copy left plain
 - fix(i18n): drop dead `language.english`/`language.spanish` keys — never rendered by any component (the language switcher shows flag emoji only)
 - Shouts to Patricia, Maritza, and Maritza's husband for helping out with the Spanish translation!
 - feat(dashboard): add a White/Black filter above the opening cards grid — openings named "X Defense/Defence" classify as Black's repertoire (`colorOf` in `groupOpenings.ts`), everything else as White's, cutting the ~149-card grid down per color

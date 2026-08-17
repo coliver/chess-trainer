@@ -16,6 +16,7 @@ const FLAGS: Record<string, string> = {
   tr: "🇹🇷",
   "en-x-pirate": "🏴‍☠️",
   "en-x-klingon": "🖖",
+  "en-x-groot": "🌱",
 };
 
 const LANGUAGES = Object.keys(i18nInstance.options.resources ?? {});
