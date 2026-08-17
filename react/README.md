@@ -43,6 +43,7 @@ react/
 │   ├── App.tsx                 # Routes: /login, /register, /dashboard, /training/:id, * -> Dashboard
 │   ├── main.tsx                # React root / entrypoint
 │   └── index.css               # Global styles (imports src/styles/*.css)
+│   └── i18n/                   # react-i18next config + en.json/es.json translation resources
 ├── public/                     # favicon.svg, quotes.txt, cm-chessboard-assets/ (board sprites)
 ├── playwright-dashboard.spec.ts  # Playwright E2E spec
 ├── vite.config.ts               # Vite configuration
@@ -200,6 +201,16 @@ Actual backend response shape (`MoveResponseResponse`, camelCased):
 ```
 
 On correct moves, `fenAfter` updates the board and, if `sessionCompleted` is true, the UI shows a completion state instead of advancing. On incorrect moves, `correct` is `false`, `fenAfter` is `null`, and `reason` (e.g. `"illegal move"`, `"wrong move"`) drives the feedback message.
+
+## 🌐 Internationalization (i18n)
+
+The UI chrome (header, auth pages, dashboard, training, and puzzles pages) is localized via [`react-i18next`](https://react.i18next.com/), with English and Spanish translation resources in `src/i18n/locales/en.json` and `src/i18n/locales/es.json`. `src/i18n/i18n.ts` initializes `i18next` (imported once in `main.tsx`, and again in `vitest.setup.ts` so component tests render real strings instead of raw keys) and reads/writes the chosen language to `localStorage` under the `language` key, mirroring `ThemeToggle.tsx`'s pattern for `theme`.
+
+`LanguageToggle.tsx` (in the header, next to the theme toggle) renders a pair of flag buttons — 🇺🇸 English / 🇪🇸 Español — that call `i18n.changeLanguage()`.
+
+**Not yet localized:**
+- Opening and puzzle descriptive content (`src/data/openingText.ts` and backend-authored opening prose) — English-only for now.
+- Status/feedback strings that live in `packages/chess-core` (`deriveStatus`, `classifyFeedback`, `splitOpeningLabel`) — e.g. "Your move", "Session completed", the "Training" fallback label. That package is consumed via its built `dist/`, so localizing it needs its own pass (edit `src`, `npm run build` in `packages/chess-core`, verify both frontends still pick up the change) rather than a one-off string swap.
 
 ## ⚠️ Known Gap
 

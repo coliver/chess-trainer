@@ -5,6 +5,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import Board, { type BoardMarker } from "../components/Board";
 import { FlipBoardButton } from "../components/FlipBoardButton";
@@ -27,6 +28,7 @@ import { useTrainingSession } from "../hooks/useTrainingSession";
 import { useBoardOrientation } from "../hooks/useBoardOrientation";
 
 export const Training = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -348,7 +350,7 @@ export const Training = () => {
             <div className="board-under">
               <span className={`turn${sideToMove(fen) === "w" ? "" : " black"}`}>
                 <span className="turn-dot" aria-hidden="true" />
-                {sideToMove(fen) === "w" ? "White to move" : "Black to move"}
+                {sideToMove(fen) === "w" ? t("training.whiteToMove") : t("training.blackToMove")}
               </span>
               <div className="board-toolbar">
                 <FlipBoardButton className="icon-btn" onClick={flip} />
@@ -361,8 +363,8 @@ export const Training = () => {
                     setHintLevel((h) => (h < 0 ? 0 : 1));
                   }}
                   disabled={busy || !itemId || isSessionCompleted}
-                  aria-label="Show a hint"
-                  title="Show a hint"
+                  aria-label={t("training.showHint")}
+                  title={t("training.showHint")}
                 >
                   💡
                 </button>
@@ -372,7 +374,7 @@ export const Training = () => {
 
           <aside className="train-rail">
             <div className="rail-head">
-              <div className="rail-eyebrow">Training</div>
+              <div className="rail-eyebrow">{t("training.eyebrow")}</div>
               <div className="rail-title">
                 <h1>{openingName}</h1>
                 {eco && <span className="eco-chip">{eco}</span>}
@@ -399,7 +401,7 @@ export const Training = () => {
                   onClick={() => jumpToIndex(timeline.index - 1)}
                   disabled={busy || timeline.index <= 0}
                 >
-                  ‹ Prev
+                  {t("training.prev")}
                 </button>
                 <button
                   className="btn"
@@ -407,7 +409,7 @@ export const Training = () => {
                   onClick={() => jumpToIndex(timeline.index + 1)}
                   disabled={busy || timeline.index >= timeline.fens.length - 1}
                 >
-                  Next ›
+                  {t("training.next")}
                 </button>
               </div>
 
@@ -416,16 +418,16 @@ export const Training = () => {
                   className="text-input"
                   value={moveInput}
                   onChange={(e) => setMoveInput(e.target.value)}
-                  placeholder="or type a move, e.g. e2e4"
+                  placeholder={t("training.movePlaceholder")}
                   disabled={isSubmitting}
                 />
                 <button
                   className="btn primary"
                   type="submit"
                   disabled={busy || !moveInput.trim() || !atLatest}
-                  title={!atLatest ? "Jump to latest before submitting" : undefined}
+                  title={!atLatest ? t("training.jumpToLatest") : undefined}
                 >
-                  Play
+                  {t("training.play")}
                 </button>
               </form>
             </div>
@@ -435,7 +437,7 @@ export const Training = () => {
               type="button"
               onClick={() => navigate("/dashboard")}
             >
-              ← Back to openings
+              {t("training.backToOpenings")}
             </button>
           </aside>
         </div>

@@ -1,0 +1,145 @@
+{
+  "header": {
+    "title": "Knight School",
+    "greetingMorning": "Buenos días ☀️",
+    "greetingAfternoon": "Buenas tardes 🌤️",
+    "greetingEvening": "Buenas noches 🌙",
+    "nav": "Principal",
+    "openings": "Aperturas",
+    "puzzles": "Puzzles",
+    "login": "Iniciar sesión",
+    "register": "Registrarse",
+    "logout": "Cerrar sesión",
+    "viewSource": "Ver el código fuente en GitHub"
+  },
+  "language": {
+    "toggle": "Idioma",
+    "english": "English",
+    "spanish": "Español"
+  },
+  "theme": {
+    "toggle": "Cambiar tema"
+  },
+  "flipBoard": {
+    "label": "Girar tablero"
+  },
+  "dashboard": {
+    "progress": {
+      "yourProgress": "Tu progreso",
+      "trainingLabel": "Progreso de entrenamiento",
+      "trainingHeading": "Entrenamiento",
+      "positionsTrained": "Posiciones entrenadas",
+      "accuracy": "Precisión",
+      "dayStreak": "Racha de días",
+      "dayStreakBest": "Racha de días · mejor {{best}}",
+      "mastered": "Dominadas",
+      "reviewDue": "Repasar pendientes ({{count}})",
+      "weakSpots": "Puntos débiles",
+      "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} correctas",
+      "weakSpotFallbackName": "Apertura",
+      "puzzleLabel": "Progreso de puzzles",
+      "puzzlesHeading": "Puzzles",
+      "puzzlesSolved": "Puzzles resueltos",
+      "practicePuzzles": "Practicar puzzles",
+      "startSessionFailed": "No se pudo iniciar la sesión. Verifica tu conexión o token.",
+      "reviewSessionFailed": "No hay posiciones pendientes de repaso todavía."
+    },
+    "openings": {
+      "title": "Aperturas",
+      "searchAriaLabel": "Buscar aperturas",
+      "searchPlaceholder": "Buscar aperturas o ECO…",
+      "sortAZ": "A–Z",
+      "sortPopular": "Popular",
+      "sortButton": "Ordenar: {{mode}}",
+      "filterByColor": "Filtrar por color",
+      "all": "Todas",
+      "white": "Blancas",
+      "black": "Negras",
+      "breadcrumb": "Ruta de navegación",
+      "allOpenings": "Todas las aperturas",
+      "playAs": "Jugar como",
+      "playAsWhite": "Jugar con blancas",
+      "playAsBlack": "Jugar con negras",
+      "pickToPreview": "Elige una apertura para ver la línea y comenzar a entrenar.",
+      "startLabel": "Empezar {{name}}",
+      "chooseOpening": "Elige una apertura",
+      "matches_one": "{{count}} coincidencia",
+      "matches_other": "{{count}} coincidencias",
+      "variationsInLibrary": "{{count}} variantes en la biblioteca completa",
+      "openingsToTrain_one": "{{count}} apertura · elige una para entrenar",
+      "openingsToTrain_other": "{{count}} aperturas · elige una para entrenar"
+    }
+  },
+  "puzzles": {
+    "noPuzzlesDue": "No hay puzzles pendientes ahora mismo — vuelve más tarde.",
+    "loadFailed": "No se pudo cargar el puzzle. Verifica tu conexión.",
+    "correct": "✅ ¡Correcto!",
+    "incorrectFallback": "No es eso — inténtalo de nuevo.",
+    "submitError": "Error al enviar el movimiento.",
+    "findBestMove": "Encuentra la mejor jugada.",
+    "eyebrow": "Puzzles",
+    "title": "Entrenamiento de puzzles",
+    "rating": "Nivel ~{{rating}}",
+    "solved": "Resueltos: {{count}}",
+    "streak": "Racha: {{count}}",
+    "streakBest": " · mejor {{best}}",
+    "skipPuzzle": "Saltar puzzle ›",
+    "backToDashboard": "← Volver al panel"
+  },
+  "training": {
+    "whiteToMove": "Mueven las blancas",
+    "blackToMove": "Mueven las negras",
+    "showHint": "Mostrar pista",
+    "eyebrow": "Entrenamiento",
+    "prev": "‹ Anterior",
+    "next": "Siguiente ›",
+    "movePlaceholder": "o escribe un movimiento, p. ej. e2e4",
+    "play": "Jugar",
+    "jumpToLatest": "Ve a la última posición antes de enviar",
+    "backToOpenings": "← Volver a las aperturas"
+  },
+  "auth": {
+    "login": {
+      "title": "Iniciar sesión",
+      "subtitle": "Bienvenido de nuevo.",
+      "usernameLabel": "Usuario",
+      "passwordLabel": "Contraseña",
+      "submit": "Enviar",
+      "submitting": "Enviando...",
+      "emailNotVerified": "Verifica tu correo electrónico antes de iniciar sesión",
+      "resendVerification": "Reenviar correo de verificación",
+      "resendSending": "Enviando...",
+      "resendSent": "¡Enviado!",
+      "needAccount": "¿No tienes una cuenta?",
+      "registerLink": "Regístrate",
+      "errorGeneric": "Ocurrió un error inesperado.",
+      "errorLoginFailed": "Error al iniciar sesión",
+      "errorResendFailed": "Error al reenviar el correo de verificación"
+    },
+    "register": {
+      "title": "Registrarse",
+      "subtitle": "Crea tu cuenta.",
+      "emailLabel": "Correo electrónico",
+      "usernameLabel": "Usuario",
+      "passwordLabel": "Contraseña",
+      "submit": "Registrarse",
+      "submitting": "Registrando...",
+      "successMessage": "¡Registro exitoso! Revisa tu bandeja de entrada en <strong>{{email}}</strong> para el enlace de verificación antes de iniciar sesión.",
+      "returnToLogin": "Volver a iniciar sesión",
+      "haveAccount": "¿Ya tienes una cuenta?",
+      "loginLink": "Inicia sesión",
+      "errorGeneric": "Error al registrarse. Inténtalo de nuevo más tarde."
+    },
+    "verifyEmail": {
+      "loadingTitle": "Verificando...",
+      "loadingSubtitle": "Verificando tu correo electrónico…",
+      "successTitle": "Correo verificado",
+      "successSubtitleWithEmail": "{{email}} ha sido verificado. Ya puedes iniciar sesión.",
+      "successSubtitleNoEmail": "Tu correo electrónico ha sido verificado. Ya puedes iniciar sesión.",
+      "goToLogin": "Ir a iniciar sesión",
+      "errorTitle": "Verificación fallida",
+      "errorSubtitle": "Este enlace de verificación no es válido o ha expirado.",
+      "returnToLogin": "Volver a iniciar sesión"
+    }
+  }
+}

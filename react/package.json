@@ -18,8 +18,10 @@
     "@knight-school/chess-core": "file:../packages/chess-core",
     "axios": "^1.18.1",
     "cm-chessboard": "^8.12.19",
+    "i18next": "^26.3.6",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
+    "react-i18next": "^17.0.11",
     "react-router-dom": "^7.18.2"
   },
   "devDependencies": {

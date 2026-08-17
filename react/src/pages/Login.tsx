@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import api from "../api";
 import { login } from "../auth";
 
 export default function Login() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
@@ -32,10 +34,10 @@ export default function Login() {
         if (err.response?.status === 403 && err.response?.data?.detail === "Email not verified") {
           setEmailNotVerified(true);
         } else {
-          setError(err.response?.data?.detail || "Failed to Login");
+          setError(err.response?.data?.detail || t("auth.login.errorLoginFailed"));
         }
       } else {
-        setError("An unexpected error occurred.");
+        setError(t("auth.login.errorGeneric"));
       }
     } finally {
       setSubmitting(false);
@@ -53,9 +55,9 @@ export default function Login() {
       setTimeout(() => setVerificationSent(false), 3000);
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {
-        setError(err.response?.data?.detail || "Failed to resend verification email");
+        setError(err.response?.data?.detail || t("auth.login.errorResendFailed"));
       } else {
-        setError("An unexpected error occurred.");
+        setError(t("auth.login.errorGeneric"));
       }
     } finally {
       setResendingVerification(false);
@@ -65,12 +67,12 @@ export default function Login() {
   return (
     <main className="page">
       <div className="card" style={{ maxWidth: 520, marginTop: 20 }}>
-        <h1 className="title" style={{ marginBottom: 6 }}>Login</h1>
-        <p className="subtitle">Welcome back.</p>
+        <h1 className="title" style={{ marginBottom: 6 }}>{t("auth.login.title")}</h1>
+        <p className="subtitle">{t("auth.login.subtitle")}</p>
 
         <form className="auth-form" onSubmit={handleSubmit}>
           <label className="auth-field">
-            <span className="auth-label">Username</span>
+            <span className="auth-label">{t("auth.login.usernameLabel")}</span>
             <input
               className="text-input"
               value={username}
@@ -81,7 +83,7 @@ export default function Login() {
           </label>
 
           <label className="auth-field">
-            <span className="auth-label">Password</span>
+            <span className="auth-label">{t("auth.login.passwordLabel")}</span>
             <input
               className="text-input"
               value={password}
@@ -93,12 +95,12 @@ export default function Login() {
           </label>
 
           <button className="btn" disabled={submitting} type="submit" style={{ marginTop: 14 }}>
-            {submitting ? "Submitting..." : "Submit"}
+            {submitting ? t("auth.login.submitting") : t("auth.login.submit")}
           </button>
 
           {emailNotVerified && (
             <div style={{ marginTop: 14 }}>
-              <div className="auth-error">Please verify your email before logging in</div>
+              <div className="auth-error">{t("auth.login.emailNotVerified")}</div>
               <button
                 className="btn"
                 type="button"
@@ -106,7 +108,7 @@ export default function Login() {
                 onClick={handleResendVerification}
                 style={{ marginTop: 10, opacity: verificationSent ? 0.6 : 1 }}
               >
-                {verificationSent ? "Sent!" : resendingVerification ? "Sending..." : "Resend verification email"}
+                {verificationSent ? t("auth.login.resendSent") : resendingVerification ? t("auth.login.resendSending") : t("auth.login.resendVerification")}
               </button>
             </div>
           )}
@@ -115,7 +117,7 @@ export default function Login() {
         </form>
 
         <p className="auth-alt">
-          Need an account? <Link to="/register">Register</Link>
+          {t("auth.login.needAccount")} <Link to="/register">{t("auth.login.registerLink")}</Link>
         </p>
       </div>
     </main>

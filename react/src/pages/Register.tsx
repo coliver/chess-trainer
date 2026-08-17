@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import api from "../api";
 
 export default function Register() {
+  const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -21,9 +23,9 @@ export default function Register() {
       setSuccess(true);
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {
-        setError(err.response?.data?.detail || "Failed to register. Please try again later.");
+        setError(err.response?.data?.detail || t("auth.register.errorGeneric"));
       } else {
-        setError("Failed to register. Please try again later.");
+        setError(t("auth.register.errorGeneric"));
       }
     } finally {
       setSubmitting(false);
@@ -33,20 +35,26 @@ export default function Register() {
   return (
     <main className="page">
       <div className="card" style={{ maxWidth: 520, marginTop: 20 }}>
-        <h1 className="title" style={{ marginBottom: 6 }}>Register</h1>
-        <p className="subtitle">Create your account.</p>
+        <h1 className="title" style={{ marginBottom: 6 }}>{t("auth.register.title")}</h1>
+        <p className="subtitle">{t("auth.register.subtitle")}</p>
 
         {success ? (
           <div>
-            <p>Registration successful! Check your inbox at <strong>{email}</strong> for a verification link before logging in.</p>
+            <p>
+              <Trans
+                i18nKey="auth.register.successMessage"
+                values={{ email }}
+                components={{ strong: <strong /> }}
+              />
+            </p>
             <p className="auth-alt" style={{ marginTop: 20 }}>
-              <Link to="/login">Return to login</Link>
+              <Link to="/login">{t("auth.register.returnToLogin")}</Link>
             </p>
           </div>
         ) : (
           <form className="auth-form" onSubmit={handleSubmit}>
             <label className="auth-field">
-              <span className="auth-label">Email</span>
+              <span className="auth-label">{t("auth.register.emailLabel")}</span>
               <input
                 className="text-input"
                 value={email}
@@ -58,7 +66,7 @@ export default function Register() {
             </label>
 
             <label className="auth-field">
-              <span className="auth-label">Username</span>
+              <span className="auth-label">{t("auth.register.usernameLabel")}</span>
               <input
                 className="text-input"
                 value={username}
@@ -69,7 +77,7 @@ export default function Register() {
             </label>
 
             <label className="auth-field">
-              <span className="auth-label">Password</span>
+              <span className="auth-label">{t("auth.register.passwordLabel")}</span>
               <input
                 className="text-input"
                 value={password}
@@ -81,7 +89,7 @@ export default function Register() {
             </label>
 
             <button className="btn" disabled={submitting} type="submit" style={{ marginTop: 6 }}>
-              {submitting ? "Registering..." : "Register"}
+              {submitting ? t("auth.register.submitting") : t("auth.register.submit")}
             </button>
 
             {error && <div className="auth-error">{error}</div>}
@@ -89,7 +97,7 @@ export default function Register() {
         )}
 
         <p className="auth-alt">
-          Already have an account? <Link to="/login">Login</Link>
+          {t("auth.register.haveAccount")} <Link to="/login">{t("auth.register.loginLink")}</Link>
         </p>
       </div>
     </main>

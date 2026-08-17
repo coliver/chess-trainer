@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export function ThemeToggle() {
+  const { t } = useTranslation();
   const [theme, setTheme] = useState(() => {
     // 1. Check localStorage
     const saved = localStorage.getItem("theme");
@@ -28,8 +30,8 @@ export function ThemeToggle() {
       className="theme-toggle-btn"
       type="button"
       onClick={toggle}
-      aria-label="Toggle theme"
-      title="Toggle theme"
+      aria-label={t("theme.toggle")}
+      title={t("theme.toggle")}
     >
       {theme === "dark" ? <SunIcon /> : <MoonIcon />}
     </button>

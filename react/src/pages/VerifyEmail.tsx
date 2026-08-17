@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useSearchParams } from "react-router-dom";
 import api from "../api";
 
 type VerificationState = "loading" | "success" | "error";
 
 export default function VerifyEmail() {
+  const { t } = useTranslation();
   const [searchParams] = useSearchParams();
   const [state, setState] = useState<VerificationState>("loading");
   const [email, setEmail] = useState<string | null>(null);
@@ -38,20 +40,22 @@ export default function VerifyEmail() {
       <div className="card" style={{ maxWidth: 520, marginTop: 20 }}>
         {state === "loading" && (
           <>
-            <h1 className="title" style={{ marginBottom: 6 }}>Verifying...</h1>
-            <p className="subtitle">Verifying your email…</p>
+            <h1 className="title" style={{ marginBottom: 6 }}>{t("auth.verifyEmail.loadingTitle")}</h1>
+            <p className="subtitle">{t("auth.verifyEmail.loadingSubtitle")}</p>
           </>
         )}
 
         {state === "success" && (
           <>
-            <h1 className="title" style={{ marginBottom: 6 }}>Email Verified</h1>
+            <h1 className="title" style={{ marginBottom: 6 }}>{t("auth.verifyEmail.successTitle")}</h1>
             <p className="subtitle">
-              {email ? <>{email} has</> : "Your email has"} been verified! You can now log in.
+              {email
+                ? t("auth.verifyEmail.successSubtitleWithEmail", { email })
+                : t("auth.verifyEmail.successSubtitleNoEmail")}
             </p>
             <p style={{ marginTop: 20 }}>
               <Link to="/login" className="btn" style={{ display: "inline-block" }}>
-                Go to Login
+                {t("auth.verifyEmail.goToLogin")}
               </Link>
             </p>
           </>
@@ -59,11 +63,11 @@ export default function VerifyEmail() {
 
         {state === "error" && (
           <>
-            <h1 className="title" style={{ marginBottom: 6 }}>Verification Failed</h1>
-            <p className="subtitle">This verification link is invalid or expired.</p>
+            <h1 className="title" style={{ marginBottom: 6 }}>{t("auth.verifyEmail.errorTitle")}</h1>
+            <p className="subtitle">{t("auth.verifyEmail.errorSubtitle")}</p>
             <p style={{ marginTop: 20 }}>
               <Link to="/login" className="btn" style={{ display: "inline-block" }}>
-                Return to Login
+                {t("auth.verifyEmail.returnToLogin")}
               </Link>
             </p>
           </>

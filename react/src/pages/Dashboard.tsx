@@ -1,5 +1,6 @@
 // \frontend\src\pages\Dashboard.tsx
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import api from "../api";
 import { useApiResource } from "../hooks/useApiResource";
@@ -52,6 +53,7 @@ type PuzzleSummary = {
 };
 
 export const Dashboard = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [openings, setOpenings] = useState<Opening[]>([]);
@@ -124,10 +126,10 @@ export const Dashboard = () => {
 
   const subText =
     view === "search"
-      ? `${searchMatches.length} match${searchMatches.length === 1 ? "" : "es"}`
+      ? t("dashboard.openings.matches", { count: searchMatches.length })
       : view === "variations" && activeGroup
-        ? `${activeGroup.count} variations in the full library`
-        : `${colorFilteredGroups.length} openings · pick one to train`;
+        ? t("dashboard.openings.variationsInLibrary", { count: activeGroup.count })
+        : t("dashboard.openings.openingsToTrain", { count: colorFilteredGroups.length });
 
   const startSession = async (
     openingEco: string,
@@ -143,7 +145,7 @@ export const Dashboard = () => {
       navigate(`/training/${response.data.id}`);
     } catch (error) {
       console.error("Error starting session:", error);
-      alert("Failed to start session. Check your connection or token.");
+      alert(t("dashboard.progress.startSessionFailed"));
     }
   };
 
@@ -153,7 +155,7 @@ export const Dashboard = () => {
       navigate(`/training/${response.data.id}`);
     } catch (error) {
       console.error("Error starting review session:", error);
-      alert("No positions due for review yet.");
+      alert(t("dashboard.progress.reviewSessionFailed"));
     }
   };
 
@@ -194,12 +196,13 @@ export const Dashboard = () => {
   }, [selected]);
 
   const startLabel = selected
-    ? `Start ${
-        variationLabelOf(selected.name) === "Main line"
-          ? baseNameOf(selected.name)
-          : variationLabelOf(selected.name)
-      }`
-    : "Choose an opening";
+    ? t("dashboard.openings.startLabel", {
+        name:
+          variationLabelOf(selected.name) === "Main line"
+            ? baseNameOf(selected.name)
+            : variationLabelOf(selected.name),
+      })
+    : t("dashboard.openings.chooseOpening");
 
   const previewFullName = selected
     ? variationLabelOf(selected.name) === "Main line"
@@ -210,15 +213,15 @@ export const Dashboard = () => {
   return (
     <main className="page">
       <div className="card">
-        <section className="progress-overview" aria-label="Your progress">
-          <div className="progress-group" aria-label="Training progress">
-            <h2 className="progress-group-label">Training</h2>
+        <section className="progress-overview" aria-label={t("dashboard.progress.yourProgress")}>
+          <div className="progress-group" aria-label={t("dashboard.progress.trainingLabel")}>
+            <h2 className="progress-group-label">{t("dashboard.progress.trainingHeading")}</h2>
             <div className="progress-group-row">
               <div className="progress-stat">
                 <span className="progress-stat-value">
                   {summary?.positionsSeen ?? 0}
                 </span>
-                <span className="progress-stat-label">Positions trained</span>
+                <span className="progress-stat-label">{t("dashboard.progress.positionsTrained")}</span>
               </div>
               <div className="progress-stat">
                 <span className="progress-stat-value">
@@ -226,7 +229,7 @@ export const Dashboard = () => {
                     ? `${Math.round(summary.overallAccuracy * 100)}%`
                     : "—"}
                 </span>
-                <span className="progress-stat-label">Accuracy</span>
+                <span className="progress-stat-label">{t("dashboard.progress.accuracy")}</span>
               </div>
               <div className="progress-stat">
                 <span className="progress-stat-value">
@@ -234,12 +237,14 @@ export const Dashboard = () => {
                   {(summary?.currentStreak ?? 0) > 0 ? " 🔥" : ""}
                 </span>
                 <span className="progress-stat-label">
-                  Day streak{summary?.longestStreak ? ` · best ${summary.longestStreak}` : ""}
+                  {summary?.longestStreak
+                    ? t("dashboard.progress.dayStreakBest", { best: summary.longestStreak })
+                    : t("dashboard.progress.dayStreak")}
                 </span>
               </div>
               <div className="progress-stat progress-stat--mastery">
                 <span className="progress-stat-value">{summary?.mastered ?? 0}</span>
-                <span className="progress-stat-label">Mastered</span>
+                <span className="progress-stat-label">{t("dashboard.progress.mastered")}</span>
                 {summary && summary.positionsSeen > 0 && (
                   <div className="mastery-bar" aria-hidden="true">
                     <div
@@ -261,17 +266,20 @@ export const Dashboard = () => {
                   disabled={dueCount === 0}
                   onClick={startReviewSession}
                 >
-                  Review due ({dueCount})
+                  {t("dashboard.progress.reviewDue", { count: dueCount })}
                 </button>
               </div>
               {weakSpots.length > 0 && (
                 <div className="progress-weak-spots">
-                  <span className="progress-stat-label">Weak spots</span>
+                  <span className="progress-stat-label">{t("dashboard.progress.weakSpots")}</span>
                   <ul>
                     {weakSpots.map((w) => (
                       <li key={`${w.openingName ?? "Opening"}-${w.fen ?? ""}-${w.correctMoveUci ?? ""}`}>
-                        {w.openingName ?? "Opening"} — {w.correctCount}/{w.attempts}{" "}
-                        correct
+                        {t("dashboard.progress.weakSpotItem", {
+                          name: w.openingName ?? t("dashboard.progress.weakSpotFallbackName"),
+                          correct: w.correctCount,
+                          attempts: w.attempts,
+                        })}
                       </li>
                     ))}
                   </ul>
@@ -280,14 +288,14 @@ export const Dashboard = () => {
             </div>
           </div>
 
-          <div className="progress-group progress-group--puzzles" aria-label="Puzzle progress">
-            <h2 className="progress-group-label">Puzzles</h2>
+          <div className="progress-group progress-group--puzzles" aria-label={t("dashboard.progress.puzzleLabel")}>
+            <h2 className="progress-group-label">{t("dashboard.progress.puzzlesHeading")}</h2>
             <div className="progress-group-row">
               <div className="progress-stat">
                 <span className="progress-stat-value">
                   {puzzleSummary?.puzzlesSeen ?? 0}
                 </span>
-                <span className="progress-stat-label">Puzzles solved</span>
+                <span className="progress-stat-label">{t("dashboard.progress.puzzlesSolved")}</span>
               </div>
               <div className="progress-stat">
                 <span className="progress-stat-value">
@@ -295,11 +303,11 @@ export const Dashboard = () => {
                     ? `${Math.round(puzzleSummary.overallAccuracy * 100)}%`
                     : "—"}
                 </span>
-                <span className="progress-stat-label">Accuracy</span>
+                <span className="progress-stat-label">{t("dashboard.progress.accuracy")}</span>
               </div>
               <div className="progress-stat">
                 <span className="progress-stat-value">{puzzleSummary?.mastered ?? 0}</span>
-                <span className="progress-stat-label">Mastered</span>
+                <span className="progress-stat-label">{t("dashboard.progress.mastered")}</span>
               </div>
               <div className="progress-stat">
                 <button
@@ -307,7 +315,7 @@ export const Dashboard = () => {
                   className="progress-review-btn"
                   onClick={() => navigate("/puzzles")}
                 >
-                  Practice puzzles
+                  {t("dashboard.progress.practicePuzzles")}
                 </button>
               </div>
             </div>
@@ -317,7 +325,7 @@ export const Dashboard = () => {
         <section className="opening-browser">
           <header className="ob-toolbar">
             <div className="ob-heading">
-              <h1 className="ob-title">Openings</h1>
+              <h1 className="ob-title">{t("dashboard.openings.title")}</h1>
               <p className="ob-sub">{subText}</p>
             </div>
             <span className="ob-grow" />
@@ -327,8 +335,8 @@ export const Dashboard = () => {
               </span>
               <input
                 type="search"
-                aria-label="Search openings"
-                placeholder="Search openings or ECO…"
+                aria-label={t("dashboard.openings.searchAriaLabel")}
+                placeholder={t("dashboard.openings.searchPlaceholder")}
                 value={query}
                 autoComplete="off"
                 onChange={(e) => {
@@ -344,12 +352,14 @@ export const Dashboard = () => {
                   className="ob-sort"
                   onClick={() => setSortAZ((s) => !s)}
                 >
-                  Sort: {sortAZ ? "A–Z" : "Popular"}
+                  {t("dashboard.openings.sortButton", {
+                    mode: sortAZ ? t("dashboard.openings.sortAZ") : t("dashboard.openings.sortPopular"),
+                  })}
                 </button>
                 <div
                   className="ob-color-filter"
                   role="radiogroup"
-                  aria-label="Filter by color"
+                  aria-label={t("dashboard.openings.filterByColor")}
                 >
                   <button
                     type="button"
@@ -360,7 +370,7 @@ export const Dashboard = () => {
                     }`}
                     onClick={() => setColorFilter("all")}
                   >
-                    All
+                    {t("dashboard.openings.all")}
                   </button>
                   <button
                     type="button"
@@ -371,7 +381,7 @@ export const Dashboard = () => {
                     }`}
                     onClick={() => setColorFilter("w")}
                   >
-                    White
+                    {t("dashboard.openings.white")}
                   </button>
                   <button
                     type="button"
@@ -382,7 +392,7 @@ export const Dashboard = () => {
                     }`}
                     onClick={() => setColorFilter("b")}
                   >
-                    Black
+                    {t("dashboard.openings.black")}
                   </button>
                 </div>
               </>
@@ -404,9 +414,9 @@ export const Dashboard = () => {
 
               {view === "variations" && activeGroup && (
                 <>
-                  <nav className="ob-crumbs" aria-label="Breadcrumb">
+                  <nav className="ob-crumbs" aria-label={t("dashboard.openings.breadcrumb")}>
                     <button type="button" onClick={goHome}>
-                      All openings
+                      {t("dashboard.openings.allOpenings")}
                     </button>
                     <span className="sep">/</span>
                     <span className="here">{activeGroup.base}</span>
@@ -459,7 +469,7 @@ export const Dashboard = () => {
                     ♞
                   </span>
                   <p className="opening-description opening-description--empty">
-                    Pick an opening to preview the line and start training.
+                    {t("dashboard.openings.pickToPreview")}
                   </p>
                 </div>
               )}
@@ -467,7 +477,7 @@ export const Dashboard = () => {
               <div
                 className="ob-color-toggle"
                 role="radiogroup"
-                aria-label="Play as"
+                aria-label={t("dashboard.openings.playAs")}
               >
                 <button
                   type="button"
@@ -476,7 +486,7 @@ export const Dashboard = () => {
                   className={`ob-color-btn${playerColor === "w" ? " selected" : ""}`}
                   onClick={() => setPlayerColor("w")}
                 >
-                  Play as White
+                  {t("dashboard.openings.playAsWhite")}
                 </button>
                 <button
                   type="button"
@@ -485,7 +495,7 @@ export const Dashboard = () => {
                   className={`ob-color-btn${playerColor === "b" ? " selected" : ""}`}
                   onClick={() => setPlayerColor("b")}
                 >
-                  Play as Black
+                  {t("dashboard.openings.playAsBlack")}
                 </button>
               </div>
 

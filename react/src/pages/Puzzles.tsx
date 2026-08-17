@@ -1,5 +1,6 @@
 // react/src/pages/Puzzles.tsx
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
 import api from "../api";
@@ -25,6 +26,7 @@ type NextPuzzle = {
 };
 
 export const Puzzles = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [puzzleId, setPuzzleId] = useState<string | null>(null);
@@ -81,13 +83,13 @@ export const Puzzles = () => {
         setPuzzleId(null);
         setLastMoveUci("");
         setNoPuzzlesDue(true);
-        setFeedback("No puzzles due right now — check back later.");
+        setFeedback(t("puzzles.noPuzzlesDue"));
         return;
       }
       setLastMoveUci("");
-      setFeedback("Failed to load a puzzle. Check your connection.");
+      setFeedback(t("puzzles.loadFailed"));
     }
-  }, [navigate, setOrientation]);
+  }, [navigate, setOrientation, t]);
 
   useEffect(() => {
     const run = async () => {
@@ -109,7 +111,7 @@ export const Puzzles = () => {
         if (!isMountedRef.current) return;
 
         if (res.data.correct) {
-          setFeedback("✅ Correct!");
+          setFeedback(t("puzzles.correct"));
           setSolved((n) => n + 1);
           setStreak((n) => {
             const next = n + 1;
@@ -118,7 +120,7 @@ export const Puzzles = () => {
           });
           advanceTimeoutRef.current = setTimeout(() => void loadNext(), 600);
         } else {
-          setFeedback(`❌ ${res.data.reason || "Not quite — try again."}`);
+          setFeedback(`❌ ${res.data.reason || t("puzzles.incorrectFallback")}`);
           setFen(preFen); // snap back to the puzzle position
           setStreak(0);
         }
@@ -126,12 +128,12 @@ export const Puzzles = () => {
         if (!isMountedRef.current) return;
         const e = err as AxiosError;
         if (e.response?.status === 401) navigate("/login");
-        setFeedback("Error submitting move.");
+        setFeedback(t("puzzles.submitError"));
       } finally {
         if (isMountedRef.current) setIsSubmitting(false);
       }
     },
-    [puzzleId, isSubmitting, loadNext, navigate],
+    [puzzleId, isSubmitting, loadNext, navigate, t],
   );
 
   const skip = useCallback(() => {
@@ -146,7 +148,7 @@ export const Puzzles = () => {
   const statusKind = feedbackKind === "neutral" ? "your" : feedbackKind;
   // Puzzles keeps its own neutral icon (pawn) rather than deriveStatus's king.
   const statusIcon = feedbackKind === "neutral" ? "♟" : feedbackIcon;
-  const statusMsg = feedback || (puzzleId ? "Find the best move." : "");
+  const statusMsg = feedback || (puzzleId ? t("puzzles.findBestMove") : "");
 
   const onMove = useCallback(
     (from: string, to: string): boolean => {
@@ -203,7 +205,7 @@ export const Puzzles = () => {
             <div className="board-under">
               <span className={`turn${solverColor === "b" ? " black" : ""}`}>
                 <span className="turn-dot" aria-hidden="true" />
-                {solverColor === "b" ? "Black to move" : "White to move"}
+                {solverColor === "b" ? t("training.blackToMove") : t("training.whiteToMove")}
               </span>
               <div className="board-toolbar">
                 <FlipBoardButton className="icon-btn" onClick={flip} />
@@ -213,25 +215,25 @@ export const Puzzles = () => {
 
           <aside className="train-rail">
             <div className="rail-head">
-              <div className="rail-eyebrow">Puzzles</div>
+              <div className="rail-eyebrow">{t("puzzles.eyebrow")}</div>
               <div className="rail-title">
-                <h1>Puzzle Training</h1>
+                <h1>{t("puzzles.title")}</h1>
                 {rating != null && (
-                  <span className="eco-chip">Rating ~{rating}</span>
+                  <span className="eco-chip">{t("puzzles.rating", { rating })}</span>
                 )}
               </div>
             </div>
 
             <div className="puzzles-stats">
-              <span className="stat-pill">Solved: {solved}</span>
+              <span className="stat-pill">{t("puzzles.solved", { count: solved })}</span>
               <span
                 className={
                   streak > 0 ? "stat-pill is-active" : "stat-pill"
                 }
               >
-                Streak: {streak}
+                {t("puzzles.streak", { count: streak })}
                 {streak > 0 ? " 🔥" : ""}
-                {bestStreak > 0 ? ` · best ${bestStreak}` : ""}
+                {bestStreak > 0 ? t("puzzles.streakBest", { best: bestStreak }) : ""}
               </span>
             </div>
 
@@ -253,13 +255,13 @@ export const Puzzles = () => {
                 onClick={skip}
                 disabled={isSubmitting}
               >
-                Skip puzzle ›
+                {t("puzzles.skipPuzzle")}
               </button>
             )}
 
             {noPuzzlesDue && (
               <Link to="/dashboard" className="puzzles-back-link">
-                ← Back to dashboard
+                {t("puzzles.backToDashboard")}
               </Link>
             )}
           </aside>
