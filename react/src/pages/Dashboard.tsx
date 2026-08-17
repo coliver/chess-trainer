@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api";
+import { useApiResource } from "../hooks/useApiResource";
 
 import BoardPreview from "../components/openings/BoardPreview";
 import OpeningCard from "../components/openings/OpeningCard";
@@ -60,11 +61,6 @@ export const Dashboard = () => {
   const [sortAZ, setSortAZ] = useState(false);
   const [searchLimit, setSearchLimit] = useState(SEARCH_PAGE);
 
-  const [summary, setSummary] = useState<ProgressSummary | null>(null);
-  const [dueCount, setDueCount] = useState(0);
-  const [weakSpots, setWeakSpots] = useState<WeakSpot[]>([]);
-  const [puzzleSummary, setPuzzleSummary] = useState<PuzzleSummary | null>(null);
-
   useEffect(() => {
     api
       .get("/openings")
@@ -77,24 +73,18 @@ export const Dashboard = () => {
       .catch((e) => console.error("Error loading openings:", e));
   }, []);
 
-  useEffect(() => {
-    api
-      .get("/progress/summary")
-      .then((res) => setSummary(res.data ?? null))
-      .catch((e) => console.error("Error loading progress summary:", e));
-    api
-      .get("/progress/due")
-      .then((res) => setDueCount((res.data ?? []).length))
-      .catch((e) => console.error("Error loading due positions:", e));
-    api
-      .get("/progress/weak-spots")
-      .then((res) => setWeakSpots((res.data ?? []).slice(0, 5)))
-      .catch((e) => console.error("Error loading weak spots:", e));
-    api
-      .get("/puzzles/summary")
-      .then((res) => setPuzzleSummary(res.data ?? null))
-      .catch((e) => console.error("Error loading puzzle summary:", e));
-  }, []);
+  const summary = useApiResource<ProgressSummary | null>(
+    "/progress/summary",
+    null,
+  );
+  const dueList = useApiResource<unknown[]>("/progress/due", []);
+  const dueCount = dueList.length;
+  const weakSpotsAll = useApiResource<WeakSpot[]>("/progress/weak-spots", []);
+  const weakSpots = useMemo(() => weakSpotsAll.slice(0, 5), [weakSpotsAll]);
+  const puzzleSummary = useApiResource<PuzzleSummary | null>(
+    "/puzzles/summary",
+    null,
+  );
 
   const groups = useMemo(() => groupByBase(openings), [openings]);
 
