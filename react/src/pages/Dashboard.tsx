@@ -1,5 +1,5 @@
 // \frontend\src\pages\Dashboard.tsx
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api";
 import { useApiResource } from "../hooks/useApiResource";
@@ -60,6 +60,7 @@ export const Dashboard = () => {
   const [playerColor, setPlayerColor] = useState<"w" | "b">("w");
   const [sortAZ, setSortAZ] = useState(false);
   const [searchLimit, setSearchLimit] = useState(SEARCH_PAGE);
+  const previewRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     api
@@ -164,6 +165,17 @@ export const Dashboard = () => {
   const goHome = () => {
     setActiveBase(null);
   };
+
+  // On narrow viewports the preview is CSS-reordered above the list (see
+  // dashboard.css `.ob-preview { order: -1 }` under the 980px breakpoint),
+  // but picking a variation from a long scrolled-down list doesn't move the
+  // viewport there on its own. `block: "nearest"` keeps this a no-op on the
+  // desktop side-by-side layout, where the preview is already visible.
+  useEffect(() => {
+    if (selected) {
+      previewRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  }, [selected]);
 
   const startLabel = selected
     ? `Start ${
@@ -366,7 +378,10 @@ export const Dashboard = () => {
               )}
             </div>
 
-            <aside className={`ob-preview${selected ? "" : " is-empty"}`}>
+            <aside
+              ref={previewRef}
+              className={`ob-preview${selected ? "" : " is-empty"}`}
+            >
               {selected ? (
                 <div className="ob-preview-inner">
                   <BoardPreview
