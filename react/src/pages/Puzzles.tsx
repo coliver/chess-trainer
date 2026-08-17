@@ -45,11 +45,25 @@ export const Puzzles = () => {
     fenRef.current = fen;
   }, [fen]);
 
+  // Tracks the "advance to next puzzle" timeout scheduled after a correct
+  // answer, so it can be cancelled on unmount — otherwise it fires after the
+  // user navigates away and calls loadNext() against a dead component.
+  const advanceTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isMountedRef = useRef(true);
+  useEffect(() => {
+    isMountedRef.current = true;
+    return () => {
+      isMountedRef.current = false;
+      if (advanceTimeoutRef.current) clearTimeout(advanceTimeoutRef.current);
+    };
+  }, []);
+
   const loadNext = useCallback(async () => {
     setFeedback("");
     setNoPuzzlesDue(false);
     try {
       const res = await api.get<NextPuzzle>("/puzzles/next");
+      if (!isMountedRef.current) return;
       setPuzzleId(res.data.puzzleId);
       setFen(res.data.fen);
       setCorrectMoveUci(res.data.correctMoveUci);
@@ -57,6 +71,7 @@ export const Puzzles = () => {
       setRating(res.data.rating);
       setOrientation(sideToMove(res.data.fen) === "b" ? "black" : "white");
     } catch (err) {
+      if (!isMountedRef.current) return;
       const e = err as AxiosError;
       if (e.response?.status === 401) {
         navigate("/login");
@@ -91,6 +106,7 @@ export const Puzzles = () => {
           reason: string;
           fenAfter?: string | null;
         }>(`/puzzles/${puzzleId}/attempts`, { moveUci });
+        if (!isMountedRef.current) return;
 
         if (res.data.correct) {
           setFeedback("✅ Correct!");
@@ -100,18 +116,19 @@ export const Puzzles = () => {
             setBestStreak((best) => Math.max(best, next));
             return next;
           });
-          setTimeout(() => void loadNext(), 600);
+          advanceTimeoutRef.current = setTimeout(() => void loadNext(), 600);
         } else {
           setFeedback(`❌ ${res.data.reason || "Not quite — try again."}`);
           setFen(preFen); // snap back to the puzzle position
           setStreak(0);
         }
       } catch (err) {
+        if (!isMountedRef.current) return;
         const e = err as AxiosError;
         if (e.response?.status === 401) navigate("/login");
         setFeedback("Error submitting move.");
       } finally {
-        setIsSubmitting(false);
+        if (isMountedRef.current) setIsSubmitting(false);
       }
     },
     [puzzleId, isSubmitting, loadNext, navigate],

@@ -797,7 +797,13 @@ describe("useTrainingSession", () => {
     await waitFor(() => expect(result.current.itemId).toBe("1"));
     const prevFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
-    const pending = result.current.submitMove("e2e4", prevFen);
+    // submitMove sets state synchronously before its first await (setIsSubmitting),
+    // so the call itself must be wrapped in act — not just the awaited tail —
+    // or that update escapes act and warns/flakes under load (e.g. coverage runs).
+    let pending!: ReturnType<typeof result.current.submitMove>;
+    act(() => {
+      pending = result.current.submitMove("e2e4", prevFen);
+    });
     unmount();
 
     await act(async () => {
