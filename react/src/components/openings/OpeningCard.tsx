@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Board from "../Board";
 import { previewFen, uciListToMoves } from "@knight-school/chess-core";
-import type { OpeningGroup } from "../../lib/groupOpenings";
+import { colorOf, type OpeningGroup } from "../../lib/groupOpenings";
 
 /**
  * A base-opening card: board thumbnail (of the line's resulting position),
@@ -42,6 +42,7 @@ export default function OpeningCard({
     () => previewFen(rep, uciListToMoves(rep.uci_moves).length),
     [rep],
   );
+  const orientation = colorOf(group.base) === "b" ? "black" : "white";
 
   return (
     <button
@@ -55,12 +56,13 @@ export default function OpeningCard({
         {visible ? (
           <Board
             position={fen}
+            orientation={orientation}
             interactive={false}
             showCoordinates={false}
             animated={false}
           />
         ) : (
-          <div className="oc-thumb-ph" aria-hidden="true" />
+          <div className="oc-thumb-ph" aria-hidden="true" data-testid="oc-thumb-placeholder" />
         )}
       </div>
       <div className="oc-name">{group.base}</div>

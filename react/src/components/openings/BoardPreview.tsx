@@ -6,9 +6,12 @@ import type { Opening } from "../../pages/Dashboard";
 export default function BoardPreview({
   openings,
   selectedOpeningName,
+  playerColor,
 }: {
   openings: Opening[];
   selectedOpeningName: string | null;
+  /** Which side to view the board from — follows the Play as White/Black toggle. */
+  playerColor: "w" | "b";
 }) {
   // Callers remount this via a `key` on the selected opening, so selectedPly
   // starts fresh for each newly previewed line — a ply index never leaks
@@ -57,6 +60,8 @@ export default function BoardPreview({
     [opening, selectedPly],
   );
 
+  const orientation = playerColor === "b" ? "black" : "white";
+
   return (
     <div className="boardPreview" ref={containerRef}>
       <div
@@ -65,6 +70,7 @@ export default function BoardPreview({
       >
         <Board
           position={previewPosition}
+          orientation={orientation}
           interactive={false}
           showCoordinates={false}
         />
