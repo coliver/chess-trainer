@@ -1,0 +1,147 @@
+{
+  "header": {
+    "title": "Knight School",
+    "greetingMorning": "Qapla'! Good morning, warrior ☀️",
+    "greetingAfternoon": "Qapla'! Good afternoon, warrior 🌤️",
+    "greetingEvening": "Qapla'! Good evening, warrior 🌙",
+    "nav": "Primary",
+    "openings": "Openings",
+    "puzzles": "Puzzles of Honor",
+    "login": "nuqneH — Log in",
+    "register": "Join the Empire",
+    "logout": "Leave with honor",
+    "viewSource": "View source on GitHub"
+  },
+  "language": {
+    "toggle": "Language"
+  },
+  "theme": {
+    "toggle": "Toggle theme"
+  },
+  "flipBoard": {
+    "label": "Flip board"
+  },
+  "dashboard": {
+    "progress": {
+      "yourProgress": "Your progress, warrior",
+      "trainingLabel": "Training progress",
+      "trainingHeading": "Training of Honor",
+      "positionsTrained": "Positions conquered",
+      "accuracy": "Accuracy",
+      "dayStreak": "Day streak",
+      "dayStreakBest": "Day streak · best {{best}}",
+      "mastered": "Mastered",
+      "reviewDue": "Review due ({{count}})",
+      "weakSpots": "Weak spots",
+      "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} correct",
+      "weakSpotFallbackName": "Opening",
+      "puzzleLabel": "Puzzle progress",
+      "puzzlesHeading": "Puzzles of Honor",
+      "puzzlesSolved": "Puzzles solved",
+      "practicePuzzles": "Practice puzzles",
+      "startSessionFailed": "Failed to start session. Check your connection or token.",
+      "reviewSessionFailed": "No positions due for review yet."
+    },
+    "openings": {
+      "title": "Openings, Qapla'!",
+      "searchAriaLabel": "Search openings",
+      "searchPlaceholder": "Search openings or ECO…",
+      "sortAZ": "A–Z",
+      "sortPopular": "Most honored",
+      "sortButton": "Sort: {{mode}}",
+      "filterByColor": "Filter by color",
+      "all": "All",
+      "white": "White",
+      "black": "Black",
+      "breadcrumb": "Breadcrumb",
+      "allOpenings": "All openings",
+      "playAs": "Play as",
+      "playAsWhite": "Play as White",
+      "playAsBlack": "Play as Black",
+      "pickToPreview": "Choose an opening to preview the line and begin training.",
+      "startLabel": "Engage: {{name}}",
+      "chooseOpening": "Choose an opening",
+      "matches_one": "{{count}} match",
+      "matches_other": "{{count}} matches",
+      "variationsInLibrary": "{{count}} variations in the full library",
+      "openingsToTrain_one": "{{count}} opening · pick one to train",
+      "openingsToTrain_other": "{{count}} openings · pick one to train",
+      "variationCount_one": "{{count}} variation",
+      "variationCount_other": "{{count}} variations",
+      "boardPreviewStart": "Charge",
+      "boardPreviewAfterPly": "After ply {{ply}}"
+    }
+  },
+  "puzzles": {
+    "noPuzzlesDue": "No puzzles due right now — check back later, warrior.",
+    "loadFailed": "Failed to load a puzzle. Check your connection.",
+    "correct": "✅ Qapla'!",
+    "incorrectFallback": "Not quite — try again, petaQ.",
+    "submitError": "Error submitting move.",
+    "findBestMove": "Find the best move.",
+    "eyebrow": "Puzzles of Honor",
+    "title": "Puzzle Training",
+    "rating": "Rating ~{{rating}}",
+    "solved": "Solved: {{count}}",
+    "streak": "Streak: {{count}}",
+    "streakBest": " · best {{best}}",
+    "skipPuzzle": "Skip puzzle ›",
+    "backToDashboard": "← Back to dashboard"
+  },
+  "training": {
+    "whiteToMove": "White to move",
+    "blackToMove": "Black to move",
+    "showHint": "Show a hint, warrior",
+    "eyebrow": "Training",
+    "prev": "‹ Prev",
+    "next": "Next ›",
+    "movePlaceholder": "or type a move, e.g. e2e4",
+    "play": "Play",
+    "jumpToLatest": "Jump to latest before submitting",
+    "backToOpenings": "← Back to openings"
+  },
+  "auth": {
+    "login": {
+      "title": "Login",
+      "subtitle": "nuqneH. Welcome back, warrior.",
+      "usernameLabel": "Username",
+      "passwordLabel": "Password",
+      "submit": "Submit",
+      "submitting": "Submitting...",
+      "emailNotVerified": "Please verify your email before logging in",
+      "resendVerification": "Resend verification email",
+      "resendSending": "Sending...",
+      "resendSent": "Sent!",
+      "needAccount": "Need an account?",
+      "registerLink": "Register",
+      "errorGeneric": "An unexpected error occurred.",
+      "errorLoginFailed": "Failed to Login",
+      "errorResendFailed": "Failed to resend verification email"
+    },
+    "register": {
+      "title": "Register",
+      "subtitle": "Join the Empire.",
+      "emailLabel": "Email",
+      "usernameLabel": "Username",
+      "passwordLabel": "Password",
+      "submit": "Register",
+      "submitting": "Registering...",
+      "successMessage": "Registration successful! Check your inbox at <strong>{{email}}</strong> for a verification link before logging in.",
+      "returnToLogin": "Return to login",
+      "haveAccount": "Already have an account?",
+      "loginLink": "Login",
+      "errorGeneric": "Failed to register. Please try again later."
+    },
+    "verifyEmail": {
+      "loadingTitle": "Verifying...",
+      "loadingSubtitle": "Verifying your email…",
+      "successTitle": "Email Verified",
+      "successSubtitleWithEmail": "{{email}} has been verified! Qapla'! You can now log in.",
+      "successSubtitleNoEmail": "Your email has been verified! Qapla'! You can now log in.",
+      "goToLogin": "Go to Login",
+      "errorTitle": "Verification Failed",
+      "errorSubtitle": "This verification link is invalid or expired.",
+      "returnToLogin": "Return to Login"
+    }
+  }
+}

@@ -2,6 +2,7 @@
 - feat(i18n): add `scripts/sync-locales.mjs` (`npm run i18n:sync` / `i18n:check`) so `en.json` is the single source of truth for translation keys — it stubs missing keys and drops stale ones across every other locale file instead of hand-copying JSON structure; `i18n.ts` and `LanguageToggle.tsx` now auto-discover `locales/*.json` via `import.meta.glob`, so adding a language no longer touches either file
 - feat(i18n): add French and German locales, and localize the remaining hardcoded strings (opening-card variation count, board-preview "Start" button and ply tooltip)
 - feat(i18n): add Italian, Dutch, Polish, Portuguese, Russian, and Turkish locales
+- feat(i18n): add a Klingon (`en-x-klingon`) locale — English flavored with canonical Klingon interjections, alongside `en-x-pirate`
 - fix(i18n): drop dead `language.english`/`language.spanish` keys — never rendered by any component (the language switcher shows flag emoji only)
 - Shouts to Patricia, Maritza, and Maritza's husband for helping out with the Spanish translation!
 - feat(dashboard): add a White/Black filter above the opening cards grid — openings named "X Defense/Defence" classify as Black's repertoire (`colorOf` in `groupOpenings.ts`), everything else as White's, cutting the ~149-card grid down per color

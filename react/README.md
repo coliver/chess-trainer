@@ -204,7 +204,7 @@ On correct moves, `fenAfter` updates the board and, if `sessionCompleted` is tru
 
 ## 🌐 Internationalization (i18n)
 
-The UI chrome (header, auth pages, dashboard, training, and puzzles pages) is localized via [`react-i18next`](https://react.i18next.com/), with translation resources in `src/i18n/locales/*.json` — currently `en`, `es`, `fr`, `de`, `it`, `nl`, `pl`, `pt`, `ru`, `tr`, and a just-for-fun `en-x-pirate`. `src/i18n/i18n.ts` initializes `i18next` (imported once in `main.tsx`, and again in `vitest.setup.ts` so component tests render real strings instead of raw keys), auto-discovers every `locales/*.json` file via `import.meta.glob` (no per-language wiring needed), and reads/writes the chosen language to `localStorage` under the `language` key, mirroring `ThemeToggle.tsx`'s pattern for `theme`.
+The UI chrome (header, auth pages, dashboard, training, and puzzles pages) is localized via [`react-i18next`](https://react.i18next.com/), with translation resources in `src/i18n/locales/*.json` — currently `en`, `es`, `fr`, `de`, `it`, `nl`, `pl`, `pt`, `ru`, `tr`, and the just-for-fun `en-x-pirate`/`en-x-klingon` variants. `src/i18n/i18n.ts` initializes `i18next` (imported once in `main.tsx`, and again in `vitest.setup.ts` so component tests render real strings instead of raw keys), auto-discovers every `locales/*.json` file via `import.meta.glob` (no per-language wiring needed), and reads/writes the chosen language to `localStorage` under the `language` key, mirroring `ThemeToggle.tsx`'s pattern for `theme`.
 
 `LanguageToggle.tsx` (in the header, next to the theme toggle) renders a `<select>` whose options are derived from the same auto-discovered language list, each shown as a flag emoji; picking one calls `i18n.changeLanguage()`.
 
