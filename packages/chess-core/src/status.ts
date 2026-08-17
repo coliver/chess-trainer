@@ -11,6 +11,20 @@ export type StatusInfo = {
   sub: string;
 };
 
+/**
+ * Classify a feedback string by its ✅/❌ prefix into a status kind + icon.
+ * Single source of truth so pages don't each hand-roll (and drift on) the
+ * emoji-prefix mapping — used by deriveStatus below and by Puzzles directly.
+ */
+export function classifyFeedback(feedback: string): {
+  kind: "good" | "bad" | "neutral";
+  icon: string;
+} {
+  if (feedback.startsWith("✅")) return { kind: "good", icon: "✓" };
+  if (feedback.startsWith("❌")) return { kind: "bad", icon: "✗" };
+  return { kind: "neutral", icon: "♔" };
+}
+
 /** Derive the status banner (kind/icon/message/sub) from training state. */
 export function deriveStatus(params: {
   isSessionCompleted: boolean;
@@ -33,7 +47,7 @@ export function deriveStatus(params: {
   if (feedback.startsWith("✅")) {
     return {
       kind: "good",
-      icon: "✓",
+      icon: classifyFeedback(feedback).icon,
       message: feedback.replace(/^✅\s*/, ""),
       sub: "",
     };
@@ -42,7 +56,7 @@ export function deriveStatus(params: {
   if (feedback.startsWith("❌")) {
     return {
       kind: "bad",
-      icon: "✗",
+      icon: classifyFeedback(feedback).icon,
       message: feedback.replace(/^❌\s*/, ""),
       sub: "Try a different move.",
     };
