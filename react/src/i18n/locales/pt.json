@@ -1,0 +1,147 @@
+{
+  "header": {
+    "title": "Escola de Cavaleiros",
+    "greetingMorning": "Bom dia ☀️",
+    "greetingAfternoon": "Boa tarde 🌤️",
+    "greetingEvening": "Boa noite 🌙",
+    "nav": "Primário",
+    "openings": "Aberturas",
+    "puzzles": "Quebra-cabeças",
+    "login": "Entrar",
+    "register": "Cadastrar",
+    "logout": "Sair",
+    "viewSource": "Ver o código no GitHub"
+  },
+  "language": {
+    "toggle": "Idioma"
+  },
+  "theme": {
+    "toggle": "Alternar tema"
+  },
+  "flipBoard": {
+    "label": "Virar tabuleiro"
+  },
+  "dashboard": {
+    "progress": {
+      "yourProgress": "Seu progresso",
+      "trainingLabel": "Progresso do treino",
+      "trainingHeading": "Treino",
+      "positionsTrained": "Posições treinadas",
+      "accuracy": "Precisão",
+      "dayStreak": "Sequência de dias",
+      "dayStreakBest": "Sequência de dias · melhor {{best}}",
+      "mastered": "Dominaram",
+      "reviewDue": "Revisão pendente ({{count}})",
+      "weakSpots": "Pontos fracos",
+      "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} corretas",
+      "weakSpotFallbackName": "Abertura",
+      "puzzleLabel": "Progresso dos quebra-cabeças",
+      "puzzlesHeading": "Quebra-cabeças",
+      "puzzlesSolved": "Quebra-cabeças resolvidos",
+      "practicePuzzles": "Quebra-cabeças de prática",
+      "startSessionFailed": "Falha ao iniciar a sessão. Verifique sua conexão ou token.",
+      "reviewSessionFailed": "Ainda não há posições para revisão."
+    },
+    "openings": {
+      "title": "Aberturas",
+      "searchAriaLabel": "Buscar aberturas",
+      "searchPlaceholder": "Buscar aberturas ou ECO…",
+      "sortAZ": "A–Z",
+      "sortPopular": "Popular",
+      "sortButton": "Ordenar: {{mode}}",
+      "filterByColor": "Filtrar por cor",
+      "all": "Todas",
+      "white": "Brancas",
+      "black": "Pretas",
+      "breadcrumb": "Caminho",
+      "allOpenings": "Todas as aberturas",
+      "playAs": "Jogar como",
+      "playAsWhite": "Jogar com as Brancas",
+      "playAsBlack": "Jogar com as Pretas",
+      "pickToPreview": "Escolha uma abertura para visualizar a linha e começar o treino.",
+      "startLabel": "Iniciar {{name}}",
+      "chooseOpening": "Escolha uma abertura",
+      "matches_one": "{{count}} correspondência",
+      "matches_other": "{{count}} correspondências",
+      "variationsInLibrary": "{{count}} variações na biblioteca completa",
+      "openingsToTrain_one": "{{count}} abertura · escolha uma para treinar",
+      "openingsToTrain_other": "{{count}} aberturas · escolha uma para treinar",
+      "variationCount_one": "{{count}} variação",
+      "variationCount_other": "{{count}} variações",
+      "boardPreviewStart": "Iniciar",
+      "boardPreviewAfterPly": "Após o lance {{ply}}"
+    }
+  },
+  "puzzles": {
+    "noPuzzlesDue": "Nenhum quebra-cabeça pendente agora — volte mais tarde.",
+    "loadFailed": "Falha ao carregar um quebra-cabeça. Verifique sua conexão.",
+    "correct": "✅ Correto!",
+    "incorrectFallback": "Não exatamente — tente novamente.",
+    "submitError": "Erro ao enviar o lance.",
+    "findBestMove": "Encontre o melhor lance.",
+    "eyebrow": "Quebra-cabeças",
+    "title": "Treino de Quebra-cabeças",
+    "rating": "Avaliação ~{{rating}}",
+    "solved": "Resolvido: {{count}}",
+    "streak": "Sequência: {{count}}",
+    "streakBest": " · melhor {{best}}",
+    "skipPuzzle": "Pular quebra-cabeça ›",
+    "backToDashboard": "← Voltar ao painel"
+  },
+  "training": {
+    "whiteToMove": "Brancas para jogar",
+    "blackToMove": "Pretas para jogar",
+    "showHint": "Mostrar uma dica",
+    "eyebrow": "Treino",
+    "prev": "‹ Anterior",
+    "next": "Próximo ›",
+    "movePlaceholder": "ou digite um lance, por exemplo e2e4",
+    "play": "Jogar",
+    "jumpToLatest": "Vá para o mais recente antes de enviar",
+    "backToOpenings": "← Voltar às aberturas"
+  },
+  "auth": {
+    "login": {
+      "title": "Entrar",
+      "subtitle": "Bem-vindo de volta.",
+      "usernameLabel": "Usuário",
+      "passwordLabel": "Senha",
+      "submit": "Enviar",
+      "submitting": "Enviando...",
+      "emailNotVerified": "Por favor, verifique seu e-mail antes de entrar",
+      "resendVerification": "Reenviar e-mail de verificação",
+      "resendSending": "Enviando...",
+      "resendSent": "Enviado!",
+      "needAccount": "Precisa de uma conta?",
+      "registerLink": "Cadastrar",
+      "errorGeneric": "Ocorreu um erro inesperado.",
+      "errorLoginFailed": "Falha ao entrar",
+      "errorResendFailed": "Falha ao reenviar e-mail de verificação"
+    },
+    "register": {
+      "title": "Cadastrar",
+      "subtitle": "Crie sua conta.",
+      "emailLabel": "E-mail",
+      "usernameLabel": "Usuário",
+      "passwordLabel": "Senha",
+      "submit": "Cadastrar",
+      "submitting": "Cadastrando...",
+      "successMessage": "Cadastro concluído! Verifique sua caixa de entrada em <strong>{{email}}</strong> para encontrar um link de verificação antes de entrar.",
+      "returnToLogin": "Voltar para entrar",
+      "haveAccount": "Já tem uma conta?",
+      "loginLink": "Entrar",
+      "errorGeneric": "Falha ao cadastrar. Tente novamente mais tarde."
+    },
+    "verifyEmail": {
+      "loadingTitle": "Verificando...",
+      "loadingSubtitle": "Verificando seu e-mail…",
+      "successTitle": "E-mail verificado",
+      "successSubtitleWithEmail": "{{email}} foi verificado! Agora você pode entrar.",
+      "successSubtitleNoEmail": "Seu e-mail foi verificado! Agora você pode entrar.",
+      "goToLogin": "Ir para Entrar",
+      "errorTitle": "Falha na verificação",
+      "errorSubtitle": "Este link de verificação é inválido ou expirou.",
+      "returnToLogin": "Voltar para Entrar"
+    }
+  }
+}

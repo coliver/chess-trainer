@@ -12,7 +12,9 @@
     "test:playwright": "playwright test playwright-dashboard.spec.ts",
     "test:smoke": "playwright test playwright-prod-smoke.spec.ts",
     "test:watch": "vitest --watch",
-    "purgecss": "purgecss --config purgecss.config.cjs"
+    "purgecss": "purgecss --config purgecss.config.cjs",
+    "i18n:sync": "node scripts/sync-locales.mjs",
+    "i18n:check": "node scripts/sync-locales.mjs --check"
   },
   "dependencies": {
     "@knight-school/chess-core": "file:../packages/chess-core",

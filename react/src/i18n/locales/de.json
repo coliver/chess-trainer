@@ -1,0 +1,147 @@
+{
+  "header": {
+    "title": "Knight School",
+    "greetingMorning": "Guten Morgen ☀️",
+    "greetingAfternoon": "Guten Nachmittag 🌤️",
+    "greetingEvening": "Guten Abend 🌙",
+    "nav": "Primär",
+    "openings": "Eröffnungen",
+    "puzzles": "Rätsel",
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "logout": "Abmelden",
+    "viewSource": "Quelltext auf GitHub ansehen"
+  },
+  "language": {
+    "toggle": "Sprache"
+  },
+  "theme": {
+    "toggle": "Design wechseln"
+  },
+  "flipBoard": {
+    "label": "Brett drehen"
+  },
+  "dashboard": {
+    "progress": {
+      "yourProgress": "Dein Fortschritt",
+      "trainingLabel": "Trainingsfortschritt",
+      "trainingHeading": "Training",
+      "positionsTrained": "Trainierte Stellungen",
+      "accuracy": "Genauigkeit",
+      "dayStreak": "Tagesserie",
+      "dayStreakBest": "Tagesserie · beste {{best}}",
+      "mastered": "Beherrscht",
+      "reviewDue": "Wiederholung fällig ({{count}})",
+      "weakSpots": "Schwächen",
+      "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} richtig",
+      "weakSpotFallbackName": "Eröffnung",
+      "puzzleLabel": "Rätsel-Progress",
+      "puzzlesHeading": "Rätsel",
+      "puzzlesSolved": "Gelöste Rätsel",
+      "practicePuzzles": "Übungsrätsel",
+      "startSessionFailed": "Starten der Sitzung fehlgeschlagen. Prüfe deine Verbindung oder dein Token.",
+      "reviewSessionFailed": "Noch keine Stellungen zur Wiederholung vorhanden."
+    },
+    "openings": {
+      "title": "Eröffnungen",
+      "searchAriaLabel": "Eröffnungen durchsuchen",
+      "searchPlaceholder": "Eröffnungen oder ECO suchen…",
+      "sortAZ": "A–Z",
+      "sortPopular": "Beliebt",
+      "sortButton": "Sortieren: {{mode}}",
+      "filterByColor": "Nach Farbe filtern",
+      "all": "Alle",
+      "white": "Weiß",
+      "black": "Schwarz",
+      "breadcrumb": "Breadcrumb",
+      "allOpenings": "Alle Eröffnungen",
+      "playAs": "Spiel als",
+      "playAsWhite": "Spiel als Weiß",
+      "playAsBlack": "Spiel als Schwarz",
+      "pickToPreview": "Wähle eine Eröffnung aus, um die Linie anzusehen und mit dem Training zu starten.",
+      "startLabel": "{{name}} starten",
+      "chooseOpening": "Eröffnung auswählen",
+      "matches_one": "{{count}} Treffer",
+      "matches_other": "{{count}} Treffer",
+      "variationsInLibrary": "{{count}} Varianten in der gesamten Bibliothek",
+      "openingsToTrain_one": "{{count}} Eröffnung · wähle eine zum Trainieren",
+      "openingsToTrain_other": "{{count}} Eröffnungen · wähle eine zum Trainieren",
+      "variationCount_one": "{{count}} Variante",
+      "variationCount_other": "{{count}} Varianten",
+      "boardPreviewStart": "Start",
+      "boardPreviewAfterPly": "Nach Halbzug {{ply}}"
+    }
+  },
+  "puzzles": {
+    "noPuzzlesDue": "Aktuell sind keine Rätsel fällig — schau später wieder vorbei.",
+    "loadFailed": "Rätsel konnten nicht geladen werden. Prüfe deine Verbindung.",
+    "correct": "✅ Richtig!",
+    "incorrectFallback": "Nicht ganz — versuche es erneut.",
+    "submitError": "Fehler beim Übermitteln des Zugs.",
+    "findBestMove": "Finde den besten Zug.",
+    "eyebrow": "Rätsel",
+    "title": "Rätseltraining",
+    "rating": "Bewertung ~{{rating}}",
+    "solved": "Gelöst: {{count}}",
+    "streak": "Serie: {{count}}",
+    "streakBest": " · beste {{best}}",
+    "skipPuzzle": "Rätsel überspringen ›",
+    "backToDashboard": "← Zurück zum Dashboard"
+  },
+  "training": {
+    "whiteToMove": "Weiß am Zug",
+    "blackToMove": "Schwarz am Zug",
+    "showHint": "Tipp anzeigen",
+    "eyebrow": "Training",
+    "prev": "‹ Zurück",
+    "next": "Weiter ›",
+    "movePlaceholder": "oder gib einen Zug ein, z. B. e2e4",
+    "play": "Spielen",
+    "jumpToLatest": "Zum neuesten Zug springen, bevor du sendest",
+    "backToOpenings": "← Zurück zu den Eröffnungen"
+  },
+  "auth": {
+    "login": {
+      "title": "Anmelden",
+      "subtitle": "Willkommen zurück.",
+      "usernameLabel": "Benutzername",
+      "passwordLabel": "Passwort",
+      "submit": "Absenden",
+      "submitting": "Wird gesendet...",
+      "emailNotVerified": "Bitte verifiziere deine E-Mail, bevor du dich anmeldest",
+      "resendVerification": "Bestätigungs-E-Mail erneut senden",
+      "resendSending": "Wird gesendet...",
+      "resendSent": "Gesendet!",
+      "needAccount": "Du brauchst ein Konto?",
+      "registerLink": "Registrieren",
+      "errorGeneric": "Ein unerwarteter Fehler ist aufgetreten.",
+      "errorLoginFailed": "Anmeldung fehlgeschlagen",
+      "errorResendFailed": "Senden der Bestätigungs-E-Mail fehlgeschlagen"
+    },
+    "register": {
+      "title": "Registrieren",
+      "subtitle": "Erstelle dein Konto.",
+      "emailLabel": "E-Mail",
+      "usernameLabel": "Benutzername",
+      "passwordLabel": "Passwort",
+      "submit": "Registrieren",
+      "submitting": "Wird registriert...",
+      "successMessage": "Registrierung erfolgreich! Prüfe deinen Posteingang unter <strong>{{email}}</strong> auf einen Verifizierungslink, bevor du dich anmeldest.",
+      "returnToLogin": "Zur Anmeldung zurück",
+      "haveAccount": "Schon ein Konto?",
+      "loginLink": "Anmelden",
+      "errorGeneric": "Registrierung fehlgeschlagen. Bitte versuche es später erneut."
+    },
+    "verifyEmail": {
+      "loadingTitle": "Wird überprüft...",
+      "loadingSubtitle": "Deine E-Mail wird überprüft…",
+      "successTitle": "E-Mail bestätigt",
+      "successSubtitleWithEmail": "{{email}} wurde bestätigt! Du kannst dich jetzt anmelden.",
+      "successSubtitleNoEmail": "Deine E-Mail wurde bestätigt! Du kannst dich jetzt anmelden.",
+      "goToLogin": "Zur Anmeldung",
+      "errorTitle": "Bestätigung fehlgeschlagen",
+      "errorSubtitle": "Dieser Bestätigungslink ist ungültig oder abgelaufen.",
+      "returnToLogin": "Zur Anmeldung zurück"
+    }
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "header": {
+    "title": "Knight School",
+    "greetingMorning": "Bonjour ☀️",
+    "greetingAfternoon": "Bon après-midi 🌤️",
+    "greetingEvening": "Bonsoir 🌙",
+    "nav": "Menu principal",
+    "openings": "Ouvertures",
+    "puzzles": "Puzzles",
+    "login": "Connexion",
+    "register": "S’inscrire",
+    "logout": "Déconnexion",
+    "viewSource": "Voir le code sur GitHub"
+  },
+  "language": {
+    "toggle": "Langue"
+  },
+  "theme": {
+    "toggle": "Changer de thème"
+  },
+  "flipBoard": {
+    "label": "Retourner l’échiquier"
+  },
+  "dashboard": {
+    "progress": {
+      "yourProgress": "Votre progression",
+      "trainingLabel": "Progression d’entraînement",
+      "trainingHeading": "Entraînement",
+      "positionsTrained": "Positions entraînées",
+      "accuracy": "Précision",
+      "dayStreak": "Série de jours",
+      "dayStreakBest": "Série de jours · meilleure {{best}}",
+      "mastered": "Maîtrisées",
+      "reviewDue": "À revoir ({{count}})",
+      "weakSpots": "Points faibles",
+      "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} correct",
+      "weakSpotFallbackName": "Ouverture",
+      "puzzleLabel": "Progression des puzzles",
+      "puzzlesHeading": "Puzzles",
+      "puzzlesSolved": "Puzzles résolus",
+      "practicePuzzles": "Puzzles d’entraînement",
+      "startSessionFailed": "Impossible de démarrer la session. Vérifiez votre connexion ou votre jeton.",
+      "reviewSessionFailed": "Aucune position n’est encore due pour la révision."
+    },
+    "openings": {
+      "title": "Ouvertures",
+      "searchAriaLabel": "Rechercher des ouvertures",
+      "searchPlaceholder": "Rechercher des ouvertures ou un ECO…",
+      "sortAZ": "A–Z",
+      "sortPopular": "Populaires",
+      "sortButton": "Tri : {{mode}}",
+      "filterByColor": "Filtrer par couleur",
+      "all": "Toutes",
+      "white": "Blanc",
+      "black": "Noir",
+      "breadcrumb": "Fil d’Ariane",
+      "allOpenings": "Toutes les ouvertures",
+      "playAs": "Jouer en tant que",
+      "playAsWhite": "Jouer en Blanc",
+      "playAsBlack": "Jouer en Noir",
+      "pickToPreview": "Choisissez une ouverture pour prévisualiser la ligne et commencer l’entraînement.",
+      "startLabel": "Démarrer {{name}}",
+      "chooseOpening": "Choisir une ouverture",
+      "matches_one": "{{count}} correspondance",
+      "matches_other": "{{count}} correspondances",
+      "variationsInLibrary": "{{count}} variantes dans la bibliothèque complète",
+      "openingsToTrain_one": "{{count}} ouverture · choisissez-en une pour vous entraîner",
+      "openingsToTrain_other": "{{count}} ouvertures · choisissez-en une pour vous entraîner",
+      "variationCount_one": "{{count}} variante",
+      "variationCount_other": "{{count}} variantes",
+      "boardPreviewStart": "Départ",
+      "boardPreviewAfterPly": "Après le coup {{ply}}"
+    }
+  },
+  "puzzles": {
+    "noPuzzlesDue": "Aucun puzzle à faire pour le moment — revenez plus tard.",
+    "loadFailed": "Impossible de charger un puzzle. Vérifiez votre connexion.",
+    "correct": "✅ Correct !",
+    "incorrectFallback": "Pas tout à fait — réessayez.",
+    "submitError": "Erreur lors de l’envoi du coup.",
+    "findBestMove": "Trouvez le meilleur coup.",
+    "eyebrow": "Entraînement de puzzles",
+    "title": "Entraînement de puzzles",
+    "rating": "Note ~{{rating}}",
+    "solved": "Résolus : {{count}}",
+    "streak": "Série : {{count}}",
+    "streakBest": " · meilleure {{best}}",
+    "skipPuzzle": "Passer le puzzle ›",
+    "backToDashboard": "← Retour au tableau de bord"
+  },
+  "training": {
+    "whiteToMove": "Au trait : Blanc",
+    "blackToMove": "Au trait : Noir",
+    "showHint": "Afficher un indice",
+    "eyebrow": "Entraînement",
+    "prev": "‹ Précédent",
+    "next": "Suivant ›",
+    "movePlaceholder": "ou saisissez un coup, par ex. e2e4",
+    "play": "Jouer",
+    "jumpToLatest": "Aller au dernier coup avant de valider",
+    "backToOpenings": "← Retour aux ouvertures"
+  },
+  "auth": {
+    "login": {
+      "title": "Connexion",
+      "subtitle": "Bon retour.",
+      "usernameLabel": "Nom d’utilisateur",
+      "passwordLabel": "Mot de passe",
+      "submit": "Se connecter",
+      "submitting": "Connexion…",
+      "emailNotVerified": "Veuillez vérifier votre email avant de vous connecter",
+      "resendVerification": "Renvoyer l’email de vérification",
+      "resendSending": "Envoi…",
+      "resendSent": "Envoyé !",
+      "needAccount": "Pas encore de compte ?",
+      "registerLink": "S’inscrire",
+      "errorGeneric": "Une erreur inattendue est survenue.",
+      "errorLoginFailed": "Échec de la connexion",
+      "errorResendFailed": "Impossible de renvoyer l’email de vérification"
+    },
+    "register": {
+      "title": "S’inscrire",
+      "subtitle": "Créez votre compte.",
+      "emailLabel": "Email",
+      "usernameLabel": "Nom d’utilisateur",
+      "passwordLabel": "Mot de passe",
+      "submit": "Créer un compte",
+      "submitting": "Inscription…",
+      "successMessage": "Inscription réussie ! Vérifiez votre boîte de réception à <strong>{{email}}</strong> pour un lien de vérification avant de vous connecter.",
+      "returnToLogin": "Retour à la connexion",
+      "haveAccount": "Vous avez déjà un compte ?",
+      "loginLink": "Connexion",
+      "errorGeneric": "Échec de l’inscription. Veuillez réessayer plus tard."
+    },
+    "verifyEmail": {
+      "loadingTitle": "Vérification…",
+      "loadingSubtitle": "Vérification de votre email…",
+      "successTitle": "Email vérifié",
+      "successSubtitleWithEmail": "{{email}} a été vérifié ! Vous pouvez maintenant vous connecter.",
+      "successSubtitleNoEmail": "Votre email a été vérifié ! Vous pouvez maintenant vous connecter.",
+      "goToLogin": "Aller à la connexion",
+      "errorTitle": "Échec de la vérification",
+      "errorSubtitle": "Ce lien de vérification est invalide ou expiré.",
+      "returnToLogin": "Retour à la connexion"
+    }
+  }
+}

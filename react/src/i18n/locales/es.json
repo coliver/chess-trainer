@@ -13,9 +13,7 @@
     "viewSource": "Ver el código fuente en GitHub"
   },
   "language": {
-    "toggle": "Idioma",
-    "english": "English",
-    "spanish": "Español"
+    "toggle": "Idioma"
   },
   "theme": {
     "toggle": "Cambiar tema"
@@ -67,7 +65,11 @@
       "matches_other": "{{count}} coincidencias",
       "variationsInLibrary": "{{count}} variantes en la biblioteca completa",
       "openingsToTrain_one": "{{count}} apertura · elige una para entrenar",
-      "openingsToTrain_other": "{{count}} aperturas · elige una para entrenar"
+      "openingsToTrain_other": "{{count}} aperturas · elige una para entrenar",
+      "variationCount_one": "{{count}} variante",
+      "variationCount_other": "{{count}} variantes",
+      "boardPreviewStart": "Inicio",
+      "boardPreviewAfterPly": "Después de la jugada {{ply}}"
     }
   },
   "puzzles": {

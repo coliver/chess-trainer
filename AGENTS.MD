@@ -12,6 +12,7 @@ Help implement features in this repository following `backend/app/docs/ARCHITECT
 - Make minimal, correct, testable changes.
 - No secrets/credentials added to the repo.
 - Dockerize end-to-end from the start (no dev-only non-container workflows).
+- New user-facing React UI text must go through i18n, not a hardcoded string — add the key to `react/src/i18n/locales/en.json`, then run `npm run i18n:sync` to propagate it to the other locales (`es`/`fr`/`de`/`en-x-pirate`). See `react/README.md`'s Internationalization section for details.
 
 ## Developer communication rule
 When working with a developer, keep responses as short as possible and explain one thing at a time.

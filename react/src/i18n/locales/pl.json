@@ -1,0 +1,147 @@
+{
+  "header": {
+    "title": "Szkoła Rycerzy",
+    "greetingMorning": "Dzień dobry ☀️",
+    "greetingAfternoon": "Dzień dobry 🌤️",
+    "greetingEvening": "Dobry wieczór 🌙",
+    "nav": "Główne",
+    "openings": "Debiuty",
+    "puzzles": "Zadania",
+    "login": "Zaloguj się",
+    "register": "Zarejestruj się",
+    "logout": "Wyloguj się",
+    "viewSource": "Zobacz kod źródłowy na GitHub"
+  },
+  "language": {
+    "toggle": "Język"
+  },
+  "theme": {
+    "toggle": "Przełącz motyw"
+  },
+  "flipBoard": {
+    "label": "Przewróć planszę"
+  },
+  "dashboard": {
+    "progress": {
+      "yourProgress": "Twój postęp",
+      "trainingLabel": "Postęp treningu",
+      "trainingHeading": "Trening",
+      "positionsTrained": "Przećwiczone pozycje",
+      "accuracy": "Dokładność",
+      "dayStreak": "Seria dni",
+      "dayStreakBest": "Seria dni · najlepsza {{best}}",
+      "mastered": "Opanowane",
+      "reviewDue": "Czas na powtórkę ({{count}})",
+      "weakSpots": "Słabe punkty",
+      "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} poprawnych",
+      "weakSpotFallbackName": "Debiut",
+      "puzzleLabel": "Postęp zadań",
+      "puzzlesHeading": "Zadania",
+      "puzzlesSolved": "Rozwiązane zadania",
+      "practicePuzzles": "Zadania treningowe",
+      "startSessionFailed": "Nie udało się rozpocząć sesji. Sprawdź połączenie lub token.",
+      "reviewSessionFailed": "Na razie brak pozycji do powtórki."
+    },
+    "openings": {
+      "title": "Debiuty",
+      "searchAriaLabel": "Szukaj debiutów",
+      "searchPlaceholder": "Szukaj debiutów lub ECO…",
+      "sortAZ": "Od A do Z",
+      "sortPopular": "Popularne",
+      "sortButton": "Sortuj: {{mode}}",
+      "filterByColor": "Filtruj po kolorze",
+      "all": "Wszystkie",
+      "white": "Białe",
+      "black": "Czarne",
+      "breadcrumb": "Ścieżka nawigacji",
+      "allOpenings": "Wszystkie debiuty",
+      "playAs": "Gra jako",
+      "playAsWhite": "Gra jako Białe",
+      "playAsBlack": "Gra jako Czarne",
+      "pickToPreview": "Wybierz debiut, aby podejrzeć wariant i rozpocząć trening.",
+      "startLabel": "Start {{name}}",
+      "chooseOpening": "Wybierz debiut",
+      "matches_one": "{{count}} trafienie",
+      "matches_other": "{{count}} trafienia",
+      "variationsInLibrary": "{{count}} wariacji w pełnej bibliotece",
+      "openingsToTrain_one": "{{count}} debiut · wybierz jeden do treningu",
+      "openingsToTrain_other": "{{count}} debiuty · wybierz jeden do treningu",
+      "variationCount_one": "{{count}} wariant",
+      "variationCount_other": "{{count}} wariantów",
+      "boardPreviewStart": "Start",
+      "boardPreviewAfterPly": "Po ruchu {{ply}}"
+    }
+  },
+  "puzzles": {
+    "noPuzzlesDue": "Brak zadań do tej chwili — wróć później.",
+    "loadFailed": "Nie udało się wczytać zadania. Sprawdź połączenie.",
+    "correct": "✅ Poprawnie!",
+    "incorrectFallback": "Nie do końca — spróbuj jeszcze raz.",
+    "submitError": "Błąd podczas wysyłania ruchu.",
+    "findBestMove": "Znajdź najlepszy ruch.",
+    "eyebrow": "Zadania",
+    "title": "Trening zadań",
+    "rating": "Ocena ~{{rating}}",
+    "solved": "Rozwiązane: {{count}}",
+    "streak": "Seria: {{count}}",
+    "streakBest": " · najlepsza {{best}}",
+    "skipPuzzle": "Pomiń zadanie ›",
+    "backToDashboard": "← Wróć do panelu"
+  },
+  "training": {
+    "whiteToMove": "Ruch białych",
+    "blackToMove": "Ruch czarnych",
+    "showHint": "Pokaż podpowiedź",
+    "eyebrow": "Trening",
+    "prev": "‹ Poprzednie",
+    "next": "Następne ›",
+    "movePlaceholder": "lub wpisz ruch, np. e2e4",
+    "play": "Graj",
+    "jumpToLatest": "Przejdź do najnowszego przed wysłaniem",
+    "backToOpenings": "← Wróć do debiutów"
+  },
+  "auth": {
+    "login": {
+      "title": "Zaloguj się",
+      "subtitle": "Miło Cię widzieć.",
+      "usernameLabel": "Nazwa użytkownika",
+      "passwordLabel": "Hasło",
+      "submit": "Wyślij",
+      "submitting": "Wysyłanie…",
+      "emailNotVerified": "Proszę potwierdź swój adres email przed zalogowaniem",
+      "resendVerification": "Wyślij ponownie email weryfikacyjny",
+      "resendSending": "Wysyłanie…",
+      "resendSent": "Wysłano!",
+      "needAccount": "Potrzebujesz konta?",
+      "registerLink": "Rejestracja",
+      "errorGeneric": "Wystąpił nieoczekiwany błąd.",
+      "errorLoginFailed": "Nie udało się zalogować",
+      "errorResendFailed": "Nie udało się ponownie wysłać emaila weryfikacyjnego"
+    },
+    "register": {
+      "title": "Rejestracja",
+      "subtitle": "Utwórz swoje konto.",
+      "emailLabel": "Email",
+      "usernameLabel": "Nazwa użytkownika",
+      "passwordLabel": "Hasło",
+      "submit": "Zarejestruj się",
+      "submitting": "Rejestrowanie…",
+      "successMessage": "Rejestracja zakończona powodzeniem! Sprawdź swoją skrzynkę przy <strong>{{email}}</strong> w poszukiwaniu linku weryfikacyjnego przed zalogowaniem.",
+      "returnToLogin": "Wróć do logowania",
+      "haveAccount": "Masz już konto?",
+      "loginLink": "Zaloguj się",
+      "errorGeneric": "Nie udało się zarejestrować. Spróbuj ponownie później."
+    },
+    "verifyEmail": {
+      "loadingTitle": "Weryfikowanie…",
+      "loadingSubtitle": "Weryfikujemy Twój email…",
+      "successTitle": "Email potwierdzony",
+      "successSubtitleWithEmail": "{{email}} zostało zweryfikowane! Możesz się teraz zalogować.",
+      "successSubtitleNoEmail": "Twój email został zweryfikowany! Możesz się teraz zalogować.",
+      "goToLogin": "Przejdź do logowania",
+      "errorTitle": "Weryfikacja nie powiodła się",
+      "errorSubtitle": "Ten link weryfikacyjny jest nieprawidłowy lub wygasł.",
+      "returnToLogin": "Wróć do logowania"
+    }
+  }
+}

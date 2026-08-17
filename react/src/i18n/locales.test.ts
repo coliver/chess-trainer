@@ -1,7 +1,19 @@
 import { describe, it, expect } from "vitest";
-import en from "./locales/en.json";
-import es from "./locales/es.json";
-import enPirate from "./locales/en-x-pirate.json";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const localesDir = path.join(
+  path.dirname(fileURLToPath(import.meta.url)),
+  "locales",
+);
+const localeFiles = fs
+  .readdirSync(localesDir)
+  .filter((f) => f.endsWith(".json"));
+
+function loadLocale(file: string): object {
+  return JSON.parse(fs.readFileSync(path.join(localesDir, file), "utf-8"));
+}
 
 function flattenKeys(obj: object, prefix = ""): string[] {
   return Object.entries(obj).flatMap(([key, value]) => {
@@ -13,27 +25,45 @@ function flattenKeys(obj: object, prefix = ""): string[] {
 }
 
 describe("locale resources", () => {
-  it("en, es, and en-x-pirate expose the same set of translation keys", () => {
-    const enKeys = flattenKeys(en).sort();
-    const esKeys = flattenKeys(es).sort();
-    const pirateKeys = flattenKeys(enPirate).sort();
+  const en = loadLocale("en.json");
+  const enKeys = flattenKeys(en).sort();
+  const otherLocaleFiles = localeFiles.filter((f) => f !== "en.json");
 
-    expect(esKeys).toEqual(enKeys);
-    expect(pirateKeys).toEqual(enKeys);
+  it.each(otherLocaleFiles)(
+    "%s exposes the same set of translation keys as en.json",
+    (file) => {
+      expect(flattenKeys(loadLocale(file)).sort()).toEqual(enKeys);
+    },
+  );
+
+  it.each(localeFiles)("%s has no empty translation values", (file) => {
+    const resource = loadLocale(file);
+    for (const key of flattenKeys(resource)) {
+      const value = key
+        .split(".")
+        .reduce<unknown>(
+          (o, k) => (o as Record<string, unknown>)[k],
+          resource,
+        );
+      expect(value, `${file}:${key} should not be empty`).not.toBe("");
+    }
   });
 
-  it("has no empty translation values", () => {
-    for (const [locale, resource] of [
-      ["en", en],
-      ["es", es],
-      ["en-x-pirate", enPirate],
-    ] as const) {
+  it.each(otherLocaleFiles)(
+    "%s has no leftover [TODO] translation stubs",
+    (file) => {
+      const resource = loadLocale(file);
       for (const key of flattenKeys(resource)) {
         const value = key
           .split(".")
-          .reduce<unknown>((o, k) => (o as Record<string, unknown>)[k], resource);
-        expect(value, `${locale}:${key} should not be empty`).not.toBe("");
+          .reduce<unknown>(
+            (o, k) => (o as Record<string, unknown>)[k],
+            resource,
+          );
+        expect(value, `${file}:${key} still has a [TODO] stub`).not.toMatch(
+          /^\[TODO /,
+        );
       }
-    }
-  });
+    },
+  );
 });

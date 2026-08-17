@@ -1,0 +1,147 @@
+{
+  "header": {
+    "title": "Школа рыцарей",
+    "greetingMorning": "Доброе утро ☀️",
+    "greetingAfternoon": "Добрый день 🌤️",
+    "greetingEvening": "Добрый вечер 🌙",
+    "nav": "Основное",
+    "openings": "Дебюты",
+    "puzzles": "Задачи",
+    "login": "Войти",
+    "register": "Регистрация",
+    "logout": "Выйти",
+    "viewSource": "Посмотреть исходный код на GitHub"
+  },
+  "language": {
+    "toggle": "Язык"
+  },
+  "theme": {
+    "toggle": "Переключить тему"
+  },
+  "flipBoard": {
+    "label": "Повернуть доску"
+  },
+  "dashboard": {
+    "progress": {
+      "yourProgress": "Ваш прогресс",
+      "trainingLabel": "Прогресс тренировки",
+      "trainingHeading": "Тренировка",
+      "positionsTrained": "Позиции отработаны",
+      "accuracy": "Точность",
+      "dayStreak": "Серия дней",
+      "dayStreakBest": "Серия дней · лучшее {{best}}",
+      "mastered": "Освоено",
+      "reviewDue": "Нужно повторение ({{count}})",
+      "weakSpots": "Слабые места",
+      "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} правильных",
+      "weakSpotFallbackName": "Дебют",
+      "puzzleLabel": "Прогресс по задачам",
+      "puzzlesHeading": "Задачи",
+      "puzzlesSolved": "Решено задач",
+      "practicePuzzles": "Тренировочные задачи",
+      "startSessionFailed": "Не удалось начать сессию. Проверьте подключение или токен.",
+      "reviewSessionFailed": "Пока нет позиций для повторения."
+    },
+    "openings": {
+      "title": "Дебюты",
+      "searchAriaLabel": "Поиск дебютов",
+      "searchPlaceholder": "Поиск дебютов или ECO…",
+      "sortAZ": "От А до Я",
+      "sortPopular": "Популярные",
+      "sortButton": "Сортировка: {{mode}}",
+      "filterByColor": "Фильтр по цвету",
+      "all": "Все",
+      "white": "Белые",
+      "black": "Чёрные",
+      "breadcrumb": "Хлебные крошки",
+      "allOpenings": "Все дебюты",
+      "playAs": "Играть за",
+      "playAsWhite": "Играть за Белых",
+      "playAsBlack": "Играть за Чёрных",
+      "pickToPreview": "Выберите дебют, чтобы просмотреть линию и начать тренировку.",
+      "startLabel": "Начать {{name}}",
+      "chooseOpening": "Выберите дебют",
+      "matches_one": "{{count}} совпадение",
+      "matches_other": "{{count}} совпадения",
+      "variationsInLibrary": "{{count}} вариаций в полной библиотеке",
+      "openingsToTrain_one": "{{count}} дебют · выберите один для тренировки",
+      "openingsToTrain_other": "{{count}} дебютов · выберите один для тренировки",
+      "variationCount_one": "{{count}} вариация",
+      "variationCount_other": "{{count}} вариаций",
+      "boardPreviewStart": "Старт",
+      "boardPreviewAfterPly": "После хода {{ply}}"
+    }
+  },
+  "puzzles": {
+    "noPuzzlesDue": "Сейчас нет задач на повторение — зайдите позже.",
+    "loadFailed": "Не удалось загрузить задачу. Проверьте подключение.",
+    "correct": "✅ Верно!",
+    "incorrectFallback": "Не совсем — попробуйте ещё раз.",
+    "submitError": "Ошибка отправки хода.",
+    "findBestMove": "Найдите лучший ход.",
+    "eyebrow": "Задачи",
+    "title": "Тренировка задач",
+    "rating": "Оценка ~{{rating}}",
+    "solved": "Решено: {{count}}",
+    "streak": "Серия: {{count}}",
+    "streakBest": " · лучшее {{best}}",
+    "skipPuzzle": "Пропустить задачу ›",
+    "backToDashboard": "← Назад на панель"
+  },
+  "training": {
+    "whiteToMove": "Ход белых",
+    "blackToMove": "Ход чёрных",
+    "showHint": "Показать подсказку",
+    "eyebrow": "Тренировка",
+    "prev": "‹ Назад",
+    "next": "Далее ›",
+    "movePlaceholder": "или введите ход, например e2e4",
+    "play": "Играть",
+    "jumpToLatest": "Перейти к последнему перед отправкой",
+    "backToOpenings": "← Назад к дебютам"
+  },
+  "auth": {
+    "login": {
+      "title": "Вход",
+      "subtitle": "С возвращением.",
+      "usernameLabel": "Имя пользователя",
+      "passwordLabel": "Пароль",
+      "submit": "Отправить",
+      "submitting": "Отправка…",
+      "emailNotVerified": "Пожалуйста, подтвердите email перед входом",
+      "resendVerification": "Отправить письмо для подтверждения заново",
+      "resendSending": "Отправка…",
+      "resendSent": "Отправлено!",
+      "needAccount": "Нужен аккаунт?",
+      "registerLink": "Регистрация",
+      "errorGeneric": "Произошла неожиданная ошибка.",
+      "errorLoginFailed": "Не удалось выполнить вход",
+      "errorResendFailed": "Не удалось повторно отправить письмо для подтверждения"
+    },
+    "register": {
+      "title": "Регистрация",
+      "subtitle": "Создайте свой аккаунт.",
+      "emailLabel": "Email",
+      "usernameLabel": "Имя пользователя",
+      "passwordLabel": "Пароль",
+      "submit": "Зарегистрироваться",
+      "submitting": "Регистрация…",
+      "successMessage": "Регистрация выполнена! Перед входом проверьте свою почту в <strong>{{email}}</strong> на наличие ссылки для подтверждения.",
+      "returnToLogin": "Вернуться ко входу",
+      "haveAccount": "Уже есть аккаунт?",
+      "loginLink": "Войти",
+      "errorGeneric": "Не удалось зарегистрироваться. Попробуйте ещё раз позже."
+    },
+    "verifyEmail": {
+      "loadingTitle": "Проверка…",
+      "loadingSubtitle": "Проверяем ваш email…",
+      "successTitle": "Email подтверждён",
+      "successSubtitleWithEmail": "{{email}} подтверждён! Теперь вы можете войти.",
+      "successSubtitleNoEmail": "Ваш email подтверждён! Теперь вы можете войти.",
+      "goToLogin": "Перейти ко входу",
+      "errorTitle": "Не удалось подтвердить",
+      "errorSubtitle": "Эта ссылка для подтверждения неверна или истекла.",
+      "returnToLogin": "Вернуться ко входу"
+    }
+  }
+}

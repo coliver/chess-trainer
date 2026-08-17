@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import Board from "../Board";
 import { previewFen, uciListToMoves } from "@knight-school/chess-core";
 import { colorOf, type OpeningGroup } from "../../lib/groupOpenings";
@@ -18,6 +19,7 @@ export default function OpeningCard({
   selected: boolean;
   onSelect: () => void;
 }) {
+  const { t } = useTranslation();
   const ref = useRef<HTMLButtonElement | null>(null);
   const [visible, setVisible] = useState(false);
 
@@ -68,7 +70,7 @@ export default function OpeningCard({
       <div className="oc-name">{group.base}</div>
       <div className="oc-foot">
         <span className="oc-count">
-          {group.count} variation{group.count === 1 ? "" : "s"}
+          {t("dashboard.openings.variationCount", { count: group.count })}
         </span>
         <span className="eco-chip">{group.eco}</span>
       </div>

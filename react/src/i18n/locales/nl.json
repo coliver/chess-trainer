@@ -1,0 +1,147 @@
+{
+  "header": {
+    "title": "Knight School",
+    "greetingMorning": "Goedemorgen ☀️",
+    "greetingAfternoon": "Goedemiddag 🌤️",
+    "greetingEvening": "Goedenavond 🌙",
+    "nav": "Primair",
+    "openings": "Openingen",
+    "puzzles": "Puzzels",
+    "login": "Inloggen",
+    "register": "Registreren",
+    "logout": "Uitloggen",
+    "viewSource": "Bekijk de bron op GitHub"
+  },
+  "language": {
+    "toggle": "Taal"
+  },
+  "theme": {
+    "toggle": "Thema wisselen"
+  },
+  "flipBoard": {
+    "label": "Bord omdraaien"
+  },
+  "dashboard": {
+    "progress": {
+      "yourProgress": "Jouw voortgang",
+      "trainingLabel": "Trainingsvoortgang",
+      "trainingHeading": "Training",
+      "positionsTrained": "Posities getraind",
+      "accuracy": "Nauwkeurigheid",
+      "dayStreak": "Dagreeks",
+      "dayStreakBest": "Dagreeks · beste {{best}}",
+      "mastered": "Beheerst",
+      "reviewDue": "Herziening nodig ({{count}})",
+      "weakSpots": "Zwakke plekken",
+      "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} correct",
+      "weakSpotFallbackName": "Opening",
+      "puzzleLabel": "Puzzelvoortgang",
+      "puzzlesHeading": "Puzzels",
+      "puzzlesSolved": "Puzzels opgelost",
+      "practicePuzzles": "Oefenpuzzels",
+      "startSessionFailed": "Het starten van de sessie is mislukt. Controleer je verbinding of token.",
+      "reviewSessionFailed": "Er zijn nog geen posities om te herzien."
+    },
+    "openings": {
+      "title": "Openingen",
+      "searchAriaLabel": "Openingen zoeken",
+      "searchPlaceholder": "Openingen zoeken of ECO…",
+      "sortAZ": "A–Z",
+      "sortPopular": "Populair",
+      "sortButton": "Sorteren: {{mode}}",
+      "filterByColor": "Filter op kleur",
+      "all": "Alles",
+      "white": "Wit",
+      "black": "Zwart",
+      "breadcrumb": "Breadcrumb",
+      "allOpenings": "Alle openingen",
+      "playAs": "Spelen als",
+      "playAsWhite": "Spelen als Wit",
+      "playAsBlack": "Spelen als Zwart",
+      "pickToPreview": "Kies een opening om de lijn te bekijken en met trainen te beginnen.",
+      "startLabel": "Start {{name}}",
+      "chooseOpening": "Kies een opening",
+      "matches_one": "{{count}} match",
+      "matches_other": "{{count}} matches",
+      "variationsInLibrary": "{{count}} variaties in de volledige bibliotheek",
+      "openingsToTrain_one": "{{count}} opening · kies er één om te trainen",
+      "openingsToTrain_other": "{{count}} openingen · kies er één om te trainen",
+      "variationCount_one": "{{count}} variatie",
+      "variationCount_other": "{{count}} variaties",
+      "boardPreviewStart": "Start",
+      "boardPreviewAfterPly": "Na zet {{ply}}"
+    }
+  },
+  "puzzles": {
+    "noPuzzlesDue": "Nu geen puzzels gepland — kom later terug.",
+    "loadFailed": "Het laden van een puzzel is mislukt. Controleer je verbinding.",
+    "correct": "✅ Correct!",
+    "incorrectFallback": "Niet helemaal — probeer het opnieuw.",
+    "submitError": "Fout bij het verzenden van de zet.",
+    "findBestMove": "Vind de beste zet.",
+    "eyebrow": "Puzzels",
+    "title": "Puzzeltraining",
+    "rating": "Waardering ~{{rating}}",
+    "solved": "Opgelost: {{count}}",
+    "streak": "Reeks: {{count}}",
+    "streakBest": " · beste {{best}}",
+    "skipPuzzle": "Puzzel overslaan ›",
+    "backToDashboard": "← Terug naar dashboard"
+  },
+  "training": {
+    "whiteToMove": "Wit aan zet",
+    "blackToMove": "Zwart aan zet",
+    "showHint": "Toon een hint",
+    "eyebrow": "Training",
+    "prev": "‹ Vorige",
+    "next": "Volgende ›",
+    "movePlaceholder": "of typ een zet, bijv. e2e4",
+    "play": "Spelen",
+    "jumpToLatest": "Ga naar de nieuwste vóór je verzendt",
+    "backToOpenings": "← Terug naar openingen"
+  },
+  "auth": {
+    "login": {
+      "title": "Inloggen",
+      "subtitle": "Welkom terug.",
+      "usernameLabel": "Gebruikersnaam",
+      "passwordLabel": "Wachtwoord",
+      "submit": "Verzenden",
+      "submitting": "Bezig met verzenden...",
+      "emailNotVerified": "Controleer je e-mail voordat je inlogt",
+      "resendVerification": "Verificatiemail opnieuw verzenden",
+      "resendSending": "Verzenden...",
+      "resendSent": "Verzonden!",
+      "needAccount": "Heb je een account nodig?",
+      "registerLink": "Registreren",
+      "errorGeneric": "Er is een onverwachte fout opgetreden.",
+      "errorLoginFailed": "Inloggen mislukt",
+      "errorResendFailed": "Het opnieuw verzenden van de verificatiemail is mislukt"
+    },
+    "register": {
+      "title": "Registreren",
+      "subtitle": "Maak je account aan.",
+      "emailLabel": "E-mail",
+      "usernameLabel": "Gebruikersnaam",
+      "passwordLabel": "Wachtwoord",
+      "submit": "Registreren",
+      "submitting": "Bezig met registreren...",
+      "successMessage": "Registratie gelukt! Controleer je inbox bij <strong>{{email}}</strong> voor een verificatielink voordat je inlogt.",
+      "returnToLogin": "Terug naar inloggen",
+      "haveAccount": "Heb je al een account?",
+      "loginLink": "Inloggen",
+      "errorGeneric": "Registreren is mislukt. Probeer het later opnieuw."
+    },
+    "verifyEmail": {
+      "loadingTitle": "Bezig met verifiëren...",
+      "loadingSubtitle": "Je e-mail verifiëren…",
+      "successTitle": "E-mail geverifieerd",
+      "successSubtitleWithEmail": "{{email}} is geverifieerd! Je kunt nu inloggen.",
+      "successSubtitleNoEmail": "Je e-mail is geverifieerd! Je kunt nu inloggen.",
+      "goToLogin": "Ga naar Inloggen",
+      "errorTitle": "Verificatie mislukt",
+      "errorSubtitle": "Deze verificatielink is ongeldig of verlopen.",
+      "returnToLogin": "Terug naar Inloggen"
+    }
+  }
+}

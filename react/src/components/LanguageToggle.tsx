@@ -1,12 +1,26 @@
 import { useTranslation } from "react-i18next";
+import i18nInstance from "../i18n/i18n";
 
-const LANGUAGES = ["en", "es", "en-x-pirate"] as const;
-type Language = (typeof LANGUAGES)[number];
+// One flag per configured language. Falls back to the language code itself
+// if a new locale file is added before its flag is picked.
+const FLAGS: Record<string, string> = {
+  en: "🇬🇧",
+  es: "🇪🇸",
+  fr: "🇫🇷",
+  de: "🇩🇪",
+  it: "🇮🇹",
+  nl: "🇳🇱",
+  pl: "🇵🇱",
+  pt: "🇵🇹",
+  ru: "🇷🇺",
+  tr: "🇹🇷",
+  "en-x-pirate": "🏴‍☠️",
+};
 
-function toLanguage(value: string): Language {
-  return (LANGUAGES as readonly string[]).includes(value)
-    ? (value as Language)
-    : "en";
+const LANGUAGES = Object.keys(i18nInstance.options.resources ?? {});
+
+function toLanguage(value: string): string {
+  return LANGUAGES.includes(value) ? value : "en";
 }
 
 export function LanguageToggle() {
@@ -27,9 +41,11 @@ export function LanguageToggle() {
       aria-label={t("language.toggle")}
       title={t("language.toggle")}
     >
-      <option value="en">🇬🇧</option>
-      <option value="es">🇪🇸</option>
-      <option value="en-x-pirate">🏴‍☠️</option>
+      {LANGUAGES.map((lang) => (
+        <option key={lang} value={lang}>
+          {FLAGS[lang] ?? lang}
+        </option>
+      ))}
     </select>
   );
 }

@@ -1,0 +1,147 @@
+{
+  "header": {
+    "title": "Knight School",
+    "greetingMorning": "Buongiorno ☀️",
+    "greetingAfternoon": "Buon pomeriggio 🌤️",
+    "greetingEvening": "Buonasera 🌙",
+    "nav": "Principale",
+    "openings": "Aperture",
+    "puzzles": "Puzzle",
+    "login": "Accedi",
+    "register": "Registrati",
+    "logout": "Esci",
+    "viewSource": "Visualizza sorgente su GitHub"
+  },
+  "language": {
+    "toggle": "Lingua"
+  },
+  "theme": {
+    "toggle": "Cambia tema"
+  },
+  "flipBoard": {
+    "label": "Capovolgi scacchiera"
+  },
+  "dashboard": {
+    "progress": {
+      "yourProgress": "Il tuo progresso",
+      "trainingLabel": "Progresso dell’allenamento",
+      "trainingHeading": "Allenamento",
+      "positionsTrained": "Posizioni allenate",
+      "accuracy": "Precisione",
+      "dayStreak": "Consistenza di giorni",
+      "dayStreakBest": "Consistenza di giorni · migliore {{best}}",
+      "mastered": "Padronanza",
+      "reviewDue": "Revisione in arrivo ({{count}})",
+      "weakSpots": "Punti deboli",
+      "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} corrette",
+      "weakSpotFallbackName": "Apertura",
+      "puzzleLabel": "Progresso puzzle",
+      "puzzlesHeading": "Puzzle",
+      "puzzlesSolved": "Puzzle risolti",
+      "practicePuzzles": "Puzzle di pratica",
+      "startSessionFailed": "Avvio sessione non riuscito. Controlla la connessione o il token.",
+      "reviewSessionFailed": "Nessuna posizione da rivedere al momento."
+    },
+    "openings": {
+      "title": "Aperture",
+      "searchAriaLabel": "Cerca aperture",
+      "searchPlaceholder": "Cerca aperture o ECO…",
+      "sortAZ": "A–Z",
+      "sortPopular": "Popolari",
+      "sortButton": "Ordina: {{mode}}",
+      "filterByColor": "Filtra per colore",
+      "all": "Tutte",
+      "white": "Bianchi",
+      "black": "Neri",
+      "breadcrumb": "Breadcrumb",
+      "allOpenings": "Tutte le aperture",
+      "playAs": "Gioca come",
+      "playAsWhite": "Gioca come i Bianchi",
+      "playAsBlack": "Gioca come i Neri",
+      "pickToPreview": "Seleziona un’apertura per visualizzare la linea e iniziare l’allenamento.",
+      "startLabel": "Inizia {{name}}",
+      "chooseOpening": "Scegli un’apertura",
+      "matches_one": "{{count}} corrispondenza",
+      "matches_other": "{{count}} corrispondenze",
+      "variationsInLibrary": "{{count}} variazioni nella libreria completa",
+      "openingsToTrain_one": "{{count}} apertura · seleziona una per allenarti",
+      "openingsToTrain_other": "{{count}} aperture · seleziona una per allenarti",
+      "variationCount_one": "{{count}} variazione",
+      "variationCount_other": "{{count}} variazioni",
+      "boardPreviewStart": "Inizia",
+      "boardPreviewAfterPly": "Dopo il semimovimento {{ply}}"
+    }
+  },
+  "puzzles": {
+    "noPuzzlesDue": "Nessun puzzle da fare in questo momento — torna più tardi.",
+    "loadFailed": "Caricamento puzzle non riuscito. Controlla la connessione.",
+    "correct": "✅ Giusto!",
+    "incorrectFallback": "Non proprio — riprova.",
+    "submitError": "Errore nell’invio della mossa.",
+    "findBestMove": "Trova la mossa migliore.",
+    "eyebrow": "Puzzle",
+    "title": "Allenamento puzzle",
+    "rating": "Valutazione ~{{rating}}",
+    "solved": "Risolti: {{count}}",
+    "streak": "Serie: {{count}}",
+    "streakBest": " · migliore {{best}}",
+    "skipPuzzle": "Salta puzzle ›",
+    "backToDashboard": "← Torna alla dashboard"
+  },
+  "training": {
+    "whiteToMove": "Tocca ai Bianchi",
+    "blackToMove": "Tocca ai Neri",
+    "showHint": "Mostra un suggerimento",
+    "eyebrow": "Allenamento",
+    "prev": "‹ Indietro",
+    "next": "Avanti ›",
+    "movePlaceholder": "oppure inserisci una mossa, es. e2e4",
+    "play": "Gioca",
+    "jumpToLatest": "Vai all’ultimo momento prima di inviare",
+    "backToOpenings": "← Torna alle aperture"
+  },
+  "auth": {
+    "login": {
+      "title": "Accedi",
+      "subtitle": "Bentornato/a.",
+      "usernameLabel": "Nome utente",
+      "passwordLabel": "Password",
+      "submit": "Invia",
+      "submitting": "Invio…",
+      "emailNotVerified": "Verifica la tua email prima di accedere",
+      "resendVerification": "Rinvía email di verifica",
+      "resendSending": "Invio…",
+      "resendSent": "Inviata!",
+      "needAccount": "Hai bisogno di un account?",
+      "registerLink": "Registrati",
+      "errorGeneric": "Si è verificato un errore imprevisto.",
+      "errorLoginFailed": "Accesso non riuscito",
+      "errorResendFailed": "Impossibile rinviare l’email di verifica"
+    },
+    "register": {
+      "title": "Registrati",
+      "subtitle": "Crea il tuo account.",
+      "emailLabel": "Email",
+      "usernameLabel": "Nome utente",
+      "passwordLabel": "Password",
+      "submit": "Registrati",
+      "submitting": "Registrazione…",
+      "successMessage": "Registrazione completata! Controlla la tua casella di posta all’indirizzo <strong>{{email}}</strong> per trovare un link di verifica prima di accedere.",
+      "returnToLogin": "Torna all’accesso",
+      "haveAccount": "Hai già un account?",
+      "loginLink": "Accedi",
+      "errorGeneric": "Registrazione non riuscita. Riprova più tardi."
+    },
+    "verifyEmail": {
+      "loadingTitle": "Verifica in corso…",
+      "loadingSubtitle": "Verifica della tua email…",
+      "successTitle": "Email verificata",
+      "successSubtitleWithEmail": "{{email}} è stata verificata! Ora puoi accedere.",
+      "successSubtitleNoEmail": "La tua email è stata verificata! Ora puoi accedere.",
+      "goToLogin": "Vai all’accesso",
+      "errorTitle": "Verifica fallita",
+      "errorSubtitle": "Questo link di verifica non è valido o è scaduto.",
+      "returnToLogin": "Torna all’accesso"
+    }
+  }
+}

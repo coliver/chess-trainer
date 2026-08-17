@@ -1,0 +1,147 @@
+{
+  "header": {
+    "title": "Şah Okulu",
+    "greetingMorning": "Günaydın ☀️",
+    "greetingAfternoon": "İyi günler 🌤️",
+    "greetingEvening": "İyi akşamlar 🌙",
+    "nav": "Birincil",
+    "openings": "Açılışlar",
+    "puzzles": "Bulmacalar",
+    "login": "Giriş yap",
+    "register": "Kayıt ol",
+    "logout": "Çıkış yap",
+    "viewSource": "GitHub’da kaynak kodu görüntüle"
+  },
+  "language": {
+    "toggle": "Dil"
+  },
+  "theme": {
+    "toggle": "Temayı değiştir"
+  },
+  "flipBoard": {
+    "label": "Tahtayı çevir"
+  },
+  "dashboard": {
+    "progress": {
+      "yourProgress": "İlerleyişiniz",
+      "trainingLabel": "Antrenman ilerleyişi",
+      "trainingHeading": "Antrenman",
+      "positionsTrained": "Çalışılan pozisyonlar",
+      "accuracy": "Doğruluk",
+      "dayStreak": "Günlük seri",
+      "dayStreakBest": "Günlük seri · en iyi {{best}}",
+      "mastered": "Ustalık",
+      "reviewDue": "Gözden geçirilecek ({{count}})",
+      "weakSpots": "Zayıf noktalar",
+      "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} doğru",
+      "weakSpotFallbackName": "Açılış",
+      "puzzleLabel": "Bulmaca ilerleyişi",
+      "puzzlesHeading": "Bulmacalar",
+      "puzzlesSolved": "Çözülen bulmacalar",
+      "practicePuzzles": "Alıştırma bulmacaları",
+      "startSessionFailed": "Antrenman başlatılamadı. Bağlantınızı veya token’ınızı kontrol edin.",
+      "reviewSessionFailed": "Şu anda gözden geçirilecek pozisyon yok."
+    },
+    "openings": {
+      "title": "Açılışlar",
+      "searchAriaLabel": "Açılışlarda ara",
+      "searchPlaceholder": "Açılışlarda veya ECO’da ara…",
+      "sortAZ": "A–Z",
+      "sortPopular": "Popüler",
+      "sortButton": "Sırala: {{mode}}",
+      "filterByColor": "Renge göre filtrele",
+      "all": "Tümü",
+      "white": "Beyaz",
+      "black": "Siyah",
+      "breadcrumb": "Breadcrumb",
+      "allOpenings": "Tüm açılışlar",
+      "playAs": "Oyna",
+      "playAsWhite": "Beyaz olarak oyna",
+      "playAsBlack": "Siyah olarak oyna",
+      "pickToPreview": "Satırı önizlemek ve antrenaja başlamak için bir açılış seçin.",
+      "startLabel": "{{name}} ile başla",
+      "chooseOpening": "Açılış seç",
+      "matches_one": "{{count}} eşleşme",
+      "matches_other": "{{count}} eşleşme",
+      "variationsInLibrary": "Tam kütüphanede {{count}} varyasyon",
+      "openingsToTrain_one": "{{count}} açılış · antrenman için birini seç",
+      "openingsToTrain_other": "{{count}} açılış · antrenman için birini seç",
+      "variationCount_one": "{{count}} varyasyon",
+      "variationCount_other": "{{count}} varyasyon",
+      "boardPreviewStart": "Başla",
+      "boardPreviewAfterPly": "{{ply}} hamleden sonra"
+    }
+  },
+  "puzzles": {
+    "noPuzzlesDue": "Şu an çözülmesi gereken bulmaca yok — sonra tekrar kontrol edin.",
+    "loadFailed": "Bir bulmaca yüklenemedi. Bağlantınızı kontrol edin.",
+    "correct": "✅ Doğru!",
+    "incorrectFallback": "Tam değil — tekrar deneyin.",
+    "submitError": "Hamle gönderilirken hata oluştu.",
+    "findBestMove": "En iyi hamleyi bulun.",
+    "eyebrow": "Bulmacalar",
+    "title": "Bulmaca Antrenmanı",
+    "rating": "Puan ~{{rating}}",
+    "solved": "Çözülen: {{count}}",
+    "streak": "Seri: {{count}}",
+    "streakBest": " · en iyi {{best}}",
+    "skipPuzzle": "Bulmacayı atla ›",
+    "backToDashboard": "← Gösterge paneline dön"
+  },
+  "training": {
+    "whiteToMove": "Sıra beyazda",
+    "blackToMove": "Sıra siyahta",
+    "showHint": "İpucu göster",
+    "eyebrow": "Antrenman",
+    "prev": "‹ Önceki",
+    "next": "Sonraki ›",
+    "movePlaceholder": "ya da bir hamle yazın, örn. e2e4",
+    "play": "Oyna",
+    "jumpToLatest": "Gönderilmeden önce en son hamleye git",
+    "backToOpenings": "← Açılışlara dön"
+  },
+  "auth": {
+    "login": {
+      "title": "Giriş yap",
+      "subtitle": "Tekrar hoş geldiniz.",
+      "usernameLabel": "Kullanıcı adı",
+      "passwordLabel": "Parola",
+      "submit": "Gönder",
+      "submitting": "Gönderiliyor...",
+      "emailNotVerified": "Giriş yapmadan önce lütfen e-postanızı doğrulayın",
+      "resendVerification": "Doğrulama e-postasını yeniden gönder",
+      "resendSending": "Gönderiliyor...",
+      "resendSent": "Gönderildi!",
+      "needAccount": "Hesabınız yok mu?",
+      "registerLink": "Kayıt ol",
+      "errorGeneric": "Beklenmeyen bir hata oluştu.",
+      "errorLoginFailed": "Giriş başarısız",
+      "errorResendFailed": "Doğrulama e-postası yeniden gönderilemedi"
+    },
+    "register": {
+      "title": "Kayıt ol",
+      "subtitle": "Hesabınızı oluşturun.",
+      "emailLabel": "E-posta",
+      "usernameLabel": "Kullanıcı adı",
+      "passwordLabel": "Parola",
+      "submit": "Kaydol",
+      "submitting": "Kaydediliyor...",
+      "successMessage": "Kayıt başarılı! Giriş yapmadan önce doğrulama bağlantısı için e-postanızı <strong>{{email}}</strong> adresinden kontrol edin.",
+      "returnToLogin": "Girişe dön",
+      "haveAccount": "Zaten hesabınız var mı?",
+      "loginLink": "Giriş",
+      "errorGeneric": "Kayıt yapılamadı. Lütfen daha sonra tekrar deneyin."
+    },
+    "verifyEmail": {
+      "loadingTitle": "Doğrulanıyor...",
+      "loadingSubtitle": "E-postanız doğrulanıyor…",
+      "successTitle": "E-posta Doğrulandı",
+      "successSubtitleWithEmail": "{{email}} doğrulandı! Artık giriş yapabilirsiniz.",
+      "successSubtitleNoEmail": "E-postanız doğrulandı! Artık giriş yapabilirsiniz.",
+      "goToLogin": "Girişe git",
+      "errorTitle": "Doğrulama başarısız",
+      "errorSubtitle": "Bu doğrulama bağlantısı geçersiz veya süresi dolmuş.",
+      "returnToLogin": "Girişe dön"
+    }
+  }
+}

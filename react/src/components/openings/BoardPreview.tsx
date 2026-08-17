@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import Board from "../Board";
 import { uciListToMoves, previewFen } from "@knight-school/chess-core";
 import type { Opening } from "../../pages/Dashboard";
@@ -13,6 +14,8 @@ export default function BoardPreview({
   /** Which side to view the board from — follows the Play as White/Black toggle. */
   playerColor: "w" | "b";
 }) {
+  const { t } = useTranslation();
+
   // Callers remount this via a `key` on the selected opening, so selectedPly
   // starts fresh for each newly previewed line — a ply index never leaks
   // from a longer line onto a shorter one. Default to the final ply so the
@@ -82,7 +85,7 @@ export default function BoardPreview({
           className={`ply-btn${selectedPly === 0 ? " active" : ""}`}
           onClick={() => setSelectedPly(0)}
         >
-          Start
+          {t("dashboard.openings.boardPreviewStart")}
         </button>
 
         {moveList.map((uci, idx) => {
@@ -95,7 +98,7 @@ export default function BoardPreview({
               type="button"
               className={`ply-btn${isActive ? " active" : ""}`}
               onClick={() => setSelectedPly(plyNumber)}
-              title={`After ply ${plyNumber}`}
+              title={t("dashboard.openings.boardPreviewAfterPly", { ply: plyNumber })}
             >
               {uci}
             </button>

@@ -13,9 +13,7 @@
     "viewSource": "View source on GitHub"
   },
   "language": {
-    "toggle": "Language",
-    "english": "English",
-    "spanish": "Español"
+    "toggle": "Language"
   },
   "theme": {
     "toggle": "Toggle theme"
@@ -67,7 +65,11 @@
       "matches_other": "{{count}} matches",
       "variationsInLibrary": "{{count}} variations in the full library",
       "openingsToTrain_one": "{{count}} opening · pick one to train",
-      "openingsToTrain_other": "{{count}} openings · pick one to train"
+      "openingsToTrain_other": "{{count}} openings · pick one to train",
+      "variationCount_one": "{{count}} variation",
+      "variationCount_other": "{{count}} variations",
+      "boardPreviewStart": "Start",
+      "boardPreviewAfterPly": "After ply {{ply}}"
     }
   },
   "puzzles": {

@@ -43,7 +43,7 @@ react/
 │   ├── App.tsx                 # Routes: /login, /register, /dashboard, /training/:id, * -> Dashboard
 │   ├── main.tsx                # React root / entrypoint
 │   └── index.css               # Global styles (imports src/styles/*.css)
-│   └── i18n/                   # react-i18next config + en.json/es.json translation resources
+│   └── i18n/                   # react-i18next config + locales/*.json translation resources
 ├── public/                     # favicon.svg, quotes.txt, cm-chessboard-assets/ (board sprites)
 ├── playwright-dashboard.spec.ts  # Playwright E2E spec
 ├── vite.config.ts               # Vite configuration
@@ -204,9 +204,13 @@ On correct moves, `fenAfter` updates the board and, if `sessionCompleted` is tru
 
 ## 🌐 Internationalization (i18n)
 
-The UI chrome (header, auth pages, dashboard, training, and puzzles pages) is localized via [`react-i18next`](https://react.i18next.com/), with English and Spanish translation resources in `src/i18n/locales/en.json` and `src/i18n/locales/es.json`. `src/i18n/i18n.ts` initializes `i18next` (imported once in `main.tsx`, and again in `vitest.setup.ts` so component tests render real strings instead of raw keys) and reads/writes the chosen language to `localStorage` under the `language` key, mirroring `ThemeToggle.tsx`'s pattern for `theme`.
+The UI chrome (header, auth pages, dashboard, training, and puzzles pages) is localized via [`react-i18next`](https://react.i18next.com/), with translation resources in `src/i18n/locales/*.json` — currently `en`, `es`, `fr`, `de`, `it`, `nl`, `pl`, `pt`, `ru`, `tr`, and a just-for-fun `en-x-pirate`. `src/i18n/i18n.ts` initializes `i18next` (imported once in `main.tsx`, and again in `vitest.setup.ts` so component tests render real strings instead of raw keys), auto-discovers every `locales/*.json` file via `import.meta.glob` (no per-language wiring needed), and reads/writes the chosen language to `localStorage` under the `language` key, mirroring `ThemeToggle.tsx`'s pattern for `theme`.
 
-`LanguageToggle.tsx` (in the header, next to the theme toggle) renders a pair of flag buttons — 🇺🇸 English / 🇪🇸 Español — that call `i18n.changeLanguage()`.
+`LanguageToggle.tsx` (in the header, next to the theme toggle) renders a `<select>` whose options are derived from the same auto-discovered language list, each shown as a flag emoji; picking one calls `i18n.changeLanguage()`.
+
+`en.json` is the source of truth for translation *keys* — run `npm run i18n:sync` (`scripts/sync-locales.mjs`) after adding/renaming/removing a key there to propagate the structural change to every other locale file automatically (missing keys land as `"[TODO <lang>] ..."` stubs to fill in; stale keys get dropped). `npm run i18n:check` does the same as a read-only CI check. `src/i18n/locales.test.ts` fails if any locale is missing a key, has an empty value, or still has a `[TODO]` stub.
+
+Shouts to Patricia, Maritza, and Maritza's husband for helping out with the Spanish translation!
 
 **Not yet localized:**
 - Opening and puzzle descriptive content (`src/data/openingText.ts` and backend-authored opening prose) — English-only for now.
