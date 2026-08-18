@@ -69,9 +69,8 @@ export default function Board({
             // Show legal moves if getLegalMoves is provided
             if (getLegalMoves) {
               const moves = getLegalMoves(from);
-              moves.forEach((move) => {
-                (board as any).addMarker(move.to, "legal");
-              });
+              // Use the Chessboard API for legal-move markers rather than calling addMarker with reversed args
+              (board as any).addLegalMovesMarkers?.(moves as any);
             }
             return true;
           }
@@ -120,7 +119,8 @@ export default function Board({
     // Apply markers (hints, last move, etc.)
     if (markers && markers.length > 0) {
       markers.forEach((marker) => {
-        (board as any).addMarker(marker.square, marker.type);
+        // cm-chessboard expects addMarker(type, square) — swap the args here
+        (board as any).addMarker?.(marker.type, marker.square);
       });
     }
 
