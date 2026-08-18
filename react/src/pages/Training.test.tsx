@@ -1,16 +1,27 @@
-//frontend/src/pages/Training.test.tsx
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, waitFor, act, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Training } from "./Training";
 import { useTrainingSession } from "../hooks/useTrainingSession";
 import { useBlinkGreen } from "../hooks/useBlinkGreen";
 import "@testing-library/jest-dom";
 import type { BoardProps } from "../components/Board";
 
+type AudioConstructor = new (src: string) => Audio;
+
+const { mockUseChessSounds } = vi.hoisted(() => ({
+  mockUseChessSounds: vi.fn(() => ({
+    playSound: vi.fn(),
+  })),
+}));
+
 vi.mock("../hooks/useTrainingSession");
 vi.mock("../hooks/useBlinkGreen");
+vi.mock("../hooks/useChessSounds", () => ({
+  __esModule: true,
+  useChessSounds: mockUseChessSounds,
+}));
 
+import { Training } from "./Training";
 // The chess logic now lives in @knight-school/chess-core (its own package, its
 // own tests against real chess.js). Here we mock that boundary so the Training
 // tests exercise the component's wiring, not chess rules.
@@ -31,7 +42,8 @@ const {
 vi.mock("@knight-school/chess-core", async (importOriginal) => {
   // Keep the real pure helpers (timeline/status/opening-label/next-item) —
   // only the chess.js-backed board logic is mocked above.
-  const actual = await importOriginal<typeof import("@knight-school/chess-core")>();
+  const actual =
+    await importOriginal<typeof import("@knight-school/chess-core")>();
   return {
     ...actual,
     applyMove: applyMoveMock,
@@ -95,6 +107,22 @@ describe("Training Page", () => {
     submitMove: mockSubmitMove,
     takeAutoplayOnce: mockTakeAutoplayOnce,
   };
+
+  class MockAudio {
+    currentTime = 0;
+    preload = "";
+    play = vi.fn().mockResolvedValue(undefined);
+    load = vi.fn();
+    src: string;
+
+    constructor(src: string) {
+      this.src = src;
+    }
+  }
+
+  beforeEach(() => {
+    vi.stubGlobal("Audio", MockAudio as unknown as AudioConstructor);
+  });
 
   beforeEach(() => {
     user = userEvent.setup();
@@ -271,7 +299,10 @@ describe("Training Page", () => {
       });
       rerender(<Training />);
 
-      expect(mockSubmitMove).not.toHaveBeenCalledWith("e7e5", expect.anything());
+      expect(mockSubmitMove).not.toHaveBeenCalledWith(
+        "e7e5",
+        expect.anything(),
+      );
     });
 
     it("does not autoplay if isSubmitting is true", async () => {

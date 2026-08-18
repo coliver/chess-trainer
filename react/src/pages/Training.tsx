@@ -26,6 +26,7 @@ import {
 import { useBlinkGreen } from "../hooks/useBlinkGreen";
 import { useTrainingSession } from "../hooks/useTrainingSession";
 import { useBoardOrientation } from "../hooks/useBoardOrientation";
+import { useChessSounds } from "../hooks/useChessSounds";
 
 export const Training = () => {
   const { t } = useTranslation();
@@ -53,6 +54,7 @@ export const Training = () => {
   const [moveInput, setMoveInput] = useState("");
   const [showAnimations] = useState(true);
   const { orientation, flip, setOrientation } = useBoardOrientation();
+  const { playSound } = useChessSounds();
   const [hintLevel, setHintLevel] = useState(-1);
   const [lastMove, setLastMove] = useState<{ from: string; to: string } | null>(
     null,
@@ -194,11 +196,18 @@ export const Training = () => {
 
     // Play the opponent's reply locally to keep the timeline consistent.
     const uci = correctMoveUci;
+    const targetSquare = uci.slice(2, 4);
+    const moverColor = sideToMove(fenRef.current);
+    const targetColor = pieceColorAt(fenRef.current, targetSquare);
+    const isCapture = !!targetColor && targetColor !== moverColor;
     const applied = applyUci(fenRef.current, uci);
+
     if (applied) {
+      playSound(isCapture ? "capture" : "move");
       appendTimelineFen(applied.nextFen);
       setLastMove({ from: uci.slice(0, 2), to: uci.slice(2, 4) });
     }
+
     // Opponent's reply, not the player's turn — don't show the "Correct!" banner for it.
     void submitMove(uci, fenRef.current, { silent: true });
   }, [
@@ -213,6 +222,7 @@ export const Training = () => {
     isAdvancing,
     appendTimelineFen,
     isSessionCompleted,
+    playSound,
   ]);
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
@@ -284,7 +294,15 @@ export const Training = () => {
       if (!isPlayerToMove) return false;
       return pieceColorAt(fen, square) === playerColor;
     },
-    [atLatest, fen, isAdvancing, isSubmitting, itemId, isPlayerToMove, playerColor],
+    [
+      atLatest,
+      fen,
+      isAdvancing,
+      isSubmitting,
+      itemId,
+      isPlayerToMove,
+      playerColor,
+    ],
   );
 
   // Legal targets for the picked-up piece — rendered as dots by cm-chessboard.
@@ -303,7 +321,11 @@ export const Training = () => {
       arr.push({ square: lastMove.to, type: "lastmove" });
     }
 
-    const hint = deriveHintMarkers(correctMoveUci, hintLevel, isSessionCompleted);
+    const hint = deriveHintMarkers(
+      correctMoveUci,
+      hintLevel,
+      isSessionCompleted,
+    );
     if (hint) {
       arr.push({ square: hint.from, type: "hint" });
       if (hint.to) arr.push({ square: hint.to, type: "hint" });
@@ -325,7 +347,12 @@ export const Training = () => {
     isPlayerToMove,
     playerColor,
   });
-  const { kind: statusKind, icon: statusIcon, message: statusMsg, sub: statusSub } = status;
+  const {
+    kind: statusKind,
+    icon: statusIcon,
+    message: statusMsg,
+    sub: statusSub,
+  } = status;
 
   const busy = isSubmitting || isAdvancing;
 
@@ -348,9 +375,13 @@ export const Training = () => {
               />
             </div>
             <div className="board-under">
-              <span className={`turn${sideToMove(fen) === "w" ? "" : " black"}`}>
+              <span
+                className={`turn${sideToMove(fen) === "w" ? "" : " black"}`}
+              >
                 <span className="turn-dot" aria-hidden="true" />
-                {sideToMove(fen) === "w" ? t("training.whiteToMove") : t("training.blackToMove")}
+                {sideToMove(fen) === "w"
+                  ? t("training.whiteToMove")
+                  : t("training.blackToMove")}
               </span>
               <div className="board-toolbar">
                 <FlipBoardButton className="icon-btn" onClick={flip} />
@@ -358,7 +389,12 @@ export const Training = () => {
                   className="btn icon-btn hint-icon"
                   type="button"
                   onClick={() => {
-                    if (isSubmitting || isAdvancing || !itemId || isSessionCompleted)
+                    if (
+                      isSubmitting ||
+                      isAdvancing ||
+                      !itemId ||
+                      isSessionCompleted
+                    )
                       return;
                     setHintLevel((h) => (h < 0 ? 0 : 1));
                   }}
