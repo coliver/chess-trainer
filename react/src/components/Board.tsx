@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react";
 import { Chessboard, INPUT_EVENT_TYPE } from "cm-chessboard";
 import { useChessSounds } from "../hooks/useChessSounds";
 
+type BoardMove = { to: string; promotion?: string };
+
 type BoardProps = {
   position: string;
   orientation: "white" | "black";
@@ -12,11 +14,11 @@ type BoardProps = {
   showCoordinates?: boolean;
   markers?: BoardMarker[];
   moveColor?: string;
-  getLegalMoves?: (square: string) => string[];
+  getLegalMoves?: (square: string) => BoardMove[];
   onMoveStart?: (square: string) => boolean;
 };
 
-export type BoardMarker = unknown; // Export for use in other components
+export type BoardMarker = { square: string; type: string };
 
 export default function Board({
   position,
