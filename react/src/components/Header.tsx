@@ -1,19 +1,18 @@
 // frontend/src/components/Header.tsx
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { LogIn, UserPlus, LogOut } from "lucide-react";
 import { KnightSchoolIcon } from "./KnightSchoolIcon";
 import { ThemeToggle } from "./ThemeToggle";
-import { LanguageToggle } from "./LanguageToggle";
-import { useNavigate } from "react-router-dom";
 import { logout } from "../auth";
 import { useAuth } from "../hooks/useAuth";
+import { LanguageToggle } from "./LanguageToggle";
 
 export default function Header() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
-
   const { isLoggedIn, username } = useAuth();
 
   const onLogout = () => {
@@ -51,14 +50,21 @@ export default function Header() {
           <nav className="site-header-nav" aria-label={t("header.nav")}>
             {isLoggedIn && (
               <>
-                <Link to="/dashboard" className={`site-header-nav-link${location.pathname.startsWith("/dashboard") ? " active" : ""}`}>
+                <Link
+                  to="/dashboard"
+                  className={`site-header-nav-link${location.pathname.startsWith("/dashboard") ? " active" : ""}`}
+                >
                   {t("header.openings")}
                 </Link>
-                <Link to="/puzzles" className={`site-header-nav-link${location.pathname.startsWith("/puzzles") ? " active" : ""}`}>
+                <Link
+                  to="/puzzles"
+                  className={`site-header-nav-link${location.pathname.startsWith("/puzzles") ? " active" : ""}`}
+                >
                   {t("header.puzzles")}
                 </Link>
               </>
             )}
+
             {!isLoggedIn ? (
               <>
                 <Link
@@ -67,21 +73,7 @@ export default function Header() {
                   aria-label={t("header.login")}
                   title={t("header.login")}
                 >
-                  <svg
-                    width={22}
-                    height={22}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
-                    <polyline points="10 17 15 12 10 7" />
-                    <line x1="15" y1="12" x2="3" y2="12" />
-                  </svg>
+                  <LogIn size={22} aria-hidden="true" />
                 </Link>
                 <Link
                   to="/register"
@@ -89,22 +81,7 @@ export default function Header() {
                   aria-label={t("header.register")}
                   title={t("header.register")}
                 >
-                  <svg
-                    width={22}
-                    height={22}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                    <circle cx="8.5" cy="7" r="4" />
-                    <line x1="20" y1="8" x2="20" y2="14" />
-                    <line x1="17" y1="11" x2="23" y2="11" />
-                  </svg>
+                  <UserPlus size={22} aria-hidden="true" />
                 </Link>
               </>
             ) : (
@@ -114,21 +91,7 @@ export default function Header() {
                 aria-label={t("header.logout")}
                 title={t("header.logout")}
               >
-                <svg
-                  width={22}
-                  height={22}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                  <polyline points="16 17 21 12 16 7" />
-                  <line x1="21" y1="12" x2="9" y2="12" />
-                </svg>
+                <LogOut size={22} aria-hidden="true" />
               </button>
             )}
 
@@ -142,13 +105,13 @@ export default function Header() {
                 title={t("header.viewSource")}
               >
                 <svg
-                  width={22}
-                  height={22}
-                  viewBox="0 0 16 16"
+                  viewBox="0 0 24 24"
+                  width="22"
+                  height="22"
                   fill="currentColor"
                   aria-hidden="true"
                 >
-                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+                  <path d="M12 2C6.477 2 2 6.58 2 12.239c0 4.526 2.865 8.367 6.839 9.72.5.094.682-.22.682-.489 0-.242-.01-.882-.014-1.731-2.782.62-3.369-1.376-3.369-1.376-.455-1.188-1.11-1.504-1.11-1.504-.908-.636.069-.623.069-.623 1.004.072 1.532 1.05 1.532 1.05.892 1.561 2.341 1.11 2.91.848.091-.662.35-1.11.636-1.365-2.22-.258-4.555-1.134-4.555-5.04 0-1.113.39-2.024 1.029-2.738-.103-.259-.446-1.3.098-2.708 0 0 .84-.275 2.75 1.047A9.3 9.3 0 0 1 12 6.844c.85.004 1.705.116 2.504.34 1.909-1.322 2.747-1.047 2.747-1.047.546 1.408.202 2.449.1 2.708.64.714 1.028 1.625 1.028 2.738 0 3.916-2.339 4.778-4.566 5.03.36.313.678.93.678 1.874 0 1.353-.012 2.443-.012 2.774 0 .272.18.587.688.487A10.246 10.246 0 0 0 22 12.239C22 6.58 17.523 2 12 2Z" />
                 </svg>
               </a>
               <LanguageToggle />

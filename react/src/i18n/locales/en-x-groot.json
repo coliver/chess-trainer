@@ -13,10 +13,15 @@
     "viewSource": "View source on GitHub"
   },
   "language": {
-    "toggle": "Language"
+    "toggle": "Language",
+    "en": "English",
+    "kl": "Klingon"
   },
   "theme": {
-    "toggle": "Toggle theme"
+    "toggle": "Toggle theme",
+    "dark": "Dark",
+    "light": "Light",
+    "system": "System"
   },
   "flipBoard": {
     "label": "Flip board"
@@ -70,6 +75,19 @@
       "variationCount_other": "{{count}} I am Groot",
       "boardPreviewStart": "I am Groot",
       "boardPreviewAfterPly": "I am Groot {{ply}}"
+    },
+    "header": {
+      "title": "Knight School",
+      "greetingMorning": "Good morning ☀️",
+      "greetingAfternoon": "Good afternoon 🌤️",
+      "greetingEvening": "Good evening 🌙",
+      "nav": "Primary",
+      "openings": "Openings",
+      "puzzles": "Puzzles",
+      "login": "Login",
+      "register": "Register",
+      "logout": "Logout",
+      "viewSource": "View source on GitHub"
     }
   },
   "puzzles": {
@@ -86,7 +104,8 @@
     "streak": "I am Groot: {{count}}",
     "streakBest": " · I am Groot {{best}}",
     "skipPuzzle": "I am Groot ›",
-    "backToDashboard": "← I am Groot"
+    "backToDashboard": "← I am Groot",
+    "label": "Puzzles"
   },
   "training": {
     "whiteToMove": "I am Groot",
@@ -98,7 +117,8 @@
     "movePlaceholder": "I am Groot, e.g. e2e4",
     "play": "I am Groot",
     "jumpToLatest": "I am Groot",
-    "backToOpenings": "← I am Groot"
+    "backToOpenings": "← I am Groot",
+    "label": "Training"
   },
   "auth": {
     "login": {
@@ -116,7 +136,8 @@
       "registerLink": "I am Groot",
       "errorGeneric": "An unexpected error occurred.",
       "errorLoginFailed": "Failed to login",
-      "errorResendFailed": "Failed to resend verification email"
+      "errorResendFailed": "Failed to resend verification email",
+      "label": "Login"
     },
     "register": {
       "title": "Register",
@@ -130,7 +151,8 @@
       "returnToLogin": "Return to login",
       "haveAccount": "Already have an account?",
       "loginLink": "Login",
-      "errorGeneric": "Failed to register. Please try again later."
+      "errorGeneric": "Failed to register. Please try again later.",
+      "label": "Register"
     },
     "verifyEmail": {
       "loadingTitle": "Verifying...",
@@ -141,7 +163,11 @@
       "goToLogin": "Go to Login",
       "errorTitle": "Verification Failed",
       "errorSubtitle": "This verification link is invalid or expired.",
-      "returnToLogin": "Return to Login"
+      "returnToLogin": "Return to Login",
+      "label": "Verify email"
+    },
+    "logout": {
+      "label": "Logout"
     }
   },
   "email": {
@@ -150,7 +176,8 @@
       "heading": "I am Groot.",
       "instructions": "Please verify your email address by visiting the link below:",
       "instructionsHtml": "Please verify your email address by clicking the link below:",
-      "expires": "This link expires in 24 hours."
+      "expires": "This link expires in 24 hours.",
+      "label": "Verify email"
     }
   }
 }

@@ -13,10 +13,15 @@
     "viewSource": "Ver el código fuente en GitHub"
   },
   "language": {
-    "toggle": "Idioma"
+    "toggle": "Idioma",
+    "en": "English",
+    "kl": "Klingon"
   },
   "theme": {
-    "toggle": "Cambiar tema"
+    "toggle": "Cambiar tema",
+    "dark": "Dark",
+    "light": "Light",
+    "system": "System"
   },
   "flipBoard": {
     "label": "Girar tablero"
@@ -70,6 +75,19 @@
       "variationCount_other": "{{count}} variantes",
       "boardPreviewStart": "Inicio",
       "boardPreviewAfterPly": "Después de la jugada {{ply}}"
+    },
+    "header": {
+      "title": "Knight School",
+      "greetingMorning": "Good morning ☀️",
+      "greetingAfternoon": "Good afternoon 🌤️",
+      "greetingEvening": "Good evening 🌙",
+      "nav": "Primary",
+      "openings": "Openings",
+      "puzzles": "Puzzles",
+      "login": "Login",
+      "register": "Register",
+      "logout": "Logout",
+      "viewSource": "View source on GitHub"
     }
   },
   "puzzles": {
@@ -86,7 +104,8 @@
     "streak": "Racha: {{count}}",
     "streakBest": " · mejor {{best}}",
     "skipPuzzle": "Saltar puzzle ›",
-    "backToDashboard": "← Volver al panel"
+    "backToDashboard": "← Volver al panel",
+    "label": "Puzzles"
   },
   "training": {
     "whiteToMove": "Mueven las blancas",
@@ -98,7 +117,8 @@
     "movePlaceholder": "o escribe un movimiento, p. ej. e2e4",
     "play": "Jugar",
     "jumpToLatest": "Ve a la última posición antes de enviar",
-    "backToOpenings": "← Volver a las aperturas"
+    "backToOpenings": "← Volver a las aperturas",
+    "label": "Training"
   },
   "auth": {
     "login": {
@@ -116,7 +136,8 @@
       "registerLink": "Regístrate",
       "errorGeneric": "Ocurrió un error inesperado.",
       "errorLoginFailed": "Error al iniciar sesión",
-      "errorResendFailed": "Error al reenviar el correo de verificación"
+      "errorResendFailed": "Error al reenviar el correo de verificación",
+      "label": "Login"
     },
     "register": {
       "title": "Registrarse",
@@ -130,7 +151,8 @@
       "returnToLogin": "Volver a iniciar sesión",
       "haveAccount": "¿Ya tienes una cuenta?",
       "loginLink": "Inicia sesión",
-      "errorGeneric": "Error al registrarse. Inténtalo de nuevo más tarde."
+      "errorGeneric": "Error al registrarse. Inténtalo de nuevo más tarde.",
+      "label": "Register"
     },
     "verifyEmail": {
       "loadingTitle": "Verificando...",
@@ -141,7 +163,11 @@
       "goToLogin": "Ir a iniciar sesión",
       "errorTitle": "Verificación fallida",
       "errorSubtitle": "Este enlace de verificación no es válido o ha expirado.",
-      "returnToLogin": "Volver a iniciar sesión"
+      "returnToLogin": "Volver a iniciar sesión",
+      "label": "Verify email"
+    },
+    "logout": {
+      "label": "Logout"
     }
   },
   "email": {
@@ -150,7 +176,8 @@
       "heading": "¡Bienvenido a Knight School!",
       "instructions": "Verifica tu dirección de correo electrónico visitando el siguiente enlace:",
       "instructionsHtml": "Verifica tu dirección de correo electrónico haciendo clic en el siguiente enlace:",
-      "expires": "Este enlace caduca en 24 horas."
+      "expires": "Este enlace caduca en 24 horas.",
+      "label": "Verify email"
     }
   }
 }

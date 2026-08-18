@@ -13,10 +13,15 @@
     "viewSource": "Посмотреть исходный код на GitHub"
   },
   "language": {
-    "toggle": "Язык"
+    "toggle": "Язык",
+    "en": "English",
+    "kl": "Klingon"
   },
   "theme": {
-    "toggle": "Переключить тему"
+    "toggle": "Переключить тему",
+    "dark": "Dark",
+    "light": "Light",
+    "system": "System"
   },
   "flipBoard": {
     "label": "Повернуть доску"
@@ -70,6 +75,19 @@
       "variationCount_other": "{{count}} вариаций",
       "boardPreviewStart": "Старт",
       "boardPreviewAfterPly": "После хода {{ply}}"
+    },
+    "header": {
+      "title": "Knight School",
+      "greetingMorning": "Good morning ☀️",
+      "greetingAfternoon": "Good afternoon 🌤️",
+      "greetingEvening": "Good evening 🌙",
+      "nav": "Primary",
+      "openings": "Openings",
+      "puzzles": "Puzzles",
+      "login": "Login",
+      "register": "Register",
+      "logout": "Logout",
+      "viewSource": "View source on GitHub"
     }
   },
   "puzzles": {
@@ -86,7 +104,8 @@
     "streak": "Серия: {{count}}",
     "streakBest": " · лучшее {{best}}",
     "skipPuzzle": "Пропустить задачу ›",
-    "backToDashboard": "← Назад на панель"
+    "backToDashboard": "← Назад на панель",
+    "label": "Puzzles"
   },
   "training": {
     "whiteToMove": "Ход белых",
@@ -98,7 +117,8 @@
     "movePlaceholder": "или введите ход, например e2e4",
     "play": "Играть",
     "jumpToLatest": "Перейти к последнему перед отправкой",
-    "backToOpenings": "← Назад к дебютам"
+    "backToOpenings": "← Назад к дебютам",
+    "label": "Training"
   },
   "auth": {
     "login": {
@@ -116,7 +136,8 @@
       "registerLink": "Регистрация",
       "errorGeneric": "Произошла неожиданная ошибка.",
       "errorLoginFailed": "Не удалось выполнить вход",
-      "errorResendFailed": "Не удалось повторно отправить письмо для подтверждения"
+      "errorResendFailed": "Не удалось повторно отправить письмо для подтверждения",
+      "label": "Login"
     },
     "register": {
       "title": "Регистрация",
@@ -130,7 +151,8 @@
       "returnToLogin": "Вернуться ко входу",
       "haveAccount": "Уже есть аккаунт?",
       "loginLink": "Войти",
-      "errorGeneric": "Не удалось зарегистрироваться. Попробуйте ещё раз позже."
+      "errorGeneric": "Не удалось зарегистрироваться. Попробуйте ещё раз позже.",
+      "label": "Register"
     },
     "verifyEmail": {
       "loadingTitle": "Проверка…",
@@ -141,7 +163,11 @@
       "goToLogin": "Перейти ко входу",
       "errorTitle": "Не удалось подтвердить",
       "errorSubtitle": "Эта ссылка для подтверждения неверна или истекла.",
-      "returnToLogin": "Вернуться ко входу"
+      "returnToLogin": "Вернуться ко входу",
+      "label": "Verify email"
+    },
+    "logout": {
+      "label": "Logout"
     }
   },
   "email": {
@@ -150,7 +176,8 @@
       "heading": "Добро пожаловать в Knight School!",
       "instructions": "Пожалуйста, подтвердите свой адрес электронной почты, перейдя по ссылке ниже:",
       "instructionsHtml": "Пожалуйста, подтвердите свой адрес электронной почты, нажав на ссылку ниже:",
-      "expires": "Срок действия этой ссылки истекает через 24 часа."
+      "expires": "Срок действия этой ссылки истекает через 24 часа.",
+      "label": "Verify email"
     }
   }
 }

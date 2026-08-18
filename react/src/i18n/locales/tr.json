@@ -13,10 +13,15 @@
     "viewSource": "GitHub’da kaynak kodu görüntüle"
   },
   "language": {
-    "toggle": "Dil"
+    "toggle": "Dil",
+    "en": "English",
+    "kl": "Klingon"
   },
   "theme": {
-    "toggle": "Temayı değiştir"
+    "toggle": "Temayı değiştir",
+    "dark": "Dark",
+    "light": "Light",
+    "system": "System"
   },
   "flipBoard": {
     "label": "Tahtayı çevir"
@@ -70,6 +75,19 @@
       "variationCount_other": "{{count}} varyasyon",
       "boardPreviewStart": "Başla",
       "boardPreviewAfterPly": "{{ply}} hamleden sonra"
+    },
+    "header": {
+      "title": "Knight School",
+      "greetingMorning": "Good morning ☀️",
+      "greetingAfternoon": "Good afternoon 🌤️",
+      "greetingEvening": "Good evening 🌙",
+      "nav": "Primary",
+      "openings": "Openings",
+      "puzzles": "Puzzles",
+      "login": "Login",
+      "register": "Register",
+      "logout": "Logout",
+      "viewSource": "View source on GitHub"
     }
   },
   "puzzles": {
@@ -86,7 +104,8 @@
     "streak": "Seri: {{count}}",
     "streakBest": " · en iyi {{best}}",
     "skipPuzzle": "Bulmacayı atla ›",
-    "backToDashboard": "← Gösterge paneline dön"
+    "backToDashboard": "← Gösterge paneline dön",
+    "label": "Puzzles"
   },
   "training": {
     "whiteToMove": "Sıra beyazda",
@@ -98,7 +117,8 @@
     "movePlaceholder": "ya da bir hamle yazın, örn. e2e4",
     "play": "Oyna",
     "jumpToLatest": "Gönderilmeden önce en son hamleye git",
-    "backToOpenings": "← Açılışlara dön"
+    "backToOpenings": "← Açılışlara dön",
+    "label": "Training"
   },
   "auth": {
     "login": {
@@ -116,7 +136,8 @@
       "registerLink": "Kayıt ol",
       "errorGeneric": "Beklenmeyen bir hata oluştu.",
       "errorLoginFailed": "Giriş başarısız",
-      "errorResendFailed": "Doğrulama e-postası yeniden gönderilemedi"
+      "errorResendFailed": "Doğrulama e-postası yeniden gönderilemedi",
+      "label": "Login"
     },
     "register": {
       "title": "Kayıt ol",
@@ -130,7 +151,8 @@
       "returnToLogin": "Girişe dön",
       "haveAccount": "Zaten hesabınız var mı?",
       "loginLink": "Giriş",
-      "errorGeneric": "Kayıt yapılamadı. Lütfen daha sonra tekrar deneyin."
+      "errorGeneric": "Kayıt yapılamadı. Lütfen daha sonra tekrar deneyin.",
+      "label": "Register"
     },
     "verifyEmail": {
       "loadingTitle": "Doğrulanıyor...",
@@ -141,7 +163,11 @@
       "goToLogin": "Girişe git",
       "errorTitle": "Doğrulama başarısız",
       "errorSubtitle": "Bu doğrulama bağlantısı geçersiz veya süresi dolmuş.",
-      "returnToLogin": "Girişe dön"
+      "returnToLogin": "Girişe dön",
+      "label": "Verify email"
+    },
+    "logout": {
+      "label": "Logout"
     }
   },
   "email": {
@@ -150,7 +176,8 @@
       "heading": "Knight School'a hoş geldiniz!",
       "instructions": "Lütfen aşağıdaki bağlantıyı ziyaret ederek e-posta adresinizi doğrulayın:",
       "instructionsHtml": "Lütfen aşağıdaki bağlantıya tıklayarak e-posta adresinizi doğrulayın:",
-      "expires": "Bu bağlantının süresi 24 saat içinde dolacaktır."
+      "expires": "Bu bağlantının süresi 24 saat içinde dolacaktır.",
+      "label": "Verify email"
     }
   }
 }

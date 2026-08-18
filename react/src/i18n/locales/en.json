@@ -13,15 +13,33 @@
     "viewSource": "View source on GitHub"
   },
   "language": {
-    "toggle": "Language"
+    "toggle": "Language",
+    "en": "English",
+    "kl": "Klingon"
   },
   "theme": {
-    "toggle": "Toggle theme"
+    "toggle": "Toggle theme",
+    "dark": "Dark",
+    "light": "Light",
+    "system": "System"
   },
   "flipBoard": {
     "label": "Flip board"
   },
   "dashboard": {
+    "header": {
+      "title": "Knight School",
+      "greetingMorning": "Good morning ☀️",
+      "greetingAfternoon": "Good afternoon 🌤️",
+      "greetingEvening": "Good evening 🌙",
+      "nav": "Primary",
+      "openings": "Openings",
+      "puzzles": "Puzzles",
+      "login": "Login",
+      "register": "Register",
+      "logout": "Logout",
+      "viewSource": "View source on GitHub"
+    },
     "progress": {
       "yourProgress": "Your progress",
       "trainingLabel": "Training progress",
@@ -73,6 +91,7 @@
     }
   },
   "puzzles": {
+    "label": "Puzzles",
     "noPuzzlesDue": "No puzzles due right now — check back later.",
     "loadFailed": "Failed to load a puzzle. Check your connection.",
     "correct": "✅ Correct!",
@@ -89,6 +108,7 @@
     "backToDashboard": "← Back to dashboard"
   },
   "training": {
+    "label": "Training",
     "whiteToMove": "White to move",
     "blackToMove": "Black to move",
     "showHint": "Show a hint",
@@ -102,6 +122,7 @@
   },
   "auth": {
     "login": {
+      "label": "Login",
       "title": "Login",
       "subtitle": "Welcome back.",
       "usernameLabel": "Username",
@@ -119,6 +140,7 @@
       "errorResendFailed": "Failed to resend verification email"
     },
     "register": {
+      "label": "Register",
       "title": "Register",
       "subtitle": "Create your account.",
       "emailLabel": "Email",
@@ -132,7 +154,11 @@
       "loginLink": "Login",
       "errorGeneric": "Failed to register. Please try again later."
     },
+    "logout": {
+      "label": "Logout"
+    },
     "verifyEmail": {
+      "label": "Verify email",
       "loadingTitle": "Verifying...",
       "loadingSubtitle": "Verifying your email…",
       "successTitle": "Email Verified",
@@ -146,6 +172,7 @@
   },
   "email": {
     "verify": {
+      "label": "Verify email",
       "subject": "Verify your Knight School email",
       "heading": "Welcome to Knight School!",
       "instructions": "Please verify your email address by visiting the link below:",

@@ -13,10 +13,15 @@
     "viewSource": "Bekijk de bron op GitHub"
   },
   "language": {
-    "toggle": "Taal"
+    "toggle": "Taal",
+    "en": "English",
+    "kl": "Klingon"
   },
   "theme": {
-    "toggle": "Thema wisselen"
+    "toggle": "Thema wisselen",
+    "dark": "Dark",
+    "light": "Light",
+    "system": "System"
   },
   "flipBoard": {
     "label": "Bord omdraaien"
@@ -70,6 +75,19 @@
       "variationCount_other": "{{count}} variaties",
       "boardPreviewStart": "Start",
       "boardPreviewAfterPly": "Na zet {{ply}}"
+    },
+    "header": {
+      "title": "Knight School",
+      "greetingMorning": "Good morning ☀️",
+      "greetingAfternoon": "Good afternoon 🌤️",
+      "greetingEvening": "Good evening 🌙",
+      "nav": "Primary",
+      "openings": "Openings",
+      "puzzles": "Puzzles",
+      "login": "Login",
+      "register": "Register",
+      "logout": "Logout",
+      "viewSource": "View source on GitHub"
     }
   },
   "puzzles": {
@@ -86,7 +104,8 @@
     "streak": "Reeks: {{count}}",
     "streakBest": " · beste {{best}}",
     "skipPuzzle": "Puzzel overslaan ›",
-    "backToDashboard": "← Terug naar dashboard"
+    "backToDashboard": "← Terug naar dashboard",
+    "label": "Puzzles"
   },
   "training": {
     "whiteToMove": "Wit aan zet",
@@ -98,7 +117,8 @@
     "movePlaceholder": "of typ een zet, bijv. e2e4",
     "play": "Spelen",
     "jumpToLatest": "Ga naar de nieuwste vóór je verzendt",
-    "backToOpenings": "← Terug naar openingen"
+    "backToOpenings": "← Terug naar openingen",
+    "label": "Training"
   },
   "auth": {
     "login": {
@@ -116,7 +136,8 @@
       "registerLink": "Registreren",
       "errorGeneric": "Er is een onverwachte fout opgetreden.",
       "errorLoginFailed": "Inloggen mislukt",
-      "errorResendFailed": "Het opnieuw verzenden van de verificatiemail is mislukt"
+      "errorResendFailed": "Het opnieuw verzenden van de verificatiemail is mislukt",
+      "label": "Login"
     },
     "register": {
       "title": "Registreren",
@@ -130,7 +151,8 @@
       "returnToLogin": "Terug naar inloggen",
       "haveAccount": "Heb je al een account?",
       "loginLink": "Inloggen",
-      "errorGeneric": "Registreren is mislukt. Probeer het later opnieuw."
+      "errorGeneric": "Registreren is mislukt. Probeer het later opnieuw.",
+      "label": "Register"
     },
     "verifyEmail": {
       "loadingTitle": "Bezig met verifiëren...",
@@ -141,7 +163,11 @@
       "goToLogin": "Ga naar Inloggen",
       "errorTitle": "Verificatie mislukt",
       "errorSubtitle": "Deze verificatielink is ongeldig of verlopen.",
-      "returnToLogin": "Terug naar Inloggen"
+      "returnToLogin": "Terug naar Inloggen",
+      "label": "Verify email"
+    },
+    "logout": {
+      "label": "Logout"
     }
   },
   "email": {
@@ -150,7 +176,8 @@
       "heading": "Welkom bij Knight School!",
       "instructions": "Bevestig je e-mailadres door de onderstaande link te bezoeken:",
       "instructionsHtml": "Bevestig je e-mailadres door op de onderstaande link te klikken:",
-      "expires": "Deze link verloopt over 24 uur."
+      "expires": "Deze link verloopt over 24 uur.",
+      "label": "Verify email"
     }
   }
 }
