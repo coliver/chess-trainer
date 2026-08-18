@@ -7,7 +7,16 @@ type BoardProps = {
   orientation: "white" | "black";
   onMove?: (from: string, to: string) => boolean;
   gameOver?: boolean;
+  interactive?: boolean;
+  animated?: boolean;
+  showCoordinates?: boolean;
+  markers?: any[];
+  moveColor?: string;
+  getLegalMoves?: (square: string) => any[];
+  onMoveStart?: (square: string) => boolean;
 };
+
+export type BoardMarker = any; // Export for use in other components
 
 export default function Board({
   position,
@@ -30,7 +39,7 @@ export default function Board({
 
     boardRef.current = board;
 
-    board.enableMoveInput((event) => {
+    board.enableMoveInput((event: { type: string; squareFrom?: string; squareTo?: string }) => {
       switch (event.type) {
         case INPUT_EVENT_TYPE.moveStart:
           return true;
