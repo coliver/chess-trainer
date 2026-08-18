@@ -34,12 +34,16 @@ export default function Board({
   onMoveStart,
 }: BoardProps) {
   const boardRef = useRef<Chessboard | null>(null);
+  const hostRef = useRef<HTMLDivElement | null>(null);
   const lastMoveRef = useRef<{ from: string; to: string } | null>(null);
   const { playSound } = useChessSounds();
 
   useEffect(() => {
-    const boardElement = document.getElementById("board");
+    const boardElement = hostRef.current;
     if (!boardElement) return;
+
+    // If an instance already exists (fast remounts), destroy it first.
+    boardRef.current?.destroy?.();
 
     const board = new Chessboard(boardElement, {
       position,
@@ -61,15 +65,13 @@ export default function Board({
         switch (event.type) {
           case INPUT_EVENT_TYPE.moveStart: {
             const from = event.squareFrom ?? "";
-            // Check if this piece can be moved
             if (onMoveStart && !onMoveStart(from)) {
               return false;
             }
 
-            // Show legal moves if getLegalMoves is provided
             if (getLegalMoves) {
               const moves = getLegalMoves(from);
-              // Use the Chessboard API for legal-move markers rather than calling addMarker with reversed args
+              // Use the chessboard extension method for legal move markers
               (board as any).addLegalMovesMarkers?.(moves as any);
             }
             return true;
@@ -119,7 +121,7 @@ export default function Board({
     // Apply markers (hints, last move, etc.)
     if (markers && markers.length > 0) {
       markers.forEach((marker) => {
-        // cm-chessboard expects addMarker(type, square) — swap the args here
+        // cm-chessboard expects addMarker(type, square)
         (board as any).addMarker?.(marker.type, marker.square);
       });
     }
@@ -136,5 +138,9 @@ export default function Board({
     }
   }, [gameOver, playSound]);
 
-  return <div id="board" style={{ width: "100%", height: "100%" }} />;
+  // Use a per-instance host and give it a square aspect so thumbnail previews
+  // get a usable height even when their container only sets width.
+  return (
+    <div ref={hostRef} style={{ width: "100%", aspectRatio: "1 / 1", minHeight: 120 }} />
+  );
 }
