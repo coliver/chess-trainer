@@ -118,7 +118,10 @@
     "play": "Jouer",
     "jumpToLatest": "Aller au dernier coup avant de valider",
     "backToOpenings": "← Retour aux ouvertures",
-    "label": "Training"
+    "label": "Training",
+    "trainAgain": "Rejouer cette ouverture",
+    "restarting": "Démarrage…",
+    "chooseAnother": "Choisir une autre ouverture"
   },
   "auth": {
     "login": {

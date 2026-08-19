@@ -118,7 +118,10 @@
     "movePlaceholder": "または手を入力してください。例: e2e4",
     "play": "指す",
     "jumpToLatest": "送信前に最新まで移動",
-    "backToOpenings": "← 定跡に戻る"
+    "backToOpenings": "← 定跡に戻る",
+    "trainAgain": "この定跡をもう一度練習する",
+    "restarting": "開始しています…",
+    "chooseAnother": "別の定跡を選ぶ"
   },
   "auth": {
     "login": {

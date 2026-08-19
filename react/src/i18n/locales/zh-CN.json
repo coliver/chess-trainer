@@ -118,7 +118,10 @@
     "movePlaceholder": "或输入走法，例如 e2e4",
     "play": "执行",
     "jumpToLatest": "提交前跳到最新",
-    "backToOpenings": "← 返回开局"
+    "backToOpenings": "← 返回开局",
+    "trainAgain": "再次训练此开局",
+    "restarting": "正在开始…",
+    "chooseAnother": "选择其他开局"
   },
   "auth": {
     "login": {

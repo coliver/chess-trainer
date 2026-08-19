@@ -118,7 +118,10 @@
     "movePlaceholder": "or type a move, e.g. e2e4",
     "play": "Play",
     "jumpToLatest": "Jump to latest before submitting",
-    "backToOpenings": "← Back to openings"
+    "backToOpenings": "← Back to openings",
+    "trainAgain": "Train this opening again",
+    "restarting": "Starting…",
+    "chooseAnother": "Choose another opening"
   },
   "auth": {
     "login": {

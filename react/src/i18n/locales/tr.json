@@ -118,7 +118,10 @@
     "play": "Oyna",
     "jumpToLatest": "Gönderilmeden önce en son hamleye git",
     "backToOpenings": "← Açılışlara dön",
-    "label": "Training"
+    "label": "Training",
+    "trainAgain": "Bu açılışı tekrar çalış",
+    "restarting": "Başlatılıyor…",
+    "chooseAnother": "Başka bir açılış seç"
   },
   "auth": {
     "login": {

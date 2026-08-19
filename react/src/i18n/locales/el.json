@@ -118,7 +118,10 @@
     "movePlaceholder": "ή πληκτρολογήστε κίνηση, π.χ. e2e4",
     "play": "Παιχνίδι",
     "jumpToLatest": "Μετάβαση στο τελευταίο πριν την υποβολή",
-    "backToOpenings": "← Πίσω στα ανοίγματα"
+    "backToOpenings": "← Πίσω στα ανοίγματα",
+    "trainAgain": "Εξάσκηση σε αυτό το άνοιγμα ξανά",
+    "restarting": "Έναρξη…",
+    "chooseAnother": "Επιλογή άλλου ανοίγματος"
   },
   "auth": {
     "login": {

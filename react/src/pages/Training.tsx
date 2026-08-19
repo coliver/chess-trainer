@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
+import api from "../api";
 import Board, { type BoardMarker } from "../components/Board";
 import { FlipBoardButton } from "../components/FlipBoardButton";
 import {
@@ -59,6 +60,7 @@ export const Training = () => {
     null,
   );
   const [localFeedback, setLocalFeedback] = useState("");
+  const [isRestarting, setIsRestarting] = useState(false);
   const shownFeedback = localFeedback || feedback;
 
   // Only the autoplay effect below needs this: eslint's set-state-in-effect
@@ -143,6 +145,7 @@ export const Training = () => {
       setMoveInput("");
       setHintLevel(-1);
       setLastMove(null);
+      setIsRestarting(false);
     }
     prevItemIdRef.current = itemId;
   }, [itemId]);
@@ -349,6 +352,21 @@ export const Training = () => {
 
   const busy = isSubmitting || isAdvancing;
 
+  const trainAgain = useCallback(async () => {
+    setIsRestarting(true);
+    try {
+      const response = await api.post("/training-sessions", {
+        openingEco: eco,
+        openingName,
+        playerColor,
+      });
+      navigate(`/training/${response.data.id}`);
+    } catch (error) {
+      console.error("Error restarting session:", error);
+      setIsRestarting(false);
+    }
+  }, [eco, openingName, playerColor, navigate]);
+
   return (
     <main className="page">
       <div className="card">
@@ -422,52 +440,78 @@ export const Training = () => {
               </div>
             </div>
 
-            <div className="train-controls">
-              <div className="train-stepper">
-                <button
-                  className="btn"
-                  type="button"
-                  onClick={() => jumpToIndex(timeline.index - 1)}
-                  disabled={busy || timeline.index <= 0}
-                >
-                  {t("training.prev")}
-                </button>
-                <button
-                  className="btn"
-                  type="button"
-                  onClick={() => jumpToIndex(timeline.index + 1)}
-                  disabled={busy || timeline.index >= timeline.fens.length - 1}
-                >
-                  {t("training.next")}
-                </button>
-              </div>
-
-              <form className="train-type-move" onSubmit={handleSubmit}>
-                <input
-                  className="text-input"
-                  value={moveInput}
-                  onChange={(e) => setMoveInput(e.target.value)}
-                  placeholder={t("training.movePlaceholder")}
-                  disabled={isSubmitting}
-                />
+            {isSessionCompleted ? (
+              <div className="train-controls">
                 <button
                   className="btn primary"
-                  type="submit"
-                  disabled={busy || !moveInput.trim() || !atLatest}
-                  title={!atLatest ? t("training.jumpToLatest") : undefined}
+                  type="button"
+                  onClick={trainAgain}
+                  disabled={isRestarting}
                 >
-                  {t("training.play")}
+                  {isRestarting
+                    ? t("training.restarting")
+                    : t("training.trainAgain")}
                 </button>
-              </form>
-            </div>
+                <button
+                  className="btn"
+                  type="button"
+                  onClick={() => navigate("/dashboard")}
+                >
+                  {t("training.chooseAnother")}
+                </button>
+              </div>
+            ) : (
+              <div className="train-controls">
+                <div className="train-stepper">
+                  <button
+                    className="btn"
+                    type="button"
+                    onClick={() => jumpToIndex(timeline.index - 1)}
+                    disabled={busy || timeline.index <= 0}
+                  >
+                    {t("training.prev")}
+                  </button>
+                  <button
+                    className="btn"
+                    type="button"
+                    onClick={() => jumpToIndex(timeline.index + 1)}
+                    disabled={
+                      busy || timeline.index >= timeline.fens.length - 1
+                    }
+                  >
+                    {t("training.next")}
+                  </button>
+                </div>
 
-            <button
-              className="train-exit"
-              type="button"
-              onClick={() => navigate("/dashboard")}
-            >
-              {t("training.backToOpenings")}
-            </button>
+                <form className="train-type-move" onSubmit={handleSubmit}>
+                  <input
+                    className="text-input"
+                    value={moveInput}
+                    onChange={(e) => setMoveInput(e.target.value)}
+                    placeholder={t("training.movePlaceholder")}
+                    disabled={isSubmitting}
+                  />
+                  <button
+                    className="btn primary"
+                    type="submit"
+                    disabled={busy || !moveInput.trim() || !atLatest}
+                    title={!atLatest ? t("training.jumpToLatest") : undefined}
+                  >
+                    {t("training.play")}
+                  </button>
+                </form>
+              </div>
+            )}
+
+            {!isSessionCompleted && (
+              <button
+                className="train-exit"
+                type="button"
+                onClick={() => navigate("/dashboard")}
+              >
+                {t("training.backToOpenings")}
+              </button>
+            )}
           </aside>
         </div>
       </div>

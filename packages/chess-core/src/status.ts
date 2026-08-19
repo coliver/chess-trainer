@@ -40,7 +40,7 @@ export function deriveStatus(params: {
       kind: "done",
       icon: "⚑",
       message: "Session complete",
-      sub: "You played the line. Well done.",
+      sub: "You played the line. Train it again or pick another opening below.",
     };
   }
 

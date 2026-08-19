@@ -118,7 +118,10 @@
     "movePlaceholder": "tai kirjoita siirto, esim. e2e4",
     "play": "Pelaa",
     "jumpToLatest": "Siirry viimeiseen ennen lähetystä",
-    "backToOpenings": "← Takaisin avauksiin"
+    "backToOpenings": "← Takaisin avauksiin",
+    "trainAgain": "Harjoittele tätä avausta uudelleen",
+    "restarting": "Käynnistetään…",
+    "chooseAnother": "Valitse toinen avaus"
   },
   "auth": {
     "login": {

@@ -118,7 +118,10 @@
     "play": "I am Groot",
     "jumpToLatest": "I am Groot",
     "backToOpenings": "← I am Groot",
-    "label": "Training"
+    "label": "Training",
+    "trainAgain": "I am Groot",
+    "restarting": "I am Groot!",
+    "chooseAnother": "I am Groot"
   },
   "auth": {
     "login": {

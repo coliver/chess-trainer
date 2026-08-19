@@ -118,7 +118,10 @@
     "movePlaceholder": "atau ketik langkah, mis. e2e4",
     "play": "Mainkan",
     "jumpToLatest": "Loncat ke posisi terbaru sebelum mengirim",
-    "backToOpenings": "← Kembali ke pembukaan"
+    "backToOpenings": "← Kembali ke pembukaan",
+    "trainAgain": "Latih pembukaan ini lagi",
+    "restarting": "Memulai…",
+    "chooseAnother": "Pilih pembukaan lain"
   },
   "auth": {
     "login": {

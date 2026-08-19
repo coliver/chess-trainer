@@ -118,7 +118,10 @@
     "movePlaceholder": "أو اكتب نقلة مثل e2e4",
     "play": "حرك",
     "jumpToLatest": "اذهب إلى آخر موضع قبل الإرسال",
-    "backToOpenings": "← العودة إلى الافتتاحيات"
+    "backToOpenings": "← العودة إلى الافتتاحيات",
+    "trainAgain": "تدرّب على هذا الافتتاح مرة أخرى",
+    "restarting": "جارٍ البدء…",
+    "chooseAnother": "اختر افتتاحية أخرى"
   },
   "auth": {
     "login": {

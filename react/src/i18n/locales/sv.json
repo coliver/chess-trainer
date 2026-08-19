@@ -118,7 +118,10 @@
     "movePlaceholder": "eller skriv ett drag, t.ex. e2e4",
     "play": "Spela",
     "jumpToLatest": "Hoppa till senaste innan du skickar",
-    "backToOpenings": "← Tillbaka till öppningar"
+    "backToOpenings": "← Tillbaka till öppningar",
+    "trainAgain": "Träna den här öppningen igen",
+    "restarting": "Startar…",
+    "chooseAnother": "Välj en annan öppning"
   },
   "auth": {
     "login": {

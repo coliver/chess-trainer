@@ -118,7 +118,10 @@
     "movePlaceholder": "או הקלידו מסע, למשל e2e4",
     "play": "שחק",
     "jumpToLatest": "קפוץ לאחרון לפני השליחה",
-    "backToOpenings": "← חזרה לפתיחות"
+    "backToOpenings": "← חזרה לפתיחות",
+    "trainAgain": "תרגל פתיחה זו שוב",
+    "restarting": "מתחיל…",
+    "chooseAnother": "בחר פתיחה אחרת"
   },
   "auth": {
     "login": {

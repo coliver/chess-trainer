@@ -118,7 +118,10 @@
     "movePlaceholder": "eller skriv et trekk, f.eks. e2e4",
     "play": "Spill",
     "jumpToLatest": "Hopp til siste før du sender inn",
-    "backToOpenings": "← Tilbake til åpninger"
+    "backToOpenings": "← Tilbake til åpninger",
+    "trainAgain": "Tren denne åpningen igjen",
+    "restarting": "Starter…",
+    "chooseAnother": "Velg en annen åpning"
   },
   "auth": {
     "login": {

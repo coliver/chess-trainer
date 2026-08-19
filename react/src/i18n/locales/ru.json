@@ -118,7 +118,10 @@
     "play": "Играть",
     "jumpToLatest": "Перейти к последнему перед отправкой",
     "backToOpenings": "← Назад к дебютам",
-    "label": "Training"
+    "label": "Training",
+    "trainAgain": "Тренировать этот дебют снова",
+    "restarting": "Запуск…",
+    "chooseAnother": "Выбрать другой дебют"
   },
   "auth": {
     "login": {

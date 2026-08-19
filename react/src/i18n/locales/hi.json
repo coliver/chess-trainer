@@ -118,7 +118,10 @@
     "movePlaceholder": "या कोई चाल लिखें, जैसे e2e4",
     "play": "चलें",
     "jumpToLatest": "जमा करने से पहले नवीनतम पर जाएँ",
-    "backToOpenings": "← ओपनिंग्स पर वापस"
+    "backToOpenings": "← ओपनिंग्स पर वापस",
+    "trainAgain": "इस ओपनिंग का फिर से अभ्यास करें",
+    "restarting": "शुरू हो रहा है…",
+    "chooseAnother": "कोई अन्य ओपनिंग चुनें"
   },
   "auth": {
     "login": {

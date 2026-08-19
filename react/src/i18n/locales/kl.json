@@ -118,7 +118,10 @@
     "movePlaceholder": "ghoS",
     "play": "bej",
     "jumpToLatest": "chay' yIghoS",
-    "backToOpenings": "poHmeyDaq chegh"
+    "backToOpenings": "poHmeyDaq chegh",
+    "trainAgain": "QorDu' DaH yIchav",
+    "restarting": "taghtaH…",
+    "chooseAnother": "poH latlh yIwIv"
   },
   "auth": {
     "login": {

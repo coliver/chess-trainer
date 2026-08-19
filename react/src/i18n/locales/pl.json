@@ -118,7 +118,10 @@
     "play": "Graj",
     "jumpToLatest": "Przejdź do najnowszego przed wysłaniem",
     "backToOpenings": "← Wróć do debiutów",
-    "label": "Training"
+    "label": "Training",
+    "trainAgain": "Trenuj to otwarcie ponownie",
+    "restarting": "Uruchamianie…",
+    "chooseAnother": "Wybierz inne otwarcie"
   },
   "auth": {
     "login": {

@@ -118,7 +118,10 @@
     "movePlaceholder": "hoặc nhập nước đi, ví dụ e2e4",
     "play": "Đi",
     "jumpToLatest": "Nhảy tới nước mới nhất trước khi gửi",
-    "backToOpenings": "← Quay lại khai cuộc"
+    "backToOpenings": "← Quay lại khai cuộc",
+    "trainAgain": "Luyện tập lại khai cuộc này",
+    "restarting": "Đang bắt đầu…",
+    "chooseAnother": "Chọn khai cuộc khác"
   },
   "auth": {
     "login": {

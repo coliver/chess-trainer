@@ -118,7 +118,10 @@
     "play": "Jugar",
     "jumpToLatest": "Ve a la última posición antes de enviar",
     "backToOpenings": "← Volver a las aperturas",
-    "label": "Training"
+    "label": "Training",
+    "trainAgain": "Entrenar esta apertura de nuevo",
+    "restarting": "Iniciando…",
+    "chooseAnother": "Elegir otra apertura"
   },
   "auth": {
     "login": {

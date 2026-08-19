@@ -118,7 +118,10 @@
     "movePlaceholder": "nebo napište tah, např. e2e4",
     "play": "Hrát",
     "jumpToLatest": "Přejít na poslední před odesláním",
-    "backToOpenings": "← Zpět na otevření"
+    "backToOpenings": "← Zpět na otevření",
+    "trainAgain": "Trénovat toto zahájení znovu",
+    "restarting": "Spouští se…",
+    "chooseAnother": "Vybrat jiné zahájení"
   },
   "auth": {
     "login": {

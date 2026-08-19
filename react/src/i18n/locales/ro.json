@@ -118,7 +118,10 @@
     "movePlaceholder": "sau tastează o mutare, de ex. e2e4",
     "play": "Joacă",
     "jumpToLatest": "Sari la cea mai recentă înainte de trimitere",
-    "backToOpenings": "← Înapoi la deschideri"
+    "backToOpenings": "← Înapoi la deschideri",
+    "trainAgain": "Antrenează din nou această deschidere",
+    "restarting": "Se pornește…",
+    "chooseAnother": "Alege altă deschidere"
   },
   "auth": {
     "login": {

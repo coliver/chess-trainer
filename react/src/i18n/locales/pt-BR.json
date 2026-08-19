@@ -118,7 +118,10 @@
     "movePlaceholder": "ou digite um lance, ex.: e2e4",
     "play": "Jogar",
     "jumpToLatest": "Ir para a última posição antes de enviar",
-    "backToOpenings": "← Voltar às aberturas"
+    "backToOpenings": "← Voltar às aberturas",
+    "trainAgain": "Treinar esta abertura novamente",
+    "restarting": "Iniciando…",
+    "chooseAnother": "Escolher outra abertura"
   },
   "auth": {
     "login": {

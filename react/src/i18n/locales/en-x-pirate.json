@@ -118,7 +118,10 @@
     "play": "Play",
     "jumpToLatest": "Jump to latest before submitting",
     "backToOpenings": "← Back to openings",
-    "label": "Training"
+    "label": "Training",
+    "trainAgain": "Sail this opening again, cap’n",
+    "restarting": "Weighin’ anchor…",
+    "chooseAnother": "Pick another opening, matey"
   },
   "auth": {
     "login": {

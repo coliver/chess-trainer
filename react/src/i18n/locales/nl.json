@@ -118,7 +118,10 @@
     "play": "Spelen",
     "jumpToLatest": "Ga naar de nieuwste vóór je verzendt",
     "backToOpenings": "← Terug naar openingen",
-    "label": "Training"
+    "label": "Training",
+    "trainAgain": "Train deze opening opnieuw",
+    "restarting": "Bezig met starten…",
+    "chooseAnother": "Kies een andere opening"
   },
   "auth": {
     "login": {

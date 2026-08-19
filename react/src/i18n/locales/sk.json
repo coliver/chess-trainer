@@ -118,7 +118,10 @@
     "movePlaceholder": "alebo zadajte ťah, napr. e2e4",
     "play": "Hrať",
     "jumpToLatest": "Pred odoslaním prejsť na najnovší",
-    "backToOpenings": "← Späť na otvárania"
+    "backToOpenings": "← Späť na otvárania",
+    "trainAgain": "Trénovať toto otvorenie znova",
+    "restarting": "Spúšťa sa…",
+    "chooseAnother": "Vybrať iné otvorenie"
   },
   "auth": {
     "login": {

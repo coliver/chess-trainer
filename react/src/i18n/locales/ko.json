@@ -118,7 +118,10 @@
     "movePlaceholder": "또는 수를 입력하세요. 예: e2e4",
     "play": "두기",
     "jumpToLatest": "제출 전에 최신 상태로 이동",
-    "backToOpenings": "← 오프닝으로 돌아가기"
+    "backToOpenings": "← 오프닝으로 돌아가기",
+    "trainAgain": "이 오프닝 다시 훈련하기",
+    "restarting": "시작 중…",
+    "chooseAnother": "다른 오프닝 선택"
   },
   "auth": {
     "login": {

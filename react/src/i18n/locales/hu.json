@@ -118,7 +118,10 @@
     "movePlaceholder": "vagy írj be egy lépést, pl. e2e4",
     "play": "Lépés",
     "jumpToLatest": "Ugrás a legutolsóhoz beküldés előtt",
-    "backToOpenings": "← Vissza a megnyitásokhoz"
+    "backToOpenings": "← Vissza a megnyitásokhoz",
+    "trainAgain": "Gyakorold újra ezt a megnyitást",
+    "restarting": "Indítás…",
+    "chooseAnother": "Válassz másik megnyitást"
   },
   "auth": {
     "login": {
