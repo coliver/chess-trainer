@@ -1,12 +1,12 @@
 {
   "header": {
-    "title": "Knight School",
+    "title": "Academia del Caballo",
     "greetingMorning": "Buenos días ☀️",
     "greetingAfternoon": "Buenas tardes 🌤️",
     "greetingEvening": "Buenas noches 🌙",
     "nav": "Principal",
     "openings": "Aperturas",
-    "puzzles": "Puzzles",
+    "puzzles": "Problemas",
     "login": "Iniciar sesión",
     "register": "Registrarse",
     "logout": "Cerrar sesión",
@@ -41,8 +41,8 @@
       "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} correctas",
       "weakSpotFallbackName": "Apertura",
       "puzzleLabel": "Progreso de puzzles",
-      "puzzlesHeading": "Puzzles",
-      "puzzlesSolved": "Puzzles resueltos",
+      "puzzlesHeading": "Problemas",
+      "puzzlesSolved": "Problemas resueltos",
       "practicePuzzles": "Practicar puzzles",
       "startSessionFailed": "No se pudo iniciar la sesión. Verifica tu conexión o token.",
       "reviewSessionFailed": "No hay posiciones pendientes de repaso todavía."
@@ -77,17 +77,17 @@
       "boardPreviewAfterPly": "Después de la jugada {{ply}}"
     },
     "header": {
-      "title": "Knight School",
-      "greetingMorning": "Good morning ☀️",
-      "greetingAfternoon": "Good afternoon 🌤️",
-      "greetingEvening": "Good evening 🌙",
-      "nav": "Primary",
-      "openings": "Openings",
-      "puzzles": "Puzzles",
-      "login": "Login",
-      "register": "Register",
-      "logout": "Logout",
-      "viewSource": "View source on GitHub"
+      "title": "Academia del Caballo",
+      "greetingMorning": "Buenos días ☀️",
+      "greetingAfternoon": "Buenas tardes 🌤️",
+      "greetingEvening": "Buenas noches 🌙",
+      "nav": "Principal",
+      "openings": "Aperturas",
+      "puzzles": "Problemas",
+      "login": "Iniciar sesión",
+      "register": "Registrarse",
+      "logout": "Cerrar sesión",
+      "viewSource": "Ver el código fuente en GitHub"
     }
   },
   "puzzles": {
@@ -97,7 +97,7 @@
     "incorrectFallback": "No es eso — inténtalo de nuevo.",
     "submitError": "Error al enviar el movimiento.",
     "findBestMove": "Encuentra la mejor jugada.",
-    "eyebrow": "Puzzles",
+    "eyebrow": "Problemas",
     "title": "Entrenamiento de puzzles",
     "rating": "Nivel ~{{rating}}",
     "solved": "Resueltos: {{count}}",
@@ -105,7 +105,7 @@
     "streakBest": " · mejor {{best}}",
     "skipPuzzle": "Saltar puzzle ›",
     "backToDashboard": "← Volver al panel",
-    "label": "Puzzles"
+    "label": "Problemas"
   },
   "training": {
     "whiteToMove": "Mueven las blancas",
@@ -164,7 +164,7 @@
       "errorTitle": "Verificación fallida",
       "errorSubtitle": "Este enlace de verificación no es válido o ha expirado.",
       "returnToLogin": "Volver a iniciar sesión",
-      "label": "Verify email"
+      "label": "Verificar correo electrónico"
     },
     "logout": {
       "label": "Logout"
