@@ -14,11 +14,26 @@ angular/
 │   │   │   ├── auth.service.ts        # login/logout, token storage
 │   │   │   ├── auth.interceptor.ts    # attaches Bearer, refreshes on 401
 │   │   │   ├── auth.guard.ts          # guards routes via GET /auth/me
-│   │   │   └── openings.service.ts    # GET /api/openings
+│   │   │   ├── openings.service.ts    # GET /api/openings
+│   │   │   ├── progress.service.ts    # user progress tracking
+│   │   │   ├── puzzles.service.ts     # GET /api/puzzles
+│   │   │   └── training.service.ts    # training session data
 │   │   ├── pages/
 │   │   │   ├── login/                 # POST /api/auth/login
-│   │   │   └── dashboard/             # openings list (guarded)
-│   │   ├── app.routes.ts              # /login, /dashboard (guarded), redirects
+│   │   │   ├── register/              # user registration
+│   │   │   ├── dashboard/             # openings list (guarded)
+│   │   │   ├── training/              # puzzle training view (guarded)
+│   │   │   └── puzzles/               # puzzles library (guarded)
+│   │   ├── shared/
+│   │   │   ├── header.component.ts    # top navigation
+│   │   │   ├── theme-toggle.component.ts   # light/dark theme switcher
+│   │   │   ├── flip-board-button.component.ts # board orientation control
+│   │   │   └── knight-school-icon.component.ts # branding icon
+│   │   ├── board.component.ts         # chess board UI (used in training/dashboard)
+│   │   ├── lib/                       # utility functions
+│   │   │   ├── group-openings.ts      # opening grouping logic
+│   │   │   └── opening-text.ts        # opening name/description utilities
+│   │   ├── app.routes.ts              # /login, /register, /dashboard, /training/:id, /puzzles (guarded), redirects
 │   │   ├── app.config.ts              # provideHttpClient(withInterceptors([authInterceptor]))
 │   │   └── app.component.*            # top bar shell + <router-outlet>
 │   ├── index.html
@@ -57,8 +72,10 @@ For local iteration outside Docker (Node 20+):
 ```bash
 cd angular
 npm install
-npm start -- --serve-path /angular/ --base-href /angular/   # http://localhost:4200/angular/
+npm start -- --serve-path /angular/   # http://localhost:4200/angular/
 ```
+
+(The `baseHref` is configured in `angular.json`, not as a CLI flag.)
 
 ## 🧪 Testing & linting
 
@@ -73,3 +90,4 @@ docker compose exec angular ./node_modules/.bin/ng build
 - **Lint:** ESLint via `@angular-eslint`.
 - **Unit tests:** Karma + Jasmine (`*.spec.ts`) — e.g. `auth.service.spec.ts` asserts the login
   flow stores tokens; `app.component.spec.ts` renders the shell.
+- **E2E tests:** Playwright for end-to-end testing; run via `npm run test:playwright`.

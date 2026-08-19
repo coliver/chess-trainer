@@ -31,8 +31,9 @@ react/
 │   ├── components/            # Reusable UI elements (Board, Header, Button, icons, theme toggle...)
 │   │   ├── Board.tsx           # cm-chessboard wrapper (the seam the Angular board mirrors)
 │   │   └── openings/          # BoardPreview, OpeningCombo, DashboardTile
-│   ├── pages/                 # Login, Register, Dashboard, Training (+ *.test.tsx alongside each)
-│   ├── hooks/                 # useTrainingSession, useBlinkGreen (+ *.test.ts alongside each)
+│   ├── pages/                 # Login, Register, Dashboard, Training, VerifyEmail, Puzzles (+ *.test.tsx alongside each)
+│   ├── hooks/                 # useTrainingSession, useBlinkGreen, useSound (+ *.test.ts alongside each)
+│   ├── utils/                 # sound.ts (feedback sound utilities)
 │   ├── tests/
 │   │   └── msw/                # Mock Service Worker handlers/server for API mocking in tests
 │   ├── assets/                 # SVG/JPG art used by dashboard tiles and icons
@@ -40,11 +41,11 @@ react/
 │   ├── auth.ts                 # logout() — clears all auth-related localStorage keys
 │   ├── cm-chessboard.d.ts      # Ambient types for cm-chessboard (the package ships none)
 │   ├── RequireAuth.tsx         # Route guard: calls GET /auth/me, redirects to /login on failure
-│   ├── App.tsx                 # Routes: /login, /register, /dashboard, /training/:id, * -> Dashboard
+│   ├── App.tsx                 # Routes: /login, /register, /dashboard, /training/:id, /verify-email, /puzzles, * -> Dashboard
 │   ├── main.tsx                # React root / entrypoint
 │   └── index.css               # Global styles (imports src/styles/*.css)
 │   └── i18n/                   # react-i18next config + locales/*.json translation resources
-├── public/                     # favicon.svg, quotes.txt, cm-chessboard-assets/ (board sprites)
+├── public/                     # favicon.svg, quotes.txt, cm-chessboard-assets/ (board sprites), sounds/ (feedback audio)
 ├── playwright-dashboard.spec.ts  # Playwright E2E spec
 ├── vite.config.ts               # Vite configuration
 ├── vitest.config.ts             # Vitest configuration (jsdom, MSW-backed unit tests)
@@ -146,6 +147,10 @@ The training experience is driven by `useTrainingSession`, which:
 - updates the local FEN and `correctMoveUci` based on backend responses; `correctMoveUci` powers `Training.tsx`'s hint feature (highlighting the from/to squares) — it is *not* debug-only output despite a stale comment to that effect in a backend test
 - optionally auto-advances during autoplay when it's the opponent's turn (uses `chess.js` to check turn)
 
+### Audio Feedback (`src/hooks/useSound.ts` + `src/utils/sound.ts`)
+
+The app provides real-time audio feedback for moves and training events via the `useSound` hook, which loads and plays sound files from `public/sounds/`. Sounds include move feedback (correct/incorrect on puzzles), piece interactions (move, capture, castle), and achievement/milestone notifications. The `sound.ts` utility exports the sound triggers (e.g., `playMoveSound()`, `playCorrectSound()`) consumed throughout the training and puzzle UI.
+
 ## 📡 Integration Contracts
 
 ### Fetch Next Move
@@ -204,7 +209,7 @@ On correct moves, `fenAfter` updates the board and, if `sessionCompleted` is tru
 
 ## 🌐 Internationalization (i18n)
 
-The UI chrome (header, auth pages, dashboard, training, and puzzles pages) is localized via [`react-i18next`](https://react.i18next.com/), with translation resources in `src/i18n/locales/*.json` — currently `en`, `es`, `fr`, `de`, `it`, `nl`, `pl`, `pt`, `ru`, `tr`, and the just-for-fun `en-x-pirate`/`en-x-klingon`/`en-x-groot` variants. `src/i18n/i18n.ts` initializes `i18next` (imported once in `main.tsx`, and again in `vitest.setup.ts` so component tests render real strings instead of raw keys), auto-discovers every `locales/*.json` file via `import.meta.glob` (no per-language wiring needed), and reads/writes the chosen language to `localStorage` under the `language` key, mirroring `ThemeToggle.tsx`'s pattern for `theme`.
+The UI chrome (header, auth pages, dashboard, training, and puzzles pages) is localized via [`react-i18next`](https://react.i18next.com/), with translation resources in `src/i18n/locales/*.json` — over 30 locales including `en-US`, `es`, `fr`, `de`, `it`, `nl`, `pl`, `pt`, `pt-BR`, `ru`, `tr`, `zh-CN`, `ja`, `ko`, `hi`, `ar`, `cs`, `da`, `el`, `fi`, `he`, `hu`, `ms`, `no`, `ro`, `sk`, `sv`, `uk`, `vi`, `id`, plus novelty variants like `en-x-pirate`, `kl` (Klingon), and `en-x-groot`. `src/i18n/i18n.ts` initializes `i18next` (imported once in `main.tsx`, and again in `vitest.setup.ts` so component tests render real strings instead of raw keys), auto-discovers every `locales/*.json` file via `import.meta.glob` (no per-language wiring needed), and reads/writes the chosen language to `localStorage` under the `language` key, mirroring `ThemeToggle.tsx`'s pattern for `theme`.
 
 `LanguageToggle.tsx` (in the header, next to the theme toggle) renders a `<select>` whose options are derived from the same auto-discovered language list, each shown as a flag emoji; picking one calls `i18n.changeLanguage()`.
 

@@ -63,6 +63,83 @@ previewFen(opening: PreviewOpening | null, ply: number): string
   // Uses opening's EPD (or start position) + its UCI moves; handles fallback if EPD moves don't apply
 ```
 
+### Move Timeline (`timeline.ts`)
+```typescript
+type Timeline = {
+  fens: string[];
+  index: number;
+}
+
+createTimeline(fen: string): Timeline
+  // Start a fresh timeline at a single position
+
+resetTimeline(fen: string): Timeline
+  // Alias for createTimeline — reads better at call sites that discard history
+
+appendTimelineFen(timeline: Timeline, nextFen: string): Timeline
+  // Append a played position after the current index, truncating any future positions
+
+jumpToIndex(timeline: Timeline, nextIndex: number): Timeline
+  // Move to nextIndex, clamped to the timeline's bounds
+
+currentFen(timeline: Timeline): string
+  // The FEN at the timeline's current index
+
+isAtLatest(timeline: Timeline): boolean
+  // Whether the timeline is positioned at its most recent entry
+```
+
+### Training Item Normalization (`next-item.ts`)
+```typescript
+type NextItemResponse = {
+  fen?: string | null;
+  fenAfter?: string | null;
+  epd?: string | null;
+  itemId?: string | number | null;
+  id?: string | number | null;
+  openingName?: string | null;
+  openingEco?: string | null;
+  correctMoveUci?: string;
+  playerColor?: "w" | "b" | null;
+  [k: string]: unknown;
+}
+
+type TrainingItem = {
+  fen: string;
+  itemId: string | null;
+  openingLabel: string;
+  correctMoveUci: string;
+  playerColor: "w" | "b";
+}
+
+deriveNextItem(data: NextItemResponse): TrainingItem
+  // Parse a raw `next` response into a normalized TrainingItem
+```
+
+### Training Status & UI Logic (`status.ts`)
+```typescript
+type StatusKind = "your" | "good" | "bad" | "hint" | "done"
+
+type StatusInfo = {
+  kind: StatusKind;
+  icon: string;
+  message: string;
+  sub: string;
+}
+
+classifyFeedback(feedback: string): { kind: "good" | "bad" | "neutral"; icon: string }
+  // Classify a feedback string by its ✅/❌ prefix into a status kind + icon
+
+deriveStatus(params: { isSessionCompleted: boolean; feedback: string; hintLevel: number; isPlayerToMove: boolean; playerColor?: "w" | "b" }): StatusInfo
+  // Derive the status banner (kind/icon/message/sub) from training state
+
+splitOpeningLabel(openingLabel: string): { eco: string; openingName: string }
+  // Split "C50 Italian Game" into an ECO chip + opening name for the rail header
+
+deriveHintMarkers(correctMoveUci: string, hintLevel: number, isSessionCompleted: boolean): { from: string; to?: string } | null
+  // From/to hint squares for the current hint level, or null if no hint is shown
+```
+
 ## 🛠 Build & Test
 
 **Build:**

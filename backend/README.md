@@ -64,6 +64,8 @@ Auth routes are under `/auth`:
 | `POST` | `/auth/login` | Authenticate user (returns JWTs) |
 | `POST` | `/auth/refresh` | Exchange a refresh token for a new access token |
 | `GET` | `/auth/me` | Return the authenticated user's `id` and `username` |
+| `GET` | `/auth/verify-email` | Confirm a verification token (idempotent) |
+| `POST` | `/auth/resend-verification` | Resend the verification email (by email or username) |
 
 ## Training Endpoints
 
@@ -78,6 +80,7 @@ is scoped to the authenticated user — a mismatched or missing token returns
 | `GET` | `/training-sessions/{id}/next` | Fetch the next pending move for the session |
 | `POST` | `/training-sessions/{id}/responses` | Submit a move (`{"itemId": ..., "moveUci": "..."}`) |
 | `POST` | `/training-sessions/{id}/items` | Bulk add items to an already-initialized session |
+| `POST` | `/training-sessions/from-due` | Start a new session from the user's spaced-repetition due items |
 
 Notes:
 - Requests/responses use camelCase JSON (e.g. `moveUci`, `sessionCompleted`); the Python layer underneath is snake_case.
@@ -91,6 +94,26 @@ Notes:
 | Method | Endpoint | Description |
 |---|---|---|
 | `GET` | `/openings` | List all openings that have parsed UCI moves (no auth required) |
+
+## Progress Endpoints
+
+Progress routes provide spaced-repetition tracking and analysis of the user's training performance. All require authentication.
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/progress/summary` | Return overall training statistics: positions seen, overall accuracy, number mastered, per-opening breakdown, current and longest streak |
+| `GET` | `/progress/due` | Return list of positions the user should review soon (spaced-repetition due items) with FEN, correct move, opening info, and due timestamp |
+| `GET` | `/progress/weak-spots` | Return list of positions the user struggles with (low accuracy) with attempt counts and success/failure breakdown |
+
+## Puzzles Endpoints
+
+Puzzle routes present tactical puzzles to the user and track their performance. All require authentication.
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/puzzles/next` | Fetch the next puzzle with FEN position, rating, themes, correct move, and opponent's setup move for board highlighting |
+| `POST` | `/puzzles/{puzzle_id}/attempts` | Submit an attempted move (`{"moveUci": "..."}`) and receive feedback on correctness and next board state |
+| `GET` | `/puzzles/summary` | Return overall puzzle statistics: puzzles seen, overall accuracy, number mastered |
 
 ## Testing
 
