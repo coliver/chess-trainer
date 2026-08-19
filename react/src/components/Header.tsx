@@ -2,7 +2,7 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { LogIn, UserPlus, LogOut } from "lucide-react";
+import { LogIn, UserPlus, LogOut, Settings } from "lucide-react";
 import { KnightSchoolIcon } from "./KnightSchoolIcon";
 import { ThemeToggle } from "./ThemeToggle";
 import { logout } from "../auth";
@@ -92,14 +92,24 @@ export default function Header() {
                 </Link>
               </>
             ) : (
-              <button
-                className="site-header-profile-link"
-                onClick={onLogout}
-                aria-label={t("header.logout")}
-                title={t("header.logout")}
-              >
-                <LogOut size={22} aria-hidden="true" />
-              </button>
+              <>
+                <Link
+                  to="/settings"
+                  className="site-header-profile-link"
+                  aria-label={t("header.settings")}
+                  title={t("header.settings")}
+                >
+                  <Settings size={22} aria-hidden="true" />
+                </Link>
+                <button
+                  className="site-header-profile-link"
+                  onClick={onLogout}
+                  aria-label={t("header.logout")}
+                  title={t("header.logout")}
+                >
+                  <LogOut size={22} aria-hidden="true" />
+                </button>
+              </>
             )}
 
             <div className="site-header-actions">

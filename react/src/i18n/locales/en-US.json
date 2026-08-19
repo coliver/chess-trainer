@@ -10,6 +10,7 @@
     "login": "Login",
     "register": "Register",
     "logout": "Logout",
+    "settings": "Settings",
     "viewSource": "View source on GitHub"
   },
   "language": {
@@ -181,6 +182,38 @@
       "instructions": "Please verify your email address by visiting the link below:",
       "instructionsHtml": "Please verify your email address by clicking the link below:",
       "expires": "This link expires in 24 hours."
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Personalize how Knight School looks and plays.",
+    "languageLabel": "Language",
+    "appearance": {
+      "heading": "Appearance",
+      "themeLabel": "Theme",
+      "boardThemeLabel": "Board colors",
+      "pieceSetLabel": "Piece set",
+      "showCoordinatesLabel": "Show board coordinates",
+      "boardAnimationsLabel": "Animate piece moves"
+    },
+    "boardOrientation": {
+      "heading": "Board orientation",
+      "auto": "Auto — flip to the side to move",
+      "white": "Always keep White on bottom",
+      "black": "Always keep Black on bottom"
+    },
+    "boardThemes": {
+      "default": "Default",
+      "default-contrast": "Default (high contrast)",
+      "green": "Green",
+      "blue": "Blue",
+      "chess-club": "Chess Club",
+      "chessboard-js": "Classic",
+      "black-and-white": "Black & White"
+    },
+    "pieceSets": {
+      "standard": "Standard",
+      "staunty": "Staunty"
     }
   }
 }

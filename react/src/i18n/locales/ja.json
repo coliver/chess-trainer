@@ -10,6 +10,7 @@
     "login": "ログイン",
     "register": "登録",
     "logout": "ログアウト",
+    "settings": "設定",
     "viewSource": "GitHubでソースを見る"
   },
   "language": {
@@ -181,6 +182,38 @@
       "instructions": "以下のリンクにアクセスして、メールアドレスを確認してください:",
       "instructionsHtml": "以下のリンクをクリックして、メールアドレスを確認してください:",
       "expires": "このリンクは24時間で期限切れになります。"
+    }
+  },
+  "settings": {
+    "title": "設定",
+    "subtitle": "ナイトスクールの外観と進め方をカスタマイズします。",
+    "languageLabel": "言語",
+    "appearance": {
+      "heading": "外観",
+      "themeLabel": "テーマ",
+      "boardThemeLabel": "盤面の色",
+      "pieceSetLabel": "駒のセット",
+      "showCoordinatesLabel": "盤面座標を表示",
+      "boardAnimationsLabel": "駒の動きをアニメ化"
+    },
+    "boardOrientation": {
+      "heading": "盤面の向き",
+      "auto": "自動 — 手番側に反転",
+      "white": "白を常に下に保つ",
+      "black": "黒を常に下に保つ"
+    },
+    "boardThemes": {
+      "default": "デフォルト",
+      "default-contrast": "デフォルト（高コントラスト）",
+      "green": "緑",
+      "blue": "青",
+      "chess-club": "チェスクラブ",
+      "chessboard-js": "クラシック",
+      "black-and-white": "白と黒"
+    },
+    "pieceSets": {
+      "standard": "スタンダード",
+      "staunty": "Staunty"
     }
   }
 }

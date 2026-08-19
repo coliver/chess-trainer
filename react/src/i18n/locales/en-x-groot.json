@@ -10,6 +10,7 @@
     "login": "I am Groot",
     "register": "I am Groot!",
     "logout": "I am Groot.",
+    "settings": "I am Groot",
     "viewSource": "View source on GitHub"
   },
   "language": {
@@ -181,6 +182,38 @@
       "instructionsHtml": "Please verify your email address by clicking the link below:",
       "expires": "This link expires in 24 hours.",
       "label": "Verify email"
+    }
+  },
+  "settings": {
+    "title": "I am Groot",
+    "subtitle": "I am Groot.",
+    "languageLabel": "I am Groot",
+    "appearance": {
+      "heading": "I am Groot",
+      "themeLabel": "I am Groot",
+      "boardThemeLabel": "I am Groot",
+      "pieceSetLabel": "I am Groot",
+      "showCoordinatesLabel": "I am Groot",
+      "boardAnimationsLabel": "I am Groot"
+    },
+    "boardOrientation": {
+      "heading": "I am Groot",
+      "auto": "I am Groot",
+      "white": "I am Groot",
+      "black": "I am Groot"
+    },
+    "boardThemes": {
+      "default": "I am Groot",
+      "default-contrast": "I am Groot (I am Groot)",
+      "green": "I am Groot",
+      "blue": "I am Groot",
+      "chess-club": "I am Groot",
+      "chessboard-js": "I am Groot",
+      "black-and-white": "I am Groot & I am Groot"
+    },
+    "pieceSets": {
+      "standard": "I am Groot",
+      "staunty": "I am Groot"
     }
   }
 }

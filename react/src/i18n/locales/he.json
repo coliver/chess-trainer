@@ -10,6 +10,7 @@
     "login": "התחברות",
     "register": "הרשמה",
     "logout": "התנתקות",
+    "settings": "הגדרות",
     "viewSource": "צפה בקוד המקור ב-GitHub"
   },
   "language": {
@@ -181,6 +182,38 @@
       "instructions": "אנא אמתו את כתובת האימייל שלכם על ידי ביקור בקישור למטה:",
       "instructionsHtml": "אנא אמתו את כתובת האימייל שלכם על ידי לחיצה על הקישור למטה:",
       "expires": "קישור זה יפוג בתוך 24 שעות."
+    }
+  },
+  "settings": {
+    "title": "הגדרות",
+    "subtitle": "התאימו את אופן ההצגה והמשחק של Knight School.",
+    "languageLabel": "שפה",
+    "appearance": {
+      "heading": "מראה",
+      "themeLabel": "ערכת נושא",
+      "boardThemeLabel": "צבעי הלוח",
+      "pieceSetLabel": "סט כלים",
+      "showCoordinatesLabel": "הצג קואורדינטות לוח",
+      "boardAnimationsLabel": "הנפש תנועות כלים"
+    },
+    "boardOrientation": {
+      "heading": "כיוון לוח",
+      "auto": "אוטומטי — הפוך לצד של זה שמזיז",
+      "white": "שמור תמיד לבן בתחתון",
+      "black": "שמור תמיד שחור בתחתון"
+    },
+    "boardThemes": {
+      "default": "ברירת מחדל",
+      "default-contrast": "ברירת מחדל (ניגודיות גבוהה)",
+      "green": "ירוק",
+      "blue": "כחול",
+      "chess-club": "מועדון שחמט",
+      "chessboard-js": "קלאסי",
+      "black-and-white": "שחור ולבן"
+    },
+    "pieceSets": {
+      "standard": "סטנדרטי",
+      "staunty": "Staunty"
     }
   }
 }

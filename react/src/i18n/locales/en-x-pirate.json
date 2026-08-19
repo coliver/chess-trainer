@@ -10,6 +10,7 @@
     "login": "Log in",
     "register": "Join the crew",
     "logout": "Walk the plank",
+    "settings": "Rigging, ye sea dog",
     "viewSource": "View source on GitHub"
   },
   "language": {
@@ -181,6 +182,38 @@
       "instructionsHtml": "Please verify your email address by clicking the link below:",
       "expires": "This link expires in 24 hours.",
       "label": "Verify email"
+    }
+  },
+  "settings": {
+    "title": "Rigging, ye sea dog",
+    "subtitle": "Customize yer ship's appearance and sailin' style.",
+    "languageLabel": "Speak in a different tongue",
+    "appearance": {
+      "heading": "Paint yer hull",
+      "themeLabel": "Light o' day or black o' night",
+      "boardThemeLabel": "Board colors, matey",
+      "pieceSetLabel": "Piece designs",
+      "showCoordinatesLabel": "Show the ship's coordinates",
+      "boardAnimationsLabel": "Make the pieces dance"
+    },
+    "boardOrientation": {
+      "heading": "Keep yer bearings",
+      "auto": "Auto — turn to face the wind",
+      "white": "Hoist white on the bottom mast",
+      "black": "Hoist black on the bottom mast"
+    },
+    "boardThemes": {
+      "default": "Standard Plank",
+      "default-contrast": "High Contrast Plank",
+      "green": "Green Sea",
+      "blue": "Blue Waters",
+      "chess-club": "Pirate's Booty",
+      "chessboard-js": "Classic Treasure",
+      "black-and-white": "Skull & Bones"
+    },
+    "pieceSets": {
+      "standard": "Standard Crew",
+      "staunty": "Staunty Scallywags"
     }
   }
 }

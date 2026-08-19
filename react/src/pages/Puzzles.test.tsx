@@ -7,6 +7,7 @@ import { Puzzles } from "./Puzzles";
 import api from "../api";
 import "@testing-library/jest-dom";
 import type { BoardProps } from "../components/Board";
+import { PreferencesProvider } from "../context/PreferencesContext";
 
 const {
   applyMoveMock,
@@ -77,7 +78,9 @@ describe("Puzzles Page", () => {
   const renderPuzzles = () =>
     render(
       <MemoryRouter>
-        <Puzzles />
+        <PreferencesProvider>
+          <Puzzles />
+        </PreferencesProvider>
       </MemoryRouter>,
     );
 

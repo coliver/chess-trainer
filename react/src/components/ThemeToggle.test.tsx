@@ -2,6 +2,14 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ThemeToggle } from "./ThemeToggle";
+import { PreferencesProvider } from "../context/PreferencesContext";
+
+const renderThemeToggle = () =>
+  render(
+    <PreferencesProvider>
+      <ThemeToggle />
+    </PreferencesProvider>,
+  );
 
 describe("ThemeToggle", () => {
   beforeEach(() => {
@@ -15,7 +23,7 @@ describe("ThemeToggle", () => {
 
   it("uses saved localStorage theme when present", () => {
     localStorage.setItem("theme", "dark");
-    render(<ThemeToggle />);
+    renderThemeToggle();
     expect(document.documentElement.dataset.theme).toBe("dark");
   });
 
@@ -25,7 +33,7 @@ describe("ThemeToggle", () => {
       vi.fn().mockReturnValue({ matches: true } as MediaQueryList),
     );
 
-    render(<ThemeToggle />);
+    renderThemeToggle();
     expect(document.documentElement.dataset.theme).toBe("dark");
     vi.unstubAllGlobals();
   });
@@ -36,7 +44,7 @@ describe("ThemeToggle", () => {
       vi.fn().mockReturnValue({ matches: false } as MediaQueryList),
     );
 
-    render(<ThemeToggle />);
+    renderThemeToggle();
     expect(document.documentElement.dataset.theme).toBe("light");
     vi.unstubAllGlobals();
   });
@@ -44,7 +52,7 @@ describe("ThemeToggle", () => {
   it("toggles theme on click and persists to localStorage", async () => {
     const user = userEvent.setup();
     localStorage.setItem("theme", "light");
-    render(<ThemeToggle />);
+    renderThemeToggle();
 
     const btn = screen.getByRole("button", { name: /toggle theme/i });
     await user.click(btn);

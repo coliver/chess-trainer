@@ -10,6 +10,7 @@
     "login": "Inloggen",
     "register": "Registreren",
     "logout": "Uitloggen",
+    "settings": "Instellingen",
     "viewSource": "Bekijk de bron op GitHub"
   },
   "language": {
@@ -181,6 +182,38 @@
       "instructionsHtml": "Bevestig je e-mailadres door op de onderstaande link te klikken:",
       "expires": "Deze link verloopt over 24 uur.",
       "label": "Verify email"
+    }
+  },
+  "settings": {
+    "title": "Instellingen",
+    "subtitle": "Pas aan hoe Knight School eruit ziet en speelt.",
+    "languageLabel": "Taal",
+    "appearance": {
+      "heading": "Uiterlijk",
+      "themeLabel": "Thema",
+      "boardThemeLabel": "Bordkleur",
+      "pieceSetLabel": "Stukkenset",
+      "showCoordinatesLabel": "Bordcoördinaten tonen",
+      "boardAnimationsLabel": "Stukbewegingen animeren"
+    },
+    "boardOrientation": {
+      "heading": "Bordoriëntatie",
+      "auto": "Auto — draai naar de partij aan zet",
+      "white": "Wit altijd onderaan",
+      "black": "Zwart altijd onderaan"
+    },
+    "boardThemes": {
+      "default": "Standaard",
+      "default-contrast": "Standaard (hoog contrast)",
+      "green": "Groen",
+      "blue": "Blauw",
+      "chess-club": "Schaakclub",
+      "chessboard-js": "Klassiek",
+      "black-and-white": "Zwart & Wit"
+    },
+    "pieceSets": {
+      "standard": "Standaard",
+      "staunty": "Staunty"
     }
   }
 }

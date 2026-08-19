@@ -10,6 +10,7 @@
     "login": "Logga in",
     "register": "Registrera",
     "logout": "Logga ut",
+    "settings": "Inställningar",
     "viewSource": "Visa källan på GitHub"
   },
   "language": {
@@ -181,6 +182,38 @@
       "instructions": "Bekräfta din e-postadress genom att besöka länken nedan:",
       "instructionsHtml": "Bekräfta din e-postadress genom att klicka på länken nedan:",
       "expires": "Den här länken går ut om 24 timmar."
+    }
+  },
+  "settings": {
+    "title": "Inställningar",
+    "subtitle": "Anpassa hur Knight School ser ut och fungerar.",
+    "languageLabel": "Språk",
+    "appearance": {
+      "heading": "Utseende",
+      "themeLabel": "Tema",
+      "boardThemeLabel": "Brädsfärger",
+      "pieceSetLabel": "Pjäsuppsättning",
+      "showCoordinatesLabel": "Visa brädkoordinater",
+      "boardAnimationsLabel": "Animera pjäsrörelser"
+    },
+    "boardOrientation": {
+      "heading": "Brädsorientering",
+      "auto": "Automatisk — vänd för spelaren vid draget",
+      "white": "Håll alltid vit längst ned",
+      "black": "Håll alltid svart längst ned"
+    },
+    "boardThemes": {
+      "default": "Standard",
+      "default-contrast": "Standard (högt kontrast)",
+      "green": "Grön",
+      "blue": "Blå",
+      "chess-club": "Chess Club",
+      "chessboard-js": "Klassisk",
+      "black-and-white": "Svart och vit"
+    },
+    "pieceSets": {
+      "standard": "Standard",
+      "staunty": "Staunty"
     }
   }
 }

@@ -89,6 +89,15 @@ Notes:
 - A session is marked `completed` when all of its training items have a correct response.
 - `POST .../items` returns `400` if the session has no `opening_eco`/`opening_name` set yet (i.e. wasn't created via `POST /training-sessions`).
 
+## User Preferences Endpoints
+
+Preferences routes are under `/users/me/preferences`. Require authentication.
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/users/me/preferences` | Return the authenticated user's preferences: `language`, `theme`, `board_theme`, `piece_set`, `show_coordinates`, `board_animations`, `board_orientation_mode` |
+| `PATCH` | `/users/me/preferences` | Partially update preferences — only send the fields you want to change. Each field is validated against an allow-list (e.g. `board_theme` against cm-chessboard's built-in skins, `language` against `supported_languages()`); an unrecognized value returns `422` |
+
 ## Openings Endpoints
 
 | Method | Endpoint | Description |

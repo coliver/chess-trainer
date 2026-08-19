@@ -10,6 +10,7 @@
     "login": "Bejelentkezés",
     "register": "Regisztráció",
     "logout": "Kijelentkezés",
+    "settings": "Beállítások",
     "viewSource": "Forrás megtekintése a GitHubon"
   },
   "language": {
@@ -181,6 +182,38 @@
       "instructions": "Kérjük, igazold az e-mail-címedet az alábbi linken:",
       "instructionsHtml": "Kérjük, igazold az e-mail-címedet az alábbi linkre kattintva:",
       "expires": "Ez a link 24 óra múlva lejár."
+    }
+  },
+  "settings": {
+    "title": "Beállítások",
+    "subtitle": "Személyre szabja a Knight School megjelenítésének és játéknak módját.",
+    "languageLabel": "Nyelv",
+    "appearance": {
+      "heading": "Megjelenés",
+      "themeLabel": "Téma",
+      "boardThemeLabel": "Tábla színei",
+      "pieceSetLabel": "Bábu készlet",
+      "showCoordinatesLabel": "Tábla koordináták megjelenítése",
+      "boardAnimationsLabel": "Bábuk mozgásának animálása"
+    },
+    "boardOrientation": {
+      "heading": "Tábla tájolása",
+      "auto": "Automatikus — fordítás a mozgó félre",
+      "white": "Mindig tartsd a világost alul",
+      "black": "Mindig tartsd a sötétet alul"
+    },
+    "boardThemes": {
+      "default": "Alapértelmezett",
+      "default-contrast": "Alapértelmezett (magas kontraszt)",
+      "green": "Zöld",
+      "blue": "Kék",
+      "chess-club": "Sakkklub",
+      "chessboard-js": "Klasszikus",
+      "black-and-white": "Fekete és fehér"
+    },
+    "pieceSets": {
+      "standard": "Szabványos",
+      "staunty": "Staunty"
     }
   }
 }

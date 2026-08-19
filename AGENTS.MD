@@ -53,6 +53,10 @@ sound feedback all shipped. See [`CHANGELOG.md`](./CHANGELOG.md) for what's land
 - `POST /training-sessions/{id}/responses`
 - `POST /training-sessions/{id}/items` — bulk add items to an already-initialized session
 
+### User preferences (FastAPI paths under `/api`)
+- `GET /users/me/preferences` — returns `language`, `theme`, `board_theme`, `piece_set`, `show_coordinates`, `board_animations`, `board_orientation_mode`
+- `PATCH /users/me/preferences` — partial update; each field validated against an allow-list, `422` on an unrecognized value
+
 ### Puzzles (Lichess puzzle DB; FastAPI paths under `/api`)
 - `GET /puzzles/next`
 - `POST /puzzles/{puzzle_id}/attempts`
@@ -90,7 +94,7 @@ Validation is performed by `backend/app/modules/training/chess_rules.py:validate
 - `backend/app/`
   - `app.py`: FastAPI wiring / startup concerns (keep thin)
   - `routers/`
-    - `auth.py`, `training.py`, `puzzles.py`, `progress.py`, `openings.py`: routing + request/response models per domain
+    - `auth.py`, `training.py`, `puzzles.py`, `progress.py`, `openings.py`, `users.py`: routing + request/response models per domain
 
 - `backend/app/modules/`
   - `openings/`

@@ -5,6 +5,14 @@ import i18n from "../i18n/i18n";
 import { LanguageToggle } from "./LanguageToggle";
 import Header from "./Header";
 import { MemoryRouter } from "react-router-dom";
+import { PreferencesProvider } from "../context/PreferencesContext";
+
+const renderLanguageToggle = () =>
+  render(
+    <PreferencesProvider>
+      <LanguageToggle />
+    </PreferencesProvider>,
+  );
 
 describe("LanguageToggle", () => {
   beforeEach(async () => {
@@ -22,13 +30,13 @@ describe("LanguageToggle", () => {
   });
 
   it("defaults to English", () => {
-    render(<LanguageToggle />);
+    renderLanguageToggle();
     expect(screen.getByRole("combobox")).toHaveValue("en-US");
   });
 
   it("switches language on selection and persists to localStorage", async () => {
     const user = userEvent.setup();
-    render(<LanguageToggle />);
+    renderLanguageToggle();
 
     await user.selectOptions(screen.getByRole("combobox"), "es");
 
@@ -40,7 +48,9 @@ describe("LanguageToggle", () => {
     const user = userEvent.setup();
     render(
       <MemoryRouter>
-        <Header />
+        <PreferencesProvider>
+          <Header />
+        </PreferencesProvider>
       </MemoryRouter>,
     );
 
@@ -59,7 +69,7 @@ describe("LanguageToggle", () => {
       await i18n.changeLanguage("es");
     });
 
-    render(<LanguageToggle />);
+    renderLanguageToggle();
     expect(screen.getByRole("combobox")).toHaveValue("es");
   });
 });

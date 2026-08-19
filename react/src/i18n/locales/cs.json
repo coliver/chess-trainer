@@ -10,6 +10,7 @@
     "login": "Přihlásit se",
     "register": "Zaregistrovat se",
     "logout": "Odhlásit se",
+    "settings": "Nastavení",
     "viewSource": "Zobrazit zdroj na GitHubu"
   },
   "language": {
@@ -181,6 +182,38 @@
       "instructions": "Ověřte prosím svou e-mailovou adresu návštěvou odkazu níže:",
       "instructionsHtml": "Ověřte prosím svou e-mailovou adresu kliknutím na odkaz níže:",
       "expires": "Tento odkaz vyprší za 24 hodin."
+    }
+  },
+  "settings": {
+    "title": "Nastavení",
+    "subtitle": "Přizpůsobte si, jak Knight School vypadá a jak se hraje.",
+    "languageLabel": "Jazyk",
+    "appearance": {
+      "heading": "Vzhled",
+      "themeLabel": "Motiv",
+      "boardThemeLabel": "Barvy šachovnice",
+      "pieceSetLabel": "Sada figurek",
+      "showCoordinatesLabel": "Zobrazit souřadnice šachovnice",
+      "boardAnimationsLabel": "Animovat tahy figurek"
+    },
+    "boardOrientation": {
+      "heading": "Orientace šachovnice",
+      "auto": "Automaticky — převrátit na stranu hrajícího",
+      "white": "Vždy drž Bílé dole",
+      "black": "Vždy drž Černé dole"
+    },
+    "boardThemes": {
+      "default": "Výchozí",
+      "default-contrast": "Výchozí (vysoký kontrast)",
+      "green": "Zelené",
+      "blue": "Modré",
+      "chess-club": "Šachový klub",
+      "chessboard-js": "Klasické",
+      "black-and-white": "Černobílé"
+    },
+    "pieceSets": {
+      "standard": "Standardní",
+      "staunty": "Staunty"
     }
   }
 }

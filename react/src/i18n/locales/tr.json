@@ -10,6 +10,7 @@
     "login": "Giriş yap",
     "register": "Kayıt ol",
     "logout": "Çıkış yap",
+    "settings": "Ayarlar",
     "viewSource": "GitHub’da kaynak kodu görüntüle"
   },
   "language": {
@@ -181,6 +182,38 @@
       "instructionsHtml": "Lütfen aşağıdaki bağlantıya tıklayarak e-posta adresinizi doğrulayın:",
       "expires": "Bu bağlantının süresi 24 saat içinde dolacaktır.",
       "label": "Verify email"
+    }
+  },
+  "settings": {
+    "title": "Ayarlar",
+    "subtitle": "Knight School'un nasıl göründüğünü ve çalıştığını kişiselleştirin.",
+    "languageLabel": "Dil",
+    "appearance": {
+      "heading": "Görünüm",
+      "themeLabel": "Tema",
+      "boardThemeLabel": "Tahta renkleri",
+      "pieceSetLabel": "Taş seti",
+      "showCoordinatesLabel": "Tahta koordinatlarını göster",
+      "boardAnimationsLabel": "Taş hareketlerini canlandır"
+    },
+    "boardOrientation": {
+      "heading": "Tahta yönü",
+      "auto": "Otomatik — sırası gelene göre döndür",
+      "white": "Her zaman beyazı altta tut",
+      "black": "Her zaman siyahı altta tut"
+    },
+    "boardThemes": {
+      "default": "Varsayılan",
+      "default-contrast": "Varsayılan (yüksek kontrast)",
+      "green": "Yeşil",
+      "blue": "Mavi",
+      "chess-club": "Chess Club",
+      "chessboard-js": "Klasik",
+      "black-and-white": "Siyah ve Beyaz"
+    },
+    "pieceSets": {
+      "standard": "Standart",
+      "staunty": "Staunty"
     }
   }
 }

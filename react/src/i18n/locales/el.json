@@ -10,6 +10,7 @@
     "login": "Σύνδεση",
     "register": "Εγγραφή",
     "logout": "Αποσύνδεση",
+    "settings": "Ρυθμίσεις",
     "viewSource": "Προβολή πηγής στο GitHub"
   },
   "language": {
@@ -181,6 +182,38 @@
       "instructions": "Επαληθεύστε τη διεύθυνση email σας επισκεπτόμενοι τον παρακάτω σύνδεσμο:",
       "instructionsHtml": "Επαληθεύστε τη διεύθυνση email σας κάνοντας κλικ στον παρακάτω σύνδεσμο:",
       "expires": "Αυτός ο σύνδεσμος λήγει σε 24 ώρες."
+    }
+  },
+  "settings": {
+    "title": "Ρυθμίσεις",
+    "subtitle": "Προσαρμόστε πώς φαίνεται και παίζεται το Knight School.",
+    "languageLabel": "Γλώσσα",
+    "appearance": {
+      "heading": "Εμφάνιση",
+      "themeLabel": "Θέμα",
+      "boardThemeLabel": "Χρώματα σκακιέρας",
+      "pieceSetLabel": "Σύνολο κομματιών",
+      "showCoordinatesLabel": "Εμφάνιση συντεταγμένων σκακιέρας",
+      "boardAnimationsLabel": "Κινούμενες εικόνες κομματιών"
+    },
+    "boardOrientation": {
+      "heading": "Προσανατολισμός σκακιέρας",
+      "auto": "Αυτόματο — αναστροφή προς τη σειρά",
+      "white": "Πάντα κράτα τα λευκά κάτω",
+      "black": "Πάντα κράτα τα μαύρα κάτω"
+    },
+    "boardThemes": {
+      "default": "Προεπιλογή",
+      "default-contrast": "Προεπιλογή (υψηλή αντίθεση)",
+      "green": "Πράσινο",
+      "blue": "Μπλε",
+      "chess-club": "Σκακιστικό Κλαμπ",
+      "chessboard-js": "Κλασικό",
+      "black-and-white": "Μαύρο & Λευκό"
+    },
+    "pieceSets": {
+      "standard": "Στάνταρ",
+      "staunty": "Staunty"
     }
   }
 }

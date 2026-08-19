@@ -5,6 +5,7 @@ import VerifyEmail from "./pages/VerifyEmail";
 import { Dashboard } from "./pages/Dashboard";
 import { Training } from "./pages/Training";
 import { Puzzles } from "./pages/Puzzles";
+import Settings from "./pages/Settings";
 import Header from "./components/Header";
 import { RequireAuth } from "./RequireAuth";
 
@@ -37,6 +38,14 @@ function App() {
           element={
             <RequireAuth>
               <Puzzles />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <RequireAuth>
+              <Settings />
             </RequireAuth>
           }
         />

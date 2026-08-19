@@ -10,6 +10,7 @@
     "login": "लॉगिन",
     "register": "पंजीकरण",
     "logout": "लॉगआउट",
+    "settings": "सेटिंग्स",
     "viewSource": "GitHub पर सोर्स देखें"
   },
   "language": {
@@ -181,6 +182,38 @@
       "instructions": "कृपया नीचे दिए गए लिंक पर जाकर अपना ईमेल पता सत्यापित करें:",
       "instructionsHtml": "कृपया नीचे दिए गए लिंक पर क्लिक करके अपना ईमेल पता सत्यापित करें:",
       "expires": "यह लिंक 24 घंटे में समाप्त हो जाएगा।"
+    }
+  },
+  "settings": {
+    "title": "सेटिंग्स",
+    "subtitle": "Knight School को अपनी पसंद के अनुसार बनाएँ।",
+    "languageLabel": "भाषा",
+    "appearance": {
+      "heading": "दिखावट",
+      "themeLabel": "थीम",
+      "boardThemeLabel": "बोर्ड रंग",
+      "pieceSetLabel": "गोटियों का सेट",
+      "showCoordinatesLabel": "बोर्ड निर्देशांक दिखाएँ",
+      "boardAnimationsLabel": "गोटियों की चाल को एनिमेट करें"
+    },
+    "boardOrientation": {
+      "heading": "बोर्ड का अभिविन्यास",
+      "auto": "स्वचालित — चाल के पक्ष की ओर पलटें",
+      "white": "सफ़ेद को हमेशा नीचे रखें",
+      "black": "काले को हमेशा नीचे रखें"
+    },
+    "boardThemes": {
+      "default": "डिफ़ॉल्ट",
+      "default-contrast": "डिफ़ॉल्ट (उच्च कंट्रास्ट)",
+      "green": "हरा",
+      "blue": "नीला",
+      "chess-club": "शतरंज क्लब",
+      "chessboard-js": "क्लासिक",
+      "black-and-white": "काला और सफ़ेद"
+    },
+    "pieceSets": {
+      "standard": "मानक",
+      "staunty": "Staunty"
     }
   }
 }

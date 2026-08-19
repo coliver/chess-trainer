@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import i18nInstance from "../i18n/i18n";
+import { usePreferences } from "../context/PreferencesContext";
 
 // One flag per configured language. Falls back to the language code itself
 // if a new locale file is added before its flag is picked.
@@ -54,13 +55,12 @@ function toLanguage(value: string): string {
 }
 
 export function LanguageToggle() {
-  const { i18n, t } = useTranslation();
-  const language = toLanguage(i18n.language);
+  const { t } = useTranslation();
+  const { preferences, update } = usePreferences();
+  const language = toLanguage(preferences.language);
 
   function onChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    const next = toLanguage(e.target.value);
-    i18n.changeLanguage(next);
-    localStorage.setItem("language", next);
+    update({ language: toLanguage(e.target.value) });
   }
 
   return (

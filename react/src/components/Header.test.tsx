@@ -6,9 +6,14 @@ import { MemoryRouter } from "react-router-dom";
 import Header from "./Header";
 import api from "../api";
 import { login } from "../auth";
+import { PreferencesProvider } from "../context/PreferencesContext";
 
 const renderWithRouter = (ui: React.ReactElement) =>
-  render(<MemoryRouter>{ui}</MemoryRouter>);
+  render(
+    <MemoryRouter>
+      <PreferencesProvider>{ui}</PreferencesProvider>
+    </MemoryRouter>,
+  );
 
 const mockNavigate = vi.fn();
 vi.mock("react-router-dom", async () => {
@@ -113,11 +118,7 @@ describe("Header auth UI", () => {
         data: [],
       });
 
-      render(
-        <MemoryRouter>
-          <Header />
-        </MemoryRouter>,
-      );
+      renderWithRouter(<Header />);
 
       screen.getByRole("heading", { name: /Chris/i });
     });
@@ -137,11 +138,7 @@ describe("Header auth UI", () => {
         data: [],
       });
 
-      render(
-        <MemoryRouter>
-          <Header />
-        </MemoryRouter>,
-      );
+      renderWithRouter(<Header />);
 
       expect(
         screen.getByRole("heading", { name: /Good morning/i }),
@@ -156,11 +153,7 @@ describe("Header auth UI", () => {
         data: [],
       });
 
-      render(
-        <MemoryRouter>
-          <Header />
-        </MemoryRouter>,
-      );
+      renderWithRouter(<Header />);
 
       expect(
         screen.getByRole("heading", { name: /Good afternoon/i }),
@@ -175,11 +168,7 @@ describe("Header auth UI", () => {
         data: [],
       });
 
-      render(
-        <MemoryRouter>
-          <Header />
-        </MemoryRouter>,
-      );
+      renderWithRouter(<Header />);
 
       expect(
         screen.getByRole("heading", { name: /Good evening/i }),

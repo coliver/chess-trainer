@@ -10,6 +10,7 @@
     "login": "Войти",
     "register": "Регистрация",
     "logout": "Выйти",
+    "settings": "Настройки",
     "viewSource": "Посмотреть исходный код на GitHub"
   },
   "language": {
@@ -181,6 +182,38 @@
       "instructionsHtml": "Пожалуйста, подтвердите свой адрес электронной почты, нажав на ссылку ниже:",
       "expires": "Срок действия этой ссылки истекает через 24 часа.",
       "label": "Verify email"
+    }
+  },
+  "settings": {
+    "title": "Настройки",
+    "subtitle": "Настройте внешний вид и поведение Knight School на свой вкус.",
+    "languageLabel": "Язык",
+    "appearance": {
+      "heading": "Внешний вид",
+      "themeLabel": "Тема",
+      "boardThemeLabel": "Цвета доски",
+      "pieceSetLabel": "Набор фигур",
+      "showCoordinatesLabel": "Показывать координаты доски",
+      "boardAnimationsLabel": "Анимировать ходы фигур"
+    },
+    "boardOrientation": {
+      "heading": "Ориентация доски",
+      "auto": "Автоматическая — переворачивать для игрока, который ходит",
+      "white": "Всегда белые снизу",
+      "black": "Всегда чёрные снизу"
+    },
+    "boardThemes": {
+      "default": "По умолчанию",
+      "default-contrast": "По умолчанию (высокий контраст)",
+      "green": "Зелёная",
+      "blue": "Голубая",
+      "chess-club": "Chess Club",
+      "chessboard-js": "Классическая",
+      "black-and-white": "Чёрная и белая"
+    },
+    "pieceSets": {
+      "standard": "Стандартный",
+      "staunty": "Staunty"
     }
   }
 }

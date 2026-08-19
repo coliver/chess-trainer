@@ -13,6 +13,7 @@ import {
 import "cm-chessboard/assets/chessboard.css";
 import "cm-chessboard/assets/extensions/markers/markers.css";
 import "../../../packages/shared-styles/board.css";
+import { usePreferences } from "../context/PreferencesContext";
 
 // Sprites are served from react/public (copied from the cm-chessboard package).
 const ASSETS_URL = "/cm-chessboard-assets/";
@@ -52,14 +53,20 @@ export default function Board({
   position,
   orientation = "white",
   interactive = false,
-  animated = true,
-  showCoordinates = true,
+  animated,
+  showCoordinates,
   moveColor = "white",
   markers,
   getLegalMoves,
   onMoveStart,
   onMove,
 }: BoardProps) {
+  const { preferences } = usePreferences();
+  const boardTheme = preferences.board_theme;
+  const pieceSet = preferences.piece_set;
+  const effectiveShowCoordinates = showCoordinates ?? preferences.show_coordinates;
+  const effectiveAnimated = animated ?? preferences.board_animations;
+
   const hostRef = useRef<HTMLDivElement | null>(null);
   const boardRef = useRef<Chessboard | null>(null);
 
@@ -81,10 +88,11 @@ export default function Board({
       responsive: true,
       assetsUrl: ASSETS_URL,
       style: {
-        cssClass: "default",
-        showCoordinates,
+        cssClass: boardTheme,
+        showCoordinates: effectiveShowCoordinates,
         borderType: BORDER_TYPE.none,
-        animationDuration: animated ? 300 : 0,
+        pieces: { file: `pieces/${pieceSet}.svg` },
+        animationDuration: effectiveAnimated ? 300 : 0,
       },
       extensions: [{ class: Markers, props: { autoMarkers: MARKER_TYPE.frame } }],
     });
@@ -94,9 +102,12 @@ export default function Board({
       board.destroy();
       boardRef.current = null;
     };
-    // Intentionally created once; see per-prop effects below.
+    // Position/orientation/move changes are applied by the effects below;
+    // this effect only needs to re-run (destroy + recreate) when the
+    // cosmetic style options change, since cm-chessboard's `style` is
+    // constructor-only.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [boardTheme, pieceSet, effectiveShowCoordinates, effectiveAnimated]);
 
   // Orientation (white/black at bottom).
   useEffect(() => {
@@ -104,9 +115,9 @@ export default function Board({
     if (!board) return;
     const desired = orientation === "black" ? COLOR.black : COLOR.white;
     if (board.getOrientation() !== desired) {
-      void board.setOrientation(desired, animated);
+      void board.setOrientation(desired, effectiveAnimated);
     }
-  }, [orientation, animated]);
+  }, [orientation, effectiveAnimated]);
 
   // Position: only re-set when the piece placement actually changes, so an
   // accepted user move (already reflected on the board) does not re-animate.
@@ -115,8 +126,8 @@ export default function Board({
     if (!board) return;
     const desired = position.split(" ")[0];
     const current = board.getPosition()?.split(" ")[0];
-    if (desired !== current) void board.setPosition(position, animated);
-  }, [position, animated]);
+    if (desired !== current) void board.setPosition(position, effectiveAnimated);
+  }, [position, effectiveAnimated]);
 
   // Enable/disable move input and register the handler.
   useEffect(() => {

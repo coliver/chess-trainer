@@ -10,6 +10,7 @@
     "login": "تسجيل الدخول",
     "register": "إنشاء حساب",
     "logout": "تسجيل الخروج",
+    "settings": "الإعدادات",
     "viewSource": "عرض المصدر على GitHub"
   },
   "language": {
@@ -181,6 +182,38 @@
       "instructions": "يرجى التحقق من بريدك الإلكتروني بزيارة الرابط أدناه:",
       "instructionsHtml": "يرجى التحقق من بريدك الإلكتروني بالنقر على الرابط أدناه:",
       "expires": "ينتهي صلاحية هذا الرابط خلال 24 ساعة."
+    }
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "subtitle": "خصص كيفية ظهور ولعب Knight School.",
+    "languageLabel": "اللغة",
+    "appearance": {
+      "heading": "المظهر",
+      "themeLabel": "المظهر",
+      "boardThemeLabel": "ألوان اللوحة",
+      "pieceSetLabel": "مجموعة الأشكال",
+      "showCoordinatesLabel": "إظهار إحداثيات اللوحة",
+      "boardAnimationsLabel": "تحريك نقلات الأشكال"
+    },
+    "boardOrientation": {
+      "heading": "توجيه اللوحة",
+      "auto": "تلقائي — تقليب إلى جانب من يلعب",
+      "white": "احتفظ دائمًا بالأبيض في الأسفل",
+      "black": "احتفظ دائمًا بالأسود في الأسفل"
+    },
+    "boardThemes": {
+      "default": "الافتراضي",
+      "default-contrast": "الافتراضي (تباين عالي)",
+      "green": "أخضر",
+      "blue": "أزرق",
+      "chess-club": "نادي الشطرنج",
+      "chessboard-js": "الكلاسيكي",
+      "black-and-white": "أسود وأبيض"
+    },
+    "pieceSets": {
+      "standard": "قياسي",
+      "staunty": "Staunty"
     }
   }
 }

@@ -10,6 +10,7 @@
     "login": "로그인",
     "register": "회원가입",
     "logout": "로그아웃",
+    "settings": "설정",
     "viewSource": "GitHub에서 소스 보기"
   },
   "language": {
@@ -181,6 +182,38 @@
       "instructions": "아래 링크를 방문하여 이메일 주소를 인증하세요:",
       "instructionsHtml": "아래 링크를 클릭하여 이메일 주소를 인증하세요:",
       "expires": "이 링크는 24시간 후 만료됩니다."
+    }
+  },
+  "settings": {
+    "title": "설정",
+    "subtitle": "Knight School이 어떻게 보이고 작동하는지 맞춤설정하세요.",
+    "languageLabel": "언어",
+    "appearance": {
+      "heading": "외관",
+      "themeLabel": "테마",
+      "boardThemeLabel": "보드 색상",
+      "pieceSetLabel": "기물 세트",
+      "showCoordinatesLabel": "보드 좌표 표시",
+      "boardAnimationsLabel": "기물 움직임 애니메이션"
+    },
+    "boardOrientation": {
+      "heading": "보드 방향",
+      "auto": "자동 — 돌을 칠 쪽으로 뒤집기",
+      "white": "항상 백을 아래에 유지",
+      "black": "항상 흑을 아래에 유지"
+    },
+    "boardThemes": {
+      "default": "기본값",
+      "default-contrast": "기본값(고대비)",
+      "green": "초록색",
+      "blue": "파란색",
+      "chess-club": "체스 클럽",
+      "chessboard-js": "클래식",
+      "black-and-white": "검은색 & 흰색"
+    },
+    "pieceSets": {
+      "standard": "표준",
+      "staunty": "스톤티"
     }
   }
 }

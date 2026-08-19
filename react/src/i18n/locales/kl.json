@@ -10,6 +10,7 @@
     "login": "nuqneH — yI'el",
     "register": "EmpireDaq chel",
     "logout": "joH'a' lurghDaq bIrgh",
+    "settings": "Segh",
     "viewSource": "GitHubDaq ghItlh'e' yIlegh"
   },
   "language": {
@@ -181,6 +182,38 @@
       "instructions": "vIleghbogh link vISammeH, emaillIj yI'ang:",
       "instructionsHtml": "vIleghbogh link yIlaDmeH, emaillIj yI'ang:",
       "expires": "linkvam 24 tupDaq chegh."
+    }
+  },
+  "settings": {
+    "title": "Segh",
+    "subtitle": "Knight SchoolDaq SoH Segh yISoQ'eH.",
+    "languageLabel": "qaD",
+    "appearance": {
+      "heading": "Segh legh",
+      "themeLabel": "SuD",
+      "boardThemeLabel": "jaghwI' SuD",
+      "pieceSetLabel": "jaghwI' set",
+      "showCoordinatesLabel": "jaghwI' Qapla' yIlegh",
+      "boardAnimationsLabel": "jaghwI' ghoS yIrI'"
+    },
+    "boardOrientation": {
+      "heading": "jaghwI' qo'",
+      "auto": "Auto - SoH ghoSmey yIjaH",
+      "white": "chIS pagh qaStaHvIS",
+      "black": "qIj pagh qaStaHvIS"
+    },
+    "boardThemes": {
+      "default": "baQa'",
+      "default-contrast": "baQa' (QaPla' je)",
+      "green": "SuD",
+      "blue": "pa'loS",
+      "chess-club": "jaghwI' club",
+      "chessboard-js": "Qo'noS",
+      "black-and-white": "qIj je chIS"
+    },
+    "pieceSets": {
+      "standard": "Pagh",
+      "staunty": "staunty"
     }
   }
 }

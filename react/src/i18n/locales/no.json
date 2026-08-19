@@ -10,6 +10,7 @@
     "login": "Logg inn",
     "register": "Registrer",
     "logout": "Logg ut",
+    "settings": "Innstillinger",
     "viewSource": "Se kildekoden på GitHub"
   },
   "language": {
@@ -181,6 +182,38 @@
       "instructions": "Bekreft e-postadressen din ved å besøke lenken nedenfor:",
       "instructionsHtml": "Bekreft e-postadressen din ved å klikke på lenken nedenfor:",
       "expires": "Denne lenken utløper om 24 timer."
+    }
+  },
+  "settings": {
+    "title": "Innstillinger",
+    "subtitle": "Tilpass hvordan Knight School ser ut og spilles.",
+    "languageLabel": "Språk",
+    "appearance": {
+      "heading": "Utseende",
+      "themeLabel": "Tema",
+      "boardThemeLabel": "Brettfarger",
+      "pieceSetLabel": "Brikkesett",
+      "showCoordinatesLabel": "Vis brettkoordinater",
+      "boardAnimationsLabel": "Animer brikkeflyttinger"
+    },
+    "boardOrientation": {
+      "heading": "Brettorientering",
+      "auto": "Auto — vend til siden som skal flytte",
+      "white": "Hold alltid hvit på bunnen",
+      "black": "Hold alltid svart på bunnen"
+    },
+    "boardThemes": {
+      "default": "Standard",
+      "default-contrast": "Standard (høy kontrast)",
+      "green": "Grønn",
+      "blue": "Blå",
+      "chess-club": "Sjakklubb",
+      "chessboard-js": "Klassisk",
+      "black-and-white": "Svart & Hvit"
+    },
+    "pieceSets": {
+      "standard": "Standard",
+      "staunty": "Staunty"
     }
   }
 }

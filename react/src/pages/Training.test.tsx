@@ -7,6 +7,13 @@ import { useTrainingSession } from "../hooks/useTrainingSession";
 import { useBlinkGreen } from "../hooks/useBlinkGreen";
 import "@testing-library/jest-dom";
 import type { BoardProps } from "../components/Board";
+import { PreferencesProvider } from "../context/PreferencesContext";
+
+const renderTraining = () => (
+  <PreferencesProvider>
+    <Training />
+  </PreferencesProvider>
+);
 
 vi.mock("../hooks/useTrainingSession");
 vi.mock("../hooks/useBlinkGreen");
@@ -139,7 +146,7 @@ describe("Training Page", () => {
       feedback: "",
     });
 
-    const { rerender } = render(<Training />);
+    const { rerender } = render(renderTraining());
     await waitFor(() => expect(capturedProps).toBeDefined());
 
     act(() => {
@@ -151,14 +158,14 @@ describe("Training Page", () => {
       feedback: "✅ Correct!",
     });
 
-    rerender(<Training />);
+    rerender(renderTraining());
 
     expect(mockBlinkGreen).toHaveBeenCalledWith("e2e4q", 2);
   });
 
   describe("Move Interactions", () => {
     it("submits move via onMove (drag or click)", async () => {
-      render(<Training />);
+      render(renderTraining());
       await waitFor(() => expect(capturedProps).toBeDefined());
 
       act(() => {
@@ -170,7 +177,7 @@ describe("Training Page", () => {
 
     it("sets local illegal-move feedback when the move is rejected", async () => {
       applyMoveMock.mockReturnValueOnce(null);
-      render(<Training />);
+      render(renderTraining());
       await waitFor(() => expect(capturedProps).toBeDefined());
 
       let result: boolean | undefined;
@@ -189,7 +196,7 @@ describe("Training Page", () => {
       });
       applyMoveMock.mockReturnValueOnce({ nextFen: "after-fen", uci: "a7a8n" });
 
-      render(<Training />);
+      render(renderTraining());
       await waitFor(() => expect(capturedProps).not.toBeUndefined());
 
       act(() => {
@@ -202,7 +209,7 @@ describe("Training Page", () => {
     });
 
     it("submits move via text input", async () => {
-      render(<Training />);
+      render(renderTraining());
       const input = screen.getByPlaceholderText(/e2e4/);
       const submitBtn = screen.getByRole("button", { name: /play/i });
 
@@ -217,7 +224,7 @@ describe("Training Page", () => {
     it("automatically submits the correct move when it is black's turn", async () => {
       sideToMoveMock.mockReturnValue("b");
       mockTakeAutoplayOnce.mockReturnValue(true);
-      render(<Training />);
+      render(renderTraining());
       await waitFor(() => {
         expect(mockSubmitMove).toHaveBeenCalledWith("e2e4", "start-fen", {
           silent: true,
@@ -229,7 +236,7 @@ describe("Training Page", () => {
       sideToMoveMock.mockReturnValue("b");
       mockTakeAutoplayOnce.mockReturnValue(true);
 
-      const { rerender } = render(<Training />);
+      const { rerender } = render(renderTraining());
       await waitFor(() => {
         expect(mockSubmitMove).toHaveBeenCalledWith("e2e4", "start-fen", {
           silent: true,
@@ -243,13 +250,13 @@ describe("Training Page", () => {
         ...baseHookValue,
         fen: "start-fen-2",
       });
-      rerender(<Training />);
+      rerender(renderTraining());
 
       expect(mockSubmitMove).not.toHaveBeenCalled();
     });
 
     it("does not autoplay when the timeline is not at its latest position", async () => {
-      const { rerender } = render(<Training />);
+      const { rerender } = render(renderTraining());
       await waitFor(() => expect(capturedProps).toBeDefined());
 
       // Extend the timeline by one ply, then step back so we're not at latest.
@@ -269,7 +276,7 @@ describe("Training Page", () => {
         itemId: 11,
         correctMoveUci: "e7e5",
       });
-      rerender(<Training />);
+      rerender(renderTraining());
 
       expect(mockSubmitMove).not.toHaveBeenCalledWith("e7e5", expect.anything());
     });
@@ -283,7 +290,7 @@ describe("Training Page", () => {
         isSubmitting: true,
       });
 
-      render(<Training />);
+      render(renderTraining());
       expect(mockSubmitMove).not.toHaveBeenCalled();
     });
   });
@@ -296,7 +303,7 @@ describe("Training Page", () => {
       });
       mockTakeAutoplayOnce.mockReturnValue(true);
       // sideToMoveMock defaults to "w" — the opponent's (White's) turn.
-      render(<Training />);
+      render(renderTraining());
       await waitFor(() => {
         expect(mockSubmitMove).toHaveBeenCalledWith("e2e4", "start-fen", {
           silent: true,
@@ -314,7 +321,7 @@ describe("Training Page", () => {
         sq === "e7" ? "b" : "w",
       );
 
-      render(<Training />);
+      render(renderTraining());
       await waitFor(() => expect(capturedProps).toBeDefined());
 
       expect(capturedProps.onMoveStart?.("e7")).toBe(true);
@@ -327,7 +334,7 @@ describe("Training Page", () => {
         playerColor: "b",
       });
 
-      render(<Training />);
+      render(renderTraining());
       await waitFor(() => expect(capturedProps).toBeDefined());
 
       expect(capturedProps.moveColor).toBe("black");
@@ -337,7 +344,7 @@ describe("Training Page", () => {
 
   describe("Piece pickup rules (onMoveStart)", () => {
     it("allows picking up a white piece and submits the move", async () => {
-      render(<Training />);
+      render(renderTraining());
       await waitFor(() => expect(capturedProps).toBeDefined());
 
       expect(capturedProps.onMoveStart?.("e2")).toBe(true);
@@ -354,7 +361,7 @@ describe("Training Page", () => {
         sq === "e5" ? "b" : null,
       );
 
-      render(<Training />);
+      render(renderTraining());
       await waitFor(() => expect(capturedProps).toBeDefined());
 
       expect(capturedProps.onMoveStart?.("e5")).toBe(false); // black piece
@@ -362,7 +369,7 @@ describe("Training Page", () => {
     });
 
     it("exposes legal targets for the picked-up piece", async () => {
-      render(<Training />);
+      render(renderTraining());
       await waitFor(() => expect(capturedProps).toBeDefined());
 
       const targets = capturedProps.getLegalMoves?.("e2");
@@ -372,7 +379,7 @@ describe("Training Page", () => {
 
   describe("Hint System (2 levels, markers)", () => {
     it("marks only the from-square on Hint and from+to on More Hint", async () => {
-      render(<Training />);
+      render(renderTraining());
       await waitFor(() => expect(capturedProps).toBeDefined());
 
       expect(hasMarker("e2", "hint")).toBe(false);
@@ -392,7 +399,7 @@ describe("Training Page", () => {
   });
 
   it("resets hint level after feedback is '✅ Correct!'", async () => {
-    const { rerender } = render(<Training />);
+    const { rerender } = render(renderTraining());
     await waitFor(() => expect(capturedProps).toBeDefined());
 
     const hintBtn = screen.getByRole("button", { name: /hint/i });
@@ -406,14 +413,14 @@ describe("Training Page", () => {
       feedback: "✅ Correct!",
     });
 
-    rerender(<Training />);
+    rerender(renderTraining());
 
     expect(hasMarker("e2", "hint")).toBe(false);
     expect(hasMarker("e4", "hint")).toBe(false);
   });
 
   it("navigates back to the dashboard via the exit button", async () => {
-    render(<Training />);
+    render(renderTraining());
     await waitFor(() => expect(capturedProps).toBeDefined());
 
     await user.click(screen.getByRole("button", { name: /back to openings/i }));
@@ -426,7 +433,7 @@ describe("Training Page", () => {
       isSessionCompleted: true,
     });
 
-    render(<Training />);
+    render(renderTraining());
     await waitFor(() => expect(capturedProps).toBeDefined());
 
     const hintBtn = screen.getByRole("button", { name: /hint/i });
@@ -439,7 +446,7 @@ describe("Training Page", () => {
       isSubmitting: true,
     });
 
-    render(<Training />);
+    render(renderTraining());
     await waitFor(() => expect(capturedProps).toBeDefined());
 
     expect(capturedProps.onMoveStart?.("e2")).toBe(false);
@@ -453,7 +460,7 @@ describe("Training Page", () => {
       itemId: null,
     });
 
-    render(<Training />);
+    render(renderTraining());
     await waitFor(() => expect(capturedProps).toBeDefined());
 
     const hintBtn = screen.getByRole("button", { name: /hint/i });
@@ -463,7 +470,7 @@ describe("Training Page", () => {
 
   describe("Timeline stepper (Prev/Next)", () => {
     it("Prev is disabled at the start of the timeline; Next steps forward and Prev becomes enabled", async () => {
-      render(<Training />);
+      render(renderTraining());
       await waitFor(() => expect(capturedProps).toBeDefined());
 
       const prevBtn = screen.getByRole("button", { name: /‹ Prev/i });
@@ -493,7 +500,7 @@ describe("Training Page", () => {
         isSubmitting: true,
       });
 
-      render(<Training />);
+      render(renderTraining());
       await waitFor(() => expect(capturedProps).toBeDefined());
 
       expect(screen.getByRole("button", { name: /‹ Prev/i })).toBeDisabled();

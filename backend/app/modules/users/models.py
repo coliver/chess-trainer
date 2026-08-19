@@ -24,6 +24,13 @@ class User(Base):
     email_verify_token_version: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     language: Mapped[str] = mapped_column(String(20), nullable=False, default="en-US")
 
+    theme: Mapped[str] = mapped_column(String(10), nullable=False, default="system")
+    board_theme: Mapped[str] = mapped_column(String(30), nullable=False, default="default")
+    piece_set: Mapped[str] = mapped_column(String(20), nullable=False, default="standard")
+    show_coordinates: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
+    board_animations: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
+    board_orientation_mode: Mapped[str] = mapped_column(String(10), nullable=False, default="auto")
+
     created_at: Mapped[datetime] = mapped_column(
         DateTime, nullable=False, server_default=func.now()
     )

@@ -10,6 +10,7 @@
     "login": "Kirjaudu sisään",
     "register": "Rekisteröidy",
     "logout": "Kirjaudu ulos",
+    "settings": "Asetukset",
     "viewSource": "Näytä lähde GitHubissa"
   },
   "language": {
@@ -181,6 +182,38 @@
       "instructions": "Vahvista sähköpostiosoitteesi vierailemalla alla olevassa linkissä:",
       "instructionsHtml": "Vahvista sähköpostiosoitteesi napsauttamalla alla olevaa linkkiä:",
       "expires": "Tämä linkki vanhenee 24 tunnissa."
+    }
+  },
+  "settings": {
+    "title": "Asetukset",
+    "subtitle": "Mukauta Knight Schoolin ulkoasua ja peliä.",
+    "languageLabel": "Kieli",
+    "appearance": {
+      "heading": "Ulkoasu",
+      "themeLabel": "Teema",
+      "boardThemeLabel": "Laudan värit",
+      "pieceSetLabel": "Nappuloiden tyyli",
+      "showCoordinatesLabel": "Näytä laudan koordinaatit",
+      "boardAnimationsLabel": "Animoi nappuloiden liikkeet"
+    },
+    "boardOrientation": {
+      "heading": "Laudan orientaatio",
+      "auto": "Automaattinen — käännä siirtävän puolen puolelle",
+      "white": "Pidä valkoiset aina alhaalla",
+      "black": "Pidä mustat aina alhaalla"
+    },
+    "boardThemes": {
+      "default": "Oletus",
+      "default-contrast": "Oletus (korkea kontrasti)",
+      "green": "Vihreä",
+      "blue": "Sininen",
+      "chess-club": "Shakkikerhon värit",
+      "chessboard-js": "Klassinen",
+      "black-and-white": "Musta ja valkoinen"
+    },
+    "pieceSets": {
+      "standard": "Standardi",
+      "staunty": "Staunty"
     }
   }
 }

@@ -31,18 +31,20 @@ react/
 │   ├── components/            # Reusable UI elements (Board, Header, Button, icons, theme toggle...)
 │   │   ├── Board.tsx           # cm-chessboard wrapper (the seam the Angular board mirrors)
 │   │   └── openings/          # BoardPreview, OpeningCombo, DashboardTile
-│   ├── pages/                 # Login, Register, Dashboard, Training, VerifyEmail, Puzzles (+ *.test.tsx alongside each)
-│   ├── hooks/                 # useTrainingSession, useBlinkGreen, useSound (+ *.test.ts alongside each)
+│   ├── pages/                 # Login, Register, Dashboard, Training, VerifyEmail, Puzzles, Settings (+ *.test.tsx alongside each)
+│   ├── hooks/                 # useTrainingSession, useBlinkGreen, useSound, useBoardOrientation (+ *.test.ts alongside each)
+│   ├── context/                # PreferencesContext — backend-synced (guests fall back to localStorage) user preferences: theme, language, board look, board-orientation lock
 │   ├── utils/                 # sound.ts (feedback sound utilities)
 │   ├── tests/
 │   │   └── msw/                # Mock Service Worker handlers/server for API mocking in tests
 │   ├── assets/                 # SVG/JPG art used by dashboard tiles and icons
 │   ├── api.ts                  # Axios instance, auth header injection, 401 refresh interceptor
 │   ├── auth.ts                 # logout() — clears all auth-related localStorage keys
+│   ├── preferences.ts          # Preferences type, defaults, and localStorage read/write helpers
 │   ├── cm-chessboard.d.ts      # Ambient types for cm-chessboard (the package ships none)
 │   ├── RequireAuth.tsx         # Route guard: calls GET /auth/me, redirects to /login on failure
-│   ├── App.tsx                 # Routes: /login, /register, /dashboard, /training/:id, /verify-email, /puzzles, * -> Dashboard
-│   ├── main.tsx                # React root / entrypoint
+│   ├── App.tsx                 # Routes: /login, /register, /dashboard, /training/:id, /verify-email, /puzzles, /settings, * -> Dashboard
+│   ├── main.tsx                # React root / entrypoint (wraps App in PreferencesProvider)
 │   └── index.css               # Global styles (imports src/styles/*.css)
 │   └── i18n/                   # react-i18next config + locales/*.json translation resources
 ├── public/                     # favicon.svg, quotes.txt, cm-chessboard-assets/ (board sprites), sounds/ (feedback audio)
@@ -206,6 +208,28 @@ Actual backend response shape (`MoveResponseResponse`, camelCased):
 ```
 
 On correct moves, `fenAfter` updates the board and, if `sessionCompleted` is true, the UI shows a completion state instead of advancing. On incorrect moves, `correct` is `false`, `fenAfter` is `null`, and `reason` (e.g. `"illegal move"`, `"wrong move"`) drives the feedback message.
+
+## ⚙️ User Preferences (`/settings`)
+
+`PreferencesContext` (`src/context/PreferencesContext.tsx`) holds theme, language, and board
+look-and-feel (`board_theme`, `piece_set`, `show_coordinates`, `board_animations`,
+`board_orientation_mode`) as one piece of state, wrapping `<App />` in `main.tsx`:
+
+- **Logged in:** hydrates from `GET /users/me/preferences` on login, and pushes changes via
+  `PATCH /users/me/preferences` so preferences follow the user across devices/sessions.
+- **Logged out (guest):** reads/writes the same fields to `localStorage` — `ThemeToggle.tsx` and
+  `LanguageToggle.tsx` in the header keep working exactly as before for anonymous visitors.
+
+`Board.tsx` reads `board_theme` (one of cm-chessboard's 7 built-in skins), `piece_set` (`standard`
+or `staunty`), `show_coordinates`, and `board_animations` from the context as defaults, with each
+still overridable per call site via props. `board_orientation_mode` (`auto` / `white` / `black`)
+overrides the per-page auto-orientation logic in `Training.tsx`/`Puzzles.tsx` (which otherwise
+flips the board to the side to move / the trainee's color) — `auto` keeps that behavior, `white`
+pins White to the bottom, `black` pins Black to the bottom; the manual flip button still works as a
+same-session override in any mode.
+
+The `/settings` page (`src/pages/Settings.tsx`, linked from the header's gear icon) exposes all of
+the above as instant-apply controls — no separate Save button, matching the existing toggle UX.
 
 ## 🌐 Internationalization (i18n)
 

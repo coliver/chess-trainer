@@ -10,6 +10,7 @@
     "login": "Prihlásiť sa",
     "register": "Zaregistrovať sa",
     "logout": "Odhlásiť sa",
+    "settings": "Nastavenia",
     "viewSource": "Zobraziť zdroj na GitHube"
   },
   "language": {
@@ -181,6 +182,38 @@
       "instructions": "Potvrďte svoju e-mailovú adresu pomocou odkazu nižšie:",
       "instructionsHtml": "Potvrďte svoju e-mailovú adresu kliknutím na odkaz nižšie:",
       "expires": "Tento odkaz vyprší o 24 hodín."
+    }
+  },
+  "settings": {
+    "title": "Nastavenia",
+    "subtitle": "Prispôsobte si, ako Knight School vyzerá a funguje.",
+    "languageLabel": "Jazyk",
+    "appearance": {
+      "heading": "Vzhľad",
+      "themeLabel": "Téma",
+      "boardThemeLabel": "Farby šachovnice",
+      "pieceSetLabel": "Sada figúrok",
+      "showCoordinatesLabel": "Zobraziť súradnice šachovnice",
+      "boardAnimationsLabel": "Animovať pohyby figúrok"
+    },
+    "boardOrientation": {
+      "heading": "Orientácia šachovnice",
+      "auto": "Automatické — otočiť pre hráča na ťahu",
+      "white": "Vždy bielych dole",
+      "black": "Vždy čiernych dole"
+    },
+    "boardThemes": {
+      "default": "Predvolená",
+      "default-contrast": "Predvolená (vysoký kontrast)",
+      "green": "Zelená",
+      "blue": "Modrá",
+      "chess-club": "Chess Club",
+      "chessboard-js": "Klasická",
+      "black-and-white": "Čierna a biela"
+    },
+    "pieceSets": {
+      "standard": "Štandardný",
+      "staunty": "Staunty"
     }
   }
 }

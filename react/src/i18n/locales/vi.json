@@ -10,6 +10,7 @@
     "login": "Đăng nhập",
     "register": "Đăng ký",
     "logout": "Đăng xuất",
+    "settings": "Cài đặt",
     "viewSource": "Xem mã nguồn trên GitHub"
   },
   "language": {
@@ -181,6 +182,38 @@
       "instructions": "Vui lòng xác minh địa chỉ email của bạn bằng cách truy cập liên kết bên dưới:",
       "instructionsHtml": "Vui lòng xác minh địa chỉ email của bạn bằng cách nhấp vào liên kết bên dưới:",
       "expires": "Liên kết này sẽ hết hạn sau 24 giờ."
+    }
+  },
+  "settings": {
+    "title": "Cài đặt",
+    "subtitle": "Cá nhân hóa cách Knight School trông và hoạt động.",
+    "languageLabel": "Ngôn ngữ",
+    "appearance": {
+      "heading": "Giao diện",
+      "themeLabel": "Giao diện",
+      "boardThemeLabel": "Màu bàn cờ",
+      "pieceSetLabel": "Bộ quân cờ",
+      "showCoordinatesLabel": "Hiện tọa độ bàn cờ",
+      "boardAnimationsLabel": "Hoạt ảnh di chuyển quân cờ"
+    },
+    "boardOrientation": {
+      "heading": "Hướng bàn cờ",
+      "auto": "Tự động — xoay theo người đi",
+      "white": "Luôn giữ trắng ở dưới",
+      "black": "Luôn giữ đen ở dưới"
+    },
+    "boardThemes": {
+      "default": "Mặc định",
+      "default-contrast": "Mặc định (độ tương phản cao)",
+      "green": "Xanh lá",
+      "blue": "Xanh dương",
+      "chess-club": "Chess Club",
+      "chessboard-js": "Cổ điển",
+      "black-and-white": "Đen và trắng"
+    },
+    "pieceSets": {
+      "standard": "Tiêu chuẩn",
+      "staunty": "Staunty"
     }
   }
 }

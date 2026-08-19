@@ -10,6 +10,7 @@
     "login": "登录",
     "register": "注册",
     "logout": "退出登录",
+    "settings": "设置",
     "viewSource": "在 GitHub 查看源代码"
   },
   "language": {
@@ -181,6 +182,38 @@
       "instructions": "请点击下方链接验证你的邮箱地址：",
       "instructionsHtml": "请点击下方链接验证你的邮箱地址：",
       "expires": "此链接将在 24 小时后失效。"
+    }
+  },
+  "settings": {
+    "title": "设置",
+    "subtitle": "自定义 Knight School 的外观和行为。",
+    "languageLabel": "语言",
+    "appearance": {
+      "heading": "外观",
+      "themeLabel": "主题",
+      "boardThemeLabel": "棋盘颜色",
+      "pieceSetLabel": "棋子风格",
+      "showCoordinatesLabel": "显示棋盘坐标",
+      "boardAnimationsLabel": "播放走子动画"
+    },
+    "boardOrientation": {
+      "heading": "棋盘方向",
+      "auto": "自动 — 根据走子方翻转",
+      "white": "始终白方在下",
+      "black": "始终黑方在下"
+    },
+    "boardThemes": {
+      "default": "默认",
+      "default-contrast": "默认（高对比）",
+      "green": "绿色",
+      "blue": "蓝色",
+      "chess-club": "棋俱乐部",
+      "chessboard-js": "经典",
+      "black-and-white": "黑白"
+    },
+    "pieceSets": {
+      "standard": "标准",
+      "staunty": "Staunty"
     }
   }
 }

@@ -10,6 +10,7 @@
     "login": "Autentificare",
     "register": "Înregistrare",
     "logout": "Deconectare",
+    "settings": "Setări",
     "viewSource": "Vezi sursa pe GitHub"
   },
   "language": {
@@ -181,6 +182,38 @@
       "instructions": "Te rugăm să îți confirmi adresa de e-mail accesând linkul de mai jos:",
       "instructionsHtml": "Te rugăm să îți confirmi adresa de e-mail făcând clic pe linkul de mai jos:",
       "expires": "Acest link expiră în 24 de ore."
+    }
+  },
+  "settings": {
+    "title": "Setări",
+    "subtitle": "Personalizează modul în care Knight School arată și funcționează.",
+    "languageLabel": "Limbă",
+    "appearance": {
+      "heading": "Aspect",
+      "themeLabel": "Temă",
+      "boardThemeLabel": "Culori tablă",
+      "pieceSetLabel": "Set de piese",
+      "showCoordinatesLabel": "Arată coordonatele tablei",
+      "boardAnimationsLabel": "Animează mișcările pieselor"
+    },
+    "boardOrientation": {
+      "heading": "Orientare tablă",
+      "auto": "Automat — inversează pentru cine mută",
+      "white": "Ține totdeauna albul jos",
+      "black": "Ține totdeauna negrul jos"
+    },
+    "boardThemes": {
+      "default": "Implicit",
+      "default-contrast": "Implicit (contrast înalt)",
+      "green": "Verde",
+      "blue": "Albastru",
+      "chess-club": "Chess Club",
+      "chessboard-js": "Clasic",
+      "black-and-white": "Alb și Negru"
+    },
+    "pieceSets": {
+      "standard": "Standard",
+      "staunty": "Staunty"
     }
   }
 }

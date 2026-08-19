@@ -7,6 +7,7 @@ import api from "../api";
 import Board, { type BoardMarker } from "../components/Board";
 import { FlipBoardButton } from "../components/FlipBoardButton";
 import { useBoardOrientation } from "../hooks/useBoardOrientation";
+import { usePreferences } from "../context/PreferencesContext";
 import {
   START_FEN,
   applyMove,
@@ -41,6 +42,7 @@ export const Puzzles = () => {
   const [streak, setStreak] = useState(0);
   const [bestStreak, setBestStreak] = useState(0);
   const [noPuzzlesDue, setNoPuzzlesDue] = useState(false);
+  const { preferences } = usePreferences();
   const { orientation, flip, setOrientation } = useBoardOrientation();
 
   const fenRef = useRef(fen);
@@ -72,7 +74,11 @@ export const Puzzles = () => {
       setCorrectMoveUci(res.data.correctMoveUci);
       setLastMoveUci(res.data.lastMoveUci);
       setRating(res.data.rating);
-      setOrientation(sideToMove(res.data.fen) === "b" ? "black" : "white");
+      if (preferences.board_orientation_mode === "auto") {
+        setOrientation(sideToMove(res.data.fen) === "b" ? "black" : "white");
+      } else {
+        setOrientation(preferences.board_orientation_mode);
+      }
     } catch (err) {
       if (!isMountedRef.current) return;
       const e = err as AxiosError;
@@ -90,7 +96,7 @@ export const Puzzles = () => {
       setLastMoveUci("");
       setFeedback(t("puzzles.loadFailed"));
     }
-  }, [navigate, setOrientation, t]);
+  }, [navigate, preferences.board_orientation_mode, setOrientation, t]);
 
   useEffect(() => {
     const run = async () => {

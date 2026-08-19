@@ -10,6 +10,7 @@
     "login": "Log masuk",
     "register": "Daftar",
     "logout": "Log keluar",
+    "settings": "Tetapan",
     "viewSource": "Lihat sumber di GitHub"
   },
   "language": {
@@ -181,6 +182,38 @@
       "instructions": "Sila sahkan alamat e-mel anda dengan melawati pautan di bawah:",
       "instructionsHtml": "Sila sahkan alamat e-mel anda dengan mengklik pautan di bawah:",
       "expires": "Pautan ini tamat tempoh dalam 24 jam."
+    }
+  },
+  "settings": {
+    "title": "Tetapan",
+    "subtitle": "Suaikan cara Knight School kelihatan dan bermain.",
+    "languageLabel": "Bahasa",
+    "appearance": {
+      "heading": "Penampilan",
+      "themeLabel": "Tema",
+      "boardThemeLabel": "Warna papan",
+      "pieceSetLabel": "Set kepingan",
+      "showCoordinatesLabel": "Tunjukkan koordinat papan",
+      "boardAnimationsLabel": "Animasikan pergerakan kepingan"
+    },
+    "boardOrientation": {
+      "heading": "Orientasi papan",
+      "auto": "Auto — balik ke pihak bergerak",
+      "white": "Sentiasa letak Putih di bawah",
+      "black": "Sentiasa letak Hitam di bawah"
+    },
+    "boardThemes": {
+      "default": "Lalai",
+      "default-contrast": "Lalai (kontras tinggi)",
+      "green": "Hijau",
+      "blue": "Biru",
+      "chess-club": "Kelab Catur",
+      "chessboard-js": "Klasik",
+      "black-and-white": "Hitam & Putih"
+    },
+    "pieceSets": {
+      "standard": "Standard",
+      "staunty": "Staunty"
     }
   }
 }

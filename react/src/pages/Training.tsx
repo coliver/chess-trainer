@@ -27,6 +27,7 @@ import {
 import { useBlinkGreen } from "../hooks/useBlinkGreen";
 import { useTrainingSession } from "../hooks/useTrainingSession";
 import { useBoardOrientation } from "../hooks/useBoardOrientation";
+import { usePreferences } from "../context/PreferencesContext";
 import { getMoveSound, playSound } from "../utils/sound";
 
 export const Training = () => {
@@ -53,7 +54,7 @@ export const Training = () => {
   } = useTrainingSession(id, handle401);
 
   const [moveInput, setMoveInput] = useState("");
-  const [showAnimations] = useState(true);
+  const { preferences } = usePreferences();
   const { orientation, flip, setOrientation } = useBoardOrientation();
   const [hintLevel, setHintLevel] = useState(-1);
   const [lastMove, setLastMove] = useState<{ from: string; to: string } | null>(
@@ -117,10 +118,15 @@ export const Training = () => {
   );
   const atLatest = isAtLatest(timeline);
 
-  // Auto-orient the board to the trainee's color whenever a new session/item loads.
+  // Auto-orient the board to the trainee's color whenever a new session/item
+  // loads — unless the user has locked orientation to a fixed side.
   useEffect(() => {
-    setOrientation(playerColor === "b" ? "black" : "white");
-  }, [playerColor, setOrientation]);
+    if (preferences.board_orientation_mode === "auto") {
+      setOrientation(playerColor === "b" ? "black" : "white");
+    } else {
+      setOrientation(preferences.board_orientation_mode);
+    }
+  }, [playerColor, preferences.board_orientation_mode, setOrientation]);
 
   const appendTimelineFen = useCallback((nextFen: string) => {
     setTimeline((t) => {
@@ -377,7 +383,6 @@ export const Training = () => {
                 position={fen}
                 orientation={orientation}
                 interactive
-                animated={showAnimations}
                 moveColor={playerColor === "b" ? "black" : "white"}
                 markers={markers}
                 getLegalMoves={getLegalMoves}

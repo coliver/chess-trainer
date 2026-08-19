@@ -1,0 +1,63 @@
+// react/src/preferences.ts
+export type Theme = "light" | "dark" | "system";
+export type BoardTheme =
+  | "default"
+  | "default-contrast"
+  | "green"
+  | "blue"
+  | "chess-club"
+  | "chessboard-js"
+  | "black-and-white";
+export type PieceSet = "standard" | "staunty";
+export type BoardOrientationMode = "auto" | "white" | "black";
+
+export type Preferences = {
+  language: string;
+  theme: Theme;
+  board_theme: BoardTheme;
+  piece_set: PieceSet;
+  show_coordinates: boolean;
+  board_animations: boolean;
+  board_orientation_mode: BoardOrientationMode;
+};
+
+export const DEFAULT_PREFERENCES: Preferences = {
+  language: "en-US",
+  theme: "system",
+  board_theme: "default",
+  piece_set: "standard",
+  show_coordinates: true,
+  board_animations: true,
+  board_orientation_mode: "auto",
+};
+
+const STORAGE_KEYS: Record<keyof Preferences, string> = {
+  language: "language",
+  theme: "theme",
+  board_theme: "board_theme",
+  piece_set: "piece_set",
+  show_coordinates: "show_coordinates",
+  board_animations: "board_animations",
+  board_orientation_mode: "board_orientation_mode",
+};
+
+/** Reads locally-persisted preferences (guest/pre-hydration state), falling back to defaults. */
+export function readLocalPreferences(): Preferences {
+  const prefs = { ...DEFAULT_PREFERENCES };
+  for (const key of Object.keys(STORAGE_KEYS) as (keyof Preferences)[]) {
+    const raw = localStorage.getItem(STORAGE_KEYS[key]);
+    if (raw === null) continue;
+    if (typeof DEFAULT_PREFERENCES[key] === "boolean") {
+      (prefs[key] as boolean) = raw === "true";
+    } else {
+      (prefs[key] as string) = raw;
+    }
+  }
+  return prefs;
+}
+
+export function writeLocalPreferences(partial: Partial<Preferences>) {
+  for (const [key, value] of Object.entries(partial) as [keyof Preferences, unknown][]) {
+    localStorage.setItem(STORAGE_KEYS[key], String(value));
+  }
+}

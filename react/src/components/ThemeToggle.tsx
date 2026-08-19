@@ -1,28 +1,24 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { usePreferences } from "../context/PreferencesContext";
+
+function resolveTheme(theme: string): "light" | "dark" {
+  if (theme === "light" || theme === "dark") return theme;
+  const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)")?.matches;
+  return prefersDark ? "dark" : "light";
+}
 
 export function ThemeToggle() {
   const { t } = useTranslation();
-  const [theme, setTheme] = useState(() => {
-    // 1. Check localStorage
-    const saved = localStorage.getItem("theme");
-    if (saved === "light" || saved === "dark") return saved;
-
-    // 2. Check system preference
-    const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)")?.matches;
-    return prefersDark ? "dark" : "light";
-  });
+  const { preferences, update } = usePreferences();
+  const resolved = resolveTheme(preferences.theme);
 
   useEffect(() => {
-    // Only synchronize the DOM with the current state
-    document.documentElement.dataset.theme = theme;
-  }, [theme]);
+    document.documentElement.dataset.theme = resolved;
+  }, [resolved]);
 
   function toggle() {
-    const next = theme === "dark" ? "light" : "dark";
-    setTheme(next);
-    document.documentElement.dataset.theme = next;
-    localStorage.setItem("theme", next);
+    update({ theme: resolved === "dark" ? "light" : "dark" });
   }
 
   return (
@@ -33,7 +29,7 @@ export function ThemeToggle() {
       aria-label={t("theme.toggle")}
       title={t("theme.toggle")}
     >
-      {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+      {resolved === "dark" ? <SunIcon /> : <MoonIcon />}
     </button>
   );
 }
