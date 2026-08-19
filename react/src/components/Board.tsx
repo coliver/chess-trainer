@@ -10,13 +10,13 @@ type BoardProps = {
   interactive?: boolean;
   animated?: boolean;
   showCoordinates?: boolean;
-  markers?: BoardMarker[];
+  markers?: any[];
   moveColor?: string;
-  getLegalMoves?: (square: string) => string[];
+  getLegalMoves?: (square: string) => any[];
   onMoveStart?: (square: string) => boolean;
 };
 
-export type BoardMarker = unknown; // Export for use in other components
+export type BoardMarker = any; // Export for use in other components
 
 export default function Board({
   position,
