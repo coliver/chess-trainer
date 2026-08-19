@@ -1,0 +1,183 @@
+{
+  "header": {
+    "title": "Knight School",
+    "greetingMorning": "Bună dimineața ☀️",
+    "greetingAfternoon": "Bună ziua 🌤️",
+    "greetingEvening": "Bună seara 🌙",
+    "nav": "Acasă",
+    "openings": "Deschideri",
+    "puzzles": "Puzzle-uri",
+    "login": "Autentificare",
+    "register": "Înregistrare",
+    "logout": "Deconectare",
+    "viewSource": "Vezi sursa pe GitHub"
+  },
+  "language": {
+    "toggle": "Limbă",
+    "en": "Engleză",
+    "kl": "Klingonă"
+  },
+  "theme": {
+    "toggle": "Schimbă tema",
+    "dark": "Întunecat",
+    "light": "Deschis",
+    "system": "Sistem"
+  },
+  "flipBoard": {
+    "label": "Inversează tabla"
+  },
+  "dashboard": {
+    "header": {
+      "title": "Knight School",
+      "greetingMorning": "Bună dimineața ☀️",
+      "greetingAfternoon": "Bună ziua 🌤️",
+      "greetingEvening": "Bună seara 🌙",
+      "nav": "Acasă",
+      "openings": "Deschideri",
+      "puzzles": "Puzzle-uri",
+      "login": "Autentificare",
+      "register": "Înregistrare",
+      "logout": "Deconectare",
+      "viewSource": "Vezi sursa pe GitHub"
+    },
+    "progress": {
+      "yourProgress": "Progresul tău",
+      "trainingLabel": "Progresul antrenamentului",
+      "trainingHeading": "Antrenament",
+      "positionsTrained": "Poziții antrenate",
+      "accuracy": "Acuratețe",
+      "dayStreak": "Zile consecutive",
+      "dayStreakBest": "Zile consecutive · record {{best}}",
+      "mastered": "Stăpânite",
+      "reviewDue": "De revizuit ({{count}})",
+      "weakSpots": "Puncte slabe",
+      "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} corecte",
+      "weakSpotFallbackName": "Deschidere",
+      "puzzleLabel": "Progres puzzle-uri",
+      "puzzlesHeading": "Puzzle-uri",
+      "puzzlesSolved": "Puzzle-uri rezolvate",
+      "practicePuzzles": "Puzzle-uri de antrenament",
+      "startSessionFailed": "Nu s-a putut porni sesiunea. Verifică conexiunea sau tokenul.",
+      "reviewSessionFailed": "Nu există încă poziții pregătite pentru revizuire."
+    },
+    "openings": {
+      "title": "Deschideri",
+      "searchAriaLabel": "Caută deschidere",
+      "searchPlaceholder": "Caută o deschidere sau ECO…",
+      "sortAZ": "A–Z",
+      "sortPopular": "Popular",
+      "sortButton": "Sortare: {{mode}}",
+      "filterByColor": "Filtrare după culoare",
+      "all": "Toate",
+      "white": "Alb",
+      "black": "Negru",
+      "breadcrumb": "Navigare",
+      "allOpenings": "Toate deschiderile",
+      "playAs": "Joacă cu",
+      "playAsWhite": "Joacă cu alb",
+      "playAsBlack": "Joacă cu negru",
+      "pickToPreview": "Alege o deschidere pentru a previzualiza variantele și a începe antrenamentul.",
+      "startLabel": "Începe {{name}}",
+      "chooseOpening": "Alege deschiderea",
+      "matches_one": "{{count}} rezultat",
+      "matches_other": "{{count}} rezultate",
+      "variationsInLibrary": "{{count}} variante în biblioteca completă",
+      "openingsToTrain_one": "{{count}} deschidere · alege una pentru antrenament",
+      "openingsToTrain_other": "{{count}} deschideri · alege una pentru antrenament",
+      "variationCount_one": "{{count}} variantă",
+      "variationCount_other": "{{count}} variante",
+      "boardPreviewStart": "Început",
+      "boardPreviewAfterPly": "După mutarea {{ply}}"
+    }
+  },
+  "puzzles": {
+    "label": "Puzzle-uri",
+    "noPuzzlesDue": "Nu ai puzzle-uri de rezolvat acum — încearcă mai târziu.",
+    "loadFailed": "Nu s-au putut încărca puzzle-urile. Verifică conexiunea.",
+    "correct": "✅ Corect!",
+    "incorrectFallback": "Nu chiar — încearcă din nou.",
+    "submitError": "Eroare la trimiterea mutării.",
+    "findBestMove": "Găsește cea mai bună mutare.",
+    "eyebrow": "Puzzle-uri",
+    "title": "Antrenament cu puzzle-uri",
+    "rating": "Rating ~{{rating}}",
+    "solved": "Rezolvate: {{count}}",
+    "streak": "Serie: {{count}}",
+    "streakBest": " · record {{best}}",
+    "skipPuzzle": "Sari peste puzzle ›",
+    "backToDashboard": "← Înapoi la panou"
+  },
+  "training": {
+    "label": "Antrenament",
+    "whiteToMove": "Alb la mutare",
+    "blackToMove": "Negru la mutare",
+    "showHint": "Arată indiciu",
+    "eyebrow": "Antrenament",
+    "prev": "‹ Anterior",
+    "next": "Următor ›",
+    "movePlaceholder": "sau tastează o mutare, de ex. e2e4",
+    "play": "Joacă",
+    "jumpToLatest": "Sari la cea mai recentă înainte de trimitere",
+    "backToOpenings": "← Înapoi la deschideri"
+  },
+  "auth": {
+    "login": {
+      "label": "Autentificare",
+      "title": "Autentificare",
+      "subtitle": "Bine ai revenit.",
+      "usernameLabel": "Nume utilizator",
+      "passwordLabel": "Parolă",
+      "submit": "Trimite",
+      "submitting": "Se trimite...",
+      "emailNotVerified": "Te rugăm să îți confirmi e-mailul înainte de autentificare",
+      "resendVerification": "Retrimite e-mailul de confirmare",
+      "resendSending": "Se trimite...",
+      "resendSent": "Trimis!",
+      "needAccount": "Ai nevoie de un cont?",
+      "registerLink": "Înregistrare",
+      "errorGeneric": "A apărut o eroare neașteptată.",
+      "errorLoginFailed": "Autentificarea a eșuat",
+      "errorResendFailed": "Nu s-a putut retrimite e-mailul de confirmare"
+    },
+    "register": {
+      "label": "Înregistrare",
+      "title": "Înregistrare",
+      "subtitle": "Creează-ți contul.",
+      "emailLabel": "E-mail",
+      "usernameLabel": "Nume utilizator",
+      "passwordLabel": "Parolă",
+      "submit": "Înregistrează-te",
+      "submitting": "Se înregistrează...",
+      "successMessage": "Înregistrare reușită! Verifică inboxul la <strong>{{email}}</strong> pentru linkul de confirmare înainte de autentificare.",
+      "returnToLogin": "Înapoi la autentificare",
+      "haveAccount": "Ai deja un cont?",
+      "loginLink": "Autentificare",
+      "errorGeneric": "Nu s-a putut face înregistrarea. Încearcă din nou mai târziu."
+    },
+    "logout": {
+      "label": "Deconectare"
+    },
+    "verifyEmail": {
+      "label": "Confirmă e-mailul",
+      "loadingTitle": "Se confirmă...",
+      "loadingSubtitle": "Se confirmă e-mailul tău…",
+      "successTitle": "E-mail confirmat",
+      "successSubtitleWithEmail": "{{email}} a fost confirmat! Acum te poți autentifica.",
+      "successSubtitleNoEmail": "E-mailul tău a fost confirmat! Acum te poți autentifica.",
+      "goToLogin": "Mergi la autentificare",
+      "errorTitle": "Confirmarea a eșuat",
+      "errorSubtitle": "Acest link de confirmare este invalid sau a expirat.",
+      "returnToLogin": "Înapoi la autentificare"
+    }
+  },
+  "email": {
+    "verify": {
+      "label": "Confirmă e-mailul",
+      "subject": "Confirmă e-mailul tău pentru Knight School",
+      "heading": "Bine ai venit la Knight School!",
+      "instructions": "Te rugăm să îți confirmi adresa de e-mail accesând linkul de mai jos:",
+      "instructionsHtml": "Te rugăm să îți confirmi adresa de e-mail făcând clic pe linkul de mai jos:",
+      "expires": "Acest link expiră în 24 de ore."
+    }
+  }
+}

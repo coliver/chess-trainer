@@ -1,0 +1,183 @@
+{
+  "header": {
+    "title": "Knight School",
+    "greetingMorning": "God morgon ☀️",
+    "greetingAfternoon": "God eftermiddag 🌤️",
+    "greetingEvening": "God kväll 🌙",
+    "nav": "Hem",
+    "openings": "Öppningar",
+    "puzzles": "Pussel",
+    "login": "Logga in",
+    "register": "Registrera",
+    "logout": "Logga ut",
+    "viewSource": "Visa källan på GitHub"
+  },
+  "language": {
+    "toggle": "Språk",
+    "en": "Engelska",
+    "kl": "Klingon"
+  },
+  "theme": {
+    "toggle": "Byt tema",
+    "dark": "Mörkt",
+    "light": "Ljust",
+    "system": "System"
+  },
+  "flipBoard": {
+    "label": "Vänd brädet"
+  },
+  "dashboard": {
+    "header": {
+      "title": "Knight School",
+      "greetingMorning": "God morgon ☀️",
+      "greetingAfternoon": "God eftermiddag 🌤️",
+      "greetingEvening": "God kväll 🌙",
+      "nav": "Hem",
+      "openings": "Öppningar",
+      "puzzles": "Pussel",
+      "login": "Logga in",
+      "register": "Registrera",
+      "logout": "Logga ut",
+      "viewSource": "Visa källan på GitHub"
+    },
+    "progress": {
+      "yourProgress": "Din framgång",
+      "trainingLabel": "Träningsframgång",
+      "trainingHeading": "Träning",
+      "positionsTrained": "Tränade positioner",
+      "accuracy": "Noggrannhet",
+      "dayStreak": "Daglig svit",
+      "dayStreakBest": "Daglig svit · bäst {{best}}",
+      "mastered": "Bemästrade",
+      "reviewDue": "Att repetera ({{count}})",
+      "weakSpots": "Svaga punkter",
+      "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} rätt",
+      "weakSpotFallbackName": "Öppning",
+      "puzzleLabel": "Pussel-framsteg",
+      "puzzlesHeading": "Pussel",
+      "puzzlesSolved": "Lösta pussel",
+      "practicePuzzles": "Övningspussel",
+      "startSessionFailed": "Det gick inte att starta sessionen. Kontrollera din anslutning eller token.",
+      "reviewSessionFailed": "Inga positioner är redo för repetition än."
+    },
+    "openings": {
+      "title": "Öppningar",
+      "searchAriaLabel": "Sök öppning",
+      "searchPlaceholder": "Sök öppning eller ECO…",
+      "sortAZ": "A–Ö",
+      "sortPopular": "Populära",
+      "sortButton": "Sortera: {{mode}}",
+      "filterByColor": "Filtrera efter färg",
+      "all": "Alla",
+      "white": "Vit",
+      "black": "Svart",
+      "breadcrumb": "Brödsmula",
+      "allOpenings": "Alla öppningar",
+      "playAs": "Spela som",
+      "playAsWhite": "Spela som vit",
+      "playAsBlack": "Spela som svart",
+      "pickToPreview": "Välj en öppning för att förhandsgranska varianter och börja träna.",
+      "startLabel": "Starta {{name}}",
+      "chooseOpening": "Välj öppning",
+      "matches_one": "{{count}} träff",
+      "matches_other": "{{count}} träffar",
+      "variationsInLibrary": "{{count}} varianter i hela biblioteket",
+      "openingsToTrain_one": "{{count}} öppning · välj en att träna",
+      "openingsToTrain_other": "{{count}} öppningar · välj en att träna",
+      "variationCount_one": "{{count}} variant",
+      "variationCount_other": "{{count}} varianter",
+      "boardPreviewStart": "Start",
+      "boardPreviewAfterPly": "Efter drag {{ply}}"
+    }
+  },
+  "puzzles": {
+    "label": "Pussel",
+    "noPuzzlesDue": "Inga pussel att göra just nu — försök igen senare.",
+    "loadFailed": "Det gick inte att ladda pusslen. Kontrollera din anslutning.",
+    "correct": "✅ Rätt!",
+    "incorrectFallback": "Inte riktigt — försök igen.",
+    "submitError": "Fel vid skickning av drag.",
+    "findBestMove": "Hitta bästa draget.",
+    "eyebrow": "Pussel",
+    "title": "Pusselträning",
+    "rating": "Rating ~{{rating}}",
+    "solved": "Lösta: {{count}}",
+    "streak": "Svit: {{count}}",
+    "streakBest": " · bäst {{best}}",
+    "skipPuzzle": "Hoppa över pussel ›",
+    "backToDashboard": "← Tillbaka till översikten"
+  },
+  "training": {
+    "label": "Träning",
+    "whiteToMove": "Vit vid draget",
+    "blackToMove": "Svart vid draget",
+    "showHint": "Visa ledtråd",
+    "eyebrow": "Träning",
+    "prev": "‹ Föregående",
+    "next": "Nästa ›",
+    "movePlaceholder": "eller skriv ett drag, t.ex. e2e4",
+    "play": "Spela",
+    "jumpToLatest": "Hoppa till senaste innan du skickar",
+    "backToOpenings": "← Tillbaka till öppningar"
+  },
+  "auth": {
+    "login": {
+      "label": "Logga in",
+      "title": "Logga in",
+      "subtitle": "Välkommen tillbaka.",
+      "usernameLabel": "Användarnamn",
+      "passwordLabel": "Lösenord",
+      "submit": "Skicka",
+      "submitting": "Skickar...",
+      "emailNotVerified": "Bekräfta din e-post innan du loggar in",
+      "resendVerification": "Skicka bekräftelsemejl igen",
+      "resendSending": "Skickar...",
+      "resendSent": "Skickat!",
+      "needAccount": "Behöver du ett konto?",
+      "registerLink": "Registrera",
+      "errorGeneric": "Ett oväntat fel inträffade.",
+      "errorLoginFailed": "Det gick inte att logga in",
+      "errorResendFailed": "Det gick inte att skicka bekräftelsemejlet igen"
+    },
+    "register": {
+      "label": "Registrera",
+      "title": "Registrera",
+      "subtitle": "Skapa ditt konto.",
+      "emailLabel": "E-post",
+      "usernameLabel": "Användarnamn",
+      "passwordLabel": "Lösenord",
+      "submit": "Registrera",
+      "submitting": "Registrerar...",
+      "successMessage": "Registreringen lyckades! Kolla inkorgen för <strong>{{email}}</strong> efter en bekräftelselänk innan du loggar in.",
+      "returnToLogin": "Tillbaka till inloggning",
+      "haveAccount": "Har du redan ett konto?",
+      "loginLink": "Logga in",
+      "errorGeneric": "Det gick inte att registrera. Försök igen senare."
+    },
+    "logout": {
+      "label": "Logga ut"
+    },
+    "verifyEmail": {
+      "label": "Bekräfta e-post",
+      "loadingTitle": "Bekräftar...",
+      "loadingSubtitle": "Bekräftar din e-post…",
+      "successTitle": "E-post bekräftad",
+      "successSubtitleWithEmail": "{{email}} har bekräftats! Du kan nu logga in.",
+      "successSubtitleNoEmail": "Din e-post har bekräftats! Du kan nu logga in.",
+      "goToLogin": "Gå till inloggning",
+      "errorTitle": "Bekräftelsen misslyckades",
+      "errorSubtitle": "Den här bekräftelselänken är ogiltig eller har gått ut.",
+      "returnToLogin": "Tillbaka till inloggning"
+    }
+  },
+  "email": {
+    "verify": {
+      "label": "Bekräfta e-post",
+      "subject": "Bekräfta din Knight School-e-post",
+      "heading": "Välkommen till Knight School!",
+      "instructions": "Bekräfta din e-postadress genom att besöka länken nedan:",
+      "instructionsHtml": "Bekräfta din e-postadress genom att klicka på länken nedan:",
+      "expires": "Den här länken går ut om 24 timmar."
+    }
+  }
+}

@@ -1,0 +1,183 @@
+{
+  "header": {
+    "title": "Knight School",
+    "greetingMorning": "Dobré ráno ☀️",
+    "greetingAfternoon": "Dobrý deň 🌤️",
+    "greetingEvening": "Dobrý večer 🌙",
+    "nav": "Domov",
+    "openings": "Otvárania",
+    "puzzles": "Úlohy",
+    "login": "Prihlásiť sa",
+    "register": "Zaregistrovať sa",
+    "logout": "Odhlásiť sa",
+    "viewSource": "Zobraziť zdroj na GitHube"
+  },
+  "language": {
+    "toggle": "Jazyk",
+    "en": "Angličtina",
+    "kl": "Klingončina"
+  },
+  "theme": {
+    "toggle": "Prepnúť tému",
+    "dark": "Tmavá",
+    "light": "Svetlá",
+    "system": "Systémová"
+  },
+  "flipBoard": {
+    "label": "Otočiť šachovnicu"
+  },
+  "dashboard": {
+    "header": {
+      "title": "Knight School",
+      "greetingMorning": "Dobré ráno ☀️",
+      "greetingAfternoon": "Dobrý deň 🌤️",
+      "greetingEvening": "Dobrý večer 🌙",
+      "nav": "Domov",
+      "openings": "Otvárania",
+      "puzzles": "Úlohy",
+      "login": "Prihlásiť sa",
+      "register": "Zaregistrovať sa",
+      "logout": "Odhlásiť sa",
+      "viewSource": "Zobraziť zdroj na GitHube"
+    },
+    "progress": {
+      "yourProgress": "Váš pokrok",
+      "trainingLabel": "Pokrok tréningu",
+      "trainingHeading": "Tréning",
+      "positionsTrained": "Odtrénované pozície",
+      "accuracy": "Presnosť",
+      "dayStreak": "Denná séria",
+      "dayStreakBest": "Denná séria · najlepšia {{best}}",
+      "mastered": "Zvládnuté",
+      "reviewDue": "Na zopakovanie ({{count}})",
+      "weakSpots": "Slabé miesta",
+      "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} správne",
+      "weakSpotFallbackName": "Otváranie",
+      "puzzleLabel": "Pokrok úloh",
+      "puzzlesHeading": "Úlohy",
+      "puzzlesSolved": "Vyriešené úlohy",
+      "practicePuzzles": "Cvičné úlohy",
+      "startSessionFailed": "Nepodarilo sa spustiť reláciu. Skontrolujte pripojenie alebo token.",
+      "reviewSessionFailed": "Zatiaľ nie sú pripravené žiadne pozície na zopakovanie."
+    },
+    "openings": {
+      "title": "Otvárania",
+      "searchAriaLabel": "Hľadať otváranie",
+      "searchPlaceholder": "Hľadať otváranie alebo ECO…",
+      "sortAZ": "A–Z",
+      "sortPopular": "Obľúbené",
+      "sortButton": "Triediť: {{mode}}",
+      "filterByColor": "Filtrovať podľa farby",
+      "all": "Všetky",
+      "white": "Biely",
+      "black": "Čierny",
+      "breadcrumb": "Navigácia",
+      "allOpenings": "Všetky otvárania",
+      "playAs": "Hrať ako",
+      "playAsWhite": "Hrať ako biely",
+      "playAsBlack": "Hrať ako čierny",
+      "pickToPreview": "Vyberte otváranie na zobrazenie variantov a spustenie tréningu.",
+      "startLabel": "Spustiť {{name}}",
+      "chooseOpening": "Vyberte otváranie",
+      "matches_one": "{{count}} zhoda",
+      "matches_other": "{{count}} zhody",
+      "variationsInLibrary": "{{count}} variantov v celej knižnici",
+      "openingsToTrain_one": "{{count}} otváranie · vyberte jedno na tréning",
+      "openingsToTrain_other": "{{count}} otvárania · vyberte jedno na tréning",
+      "variationCount_one": "{{count}} variant",
+      "variationCount_other": "{{count}} variantov",
+      "boardPreviewStart": "Začiatok",
+      "boardPreviewAfterPly": "Po ťahu {{ply}}"
+    }
+  },
+  "puzzles": {
+    "label": "Úlohy",
+    "noPuzzlesDue": "Momentálne nie sú žiadne úlohy — skúste neskôr.",
+    "loadFailed": "Nepodarilo sa načítať úlohy. Skontrolujte pripojenie.",
+    "correct": "✅ Správne!",
+    "incorrectFallback": "Nie celkom — skúste znova.",
+    "submitError": "Chyba pri odosielaní ťahu.",
+    "findBestMove": "Nájdite najlepší ťah.",
+    "eyebrow": "Úlohy",
+    "title": "Tréning úloh",
+    "rating": "Rating ~{{rating}}",
+    "solved": "Vyriešené: {{count}}",
+    "streak": "Séria: {{count}}",
+    "streakBest": " · najlepšia {{best}}",
+    "skipPuzzle": "Preskočiť úlohu ›",
+    "backToDashboard": "← Späť na nástenku"
+  },
+  "training": {
+    "label": "Tréning",
+    "whiteToMove": "Ťahá biely",
+    "blackToMove": "Ťahá čierny",
+    "showHint": "Zobraziť nápovedu",
+    "eyebrow": "Tréning",
+    "prev": "‹ Predchádzajúci",
+    "next": "Ďalší ›",
+    "movePlaceholder": "alebo zadajte ťah, napr. e2e4",
+    "play": "Hrať",
+    "jumpToLatest": "Pred odoslaním prejsť na najnovší",
+    "backToOpenings": "← Späť na otvárania"
+  },
+  "auth": {
+    "login": {
+      "label": "Prihlásiť sa",
+      "title": "Prihlásiť sa",
+      "subtitle": "Vitajte späť.",
+      "usernameLabel": "Používateľské meno",
+      "passwordLabel": "Heslo",
+      "submit": "Odoslať",
+      "submitting": "Odosiela sa...",
+      "emailNotVerified": "Pred prihlásením potvrďte svoj e-mail",
+      "resendVerification": "Znova poslať overovací e-mail",
+      "resendSending": "Odosiela sa...",
+      "resendSent": "Odoslané!",
+      "needAccount": "Potrebujete účet?",
+      "registerLink": "Zaregistrovať sa",
+      "errorGeneric": "Vyskytla sa neočakávaná chyba.",
+      "errorLoginFailed": "Nepodarilo sa prihlásiť",
+      "errorResendFailed": "Nepodarilo sa znova poslať overovací e-mail"
+    },
+    "register": {
+      "label": "Zaregistrovať sa",
+      "title": "Zaregistrovať sa",
+      "subtitle": "Vytvorte si účet.",
+      "emailLabel": "E-mail",
+      "usernameLabel": "Používateľské meno",
+      "passwordLabel": "Heslo",
+      "submit": "Registrovať",
+      "submitting": "Registruje sa...",
+      "successMessage": "Registrácia bola úspešná! Skontrolujte doručenú poštu na <strong>{{email}}</strong> a pred prihlásením potvrďte odkaz.",
+      "returnToLogin": "Späť na prihlásenie",
+      "haveAccount": "Už máte účet?",
+      "loginLink": "Prihlásiť sa",
+      "errorGeneric": "Nepodarilo sa zaregistrovať. Skúste to znova neskôr."
+    },
+    "logout": {
+      "label": "Odhlásiť sa"
+    },
+    "verifyEmail": {
+      "label": "Potvrdiť e-mail",
+      "loadingTitle": "Potvrdzuje sa...",
+      "loadingSubtitle": "Potvrdzuje sa váš e-mail…",
+      "successTitle": "E-mail potvrdený",
+      "successSubtitleWithEmail": "{{email}} bol potvrdený! Teraz sa môžete prihlásiť.",
+      "successSubtitleNoEmail": "Váš e-mail bol potvrdený! Teraz sa môžete prihlásiť.",
+      "goToLogin": "Prejsť na prihlásenie",
+      "errorTitle": "Potvrdenie zlyhalo",
+      "errorSubtitle": "Tento potvrdzovací odkaz je neplatný alebo exspirovaný.",
+      "returnToLogin": "Späť na prihlásenie"
+    }
+  },
+  "email": {
+    "verify": {
+      "label": "Potvrdiť e-mail",
+      "subject": "Potvrďte svoj e-mail pre Knight School",
+      "heading": "Vitajte v Knight School!",
+      "instructions": "Potvrďte svoju e-mailovú adresu pomocou odkazu nižšie:",
+      "instructionsHtml": "Potvrďte svoju e-mailovú adresu kliknutím na odkaz nižšie:",
+      "expires": "Tento odkaz vyprší o 24 hodín."
+    }
+  }
+}

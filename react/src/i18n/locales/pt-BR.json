@@ -1,0 +1,183 @@
+{
+  "header": {
+    "title": "Knight School",
+    "greetingMorning": "Bom dia ☀️",
+    "greetingAfternoon": "Boa tarde 🌤️",
+    "greetingEvening": "Boa noite 🌙",
+    "nav": "Principal",
+    "openings": "Aberturas",
+    "puzzles": "Problemas",
+    "login": "Entrar",
+    "register": "Cadastrar",
+    "logout": "Sair",
+    "viewSource": "Ver o código-fonte no GitHub"
+  },
+  "language": {
+    "toggle": "Idioma",
+    "en": "Inglês",
+    "kl": "Klingon"
+  },
+  "theme": {
+    "toggle": "Alternar tema",
+    "dark": "Escuro",
+    "light": "Claro",
+    "system": "Sistema"
+  },
+  "flipBoard": {
+    "label": "Virar tabuleiro"
+  },
+  "dashboard": {
+    "header": {
+      "title": "Knight School",
+      "greetingMorning": "Bom dia ☀️",
+      "greetingAfternoon": "Boa tarde 🌤️",
+      "greetingEvening": "Boa noite 🌙",
+      "nav": "Principal",
+      "openings": "Aberturas",
+      "puzzles": "Problemas",
+      "login": "Entrar",
+      "register": "Cadastrar",
+      "logout": "Sair",
+      "viewSource": "Ver o código-fonte no GitHub"
+    },
+    "progress": {
+      "yourProgress": "Seu progresso",
+      "trainingLabel": "Progresso do treino",
+      "trainingHeading": "Treino",
+      "positionsTrained": "Posições treinadas",
+      "accuracy": "Precisão",
+      "dayStreak": "Sequência diária",
+      "dayStreakBest": "Sequência diária · melhor {{best}}",
+      "mastered": "Dominado",
+      "reviewDue": "Revisão pendente ({{count}})",
+      "weakSpots": "Pontos fracos",
+      "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} corretos",
+      "weakSpotFallbackName": "Abertura",
+      "puzzleLabel": "Progresso dos problemas",
+      "puzzlesHeading": "Problemas",
+      "puzzlesSolved": "Problemas resolvidos",
+      "practicePuzzles": "Problemas de prática",
+      "startSessionFailed": "Falha ao iniciar a sessão. Verifique sua conexão ou token.",
+      "reviewSessionFailed": "Ainda não há posições para revisão."
+    },
+    "openings": {
+      "title": "Aberturas",
+      "searchAriaLabel": "Buscar aberturas",
+      "searchPlaceholder": "Buscar aberturas ou ECO…",
+      "sortAZ": "A–Z",
+      "sortPopular": "Populares",
+      "sortButton": "Ordenar: {{mode}}",
+      "filterByColor": "Filtrar por cor",
+      "all": "Todas",
+      "white": "Brancas",
+      "black": "Pretas",
+      "breadcrumb": "Trilha",
+      "allOpenings": "Todas as aberturas",
+      "playAs": "Jogar como",
+      "playAsWhite": "Jogar como brancas",
+      "playAsBlack": "Jogar como pretas",
+      "pickToPreview": "Escolha uma abertura para ver a linha e começar o treino.",
+      "startLabel": "Iniciar {{name}}",
+      "chooseOpening": "Escolha uma abertura",
+      "matches_one": "{{count}} partida",
+      "matches_other": "{{count}} partidas",
+      "variationsInLibrary": "{{count}} variações na biblioteca completa",
+      "openingsToTrain_one": "{{count}} abertura · escolha uma para treinar",
+      "openingsToTrain_other": "{{count}} aberturas · escolha uma para treinar",
+      "variationCount_one": "{{count}} variação",
+      "variationCount_other": "{{count}} variações",
+      "boardPreviewStart": "Início",
+      "boardPreviewAfterPly": "Após lance {{ply}}"
+    }
+  },
+  "puzzles": {
+    "label": "Problemas",
+    "noPuzzlesDue": "Nenhum problema pendente agora — volte mais tarde.",
+    "loadFailed": "Falha ao carregar um problema. Verifique sua conexão.",
+    "correct": "✅ Correto!",
+    "incorrectFallback": "Não foi dessa vez — tente de novo.",
+    "submitError": "Erro ao enviar o lance.",
+    "findBestMove": "Encontre o melhor lance.",
+    "eyebrow": "Problemas",
+    "title": "Treino de Problemas",
+    "rating": "Rating ~{{rating}}",
+    "solved": "Resolvidos: {{count}}",
+    "streak": "Sequência: {{count}}",
+    "streakBest": " · melhor {{best}}",
+    "skipPuzzle": "Pular problema ›",
+    "backToDashboard": "← Voltar ao painel"
+  },
+  "training": {
+    "label": "Treino",
+    "whiteToMove": "Brancas jogam",
+    "blackToMove": "Pretas jogam",
+    "showHint": "Mostrar dica",
+    "eyebrow": "Treino",
+    "prev": "‹ Anterior",
+    "next": "Próximo ›",
+    "movePlaceholder": "ou digite um lance, ex.: e2e4",
+    "play": "Jogar",
+    "jumpToLatest": "Ir para a última posição antes de enviar",
+    "backToOpenings": "← Voltar às aberturas"
+  },
+  "auth": {
+    "login": {
+      "label": "Entrar",
+      "title": "Entrar",
+      "subtitle": "Bem-vindo de volta.",
+      "usernameLabel": "Usuário",
+      "passwordLabel": "Senha",
+      "submit": "Enviar",
+      "submitting": "Enviando...",
+      "emailNotVerified": "Verifique seu e-mail antes de entrar",
+      "resendVerification": "Reenviar e-mail de verificação",
+      "resendSending": "Enviando...",
+      "resendSent": "Enviado!",
+      "needAccount": "Precisa de uma conta?",
+      "registerLink": "Cadastrar",
+      "errorGeneric": "Ocorreu um erro inesperado.",
+      "errorLoginFailed": "Falha ao entrar",
+      "errorResendFailed": "Falha ao reenviar o e-mail de verificação"
+    },
+    "register": {
+      "label": "Cadastrar",
+      "title": "Cadastrar",
+      "subtitle": "Crie sua conta.",
+      "emailLabel": "E-mail",
+      "usernameLabel": "Usuário",
+      "passwordLabel": "Senha",
+      "submit": "Cadastrar",
+      "submitting": "Cadastrando...",
+      "successMessage": "Cadastro realizado com sucesso! Verifique sua caixa de entrada em <strong>{{email}}</strong> para acessar o link de verificação antes de entrar.",
+      "returnToLogin": "Voltar ao login",
+      "haveAccount": "Já tem uma conta?",
+      "loginLink": "Entrar",
+      "errorGeneric": "Falha ao cadastrar. Tente novamente mais tarde."
+    },
+    "logout": {
+      "label": "Sair"
+    },
+    "verifyEmail": {
+      "label": "Verificar e-mail",
+      "loadingTitle": "Verificando...",
+      "loadingSubtitle": "Verificando seu e-mail…",
+      "successTitle": "E-mail verificado",
+      "successSubtitleWithEmail": "{{email}} foi verificado! Agora você pode entrar.",
+      "successSubtitleNoEmail": "Seu e-mail foi verificado! Agora você pode entrar.",
+      "goToLogin": "Ir para o login",
+      "errorTitle": "Falha na verificação",
+      "errorSubtitle": "Este link de verificação é inválido ou expirou.",
+      "returnToLogin": "Voltar ao login"
+    }
+  },
+  "email": {
+    "verify": {
+      "label": "Verificar e-mail",
+      "subject": "Verifique seu e-mail do Knight School",
+      "heading": "Bem-vindo ao Knight School!",
+      "instructions": "Verifique seu endereço de e-mail acessando o link abaixo:",
+      "instructionsHtml": "Verifique seu endereço de e-mail clicando no link abaixo:",
+      "expires": "Este link expira em 24 horas."
+    }
+  }
+}

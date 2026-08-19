@@ -1,0 +1,183 @@
+{
+  "header": {
+    "title": "Knight School",
+    "greetingMorning": "God morgen ☀️",
+    "greetingAfternoon": "God ettermiddag 🌤️",
+    "greetingEvening": "God kveld 🌙",
+    "nav": "Hjem",
+    "openings": "Åpninger",
+    "puzzles": "Oppgaver",
+    "login": "Logg inn",
+    "register": "Registrer",
+    "logout": "Logg ut",
+    "viewSource": "Se kildekoden på GitHub"
+  },
+  "language": {
+    "toggle": "Språk",
+    "en": "Engelsk",
+    "kl": "Klingon"
+  },
+  "theme": {
+    "toggle": "Bytt tema",
+    "dark": "Mørk",
+    "light": "Lys",
+    "system": "System"
+  },
+  "flipBoard": {
+    "label": "Snu brettet"
+  },
+  "dashboard": {
+    "header": {
+      "title": "Knight School",
+      "greetingMorning": "God morgen ☀️",
+      "greetingAfternoon": "God ettermiddag 🌤️",
+      "greetingEvening": "God kveld 🌙",
+      "nav": "Hjem",
+      "openings": "Åpninger",
+      "puzzles": "Oppgaver",
+      "login": "Logg inn",
+      "register": "Registrer",
+      "logout": "Logg ut",
+      "viewSource": "Se kildekoden på GitHub"
+    },
+    "progress": {
+      "yourProgress": "Din fremdrift",
+      "trainingLabel": "Treningsfremdrift",
+      "trainingHeading": "Trening",
+      "positionsTrained": "Posisjoner trent",
+      "accuracy": "Nøyaktighet",
+      "dayStreak": "Daglig rekke",
+      "dayStreakBest": "Daglig rekke · best {{best}}",
+      "mastered": "Mestret",
+      "reviewDue": "Gjennomgang påkrevd ({{count}})",
+      "weakSpots": "Svake punkter",
+      "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} riktig",
+      "weakSpotFallbackName": "Åpning",
+      "puzzleLabel": "Oppgavefremdrift",
+      "puzzlesHeading": "Oppgaver",
+      "puzzlesSolved": "Oppgaver løst",
+      "practicePuzzles": "Øvingsoppgaver",
+      "startSessionFailed": "Kunne ikke starte økten. Sjekk tilkoblingen eller tokenet ditt.",
+      "reviewSessionFailed": "Ingen posisjoner er klare for gjennomgang ennå."
+    },
+    "openings": {
+      "title": "Åpninger",
+      "searchAriaLabel": "Søk etter åpning",
+      "searchPlaceholder": "Søk etter åpning eller ECO…",
+      "sortAZ": "A–Å",
+      "sortPopular": "Populær",
+      "sortButton": "Sorter: {{mode}}",
+      "filterByColor": "Filtrer etter farge",
+      "all": "Alle",
+      "white": "Hvit",
+      "black": "Svart",
+      "breadcrumb": "Brødsmule",
+      "allOpenings": "Alle åpninger",
+      "playAs": "Spill som",
+      "playAsWhite": "Spill som hvit",
+      "playAsBlack": "Spill som svart",
+      "pickToPreview": "Velg en åpning for å forhåndsvise variantene og starte trening.",
+      "startLabel": "Start {{name}}",
+      "chooseOpening": "Velg åpning",
+      "matches_one": "{{count}} treff",
+      "matches_other": "{{count}} treff",
+      "variationsInLibrary": "{{count}} varianter i hele biblioteket",
+      "openingsToTrain_one": "{{count}} åpning · velg én å trene",
+      "openingsToTrain_other": "{{count}} åpninger · velg én å trene",
+      "variationCount_one": "{{count}} variant",
+      "variationCount_other": "{{count}} varianter",
+      "boardPreviewStart": "Start",
+      "boardPreviewAfterPly": "Etter trekk {{ply}}"
+    }
+  },
+  "puzzles": {
+    "label": "Oppgaver",
+    "noPuzzlesDue": "Ingen oppgaver er klare nå — prøv igjen senere.",
+    "loadFailed": "Kunne ikke laste oppgaver. Sjekk tilkoblingen din.",
+    "correct": "✅ Riktig!",
+    "incorrectFallback": "Ikke helt riktig — prøv igjen.",
+    "submitError": "Feil ved sending av trekk.",
+    "findBestMove": "Finn det beste trekket.",
+    "eyebrow": "Oppgaver",
+    "title": "Oppgavetrening",
+    "rating": "Rating ~{{rating}}",
+    "solved": "Løst: {{count}}",
+    "streak": "Rekke: {{count}}",
+    "streakBest": " · best {{best}}",
+    "skipPuzzle": "Hopp over oppgave ›",
+    "backToDashboard": "← Tilbake til oversikten"
+  },
+  "training": {
+    "label": "Trening",
+    "whiteToMove": "Hvit i trekket",
+    "blackToMove": "Svart i trekket",
+    "showHint": "Vis hint",
+    "eyebrow": "Trening",
+    "prev": "‹ Forrige",
+    "next": "Neste ›",
+    "movePlaceholder": "eller skriv et trekk, f.eks. e2e4",
+    "play": "Spill",
+    "jumpToLatest": "Hopp til siste før du sender inn",
+    "backToOpenings": "← Tilbake til åpninger"
+  },
+  "auth": {
+    "login": {
+      "label": "Logg inn",
+      "title": "Logg inn",
+      "subtitle": "Velkommen tilbake.",
+      "usernameLabel": "Brukernavn",
+      "passwordLabel": "Passord",
+      "submit": "Send",
+      "submitting": "Sender...",
+      "emailNotVerified": "Vennligst bekreft e-posten din før du logger inn",
+      "resendVerification": "Send bekreftelses-e-post på nytt",
+      "resendSending": "Sender...",
+      "resendSent": "Sendt!",
+      "needAccount": "Trenger du en konto?",
+      "registerLink": "Registrer",
+      "errorGeneric": "Det oppstod en uventet feil.",
+      "errorLoginFailed": "Kunne ikke logge inn",
+      "errorResendFailed": "Kunne ikke sende bekreftelses-e-posten på nytt"
+    },
+    "register": {
+      "label": "Registrer",
+      "title": "Registrer",
+      "subtitle": "Opprett kontoen din.",
+      "emailLabel": "E-post",
+      "usernameLabel": "Brukernavn",
+      "passwordLabel": "Passord",
+      "submit": "Registrer",
+      "submitting": "Registrerer...",
+      "successMessage": "Registreringen var vellykket! Sjekk innboksen din på <strong>{{email}}</strong> for en bekreftelseslenke før du logger inn.",
+      "returnToLogin": "Tilbake til innlogging",
+      "haveAccount": "Har du allerede en konto?",
+      "loginLink": "Logg inn",
+      "errorGeneric": "Kunne ikke registrere. Prøv igjen senere."
+    },
+    "logout": {
+      "label": "Logg ut"
+    },
+    "verifyEmail": {
+      "label": "Bekreft e-post",
+      "loadingTitle": "Bekrefter...",
+      "loadingSubtitle": "Bekrefter e-posten din…",
+      "successTitle": "E-post bekreftet",
+      "successSubtitleWithEmail": "{{email}} er bekreftet! Du kan nå logge inn.",
+      "successSubtitleNoEmail": "E-posten din er bekreftet! Du kan nå logge inn.",
+      "goToLogin": "Gå til innlogging",
+      "errorTitle": "Bekreftelse mislyktes",
+      "errorSubtitle": "Denne bekreftelseslenken er ugyldig eller utløpt.",
+      "returnToLogin": "Tilbake til innlogging"
+    }
+  },
+  "email": {
+    "verify": {
+      "label": "Bekreft e-post",
+      "subject": "Bekreft Knight School-e-posten din",
+      "heading": "Velkommen til Knight School!",
+      "instructions": "Bekreft e-postadressen din ved å besøke lenken nedenfor:",
+      "instructionsHtml": "Bekreft e-postadressen din ved å klikke på lenken nedenfor:",
+      "expires": "Denne lenken utløper om 24 timer."
+    }
+  }
+}

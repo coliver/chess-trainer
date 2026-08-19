@@ -1,0 +1,183 @@
+{
+  "header": {
+    "title": "Knight School",
+    "greetingMorning": "Chào buổi sáng ☀️",
+    "greetingAfternoon": "Chào buổi chiều 🌤️",
+    "greetingEvening": "Chào buổi tối 🌙",
+    "nav": "Trang chủ",
+    "openings": "Khai cuộc",
+    "puzzles": "Bài tập",
+    "login": "Đăng nhập",
+    "register": "Đăng ký",
+    "logout": "Đăng xuất",
+    "viewSource": "Xem mã nguồn trên GitHub"
+  },
+  "language": {
+    "toggle": "Ngôn ngữ",
+    "en": "Tiếng Anh",
+    "kl": "Tiếng Klingon"
+  },
+  "theme": {
+    "toggle": "Đổi giao diện",
+    "dark": "Tối",
+    "light": "Sáng",
+    "system": "Hệ thống"
+  },
+  "flipBoard": {
+    "label": "Xoay bàn cờ"
+  },
+  "dashboard": {
+    "header": {
+      "title": "Knight School",
+      "greetingMorning": "Chào buổi sáng ☀️",
+      "greetingAfternoon": "Chào buổi chiều 🌤️",
+      "greetingEvening": "Chào buổi tối 🌙",
+      "nav": "Trang chủ",
+      "openings": "Khai cuộc",
+      "puzzles": "Bài tập",
+      "login": "Đăng nhập",
+      "register": "Đăng ký",
+      "logout": "Đăng xuất",
+      "viewSource": "Xem mã nguồn trên GitHub"
+    },
+    "progress": {
+      "yourProgress": "Tiến độ của bạn",
+      "trainingLabel": "Tiến độ luyện tập",
+      "trainingHeading": "Luyện tập",
+      "positionsTrained": "Vị trí đã luyện",
+      "accuracy": "Độ chính xác",
+      "dayStreak": "Chuỗi ngày",
+      "dayStreakBest": "Chuỗi ngày · tốt nhất {{best}}",
+      "mastered": "Đã thành thạo",
+      "reviewDue": "Cần ôn lại ({{count}})",
+      "weakSpots": "Điểm yếu",
+      "weakSpotItem": "{{name}} — đúng {{correct}}/{{attempts}}",
+      "weakSpotFallbackName": "Khai cuộc",
+      "puzzleLabel": "Tiến độ bài tập",
+      "puzzlesHeading": "Bài tập",
+      "puzzlesSolved": "Bài tập đã giải",
+      "practicePuzzles": "Bài tập luyện",
+      "startSessionFailed": "Không thể bắt đầu phiên. Kiểm tra kết nối hoặc token của bạn.",
+      "reviewSessionFailed": "Chưa có vị trí nào sẵn sàng để ôn lại."
+    },
+    "openings": {
+      "title": "Khai cuộc",
+      "searchAriaLabel": "Tìm khai cuộc",
+      "searchPlaceholder": "Tìm khai cuộc hoặc ECO…",
+      "sortAZ": "A–Z",
+      "sortPopular": "Phổ biến",
+      "sortButton": "Sắp xếp: {{mode}}",
+      "filterByColor": "Lọc theo màu",
+      "all": "Tất cả",
+      "white": "Trắng",
+      "black": "Đen",
+      "breadcrumb": "Điều hướng",
+      "allOpenings": "Tất cả khai cuộc",
+      "playAs": "Chơi với",
+      "playAsWhite": "Chơi quân trắng",
+      "playAsBlack": "Chơi quân đen",
+      "pickToPreview": "Chọn một khai cuộc để xem trước các biến thể và bắt đầu luyện tập.",
+      "startLabel": "Bắt đầu {{name}}",
+      "chooseOpening": "Chọn khai cuộc",
+      "matches_one": "{{count}} kết quả",
+      "matches_other": "{{count}} kết quả",
+      "variationsInLibrary": "{{count}} biến thể trong toàn bộ thư viện",
+      "openingsToTrain_one": "{{count}} khai cuộc · chọn một để luyện",
+      "openingsToTrain_other": "{{count}} khai cuộc · chọn một để luyện",
+      "variationCount_one": "{{count}} biến thể",
+      "variationCount_other": "{{count}} biến thể",
+      "boardPreviewStart": "Bắt đầu",
+      "boardPreviewAfterPly": "Sau nước {{ply}}"
+    }
+  },
+  "puzzles": {
+    "label": "Bài tập",
+    "noPuzzlesDue": "Hiện không có bài tập nào — thử lại sau.",
+    "loadFailed": "Không tải được bài tập. Kiểm tra kết nối của bạn.",
+    "correct": "✅ Đúng rồi!",
+    "incorrectFallback": "Chưa đúng — thử lại nhé.",
+    "submitError": "Lỗi khi gửi nước đi.",
+    "findBestMove": "Tìm nước đi tốt nhất.",
+    "eyebrow": "Bài tập",
+    "title": "Luyện bài tập",
+    "rating": "Rating ~{{rating}}",
+    "solved": "Đã giải: {{count}}",
+    "streak": "Chuỗi: {{count}}",
+    "streakBest": " · tốt nhất {{best}}",
+    "skipPuzzle": "Bỏ qua bài tập ›",
+    "backToDashboard": "← Quay lại bảng điều khiển"
+  },
+  "training": {
+    "label": "Luyện tập",
+    "whiteToMove": "Quân trắng đi",
+    "blackToMove": "Quân đen đi",
+    "showHint": "Hiện gợi ý",
+    "eyebrow": "Luyện tập",
+    "prev": "‹ Trước",
+    "next": "Tiếp ›",
+    "movePlaceholder": "hoặc nhập nước đi, ví dụ e2e4",
+    "play": "Đi",
+    "jumpToLatest": "Nhảy tới nước mới nhất trước khi gửi",
+    "backToOpenings": "← Quay lại khai cuộc"
+  },
+  "auth": {
+    "login": {
+      "label": "Đăng nhập",
+      "title": "Đăng nhập",
+      "subtitle": "Chào mừng trở lại.",
+      "usernameLabel": "Tên người dùng",
+      "passwordLabel": "Mật khẩu",
+      "submit": "Gửi",
+      "submitting": "Đang gửi...",
+      "emailNotVerified": "Vui lòng xác minh email của bạn trước khi đăng nhập",
+      "resendVerification": "Gửi lại email xác minh",
+      "resendSending": "Đang gửi...",
+      "resendSent": "Đã gửi!",
+      "needAccount": "Cần tài khoản?",
+      "registerLink": "Đăng ký",
+      "errorGeneric": "Đã xảy ra lỗi không mong đợi.",
+      "errorLoginFailed": "Không thể đăng nhập",
+      "errorResendFailed": "Không thể gửi lại email xác minh"
+    },
+    "register": {
+      "label": "Đăng ký",
+      "title": "Đăng ký",
+      "subtitle": "Tạo tài khoản của bạn.",
+      "emailLabel": "Email",
+      "usernameLabel": "Tên người dùng",
+      "passwordLabel": "Mật khẩu",
+      "submit": "Đăng ký",
+      "submitting": "Đang đăng ký...",
+      "successMessage": "Đăng ký thành công! Hãy kiểm tra hộp thư đến tại <strong>{{email}}</strong> để nhận liên kết xác minh trước khi đăng nhập.",
+      "returnToLogin": "Quay lại đăng nhập",
+      "haveAccount": "Đã có tài khoản?",
+      "loginLink": "Đăng nhập",
+      "errorGeneric": "Không thể đăng ký. Vui lòng thử lại sau."
+    },
+    "logout": {
+      "label": "Đăng xuất"
+    },
+    "verifyEmail": {
+      "label": "Xác minh email",
+      "loadingTitle": "Đang xác minh...",
+      "loadingSubtitle": "Đang xác minh email của bạn…",
+      "successTitle": "Email đã được xác minh",
+      "successSubtitleWithEmail": "{{email}} đã được xác minh! Giờ bạn có thể đăng nhập.",
+      "successSubtitleNoEmail": "Email của bạn đã được xác minh! Giờ bạn có thể đăng nhập.",
+      "goToLogin": "Đi tới đăng nhập",
+      "errorTitle": "Xác minh thất bại",
+      "errorSubtitle": "Liên kết xác minh này không hợp lệ hoặc đã hết hạn.",
+      "returnToLogin": "Quay lại đăng nhập"
+    }
+  },
+  "email": {
+    "verify": {
+      "label": "Xác minh email",
+      "subject": "Xác minh email Knight School của bạn",
+      "heading": "Chào mừng đến với Knight School!",
+      "instructions": "Vui lòng xác minh địa chỉ email của bạn bằng cách truy cập liên kết bên dưới:",
+      "instructionsHtml": "Vui lòng xác minh địa chỉ email của bạn bằng cách nhấp vào liên kết bên dưới:",
+      "expires": "Liên kết này sẽ hết hạn sau 24 giờ."
+    }
+  }
+}

@@ -1,0 +1,183 @@
+{
+  "header": {
+    "title": "Knight School",
+    "greetingMorning": "Jó reggelt ☀️",
+    "greetingAfternoon": "Jó napot 🌤️",
+    "greetingEvening": "Jó estét 🌙",
+    "nav": "Főmenü",
+    "openings": "Megnyitások",
+    "puzzles": "Feladványok",
+    "login": "Bejelentkezés",
+    "register": "Regisztráció",
+    "logout": "Kijelentkezés",
+    "viewSource": "Forrás megtekintése a GitHubon"
+  },
+  "language": {
+    "toggle": "Nyelv",
+    "en": "Angol",
+    "kl": "Klingon"
+  },
+  "theme": {
+    "toggle": "Téma váltása",
+    "dark": "Sötét",
+    "light": "Világos",
+    "system": "Rendszer"
+  },
+  "flipBoard": {
+    "label": "Tábla megfordítása"
+  },
+  "dashboard": {
+    "header": {
+      "title": "Knight School",
+      "greetingMorning": "Jó reggelt ☀️",
+      "greetingAfternoon": "Jó napot 🌤️",
+      "greetingEvening": "Jó estét 🌙",
+      "nav": "Főmenü",
+      "openings": "Megnyitások",
+      "puzzles": "Feladványok",
+      "login": "Bejelentkezés",
+      "register": "Regisztráció",
+      "logout": "Kijelentkezés",
+      "viewSource": "Forrás megtekintése a GitHubon"
+    },
+    "progress": {
+      "yourProgress": "A te haladásod",
+      "trainingLabel": "Edzési haladás",
+      "trainingHeading": "Edzés",
+      "positionsTrained": "Kiképzett állások",
+      "accuracy": "Pontosság",
+      "dayStreak": "Napi sorozat",
+      "dayStreakBest": "Napi sorozat · legjobb {{best}}",
+      "mastered": "Elsajátítva",
+      "reviewDue": "Ismétlés esedékes ({{count}})",
+      "weakSpots": "Gyenge pontok",
+      "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} helyes",
+      "weakSpotFallbackName": "Megnyitás",
+      "puzzleLabel": "Feladványhaladás",
+      "puzzlesHeading": "Feladványok",
+      "puzzlesSolved": "Megoldott feladványok",
+      "practicePuzzles": "Gyakorló feladványok",
+      "startSessionFailed": "Nem sikerült elindítani a munkamenetet. Ellenőrizd a kapcsolatodat vagy a tokent.",
+      "reviewSessionFailed": "Még nincs ismétlésre váró állás."
+    },
+    "openings": {
+      "title": "Megnyitások",
+      "searchAriaLabel": "Megnyitások keresése",
+      "searchPlaceholder": "Megnyitások vagy ECO keresése…",
+      "sortAZ": "A–Z",
+      "sortPopular": "Népszerű",
+      "sortButton": "Rendezés: {{mode}}",
+      "filterByColor": "Szín szerinti szűrés",
+      "all": "Mind",
+      "white": "Világos",
+      "black": "Sötét",
+      "breadcrumb": "Útvonalsáv",
+      "allOpenings": "Minden megnyitás",
+      "playAs": "Játszás színként",
+      "playAsWhite": "Játszás világosként",
+      "playAsBlack": "Játszás sötétként",
+      "pickToPreview": "Válassz egy megnyitást a változat előnézetéhez és az edzés indításához.",
+      "startLabel": "Kezdés: {{name}}",
+      "chooseOpening": "Válassz megnyitást",
+      "matches_one": "{{count}} találat",
+      "matches_other": "{{count}} találat",
+      "variationsInLibrary": "{{count}} változat a teljes könyvtárban",
+      "openingsToTrain_one": "{{count}} megnyitás · válassz egyet az edzéshez",
+      "openingsToTrain_other": "{{count}} megnyitás · válassz egyet az edzéshez",
+      "variationCount_one": "{{count}} változat",
+      "variationCount_other": "{{count}} változat",
+      "boardPreviewStart": "Kezdés",
+      "boardPreviewAfterPly": "{{ply}}. fél lépés után"
+    }
+  },
+  "puzzles": {
+    "label": "Feladványok",
+    "noPuzzlesDue": "Most nincs esedékes feladvány — nézz vissza később.",
+    "loadFailed": "Nem sikerült betölteni a feladványt. Ellenőrizd a kapcsolatodat.",
+    "correct": "✅ Helyes!",
+    "incorrectFallback": "Nem egészen — próbáld újra.",
+    "submitError": "Hiba történt a lépés beküldésekor.",
+    "findBestMove": "Találd meg a legjobb lépést.",
+    "eyebrow": "Feladványok",
+    "title": "Feladványedzés",
+    "rating": "Értékszám ~{{rating}}",
+    "solved": "Megoldva: {{count}}",
+    "streak": "Sorozat: {{count}}",
+    "streakBest": " · legjobb {{best}}",
+    "skipPuzzle": "Feladvány kihagyása ›",
+    "backToDashboard": "← Vissza az irányítópultra"
+  },
+  "training": {
+    "label": "Edzés",
+    "whiteToMove": "Világos következik",
+    "blackToMove": "Sötét következik",
+    "showHint": "Tipp megjelenítése",
+    "eyebrow": "Edzés",
+    "prev": "‹ Előző",
+    "next": "Következő ›",
+    "movePlaceholder": "vagy írj be egy lépést, pl. e2e4",
+    "play": "Lépés",
+    "jumpToLatest": "Ugrás a legutolsóhoz beküldés előtt",
+    "backToOpenings": "← Vissza a megnyitásokhoz"
+  },
+  "auth": {
+    "login": {
+      "label": "Bejelentkezés",
+      "title": "Bejelentkezés",
+      "subtitle": "Üdv újra.",
+      "usernameLabel": "Felhasználónév",
+      "passwordLabel": "Jelszó",
+      "submit": "Küldés",
+      "submitting": "Küldés...",
+      "emailNotVerified": "Bejelentkezés előtt kérjük, igazold az e-mail-címedet",
+      "resendVerification": "Ellenőrző e-mail újraküldése",
+      "resendSending": "Küldés...",
+      "resendSent": "Elküldve!",
+      "needAccount": "Szükséged van fiókra?",
+      "registerLink": "Regisztráció",
+      "errorGeneric": "Váratlan hiba történt.",
+      "errorLoginFailed": "A bejelentkezés sikertelen",
+      "errorResendFailed": "Az ellenőrző e-mail újraküldése sikertelen"
+    },
+    "register": {
+      "label": "Regisztráció",
+      "title": "Regisztráció",
+      "subtitle": "Hozd létre a fiókodat.",
+      "emailLabel": "E-mail",
+      "usernameLabel": "Felhasználónév",
+      "passwordLabel": "Jelszó",
+      "submit": "Regisztráció",
+      "submitting": "Regisztráció...",
+      "successMessage": "A regisztráció sikeres! Jelentkezés előtt ellenőrizd a postafiókodat a <strong>{{email}}</strong> címen a megerősítő linkért.",
+      "returnToLogin": "Vissza a bejelentkezéshez",
+      "haveAccount": "Már van fiókod?",
+      "loginLink": "Bejelentkezés",
+      "errorGeneric": "A regisztráció sikertelen. Kérjük, próbáld újra később."
+    },
+    "logout": {
+      "label": "Kijelentkezés"
+    },
+    "verifyEmail": {
+      "label": "E-mail ellenőrzése",
+      "loadingTitle": "Ellenőrzés...",
+      "loadingSubtitle": "Az e-mail-cím ellenőrzése…",
+      "successTitle": "E-mail ellenőrizve",
+      "successSubtitleWithEmail": "A(z) {{email}} cím ellenőrizve lett! Most már bejelentkezhetsz.",
+      "successSubtitleNoEmail": "Az e-mail-címed ellenőrizve lett! Most már bejelentkezhetsz.",
+      "goToLogin": "Ugrás a bejelentkezéshez",
+      "errorTitle": "Az ellenőrzés sikertelen",
+      "errorSubtitle": "Ez az ellenőrző link érvénytelen vagy lejárt.",
+      "returnToLogin": "Vissza a bejelentkezéshez"
+    }
+  },
+  "email": {
+    "verify": {
+      "label": "E-mail ellenőrzése",
+      "subject": "Igazold a Knight School e-mail-címedet",
+      "heading": "Üdvözlünk a Knight Schoolban!",
+      "instructions": "Kérjük, igazold az e-mail-címedet az alábbi linken:",
+      "instructionsHtml": "Kérjük, igazold az e-mail-címedet az alábbi linkre kattintva:",
+      "expires": "Ez a link 24 óra múlva lejár."
+    }
+  }
+}

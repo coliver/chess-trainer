@@ -1,0 +1,183 @@
+{
+  "header": {
+    "title": "Knight School",
+    "greetingMorning": "Selamat pagi ☀️",
+    "greetingAfternoon": "Selamat tengah hari 🌤️",
+    "greetingEvening": "Selamat malam 🌙",
+    "nav": "Utama",
+    "openings": "Pembukaan",
+    "puzzles": "Teka-teki",
+    "login": "Log masuk",
+    "register": "Daftar",
+    "logout": "Log keluar",
+    "viewSource": "Lihat sumber di GitHub"
+  },
+  "language": {
+    "toggle": "Bahasa",
+    "en": "Bahasa Inggeris",
+    "kl": "Klingon"
+  },
+  "theme": {
+    "toggle": "Tukar tema",
+    "dark": "Gelap",
+    "light": "Cerah",
+    "system": "Sistem"
+  },
+  "flipBoard": {
+    "label": "Pusing papan"
+  },
+  "dashboard": {
+    "header": {
+      "title": "Knight School",
+      "greetingMorning": "Selamat pagi ☀️",
+      "greetingAfternoon": "Selamat tengah hari 🌤️",
+      "greetingEvening": "Selamat malam 🌙",
+      "nav": "Utama",
+      "openings": "Pembukaan",
+      "puzzles": "Teka-teki",
+      "login": "Log masuk",
+      "register": "Daftar",
+      "logout": "Log keluar",
+      "viewSource": "Lihat sumber di GitHub"
+    },
+    "progress": {
+      "yourProgress": "Kemajuan anda",
+      "trainingLabel": "Kemajuan latihan",
+      "trainingHeading": "Latihan",
+      "positionsTrained": "Posisi dilatih",
+      "accuracy": "Ketepatan",
+      "dayStreak": "Siri harian",
+      "dayStreakBest": "Siri harian · terbaik {{best}}",
+      "mastered": "Dikuasai",
+      "reviewDue": "Semakan perlu dibuat ({{count}})",
+      "weakSpots": "Bahagian lemah",
+      "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} betul",
+      "weakSpotFallbackName": "Pembukaan",
+      "puzzleLabel": "Kemajuan teka-teki",
+      "puzzlesHeading": "Teka-teki",
+      "puzzlesSolved": "Teka-teki diselesaikan",
+      "practicePuzzles": "Teka-teki latihan",
+      "startSessionFailed": "Gagal memulakan sesi. Semak sambungan atau token anda.",
+      "reviewSessionFailed": "Belum ada posisi untuk disemak lagi."
+    },
+    "openings": {
+      "title": "Pembukaan",
+      "searchAriaLabel": "Cari pembukaan",
+      "searchPlaceholder": "Cari pembukaan atau ECO…",
+      "sortAZ": "A–Z",
+      "sortPopular": "Popular",
+      "sortButton": "Susun: {{mode}}",
+      "filterByColor": "Tapis mengikut warna",
+      "all": "Semua",
+      "white": "Putih",
+      "black": "Hitam",
+      "breadcrumb": "Jejak",
+      "allOpenings": "Semua pembukaan",
+      "playAs": "Main sebagai",
+      "playAsWhite": "Main sebagai Putih",
+      "playAsBlack": "Main sebagai Hitam",
+      "pickToPreview": "Pilih pembukaan untuk pratonton baris dan mula latihan.",
+      "startLabel": "Mula {{name}}",
+      "chooseOpening": "Pilih pembukaan",
+      "matches_one": "{{count}} padanan",
+      "matches_other": "{{count}} padanan",
+      "variationsInLibrary": "{{count}} variasi dalam perpustakaan penuh",
+      "openingsToTrain_one": "{{count}} pembukaan · pilih satu untuk dilatih",
+      "openingsToTrain_other": "{{count}} pembukaan · pilih satu untuk dilatih",
+      "variationCount_one": "{{count}} variasi",
+      "variationCount_other": "{{count}} variasi",
+      "boardPreviewStart": "Mula",
+      "boardPreviewAfterPly": "Selepas ply {{ply}}"
+    }
+  },
+  "puzzles": {
+    "label": "Teka-teki",
+    "noPuzzlesDue": "Tiada teka-teki perlu dibuat sekarang — cuba lagi nanti.",
+    "loadFailed": "Gagal memuatkan teka-teki. Semak sambungan anda.",
+    "correct": "✅ Betul!",
+    "incorrectFallback": "Belum tepat — cuba lagi.",
+    "submitError": "Ralat menghantar langkah.",
+    "findBestMove": "Cari langkah terbaik.",
+    "eyebrow": "Teka-teki",
+    "title": "Latihan Teka-teki",
+    "rating": "Rating ~{{rating}}",
+    "solved": "Diselesaikan: {{count}}",
+    "streak": "Siri: {{count}}",
+    "streakBest": " · terbaik {{best}}",
+    "skipPuzzle": "Langkau teka-teki ›",
+    "backToDashboard": "← Kembali ke papan pemuka"
+  },
+  "training": {
+    "label": "Latihan",
+    "whiteToMove": "Putih untuk bergerak",
+    "blackToMove": "Hitam untuk bergerak",
+    "showHint": "Tunjukkan petunjuk",
+    "eyebrow": "Latihan",
+    "prev": "‹ Sebelumnya",
+    "next": "Seterusnya ›",
+    "movePlaceholder": "atau taip langkah, contohnya e2e4",
+    "play": "Main",
+    "jumpToLatest": "Lompat ke yang terkini sebelum menghantar",
+    "backToOpenings": "← Kembali ke pembukaan"
+  },
+  "auth": {
+    "login": {
+      "label": "Log masuk",
+      "title": "Log masuk",
+      "subtitle": "Selamat kembali.",
+      "usernameLabel": "Nama pengguna",
+      "passwordLabel": "Kata laluan",
+      "submit": "Hantar",
+      "submitting": "Sedang menghantar...",
+      "emailNotVerified": "Sila sahkan e-mel anda sebelum log masuk",
+      "resendVerification": "Hantar semula e-mel pengesahan",
+      "resendSending": "Sedang menghantar...",
+      "resendSent": "Dihantar!",
+      "needAccount": "Perlukan akaun?",
+      "registerLink": "Daftar",
+      "errorGeneric": "Ralat tidak dijangka berlaku.",
+      "errorLoginFailed": "Gagal log masuk",
+      "errorResendFailed": "Gagal menghantar semula e-mel pengesahan"
+    },
+    "register": {
+      "label": "Daftar",
+      "title": "Daftar",
+      "subtitle": "Cipta akaun anda.",
+      "emailLabel": "E-mel",
+      "usernameLabel": "Nama pengguna",
+      "passwordLabel": "Kata laluan",
+      "submit": "Daftar",
+      "submitting": "Sedang mendaftar...",
+      "successMessage": "Pendaftaran berjaya! Semak peti masuk anda di <strong>{{email}}</strong> untuk pautan pengesahan sebelum log masuk.",
+      "returnToLogin": "Kembali ke log masuk",
+      "haveAccount": "Sudah ada akaun?",
+      "loginLink": "Log masuk",
+      "errorGeneric": "Gagal mendaftar. Sila cuba lagi nanti."
+    },
+    "logout": {
+      "label": "Log keluar"
+    },
+    "verifyEmail": {
+      "label": "Sahkan e-mel",
+      "loadingTitle": "Mengesahkan...",
+      "loadingSubtitle": "Mengesahkan e-mel anda…",
+      "successTitle": "E-mel disahkan",
+      "successSubtitleWithEmail": "{{email}} telah disahkan! Anda kini boleh log masuk.",
+      "successSubtitleNoEmail": "E-mel anda telah disahkan! Anda kini boleh log masuk.",
+      "goToLogin": "Pergi ke log masuk",
+      "errorTitle": "Pengesahan gagal",
+      "errorSubtitle": "Pautan pengesahan ini tidak sah atau telah tamat tempoh.",
+      "returnToLogin": "Kembali ke log masuk"
+    }
+  },
+  "email": {
+    "verify": {
+      "label": "Sahkan e-mel",
+      "subject": "Sahkan e-mel Knight School anda",
+      "heading": "Selamat datang ke Knight School!",
+      "instructions": "Sila sahkan alamat e-mel anda dengan melawati pautan di bawah:",
+      "instructionsHtml": "Sila sahkan alamat e-mel anda dengan mengklik pautan di bawah:",
+      "expires": "Pautan ini tamat tempoh dalam 24 jam."
+    }
+  }
+}

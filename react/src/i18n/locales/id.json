@@ -1,0 +1,183 @@
+{
+  "header": {
+    "title": "Knight School",
+    "greetingMorning": "Selamat pagi ☀️",
+    "greetingAfternoon": "Selamat siang 🌤️",
+    "greetingEvening": "Selamat malam 🌙",
+    "nav": "Utama",
+    "openings": "Pembukaan",
+    "puzzles": "Teka-teki",
+    "login": "Masuk",
+    "register": "Daftar",
+    "logout": "Keluar",
+    "viewSource": "Lihat sumber di GitHub"
+  },
+  "language": {
+    "toggle": "Bahasa",
+    "en": "Bahasa Inggris",
+    "kl": "Klingon"
+  },
+  "theme": {
+    "toggle": "Ganti tema",
+    "dark": "Gelap",
+    "light": "Terang",
+    "system": "Sistem"
+  },
+  "flipBoard": {
+    "label": "Balik papan"
+  },
+  "dashboard": {
+    "header": {
+      "title": "Knight School",
+      "greetingMorning": "Selamat pagi ☀️",
+      "greetingAfternoon": "Selamat siang 🌤️",
+      "greetingEvening": "Selamat malam 🌙",
+      "nav": "Utama",
+      "openings": "Pembukaan",
+      "puzzles": "Teka-teki",
+      "login": "Masuk",
+      "register": "Daftar",
+      "logout": "Keluar",
+      "viewSource": "Lihat sumber di GitHub"
+    },
+    "progress": {
+      "yourProgress": "Kemajuan Anda",
+      "trainingLabel": "Kemajuan latihan",
+      "trainingHeading": "Latihan",
+      "positionsTrained": "Posisi dilatih",
+      "accuracy": "Akurasi",
+      "dayStreak": "Rangkaian hari",
+      "dayStreakBest": "Rangkaian hari · terbaik {{best}}",
+      "mastered": "Dikuasai",
+      "reviewDue": "Tinjau ulang ({{count}})",
+      "weakSpots": "Bagian lemah",
+      "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} benar",
+      "weakSpotFallbackName": "Pembukaan",
+      "puzzleLabel": "Kemajuan teka-teki",
+      "puzzlesHeading": "Teka-teki",
+      "puzzlesSolved": "Teka-teki terselesaikan",
+      "practicePuzzles": "Latihan teka-teki",
+      "startSessionFailed": "Gagal memulai sesi. Periksa koneksi atau token Anda.",
+      "reviewSessionFailed": "Belum ada posisi untuk ditinjau."
+    },
+    "openings": {
+      "title": "Pembukaan",
+      "searchAriaLabel": "Cari pembukaan",
+      "searchPlaceholder": "Cari pembukaan atau ECO…",
+      "sortAZ": "A–Z",
+      "sortPopular": "Populer",
+      "sortButton": "Urutkan: {{mode}}",
+      "filterByColor": "Filter berdasarkan warna",
+      "all": "Semua",
+      "white": "Putih",
+      "black": "Hitam",
+      "breadcrumb": "Jejak navigasi",
+      "allOpenings": "Semua pembukaan",
+      "playAs": "Bermain sebagai",
+      "playAsWhite": "Bermain sebagai Putih",
+      "playAsBlack": "Bermain sebagai Hitam",
+      "pickToPreview": "Pilih pembukaan untuk melihat garis dan mulai latihan.",
+      "startLabel": "Mulai {{name}}",
+      "chooseOpening": "Pilih pembukaan",
+      "matches_one": "{{count}} hasil",
+      "matches_other": "{{count}} hasil",
+      "variationsInLibrary": "{{count}} variasi di perpustakaan penuh",
+      "openingsToTrain_one": "{{count}} pembukaan · pilih satu untuk dilatih",
+      "openingsToTrain_other": "{{count}} pembukaan · pilih satu untuk dilatih",
+      "variationCount_one": "{{count}} variasi",
+      "variationCount_other": "{{count}} variasi",
+      "boardPreviewStart": "Mulai",
+      "boardPreviewAfterPly": "Setelah ply {{ply}}"
+    }
+  },
+  "puzzles": {
+    "label": "Teka-teki",
+    "noPuzzlesDue": "Belum ada teka-teki yang harus dikerjakan sekarang — cek lagi nanti.",
+    "loadFailed": "Gagal memuat teka-teki. Periksa koneksi Anda.",
+    "correct": "✅ Benar!",
+    "incorrectFallback": "Belum tepat — coba lagi.",
+    "submitError": "Terjadi kesalahan saat mengirim langkah.",
+    "findBestMove": "Temukan langkah terbaik.",
+    "eyebrow": "Teka-teki",
+    "title": "Latihan Teka-teki",
+    "rating": "Peringkat ~{{rating}}",
+    "solved": "Selesai: {{count}}",
+    "streak": "Rangkaian: {{count}}",
+    "streakBest": " · terbaik {{best}}",
+    "skipPuzzle": "Lewati teka-teki ›",
+    "backToDashboard": "← Kembali ke dasbor"
+  },
+  "training": {
+    "label": "Latihan",
+    "whiteToMove": "Putih jalan",
+    "blackToMove": "Hitam jalan",
+    "showHint": "Tampilkan petunjuk",
+    "eyebrow": "Latihan",
+    "prev": "‹ Sebelumnya",
+    "next": "Berikutnya ›",
+    "movePlaceholder": "atau ketik langkah, mis. e2e4",
+    "play": "Mainkan",
+    "jumpToLatest": "Loncat ke posisi terbaru sebelum mengirim",
+    "backToOpenings": "← Kembali ke pembukaan"
+  },
+  "auth": {
+    "login": {
+      "label": "Masuk",
+      "title": "Masuk",
+      "subtitle": "Selamat datang kembali.",
+      "usernameLabel": "Nama pengguna",
+      "passwordLabel": "Kata sandi",
+      "submit": "Kirim",
+      "submitting": "Mengirim...",
+      "emailNotVerified": "Harap verifikasi email Anda sebelum masuk",
+      "resendVerification": "Kirim ulang email verifikasi",
+      "resendSending": "Mengirim...",
+      "resendSent": "Terkirim!",
+      "needAccount": "Perlu akun?",
+      "registerLink": "Daftar",
+      "errorGeneric": "Terjadi kesalahan yang tidak terduga.",
+      "errorLoginFailed": "Gagal masuk",
+      "errorResendFailed": "Gagal mengirim ulang email verifikasi"
+    },
+    "register": {
+      "label": "Daftar",
+      "title": "Daftar",
+      "subtitle": "Buat akun Anda.",
+      "emailLabel": "Email",
+      "usernameLabel": "Nama pengguna",
+      "passwordLabel": "Kata sandi",
+      "submit": "Daftar",
+      "submitting": "Mendaftar...",
+      "successMessage": "Pendaftaran berhasil! Periksa kotak masuk Anda di <strong>{{email}}</strong> untuk tautan verifikasi sebelum masuk.",
+      "returnToLogin": "Kembali ke login",
+      "haveAccount": "Sudah punya akun?",
+      "loginLink": "Masuk",
+      "errorGeneric": "Gagal mendaftar. Silakan coba lagi nanti."
+    },
+    "logout": {
+      "label": "Keluar"
+    },
+    "verifyEmail": {
+      "label": "Verifikasi email",
+      "loadingTitle": "Memverifikasi...",
+      "loadingSubtitle": "Memverifikasi email Anda…",
+      "successTitle": "Email Terverifikasi",
+      "successSubtitleWithEmail": "{{email}} telah diverifikasi! Anda sekarang dapat masuk.",
+      "successSubtitleNoEmail": "Email Anda telah diverifikasi! Anda sekarang dapat masuk.",
+      "goToLogin": "Ke Login",
+      "errorTitle": "Verifikasi Gagal",
+      "errorSubtitle": "Tautan verifikasi ini tidak valid atau kedaluwarsa.",
+      "returnToLogin": "Kembali ke Login"
+    }
+  },
+  "email": {
+    "verify": {
+      "label": "Verifikasi email",
+      "subject": "Verifikasi email Knight School Anda",
+      "heading": "Selamat datang di Knight School!",
+      "instructions": "Silakan verifikasi alamat email Anda dengan membuka tautan di bawah ini:",
+      "instructionsHtml": "Silakan verifikasi alamat email Anda dengan mengeklik tautan di bawah ini:",
+      "expires": "Tautan ini kedaluwarsa dalam 24 jam."
+    }
+  }
+}

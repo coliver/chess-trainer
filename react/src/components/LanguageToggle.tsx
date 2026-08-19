@@ -4,7 +4,7 @@ import i18nInstance from "../i18n/i18n";
 // One flag per configured language. Falls back to the language code itself
 // if a new locale file is added before its flag is picked.
 const FLAGS: Record<string, string> = {
-  en: "🇬🇧",
+  "en-GB": "🇬🇧",
   "en-US": "🇺🇸",
   "en-AU": "🇦🇺",
 
@@ -14,6 +14,7 @@ const FLAGS: Record<string, string> = {
   hi: "🇮🇳",
   it: "🇮🇹",
   ja: "🇯🇵",
+  kl: "🖖",
   ko: "🇰🇷",
   nl: "🇳🇱",
   pl: "🇵🇱",
@@ -40,7 +41,6 @@ const FLAGS: Record<string, string> = {
   vi: "🇻🇳",
 
   "en-x-pirate": "🏴‍☠️",
-  "en-x-klingon": "🖖",
   "en-x-groot": "🌱",
 };
 
