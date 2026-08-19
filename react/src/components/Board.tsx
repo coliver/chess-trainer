@@ -26,10 +26,10 @@ export default function Board({
   onMove,
   gameOver = false,
   interactive = false,
-  _animated = true,
-  _showCoordinates = true,
+  animated = true,
+  showCoordinates = true,
   markers = [],
-  _moveColor,
+  moveColor,
   getLegalMoves,
   onMoveStart,
 }: BoardProps) {
