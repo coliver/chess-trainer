@@ -13,7 +13,6 @@ type BoardProps = {
   animated?: boolean;
   showCoordinates?: boolean;
   markers?: BoardMarker[];
-  moveColor?: string;
   getLegalMoves?: (square: string) => BoardMove[];
   onMoveStart?: (square: string) => boolean;
 };
@@ -29,7 +28,6 @@ export default function Board({
   animated: _animated = true,
   showCoordinates: _showCoordinates = true,
   markers = [],
-  moveColor: _moveColor,
   getLegalMoves,
   onMoveStart,
 }: BoardProps) {
@@ -45,46 +43,61 @@ export default function Board({
     // If an instance already exists (fast remounts), destroy it first.
     boardRef.current?.destroy?.();
 
-    const board = new Chessboard(boardElement, {
-      position,
-      orientation,
-      responsive: true,
-      assetsUrl: "/cm-chessboard-assets/",
-      assetsCache: true,
-      style: {
-        cssClass: "default",
-        showCoordinates: _showCoordinates,
-        animationDuration: _animated ? 300 : 0,
-      } as any,
-    } as any);
+    const board = new Chessboard(
+      boardElement,
+      {
+        position,
+        orientation,
+        responsive: true,
+        assetsUrl: "/cm-chessboard-assets/",
+        assetsCache: true,
+        style: {
+          cssClass: "default",
+          showCoordinates: _showCoordinates,
+          animationDuration: _animated ? 300 : 0,
+        },
+      } as unknown,
+    );
 
     boardRef.current = board;
 
-    if (interactive) {
-      board.enableMoveInput((event: { type: string; squareFrom?: string; squareTo?: string }) => {
-        switch (event.type) {
+    const api = board as unknown as {
+      addLegalMovesMarkers?: (moves: BoardMove[]) => void;
+      addMarker?: (type: unknown, square: string) => void;
+      removeLegalMovesMarkers?: () => void;
+      getPiece?: (square: string) => string | null;
+      destroy?: () => void;
+      enableMoveInput?: (
+        handler: (event: { type: string; squareFrom?: string; squareTo?: string }) => boolean | void,
+        color?: unknown,
+      ) => void;
+    };
+
+    if (api.enableMoveInput) {
+      api.enableMoveInput((event) => {
+        const evt = event as { type: string; squareFrom?: string; squareTo?: string };
+        switch (evt.type) {
           case INPUT_EVENT_TYPE.moveStart: {
-            const from = event.squareFrom ?? "";
+            const from = evt.squareFrom ?? "";
             if (onMoveStart && !onMoveStart(from)) {
               return false;
             }
 
             if (getLegalMoves) {
               const moves = getLegalMoves(from);
-              // Use the chessboard extension method for legal move markers
-              (board as any).addLegalMovesMarkers?.(moves as any);
+              api.addLegalMovesMarkers?.(moves);
             }
             return true;
           }
 
           case INPUT_EVENT_TYPE.validateMoveInput: {
-            board.removeLegalMovesMarkers();
+            api.removeLegalMovesMarkers?.();
 
-            const from = event.squareFrom ?? "";
-            const to = event.squareTo ?? "";
+            const from = evt.squareFrom ?? "";
+            const to = evt.squareTo ?? "";
 
-            const movingPiece = board.getPiece(from) ?? "";
-            const targetPiece = board.getPiece(to);
+            const movingPiece = api.getPiece?.(from) ?? "";
+            const targetPiece = api.getPiece?.(to);
 
             const isCapture = !!targetPiece;
             const isCastle =
@@ -109,7 +122,7 @@ export default function Board({
           }
 
           case INPUT_EVENT_TYPE.moveCanceled:
-            board.removeLegalMovesMarkers();
+            api.removeLegalMovesMarkers?.();
             return true;
 
           default:
@@ -121,13 +134,12 @@ export default function Board({
     // Apply markers (hints, last move, etc.)
     if (markers && markers.length > 0) {
       markers.forEach((marker) => {
-        // cm-chessboard expects addMarker(type, square)
-        (board as any).addMarker?.(marker.type, marker.square);
+        api.addMarker?.(marker.type, marker.square);
       });
     }
 
     return () => {
-      board.destroy?.();
+      api.destroy?.();
       boardRef.current = null;
     };
   }, [orientation, position, onMove, playSound, interactive, getLegalMoves, onMoveStart, markers, _showCoordinates, _animated]);
@@ -140,7 +152,5 @@ export default function Board({
 
   // Use a per-instance host and give it a square aspect so thumbnail previews
   // get a usable height even when their container only sets width.
-  return (
-    <div ref={hostRef} style={{ width: "100%", aspectRatio: "1 / 1", minHeight: 120 }} />
-  );
+  return <div ref={hostRef} style={{ width: "100%", aspectRatio: "1 / 1", minHeight: 120 }} />;
 }
