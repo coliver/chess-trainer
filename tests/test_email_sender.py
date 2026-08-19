@@ -80,10 +80,10 @@ def test_send_verification_email_falls_back_to_english_for_unknown_language(monk
 
 def test_verify_email_strings_skips_untranslated_todo_placeholders():
     sender._load_translations.cache_clear()
-    strings = sender._verify_email_strings("en")  # en has no [TODO ..] placeholders
+    strings = sender._verify_email_strings("en-US")  # en-US has no [TODO ..] placeholders
     assert not any(v.startswith("[TODO") for v in strings.values())
 
 
 def test_supported_languages_includes_known_locales():
     languages = sender.supported_languages()
-    assert {"en", "de", "es", "fr"}.issubset(languages)
+    assert {"en-US", "de", "es", "fr"}.issubset(languages)
