@@ -58,8 +58,8 @@
       "puzzlesHeading": "bIQtIq",
       "puzzlesSolved": "bIQtIqmey taghta'",
       "practicePuzzles": "bIQtIqmey yIbej",
-      "reviewSessionFailed": "QaD laHbe'",
-      "startSessionFailed": "QapmeH ghoSlaHbe'"
+      "startSessionFailed": "QapmeH ghoSlaHbe'",
+      "reviewSessionFailed": "QaD laHbe'"
     },
     "openings": {
       "title": "poHmey",
@@ -79,16 +79,16 @@
       "playAsBlack": "qIj bIbej",
       "pickToPreview": "choH yIpoQ",
       "startLabel": "qaS",
-      "boardPreviewStart": "qaS pegh",
-      "boardPreviewAfterPly": "{{ply}} 'ar loDpu' vI",
       "chooseOpening": "poH yIchoS",
-      "variationsInLibrary": "nuvmey lo'be'",
       "matches_one": "{{count}} ngaS",
       "matches_other": "{{count}} ngaS",
+      "variationsInLibrary": "nuvmey lo'be'",
       "openingsToTrain_one": "{{count}} poH yIlo'",
       "openingsToTrain_other": "{{count}} poHmey yIlo'",
       "variationCount_one": "{{count}} nuv",
-      "variationCount_other": "{{count}} nuvmey"
+      "variationCount_other": "{{count}} nuvmey",
+      "boardPreviewStart": "qaS pegh",
+      "boardPreviewAfterPly": "{{ply}} 'ar loDpu' vI"
     }
   },
   "puzzles": {
@@ -187,6 +187,7 @@
   "settings": {
     "title": "Segh",
     "subtitle": "Knight SchoolDaq SoH Segh yISoQ'eH.",
+    "previewLabel": "leghpa'",
     "languageLabel": "qaD",
     "appearance": {
       "heading": "Segh legh",

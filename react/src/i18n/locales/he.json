@@ -187,6 +187,7 @@
   "settings": {
     "title": "הגדרות",
     "subtitle": "התאימו את אופן ההצגה והמשחק של Knight School.",
+    "previewLabel": "תצוגה מקדימה",
     "languageLabel": "שפה",
     "appearance": {
       "heading": "מראה",

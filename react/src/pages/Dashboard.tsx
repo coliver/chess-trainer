@@ -128,8 +128,12 @@ export const Dashboard = () => {
     view === "search"
       ? t("dashboard.openings.matches", { count: searchMatches.length })
       : view === "variations" && activeGroup
-        ? t("dashboard.openings.variationsInLibrary", { count: activeGroup.count })
-        : t("dashboard.openings.openingsToTrain", { count: colorFilteredGroups.length });
+        ? t("dashboard.openings.variationsInLibrary", {
+            count: activeGroup.count,
+          })
+        : t("dashboard.openings.openingsToTrain", {
+            count: colorFilteredGroups.length,
+          });
 
   const startSession = async (
     openingEco: string,
@@ -191,7 +195,10 @@ export const Dashboard = () => {
   // desktop side-by-side layout, where the preview is already visible.
   useEffect(() => {
     if (selected) {
-      previewRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      previewRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
     }
   }, [selected]);
 
@@ -213,23 +220,36 @@ export const Dashboard = () => {
   return (
     <main className="page">
       <div className="card">
-        <section className="progress-overview" aria-label={t("dashboard.progress.yourProgress")}>
-          <div className="progress-group" aria-label={t("dashboard.progress.trainingLabel")}>
-            <h2 className="progress-group-label">{t("dashboard.progress.trainingHeading")}</h2>
+        <section
+          className="progress-overview"
+          aria-label={t("dashboard.progress.yourProgress")}
+        >
+          <div
+            className="progress-group"
+            aria-label={t("dashboard.progress.trainingLabel")}
+          >
+            <h2 className="progress-group-label">
+              {t("dashboard.progress.trainingHeading")}
+            </h2>
             <div className="progress-group-row">
               <div className="progress-stat">
                 <span className="progress-stat-value">
                   {summary?.positionsSeen ?? 0}
                 </span>
-                <span className="progress-stat-label">{t("dashboard.progress.positionsTrained")}</span>
+                <span className="progress-stat-label">
+                  {t("dashboard.progress.positionsTrained")}
+                </span>
               </div>
               <div className="progress-stat">
                 <span className="progress-stat-value">
-                  {summary
+                  {summary?.overallAccuracy != null
                     ? `${Math.round(summary.overallAccuracy * 100)}%`
                     : "—"}
                 </span>
-                <span className="progress-stat-label">{t("dashboard.progress.accuracy")}</span>
+
+                <span className="progress-stat-label">
+                  {t("dashboard.progress.accuracy")}
+                </span>
               </div>
               <div className="progress-stat">
                 <span className="progress-stat-value">
@@ -238,13 +258,19 @@ export const Dashboard = () => {
                 </span>
                 <span className="progress-stat-label">
                   {summary?.longestStreak
-                    ? t("dashboard.progress.dayStreakBest", { best: summary.longestStreak })
+                    ? t("dashboard.progress.dayStreakBest", {
+                        best: summary.longestStreak,
+                      })
                     : t("dashboard.progress.dayStreak")}
                 </span>
               </div>
               <div className="progress-stat progress-stat--mastery">
-                <span className="progress-stat-value">{summary?.mastered ?? 0}</span>
-                <span className="progress-stat-label">{t("dashboard.progress.mastered")}</span>
+                <span className="progress-stat-value">
+                  {summary?.mastered ?? 0}
+                </span>
+                <span className="progress-stat-label">
+                  {t("dashboard.progress.mastered")}
+                </span>
                 {summary && summary.positionsSeen > 0 && (
                   <div className="mastery-bar" aria-hidden="true">
                     <div
@@ -252,7 +278,9 @@ export const Dashboard = () => {
                       style={{
                         width: `${Math.min(
                           100,
-                          Math.round((summary.mastered / summary.positionsSeen) * 100),
+                          Math.round(
+                            (summary.mastered / summary.positionsSeen) * 100,
+                          ),
                         )}%`,
                       }}
                     />
@@ -271,12 +299,18 @@ export const Dashboard = () => {
               </div>
               {weakSpots.length > 0 && (
                 <div className="progress-weak-spots">
-                  <span className="progress-stat-label">{t("dashboard.progress.weakSpots")}</span>
+                  <span className="progress-stat-label">
+                    {t("dashboard.progress.weakSpots")}
+                  </span>
                   <ul>
                     {weakSpots.map((w) => (
-                      <li key={`${w.openingName ?? "Opening"}-${w.fen ?? ""}-${w.correctMoveUci ?? ""}`}>
+                      <li
+                        key={`${w.openingName ?? "Opening"}-${w.fen ?? ""}-${w.correctMoveUci ?? ""}`}
+                      >
                         {t("dashboard.progress.weakSpotItem", {
-                          name: w.openingName ?? t("dashboard.progress.weakSpotFallbackName"),
+                          name:
+                            w.openingName ??
+                            t("dashboard.progress.weakSpotFallbackName"),
                           correct: w.correctCount,
                           attempts: w.attempts,
                         })}
@@ -288,14 +322,21 @@ export const Dashboard = () => {
             </div>
           </div>
 
-          <div className="progress-group progress-group--puzzles" aria-label={t("dashboard.progress.puzzleLabel")}>
-            <h2 className="progress-group-label">{t("dashboard.progress.puzzlesHeading")}</h2>
+          <div
+            className="progress-group progress-group--puzzles"
+            aria-label={t("dashboard.progress.puzzleLabel")}
+          >
+            <h2 className="progress-group-label">
+              {t("dashboard.progress.puzzlesHeading")}
+            </h2>
             <div className="progress-group-row">
               <div className="progress-stat">
                 <span className="progress-stat-value">
                   {puzzleSummary?.puzzlesSeen ?? 0}
                 </span>
-                <span className="progress-stat-label">{t("dashboard.progress.puzzlesSolved")}</span>
+                <span className="progress-stat-label">
+                  {t("dashboard.progress.puzzlesSolved")}
+                </span>
               </div>
               <div className="progress-stat">
                 <span className="progress-stat-value">
@@ -303,11 +344,17 @@ export const Dashboard = () => {
                     ? `${Math.round(puzzleSummary.overallAccuracy * 100)}%`
                     : "—"}
                 </span>
-                <span className="progress-stat-label">{t("dashboard.progress.accuracy")}</span>
+                <span className="progress-stat-label">
+                  {t("dashboard.progress.accuracy")}
+                </span>
               </div>
               <div className="progress-stat">
-                <span className="progress-stat-value">{puzzleSummary?.mastered ?? 0}</span>
-                <span className="progress-stat-label">{t("dashboard.progress.mastered")}</span>
+                <span className="progress-stat-value">
+                  {puzzleSummary?.mastered ?? 0}
+                </span>
+                <span className="progress-stat-label">
+                  {t("dashboard.progress.mastered")}
+                </span>
               </div>
               <div className="progress-stat">
                 <button
@@ -353,7 +400,9 @@ export const Dashboard = () => {
                   onClick={() => setSortAZ((s) => !s)}
                 >
                   {t("dashboard.openings.sortButton", {
-                    mode: sortAZ ? t("dashboard.openings.sortAZ") : t("dashboard.openings.sortPopular"),
+                    mode: sortAZ
+                      ? t("dashboard.openings.sortAZ")
+                      : t("dashboard.openings.sortPopular"),
                   })}
                 </button>
                 <div
@@ -414,7 +463,10 @@ export const Dashboard = () => {
 
               {view === "variations" && activeGroup && (
                 <>
-                  <nav className="ob-crumbs" aria-label={t("dashboard.openings.breadcrumb")}>
+                  <nav
+                    className="ob-crumbs"
+                    aria-label={t("dashboard.openings.breadcrumb")}
+                  >
                     <button type="button" onClick={goHome}>
                       {t("dashboard.openings.allOpenings")}
                     </button>

@@ -28,6 +28,19 @@
     "label": "Flip board"
   },
   "dashboard": {
+    "header": {
+      "title": "Knight School",
+      "greetingMorning": "Good morning ☀️",
+      "greetingAfternoon": "Good afternoon 🌤️",
+      "greetingEvening": "Good evening 🌙",
+      "nav": "Primary",
+      "openings": "Openings",
+      "puzzles": "Puzzles",
+      "login": "Login",
+      "register": "Register",
+      "logout": "Logout",
+      "viewSource": "View source on GitHub"
+    },
     "progress": {
       "yourProgress": "I am Groot",
       "trainingLabel": "I am Groot",
@@ -76,22 +89,10 @@
       "variationCount_other": "{{count}} I am Groot",
       "boardPreviewStart": "I am Groot",
       "boardPreviewAfterPly": "I am Groot {{ply}}"
-    },
-    "header": {
-      "title": "Knight School",
-      "greetingMorning": "Good morning ☀️",
-      "greetingAfternoon": "Good afternoon 🌤️",
-      "greetingEvening": "Good evening 🌙",
-      "nav": "Primary",
-      "openings": "Openings",
-      "puzzles": "Puzzles",
-      "login": "Login",
-      "register": "Register",
-      "logout": "Logout",
-      "viewSource": "View source on GitHub"
     }
   },
   "puzzles": {
+    "label": "Puzzles",
     "noPuzzlesDue": "I am Groot",
     "loadFailed": "Failed to load a puzzle. Check your connection.",
     "correct": "✅ I am Groot!",
@@ -105,10 +106,10 @@
     "streak": "I am Groot: {{count}}",
     "streakBest": " · I am Groot {{best}}",
     "skipPuzzle": "I am Groot ›",
-    "backToDashboard": "← I am Groot",
-    "label": "Puzzles"
+    "backToDashboard": "← I am Groot"
   },
   "training": {
+    "label": "Training",
     "whiteToMove": "I am Groot",
     "blackToMove": "I am Groot",
     "showHint": "I am Groot",
@@ -119,13 +120,13 @@
     "play": "I am Groot",
     "jumpToLatest": "I am Groot",
     "backToOpenings": "← I am Groot",
-    "label": "Training",
     "trainAgain": "I am Groot",
     "restarting": "I am Groot!",
     "chooseAnother": "I am Groot"
   },
   "auth": {
     "login": {
+      "label": "Login",
       "title": "I am Groot",
       "subtitle": "I am Groot.",
       "usernameLabel": "I am Groot",
@@ -140,10 +141,10 @@
       "registerLink": "I am Groot",
       "errorGeneric": "An unexpected error occurred.",
       "errorLoginFailed": "Failed to login",
-      "errorResendFailed": "Failed to resend verification email",
-      "label": "Login"
+      "errorResendFailed": "Failed to resend verification email"
     },
     "register": {
+      "label": "Register",
       "title": "Register",
       "subtitle": "I am Groot.",
       "emailLabel": "Email",
@@ -155,10 +156,13 @@
       "returnToLogin": "Return to login",
       "haveAccount": "Already have an account?",
       "loginLink": "Login",
-      "errorGeneric": "Failed to register. Please try again later.",
-      "label": "Register"
+      "errorGeneric": "Failed to register. Please try again later."
+    },
+    "logout": {
+      "label": "Logout"
     },
     "verifyEmail": {
+      "label": "Verify email",
       "loadingTitle": "Verifying...",
       "loadingSubtitle": "Verifying your email…",
       "successTitle": "Email Verified",
@@ -167,26 +171,23 @@
       "goToLogin": "Go to Login",
       "errorTitle": "Verification Failed",
       "errorSubtitle": "This verification link is invalid or expired.",
-      "returnToLogin": "Return to Login",
-      "label": "Verify email"
-    },
-    "logout": {
-      "label": "Logout"
+      "returnToLogin": "Return to Login"
     }
   },
   "email": {
     "verify": {
+      "label": "Verify email",
       "subject": "Verify your Knight School email",
       "heading": "I am Groot.",
       "instructions": "Please verify your email address by visiting the link below:",
       "instructionsHtml": "Please verify your email address by clicking the link below:",
-      "expires": "This link expires in 24 hours.",
-      "label": "Verify email"
+      "expires": "This link expires in 24 hours."
     }
   },
   "settings": {
     "title": "I am Groot",
     "subtitle": "I am Groot.",
+    "previewLabel": "I am Groot",
     "languageLabel": "I am Groot",
     "appearance": {
       "heading": "I am Groot",

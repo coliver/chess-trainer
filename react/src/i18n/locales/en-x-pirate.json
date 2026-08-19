@@ -28,6 +28,19 @@
     "label": "Flip board"
   },
   "dashboard": {
+    "header": {
+      "title": "Knight School",
+      "greetingMorning": "Good morning ☀️",
+      "greetingAfternoon": "Good afternoon 🌤️",
+      "greetingEvening": "Good evening 🌙",
+      "nav": "Primary",
+      "openings": "Openings",
+      "puzzles": "Puzzles",
+      "login": "Login",
+      "register": "Register",
+      "logout": "Logout",
+      "viewSource": "View source on GitHub"
+    },
     "progress": {
       "yourProgress": "Yer progress, matey",
       "trainingLabel": "Training progress",
@@ -76,22 +89,10 @@
       "variationCount_other": "{{count}} variations",
       "boardPreviewStart": "Set sail",
       "boardPreviewAfterPly": "After ply {{ply}}"
-    },
-    "header": {
-      "title": "Knight School",
-      "greetingMorning": "Good morning ☀️",
-      "greetingAfternoon": "Good afternoon 🌤️",
-      "greetingEvening": "Good evening 🌙",
-      "nav": "Primary",
-      "openings": "Openings",
-      "puzzles": "Puzzles",
-      "login": "Login",
-      "register": "Register",
-      "logout": "Logout",
-      "viewSource": "View source on GitHub"
     }
   },
   "puzzles": {
+    "label": "Puzzles",
     "noPuzzlesDue": "No puzzles due right now — check back later.",
     "loadFailed": "Failed to load a puzzle. Check your connection.",
     "correct": "✅ Correct, matey!",
@@ -105,10 +106,10 @@
     "streak": "Streak: {{count}}",
     "streakBest": " · best {{best}}",
     "skipPuzzle": "Skip puzzle ›",
-    "backToDashboard": "← Back to dashboard",
-    "label": "Puzzles"
+    "backToDashboard": "← Back to dashboard"
   },
   "training": {
+    "label": "Training",
     "whiteToMove": "White to move",
     "blackToMove": "Black to move",
     "showHint": "Show a hint, cap’n",
@@ -119,13 +120,13 @@
     "play": "Play",
     "jumpToLatest": "Jump to latest before submitting",
     "backToOpenings": "← Back to openings",
-    "label": "Training",
     "trainAgain": "Sail this opening again, cap’n",
     "restarting": "Weighin’ anchor…",
     "chooseAnother": "Pick another opening, matey"
   },
   "auth": {
     "login": {
+      "label": "Login",
       "title": "Login",
       "subtitle": "Welcome back, matey.",
       "usernameLabel": "Username",
@@ -140,10 +141,10 @@
       "registerLink": "Join the crew",
       "errorGeneric": "An unexpected error occurred.",
       "errorLoginFailed": "Failed to Login",
-      "errorResendFailed": "Failed to resend verification email",
-      "label": "Login"
+      "errorResendFailed": "Failed to resend verification email"
     },
     "register": {
+      "label": "Register",
       "title": "Register",
       "subtitle": "Create your account, arrr.",
       "emailLabel": "Email",
@@ -155,10 +156,13 @@
       "returnToLogin": "Return to login",
       "haveAccount": "Already have an account?",
       "loginLink": "Log in",
-      "errorGeneric": "Failed to register. Please try again later.",
-      "label": "Register"
+      "errorGeneric": "Failed to register. Please try again later."
+    },
+    "logout": {
+      "label": "Logout"
     },
     "verifyEmail": {
+      "label": "Verify email",
       "loadingTitle": "Verifying...",
       "loadingSubtitle": "Verifying yer email…",
       "successTitle": "Email Verified",
@@ -167,26 +171,23 @@
       "goToLogin": "Go to Login",
       "errorTitle": "Verification Failed",
       "errorSubtitle": "This verification link is invalid or expired.",
-      "returnToLogin": "Return to Login",
-      "label": "Verify email"
-    },
-    "logout": {
-      "label": "Logout"
+      "returnToLogin": "Return to Login"
     }
   },
   "email": {
     "verify": {
+      "label": "Verify email",
       "subject": "Verify your Knight School email",
       "heading": "Ahoy, and welcome to Knight School!",
       "instructions": "Please verify your email address by visiting the link below:",
       "instructionsHtml": "Please verify your email address by clicking the link below:",
-      "expires": "This link expires in 24 hours.",
-      "label": "Verify email"
+      "expires": "This link expires in 24 hours."
     }
   },
   "settings": {
     "title": "Rigging, ye sea dog",
     "subtitle": "Customize yer ship's appearance and sailin' style.",
+    "previewLabel": "A peek at yer board",
     "languageLabel": "Speak in a different tongue",
     "appearance": {
       "heading": "Paint yer hull",

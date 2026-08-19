@@ -187,6 +187,7 @@
   "settings": {
     "title": "Configurações",
     "subtitle": "Personalize como o Knight School se parece e joga.",
+    "previewLabel": "Pré-visualização",
     "languageLabel": "Idioma",
     "appearance": {
       "heading": "Aparência",

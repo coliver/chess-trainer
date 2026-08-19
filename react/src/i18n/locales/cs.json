@@ -187,6 +187,7 @@
   "settings": {
     "title": "Nastavení",
     "subtitle": "Přizpůsobte si, jak Knight School vypadá a jak se hraje.",
+    "previewLabel": "Náhled",
     "languageLabel": "Jazyk",
     "appearance": {
       "heading": "Vzhled",

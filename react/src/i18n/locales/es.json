@@ -28,6 +28,19 @@
     "label": "Girar tablero"
   },
   "dashboard": {
+    "header": {
+      "title": "Academia del Caballo",
+      "greetingMorning": "Buenos días ☀️",
+      "greetingAfternoon": "Buenas tardes 🌤️",
+      "greetingEvening": "Buenas noches 🌙",
+      "nav": "Principal",
+      "openings": "Aperturas",
+      "puzzles": "Problemas",
+      "login": "Iniciar sesión",
+      "register": "Registrarse",
+      "logout": "Cerrar sesión",
+      "viewSource": "Ver el código fuente en GitHub"
+    },
     "progress": {
       "yourProgress": "Tu progreso",
       "trainingLabel": "Progreso de entrenamiento",
@@ -76,22 +89,10 @@
       "variationCount_other": "{{count}} variantes",
       "boardPreviewStart": "Inicio",
       "boardPreviewAfterPly": "Después de la jugada {{ply}}"
-    },
-    "header": {
-      "title": "Academia del Caballo",
-      "greetingMorning": "Buenos días ☀️",
-      "greetingAfternoon": "Buenas tardes 🌤️",
-      "greetingEvening": "Buenas noches 🌙",
-      "nav": "Principal",
-      "openings": "Aperturas",
-      "puzzles": "Problemas",
-      "login": "Iniciar sesión",
-      "register": "Registrarse",
-      "logout": "Cerrar sesión",
-      "viewSource": "Ver el código fuente en GitHub"
     }
   },
   "puzzles": {
+    "label": "Problemas",
     "noPuzzlesDue": "No hay puzzles pendientes ahora mismo — vuelve más tarde.",
     "loadFailed": "No se pudo cargar el puzzle. Verifica tu conexión.",
     "correct": "✅ ¡Correcto!",
@@ -105,10 +106,10 @@
     "streak": "Racha: {{count}}",
     "streakBest": " · mejor {{best}}",
     "skipPuzzle": "Saltar puzzle ›",
-    "backToDashboard": "← Volver al panel",
-    "label": "Problemas"
+    "backToDashboard": "← Volver al panel"
   },
   "training": {
+    "label": "Training",
     "whiteToMove": "Mueven las blancas",
     "blackToMove": "Mueven las negras",
     "showHint": "Mostrar pista",
@@ -119,13 +120,13 @@
     "play": "Jugar",
     "jumpToLatest": "Ve a la última posición antes de enviar",
     "backToOpenings": "← Volver a las aperturas",
-    "label": "Training",
     "trainAgain": "Entrenar esta apertura de nuevo",
     "restarting": "Iniciando…",
     "chooseAnother": "Elegir otra apertura"
   },
   "auth": {
     "login": {
+      "label": "Login",
       "title": "Iniciar sesión",
       "subtitle": "Bienvenido de nuevo.",
       "usernameLabel": "Usuario",
@@ -140,10 +141,10 @@
       "registerLink": "Regístrate",
       "errorGeneric": "Ocurrió un error inesperado.",
       "errorLoginFailed": "Error al iniciar sesión",
-      "errorResendFailed": "Error al reenviar el correo de verificación",
-      "label": "Login"
+      "errorResendFailed": "Error al reenviar el correo de verificación"
     },
     "register": {
+      "label": "Register",
       "title": "Registrarse",
       "subtitle": "Crea tu cuenta.",
       "emailLabel": "Correo electrónico",
@@ -155,10 +156,13 @@
       "returnToLogin": "Volver a iniciar sesión",
       "haveAccount": "¿Ya tienes una cuenta?",
       "loginLink": "Inicia sesión",
-      "errorGeneric": "Error al registrarse. Inténtalo de nuevo más tarde.",
-      "label": "Register"
+      "errorGeneric": "Error al registrarse. Inténtalo de nuevo más tarde."
+    },
+    "logout": {
+      "label": "Logout"
     },
     "verifyEmail": {
+      "label": "Verificar correo electrónico",
       "loadingTitle": "Verificando...",
       "loadingSubtitle": "Verificando tu correo electrónico…",
       "successTitle": "Correo verificado",
@@ -167,26 +171,23 @@
       "goToLogin": "Ir a iniciar sesión",
       "errorTitle": "Verificación fallida",
       "errorSubtitle": "Este enlace de verificación no es válido o ha expirado.",
-      "returnToLogin": "Volver a iniciar sesión",
-      "label": "Verificar correo electrónico"
-    },
-    "logout": {
-      "label": "Logout"
+      "returnToLogin": "Volver a iniciar sesión"
     }
   },
   "email": {
     "verify": {
+      "label": "Verify email",
       "subject": "Verifica tu correo de Knight School",
       "heading": "¡Bienvenido a Knight School!",
       "instructions": "Verifica tu dirección de correo electrónico visitando el siguiente enlace:",
       "instructionsHtml": "Verifica tu dirección de correo electrónico haciendo clic en el siguiente enlace:",
-      "expires": "Este enlace caduca en 24 horas.",
-      "label": "Verify email"
+      "expires": "Este enlace caduca en 24 horas."
     }
   },
   "settings": {
     "title": "Configuración",
     "subtitle": "Personaliza cómo se ve y juega Knight School.",
+    "previewLabel": "Vista previa",
     "languageLabel": "Idioma",
     "appearance": {
       "heading": "Apariencia",

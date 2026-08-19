@@ -187,6 +187,7 @@
   "settings": {
     "title": "Beállítások",
     "subtitle": "Személyre szabja a Knight School megjelenítésének és játéknak módját.",
+    "previewLabel": "Előnézet",
     "languageLabel": "Nyelv",
     "appearance": {
       "heading": "Megjelenés",

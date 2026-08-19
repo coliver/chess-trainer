@@ -187,6 +187,7 @@
   "settings": {
     "title": "설정",
     "subtitle": "Knight School이 어떻게 보이고 작동하는지 맞춤설정하세요.",
+    "previewLabel": "미리보기",
     "languageLabel": "언어",
     "appearance": {
       "heading": "외관",

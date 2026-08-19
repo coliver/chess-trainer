@@ -187,6 +187,7 @@
   "settings": {
     "title": "Ρυθμίσεις",
     "subtitle": "Προσαρμόστε πώς φαίνεται και παίζεται το Knight School.",
+    "previewLabel": "Προεπισκόπηση",
     "languageLabel": "Γλώσσα",
     "appearance": {
       "heading": "Εμφάνιση",

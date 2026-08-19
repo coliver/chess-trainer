@@ -28,6 +28,19 @@
     "label": "Capovolgi scacchiera"
   },
   "dashboard": {
+    "header": {
+      "title": "Knight School",
+      "greetingMorning": "Good morning ☀️",
+      "greetingAfternoon": "Good afternoon 🌤️",
+      "greetingEvening": "Good evening 🌙",
+      "nav": "Primary",
+      "openings": "Openings",
+      "puzzles": "Puzzles",
+      "login": "Login",
+      "register": "Register",
+      "logout": "Logout",
+      "viewSource": "View source on GitHub"
+    },
     "progress": {
       "yourProgress": "Il tuo progresso",
       "trainingLabel": "Progresso dell’allenamento",
@@ -76,22 +89,10 @@
       "variationCount_other": "{{count}} variazioni",
       "boardPreviewStart": "Inizia",
       "boardPreviewAfterPly": "Dopo il semimovimento {{ply}}"
-    },
-    "header": {
-      "title": "Knight School",
-      "greetingMorning": "Good morning ☀️",
-      "greetingAfternoon": "Good afternoon 🌤️",
-      "greetingEvening": "Good evening 🌙",
-      "nav": "Primary",
-      "openings": "Openings",
-      "puzzles": "Puzzles",
-      "login": "Login",
-      "register": "Register",
-      "logout": "Logout",
-      "viewSource": "View source on GitHub"
     }
   },
   "puzzles": {
+    "label": "Puzzles",
     "noPuzzlesDue": "Nessun puzzle da fare in questo momento — torna più tardi.",
     "loadFailed": "Caricamento puzzle non riuscito. Controlla la connessione.",
     "correct": "✅ Giusto!",
@@ -105,10 +106,10 @@
     "streak": "Serie: {{count}}",
     "streakBest": " · migliore {{best}}",
     "skipPuzzle": "Salta puzzle ›",
-    "backToDashboard": "← Torna alla dashboard",
-    "label": "Puzzles"
+    "backToDashboard": "← Torna alla dashboard"
   },
   "training": {
+    "label": "Training",
     "whiteToMove": "Tocca ai Bianchi",
     "blackToMove": "Tocca ai Neri",
     "showHint": "Mostra un suggerimento",
@@ -119,13 +120,13 @@
     "play": "Gioca",
     "jumpToLatest": "Vai all’ultimo momento prima di inviare",
     "backToOpenings": "← Torna alle aperture",
-    "label": "Training",
     "trainAgain": "Allena di nuovo questa apertura",
     "restarting": "Avvio…",
     "chooseAnother": "Scegli un’altra apertura"
   },
   "auth": {
     "login": {
+      "label": "Login",
       "title": "Accedi",
       "subtitle": "Bentornato/a.",
       "usernameLabel": "Nome utente",
@@ -140,10 +141,10 @@
       "registerLink": "Registrati",
       "errorGeneric": "Si è verificato un errore imprevisto.",
       "errorLoginFailed": "Accesso non riuscito",
-      "errorResendFailed": "Impossibile rinviare l’email di verifica",
-      "label": "Login"
+      "errorResendFailed": "Impossibile rinviare l’email di verifica"
     },
     "register": {
+      "label": "Register",
       "title": "Registrati",
       "subtitle": "Crea il tuo account.",
       "emailLabel": "Email",
@@ -155,10 +156,13 @@
       "returnToLogin": "Torna all’accesso",
       "haveAccount": "Hai già un account?",
       "loginLink": "Accedi",
-      "errorGeneric": "Registrazione non riuscita. Riprova più tardi.",
-      "label": "Register"
+      "errorGeneric": "Registrazione non riuscita. Riprova più tardi."
+    },
+    "logout": {
+      "label": "Logout"
     },
     "verifyEmail": {
+      "label": "Verify email",
       "loadingTitle": "Verifica in corso…",
       "loadingSubtitle": "Verifica della tua email…",
       "successTitle": "Email verificata",
@@ -167,26 +171,23 @@
       "goToLogin": "Vai all’accesso",
       "errorTitle": "Verifica fallita",
       "errorSubtitle": "Questo link di verifica non è valido o è scaduto.",
-      "returnToLogin": "Torna all’accesso",
-      "label": "Verify email"
-    },
-    "logout": {
-      "label": "Logout"
+      "returnToLogin": "Torna all’accesso"
     }
   },
   "email": {
     "verify": {
+      "label": "Verify email",
       "subject": "Verifica la tua email di Knight School",
       "heading": "Benvenuto in Knight School!",
       "instructions": "Verifica il tuo indirizzo email visitando il link qui sotto:",
       "instructionsHtml": "Verifica il tuo indirizzo email cliccando sul link qui sotto:",
-      "expires": "Questo link scade tra 24 ore.",
-      "label": "Verify email"
+      "expires": "Questo link scade tra 24 ore."
     }
   },
   "settings": {
     "title": "Impostazioni",
     "subtitle": "Personalizza come Knight School viene visualizzato e giocato.",
+    "previewLabel": "Anteprima",
     "languageLabel": "Lingua",
     "appearance": {
       "heading": "Aspetto",

@@ -187,6 +187,7 @@
   "settings": {
     "title": "Asetukset",
     "subtitle": "Mukauta Knight Schoolin ulkoasua ja peliä.",
+    "previewLabel": "Esikatselu",
     "languageLabel": "Kieli",
     "appearance": {
       "heading": "Ulkoasu",

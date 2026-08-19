@@ -187,6 +187,7 @@
   "settings": {
     "title": "Cài đặt",
     "subtitle": "Cá nhân hóa cách Knight School trông và hoạt động.",
+    "previewLabel": "Xem trước",
     "languageLabel": "Ngôn ngữ",
     "appearance": {
       "heading": "Giao diện",

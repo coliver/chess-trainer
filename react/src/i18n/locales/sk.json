@@ -187,6 +187,7 @@
   "settings": {
     "title": "Nastavenia",
     "subtitle": "Prispôsobte si, ako Knight School vyzerá a funguje.",
+    "previewLabel": "Náhľad",
     "languageLabel": "Jazyk",
     "appearance": {
       "heading": "Vzhľad",

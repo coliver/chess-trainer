@@ -187,6 +187,7 @@
   "settings": {
     "title": "Setări",
     "subtitle": "Personalizează modul în care Knight School arată și funcționează.",
+    "previewLabel": "Previzualizare",
     "languageLabel": "Limbă",
     "appearance": {
       "heading": "Aspect",

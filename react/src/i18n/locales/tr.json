@@ -28,6 +28,19 @@
     "label": "Tahtayı çevir"
   },
   "dashboard": {
+    "header": {
+      "title": "Knight School",
+      "greetingMorning": "Good morning ☀️",
+      "greetingAfternoon": "Good afternoon 🌤️",
+      "greetingEvening": "Good evening 🌙",
+      "nav": "Primary",
+      "openings": "Openings",
+      "puzzles": "Puzzles",
+      "login": "Login",
+      "register": "Register",
+      "logout": "Logout",
+      "viewSource": "View source on GitHub"
+    },
     "progress": {
       "yourProgress": "İlerleyişiniz",
       "trainingLabel": "Antrenman ilerleyişi",
@@ -76,22 +89,10 @@
       "variationCount_other": "{{count}} varyasyon",
       "boardPreviewStart": "Başla",
       "boardPreviewAfterPly": "{{ply}} hamleden sonra"
-    },
-    "header": {
-      "title": "Knight School",
-      "greetingMorning": "Good morning ☀️",
-      "greetingAfternoon": "Good afternoon 🌤️",
-      "greetingEvening": "Good evening 🌙",
-      "nav": "Primary",
-      "openings": "Openings",
-      "puzzles": "Puzzles",
-      "login": "Login",
-      "register": "Register",
-      "logout": "Logout",
-      "viewSource": "View source on GitHub"
     }
   },
   "puzzles": {
+    "label": "Puzzles",
     "noPuzzlesDue": "Şu an çözülmesi gereken bulmaca yok — sonra tekrar kontrol edin.",
     "loadFailed": "Bir bulmaca yüklenemedi. Bağlantınızı kontrol edin.",
     "correct": "✅ Doğru!",
@@ -105,10 +106,10 @@
     "streak": "Seri: {{count}}",
     "streakBest": " · en iyi {{best}}",
     "skipPuzzle": "Bulmacayı atla ›",
-    "backToDashboard": "← Gösterge paneline dön",
-    "label": "Puzzles"
+    "backToDashboard": "← Gösterge paneline dön"
   },
   "training": {
+    "label": "Training",
     "whiteToMove": "Sıra beyazda",
     "blackToMove": "Sıra siyahta",
     "showHint": "İpucu göster",
@@ -119,13 +120,13 @@
     "play": "Oyna",
     "jumpToLatest": "Gönderilmeden önce en son hamleye git",
     "backToOpenings": "← Açılışlara dön",
-    "label": "Training",
     "trainAgain": "Bu açılışı tekrar çalış",
     "restarting": "Başlatılıyor…",
     "chooseAnother": "Başka bir açılış seç"
   },
   "auth": {
     "login": {
+      "label": "Login",
       "title": "Giriş yap",
       "subtitle": "Tekrar hoş geldiniz.",
       "usernameLabel": "Kullanıcı adı",
@@ -140,10 +141,10 @@
       "registerLink": "Kayıt ol",
       "errorGeneric": "Beklenmeyen bir hata oluştu.",
       "errorLoginFailed": "Giriş başarısız",
-      "errorResendFailed": "Doğrulama e-postası yeniden gönderilemedi",
-      "label": "Login"
+      "errorResendFailed": "Doğrulama e-postası yeniden gönderilemedi"
     },
     "register": {
+      "label": "Register",
       "title": "Kayıt ol",
       "subtitle": "Hesabınızı oluşturun.",
       "emailLabel": "E-posta",
@@ -155,10 +156,13 @@
       "returnToLogin": "Girişe dön",
       "haveAccount": "Zaten hesabınız var mı?",
       "loginLink": "Giriş",
-      "errorGeneric": "Kayıt yapılamadı. Lütfen daha sonra tekrar deneyin.",
-      "label": "Register"
+      "errorGeneric": "Kayıt yapılamadı. Lütfen daha sonra tekrar deneyin."
+    },
+    "logout": {
+      "label": "Logout"
     },
     "verifyEmail": {
+      "label": "Verify email",
       "loadingTitle": "Doğrulanıyor...",
       "loadingSubtitle": "E-postanız doğrulanıyor…",
       "successTitle": "E-posta Doğrulandı",
@@ -167,26 +171,23 @@
       "goToLogin": "Girişe git",
       "errorTitle": "Doğrulama başarısız",
       "errorSubtitle": "Bu doğrulama bağlantısı geçersiz veya süresi dolmuş.",
-      "returnToLogin": "Girişe dön",
-      "label": "Verify email"
-    },
-    "logout": {
-      "label": "Logout"
+      "returnToLogin": "Girişe dön"
     }
   },
   "email": {
     "verify": {
+      "label": "Verify email",
       "subject": "Knight School e-postanızı doğrulayın",
       "heading": "Knight School'a hoş geldiniz!",
       "instructions": "Lütfen aşağıdaki bağlantıyı ziyaret ederek e-posta adresinizi doğrulayın:",
       "instructionsHtml": "Lütfen aşağıdaki bağlantıya tıklayarak e-posta adresinizi doğrulayın:",
-      "expires": "Bu bağlantının süresi 24 saat içinde dolacaktır.",
-      "label": "Verify email"
+      "expires": "Bu bağlantının süresi 24 saat içinde dolacaktır."
     }
   },
   "settings": {
     "title": "Ayarlar",
     "subtitle": "Knight School'un nasıl göründüğünü ve çalıştığını kişiselleştirin.",
+    "previewLabel": "Önizleme",
     "languageLabel": "Dil",
     "appearance": {
       "heading": "Görünüm",

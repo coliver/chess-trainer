@@ -187,6 +187,7 @@
   "settings": {
     "title": "Innstillinger",
     "subtitle": "Tilpass hvordan Knight School ser ut og spilles.",
+    "previewLabel": "Forhåndsvisning",
     "languageLabel": "Språk",
     "appearance": {
       "heading": "Utseende",

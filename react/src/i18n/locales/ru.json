@@ -28,6 +28,19 @@
     "label": "Повернуть доску"
   },
   "dashboard": {
+    "header": {
+      "title": "Knight School",
+      "greetingMorning": "Good morning ☀️",
+      "greetingAfternoon": "Good afternoon 🌤️",
+      "greetingEvening": "Good evening 🌙",
+      "nav": "Primary",
+      "openings": "Openings",
+      "puzzles": "Puzzles",
+      "login": "Login",
+      "register": "Register",
+      "logout": "Logout",
+      "viewSource": "View source on GitHub"
+    },
     "progress": {
       "yourProgress": "Ваш прогресс",
       "trainingLabel": "Прогресс тренировки",
@@ -76,22 +89,10 @@
       "variationCount_other": "{{count}} вариаций",
       "boardPreviewStart": "Старт",
       "boardPreviewAfterPly": "После хода {{ply}}"
-    },
-    "header": {
-      "title": "Knight School",
-      "greetingMorning": "Good morning ☀️",
-      "greetingAfternoon": "Good afternoon 🌤️",
-      "greetingEvening": "Good evening 🌙",
-      "nav": "Primary",
-      "openings": "Openings",
-      "puzzles": "Puzzles",
-      "login": "Login",
-      "register": "Register",
-      "logout": "Logout",
-      "viewSource": "View source on GitHub"
     }
   },
   "puzzles": {
+    "label": "Puzzles",
     "noPuzzlesDue": "Сейчас нет задач на повторение — зайдите позже.",
     "loadFailed": "Не удалось загрузить задачу. Проверьте подключение.",
     "correct": "✅ Верно!",
@@ -105,10 +106,10 @@
     "streak": "Серия: {{count}}",
     "streakBest": " · лучшее {{best}}",
     "skipPuzzle": "Пропустить задачу ›",
-    "backToDashboard": "← Назад на панель",
-    "label": "Puzzles"
+    "backToDashboard": "← Назад на панель"
   },
   "training": {
+    "label": "Training",
     "whiteToMove": "Ход белых",
     "blackToMove": "Ход чёрных",
     "showHint": "Показать подсказку",
@@ -119,13 +120,13 @@
     "play": "Играть",
     "jumpToLatest": "Перейти к последнему перед отправкой",
     "backToOpenings": "← Назад к дебютам",
-    "label": "Training",
     "trainAgain": "Тренировать этот дебют снова",
     "restarting": "Запуск…",
     "chooseAnother": "Выбрать другой дебют"
   },
   "auth": {
     "login": {
+      "label": "Login",
       "title": "Вход",
       "subtitle": "С возвращением.",
       "usernameLabel": "Имя пользователя",
@@ -140,10 +141,10 @@
       "registerLink": "Регистрация",
       "errorGeneric": "Произошла неожиданная ошибка.",
       "errorLoginFailed": "Не удалось выполнить вход",
-      "errorResendFailed": "Не удалось повторно отправить письмо для подтверждения",
-      "label": "Login"
+      "errorResendFailed": "Не удалось повторно отправить письмо для подтверждения"
     },
     "register": {
+      "label": "Register",
       "title": "Регистрация",
       "subtitle": "Создайте свой аккаунт.",
       "emailLabel": "Email",
@@ -155,10 +156,13 @@
       "returnToLogin": "Вернуться ко входу",
       "haveAccount": "Уже есть аккаунт?",
       "loginLink": "Войти",
-      "errorGeneric": "Не удалось зарегистрироваться. Попробуйте ещё раз позже.",
-      "label": "Register"
+      "errorGeneric": "Не удалось зарегистрироваться. Попробуйте ещё раз позже."
+    },
+    "logout": {
+      "label": "Logout"
     },
     "verifyEmail": {
+      "label": "Verify email",
       "loadingTitle": "Проверка…",
       "loadingSubtitle": "Проверяем ваш email…",
       "successTitle": "Email подтверждён",
@@ -167,26 +171,23 @@
       "goToLogin": "Перейти ко входу",
       "errorTitle": "Не удалось подтвердить",
       "errorSubtitle": "Эта ссылка для подтверждения неверна или истекла.",
-      "returnToLogin": "Вернуться ко входу",
-      "label": "Verify email"
-    },
-    "logout": {
-      "label": "Logout"
+      "returnToLogin": "Вернуться ко входу"
     }
   },
   "email": {
     "verify": {
+      "label": "Verify email",
       "subject": "Подтвердите свою почту Knight School",
       "heading": "Добро пожаловать в Knight School!",
       "instructions": "Пожалуйста, подтвердите свой адрес электронной почты, перейдя по ссылке ниже:",
       "instructionsHtml": "Пожалуйста, подтвердите свой адрес электронной почты, нажав на ссылку ниже:",
-      "expires": "Срок действия этой ссылки истекает через 24 часа.",
-      "label": "Verify email"
+      "expires": "Срок действия этой ссылки истекает через 24 часа."
     }
   },
   "settings": {
     "title": "Настройки",
     "subtitle": "Настройте внешний вид и поведение Knight School на свой вкус.",
+    "previewLabel": "Предпросмотр",
     "languageLabel": "Язык",
     "appearance": {
       "heading": "Внешний вид",

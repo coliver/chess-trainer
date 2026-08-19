@@ -187,6 +187,7 @@
   "settings": {
     "title": "الإعدادات",
     "subtitle": "خصص كيفية ظهور ولعب Knight School.",
+    "previewLabel": "معاينة",
     "languageLabel": "اللغة",
     "appearance": {
       "heading": "المظهر",

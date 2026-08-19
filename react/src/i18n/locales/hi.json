@@ -187,6 +187,7 @@
   "settings": {
     "title": "सेटिंग्स",
     "subtitle": "Knight School को अपनी पसंद के अनुसार बनाएँ।",
+    "previewLabel": "पूर्वावलोकन",
     "languageLabel": "भाषा",
     "appearance": {
       "heading": "दिखावट",

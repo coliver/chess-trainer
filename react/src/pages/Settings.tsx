@@ -1,6 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { usePreferences } from "../context/PreferencesContext";
 import { LanguageToggle } from "../components/LanguageToggle";
+import Board from "../components/Board";
+import { START_FEN } from "@knight-school/chess-core";
 import type {
   BoardOrientationMode,
   BoardTheme,
@@ -29,6 +31,16 @@ export default function Settings() {
       <div className="card settings-card">
         <h1 className="title">{t("settings.title")}</h1>
         <p className="subtitle">{t("settings.subtitle")}</p>
+
+        <section className="settings-section settings-section--preview">
+          <span className="settings-row-label">{t("settings.previewLabel")}</span>
+          <div className="settings-preview-board">
+            <Board
+              position={START_FEN}
+              orientation={preferences.board_orientation_mode === "black" ? "black" : "white"}
+            />
+          </div>
+        </section>
 
         <section className="settings-section">
           <div className="settings-row">

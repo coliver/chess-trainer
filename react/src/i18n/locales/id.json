@@ -187,6 +187,7 @@
   "settings": {
     "title": "Pengaturan",
     "subtitle": "Sesuaikan cara Knight School ditampilkan dan dimainkan.",
+    "previewLabel": "Pratinjau",
     "languageLabel": "Bahasa",
     "appearance": {
       "heading": "Tampilan",

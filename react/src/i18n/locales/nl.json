@@ -28,6 +28,19 @@
     "label": "Bord omdraaien"
   },
   "dashboard": {
+    "header": {
+      "title": "Knight School",
+      "greetingMorning": "Good morning ☀️",
+      "greetingAfternoon": "Good afternoon 🌤️",
+      "greetingEvening": "Good evening 🌙",
+      "nav": "Primary",
+      "openings": "Openings",
+      "puzzles": "Puzzles",
+      "login": "Login",
+      "register": "Register",
+      "logout": "Logout",
+      "viewSource": "View source on GitHub"
+    },
     "progress": {
       "yourProgress": "Jouw voortgang",
       "trainingLabel": "Trainingsvoortgang",
@@ -76,22 +89,10 @@
       "variationCount_other": "{{count}} variaties",
       "boardPreviewStart": "Start",
       "boardPreviewAfterPly": "Na zet {{ply}}"
-    },
-    "header": {
-      "title": "Knight School",
-      "greetingMorning": "Good morning ☀️",
-      "greetingAfternoon": "Good afternoon 🌤️",
-      "greetingEvening": "Good evening 🌙",
-      "nav": "Primary",
-      "openings": "Openings",
-      "puzzles": "Puzzles",
-      "login": "Login",
-      "register": "Register",
-      "logout": "Logout",
-      "viewSource": "View source on GitHub"
     }
   },
   "puzzles": {
+    "label": "Puzzles",
     "noPuzzlesDue": "Nu geen puzzels gepland — kom later terug.",
     "loadFailed": "Het laden van een puzzel is mislukt. Controleer je verbinding.",
     "correct": "✅ Correct!",
@@ -105,10 +106,10 @@
     "streak": "Reeks: {{count}}",
     "streakBest": " · beste {{best}}",
     "skipPuzzle": "Puzzel overslaan ›",
-    "backToDashboard": "← Terug naar dashboard",
-    "label": "Puzzles"
+    "backToDashboard": "← Terug naar dashboard"
   },
   "training": {
+    "label": "Training",
     "whiteToMove": "Wit aan zet",
     "blackToMove": "Zwart aan zet",
     "showHint": "Toon een hint",
@@ -119,13 +120,13 @@
     "play": "Spelen",
     "jumpToLatest": "Ga naar de nieuwste vóór je verzendt",
     "backToOpenings": "← Terug naar openingen",
-    "label": "Training",
     "trainAgain": "Train deze opening opnieuw",
     "restarting": "Bezig met starten…",
     "chooseAnother": "Kies een andere opening"
   },
   "auth": {
     "login": {
+      "label": "Login",
       "title": "Inloggen",
       "subtitle": "Welkom terug.",
       "usernameLabel": "Gebruikersnaam",
@@ -140,10 +141,10 @@
       "registerLink": "Registreren",
       "errorGeneric": "Er is een onverwachte fout opgetreden.",
       "errorLoginFailed": "Inloggen mislukt",
-      "errorResendFailed": "Het opnieuw verzenden van de verificatiemail is mislukt",
-      "label": "Login"
+      "errorResendFailed": "Het opnieuw verzenden van de verificatiemail is mislukt"
     },
     "register": {
+      "label": "Register",
       "title": "Registreren",
       "subtitle": "Maak je account aan.",
       "emailLabel": "E-mail",
@@ -155,10 +156,13 @@
       "returnToLogin": "Terug naar inloggen",
       "haveAccount": "Heb je al een account?",
       "loginLink": "Inloggen",
-      "errorGeneric": "Registreren is mislukt. Probeer het later opnieuw.",
-      "label": "Register"
+      "errorGeneric": "Registreren is mislukt. Probeer het later opnieuw."
+    },
+    "logout": {
+      "label": "Logout"
     },
     "verifyEmail": {
+      "label": "Verify email",
       "loadingTitle": "Bezig met verifiëren...",
       "loadingSubtitle": "Je e-mail verifiëren…",
       "successTitle": "E-mail geverifieerd",
@@ -167,26 +171,23 @@
       "goToLogin": "Ga naar Inloggen",
       "errorTitle": "Verificatie mislukt",
       "errorSubtitle": "Deze verificatielink is ongeldig of verlopen.",
-      "returnToLogin": "Terug naar Inloggen",
-      "label": "Verify email"
-    },
-    "logout": {
-      "label": "Logout"
+      "returnToLogin": "Terug naar Inloggen"
     }
   },
   "email": {
     "verify": {
+      "label": "Verify email",
       "subject": "Bevestig je Knight School-e-mail",
       "heading": "Welkom bij Knight School!",
       "instructions": "Bevestig je e-mailadres door de onderstaande link te bezoeken:",
       "instructionsHtml": "Bevestig je e-mailadres door op de onderstaande link te klikken:",
-      "expires": "Deze link verloopt over 24 uur.",
-      "label": "Verify email"
+      "expires": "Deze link verloopt over 24 uur."
     }
   },
   "settings": {
     "title": "Instellingen",
     "subtitle": "Pas aan hoe Knight School eruit ziet en speelt.",
+    "previewLabel": "Voorbeeld",
     "languageLabel": "Taal",
     "appearance": {
       "heading": "Uiterlijk",

@@ -187,6 +187,7 @@
   "settings": {
     "title": "Indstillinger",
     "subtitle": "Tilpas hvordan Ridderskolen ser ud og spilles.",
+    "previewLabel": "Forhåndsvisning",
     "languageLabel": "Sprog",
     "appearance": {
       "heading": "Udseende",

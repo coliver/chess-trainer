@@ -187,6 +187,7 @@
   "settings": {
     "title": "Inställningar",
     "subtitle": "Anpassa hur Knight School ser ut och fungerar.",
+    "previewLabel": "Förhandsgranskning",
     "languageLabel": "Språk",
     "appearance": {
       "heading": "Utseende",

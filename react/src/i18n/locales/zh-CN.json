@@ -187,6 +187,7 @@
   "settings": {
     "title": "设置",
     "subtitle": "自定义 Knight School 的外观和行为。",
+    "previewLabel": "预览",
     "languageLabel": "语言",
     "appearance": {
       "heading": "外观",

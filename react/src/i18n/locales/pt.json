@@ -28,6 +28,19 @@
     "label": "Virar tabuleiro"
   },
   "dashboard": {
+    "header": {
+      "title": "Knight School",
+      "greetingMorning": "Good morning ☀️",
+      "greetingAfternoon": "Good afternoon 🌤️",
+      "greetingEvening": "Good evening 🌙",
+      "nav": "Primary",
+      "openings": "Openings",
+      "puzzles": "Puzzles",
+      "login": "Login",
+      "register": "Register",
+      "logout": "Logout",
+      "viewSource": "View source on GitHub"
+    },
     "progress": {
       "yourProgress": "Seu progresso",
       "trainingLabel": "Progresso do treino",
@@ -76,22 +89,10 @@
       "variationCount_other": "{{count}} variações",
       "boardPreviewStart": "Iniciar",
       "boardPreviewAfterPly": "Após o lance {{ply}}"
-    },
-    "header": {
-      "title": "Knight School",
-      "greetingMorning": "Good morning ☀️",
-      "greetingAfternoon": "Good afternoon 🌤️",
-      "greetingEvening": "Good evening 🌙",
-      "nav": "Primary",
-      "openings": "Openings",
-      "puzzles": "Puzzles",
-      "login": "Login",
-      "register": "Register",
-      "logout": "Logout",
-      "viewSource": "View source on GitHub"
     }
   },
   "puzzles": {
+    "label": "Puzzles",
     "noPuzzlesDue": "Nenhum quebra-cabeça pendente agora — volte mais tarde.",
     "loadFailed": "Falha ao carregar um quebra-cabeça. Verifique sua conexão.",
     "correct": "✅ Correto!",
@@ -105,10 +106,10 @@
     "streak": "Sequência: {{count}}",
     "streakBest": " · melhor {{best}}",
     "skipPuzzle": "Pular quebra-cabeça ›",
-    "backToDashboard": "← Voltar ao painel",
-    "label": "Puzzles"
+    "backToDashboard": "← Voltar ao painel"
   },
   "training": {
+    "label": "Training",
     "whiteToMove": "Brancas para jogar",
     "blackToMove": "Pretas para jogar",
     "showHint": "Mostrar uma dica",
@@ -119,13 +120,13 @@
     "play": "Jogar",
     "jumpToLatest": "Vá para o mais recente antes de enviar",
     "backToOpenings": "← Voltar às aberturas",
-    "label": "Training",
     "trainAgain": "Treinar esta abertura novamente",
     "restarting": "A iniciar…",
     "chooseAnother": "Escolher outra abertura"
   },
   "auth": {
     "login": {
+      "label": "Login",
       "title": "Entrar",
       "subtitle": "Bem-vindo de volta.",
       "usernameLabel": "Usuário",
@@ -140,10 +141,10 @@
       "registerLink": "Cadastrar",
       "errorGeneric": "Ocorreu um erro inesperado.",
       "errorLoginFailed": "Falha ao entrar",
-      "errorResendFailed": "Falha ao reenviar e-mail de verificação",
-      "label": "Login"
+      "errorResendFailed": "Falha ao reenviar e-mail de verificação"
     },
     "register": {
+      "label": "Register",
       "title": "Cadastrar",
       "subtitle": "Crie sua conta.",
       "emailLabel": "E-mail",
@@ -155,10 +156,13 @@
       "returnToLogin": "Voltar para entrar",
       "haveAccount": "Já tem uma conta?",
       "loginLink": "Entrar",
-      "errorGeneric": "Falha ao cadastrar. Tente novamente mais tarde.",
-      "label": "Register"
+      "errorGeneric": "Falha ao cadastrar. Tente novamente mais tarde."
+    },
+    "logout": {
+      "label": "Logout"
     },
     "verifyEmail": {
+      "label": "Verify email",
       "loadingTitle": "Verificando...",
       "loadingSubtitle": "Verificando seu e-mail…",
       "successTitle": "E-mail verificado",
@@ -167,26 +171,23 @@
       "goToLogin": "Ir para Entrar",
       "errorTitle": "Falha na verificação",
       "errorSubtitle": "Este link de verificação é inválido ou expirou.",
-      "returnToLogin": "Voltar para Entrar",
-      "label": "Verify email"
-    },
-    "logout": {
-      "label": "Logout"
+      "returnToLogin": "Voltar para Entrar"
     }
   },
   "email": {
     "verify": {
+      "label": "Verify email",
       "subject": "Verifique seu e-mail do Knight School",
       "heading": "Bem-vindo ao Knight School!",
       "instructions": "Verifique seu endereço de e-mail visitando o link abaixo:",
       "instructionsHtml": "Verifique seu endereço de e-mail clicando no link abaixo:",
-      "expires": "Este link expira em 24 horas.",
-      "label": "Verify email"
+      "expires": "Este link expira em 24 horas."
     }
   },
   "settings": {
     "title": "Definições",
     "subtitle": "Personalize como o Knight School aparece e é reproduzido.",
+    "previewLabel": "Pré-visualização",
     "languageLabel": "Idioma",
     "appearance": {
       "heading": "Aparência",

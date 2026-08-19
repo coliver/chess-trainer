@@ -187,6 +187,7 @@
   "settings": {
     "title": "Налаштування",
     "subtitle": "Персоналізуйте зовнішній вигляд і поведінку Knight School.",
+    "previewLabel": "Попередній перегляд",
     "languageLabel": "Мова",
     "appearance": {
       "heading": "Зовнішній вигляд",

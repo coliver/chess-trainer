@@ -18,6 +18,15 @@
   padding-top: 4px;
 }
 
+.settings-section--preview {
+  align-items: center;
+}
+
+.settings-preview-board {
+  width: 200px;
+  max-width: 100%;
+}
+
 .settings-section-heading {
   margin: 0;
   font-size: 13px;

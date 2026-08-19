@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "test": "vitest",
     "test:playwright": "playwright test playwright-dashboard.spec.ts",
+    "test:settings": "playwright test playwright-settings-preview-check.spec.ts",
     "test:smoke": "playwright test playwright-prod-smoke.spec.ts",
     "test:watch": "vitest --watch",
     "purgecss": "purgecss --config purgecss.config.cjs",

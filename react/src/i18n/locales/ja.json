@@ -187,6 +187,7 @@
   "settings": {
     "title": "設定",
     "subtitle": "ナイトスクールの外観と進め方をカスタマイズします。",
+    "previewLabel": "プレビュー",
     "languageLabel": "言語",
     "appearance": {
       "heading": "外観",
