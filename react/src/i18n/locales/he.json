@@ -1,0 +1,183 @@
+{
+  "header": {
+    "title": "בית הספר לאבירים",
+    "greetingMorning": "בוקר טוב ☀️",
+    "greetingAfternoon": "צהריים טובים 🌤️",
+    "greetingEvening": "ערב טוב 🌙",
+    "nav": "ראשי",
+    "openings": "פתיחות",
+    "puzzles": "חידות",
+    "login": "התחברות",
+    "register": "הרשמה",
+    "logout": "התנתקות",
+    "viewSource": "צפה בקוד המקור ב-GitHub"
+  },
+  "language": {
+    "toggle": "שפה",
+    "en": "אנגלית",
+    "kl": "קלינגונית"
+  },
+  "theme": {
+    "toggle": "החלפת ערכת נושא",
+    "dark": "כהה",
+    "light": "בהיר",
+    "system": "מערכת"
+  },
+  "flipBoard": {
+    "label": "הפוך את הלוח"
+  },
+  "dashboard": {
+    "header": {
+      "title": "בית הספר לאבירים",
+      "greetingMorning": "בוקר טוב ☀️",
+      "greetingAfternoon": "צהריים טובים 🌤️",
+      "greetingEvening": "ערב טוב 🌙",
+      "nav": "ראשי",
+      "openings": "פתיחות",
+      "puzzles": "חידות",
+      "login": "התחברות",
+      "register": "הרשמה",
+      "logout": "התנתקות",
+      "viewSource": "צפה בקוד המקור ב-GitHub"
+    },
+    "progress": {
+      "yourProgress": "ההתקדמות שלך",
+      "trainingLabel": "התקדמות האימון",
+      "trainingHeading": "אימון",
+      "positionsTrained": "עמדות שהתאמנת עליהן",
+      "accuracy": "דיוק",
+      "dayStreak": "רצף ימי",
+      "dayStreakBest": "רצף ימי · הכי טוב {{best}}",
+      "mastered": "נלמדו",
+      "reviewDue": "לחזרה ({{count}})",
+      "weakSpots": "נקודות חלשות",
+      "weakSpotItem": "{{name}} — נכון {{correct}}/{{attempts}}",
+      "weakSpotFallbackName": "פתיחה",
+      "puzzleLabel": "התקדמות בחידות",
+      "puzzlesHeading": "חידות",
+      "puzzlesSolved": "חידות שנפתרו",
+      "practicePuzzles": "חידות לתרגול",
+      "startSessionFailed": "לא ניתן היה להתחיל את המפגש. בדוק את החיבור או את האסימון שלך.",
+      "reviewSessionFailed": "עדיין אין עמדות מוכנות לחזרה."
+    },
+    "openings": {
+      "title": "פתיחות",
+      "searchAriaLabel": "חיפוש פתיחה",
+      "searchPlaceholder": "חיפוש פתיחה או ECO…",
+      "sortAZ": "א–ת",
+      "sortPopular": "פופולריות",
+      "sortButton": "מיון: {{mode}}",
+      "filterByColor": "סינון לפי צבע",
+      "all": "הכול",
+      "white": "לבן",
+      "black": "שחור",
+      "breadcrumb": "נתיב ניווט",
+      "allOpenings": "כל הפתיחות",
+      "playAs": "שחק כ",
+      "playAsWhite": "שחק כלבן",
+      "playAsBlack": "שחק כשחור",
+      "pickToPreview": "בחר פתיחה כדי לצפות בקו ולהתחיל אימון.",
+      "startLabel": "התחל {{name}}",
+      "chooseOpening": "בחר פתיחה",
+      "matches_one": "התאמה אחת",
+      "matches_other": "{{count}} התאמות",
+      "variationsInLibrary": "{{count}} וריאציות בכל הספרייה",
+      "openingsToTrain_one": "פתיחה אחת · בחר אחת לאימון",
+      "openingsToTrain_other": "{{count}} פתיחות · בחר אחת לאימון",
+      "variationCount_one": "וריאציה אחת",
+      "variationCount_other": "{{count}} וריאציות",
+      "boardPreviewStart": "התחלה",
+      "boardPreviewAfterPly": "אחרי חצי-מסע {{ply}}"
+    }
+  },
+  "puzzles": {
+    "label": "חידות",
+    "noPuzzlesDue": "אין חידות כרגע — נסו שוב מאוחר יותר.",
+    "loadFailed": "טעינת החידה נכשלה. בדקו את החיבור.",
+    "correct": "✅ נכון!",
+    "incorrectFallback": "לא בדיוק — נסו שוב.",
+    "submitError": "שגיאה בשליחת המסע.",
+    "findBestMove": "מצאו את המסע הטוב ביותר.",
+    "eyebrow": "חידות",
+    "title": "אימון חידות",
+    "rating": "דירוג ~{{rating}}",
+    "solved": "נפתרו: {{count}}",
+    "streak": "רצף: {{count}}",
+    "streakBest": " · הכי טוב {{best}}",
+    "skipPuzzle": "דילוג על חידה ›",
+    "backToDashboard": "← חזרה ללוח הבקרה"
+  },
+  "training": {
+    "label": "אימון",
+    "whiteToMove": "לבן בתור",
+    "blackToMove": "שחור בתור",
+    "showHint": "הצג רמז",
+    "eyebrow": "אימון",
+    "prev": "‹ הקודם",
+    "next": "הבא ›",
+    "movePlaceholder": "או הקלידו מסע, למשל e2e4",
+    "play": "שחק",
+    "jumpToLatest": "קפוץ לאחרון לפני השליחה",
+    "backToOpenings": "← חזרה לפתיחות"
+  },
+  "auth": {
+    "login": {
+      "label": "התחברות",
+      "title": "התחברות",
+      "subtitle": "ברוכים השבים.",
+      "usernameLabel": "שם משתמש",
+      "passwordLabel": "סיסמה",
+      "submit": "שליחה",
+      "submitting": "שולח...",
+      "emailNotVerified": "יש לאמת את האימייל לפני ההתחברות",
+      "resendVerification": "שלח שוב אימייל אימות",
+      "resendSending": "שולח...",
+      "resendSent": "נשלח!",
+      "needAccount": "צריך חשבון?",
+      "registerLink": "הרשמה",
+      "errorGeneric": "אירעה שגיאה בלתי צפויה.",
+      "errorLoginFailed": "ההתחברות נכשלה",
+      "errorResendFailed": "שליחת אימייל האימות מחדש נכשלה"
+    },
+    "register": {
+      "label": "הרשמה",
+      "title": "הרשמה",
+      "subtitle": "צרו חשבון.",
+      "emailLabel": "אימייל",
+      "usernameLabel": "שם משתמש",
+      "passwordLabel": "סיסמה",
+      "submit": "הירשמו",
+      "submitting": "נרשם...",
+      "successMessage": "ההרשמה הצליחה! בדקו את תיבת הדואר של <strong>{{email}}</strong> לקישור אימות לפני ההתחברות.",
+      "returnToLogin": "חזרה להתחברות",
+      "haveAccount": "כבר יש לכם חשבון?",
+      "loginLink": "התחברות",
+      "errorGeneric": "ההרשמה נכשלה. נסו שוב מאוחר יותר."
+    },
+    "logout": {
+      "label": "התנתקות"
+    },
+    "verifyEmail": {
+      "label": "אימות אימייל",
+      "loadingTitle": "מאמת...",
+      "loadingSubtitle": "מאמת את האימייל שלך…",
+      "successTitle": "האימייל אומת",
+      "successSubtitleWithEmail": "{{email}} אומת! כעת אפשר להתחבר.",
+      "successSubtitleNoEmail": "האימייל שלך אומת! כעת אפשר להתחבר.",
+      "goToLogin": "מעבר להתחברות",
+      "errorTitle": "האימות נכשל",
+      "errorSubtitle": "קישור האימות הזה לא תקין או שפג תוקפו.",
+      "returnToLogin": "חזרה להתחברות"
+    }
+  },
+  "email": {
+    "verify": {
+      "label": "אימות אימייל",
+      "subject": "אמתו את האימייל שלכם עבור Knight School",
+      "heading": "ברוכים הבאים ל-Knight School!",
+      "instructions": "אנא אמתו את כתובת האימייל שלכם על ידי ביקור בקישור למטה:",
+      "instructionsHtml": "אנא אמתו את כתובת האימייל שלכם על ידי לחיצה על הקישור למטה:",
+      "expires": "קישור זה יפוג בתוך 24 שעות."
+    }
+  }
+}

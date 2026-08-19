@@ -1,0 +1,183 @@
+{
+  "header": {
+    "title": "مدرسة الفارس",
+    "greetingMorning": "صباح الخير ☀️",
+    "greetingAfternoon": "مساء الخير 🌤️",
+    "greetingEvening": "مساء الخير 🌙",
+    "nav": "الرئيسية",
+    "openings": "الافتتاحيات",
+    "puzzles": "الألغاز",
+    "login": "تسجيل الدخول",
+    "register": "إنشاء حساب",
+    "logout": "تسجيل الخروج",
+    "viewSource": "عرض المصدر على GitHub"
+  },
+  "language": {
+    "toggle": "اللغة",
+    "en": "الإنجليزية",
+    "kl": "الكlingon"
+  },
+  "theme": {
+    "toggle": "تبديل المظهر",
+    "dark": "داكن",
+    "light": "فاتح",
+    "system": "النظام"
+  },
+  "flipBoard": {
+    "label": "تدوير اللوحة"
+  },
+  "dashboard": {
+    "header": {
+      "title": "مدرسة الفارس",
+      "greetingMorning": "صباح الخير ☀️",
+      "greetingAfternoon": "مساء الخير 🌤️",
+      "greetingEvening": "مساء الخير 🌙",
+      "nav": "الرئيسية",
+      "openings": "الافتتاحيات",
+      "puzzles": "الألغاز",
+      "login": "تسجيل الدخول",
+      "register": "إنشاء حساب",
+      "logout": "تسجيل الخروج",
+      "viewSource": "عرض المصدر على GitHub"
+    },
+    "progress": {
+      "yourProgress": "تقدمك",
+      "trainingLabel": "تقدم التدريب",
+      "trainingHeading": "التدريب",
+      "positionsTrained": "المواضع التي تم التدريب عليها",
+      "accuracy": "الدقة",
+      "dayStreak": "سلسلة الأيام",
+      "dayStreakBest": "سلسلة الأيام · الأفضل {{best}}",
+      "mastered": "تم إتقانها",
+      "reviewDue": "المراجعة المستحقة ({{count}})",
+      "weakSpots": "نقاط الضعف",
+      "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} صحيح",
+      "weakSpotFallbackName": "افتتاحية",
+      "puzzleLabel": "تقدم الألغاز",
+      "puzzlesHeading": "الألغاز",
+      "puzzlesSolved": "الألغاز المحلولة",
+      "practicePuzzles": "ألغاز تدريبية",
+      "startSessionFailed": "فشل بدء الجلسة. تحقق من اتصالك أو الرمز.",
+      "reviewSessionFailed": "لا توجد مواضع مستحقة للمراجعة بعد."
+    },
+    "openings": {
+      "title": "الافتتاحيات",
+      "searchAriaLabel": "ابحث في الافتتاحيات",
+      "searchPlaceholder": "ابحث عن افتتاحية أو ECO…",
+      "sortAZ": "أ–ي",
+      "sortPopular": "الأشهر",
+      "sortButton": "الترتيب: {{mode}}",
+      "filterByColor": "تصفية حسب اللون",
+      "all": "الكل",
+      "white": "الأبيض",
+      "black": "الأسود",
+      "breadcrumb": "مسار التنقل",
+      "allOpenings": "جميع الافتتاحيات",
+      "playAs": "العب كـ",
+      "playAsWhite": "العب بالأبيض",
+      "playAsBlack": "العب بالأسود",
+      "pickToPreview": "اختر افتتاحية لمعاينة الخط وبدء التدريب.",
+      "startLabel": "ابدأ {{name}}",
+      "chooseOpening": "اختر افتتاحية",
+      "matches_one": "مطابقة واحدة",
+      "matches_other": "{{count}} مطابقات",
+      "variationsInLibrary": "{{count}} من التنويعات في المكتبة الكاملة",
+      "openingsToTrain_one": "{{count}} افتتاحية · اختر واحدة للتدريب",
+      "openingsToTrain_other": "{{count}} افتتاحيات · اختر واحدة للتدريب",
+      "variationCount_one": "تنويع واحد",
+      "variationCount_other": "{{count}} تنويعات",
+      "boardPreviewStart": "ابدأ",
+      "boardPreviewAfterPly": "بعد نصف نقلة {{ply}}"
+    }
+  },
+  "puzzles": {
+    "label": "الألغاز",
+    "noPuzzlesDue": "لا توجد ألغاز مستحقة الآن — عد لاحقًا.",
+    "loadFailed": "فشل تحميل اللغز. تحقق من اتصالك.",
+    "correct": "✅ صحيح!",
+    "incorrectFallback": "ليس تمامًا — حاول مرة أخرى.",
+    "submitError": "حدث خطأ أثناء إرسال النقلة.",
+    "findBestMove": "اعثر على أفضل نقلة.",
+    "eyebrow": "الألغاز",
+    "title": "تدريب الألغاز",
+    "rating": "التصنيف ~{{rating}}",
+    "solved": "تم الحل: {{count}}",
+    "streak": "السلسلة: {{count}}",
+    "streakBest": " · الأفضل {{best}}",
+    "skipPuzzle": "تخطي اللغز ›",
+    "backToDashboard": "← العودة إلى لوحة التحكم"
+  },
+  "training": {
+    "label": "التدريب",
+    "whiteToMove": "دور الأبيض",
+    "blackToMove": "دور الأسود",
+    "showHint": "إظهار تلميح",
+    "eyebrow": "التدريب",
+    "prev": "‹ السابق",
+    "next": "التالي ›",
+    "movePlaceholder": "أو اكتب نقلة مثل e2e4",
+    "play": "حرك",
+    "jumpToLatest": "اذهب إلى آخر موضع قبل الإرسال",
+    "backToOpenings": "← العودة إلى الافتتاحيات"
+  },
+  "auth": {
+    "login": {
+      "label": "تسجيل الدخول",
+      "title": "تسجيل الدخول",
+      "subtitle": "مرحبًا بعودتك.",
+      "usernameLabel": "اسم المستخدم",
+      "passwordLabel": "كلمة المرور",
+      "submit": "إرسال",
+      "submitting": "جارٍ الإرسال...",
+      "emailNotVerified": "يرجى التحقق من بريدك الإلكتروني قبل تسجيل الدخول",
+      "resendVerification": "إعادة إرسال رسالة التحقق",
+      "resendSending": "جارٍ الإرسال...",
+      "resendSent": "تم الإرسال!",
+      "needAccount": "تحتاج إلى حساب؟",
+      "registerLink": "إنشاء حساب",
+      "errorGeneric": "حدث خطأ غير متوقع.",
+      "errorLoginFailed": "فشل تسجيل الدخول",
+      "errorResendFailed": "فشل إعادة إرسال رسالة التحقق"
+    },
+    "register": {
+      "label": "إنشاء حساب",
+      "title": "إنشاء حساب",
+      "subtitle": "أنشئ حسابك.",
+      "emailLabel": "البريد الإلكتروني",
+      "usernameLabel": "اسم المستخدم",
+      "passwordLabel": "كلمة المرور",
+      "submit": "إنشاء حساب",
+      "submitting": "جارٍ إنشاء الحساب...",
+      "successMessage": "تم التسجيل بنجاح! تحقق من صندوق الوارد في <strong>{{email}}</strong> للحصول على رابط التحقق قبل تسجيل الدخول.",
+      "returnToLogin": "العودة إلى تسجيل الدخول",
+      "haveAccount": "لديك حساب بالفعل؟",
+      "loginLink": "تسجيل الدخول",
+      "errorGeneric": "فشل إنشاء الحساب. حاول مرة أخرى لاحقًا."
+    },
+    "logout": {
+      "label": "تسجيل الخروج"
+    },
+    "verifyEmail": {
+      "label": "التحقق من البريد الإلكتروني",
+      "loadingTitle": "جارٍ التحقق...",
+      "loadingSubtitle": "جارٍ التحقق من بريدك الإلكتروني…",
+      "successTitle": "تم التحقق من البريد الإلكتروني",
+      "successSubtitleWithEmail": "تم التحقق من {{email}}! يمكنك الآن تسجيل الدخول.",
+      "successSubtitleNoEmail": "تم التحقق من بريدك الإلكتروني! يمكنك الآن تسجيل الدخول.",
+      "goToLogin": "اذهب إلى تسجيل الدخول",
+      "errorTitle": "فشل التحقق",
+      "errorSubtitle": "رابط التحقق هذا غير صالح أو منتهي الصلاحية.",
+      "returnToLogin": "العودة إلى تسجيل الدخول"
+    }
+  },
+  "email": {
+    "verify": {
+      "label": "التحقق من البريد الإلكتروني",
+      "subject": "تحقق من بريدك الإلكتروني في Knight School",
+      "heading": "مرحبًا بك في Knight School!",
+      "instructions": "يرجى التحقق من بريدك الإلكتروني بزيارة الرابط أدناه:",
+      "instructionsHtml": "يرجى التحقق من بريدك الإلكتروني بالنقر على الرابط أدناه:",
+      "expires": "ينتهي صلاحية هذا الرابط خلال 24 ساعة."
+    }
+  }
+}

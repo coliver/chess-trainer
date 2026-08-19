@@ -5,23 +5,45 @@ import i18nInstance from "../i18n/i18n";
 // if a new locale file is added before its flag is picked.
 const FLAGS: Record<string, string> = {
   en: "🇬🇧",
+  "en-US": "🇺🇸",
+  "en-AU": "🇦🇺",
+
   es: "🇪🇸",
   fr: "🇫🇷",
   de: "🇩🇪",
-  in: "🇮🇳",
+  hi: "🇮🇳",
   it: "🇮🇹",
-  jp: "🇯🇵",
+  ja: "🇯🇵",
   ko: "🇰🇷",
   nl: "🇳🇱",
   pl: "🇵🇱",
   pt: "🇵🇹",
+  "pt-BR": "🇧🇷",
   ru: "🇷🇺",
   tr: "🇹🇷",
   "zh-CN": "🇨🇳",
+
+  ar: "🇸🇦",
+  cs: "🇨🇿",
+  da: "🇩🇰",
+  el: "🇬🇷",
+  fi: "🇫🇮",
+  he: "🇮🇱",
+  hu: "🇭🇺",
+  id: "🇮🇩",
+  ms: "🇲🇾",
+  no: "🇳🇴",
+  ro: "🇷🇴",
+  sk: "🇸🇰",
+  sv: "🇸🇪",
+  uk: "🇺🇦",
+  vi: "🇻🇳",
+
   "en-x-pirate": "🏴‍☠️",
   "en-x-klingon": "🖖",
   "en-x-groot": "🌱",
 };
+
 
 const LANGUAGES = Object.keys(i18nInstance.options.resources ?? {}).sort((a, b) =>
   a.localeCompare(b)

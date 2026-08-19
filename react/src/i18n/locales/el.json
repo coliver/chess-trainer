@@ -1,0 +1,183 @@
+{
+  "header": {
+    "title": "Σχολή Ιπποτών",
+    "greetingMorning": "Καλημέρα ☀️",
+    "greetingAfternoon": "Καλό απόγευμα 🌤️",
+    "greetingEvening": "Καλησπέρα 🌙",
+    "nav": "Κεντρικό",
+    "openings": "Ανοίγματα",
+    "puzzles": "Γρίφοι",
+    "login": "Σύνδεση",
+    "register": "Εγγραφή",
+    "logout": "Αποσύνδεση",
+    "viewSource": "Προβολή πηγής στο GitHub"
+  },
+  "language": {
+    "toggle": "Γλώσσα",
+    "en": "Αγγλικά",
+    "kl": "Κλίνγκον"
+  },
+  "theme": {
+    "toggle": "Αλλαγή θέματος",
+    "dark": "Σκοτεινό",
+    "light": "Ανοιχτό",
+    "system": "Σύστημα"
+  },
+  "flipBoard": {
+    "label": "Αναστροφή σκακιέρας"
+  },
+  "dashboard": {
+    "header": {
+      "title": "Σχολή Ιπποτών",
+      "greetingMorning": "Καλημέρα ☀️",
+      "greetingAfternoon": "Καλό απόγευμα 🌤️",
+      "greetingEvening": "Καλησπέρα 🌙",
+      "nav": "Κεντρικό",
+      "openings": "Ανοίγματα",
+      "puzzles": "Γρίφοι",
+      "login": "Σύνδεση",
+      "register": "Εγγραφή",
+      "logout": "Αποσύνδεση",
+      "viewSource": "Προβολή πηγής στο GitHub"
+    },
+    "progress": {
+      "yourProgress": "Η πρόοδός σας",
+      "trainingLabel": "Πρόοδος εκπαίδευσης",
+      "trainingHeading": "Εκπαίδευση",
+      "positionsTrained": "Θέσεις που εξασκήθηκαν",
+      "accuracy": "Ακρίβεια",
+      "dayStreak": "Σειρά ημερών",
+      "dayStreakBest": "Σειρά ημερών · καλύτερη {{best}}",
+      "mastered": "Κατακτήθηκαν",
+      "reviewDue": "Για επανάληψη ({{count}})",
+      "weakSpots": "Αδύναμα σημεία",
+      "weakSpotItem": "{{name}} — σωστά {{correct}}/{{attempts}}",
+      "weakSpotFallbackName": "Άνοιγμα",
+      "puzzleLabel": "Πρόοδος γρίφων",
+      "puzzlesHeading": "Γρίφοι",
+      "puzzlesSolved": "Λυμένοι γρίφοι",
+      "practicePuzzles": "Γρίφοι εξάσκησης",
+      "startSessionFailed": "Δεν ήταν δυνατή η έναρξη της συνεδρίας. Ελέγξτε τη σύνδεση ή το token σας.",
+      "reviewSessionFailed": "Δεν υπάρχουν ακόμη θέσεις έτοιμες για επανάληψη."
+    },
+    "openings": {
+      "title": "Ανοίγματα",
+      "searchAriaLabel": "Αναζήτηση ανοίγματος",
+      "searchPlaceholder": "Αναζήτηση ανοίγματος ή ECO…",
+      "sortAZ": "Α–Ω",
+      "sortPopular": "Δημοφιλή",
+      "sortButton": "Ταξινόμηση: {{mode}}",
+      "filterByColor": "Φιλτράρισμα κατά χρώμα",
+      "all": "Όλα",
+      "white": "Λευκά",
+      "black": "Μαύρα",
+      "breadcrumb": "Διαδρομή",
+      "allOpenings": "Όλα τα ανοίγματα",
+      "playAs": "Παίξτε ως",
+      "playAsWhite": "Παίξτε ως λευκά",
+      "playAsBlack": "Παίξτε ως μαύρα",
+      "pickToPreview": "Επιλέξτε ένα άνοιγμα για προεπισκόπηση της γραμμής και έναρξη εκπαίδευσης.",
+      "startLabel": "Έναρξη {{name}}",
+      "chooseOpening": "Επιλέξτε άνοιγμα",
+      "matches_one": "{{count}} αποτέλεσμα",
+      "matches_other": "{{count}} αποτελέσματα",
+      "variationsInLibrary": "{{count}} παραλλαγές σε όλη τη βιβλιοθήκη",
+      "openingsToTrain_one": "{{count}} άνοιγμα · επιλέξτε ένα για εξάσκηση",
+      "openingsToTrain_other": "{{count}} ανοίγματα · επιλέξτε ένα για εξάσκηση",
+      "variationCount_one": "{{count}} παραλλαγή",
+      "variationCount_other": "{{count}} παραλλαγές",
+      "boardPreviewStart": "Έναρξη",
+      "boardPreviewAfterPly": "Μετά από ημι-κίνηση {{ply}}"
+    }
+  },
+  "puzzles": {
+    "label": "Γρίφοι",
+    "noPuzzlesDue": "Δεν υπάρχουν γρίφοι αυτή τη στιγμή — δοκιμάστε αργότερα.",
+    "loadFailed": "Αποτυχία φόρτωσης γρίφου. Ελέγξτε τη σύνδεσή σας.",
+    "correct": "✅ Σωστά!",
+    "incorrectFallback": "Όχι ακριβώς — δοκιμάστε ξανά.",
+    "submitError": "Σφάλμα κατά την υποβολή της κίνησης.",
+    "findBestMove": "Βρείτε την καλύτερη κίνηση.",
+    "eyebrow": "Γρίφοι",
+    "title": "Εκπαίδευση γρίφων",
+    "rating": "Βαθμολογία ~{{rating}}",
+    "solved": "Λυμένα: {{count}}",
+    "streak": "Σερί: {{count}}",
+    "streakBest": " · καλύτερο {{best}}",
+    "skipPuzzle": "Παράλειψη γρίφου ›",
+    "backToDashboard": "← Πίσω στον πίνακα"
+  },
+  "training": {
+    "label": "Εκπαίδευση",
+    "whiteToMove": "Κινεί τα λευκά",
+    "blackToMove": "Κινεί τα μαύρα",
+    "showHint": "Εμφάνιση υπόδειξης",
+    "eyebrow": "Εκπαίδευση",
+    "prev": "‹ Προηγούμενο",
+    "next": "Επόμενο ›",
+    "movePlaceholder": "ή πληκτρολογήστε κίνηση, π.χ. e2e4",
+    "play": "Παιχνίδι",
+    "jumpToLatest": "Μετάβαση στο τελευταίο πριν την υποβολή",
+    "backToOpenings": "← Πίσω στα ανοίγματα"
+  },
+  "auth": {
+    "login": {
+      "label": "Σύνδεση",
+      "title": "Σύνδεση",
+      "subtitle": "Καλώς ορίσατε ξανά.",
+      "usernameLabel": "Όνομα χρήστη",
+      "passwordLabel": "Κωδικός",
+      "submit": "Υποβολή",
+      "submitting": "Υποβολή...",
+      "emailNotVerified": "Επαληθεύστε το email σας πριν συνδεθείτε",
+      "resendVerification": "Επαναποστολή email επαλήθευσης",
+      "resendSending": "Αποστολή...",
+      "resendSent": "Εστάλη!",
+      "needAccount": "Χρειάζεστε λογαριασμό;",
+      "registerLink": "Εγγραφή",
+      "errorGeneric": "Παρουσιάστηκε απροσδόκητο σφάλμα.",
+      "errorLoginFailed": "Αποτυχία σύνδεσης",
+      "errorResendFailed": "Αποτυχία επαναποστολής email επαλήθευσης"
+    },
+    "register": {
+      "label": "Εγγραφή",
+      "title": "Εγγραφή",
+      "subtitle": "Δημιουργήστε τον λογαριασμό σας.",
+      "emailLabel": "Email",
+      "usernameLabel": "Όνομα χρήστη",
+      "passwordLabel": "Κωδικός",
+      "submit": "Εγγραφή",
+      "submitting": "Εγγραφή...",
+      "successMessage": "Η εγγραφή ήταν επιτυχής! Ελέγξτε τα εισερχόμενά σας στο <strong>{{email}}</strong> για τον σύνδεσμο επαλήθευσης πριν συνδεθείτε.",
+      "returnToLogin": "Επιστροφή στη σύνδεση",
+      "haveAccount": "Έχετε ήδη λογαριασμό;",
+      "loginLink": "Σύνδεση",
+      "errorGeneric": "Η εγγραφή απέτυχε. Δοκιμάστε ξανά αργότερα."
+    },
+    "logout": {
+      "label": "Αποσύνδεση"
+    },
+    "verifyEmail": {
+      "label": "Επαλήθευση email",
+      "loadingTitle": "Επαλήθευση...",
+      "loadingSubtitle": "Επαληθεύεται το email σας…",
+      "successTitle": "Το email επαληθεύτηκε",
+      "successSubtitleWithEmail": "Το {{email}} επαληθεύτηκε! Μπορείτε τώρα να συνδεθείτε.",
+      "successSubtitleNoEmail": "Το email σας επαληθεύτηκε! Μπορείτε τώρα να συνδεθείτε.",
+      "goToLogin": "Μετάβαση στη σύνδεση",
+      "errorTitle": "Η επαλήθευση απέτυχε",
+      "errorSubtitle": "Αυτός ο σύνδεσμος επαλήθευσης είναι άκυρος ή έχει λήξει.",
+      "returnToLogin": "Επιστροφή στη σύνδεση"
+    }
+  },
+  "email": {
+    "verify": {
+      "label": "Επαλήθευση email",
+      "subject": "Επαληθεύστε το email σας για το Knight School",
+      "heading": "Καλώς ήρθατε στο Knight School!",
+      "instructions": "Επαληθεύστε τη διεύθυνση email σας επισκεπτόμενοι τον παρακάτω σύνδεσμο:",
+      "instructionsHtml": "Επαληθεύστε τη διεύθυνση email σας κάνοντας κλικ στον παρακάτω σύνδεσμο:",
+      "expires": "Αυτός ο σύνδεσμος λήγει σε 24 ώρες."
+    }
+  }
+}
