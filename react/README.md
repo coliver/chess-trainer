@@ -124,7 +124,7 @@ flowchart TD
   F --> G{Correct?}
   G -- Yes --> H{Session completed?}
   H -- No --> D
-  H -- Yes --> I[Show 'Session completed']
+  H -- Yes --> I[Show 'Train again' / 'Choose another opening']
   G -- No --> E
 ```
 

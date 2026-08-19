@@ -1,4 +1,12 @@
+## 2026-08-19
+- feat(training): replace the dead-end "Session complete" banner with Train again / Choose another opening actions, translated across all locales; fix a stuck "Starting..." button caused by `isSessionCompleted`/`isRestarting` never resetting when a new session loaded into the same page instance
+- feat(sounds): wire up puzzle/training feedback sounds and fix broken asset paths, then close the remaining gaps — play `gameStart` on session load and `moveOpponent` on the autoplayed opponent reply, persist the mute preference, and surface playback failures instead of failing silently; untrack and gitignore the 22 sound files with no `playSound()` call site
+- fix(i18n): change the default language code from `en` to `en-US` everywhere it was hardcoded — i18n config, the verification email, and the `users.language` column default (migration `0010`)
+- accessibility: add Hindi, Japanese, Chinese, and Korean locales; rename locale files to match language rather than country; broad pass over existing locale content
+- docs: sync AGENTS.md and READMEs with current codebase
+
 ## 2026-08-17
+- feat(i18n): add per-user language support for verification emails
 - feat(i18n): add `scripts/sync-locales.mjs` (`npm run i18n:sync` / `i18n:check`) so `en.json` is the single source of truth for translation keys — it stubs missing keys and drops stale ones across every other locale file instead of hand-copying JSON structure; `i18n.ts` and `LanguageToggle.tsx` now auto-discover `locales/*.json` via `import.meta.glob`, so adding a language no longer touches either file
 - feat(i18n): add French and German locales, and localize the remaining hardcoded strings (opening-card variation count, board-preview "Start" button and ply tooltip)
 - feat(i18n): add Italian, Dutch, Polish, Portuguese, Russian, and Turkish locales
