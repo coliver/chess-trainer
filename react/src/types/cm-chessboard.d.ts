@@ -13,13 +13,13 @@ declare module "cm-chessboard" {
   };
 
   export class Chessboard {
-    constructor(element: Element | HTMLElement, options?: any);
+    constructor(element: Element | HTMLElement, options?: unknown);
     enableMoveInput(cb: (event: MoveInputEvent) => boolean | void): void;
     removeLegalMovesMarkers(): void;
     getPiece(square: string): string | null;
     destroy?(): void;
     // Minimal API surface we use — leave room for any other methods
-    [key: string]: any;
+    [key: string]: unknown;
   }
 
   export default Chessboard;
