@@ -140,7 +140,7 @@ def test_register_schedules_verification_email(jwt_env, monkeypatch):
         task.func(*task.args, **task.kwargs)
 
     assert sent["email"] == "a@example.com"
-    assert sent["language"] == "en"
+    assert sent["language"] == "en-US"
     payload = jwt.decode(sent["token"], os.environ["JWT_SECRET"], algorithms=["HS256"])
     assert payload["type"] == "email_verify"
     assert payload["sub"] == str(db.users[0].id)
@@ -163,7 +163,7 @@ def test_register_defaults_to_english_for_unsupported_language(jwt_env):
     )
     register(req, background_tasks=BackgroundTasks(), db=db)
 
-    assert db.users[0].language == "en"
+    assert db.users[0].language == "en-US"
 
 
 def test_register_duplicate_email_409(jwt_env):

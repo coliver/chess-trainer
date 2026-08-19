@@ -55,7 +55,7 @@ def register(req: RegisterRequest, background_tasks: BackgroundTasks, db=Depends
         raise HTTPException(status_code=409, detail="Email or username already exists")
 
     verification_required = _email_verification_required()
-    language = req.language if req.language in supported_languages() else "en"
+    language = req.language if req.language in supported_languages() else "en-US"
     user = User(
         email=req.email,
         username=req.username,
