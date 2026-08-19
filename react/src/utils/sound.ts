@@ -1,4 +1,4 @@
-// src/utils/sound.ts
+import { isCastleMove, isCaptureMove, isPromotionMove } from "@knight-school/chess-core";
 
 export type SoundName =
   | "achievement"
@@ -83,7 +83,19 @@ function getAudio(name: SoundName) {
 
 export function playSound(name: SoundName) {
   if (!enabled) return;
+
   const audio = getAudio(name);
   audio.currentTime = 0;
-  audio.play().catch(() => {});
+
+  const result = audio.play();
+  result?.catch?.(() => {});
+}
+
+export type MoveSound = "move" | "capture" | "castle" | "promote" | "illegal";
+
+export function getMoveSound(fenBefore: string, uci: string): MoveSound {
+  if (isCastleMove(uci)) return "castle";
+  if (isPromotionMove(uci)) return "promote";
+  if (isCaptureMove(fenBefore, uci)) return "capture";
+  return "move";
 }

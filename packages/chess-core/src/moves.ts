@@ -100,3 +100,21 @@ export function applyUci(fen: string, uci: string): { nextFen: string } | null {
     return null;
   }
 }
+
+export function isCastleMove(uci: string): boolean {
+  return (
+    uci === "e1g1" ||
+    uci === "e1c1" ||
+    uci === "e8g8" ||
+    uci === "e8c8"
+  );
+}
+
+export function isPromotionMove(uci: string): boolean {
+  return uci.trim().length === 5;
+}
+
+export function isCaptureMove(fen: string, uci: string): boolean {
+  const target = uci.trim().slice(2, 4);
+  return !!pieceColorAt(fen, target);
+}

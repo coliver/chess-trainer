@@ -26,6 +26,7 @@ import {
 import { useBlinkGreen } from "../hooks/useBlinkGreen";
 import { useTrainingSession } from "../hooks/useTrainingSession";
 import { useBoardOrientation } from "../hooks/useBoardOrientation";
+import { getMoveSound, playSound } from "../utils/sound";
 
 export const Training = () => {
   const { t } = useTranslation();
@@ -240,7 +241,7 @@ export const Training = () => {
         setLocalFeedback("❌ Illegal move");
         return false;
       }
-
+      console.log(result);
       setFen(result.nextFen);
       appendTimelineFen(result.nextFen);
       setLastMove({ from: sourceSquare, to: targetSquare });
@@ -249,7 +250,9 @@ export const Training = () => {
       lastSubmittedMoveUciRef.current = result.uci;
       setMoveInput(result.uci);
       void submitMove(result.uci, fen);
-
+      const sound = getMoveSound(fen, result.uci);
+      console.log(sound)
+      playSound(sound);
       return true;
     },
     [
@@ -284,7 +287,15 @@ export const Training = () => {
       if (!isPlayerToMove) return false;
       return pieceColorAt(fen, square) === playerColor;
     },
-    [atLatest, fen, isAdvancing, isSubmitting, itemId, isPlayerToMove, playerColor],
+    [
+      atLatest,
+      fen,
+      isAdvancing,
+      isSubmitting,
+      itemId,
+      isPlayerToMove,
+      playerColor,
+    ],
   );
 
   // Legal targets for the picked-up piece — rendered as dots by cm-chessboard.
@@ -303,7 +314,11 @@ export const Training = () => {
       arr.push({ square: lastMove.to, type: "lastmove" });
     }
 
-    const hint = deriveHintMarkers(correctMoveUci, hintLevel, isSessionCompleted);
+    const hint = deriveHintMarkers(
+      correctMoveUci,
+      hintLevel,
+      isSessionCompleted,
+    );
     if (hint) {
       arr.push({ square: hint.from, type: "hint" });
       if (hint.to) arr.push({ square: hint.to, type: "hint" });
@@ -325,7 +340,12 @@ export const Training = () => {
     isPlayerToMove,
     playerColor,
   });
-  const { kind: statusKind, icon: statusIcon, message: statusMsg, sub: statusSub } = status;
+  const {
+    kind: statusKind,
+    icon: statusIcon,
+    message: statusMsg,
+    sub: statusSub,
+  } = status;
 
   const busy = isSubmitting || isAdvancing;
 
@@ -348,9 +368,13 @@ export const Training = () => {
               />
             </div>
             <div className="board-under">
-              <span className={`turn${sideToMove(fen) === "w" ? "" : " black"}`}>
+              <span
+                className={`turn${sideToMove(fen) === "w" ? "" : " black"}`}
+              >
                 <span className="turn-dot" aria-hidden="true" />
-                {sideToMove(fen) === "w" ? t("training.whiteToMove") : t("training.blackToMove")}
+                {sideToMove(fen) === "w"
+                  ? t("training.whiteToMove")
+                  : t("training.blackToMove")}
               </span>
               <div className="board-toolbar">
                 <FlipBoardButton className="icon-btn" onClick={flip} />
@@ -358,7 +382,12 @@ export const Training = () => {
                   className="btn icon-btn hint-icon"
                   type="button"
                   onClick={() => {
-                    if (isSubmitting || isAdvancing || !itemId || isSessionCompleted)
+                    if (
+                      isSubmitting ||
+                      isAdvancing ||
+                      !itemId ||
+                      isSessionCompleted
+                    )
                       return;
                     setHintLevel((h) => (h < 0 ? 0 : 1));
                   }}

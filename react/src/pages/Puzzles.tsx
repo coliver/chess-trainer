@@ -15,6 +15,7 @@ import {
   pieceColorAt,
   sideToMove,
 } from "@knight-school/chess-core";
+import { getMoveSound, playSound } from "../utils/sound";
 
 type NextPuzzle = {
   puzzleId: string;
@@ -120,7 +121,9 @@ export const Puzzles = () => {
           });
           advanceTimeoutRef.current = setTimeout(() => void loadNext(), 600);
         } else {
-          setFeedback(`❌ ${res.data.reason || t("puzzles.incorrectFallback")}`);
+          setFeedback(
+            `❌ ${res.data.reason || t("puzzles.incorrectFallback")}`,
+          );
           setFen(preFen); // snap back to the puzzle position
           setStreak(0);
         }
@@ -156,13 +159,18 @@ export const Puzzles = () => {
       const preFen = fenRef.current;
       const result = applyMove(preFen, from, to, correctMoveUci);
       if (!result) return false;
+
       setFen(result.nextFen);
+
+      const moveSound = getMoveSound(preFen, result.uci);
+      playSound(moveSound);
+
       void submit(result.uci, preFen);
       return true;
     },
     [isSubmitting, puzzleId, correctMoveUci, submit],
   );
-
+  
   const canPickUp = useCallback(
     (square: string): boolean => {
       if (isSubmitting || !puzzleId) return false;
@@ -205,7 +213,9 @@ export const Puzzles = () => {
             <div className="board-under">
               <span className={`turn${solverColor === "b" ? " black" : ""}`}>
                 <span className="turn-dot" aria-hidden="true" />
-                {solverColor === "b" ? t("training.blackToMove") : t("training.whiteToMove")}
+                {solverColor === "b"
+                  ? t("training.blackToMove")
+                  : t("training.whiteToMove")}
               </span>
               <div className="board-toolbar">
                 <FlipBoardButton className="icon-btn" onClick={flip} />
@@ -219,21 +229,25 @@ export const Puzzles = () => {
               <div className="rail-title">
                 <h1>{t("puzzles.title")}</h1>
                 {rating != null && (
-                  <span className="eco-chip">{t("puzzles.rating", { rating })}</span>
+                  <span className="eco-chip">
+                    {t("puzzles.rating", { rating })}
+                  </span>
                 )}
               </div>
             </div>
 
             <div className="puzzles-stats">
-              <span className="stat-pill">{t("puzzles.solved", { count: solved })}</span>
+              <span className="stat-pill">
+                {t("puzzles.solved", { count: solved })}
+              </span>
               <span
-                className={
-                  streak > 0 ? "stat-pill is-active" : "stat-pill"
-                }
+                className={streak > 0 ? "stat-pill is-active" : "stat-pill"}
               >
                 {t("puzzles.streak", { count: streak })}
                 {streak > 0 ? " 🔥" : ""}
-                {bestStreak > 0 ? t("puzzles.streakBest", { best: bestStreak }) : ""}
+                {bestStreak > 0
+                  ? t("puzzles.streakBest", { best: bestStreak })
+                  : ""}
               </span>
             </div>
 
