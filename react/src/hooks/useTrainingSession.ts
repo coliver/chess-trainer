@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import api from "../api";
 import { AxiosError } from "axios";
+import { playSound } from "../utils/sound";
 import {
   START_FEN,
   normalizeFen,
@@ -146,7 +147,10 @@ export function useTrainingSession(
         const data = response.data;
 
         if (data.correct) {
-          if (!silent) setFeedback("✅ Correct!");
+          if (!silent) {
+            playSound("correct");
+            setFeedback("✅ Correct!");
+          }
 
           const fenAfterNorm =
             data.fenAfter != null ? normalizeFen(data.fenAfter) : "";
@@ -159,6 +163,7 @@ export function useTrainingSession(
               advanceTimeoutRef.current = null;
             }
 
+            playSound("achievement");
             setFeedback("✅ Session completed.");
             setIsSessionCompleted(true);
             setIsAdvancing(false);
@@ -210,6 +215,7 @@ export function useTrainingSession(
         }
 
         // incorrect move => revert to the exact fen used to submit
+        playSound("incorrect");
         setFen(revertFen);
         setFeedback(`❌ ${data.reason ?? "Incorrect move"}`);
       } catch (unknownErr) {

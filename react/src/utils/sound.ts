@@ -25,7 +25,6 @@ export type SoundName =
   | "moveSelf"
   | "notification"
   | "notify"
-  | "promoNew"
   | "promote"
   | "puzzleCorrect"
   | "puzzleWrong"
@@ -49,7 +48,7 @@ const soundFiles: Record<SoundName, string> = {
   gameLose: "/sounds/game-lose.mp3",
   gameLoseLong: "/sounds/game-lose-long.mp3",
   gameStart: "/sounds/game-start.mp3",
-  gameWin: "/sounds/game-win.mp3",
+  gameWin: "/sounds/game-win-long.mp3",
   illegal: "/sounds/illegal.mp3",
   incorrect: "/sounds/incorrect.mp3",
   lessonFail: "/sounds/lesson-fail.mp3",
@@ -58,11 +57,10 @@ const soundFiles: Record<SoundName, string> = {
   moveSelf: "/sounds/move-self-check.mp3",
   notification: "/sounds/notification.mp3",
   notify: "/sounds/notify.mp3",
-  promoNew: "/sounds/promo-new.mp3",
   promote: "/sounds/promote.mp3",
   puzzleCorrect: "/sounds/puzzle-correct-2.mp3",
   puzzleWrong: "/sounds/puzzle-wrong.mp3",
-  scale: "/sounds/scale.mp3",
+  scale: "/sounds/scatter.mp3",
   shoutout: "/sounds/shoutout.mp3",
   tense: "/sounds/tenseconds.mp3",
 };

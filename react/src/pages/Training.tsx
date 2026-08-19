@@ -238,10 +238,10 @@ export const Training = () => {
 
       const result = applyMove(fen, sourceSquare, targetSquare, correctMoveUci);
       if (!result) {
+        playSound("illegal");
         setLocalFeedback("❌ Illegal move");
         return false;
       }
-      console.log(result);
       setFen(result.nextFen);
       appendTimelineFen(result.nextFen);
       setLastMove({ from: sourceSquare, to: targetSquare });
@@ -251,7 +251,6 @@ export const Training = () => {
       setMoveInput(result.uci);
       void submitMove(result.uci, fen);
       const sound = getMoveSound(fen, result.uci);
-      console.log(sound)
       playSound(sound);
       return true;
     },

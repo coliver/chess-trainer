@@ -112,6 +112,7 @@ export const Puzzles = () => {
         if (!isMountedRef.current) return;
 
         if (res.data.correct) {
+          playSound("puzzleCorrect");
           setFeedback(t("puzzles.correct"));
           setSolved((n) => n + 1);
           setStreak((n) => {
@@ -121,6 +122,7 @@ export const Puzzles = () => {
           });
           advanceTimeoutRef.current = setTimeout(() => void loadNext(), 600);
         } else {
+          playSound("puzzleWrong");
           setFeedback(
             `❌ ${res.data.reason || t("puzzles.incorrectFallback")}`,
           );
@@ -158,7 +160,10 @@ export const Puzzles = () => {
       if (isSubmitting || !puzzleId || from === to) return false;
       const preFen = fenRef.current;
       const result = applyMove(preFen, from, to, correctMoveUci);
-      if (!result) return false;
+      if (!result) {
+        playSound("illegal");
+        return false;
+      }
 
       setFen(result.nextFen);
 
