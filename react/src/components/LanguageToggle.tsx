@@ -8,6 +8,7 @@ const FLAGS: Record<string, string> = {
   es: "🇪🇸",
   fr: "🇫🇷",
   de: "🇩🇪",
+  in: "🇮🇳",
   it: "🇮🇹",
   jp: "🇯🇵",
   ko: "🇰🇷",

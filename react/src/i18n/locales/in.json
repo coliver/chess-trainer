@@ -1,0 +1,183 @@
+{
+  "header": {
+    "title": "Knight School",
+    "greetingMorning": "सुप्रभात ☀️",
+    "greetingAfternoon": "शुभ दोपहर 🌤️",
+    "greetingEvening": "शुभ संध्या 🌙",
+    "nav": "मुख्य",
+    "openings": "ओपनिंग्स",
+    "puzzles": "पहेलियाँ",
+    "login": "लॉगिन",
+    "register": "पंजीकरण",
+    "logout": "लॉगआउट",
+    "viewSource": "GitHub पर सोर्स देखें"
+  },
+  "language": {
+    "toggle": "भाषा",
+    "en": "अंग्रेज़ी",
+    "kl": "क्लिंगन"
+  },
+  "theme": {
+    "toggle": "थीम बदलें",
+    "dark": "डार्क",
+    "light": "लाइट",
+    "system": "सिस्टम"
+  },
+  "flipBoard": {
+    "label": "बोर्ड पलटें"
+  },
+  "dashboard": {
+    "header": {
+      "title": "Knight School",
+      "greetingMorning": "सुप्रभात ☀️",
+      "greetingAfternoon": "शुभ दोपहर 🌤️",
+      "greetingEvening": "शुभ संध्या 🌙",
+      "nav": "मुख्य",
+      "openings": "ओपनिंग्स",
+      "puzzles": "पहेलियाँ",
+      "login": "लॉगिन",
+      "register": "पंजीकरण",
+      "logout": "लॉगआउट",
+      "viewSource": "GitHub पर सोर्स देखें"
+    },
+    "progress": {
+      "yourProgress": "आपकी प्रगति",
+      "trainingLabel": "प्रशिक्षण प्रगति",
+      "trainingHeading": "प्रशिक्षण",
+      "positionsTrained": "प्रशिक्षित स्थितियाँ",
+      "accuracy": "सटीकता",
+      "dayStreak": "दैनिक स्ट्रीक",
+      "dayStreakBest": "दैनिक स्ट्रीक · सर्वोत्तम {{best}}",
+      "mastered": "निपुण",
+      "reviewDue": "दोहराव के लिए due ({{count}})",
+      "weakSpots": "कमज़ोर क्षेत्र",
+      "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} सही",
+      "weakSpotFallbackName": "ओपनिंग",
+      "puzzleLabel": "पहेली प्रगति",
+      "puzzlesHeading": "पहेलियाँ",
+      "puzzlesSolved": "हल की गई पहेलियाँ",
+      "practicePuzzles": "अभ्यास पहेलियाँ",
+      "startSessionFailed": "सत्र शुरू करने में विफल। अपना कनेक्शन या टोकन जाँचें।",
+      "reviewSessionFailed": "अभी समीक्षा के लिए कोई स्थिति नहीं है।"
+    },
+    "openings": {
+      "title": "ओपनिंग्स",
+      "searchAriaLabel": "ओपनिंग्स खोजें",
+      "searchPlaceholder": "ओपनिंग्स या ECO खोजें…",
+      "sortAZ": "A–Z",
+      "sortPopular": "लोकप्रिय",
+      "sortButton": "क्रमबद्ध करें: {{mode}}",
+      "filterByColor": "रंग के अनुसार फ़िल्टर",
+      "all": "सभी",
+      "white": "सफ़ेद",
+      "black": "काला",
+      "breadcrumb": "पथ",
+      "allOpenings": "सभी ओपनिंग्स",
+      "playAs": "इस रूप में खेलें",
+      "playAsWhite": "सफ़ेद से खेलें",
+      "playAsBlack": "काले से खेलें",
+      "pickToPreview": "लाइन का पूर्वावलोकन करने और प्रशिक्षण शुरू करने के लिए एक ओपनिंग चुनें।",
+      "startLabel": "{{name}} शुरू करें",
+      "chooseOpening": "एक ओपनिंग चुनें",
+      "matches_one": "{{count}} मिलान",
+      "matches_other": "{{count}} मिलान",
+      "variationsInLibrary": "पूरी लाइब्रेरी में {{count}} वैरिएशन",
+      "openingsToTrain_one": "{{count}} ओपनिंग · प्रशिक्षण के लिए एक चुनें",
+      "openingsToTrain_other": "{{count}} ओपनिंग्स · प्रशिक्षण के लिए एक चुनें",
+      "variationCount_one": "{{count}} वैरिएशन",
+      "variationCount_other": "{{count}} वैरिएशन",
+      "boardPreviewStart": "शुरू",
+      "boardPreviewAfterPly": "{{ply}} ply के बाद"
+    }
+  },
+  "puzzles": {
+    "label": "पहेलियाँ",
+    "noPuzzlesDue": "अभी कोई पहेली due नहीं है — बाद में देखें।",
+    "loadFailed": "पहेली लोड करने में विफल। अपना कनेक्शन जाँचें।",
+    "correct": "✅ सही!",
+    "incorrectFallback": "थोड़ा और प्रयास करें — फिर से कोशिश करें।",
+    "submitError": "चाल जमा करने में त्रुटि।",
+    "findBestMove": "सबसे अच्छी चाल खोजें।",
+    "eyebrow": "पहेलियाँ",
+    "title": "पहेली प्रशिक्षण",
+    "rating": "रेटिंग ~{{rating}}",
+    "solved": "हल: {{count}}",
+    "streak": "स्ट्रीक: {{count}}",
+    "streakBest": " · सर्वोत्तम {{best}}",
+    "skipPuzzle": "पहेली छोड़ें ›",
+    "backToDashboard": "← डैशबोर्ड पर वापस"
+  },
+  "training": {
+    "label": "प्रशिक्षण",
+    "whiteToMove": "सफ़ेद की चाल",
+    "blackToMove": "काले की चाल",
+    "showHint": "संकेत दिखाएँ",
+    "eyebrow": "प्रशिक्षण",
+    "prev": "‹ पिछला",
+    "next": "अगला ›",
+    "movePlaceholder": "या कोई चाल लिखें, जैसे e2e4",
+    "play": "चलें",
+    "jumpToLatest": "जमा करने से पहले नवीनतम पर जाएँ",
+    "backToOpenings": "← ओपनिंग्स पर वापस"
+  },
+  "auth": {
+    "login": {
+      "label": "लॉगिन",
+      "title": "लॉगिन",
+      "subtitle": "वापसी पर स्वागत है।",
+      "usernameLabel": "उपयोगकर्ता नाम",
+      "passwordLabel": "पासवर्ड",
+      "submit": "जमा करें",
+      "submitting": "जमा किया जा रहा है...",
+      "emailNotVerified": "लॉगिन करने से पहले अपना ईमेल सत्यापित करें",
+      "resendVerification": "सत्यापन ईमेल फिर से भेजें",
+      "resendSending": "भेजा जा रहा है...",
+      "resendSent": "भेज दिया गया!",
+      "needAccount": "खाता चाहिए?",
+      "registerLink": "पंजीकरण",
+      "errorGeneric": "एक अप्रत्याशित त्रुटि हुई।",
+      "errorLoginFailed": "लॉगिन विफल",
+      "errorResendFailed": "सत्यापन ईमेल फिर से भेजने में विफल"
+    },
+    "register": {
+      "label": "पंजीकरण",
+      "title": "पंजीकरण",
+      "subtitle": "अपना खाता बनाएँ।",
+      "emailLabel": "ईमेल",
+      "usernameLabel": "उपयोगकर्ता नाम",
+      "passwordLabel": "पासवर्ड",
+      "submit": "पंजीकरण",
+      "submitting": "पंजीकरण किया जा रहा है...",
+      "successMessage": "पंजीकरण सफल! लॉगिन करने से पहले सत्यापन लिंक के लिए अपना इनबॉक्स <strong>{{email}}</strong> देखें।",
+      "returnToLogin": "लॉगिन पर लौटें",
+      "haveAccount": "पहले से खाता है?",
+      "loginLink": "लॉगिन",
+      "errorGeneric": "पंजीकरण विफल। कृपया बाद में फिर से कोशिश करें।"
+    },
+    "logout": {
+      "label": "लॉगआउट"
+    },
+    "verifyEmail": {
+      "label": "ईमेल सत्यापित करें",
+      "loadingTitle": "सत्यापित किया जा रहा है...",
+      "loadingSubtitle": "आपका ईमेल सत्यापित किया जा रहा है…",
+      "successTitle": "ईमेल सत्यापित",
+      "successSubtitleWithEmail": "{{email}} सत्यापित हो गया है! अब आप लॉगिन कर सकते हैं।",
+      "successSubtitleNoEmail": "आपका ईमेल सत्यापित हो गया है! अब आप लॉगिन कर सकते हैं।",
+      "goToLogin": "लॉगिन पर जाएँ",
+      "errorTitle": "सत्यापन विफल",
+      "errorSubtitle": "यह सत्यापन लिंक अमान्य है या समाप्त हो चुका है।",
+      "returnToLogin": "लॉगिन पर लौटें"
+    }
+  },
+  "email": {
+    "verify": {
+      "label": "ईमेल सत्यापित करें",
+      "subject": "अपना Knight School ईमेल सत्यापित करें",
+      "heading": "Knight School में आपका स्वागत है!",
+      "instructions": "कृपया नीचे दिए गए लिंक पर जाकर अपना ईमेल पता सत्यापित करें:",
+      "instructionsHtml": "कृपया नीचे दिए गए लिंक पर क्लिक करके अपना ईमेल पता सत्यापित करें:",
+      "expires": "यह लिंक 24 घंटे में समाप्त हो जाएगा।"
+    }
+  }
+}
