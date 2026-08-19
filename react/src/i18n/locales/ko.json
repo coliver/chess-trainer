@@ -1,0 +1,183 @@
+{
+  "header": {
+    "title": "Knight School",
+    "greetingMorning": "좋은 아침입니다 ☀️",
+    "greetingAfternoon": "좋은 오후입니다 🌤️",
+    "greetingEvening": "좋은 저녁입니다 🌙",
+    "nav": "주 메뉴",
+    "openings": "오프닝",
+    "puzzles": "퍼즐",
+    "login": "로그인",
+    "register": "회원가입",
+    "logout": "로그아웃",
+    "viewSource": "GitHub에서 소스 보기"
+  },
+  "language": {
+    "toggle": "언어",
+    "en": "영어",
+    "kl": "클링온어"
+  },
+  "theme": {
+    "toggle": "테마 전환",
+    "dark": "다크",
+    "light": "라이트",
+    "system": "시스템"
+  },
+  "flipBoard": {
+    "label": "보드 뒤집기"
+  },
+  "dashboard": {
+    "header": {
+      "title": "Knight School",
+      "greetingMorning": "좋은 아침입니다 ☀️",
+      "greetingAfternoon": "좋은 오후입니다 🌤️",
+      "greetingEvening": "좋은 저녁입니다 🌙",
+      "nav": "주 메뉴",
+      "openings": "오프닝",
+      "puzzles": "퍼즐",
+      "login": "로그인",
+      "register": "회원가입",
+      "logout": "로그아웃",
+      "viewSource": "GitHub에서 소스 보기"
+    },
+    "progress": {
+      "yourProgress": "진행 상황",
+      "trainingLabel": "훈련 진행도",
+      "trainingHeading": "훈련",
+      "positionsTrained": "훈련한 포지션",
+      "accuracy": "정확도",
+      "dayStreak": "연속 일수",
+      "dayStreakBest": "연속 일수 · 최고 {{best}}",
+      "mastered": "숙달됨",
+      "reviewDue": "복습 필요 ({{count}})",
+      "weakSpots": "약한 부분",
+      "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} 정답",
+      "weakSpotFallbackName": "오프닝",
+      "puzzleLabel": "퍼즐 진행도",
+      "puzzlesHeading": "퍼즐",
+      "puzzlesSolved": "해결한 퍼즐",
+      "practicePuzzles": "연습 퍼즐",
+      "startSessionFailed": "세션 시작에 실패했습니다. 연결이나 토큰을 확인하세요.",
+      "reviewSessionFailed": "아직 복습할 포지션이 없습니다."
+    },
+    "openings": {
+      "title": "오프닝",
+      "searchAriaLabel": "오프닝 검색",
+      "searchPlaceholder": "오프닝 또는 ECO 검색…",
+      "sortAZ": "가나다순",
+      "sortPopular": "인기순",
+      "sortButton": "정렬: {{mode}}",
+      "filterByColor": "색상으로 필터",
+      "all": "전체",
+      "white": "백",
+      "black": "흑",
+      "breadcrumb": "경로",
+      "allOpenings": "모든 오프닝",
+      "playAs": "플레이 색상",
+      "playAsWhite": "백으로 플레이",
+      "playAsBlack": "흑으로 플레이",
+      "pickToPreview": "라인을 미리 보고 훈련을 시작할 오프닝을 선택하세요.",
+      "startLabel": "{{name}} 시작",
+      "chooseOpening": "오프닝 선택",
+      "matches_one": "{{count}}개 일치",
+      "matches_other": "{{count}}개 일치",
+      "variationsInLibrary": "전체 라이브러리의 변형 {{count}}개",
+      "openingsToTrain_one": "오프닝 {{count}}개 · 하나를 선택해 훈련",
+      "openingsToTrain_other": "오프닝 {{count}}개 · 하나를 선택해 훈련",
+      "variationCount_one": "변형 {{count}}개",
+      "variationCount_other": "변형 {{count}}개",
+      "boardPreviewStart": "시작",
+      "boardPreviewAfterPly": "{{ply}}수 후"
+    }
+  },
+  "puzzles": {
+    "label": "퍼즐",
+    "noPuzzlesDue": "지금은 해결할 퍼즐이 없습니다 — 나중에 다시 확인하세요.",
+    "loadFailed": "퍼즐을 불러오지 못했습니다. 연결을 확인하세요.",
+    "correct": "✅ 정답!",
+    "incorrectFallback": "아쉽네요 — 다시 시도하세요.",
+    "submitError": "수 제출 중 오류가 발생했습니다.",
+    "findBestMove": "최선의 수를 찾으세요.",
+    "eyebrow": "퍼즐",
+    "title": "퍼즐 훈련",
+    "rating": "레이팅 ~{{rating}}",
+    "solved": "해결: {{count}}",
+    "streak": "연속: {{count}}",
+    "streakBest": " · 최고 {{best}}",
+    "skipPuzzle": "퍼즐 건너뛰기 ›",
+    "backToDashboard": "← 대시보드로 돌아가기"
+  },
+  "training": {
+    "label": "훈련",
+    "whiteToMove": "백 차례",
+    "blackToMove": "흑 차례",
+    "showHint": "힌트 보기",
+    "eyebrow": "훈련",
+    "prev": "‹ 이전",
+    "next": "다음 ›",
+    "movePlaceholder": "또는 수를 입력하세요. 예: e2e4",
+    "play": "두기",
+    "jumpToLatest": "제출 전에 최신 상태로 이동",
+    "backToOpenings": "← 오프닝으로 돌아가기"
+  },
+  "auth": {
+    "login": {
+      "label": "로그인",
+      "title": "로그인",
+      "subtitle": "다시 오신 것을 환영합니다.",
+      "usernameLabel": "사용자 이름",
+      "passwordLabel": "비밀번호",
+      "submit": "제출",
+      "submitting": "제출 중...",
+      "emailNotVerified": "로그인하기 전에 이메일을 인증하세요",
+      "resendVerification": "인증 이메일 다시 보내기",
+      "resendSending": "전송 중...",
+      "resendSent": "전송됨!",
+      "needAccount": "계정이 없으신가요?",
+      "registerLink": "회원가입",
+      "errorGeneric": "예상치 못한 오류가 발생했습니다.",
+      "errorLoginFailed": "로그인 실패",
+      "errorResendFailed": "인증 이메일 재전송 실패"
+    },
+    "register": {
+      "label": "회원가입",
+      "title": "회원가입",
+      "subtitle": "계정을 만들어보세요.",
+      "emailLabel": "이메일",
+      "usernameLabel": "사용자 이름",
+      "passwordLabel": "비밀번호",
+      "submit": "회원가입",
+      "submitting": "등록 중...",
+      "successMessage": "회원가입이 완료되었습니다! 로그인하기 전에 <strong>{{email}}</strong> 받은편지함에서 인증 링크를 확인하세요.",
+      "returnToLogin": "로그인으로 돌아가기",
+      "haveAccount": "이미 계정이 있으신가요?",
+      "loginLink": "로그인",
+      "errorGeneric": "회원가입에 실패했습니다. 나중에 다시 시도하세요."
+    },
+    "logout": {
+      "label": "로그아웃"
+    },
+    "verifyEmail": {
+      "label": "이메일 인증",
+      "loadingTitle": "인증 중...",
+      "loadingSubtitle": "이메일을 인증하는 중…",
+      "successTitle": "이메일 인증 완료",
+      "successSubtitleWithEmail": "{{email}} 인증이 완료되었습니다! 이제 로그인할 수 있습니다.",
+      "successSubtitleNoEmail": "이메일 인증이 완료되었습니다! 이제 로그인할 수 있습니다.",
+      "goToLogin": "로그인으로 이동",
+      "errorTitle": "인증 실패",
+      "errorSubtitle": "이 인증 링크는 유효하지 않거나 만료되었습니다.",
+      "returnToLogin": "로그인으로 돌아가기"
+    }
+  },
+  "email": {
+    "verify": {
+      "label": "이메일 인증",
+      "subject": "Knight School 이메일을 인증하세요",
+      "heading": "Knight School에 오신 것을 환영합니다!",
+      "instructions": "아래 링크를 방문하여 이메일 주소를 인증하세요:",
+      "instructionsHtml": "아래 링크를 클릭하여 이메일 주소를 인증하세요:",
+      "expires": "이 링크는 24시간 후 만료됩니다."
+    }
+  }
+}

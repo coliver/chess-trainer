@@ -1,0 +1,183 @@
+{
+  "header": {
+    "title": "ナイトスクール",
+    "greetingMorning": "おはようございます ☀️",
+    "greetingAfternoon": "こんにちは 🌤️",
+    "greetingEvening": "こんばんは 🌙",
+    "nav": "メイン",
+    "openings": "定跡",
+    "puzzles": "問題",
+    "login": "ログイン",
+    "register": "登録",
+    "logout": "ログアウト",
+    "viewSource": "GitHubでソースを見る"
+  },
+  "language": {
+    "toggle": "言語",
+    "en": "英語",
+    "kl": "クリンゴン語"
+  },
+  "theme": {
+    "toggle": "テーマを切り替え",
+    "dark": "ダーク",
+    "light": "ライト",
+    "system": "システム"
+  },
+  "flipBoard": {
+    "label": "盤面を反転"
+  },
+  "dashboard": {
+    "header": {
+      "title": "ナイトスクール",
+      "greetingMorning": "おはようございます ☀️",
+      "greetingAfternoon": "こんにちは 🌤️",
+      "greetingEvening": "こんばんは 🌙",
+      "nav": "メイン",
+      "openings": "定跡",
+      "puzzles": "問題",
+      "login": "ログイン",
+      "register": "登録",
+      "logout": "ログアウト",
+      "viewSource": "GitHubでソースを見る"
+    },
+    "progress": {
+      "yourProgress": "あなたの進捗",
+      "trainingLabel": "トレーニングの進捗",
+      "trainingHeading": "トレーニング",
+      "positionsTrained": "学習した局面",
+      "accuracy": "正答率",
+      "dayStreak": "連続日数",
+      "dayStreakBest": "連続日数 · 最高 {{best}}",
+      "mastered": "習得済み",
+      "reviewDue": "復習対象 ({{count}})",
+      "weakSpots": "苦手分野",
+      "weakSpotItem": "{{name}} — 正解 {{correct}}/{{attempts}}",
+      "weakSpotFallbackName": "定跡",
+      "puzzleLabel": "問題の進捗",
+      "puzzlesHeading": "問題",
+      "puzzlesSolved": "解いた問題数",
+      "practicePuzzles": "練習問題",
+      "startSessionFailed": "セッションの開始に失敗しました。接続またはトークンを確認してください。",
+      "reviewSessionFailed": "現在、復習対象の局面はありません。"
+    },
+    "openings": {
+      "title": "定跡",
+      "searchAriaLabel": "定跡を検索",
+      "searchPlaceholder": "定跡またはECOを検索…",
+      "sortAZ": "A–Z",
+      "sortPopular": "人気順",
+      "sortButton": "並び替え: {{mode}}",
+      "filterByColor": "色で絞り込む",
+      "all": "すべて",
+      "white": "白",
+      "black": "黒",
+      "breadcrumb": "パンくず",
+      "allOpenings": "すべての定跡",
+      "playAs": "プレイする側",
+      "playAsWhite": "白番でプレイ",
+      "playAsBlack": "黒番でプレイ",
+      "pickToPreview": "定跡を選んで手順を確認し、学習を開始します。",
+      "startLabel": "{{name}}を開始",
+      "chooseOpening": "定跡を選択",
+      "matches_one": "{{count}}件一致",
+      "matches_other": "{{count}}件一致",
+      "variationsInLibrary": "ライブラリ全体で{{count}}種類の変化",
+      "openingsToTrain_one": "{{count}}個の定跡 · 1つ選んで学習",
+      "openingsToTrain_other": "{{count}}個の定跡 · 1つ選んで学習",
+      "variationCount_one": "{{count}}種類の変化",
+      "variationCount_other": "{{count}}種類の変化",
+      "boardPreviewStart": "開始",
+      "boardPreviewAfterPly": "{{ply}}手後"
+    }
+  },
+  "puzzles": {
+    "label": "問題",
+    "noPuzzlesDue": "今すぐ取り組める問題はありません。後でもう一度確認してください。",
+    "loadFailed": "問題の読み込みに失敗しました。接続を確認してください。",
+    "correct": "✅ 正解！",
+    "incorrectFallback": "惜しいです。もう一度試してください。",
+    "submitError": "手の送信中にエラーが発生しました。",
+    "findBestMove": "最善手を見つけてください。",
+    "eyebrow": "問題",
+    "title": "問題トレーニング",
+    "rating": "レーティング 約{{rating}}",
+    "solved": "解答済み: {{count}}",
+    "streak": "連続正解: {{count}}",
+    "streakBest": " · 最高 {{best}}",
+    "skipPuzzle": "問題をスキップ ›",
+    "backToDashboard": "← ダッシュボードに戻る"
+  },
+  "training": {
+    "label": "トレーニング",
+    "whiteToMove": "白番手番",
+    "blackToMove": "黒番手番",
+    "showHint": "ヒントを表示",
+    "eyebrow": "トレーニング",
+    "prev": "‹ 前へ",
+    "next": "次へ ›",
+    "movePlaceholder": "または手を入力してください。例: e2e4",
+    "play": "指す",
+    "jumpToLatest": "送信前に最新まで移動",
+    "backToOpenings": "← 定跡に戻る"
+  },
+  "auth": {
+    "login": {
+      "label": "ログイン",
+      "title": "ログイン",
+      "subtitle": "おかえりなさい。",
+      "usernameLabel": "ユーザー名",
+      "passwordLabel": "パスワード",
+      "submit": "送信",
+      "submitting": "送信中...",
+      "emailNotVerified": "ログインする前にメールを確認してください",
+      "resendVerification": "確認メールを再送信",
+      "resendSending": "送信中...",
+      "resendSent": "送信しました！",
+      "needAccount": "アカウントが必要ですか？",
+      "registerLink": "登録",
+      "errorGeneric": "予期しないエラーが発生しました。",
+      "errorLoginFailed": "ログインに失敗しました",
+      "errorResendFailed": "確認メールの再送信に失敗しました"
+    },
+    "register": {
+      "label": "登録",
+      "title": "登録",
+      "subtitle": "アカウントを作成しましょう。",
+      "emailLabel": "メールアドレス",
+      "usernameLabel": "ユーザー名",
+      "passwordLabel": "パスワード",
+      "submit": "登録",
+      "submitting": "登録中...",
+      "successMessage": "登録に成功しました。ログインする前に、<strong>{{email}}</strong> 宛ての受信箱で確認リンクをご確認ください。",
+      "returnToLogin": "ログインに戻る",
+      "haveAccount": "すでにアカウントをお持ちですか？",
+      "loginLink": "ログイン",
+      "errorGeneric": "登録に失敗しました。後でもう一度お試しください。"
+    },
+    "logout": {
+      "label": "ログアウト"
+    },
+    "verifyEmail": {
+      "label": "メール確認",
+      "loadingTitle": "確認中...",
+      "loadingSubtitle": "メールを確認しています…",
+      "successTitle": "メール確認完了",
+      "successSubtitleWithEmail": "{{email}} の確認が完了しました！ログインできるようになりました。",
+      "successSubtitleNoEmail": "メールの確認が完了しました！ログインできるようになりました。",
+      "goToLogin": "ログインへ",
+      "errorTitle": "確認に失敗しました",
+      "errorSubtitle": "この確認リンクは無効か期限切れです。",
+      "returnToLogin": "ログインに戻る"
+    }
+  },
+  "email": {
+    "verify": {
+      "label": "メール確認",
+      "subject": "ナイトスクールのメールを確認してください",
+      "heading": "ナイトスクールへようこそ！",
+      "instructions": "以下のリンクにアクセスして、メールアドレスを確認してください:",
+      "instructionsHtml": "以下のリンクをクリックして、メールアドレスを確認してください:",
+      "expires": "このリンクは24時間で期限切れになります。"
+    }
+  }
+}

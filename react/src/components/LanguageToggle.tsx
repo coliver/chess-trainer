@@ -9,17 +9,22 @@ const FLAGS: Record<string, string> = {
   fr: "🇫🇷",
   de: "🇩🇪",
   it: "🇮🇹",
+  jp: "🇯🇵",
+  ko: "🇰🇷",
   nl: "🇳🇱",
   pl: "🇵🇱",
   pt: "🇵🇹",
   ru: "🇷🇺",
   tr: "🇹🇷",
+  "zh-CN": "🇨🇳",
   "en-x-pirate": "🏴‍☠️",
   "en-x-klingon": "🖖",
   "en-x-groot": "🌱",
 };
 
-const LANGUAGES = Object.keys(i18nInstance.options.resources ?? {});
+const LANGUAGES = Object.keys(i18nInstance.options.resources ?? {}).sort((a, b) =>
+  a.localeCompare(b)
+);
 
 function toLanguage(value: string): string {
   return LANGUAGES.includes(value) ? value : "en";
