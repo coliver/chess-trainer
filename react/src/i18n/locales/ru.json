@@ -20,9 +20,9 @@
   },
   "theme": {
     "toggle": "Переключить тему",
-    "dark": "Dark",
-    "light": "Light",
-    "system": "System"
+    "dark": "Тёмный",
+    "light": "Светлый",
+    "system": "Автоматический"
   },
   "flipBoard": {
     "label": "Повернуть доску"

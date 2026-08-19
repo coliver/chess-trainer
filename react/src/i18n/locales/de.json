@@ -20,8 +20,8 @@
   },
   "theme": {
     "toggle": "Design wechseln",
-    "dark": "Dark",
-    "light": "Light",
+    "dark": "Dunkel",
+    "light": "Hell",
     "system": "System"
   },
   "flipBoard": {

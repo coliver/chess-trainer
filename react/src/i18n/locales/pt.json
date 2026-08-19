@@ -20,9 +20,9 @@
   },
   "theme": {
     "toggle": "Alternar tema",
-    "dark": "Dark",
-    "light": "Light",
-    "system": "System"
+    "dark": "Escuro",
+    "light": "Claro",
+    "system": "Automático"
   },
   "flipBoard": {
     "label": "Virar tabuleiro"

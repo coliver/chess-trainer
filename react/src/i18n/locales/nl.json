@@ -20,9 +20,9 @@
   },
   "theme": {
     "toggle": "Thema wisselen",
-    "dark": "Dark",
-    "light": "Light",
-    "system": "System"
+    "dark": "Donker",
+    "light": "Licht",
+    "system": "Automatisch"
   },
   "flipBoard": {
     "label": "Bord omdraaien"

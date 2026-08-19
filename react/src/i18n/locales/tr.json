@@ -20,9 +20,9 @@
   },
   "theme": {
     "toggle": "Temayı değiştir",
-    "dark": "Dark",
-    "light": "Light",
-    "system": "System"
+    "dark": "Koyu",
+    "light": "Açık",
+    "system": "Otomatik"
   },
   "flipBoard": {
     "label": "Tahtayı çevir"

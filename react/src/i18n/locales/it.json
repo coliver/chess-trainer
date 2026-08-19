@@ -20,9 +20,9 @@
   },
   "theme": {
     "toggle": "Cambia tema",
-    "dark": "Dark",
-    "light": "Light",
-    "system": "System"
+    "dark": "Scuro",
+    "light": "Chiaro",
+    "system": "Automatico"
   },
   "flipBoard": {
     "label": "Capovolgi scacchiera"

@@ -20,9 +20,9 @@
   },
   "theme": {
     "toggle": "Przełącz motyw",
-    "dark": "Dark",
-    "light": "Light",
-    "system": "System"
+    "dark": "Ciemny",
+    "light": "Jasny",
+    "system": "Automatycznie"
   },
   "flipBoard": {
     "label": "Przewróć planszę"

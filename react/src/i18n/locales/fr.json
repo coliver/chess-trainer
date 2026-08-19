@@ -20,9 +20,9 @@
   },
   "theme": {
     "toggle": "Changer de thème",
-    "dark": "Dark",
-    "light": "Light",
-    "system": "System"
+    "dark": "Sombre",
+    "light": "Clair",
+    "system": "Automatique"
   },
   "flipBoard": {
     "label": "Retourner l’échiquier"
