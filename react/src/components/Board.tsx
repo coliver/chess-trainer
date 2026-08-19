@@ -44,14 +44,9 @@ export default function Board({
     const board = new Chessboard(boardElement, {
       position,
       orientation,
-      responsive: true,
-      assetsUrl: "/cm-chessboard-assets/",
-      assetsCache: true,
       style: {
         cssClass: "default",
-        showCoordinates: _showCoordinates,
-        animationDuration: _animated ? 300 : 0,
-      } as any,
+      },
     } as any);
 
     boardRef.current = board;
@@ -128,7 +123,7 @@ export default function Board({
       board.destroy?.();
       boardRef.current = null;
     };
-  }, [orientation, position, onMove, playSound, interactive, getLegalMoves, onMoveStart, markers, _showCoordinates, _animated]);
+  }, [orientation, position, onMove, playSound, interactive, getLegalMoves, onMoveStart, markers]);
 
   useEffect(() => {
     if (gameOver) {
