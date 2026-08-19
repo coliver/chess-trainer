@@ -50,7 +50,7 @@ const LANGUAGES = Object.keys(i18nInstance.options.resources ?? {}).sort((a, b) 
 );
 
 function toLanguage(value: string): string {
-  return LANGUAGES.includes(value) ? value : "en";
+  return LANGUAGES.includes(value) ? value : "en-US";
 }
 
 export function LanguageToggle() {

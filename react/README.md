@@ -208,7 +208,7 @@ The UI chrome (header, auth pages, dashboard, training, and puzzles pages) is lo
 
 `LanguageToggle.tsx` (in the header, next to the theme toggle) renders a `<select>` whose options are derived from the same auto-discovered language list, each shown as a flag emoji; picking one calls `i18n.changeLanguage()`.
 
-`en.json` is the source of truth for translation *keys* — run `npm run i18n:sync` (`scripts/sync-locales.mjs`) after adding/renaming/removing a key there to propagate the structural change to every other locale file automatically (missing keys land as `"[TODO <lang>] ..."` stubs to fill in; stale keys get dropped). `npm run i18n:check` does the same as a read-only CI check. `src/i18n/locales.test.ts` fails if any locale is missing a key, has an empty value, or still has a `[TODO]` stub.
+`en-US.json` is the source of truth for translation *keys* — run `npm run i18n:sync` (`scripts/sync-locales.mjs`) after adding/renaming/removing a key there to propagate the structural change to every other locale file automatically (missing keys land as `"[TODO <lang>] ..."` stubs to fill in; stale keys get dropped). `npm run i18n:check` does the same as a read-only CI check. `src/i18n/locales.test.ts` fails if any locale is missing a key, has an empty value, or still has a `[TODO]` stub.
 
 Shouts to Patricia, Maritza, and Maritza's husband for helping out with the Spanish translation!
 

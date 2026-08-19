@@ -10,20 +10,20 @@ describe("LanguageToggle", () => {
   beforeEach(async () => {
     localStorage.clear();
     await act(async () => {
-      await i18n.changeLanguage("en");
+      await i18n.changeLanguage("en-US");
     });
   });
 
   afterEach(async () => {
     localStorage.clear();
     await act(async () => {
-      await i18n.changeLanguage("en");
+      await i18n.changeLanguage("en-US");
     });
   });
 
   it("defaults to English", () => {
     render(<LanguageToggle />);
-    expect(screen.getByRole("combobox")).toHaveValue("en");
+    expect(screen.getByRole("combobox")).toHaveValue("en-US");
   });
 
   it("switches language on selection and persists to localStorage", async () => {

@@ -15,12 +15,12 @@ const resources = Object.fromEntries(
 
 const languages = Object.keys(resources);
 const saved = localStorage.getItem("language");
-const initialLanguage = saved && languages.includes(saved) ? saved : "en";
+const initialLanguage = saved && languages.includes(saved) ? saved : "en-US";
 
 i18n.use(initReactI18next).init({
   resources,
   lng: initialLanguage,
-  fallbackLng: "en",
+  fallbackLng: "en-US",
   interpolation: {
     escapeValue: false,
   },

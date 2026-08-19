@@ -25,12 +25,12 @@ function flattenKeys(obj: object, prefix = ""): string[] {
 }
 
 describe("locale resources", () => {
-  const en = loadLocale("en.json");
+  const en = loadLocale("en-US.json");
   const enKeys = flattenKeys(en).sort();
-  const otherLocaleFiles = localeFiles.filter((f) => f !== "en.json");
+  const otherLocaleFiles = localeFiles.filter((f) => f !== "en-US.json");
 
   it.each(otherLocaleFiles)(
-    "%s exposes the same set of translation keys as en.json",
+    "%s exposes the same set of translation keys as en-US.json",
     (file) => {
       expect(flattenKeys(loadLocale(file)).sort()).toEqual(enKeys);
     },

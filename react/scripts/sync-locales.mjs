@@ -1,11 +1,11 @@
 #!/usr/bin/env node
-// Keeps every locale file's *key structure* in sync with en.json (the source of truth).
+// Keeps every locale file's *key structure* in sync with en-US.json (the source of truth).
 //
-// - Adds keys that exist in en.json but are missing from a locale, filling them
+// - Adds keys that exist in en-US.json but are missing from a locale, filling them
 //   with a "[TODO fr] English text" placeholder so they're easy to grep for and
 //   the file stays valid to load.
-// - Removes keys that no longer exist in en.json.
-// - Reorders keys to match en.json so diffs stay readable.
+// - Removes keys that no longer exist in en-US.json.
+// - Reorders keys to match en-US.json so diffs stay readable.
 //
 // Usage:
 //   node scripts/sync-locales.mjs          write changes
@@ -71,10 +71,10 @@ function collectRemoved(enNode, localeNode, prefix, removed) {
   }
 }
 
-const en = loadJson("en.json");
+const en = loadJson("en-US.json");
 const localeFiles = fs
   .readdirSync(localesDir)
-  .filter((f) => f.endsWith(".json") && f !== "en.json");
+  .filter((f) => f.endsWith(".json") && f !== "en-US.json");
 
 let outOfSync = false;
 
@@ -106,7 +106,7 @@ for (const file of localeFiles) {
 
 if (checkOnly && outOfSync) {
   console.error(
-    "\nLocale files are out of sync with en.json. Run `npm run i18n:sync` to fix.",
+    "\nLocale files are out of sync with en-US.json. Run `npm run i18n:sync` to fix.",
   );
   process.exit(1);
 }
