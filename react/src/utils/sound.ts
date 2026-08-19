@@ -66,10 +66,25 @@ const soundFiles: Record<SoundName, string> = {
 };
 
 const cache: Partial<Record<SoundName, HTMLAudioElement>> = {};
-let enabled = true;
+const STORAGE_KEY = "chess-trainer:soundsEnabled";
+
+function readStoredEnabled(): boolean {
+  if (typeof localStorage === "undefined") return true;
+  const stored = localStorage.getItem(STORAGE_KEY);
+  return stored === null ? true : stored === "true";
+}
+
+let enabled = readStoredEnabled();
 
 export function setSoundsEnabled(value: boolean) {
   enabled = value;
+  if (typeof localStorage !== "undefined") {
+    localStorage.setItem(STORAGE_KEY, String(value));
+  }
+}
+
+export function getSoundsEnabled(): boolean {
+  return enabled;
 }
 
 function getAudio(name: SoundName) {
@@ -86,7 +101,9 @@ export function playSound(name: SoundName) {
   audio.currentTime = 0;
 
   const result = audio.play();
-  result?.catch?.(() => {});
+  result?.catch?.((err: unknown) => {
+    console.warn(`[sound] failed to play "${name}":`, err);
+  });
 }
 
 export type MoveSound = "move" | "capture" | "castle" | "promote" | "illegal";

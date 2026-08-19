@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { playSound, setSoundsEnabled, type SoundName } from "../utils/sound";
+import { playSound, setSoundsEnabled, getSoundsEnabled, type SoundName } from "../utils/sound";
 
 export function useSound() {
   const play = useCallback((name: SoundName) => {
@@ -10,5 +10,5 @@ export function useSound() {
     setSoundsEnabled(value);
   }, []);
 
-  return { play, setEnabled };
+  return { play, setEnabled, isEnabled: getSoundsEnabled };
 }

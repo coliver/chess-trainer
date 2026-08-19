@@ -26,4 +26,12 @@ describe("useSound", () => {
 
     expect(spy).toHaveBeenCalledWith(false);
   });
+
+  it("exposes isEnabled reflecting getSoundsEnabled", () => {
+    const spy = vi.spyOn(sound, "getSoundsEnabled").mockReturnValue(false);
+    const { result } = renderHook(() => useSound());
+
+    expect(result.current.isEnabled()).toBe(false);
+    spy.mockRestore();
+  });
 });
