@@ -1,6 +1,3 @@
-@import 'cm-chessboard/assets/chessboard.css';
-@import 'cm-chessboard/assets/extensions/markers/markers.css';
-
 @import "../../packages/shared-styles/tokens.css";
 @import "../../packages/shared-styles/base.css";
 @import "../../packages/shared-styles/header.css";
