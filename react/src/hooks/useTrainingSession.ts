@@ -96,6 +96,7 @@ export function useTrainingSession(
         if (!isMountedRef.current) return;
         applyNextItemState(next);
         setFeedback("");
+        playSound("gameStart");
       } catch (unknownErr) {
         const err = unknownErr as AxiosError<{ detail?: string }>;
         if (!isMountedRef.current) return;

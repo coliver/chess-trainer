@@ -199,6 +199,7 @@ export const Training = () => {
     if (applied) {
       appendTimelineFen(applied.nextFen);
       setLastMove({ from: uci.slice(0, 2), to: uci.slice(2, 4) });
+      playSound("moveOpponent");
     }
     // Opponent's reply, not the player's turn — don't show the "Correct!" banner for it.
     void submitMove(uci, fenRef.current, { silent: true });

@@ -35,3 +35,29 @@ coverage
 /training-*.png
 !/dashboard-light-1440.png
 !/dashboard-dark-1440.png
+
+# Sound assets not wired to any playSound() call site (see src/utils/sound.ts).
+# Re-track a file here once it's actually used.
+/public/sounds/boom.mp3
+/public/sounds/click.mp3
+/public/sounds/decline.mp3
+/public/sounds/event-end.mp3
+/public/sounds/event-start.mp3
+/public/sounds/event-warning.mp3
+/public/sounds/game-draw.mp3
+/public/sounds/game-end.mp3
+/public/sounds/game-lose.mp3
+/public/sounds/game-lose-long.mp3
+/public/sounds/game-win-long.mp3
+/public/sounds/lesson-fail.mp3
+/public/sounds/move-self-check.mp3
+/public/sounds/notification.mp3
+/public/sounds/notify.mp3
+/public/sounds/scatter.mp3
+/public/sounds/shoutout.mp3
+/public/sounds/tenseconds.mp3
+# Orphan files not even referenced by a SoundName key in sound.ts
+/public/sounds/move-opponent.mp3
+/public/sounds/move-self.mp3
+/public/sounds/premove.mp3
+/public/sounds/puzzle-correct.mp3
