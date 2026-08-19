@@ -1,4 +1,5 @@
 ## 2026-08-19
+- chore: adopt semantic versioning, starting at `v1.0.0` (git tags only, no `package.json` bumps); the deploy workflow now derives the running version via `git describe --tags` and bakes it into the React build as `VITE_APP_VERSION`, shown small under the header logo (`Header.tsx`'s `.site-header-version`)
 - feat(training): replace the dead-end "Session complete" banner with Train again / Choose another opening actions, translated across all locales; fix a stuck "Starting..." button caused by `isSessionCompleted`/`isRestarting` never resetting when a new session loaded into the same page instance
 - feat(sounds): wire up puzzle/training feedback sounds and fix broken asset paths, then close the remaining gaps — play `gameStart` on session load and `moveOpponent` on the autoplayed opponent reply, persist the mute preference, and surface playback failures instead of failing silently; untrack and gitignore the 22 sound files with no `playSound()` call site
 - fix(i18n): change the default language code from `en` to `en-US` everywhere it was hardcoded — i18n config, the verification email, and the `users.language` column default (migration `0010`)

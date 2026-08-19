@@ -9,6 +9,8 @@ import { logout } from "../auth";
 import { useAuth } from "../hooks/useAuth";
 import { LanguageToggle } from "./LanguageToggle";
 
+const APP_VERSION = import.meta.env.VITE_APP_VERSION ?? "dev";
+
 export default function Header() {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -36,7 +38,12 @@ export default function Header() {
     <header className="site-header">
       <div className="site-header-inner">
         <div className="site-header-brand">
-          <KnightSchoolIcon height="64px" className="site-header-logo" />
+          <div className="site-header-logo-stack">
+            <KnightSchoolIcon height="64px" className="site-header-logo" />
+            <span className="site-header-version" data-testid="app-version">
+              {APP_VERSION}
+            </span>
+          </div>
           <Link to="/dashboard" className="site-header-title">
             {t("header.title")}
           </Link>

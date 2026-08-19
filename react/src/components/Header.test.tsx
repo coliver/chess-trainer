@@ -32,6 +32,12 @@ describe("Header auth UI", () => {
     localStorage.removeItem("token");
   });
 
+  it("shows the app version under the logo", () => {
+    renderWithRouter(<Header />);
+
+    expect(screen.getByTestId("app-version")).not.toBeEmptyDOMElement();
+  });
+
   it("logs out, clears the token, and navigates to /login", async () => {
     const user = userEvent.setup();
     mockNavigate.mockReset();
