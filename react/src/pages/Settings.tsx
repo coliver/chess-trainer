@@ -119,6 +119,15 @@ export default function Settings() {
               onChange={(e) => update({ board_animations: e.target.checked })}
             />
           </label>
+
+          <label className="settings-row settings-row--checkbox">
+            <span className="settings-row-label">{t("settings.appearance.soundLabel")}</span>
+            <input
+              type="checkbox"
+              checked={preferences.sound}
+              onChange={(e) => update({ sound: e.target.checked })}
+            />
+          </label>
         </section>
 
         <section className="settings-section">
