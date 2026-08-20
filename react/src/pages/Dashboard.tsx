@@ -67,7 +67,13 @@ export const Dashboard = () => {
           ? t("header.greetingAfternoon")
           : t("header.greetingEvening");
     const who = username ? `, ${username}` : "";
-    return `${base}${who}`;
+    const match = base.match(/(\p{Extended_Pictographic}️?)\s*$/u);
+    if (!match) return { before: `${base}${who}`, emoji: "", who: "" };
+    return {
+      before: base.slice(0, match.index).trimEnd(),
+      emoji: match[1],
+      who,
+    };
   }, [username, t]);
 
   const [openings, setOpenings] = useState<Opening[]>([]);
@@ -235,7 +241,11 @@ export const Dashboard = () => {
     <main className="page">
       <div className="dashboard-stack">
         <div role="heading" className="dashboard-greeting">
-          {greeting}
+          {greeting.before}
+          {greeting.emoji && (
+            <span className="dashboard-greeting-emoji"> {greeting.emoji}</span>
+          )}
+          {greeting.who}
         </div>
         <div className="card">
           <section

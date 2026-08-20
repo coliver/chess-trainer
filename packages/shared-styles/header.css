@@ -182,7 +182,6 @@
   font-size: 64px;
   text-decoration: none;
   line-height: 1.1;
-  white-space: nowrap;
 
   display: block;
 
@@ -235,7 +234,12 @@
 
   .site-header-nav {
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
+  }
+
+  .site-header-actions {
+    justify-content: flex-end;
+    gap: 6px;
   }
 
   .site-header-link {
@@ -243,17 +247,18 @@
   }
 
   .site-header-profile-link {
-    width: 36px;
-    height: 36px;
+    box-sizing: border-box;
+    width: 34px;
+    height: 34px;
   }
 
   .theme-toggle-btn {
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
   }
 
   .language-toggle-select {
-    height: 36px;
-    width: 36px;
+    height: 34px;
+    width: 34px;
   }
 }

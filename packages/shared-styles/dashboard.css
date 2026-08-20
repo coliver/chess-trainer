@@ -19,6 +19,15 @@
   color: var(--text);
   opacity: 0.75;
   padding: 0 4px;
+  /* .page's top padding (32px) is taller than .dashboard-stack's gap (12px)
+     wants to give it below, so pull it up to shrink the top gap and top up
+     the bottom gap to match, landing both at a smaller, equal 16px. */
+  margin-top: -16px;
+  margin-bottom: 4px;
+}
+
+.dashboard-greeting-emoji {
+  vertical-align: middle;
 }
 
 /* ===== Dashboard: progress overview (training + puzzles) ===== */
@@ -681,6 +690,10 @@
 
 /* ===== Phone layout: progress strip ===== */
 @media (max-width: 600px) {
+  .dashboard-greeting {
+    margin-top: -10px;
+    margin-bottom: -2px;
+  }
   .card {
     padding: 18px 14px;
     text-align: left;

@@ -55,7 +55,7 @@ export default function Header() {
               </>
             )}
 
-            {!isLoggedIn ? (
+            {!isLoggedIn && (
               <>
                 <Link
                   to="/login"
@@ -74,28 +74,29 @@ export default function Header() {
                   <UserPlus size={22} aria-hidden="true" />
                 </Link>
               </>
-            ) : (
-              <>
-                <Link
-                  to="/settings"
-                  className="site-header-profile-link"
-                  aria-label={t("header.settings")}
-                  title={t("header.settings")}
-                >
-                  <Settings size={22} aria-hidden="true" />
-                </Link>
-                <button
-                  className="site-header-profile-link"
-                  onClick={onLogout}
-                  aria-label={t("header.logout")}
-                  title={t("header.logout")}
-                >
-                  <LogOut size={22} aria-hidden="true" />
-                </button>
-              </>
             )}
 
             <div className="site-header-actions">
+              {isLoggedIn && (
+                <>
+                  <Link
+                    to="/settings"
+                    className="site-header-profile-link"
+                    aria-label={t("header.settings")}
+                    title={t("header.settings")}
+                  >
+                    <Settings size={22} aria-hidden="true" />
+                  </Link>
+                  <button
+                    className="site-header-profile-link"
+                    onClick={onLogout}
+                    aria-label={t("header.logout")}
+                    title={t("header.logout")}
+                  >
+                    <LogOut size={22} aria-hidden="true" />
+                  </button>
+                </>
+              )}
               <a
                 href="https://github.com/coliver/chess-trainer"
                 className="site-header-profile-link"
