@@ -195,7 +195,8 @@
       "boardThemeLabel": "צבעי הלוח",
       "pieceSetLabel": "סט כלים",
       "showCoordinatesLabel": "הצג קואורדינטות לוח",
-      "boardAnimationsLabel": "הנפש תנועות כלים"
+      "boardAnimationsLabel": "הנפש תנועות כלים",
+      "soundLabel": "אפקטים קוליים"
     },
     "boardOrientation": {
       "heading": "כיוון לוח",

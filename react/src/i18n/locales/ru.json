@@ -195,7 +195,8 @@
       "boardThemeLabel": "Цвета доски",
       "pieceSetLabel": "Набор фигур",
       "showCoordinatesLabel": "Показывать координаты доски",
-      "boardAnimationsLabel": "Анимировать ходы фигур"
+      "boardAnimationsLabel": "Анимировать ходы фигур",
+      "soundLabel": "Звуковые эффекты"
     },
     "boardOrientation": {
       "heading": "Ориентация доски",

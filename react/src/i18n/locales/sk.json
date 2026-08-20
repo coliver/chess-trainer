@@ -195,7 +195,8 @@
       "boardThemeLabel": "Farby šachovnice",
       "pieceSetLabel": "Sada figúrok",
       "showCoordinatesLabel": "Zobraziť súradnice šachovnice",
-      "boardAnimationsLabel": "Animovať pohyby figúrok"
+      "boardAnimationsLabel": "Animovať pohyby figúrok",
+      "soundLabel": "Zvukové efekty"
     },
     "boardOrientation": {
       "heading": "Orientácia šachovnice",

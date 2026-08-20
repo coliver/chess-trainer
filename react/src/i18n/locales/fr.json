@@ -195,7 +195,8 @@
       "boardThemeLabel": "Couleurs de l'échiquier",
       "pieceSetLabel": "Ensemble de pièces",
       "showCoordinatesLabel": "Afficher les coordonnées de l'échiquier",
-      "boardAnimationsLabel": "Animer les mouvements des pièces"
+      "boardAnimationsLabel": "Animer les mouvements des pièces",
+      "soundLabel": "Effets sonores"
     },
     "boardOrientation": {
       "heading": "Orientation de l'échiquier",

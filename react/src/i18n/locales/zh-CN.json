@@ -195,7 +195,8 @@
       "boardThemeLabel": "棋盘颜色",
       "pieceSetLabel": "棋子风格",
       "showCoordinatesLabel": "显示棋盘坐标",
-      "boardAnimationsLabel": "播放走子动画"
+      "boardAnimationsLabel": "播放走子动画",
+      "soundLabel": "音效"
     },
     "boardOrientation": {
       "heading": "棋盘方向",

@@ -195,7 +195,8 @@
       "boardThemeLabel": "Laudan värit",
       "pieceSetLabel": "Nappuloiden tyyli",
       "showCoordinatesLabel": "Näytä laudan koordinaatit",
-      "boardAnimationsLabel": "Animoi nappuloiden liikkeet"
+      "boardAnimationsLabel": "Animoi nappuloiden liikkeet",
+      "soundLabel": "Äänitehosteet"
     },
     "boardOrientation": {
       "heading": "Laudan orientaatio",

@@ -195,7 +195,8 @@
       "boardThemeLabel": "Board colors, matey",
       "pieceSetLabel": "Piece designs",
       "showCoordinatesLabel": "Show the ship's coordinates",
-      "boardAnimationsLabel": "Make the pieces dance"
+      "boardAnimationsLabel": "Make the pieces dance",
+      "soundLabel": "Cannon booms and clangs"
     },
     "boardOrientation": {
       "heading": "Keep yer bearings",

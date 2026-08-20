@@ -195,7 +195,8 @@
       "boardThemeLabel": "Warna papan",
       "pieceSetLabel": "Set kepingan",
       "showCoordinatesLabel": "Tunjukkan koordinat papan",
-      "boardAnimationsLabel": "Animasikan pergerakan kepingan"
+      "boardAnimationsLabel": "Animasikan pergerakan kepingan",
+      "soundLabel": "Kesan bunyi"
     },
     "boardOrientation": {
       "heading": "Orientasi papan",

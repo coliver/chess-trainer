@@ -195,7 +195,8 @@
       "boardThemeLabel": "Brädsfärger",
       "pieceSetLabel": "Pjäsuppsättning",
       "showCoordinatesLabel": "Visa brädkoordinater",
-      "boardAnimationsLabel": "Animera pjäsrörelser"
+      "boardAnimationsLabel": "Animera pjäsrörelser",
+      "soundLabel": "Ljudeffekter"
     },
     "boardOrientation": {
       "heading": "Brädsorientering",

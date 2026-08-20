@@ -195,7 +195,8 @@
       "boardThemeLabel": "Brettfarben",
       "pieceSetLabel": "Figurenset",
       "showCoordinatesLabel": "Brettkoordinaten anzeigen",
-      "boardAnimationsLabel": "Zuganimationen"
+      "boardAnimationsLabel": "Zuganimationen",
+      "soundLabel": "Soundeffekte"
     },
     "boardOrientation": {
       "heading": "Brettorientierung",

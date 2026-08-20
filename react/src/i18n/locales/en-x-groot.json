@@ -195,7 +195,8 @@
       "boardThemeLabel": "I am Groot",
       "pieceSetLabel": "I am Groot",
       "showCoordinatesLabel": "I am Groot",
-      "boardAnimationsLabel": "I am Groot"
+      "boardAnimationsLabel": "I am Groot",
+      "soundLabel": "I am Groot"
     },
     "boardOrientation": {
       "heading": "I am Groot",

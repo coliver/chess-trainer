@@ -195,7 +195,8 @@
       "boardThemeLabel": "Tábla színei",
       "pieceSetLabel": "Bábu készlet",
       "showCoordinatesLabel": "Tábla koordináták megjelenítése",
-      "boardAnimationsLabel": "Bábuk mozgásának animálása"
+      "boardAnimationsLabel": "Bábuk mozgásának animálása",
+      "soundLabel": "Hangeffektek"
     },
     "boardOrientation": {
       "heading": "Tábla tájolása",

@@ -195,7 +195,8 @@
       "boardThemeLabel": "Board colours",
       "pieceSetLabel": "Piece set",
       "showCoordinatesLabel": "Show board coordinates",
-      "boardAnimationsLabel": "Animate piece moves"
+      "boardAnimationsLabel": "Animate piece moves",
+      "soundLabel": "Sound effects"
     },
     "boardOrientation": {
       "heading": "Board orientation",

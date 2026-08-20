@@ -195,7 +195,8 @@
       "boardThemeLabel": "ألوان اللوحة",
       "pieceSetLabel": "مجموعة الأشكال",
       "showCoordinatesLabel": "إظهار إحداثيات اللوحة",
-      "boardAnimationsLabel": "تحريك نقلات الأشكال"
+      "boardAnimationsLabel": "تحريك نقلات الأشكال",
+      "soundLabel": "مؤثرات صوتية"
     },
     "boardOrientation": {
       "heading": "توجيه اللوحة",

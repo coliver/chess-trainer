@@ -195,7 +195,8 @@
       "boardThemeLabel": "Χρώματα σκακιέρας",
       "pieceSetLabel": "Σύνολο κομματιών",
       "showCoordinatesLabel": "Εμφάνιση συντεταγμένων σκακιέρας",
-      "boardAnimationsLabel": "Κινούμενες εικόνες κομματιών"
+      "boardAnimationsLabel": "Κινούμενες εικόνες κομματιών",
+      "soundLabel": "Ηχητικά εφέ"
     },
     "boardOrientation": {
       "heading": "Προσανατολισμός σκακιέρας",

@@ -195,7 +195,8 @@
       "boardThemeLabel": "Colori della scacchiera",
       "pieceSetLabel": "Set di pezzi",
       "showCoordinatesLabel": "Mostra coordinate della scacchiera",
-      "boardAnimationsLabel": "Anima i movimenti dei pezzi"
+      "boardAnimationsLabel": "Anima i movimenti dei pezzi",
+      "soundLabel": "Effetti sonori"
     },
     "boardOrientation": {
       "heading": "Orientamento della scacchiera",

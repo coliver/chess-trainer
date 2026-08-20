@@ -195,7 +195,8 @@
       "boardThemeLabel": "Brettfarver",
       "pieceSetLabel": "Brikker",
       "showCoordinatesLabel": "Vis brettkoordinater",
-      "boardAnimationsLabel": "Animér brikbevægelser"
+      "boardAnimationsLabel": "Animér brikbevægelser",
+      "soundLabel": "Lydeffekter"
     },
     "boardOrientation": {
       "heading": "Bretorienteringer",

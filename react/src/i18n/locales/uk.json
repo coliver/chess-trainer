@@ -195,7 +195,8 @@
       "boardThemeLabel": "Кольори дошки",
       "pieceSetLabel": "Набір фігур",
       "showCoordinatesLabel": "Показувати координати дошки",
-      "boardAnimationsLabel": "Анімувати рухи фігур"
+      "boardAnimationsLabel": "Анімувати рухи фігур",
+      "soundLabel": "Звукові ефекти"
     },
     "boardOrientation": {
       "heading": "Орієнтація дошки",

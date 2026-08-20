@@ -195,7 +195,8 @@
       "boardThemeLabel": "Bordkleur",
       "pieceSetLabel": "Stukkenset",
       "showCoordinatesLabel": "Bordcoördinaten tonen",
-      "boardAnimationsLabel": "Stukbewegingen animeren"
+      "boardAnimationsLabel": "Stukbewegingen animeren",
+      "soundLabel": "Geluidseffecten"
     },
     "boardOrientation": {
       "heading": "Bordoriëntatie",

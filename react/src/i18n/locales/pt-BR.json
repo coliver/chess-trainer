@@ -195,7 +195,8 @@
       "boardThemeLabel": "Cores do tabuleiro",
       "pieceSetLabel": "Conjunto de peças",
       "showCoordinatesLabel": "Mostrar coordenadas do tabuleiro",
-      "boardAnimationsLabel": "Animar movimentos de peças"
+      "boardAnimationsLabel": "Animar movimentos de peças",
+      "soundLabel": "Efeitos sonoros"
     },
     "boardOrientation": {
       "heading": "Orientação do tabuleiro",

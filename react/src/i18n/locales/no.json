@@ -195,7 +195,8 @@
       "boardThemeLabel": "Brettfarger",
       "pieceSetLabel": "Brikkesett",
       "showCoordinatesLabel": "Vis brettkoordinater",
-      "boardAnimationsLabel": "Animer brikkeflyttinger"
+      "boardAnimationsLabel": "Animer brikkeflyttinger",
+      "soundLabel": "Lydeffekter"
     },
     "boardOrientation": {
       "heading": "Brettorientering",

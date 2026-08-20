@@ -195,7 +195,8 @@
       "boardThemeLabel": "Tahta renkleri",
       "pieceSetLabel": "Taş seti",
       "showCoordinatesLabel": "Tahta koordinatlarını göster",
-      "boardAnimationsLabel": "Taş hareketlerini canlandır"
+      "boardAnimationsLabel": "Taş hareketlerini canlandır",
+      "soundLabel": "Ses efektleri"
     },
     "boardOrientation": {
       "heading": "Tahta yönü",
