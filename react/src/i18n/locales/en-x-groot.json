@@ -216,7 +216,10 @@
     },
     "pieceSets": {
       "standard": "I am Groot",
-      "staunty": "I am Groot"
+      "staunty": "I am Groot",
+      "merida": "Merida",
+      "pirouetti": "Pirouetti",
+      "chessnut": "Chessnut"
     }
   }
 }

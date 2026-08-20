@@ -19,7 +19,7 @@ BOARD_THEMES = {
     "chessboard-js",
     "black-and-white",
 }
-PIECE_SETS = {"standard", "staunty"}
+PIECE_SETS = {"standard", "staunty", "merida", "pirouetti", "chessnut"}
 BOARD_ORIENTATION_MODES = {"auto", "white", "black"}
 
 

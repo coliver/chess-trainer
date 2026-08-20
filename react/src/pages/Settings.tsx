@@ -21,7 +21,7 @@ const BOARD_THEMES: BoardTheme[] = [
   "black-and-white",
 ];
 
-const PIECE_SETS: PieceSet[] = ["standard", "staunty"];
+const PIECE_SETS: PieceSet[] = ["standard", "staunty", "merida", "pirouetti", "chessnut"];
 
 export default function Settings() {
   const { t } = useTranslation();

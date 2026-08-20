@@ -216,7 +216,10 @@
     },
     "pieceSets": {
       "standard": "Pagh",
-      "staunty": "staunty"
+      "staunty": "staunty",
+      "merida": "Merida",
+      "pirouetti": "Pirouetti",
+      "chessnut": "Chessnut"
     }
   }
 }

@@ -216,7 +216,10 @@
     },
     "pieceSets": {
       "standard": "Standard Crew",
-      "staunty": "Staunty Scallywags"
+      "staunty": "Staunty Scallywags",
+      "merida": "Merida",
+      "pirouetti": "Pirouetti",
+      "chessnut": "Chessnut"
     }
   }
 }

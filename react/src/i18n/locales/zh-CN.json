@@ -216,7 +216,10 @@
     },
     "pieceSets": {
       "standard": "标准",
-      "staunty": "Staunty"
+      "staunty": "Staunty",
+      "merida": "Merida",
+      "pirouetti": "Pirouetti",
+      "chessnut": "Chessnut"
     }
   }
 }

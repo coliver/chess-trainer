@@ -8,7 +8,7 @@ export type BoardTheme =
   | "chess-club"
   | "chessboard-js"
   | "black-and-white";
-export type PieceSet = "standard" | "staunty";
+export type PieceSet = "standard" | "staunty" | "merida" | "pirouetti" | "chessnut";
 export type BoardOrientationMode = "auto" | "white" | "black";
 
 export type Preferences = {
