@@ -196,7 +196,8 @@
       "pieceSetLabel": "Σύνολο κομματιών",
       "showCoordinatesLabel": "Εμφάνιση συντεταγμένων σκακιέρας",
       "boardAnimationsLabel": "Κινούμενες εικόνες κομματιών",
-      "soundLabel": "Ηχητικά εφέ"
+      "soundLabel": "Ηχητικά εφέ",
+      "snowLabel": "Εφέ χιονιού"
     },
     "boardOrientation": {
       "heading": "Προσανατολισμός σκακιέρας",

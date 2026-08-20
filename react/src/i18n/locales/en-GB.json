@@ -196,7 +196,8 @@
       "pieceSetLabel": "Piece set",
       "showCoordinatesLabel": "Show board coordinates",
       "boardAnimationsLabel": "Animate piece moves",
-      "soundLabel": "Sound effects"
+      "soundLabel": "Sound effects",
+      "snowLabel": "Snow effect"
     },
     "boardOrientation": {
       "heading": "Board orientation",

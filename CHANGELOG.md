@@ -1,4 +1,6 @@
 ## 2026-08-19
+- feat(react): celebrate a completed training session and a correct puzzle answer with a `canvas-confetti` burst (`utils/winCelebration.ts`); training's enemy-last-move highlight now stays put through an in-flight player attempt and only advances once the move is confirmed correct, instead of clearing on every attempt; remove the unused `emoji-picker-react` dependency (only ever referenced by an untracked prototype that never shipped), keeping `snow.tsx` in place for a future easter egg
+- feat(settings): add a snow-effect toggle to Settings' appearance section — deliberately local-only (`localStorage`, `useSnowPreference`), not synced through `PreferencesContext`/the backend; backfill the `snowLabel` translation key across all 34 non-English locales
 - chore: stop deploying the Angular frontend — dropped from docker-compose, nginx, and CI workflows; the `angular/` source tree is left in place but no longer built or deployed
 - ci: gate prod deploy on lint/test workflows passing — deploy.yml now requires the core/react/tests reusable workflows to succeed before deploying to prod, whereas previously deploy ran independently of CI results
 - feat(settings): add sound effects toggle to Settings' appearance section, and backfill the missing `soundLabel` translation key across all 34 non-English locales

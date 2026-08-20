@@ -196,7 +196,8 @@
       "pieceSetLabel": "Kumpulan bidak",
       "showCoordinatesLabel": "Tampilkan koordinat papan",
       "boardAnimationsLabel": "Animasikan gerakan bidak",
-      "soundLabel": "Efek suara"
+      "soundLabel": "Efek suara",
+      "snowLabel": "Efek salju"
     },
     "boardOrientation": {
       "heading": "Orientasi papan",

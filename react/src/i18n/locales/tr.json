@@ -196,7 +196,8 @@
       "pieceSetLabel": "Taş seti",
       "showCoordinatesLabel": "Tahta koordinatlarını göster",
       "boardAnimationsLabel": "Taş hareketlerini canlandır",
-      "soundLabel": "Ses efektleri"
+      "soundLabel": "Ses efektleri",
+      "snowLabel": "Kar efekti"
     },
     "boardOrientation": {
       "heading": "Tahta yönü",

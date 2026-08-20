@@ -196,7 +196,8 @@
       "pieceSetLabel": "駒のセット",
       "showCoordinatesLabel": "盤面座標を表示",
       "boardAnimationsLabel": "駒の動きをアニメ化",
-      "soundLabel": "効果音"
+      "soundLabel": "効果音",
+      "snowLabel": "雪エフェクト"
     },
     "boardOrientation": {
       "heading": "盤面の向き",

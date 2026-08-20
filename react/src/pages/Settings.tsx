@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { usePreferences } from "../context/PreferencesContext";
+import { useSnowPreference } from "../hooks/useSnowPreference";
 import { LanguageToggle } from "../components/LanguageToggle";
 import Board from "../components/Board";
 import { START_FEN } from "@knight-school/chess-core";
@@ -25,6 +26,7 @@ const PIECE_SETS: PieceSet[] = ["standard", "staunty"];
 export default function Settings() {
   const { t } = useTranslation();
   const { preferences, update } = usePreferences();
+  const { snowEnabled, setSnowEnabled } = useSnowPreference();
 
   return (
     <main className="page">
@@ -126,6 +128,15 @@ export default function Settings() {
               type="checkbox"
               checked={preferences.sound}
               onChange={(e) => update({ sound: e.target.checked })}
+            />
+          </label>
+
+          <label className="settings-row settings-row--checkbox">
+            <span className="settings-row-label">{t("settings.appearance.snowLabel")}</span>
+            <input
+              type="checkbox"
+              checked={snowEnabled}
+              onChange={(e) => setSnowEnabled(e.target.checked)}
             />
           </label>
         </section>

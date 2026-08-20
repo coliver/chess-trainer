@@ -18,6 +18,13 @@ const renderTraining = () => (
 vi.mock("../hooks/useTrainingSession");
 vi.mock("../hooks/useBlinkGreen");
 
+const { mockCelebrateWin } = vi.hoisted(() => ({
+  mockCelebrateWin: vi.fn(),
+}));
+vi.mock("../utils/winCelebration", () => ({
+  celebrateWin: mockCelebrateWin,
+}));
+
 // The chess logic now lives in @knight-school/chess-core (its own package, its
 // own tests against real chess.js). Here we mock that boundary so the Training
 // tests exercise the component's wiring, not chess rules.
@@ -78,7 +85,7 @@ vi.mock("../components/FenTurnBadge", () => ({
   ),
 }));
 
-const hasMarker = (square: string, type: "hint" | "blink") =>
+const hasMarker = (square: string, type: "hint" | "blink" | "lastmove") =>
   (capturedProps.markers ?? []).some(
     (m) => m.square === square && m.type === type,
   );
@@ -505,6 +512,122 @@ describe("Training Page", () => {
 
       expect(screen.getByRole("button", { name: /‹ Prev/i })).toBeDisabled();
       expect(screen.getByRole("button", { name: /Next ›/i })).toBeDisabled();
+    });
+  });
+
+  describe("Win celebration", () => {
+    it("fires celebrateWin once when the session transitions to completed", async () => {
+      const { rerender } = render(renderTraining());
+      await waitFor(() => expect(capturedProps).toBeDefined());
+      expect(mockCelebrateWin).not.toHaveBeenCalled();
+
+      useTrainingSession.mockReturnValue({
+        ...baseHookValue,
+        isSessionCompleted: true,
+      });
+      rerender(renderTraining());
+
+      expect(mockCelebrateWin).toHaveBeenCalledTimes(1);
+
+      // A further re-render while still completed should not re-fire it.
+      rerender(renderTraining());
+      expect(mockCelebrateWin).toHaveBeenCalledTimes(1);
+    });
+
+    it("does not fire celebrateWin when the session starts out completed and stays completed", async () => {
+      useTrainingSession.mockReturnValue({
+        ...baseHookValue,
+        isSessionCompleted: true,
+      });
+
+      const { rerender } = render(renderTraining());
+      await waitFor(() => expect(capturedProps).toBeDefined());
+
+      rerender(renderTraining());
+      expect(mockCelebrateWin).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("Last-move highlight", () => {
+    it("keeps the previous move highlighted through an in-flight attempt, and only moves once the new move is confirmed correct", async () => {
+      const { rerender } = render(renderTraining());
+      await waitFor(() => expect(capturedProps).toBeDefined());
+
+      // Establish an initial confirmed last move (d2-d4).
+      applyMoveMock.mockReturnValueOnce({ nextFen: "after-fen", uci: "d2d4" });
+      act(() => {
+        capturedProps.onMove?.("d2", "d4");
+      });
+      useTrainingSession.mockReturnValue({
+        ...baseHookValue,
+        feedback: "✅ Correct!",
+      });
+      rerender(renderTraining());
+      expect(hasMarker("d2", "lastmove")).toBe(true);
+      expect(hasMarker("d4", "lastmove")).toBe(true);
+
+      // Next item: feedback resets, then the player attempts e2-e4.
+      useTrainingSession.mockReturnValue({
+        ...baseHookValue,
+        feedback: "",
+      });
+      rerender(renderTraining());
+
+      applyMoveMock.mockReturnValueOnce({ nextFen: "after-fen", uci: "e2e4" });
+      act(() => {
+        capturedProps.onMove?.("e2", "e4");
+      });
+
+      // Still showing the previous move — the attempt hasn't been confirmed yet.
+      expect(hasMarker("d2", "lastmove")).toBe(true);
+      expect(hasMarker("d4", "lastmove")).toBe(true);
+      expect(hasMarker("e2", "lastmove")).toBe(false);
+      expect(hasMarker("e4", "lastmove")).toBe(false);
+
+      // Once accepted, the highlight moves to the new move.
+      useTrainingSession.mockReturnValue({
+        ...baseHookValue,
+        feedback: "✅ Correct!",
+      });
+      rerender(renderTraining());
+
+      expect(hasMarker("e2", "lastmove")).toBe(true);
+      expect(hasMarker("e4", "lastmove")).toBe(true);
+      expect(hasMarker("d2", "lastmove")).toBe(false);
+    });
+
+    it("does not move the highlight when the attempted move is rejected", async () => {
+      const { rerender } = render(renderTraining());
+      await waitFor(() => expect(capturedProps).toBeDefined());
+
+      applyMoveMock.mockReturnValueOnce({ nextFen: "after-fen", uci: "d2d4" });
+      act(() => {
+        capturedProps.onMove?.("d2", "d4");
+      });
+      useTrainingSession.mockReturnValue({
+        ...baseHookValue,
+        feedback: "✅ Correct!",
+      });
+      rerender(renderTraining());
+
+      useTrainingSession.mockReturnValue({ ...baseHookValue, feedback: "" });
+      rerender(renderTraining());
+
+      applyMoveMock.mockReturnValueOnce({ nextFen: "after-fen", uci: "e2e5" });
+      act(() => {
+        capturedProps.onMove?.("e2", "e5");
+      });
+
+      useTrainingSession.mockReturnValue({
+        ...baseHookValue,
+        feedback: "❌ Incorrect move",
+      });
+      rerender(renderTraining());
+
+      expect(hasMarker("d2", "lastmove")).toBe(true);
+      expect(hasMarker("d4", "lastmove")).toBe(true);
+      expect(hasMarker("e2", "lastmove")).toBe(false);
+      expect(hasMarker("e5", "lastmove")).toBe(false);
     });
   });
 });

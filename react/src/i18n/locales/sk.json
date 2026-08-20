@@ -196,7 +196,8 @@
       "pieceSetLabel": "Sada figúrok",
       "showCoordinatesLabel": "Zobraziť súradnice šachovnice",
       "boardAnimationsLabel": "Animovať pohyby figúrok",
-      "soundLabel": "Zvukové efekty"
+      "soundLabel": "Zvukové efekty",
+      "snowLabel": "Efekt snehu"
     },
     "boardOrientation": {
       "heading": "Orientácia šachovnice",

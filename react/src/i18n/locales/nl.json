@@ -196,7 +196,8 @@
       "pieceSetLabel": "Stukkenset",
       "showCoordinatesLabel": "Bordcoördinaten tonen",
       "boardAnimationsLabel": "Stukbewegingen animeren",
-      "soundLabel": "Geluidseffecten"
+      "soundLabel": "Geluidseffecten",
+      "snowLabel": "Sneeuweffect"
     },
     "boardOrientation": {
       "heading": "Bordoriëntatie",

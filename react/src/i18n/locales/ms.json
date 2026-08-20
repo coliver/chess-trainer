@@ -196,7 +196,8 @@
       "pieceSetLabel": "Set kepingan",
       "showCoordinatesLabel": "Tunjukkan koordinat papan",
       "boardAnimationsLabel": "Animasikan pergerakan kepingan",
-      "soundLabel": "Kesan bunyi"
+      "soundLabel": "Kesan bunyi",
+      "snowLabel": "Kesan salji"
     },
     "boardOrientation": {
       "heading": "Orientasi papan",

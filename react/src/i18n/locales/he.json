@@ -196,7 +196,8 @@
       "pieceSetLabel": "סט כלים",
       "showCoordinatesLabel": "הצג קואורדינטות לוח",
       "boardAnimationsLabel": "הנפש תנועות כלים",
-      "soundLabel": "אפקטים קוליים"
+      "soundLabel": "אפקטים קוליים",
+      "snowLabel": "אפקט שלג"
     },
     "boardOrientation": {
       "heading": "כיוון לוח",

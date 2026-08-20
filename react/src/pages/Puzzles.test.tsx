@@ -46,6 +46,13 @@ vi.mock("../api", () => ({
   default: { get: vi.fn(), post: vi.fn() },
 }));
 
+const { mockCelebratePuzzleCorrect } = vi.hoisted(() => ({
+  mockCelebratePuzzleCorrect: vi.fn(),
+}));
+vi.mock("../utils/winCelebration", () => ({
+  celebratePuzzleCorrect: mockCelebratePuzzleCorrect,
+}));
+
 const mockNavigate = vi.fn();
 vi.mock("react-router-dom", async () => {
   const actual =
@@ -70,6 +77,7 @@ describe("Puzzles Page", () => {
   beforeEach(() => {
     user = userEvent.setup();
     mockNavigate.mockReset();
+    mockCelebratePuzzleCorrect.mockReset();
     applyMoveMock.mockReset();
     (api.get as ReturnType<typeof vi.fn>).mockReset();
     (api.post as ReturnType<typeof vi.fn>).mockReset();
@@ -121,6 +129,7 @@ describe("Puzzles Page", () => {
     expect(screen.getByText("Solved: 1")).toBeInTheDocument();
     expect(screen.getByText(/Streak: 1/)).toBeInTheDocument();
     expect(screen.getByText(/best 1/)).toBeInTheDocument();
+    expect(mockCelebratePuzzleCorrect).toHaveBeenCalledTimes(1);
   });
 
   it("resets streak and snaps the board back on a wrong move", async () => {
@@ -147,6 +156,7 @@ describe("Puzzles Page", () => {
     expect(screen.getByText(/Streak: 0/)).toBeInTheDocument();
     expect(screen.queryByText(/best/)).not.toBeInTheDocument();
     expect(capturedProps.position).toBe(NEXT_PUZZLE.fen);
+    expect(mockCelebratePuzzleCorrect).not.toHaveBeenCalled();
   });
 
   it("shows a Back to dashboard link when no puzzles are due", async () => {

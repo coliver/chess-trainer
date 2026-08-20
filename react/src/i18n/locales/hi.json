@@ -196,7 +196,8 @@
       "pieceSetLabel": "गोटियों का सेट",
       "showCoordinatesLabel": "बोर्ड निर्देशांक दिखाएँ",
       "boardAnimationsLabel": "गोटियों की चाल को एनिमेट करें",
-      "soundLabel": "ध्वनि प्रभाव"
+      "soundLabel": "ध्वनि प्रभाव",
+      "snowLabel": "बर्फ़ प्रभाव"
     },
     "boardOrientation": {
       "heading": "बोर्ड का अभिविन्यास",

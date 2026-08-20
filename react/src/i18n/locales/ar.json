@@ -196,7 +196,8 @@
       "pieceSetLabel": "مجموعة الأشكال",
       "showCoordinatesLabel": "إظهار إحداثيات اللوحة",
       "boardAnimationsLabel": "تحريك نقلات الأشكال",
-      "soundLabel": "مؤثرات صوتية"
+      "soundLabel": "مؤثرات صوتية",
+      "snowLabel": "تأثير الثلج"
     },
     "boardOrientation": {
       "heading": "توجيه اللوحة",

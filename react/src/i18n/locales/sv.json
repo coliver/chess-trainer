@@ -196,7 +196,8 @@
       "pieceSetLabel": "Pjäsuppsättning",
       "showCoordinatesLabel": "Visa brädkoordinater",
       "boardAnimationsLabel": "Animera pjäsrörelser",
-      "soundLabel": "Ljudeffekter"
+      "soundLabel": "Ljudeffekter",
+      "snowLabel": "Snöeffekt"
     },
     "boardOrientation": {
       "heading": "Brädsorientering",

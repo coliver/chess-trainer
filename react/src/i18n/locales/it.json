@@ -196,7 +196,8 @@
       "pieceSetLabel": "Set di pezzi",
       "showCoordinatesLabel": "Mostra coordinate della scacchiera",
       "boardAnimationsLabel": "Anima i movimenti dei pezzi",
-      "soundLabel": "Effetti sonori"
+      "soundLabel": "Effetti sonori",
+      "snowLabel": "Effetto neve"
     },
     "boardOrientation": {
       "heading": "Orientamento della scacchiera",

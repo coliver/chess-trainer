@@ -196,7 +196,8 @@
       "pieceSetLabel": "Conjunto de peças",
       "showCoordinatesLabel": "Mostrar coordenadas do tabuleiro",
       "boardAnimationsLabel": "Animar movimentos de peças",
-      "soundLabel": "Efeitos sonoros"
+      "soundLabel": "Efeitos sonoros",
+      "snowLabel": "Efeito de neve"
     },
     "boardOrientation": {
       "heading": "Orientação do tabuleiro",

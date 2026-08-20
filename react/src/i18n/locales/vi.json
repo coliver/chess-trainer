@@ -196,7 +196,8 @@
       "pieceSetLabel": "Bộ quân cờ",
       "showCoordinatesLabel": "Hiện tọa độ bàn cờ",
       "boardAnimationsLabel": "Hoạt ảnh di chuyển quân cờ",
-      "soundLabel": "Hiệu ứng âm thanh"
+      "soundLabel": "Hiệu ứng âm thanh",
+      "snowLabel": "Hiệu ứng tuyết"
     },
     "boardOrientation": {
       "heading": "Hướng bàn cờ",

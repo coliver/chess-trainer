@@ -196,7 +196,8 @@
       "pieceSetLabel": "棋子风格",
       "showCoordinatesLabel": "显示棋盘坐标",
       "boardAnimationsLabel": "播放走子动画",
-      "soundLabel": "音效"
+      "soundLabel": "音效",
+      "snowLabel": "雪花效果"
     },
     "boardOrientation": {
       "heading": "棋盘方向",

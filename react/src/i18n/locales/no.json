@@ -196,7 +196,8 @@
       "pieceSetLabel": "Brikkesett",
       "showCoordinatesLabel": "Vis brettkoordinater",
       "boardAnimationsLabel": "Animer brikkeflyttinger",
-      "soundLabel": "Lydeffekter"
+      "soundLabel": "Lydeffekter",
+      "snowLabel": "Snøeffekt"
     },
     "boardOrientation": {
       "heading": "Brettorientering",

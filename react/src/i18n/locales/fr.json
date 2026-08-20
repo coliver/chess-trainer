@@ -196,7 +196,8 @@
       "pieceSetLabel": "Ensemble de pièces",
       "showCoordinatesLabel": "Afficher les coordonnées de l'échiquier",
       "boardAnimationsLabel": "Animer les mouvements des pièces",
-      "soundLabel": "Effets sonores"
+      "soundLabel": "Effets sonores",
+      "snowLabel": "Effet de neige"
     },
     "boardOrientation": {
       "heading": "Orientation de l'échiquier",

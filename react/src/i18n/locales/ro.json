@@ -196,7 +196,8 @@
       "pieceSetLabel": "Set de piese",
       "showCoordinatesLabel": "Arată coordonatele tablei",
       "boardAnimationsLabel": "Animează mișcările pieselor",
-      "soundLabel": "Efecte sonore"
+      "soundLabel": "Efecte sonore",
+      "snowLabel": "Efect de zăpadă"
     },
     "boardOrientation": {
       "heading": "Orientare tablă",

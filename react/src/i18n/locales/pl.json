@@ -196,7 +196,8 @@
       "pieceSetLabel": "Zestaw bierek",
       "showCoordinatesLabel": "Pokaż współrzędne planszy",
       "boardAnimationsLabel": "Animuj ruchy bierek",
-      "soundLabel": "Efekty dźwiękowe"
+      "soundLabel": "Efekty dźwiękowe",
+      "snowLabel": "Efekt śniegu"
     },
     "boardOrientation": {
       "heading": "Orientacja planszy",

@@ -196,7 +196,8 @@
       "pieceSetLabel": "Набор фигур",
       "showCoordinatesLabel": "Показывать координаты доски",
       "boardAnimationsLabel": "Анимировать ходы фигур",
-      "soundLabel": "Звуковые эффекты"
+      "soundLabel": "Звуковые эффекты",
+      "snowLabel": "Эффект снега"
     },
     "boardOrientation": {
       "heading": "Ориентация доски",

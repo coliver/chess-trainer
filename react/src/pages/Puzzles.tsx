@@ -17,6 +17,7 @@ import {
   sideToMove,
 } from "@knight-school/chess-core";
 import { getMoveSound, playSound } from "../utils/sound";
+import { celebratePuzzleCorrect } from "../utils/winCelebration";
 
 type NextPuzzle = {
   puzzleId: string;
@@ -119,6 +120,7 @@ export const Puzzles = () => {
 
         if (res.data.correct) {
           playSound("puzzleCorrect");
+          celebratePuzzleCorrect();
           setFeedback(t("puzzles.correct"));
           setSolved((n) => n + 1);
           setStreak((n) => {

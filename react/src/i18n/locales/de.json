@@ -196,7 +196,8 @@
       "pieceSetLabel": "Figurenset",
       "showCoordinatesLabel": "Brettkoordinaten anzeigen",
       "boardAnimationsLabel": "Zuganimationen",
-      "soundLabel": "Soundeffekte"
+      "soundLabel": "Soundeffekte",
+      "snowLabel": "Schneeeffekt"
     },
     "boardOrientation": {
       "heading": "Brettorientierung",

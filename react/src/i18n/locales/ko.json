@@ -196,7 +196,8 @@
       "pieceSetLabel": "기물 세트",
       "showCoordinatesLabel": "보드 좌표 표시",
       "boardAnimationsLabel": "기물 움직임 애니메이션",
-      "soundLabel": "효과음"
+      "soundLabel": "효과음",
+      "snowLabel": "눈 효과"
     },
     "boardOrientation": {
       "heading": "보드 방향",

@@ -29,6 +29,7 @@ import { useTrainingSession } from "../hooks/useTrainingSession";
 import { useBoardOrientation } from "../hooks/useBoardOrientation";
 import { usePreferences } from "../context/PreferencesContext";
 import { getMoveSound, playSound } from "../utils/sound";
+import { celebrateWin } from "../utils/winCelebration";
 
 export const Training = () => {
   const { t } = useTranslation();
@@ -72,6 +73,7 @@ export const Training = () => {
   const lastAutoplayedItemIdRef = useRef<string | null>(null);
   const prevFeedbackRef = useRef<string>(feedback);
   const prevItemIdRef = useRef<string | null>(itemId);
+  const pendingMoveRef = useRef<{ from: string; to: string } | null>(null);
 
   // Timeline: keep both state (for UI render) and a ref (for sync checks in effects)
   const [timeline, setTimeline] = useState(() => createTimeline(fen));
@@ -102,6 +104,10 @@ export const Training = () => {
       feedback === "✅ Correct!"
     ) {
       setHintLevel(-1);
+      if (pendingMoveRef.current) {
+        setLastMove(pendingMoveRef.current);
+        pendingMoveRef.current = null;
+      }
     }
     prevFeedbackRef.current = feedback;
   }, [feedback]);
@@ -111,6 +117,14 @@ export const Training = () => {
       blinkGreen(lastSubmittedMoveUciRef.current, 2);
     }
   }, [feedback, blinkGreen]);
+
+  const prevSessionCompletedRef = useRef(isSessionCompleted);
+  useEffect(() => {
+    if (isSessionCompleted && !prevSessionCompletedRef.current) {
+      celebrateWin();
+    }
+    prevSessionCompletedRef.current = isSessionCompleted;
+  }, [isSessionCompleted]);
 
   const isPlayerToMove = useMemo(
     () => sideToMove(fen) === playerColor,
@@ -140,6 +154,7 @@ export const Training = () => {
     setLocalFeedback("");
     setMoveInput("");
     setHintLevel(-1);
+    pendingMoveRef.current = null;
     setLastMove(null);
   }, []);
 
@@ -150,8 +165,8 @@ export const Training = () => {
       setLocalFeedback("");
       setMoveInput("");
       setHintLevel(-1);
-      setLastMove(null);
       setIsRestarting(false);
+      pendingMoveRef.current = null;
     }
     prevItemIdRef.current = itemId;
   }, [itemId]);
@@ -254,7 +269,7 @@ export const Training = () => {
       }
       setFen(result.nextFen);
       appendTimelineFen(result.nextFen);
-      setLastMove({ from: sourceSquare, to: targetSquare });
+      pendingMoveRef.current = { from: sourceSquare, to: targetSquare };
 
       setLocalFeedback("");
       lastSubmittedMoveUciRef.current = result.uci;

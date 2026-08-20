@@ -196,7 +196,8 @@
       "pieceSetLabel": "Piece designs",
       "showCoordinatesLabel": "Show the ship's coordinates",
       "boardAnimationsLabel": "Make the pieces dance",
-      "soundLabel": "Cannon booms and clangs"
+      "soundLabel": "Cannon booms and clangs",
+      "snowLabel": "Snow flurries on the deck"
     },
     "boardOrientation": {
       "heading": "Keep yer bearings",
