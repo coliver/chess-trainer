@@ -19,9 +19,16 @@ function App() {
 
   useEffect(() => {
     if (!snowEnabled) return;
-    snow();
-    const interval = setInterval(snow, SNOW_CYCLE_MS);
-    return () => clearInterval(interval);
+
+    let stopCurrent = snow();
+    const interval = setInterval(() => {
+      stopCurrent = snow();
+    }, SNOW_CYCLE_MS);
+
+    return () => {
+      clearInterval(interval);
+      stopCurrent?.();
+    };
   }, [snowEnabled]);
 
   return (

@@ -1,15 +1,18 @@
 import confetti from 'canvas-confetti';
 
-export function snow(): void {
+export function snow(): () => void {
   const duration = 15 * 1000;
   const animationEnd = Date.now() + duration;
   let skew = 1;
+  let stopped = false;
 
   function randomInRange(min: number, max: number): number {
     return Math.random() * (max - min) + min;
   }
 
   function frame() {
+    if (stopped) return;
+
     const timeLeft = animationEnd - Date.now();
     const ticks = Math.max(200, 500 * (timeLeft / duration));
     skew = Math.max(0.8, skew - 0.001);
@@ -33,4 +36,8 @@ export function snow(): void {
   }
 
   frame();
+
+  return () => {
+    stopped = true;
+  };
 }

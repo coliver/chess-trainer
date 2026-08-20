@@ -6,7 +6,10 @@ import "@testing-library/jest-dom";
 import App from "./App";
 import { PreferencesProvider } from "./context/PreferencesContext";
 
-const { mockSnow } = vi.hoisted(() => ({ mockSnow: vi.fn() }));
+const { mockSnow, mockStop } = vi.hoisted(() => ({
+  mockSnow: vi.fn(),
+  mockStop: vi.fn(),
+}));
 vi.mock("./utils/snow", () => ({ snow: mockSnow }));
 
 vi.mock("./components/Board", () => ({
@@ -17,6 +20,8 @@ describe("App — snow trigger", () => {
   beforeEach(() => {
     localStorage.clear();
     mockSnow.mockReset();
+    mockStop.mockReset();
+    mockSnow.mockReturnValue(mockStop);
     vi.useFakeTimers();
   });
 
