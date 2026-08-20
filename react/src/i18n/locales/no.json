@@ -14,9 +14,7 @@
     "viewSource": "Se kildekoden på GitHub"
   },
   "language": {
-    "toggle": "Språk",
-    "en": "Engelsk",
-    "kl": "Klingon"
+    "toggle": "Språk"
   },
   "theme": {
     "toggle": "Bytt tema",
@@ -28,19 +26,6 @@
     "label": "Snu brettet"
   },
   "dashboard": {
-    "header": {
-      "title": "Knight School",
-      "greetingMorning": "God morgen ☀️",
-      "greetingAfternoon": "God ettermiddag 🌤️",
-      "greetingEvening": "God kveld 🌙",
-      "nav": "Hjem",
-      "openings": "Åpninger",
-      "puzzles": "Oppgaver",
-      "login": "Logg inn",
-      "register": "Registrer",
-      "logout": "Logg ut",
-      "viewSource": "Se kildekoden på GitHub"
-    },
     "progress": {
       "yourProgress": "Din fremdrift",
       "trainingLabel": "Treningsfremdrift",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "Oppgaver",
     "noPuzzlesDue": "Ingen oppgaver er klare nå — prøv igjen senere.",
     "loadFailed": "Kunne ikke laste oppgaver. Sjekk tilkoblingen din.",
     "correct": "✅ Riktig!",
@@ -109,7 +93,6 @@
     "backToDashboard": "← Tilbake til oversikten"
   },
   "training": {
-    "label": "Trening",
     "whiteToMove": "Hvit i trekket",
     "blackToMove": "Svart i trekket",
     "showHint": "Vis hint",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "Logg inn",
       "title": "Logg inn",
       "subtitle": "Velkommen tilbake.",
       "usernameLabel": "Brukernavn",
@@ -144,7 +126,6 @@
       "errorResendFailed": "Kunne ikke sende bekreftelses-e-posten på nytt"
     },
     "register": {
-      "label": "Registrer",
       "title": "Registrer",
       "subtitle": "Opprett kontoen din.",
       "emailLabel": "E-post",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "Bekreft passord",
       "passwordMismatch": "Passordene samsvarer ikke"
     },
-    "logout": {
-      "label": "Logg ut"
-    },
     "verifyEmail": {
-      "label": "Bekreft e-post",
       "loadingTitle": "Bekrefter...",
       "loadingSubtitle": "Bekrefter e-posten din…",
       "successTitle": "E-post bekreftet",

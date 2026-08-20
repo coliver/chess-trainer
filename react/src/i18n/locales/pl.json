@@ -14,9 +14,7 @@
     "viewSource": "Zobacz kod źródłowy na GitHub"
   },
   "language": {
-    "toggle": "Język",
-    "en": "English",
-    "kl": "Klingon"
+    "toggle": "Język"
   },
   "theme": {
     "toggle": "Przełącz motyw",
@@ -28,19 +26,6 @@
     "label": "Przewróć planszę"
   },
   "dashboard": {
-    "header": {
-      "title": "Knight School",
-      "greetingMorning": "Good morning ☀️",
-      "greetingAfternoon": "Good afternoon 🌤️",
-      "greetingEvening": "Good evening 🌙",
-      "nav": "Primary",
-      "openings": "Openings",
-      "puzzles": "Puzzles",
-      "login": "Login",
-      "register": "Register",
-      "logout": "Logout",
-      "viewSource": "View source on GitHub"
-    },
     "progress": {
       "yourProgress": "Twój postęp",
       "trainingLabel": "Postęp treningu",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "Puzzles",
     "noPuzzlesDue": "Brak zadań do tej chwili — wróć później.",
     "loadFailed": "Nie udało się wczytać zadania. Sprawdź połączenie.",
     "correct": "✅ Poprawnie!",
@@ -109,7 +93,6 @@
     "backToDashboard": "← Wróć do panelu"
   },
   "training": {
-    "label": "Training",
     "whiteToMove": "Ruch białych",
     "blackToMove": "Ruch czarnych",
     "showHint": "Pokaż podpowiedź",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "Login",
       "title": "Zaloguj się",
       "subtitle": "Miło Cię widzieć.",
       "usernameLabel": "Nazwa użytkownika",
@@ -144,7 +126,6 @@
       "errorResendFailed": "Nie udało się ponownie wysłać emaila weryfikacyjnego"
     },
     "register": {
-      "label": "Register",
       "title": "Rejestracja",
       "subtitle": "Utwórz swoje konto.",
       "emailLabel": "Email",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "Potwierdź hasło",
       "passwordMismatch": "Hasła się nie zgadzają"
     },
-    "logout": {
-      "label": "Logout"
-    },
     "verifyEmail": {
-      "label": "Verify email",
       "loadingTitle": "Weryfikowanie…",
       "loadingSubtitle": "Weryfikujemy Twój email…",
       "successTitle": "Email potwierdzony",

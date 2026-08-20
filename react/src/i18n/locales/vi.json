@@ -14,9 +14,7 @@
     "viewSource": "Xem mã nguồn trên GitHub"
   },
   "language": {
-    "toggle": "Ngôn ngữ",
-    "en": "Tiếng Anh",
-    "kl": "Tiếng Klingon"
+    "toggle": "Ngôn ngữ"
   },
   "theme": {
     "toggle": "Đổi giao diện",
@@ -28,19 +26,6 @@
     "label": "Xoay bàn cờ"
   },
   "dashboard": {
-    "header": {
-      "title": "Knight School",
-      "greetingMorning": "Chào buổi sáng ☀️",
-      "greetingAfternoon": "Chào buổi chiều 🌤️",
-      "greetingEvening": "Chào buổi tối 🌙",
-      "nav": "Trang chủ",
-      "openings": "Khai cuộc",
-      "puzzles": "Bài tập",
-      "login": "Đăng nhập",
-      "register": "Đăng ký",
-      "logout": "Đăng xuất",
-      "viewSource": "Xem mã nguồn trên GitHub"
-    },
     "progress": {
       "yourProgress": "Tiến độ của bạn",
       "trainingLabel": "Tiến độ luyện tập",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "Bài tập",
     "noPuzzlesDue": "Hiện không có bài tập nào — thử lại sau.",
     "loadFailed": "Không tải được bài tập. Kiểm tra kết nối của bạn.",
     "correct": "✅ Đúng rồi!",
@@ -109,7 +93,6 @@
     "backToDashboard": "← Quay lại bảng điều khiển"
   },
   "training": {
-    "label": "Luyện tập",
     "whiteToMove": "Quân trắng đi",
     "blackToMove": "Quân đen đi",
     "showHint": "Hiện gợi ý",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "Đăng nhập",
       "title": "Đăng nhập",
       "subtitle": "Chào mừng trở lại.",
       "usernameLabel": "Tên người dùng",
@@ -144,7 +126,6 @@
       "errorResendFailed": "Không thể gửi lại email xác minh"
     },
     "register": {
-      "label": "Đăng ký",
       "title": "Đăng ký",
       "subtitle": "Tạo tài khoản của bạn.",
       "emailLabel": "Email",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "Xác nhận mật khẩu",
       "passwordMismatch": "Mật khẩu không khớp"
     },
-    "logout": {
-      "label": "Đăng xuất"
-    },
     "verifyEmail": {
-      "label": "Xác minh email",
       "loadingTitle": "Đang xác minh...",
       "loadingSubtitle": "Đang xác minh email của bạn…",
       "successTitle": "Email đã được xác minh",

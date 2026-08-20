@@ -14,9 +14,7 @@
     "viewSource": "Lihat sumber di GitHub"
   },
   "language": {
-    "toggle": "Bahasa",
-    "en": "Bahasa Inggris",
-    "kl": "Klingon"
+    "toggle": "Bahasa"
   },
   "theme": {
     "toggle": "Ganti tema",
@@ -28,19 +26,6 @@
     "label": "Balik papan"
   },
   "dashboard": {
-    "header": {
-      "title": "Knight School",
-      "greetingMorning": "Selamat pagi ☀️",
-      "greetingAfternoon": "Selamat siang 🌤️",
-      "greetingEvening": "Selamat malam 🌙",
-      "nav": "Utama",
-      "openings": "Pembukaan",
-      "puzzles": "Teka-teki",
-      "login": "Masuk",
-      "register": "Daftar",
-      "logout": "Keluar",
-      "viewSource": "Lihat sumber di GitHub"
-    },
     "progress": {
       "yourProgress": "Kemajuan Anda",
       "trainingLabel": "Kemajuan latihan",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "Teka-teki",
     "noPuzzlesDue": "Belum ada teka-teki yang harus dikerjakan sekarang — cek lagi nanti.",
     "loadFailed": "Gagal memuat teka-teki. Periksa koneksi Anda.",
     "correct": "✅ Benar!",
@@ -109,7 +93,6 @@
     "backToDashboard": "← Kembali ke dasbor"
   },
   "training": {
-    "label": "Latihan",
     "whiteToMove": "Putih jalan",
     "blackToMove": "Hitam jalan",
     "showHint": "Tampilkan petunjuk",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "Masuk",
       "title": "Masuk",
       "subtitle": "Selamat datang kembali.",
       "usernameLabel": "Nama pengguna",
@@ -144,7 +126,6 @@
       "errorResendFailed": "Gagal mengirim ulang email verifikasi"
     },
     "register": {
-      "label": "Daftar",
       "title": "Daftar",
       "subtitle": "Buat akun Anda.",
       "emailLabel": "Email",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "Konfirmasi sandi",
       "passwordMismatch": "Sandi tidak cocok"
     },
-    "logout": {
-      "label": "Keluar"
-    },
     "verifyEmail": {
-      "label": "Verifikasi email",
       "loadingTitle": "Memverifikasi...",
       "loadingSubtitle": "Memverifikasi email Anda…",
       "successTitle": "Email Terverifikasi",

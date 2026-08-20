@@ -14,9 +14,7 @@
     "viewSource": "GitHubでソースを見る"
   },
   "language": {
-    "toggle": "言語",
-    "en": "英語",
-    "kl": "クリンゴン語"
+    "toggle": "言語"
   },
   "theme": {
     "toggle": "テーマを切り替え",
@@ -28,19 +26,6 @@
     "label": "盤面を反転"
   },
   "dashboard": {
-    "header": {
-      "title": "ナイトスクール",
-      "greetingMorning": "おはようございます ☀️",
-      "greetingAfternoon": "こんにちは 🌤️",
-      "greetingEvening": "こんばんは 🌙",
-      "nav": "メイン",
-      "openings": "定跡",
-      "puzzles": "問題",
-      "login": "ログイン",
-      "register": "登録",
-      "logout": "ログアウト",
-      "viewSource": "GitHubでソースを見る"
-    },
     "progress": {
       "yourProgress": "あなたの進捗",
       "trainingLabel": "トレーニングの進捗",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "問題",
     "noPuzzlesDue": "今すぐ取り組める問題はありません。後でもう一度確認してください。",
     "loadFailed": "問題の読み込みに失敗しました。接続を確認してください。",
     "correct": "✅ 正解！",
@@ -109,7 +93,6 @@
     "backToDashboard": "← ダッシュボードに戻る"
   },
   "training": {
-    "label": "トレーニング",
     "whiteToMove": "白番手番",
     "blackToMove": "黒番手番",
     "showHint": "ヒントを表示",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "ログイン",
       "title": "ログイン",
       "subtitle": "おかえりなさい。",
       "usernameLabel": "ユーザー名",
@@ -144,7 +126,6 @@
       "errorResendFailed": "確認メールの再送信に失敗しました"
     },
     "register": {
-      "label": "登録",
       "title": "登録",
       "subtitle": "アカウントを作成しましょう。",
       "emailLabel": "メールアドレス",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "パスワード確認",
       "passwordMismatch": "パスワードが一致しません"
     },
-    "logout": {
-      "label": "ログアウト"
-    },
     "verifyEmail": {
-      "label": "メール確認",
       "loadingTitle": "確認中...",
       "loadingSubtitle": "メールを確認しています…",
       "successTitle": "メール確認完了",

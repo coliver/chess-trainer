@@ -14,9 +14,7 @@
     "viewSource": "Переглянути вихідний код на GitHub"
   },
   "language": {
-    "toggle": "Мова",
-    "en": "English",
-    "kl": "Klingon"
+    "toggle": "Мова"
   },
   "theme": {
     "toggle": "Перемкнути тему",
@@ -28,19 +26,6 @@
     "label": "Перевернути дошку"
   },
   "dashboard": {
-    "header": {
-      "title": "Knight School",
-      "greetingMorning": "Добрий ранок ☀️",
-      "greetingAfternoon": "Добрий день 🌤️",
-      "greetingEvening": "Добрий вечір 🌙",
-      "nav": "Головна",
-      "openings": "Дебюти",
-      "puzzles": "Головоломки",
-      "login": "Увійти",
-      "register": "Реєстрація",
-      "logout": "Вийти",
-      "viewSource": "Переглянути вихідний код на GitHub"
-    },
     "progress": {
       "yourProgress": "Ваш прогрес",
       "trainingLabel": "Прогрес тренування",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "Головоломки",
     "noPuzzlesDue": "Поки немає головоломок для розв'язування — загляньте пізніше.",
     "loadFailed": "Не вдалося завантажити головоломку. Перевірте з'єднання.",
     "correct": "✅ Правильно!",
@@ -109,7 +93,6 @@
     "backToDashboard": "← Повернутися на панель"
   },
   "training": {
-    "label": "Тренування",
     "whiteToMove": "Ходять білі",
     "blackToMove": "Ходять чорні",
     "showHint": "Показати підказку",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "Увійти",
       "title": "Вхід",
       "subtitle": "З поверненням.",
       "usernameLabel": "Ім'я користувача",
@@ -144,7 +126,6 @@
       "errorResendFailed": "Не вдалося повторно відправити лист для підтвердження"
     },
     "register": {
-      "label": "Реєстрація",
       "title": "Реєстрація",
       "subtitle": "Створіть свій акаунт.",
       "emailLabel": "Електронна пошта",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "Підтвердіть пароль",
       "passwordMismatch": "Паролі не збігаються"
     },
-    "logout": {
-      "label": "Вийти"
-    },
     "verifyEmail": {
-      "label": "Підтвердити електронну пошту",
       "loadingTitle": "Підтвердження…",
       "loadingSubtitle": "Підтвердження вашої електронної пошти…",
       "successTitle": "Електронну пошту підтверджено",

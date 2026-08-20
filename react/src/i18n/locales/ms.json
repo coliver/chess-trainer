@@ -14,9 +14,7 @@
     "viewSource": "Lihat sumber di GitHub"
   },
   "language": {
-    "toggle": "Bahasa",
-    "en": "Bahasa Inggeris",
-    "kl": "Klingon"
+    "toggle": "Bahasa"
   },
   "theme": {
     "toggle": "Tukar tema",
@@ -28,19 +26,6 @@
     "label": "Pusing papan"
   },
   "dashboard": {
-    "header": {
-      "title": "Knight School",
-      "greetingMorning": "Selamat pagi ☀️",
-      "greetingAfternoon": "Selamat tengah hari 🌤️",
-      "greetingEvening": "Selamat malam 🌙",
-      "nav": "Utama",
-      "openings": "Pembukaan",
-      "puzzles": "Teka-teki",
-      "login": "Log masuk",
-      "register": "Daftar",
-      "logout": "Log keluar",
-      "viewSource": "Lihat sumber di GitHub"
-    },
     "progress": {
       "yourProgress": "Kemajuan anda",
       "trainingLabel": "Kemajuan latihan",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "Teka-teki",
     "noPuzzlesDue": "Tiada teka-teki perlu dibuat sekarang — cuba lagi nanti.",
     "loadFailed": "Gagal memuatkan teka-teki. Semak sambungan anda.",
     "correct": "✅ Betul!",
@@ -109,7 +93,6 @@
     "backToDashboard": "← Kembali ke papan pemuka"
   },
   "training": {
-    "label": "Latihan",
     "whiteToMove": "Putih untuk bergerak",
     "blackToMove": "Hitam untuk bergerak",
     "showHint": "Tunjukkan petunjuk",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "Log masuk",
       "title": "Log masuk",
       "subtitle": "Selamat kembali.",
       "usernameLabel": "Nama pengguna",
@@ -144,7 +126,6 @@
       "errorResendFailed": "Gagal menghantar semula e-mel pengesahan"
     },
     "register": {
-      "label": "Daftar",
       "title": "Daftar",
       "subtitle": "Cipta akaun anda.",
       "emailLabel": "E-mel",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "Sahkan kata laluan",
       "passwordMismatch": "Kata laluan tidak sepadan"
     },
-    "logout": {
-      "label": "Log keluar"
-    },
     "verifyEmail": {
-      "label": "Sahkan e-mel",
       "loadingTitle": "Mengesahkan...",
       "loadingSubtitle": "Mengesahkan e-mel anda…",
       "successTitle": "E-mel disahkan",

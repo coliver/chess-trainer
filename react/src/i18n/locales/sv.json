@@ -14,9 +14,7 @@
     "viewSource": "Visa källan på GitHub"
   },
   "language": {
-    "toggle": "Språk",
-    "en": "Engelska",
-    "kl": "Klingon"
+    "toggle": "Språk"
   },
   "theme": {
     "toggle": "Byt tema",
@@ -28,19 +26,6 @@
     "label": "Vänd brädet"
   },
   "dashboard": {
-    "header": {
-      "title": "Knight School",
-      "greetingMorning": "God morgon ☀️",
-      "greetingAfternoon": "God eftermiddag 🌤️",
-      "greetingEvening": "God kväll 🌙",
-      "nav": "Hem",
-      "openings": "Öppningar",
-      "puzzles": "Pussel",
-      "login": "Logga in",
-      "register": "Registrera",
-      "logout": "Logga ut",
-      "viewSource": "Visa källan på GitHub"
-    },
     "progress": {
       "yourProgress": "Din framgång",
       "trainingLabel": "Träningsframgång",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "Pussel",
     "noPuzzlesDue": "Inga pussel att göra just nu — försök igen senare.",
     "loadFailed": "Det gick inte att ladda pusslen. Kontrollera din anslutning.",
     "correct": "✅ Rätt!",
@@ -109,7 +93,6 @@
     "backToDashboard": "← Tillbaka till översikten"
   },
   "training": {
-    "label": "Träning",
     "whiteToMove": "Vit vid draget",
     "blackToMove": "Svart vid draget",
     "showHint": "Visa ledtråd",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "Logga in",
       "title": "Logga in",
       "subtitle": "Välkommen tillbaka.",
       "usernameLabel": "Användarnamn",
@@ -144,7 +126,6 @@
       "errorResendFailed": "Det gick inte att skicka bekräftelsemejlet igen"
     },
     "register": {
-      "label": "Registrera",
       "title": "Registrera",
       "subtitle": "Skapa ditt konto.",
       "emailLabel": "E-post",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "Bekräfta lösenord",
       "passwordMismatch": "Lösenorden matchar inte"
     },
-    "logout": {
-      "label": "Logga ut"
-    },
     "verifyEmail": {
-      "label": "Bekräfta e-post",
       "loadingTitle": "Bekräftar...",
       "loadingSubtitle": "Bekräftar din e-post…",
       "successTitle": "E-post bekräftad",

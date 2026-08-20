@@ -1,0 +1,207 @@
+{
+  "header": {
+    "title": "Rachathol",
+    "greetingMorning": "Suilad ☀️",
+    "greetingAfternoon": "Suilad 🌤️",
+    "greetingEvening": "Suilad 🌙",
+    "nav": "Tad-dollen",
+    "openings": "Dagorath",
+    "puzzles": "Gorthad",
+    "login": "Enedh",
+    "register": "Cenedh",
+    "logout": "Díhena",
+    "settings": "Govaded",
+    "viewSource": "Círa a thîr GitHub"
+  },
+  "language": {
+    "toggle": "Tad"
+  },
+  "theme": {
+    "toggle": "Tog na them",
+    "dark": "Dûr",
+    "light": "Calen",
+    "system": "Cenedh"
+  },
+  "flipBoard": {
+    "label": "Tog na borth"
+  },
+  "dashboard": {
+    "progress": {
+      "yourProgress": "Dollen nîn",
+      "trainingLabel": "Dollen athra",
+      "trainingHeading": "Athra",
+      "positionsTrained": "Dagorath athra",
+      "accuracy": "Canath",
+      "dayStreak": "Dínen athra",
+      "dayStreakBest": "Dínen athra · dîn {{best}}",
+      "mastered": "Mâthant",
+      "reviewDue": "Dínen athra ({{count}})",
+      "weakSpots": "Mâthant dûr",
+      "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} canath",
+      "weakSpotFallbackName": "Dagor",
+      "puzzleLabel": "Dollen dagor",
+      "puzzlesHeading": "Gorthad",
+      "puzzlesSolved": "Gorthad dortha",
+      "practicePuzzles": "Athra gorthad",
+      "startSessionFailed": "Díhena na dortha. Tog na hammad na thîr na token.",
+      "reviewSessionFailed": "Ú-dollen athra na dortha ú-dollen."
+    },
+    "openings": {
+      "title": "Dagorath",
+      "searchAriaLabel": "Tog dagorath",
+      "searchPlaceholder": "Tog dagorath na ECO…",
+      "sortAZ": "A–Z",
+      "sortPopular": "Methred",
+      "sortButton": "Dínen: {{mode}}",
+      "filterByColor": "Dínen na mîr",
+      "all": "Vollen",
+      "white": "Mîr",
+      "black": "Mellon",
+      "breadcrumb": "Vollen dagorath",
+      "allOpenings": "Govaded",
+      "playAs": "Govaded Mîr",
+      "playAsWhite": "Govaded Mîr",
+      "playAsBlack": "Govaded dûr",
+      "pickToPreview": "Dínen dagor na mîr a thîr athra.",
+      "startLabel": "Tog {{name}}",
+      "chooseOpening": "Dínen dagor",
+      "matches_one": "{{count}} dorth",
+      "matches_other": "{{count}} dorth",
+      "variationsInLibrary": "{{count}} athra i nîr gell",
+      "openingsToTrain_one": "{{count}} dagor · dín na athra",
+      "openingsToTrain_other": "{{count}} dagorath · dín na athra",
+      "variationCount_one": "{{count}} athra",
+      "variationCount_other": "{{count}} athra",
+      "boardPreviewStart": "Tog",
+      "boardPreviewAfterPly": "Aph {{ply}}"
+    }
+  },
+  "puzzles": {
+    "noPuzzlesDue": "Ú-dorth gorthad ú-dollen — tôl na dortha.",
+    "loadFailed": "Díhena na gorthad. Tog na hammad.",
+    "correct": "✅ Canath!",
+    "incorrectFallback": "Ú-vel — ad toltha.",
+    "submitError": "Díhena na dortha.",
+    "findBestMove": "Caran na dortha.",
+    "eyebrow": "Gorthad",
+    "title": "Athra Gorthad",
+    "rating": "Dínen ~{{rating}}",
+    "solved": "Dortha: {{count}}",
+    "streak": "Mellon: {{count}}",
+    "streakBest": " · gwann {{best}}",
+    "skipPuzzle": "Dolven dantath ›",
+    "backToDashboard": "← Ad tolathron"
+  },
+  "training": {
+    "whiteToMove": "Mîr na Tog",
+    "blackToMove": "Mellon na Tog",
+    "showHint": "Círa na vîr",
+    "eyebrow": "Athra",
+    "prev": "‹ Amin",
+    "next": "Noro ›",
+    "movePlaceholder": "na tegra tog, g.e. e2e4",
+    "play": "Tog",
+    "jumpToLatest": "Thol na noro anim na dortha",
+    "backToOpenings": "← Dortha na dagorath",
+    "trainAgain": "Athra dagor na enni",
+    "restarting": "Togra…",
+    "chooseAnother": "Dínen dagor enni"
+  },
+  "auth": {
+    "login": {
+      "title": "Tul",
+      "subtitle": "Mellon a Pheriannath, agor",
+      "usernameLabel": "Eneth",
+      "passwordLabel": "Parma",
+      "submit": "Tul",
+      "submitting": "Tul...",
+      "emailNotVerified": "Tortha i mîr nîn aduialin a thûl",
+      "resendVerification": "Athar i mîr nîn athar",
+      "resendSending": "Athar...",
+      "resendSent": "Athar!",
+      "needAccount": "Man sad?",
+      "registerLink": "Mabon",
+      "errorGeneric": "Ú-melinyes i ú-melinyes.",
+      "errorLoginFailed": "Ú-thûl",
+      "errorResendFailed": "Ú-athar i mîr nîn athar"
+    },
+    "register": {
+      "title": "Ennel",
+      "subtitle": "Gwara i mbathron nîn.",
+      "emailLabel": "Mbathron",
+      "emailDisclaimer": "Ú-dûr i ú-mîr — ú-dûr i ú-drîn",
+      "usernameLabel": "Melin",
+      "passwordLabel": "Phedhell",
+      "passwordConfirmLabel": "Aphadhel",
+      "passwordMismatch": "Phedhellin ú-melir",
+      "submit": "Ennel",
+      "submitting": "Ennel...",
+      "successMessage": "Ennel netha! Tiro i mbathron na <strong>{{email}}</strong> am man cenedh i dortha na ngor.",
+      "returnToLogin": "Tolo i login",
+      "haveAccount": "Man cenedh i mbas?",
+      "loginLink": "Login",
+      "errorGeneric": "Ú-vennel. Aphadho i lin."
+    },
+    "verifyEmail": {
+      "loadingTitle": "Dortha...",
+      "loadingSubtitle": "Dortha i mbathron...",
+      "successTitle": "Mbathron Dortha",
+      "successSubtitleWithEmail": "{{email}} dortha! Man cenedh i login.",
+      "successSubtitleNoEmail": "Mbathron dortha! Man cenedh i login.",
+      "goToLogin": "Tolo i Login",
+      "errorTitle": "Dortha Ú-vae",
+      "errorSubtitle": "I dortha na i mbathron ú-vae na ú-tharas.",
+      "returnToLogin": "Tolo i Login"
+    }
+  },
+  "email": {
+    "verify": {
+      "label": "Dortha i mbathron",
+      "subject": "Dortha i mbathron na i Alphabet n·Imladris",
+      "heading": "Suilad i Alphabet n·Imladris!",
+      "instructions": "Dortha i mbathron na le amman:",
+      "instructionsHtml": "Dortha i mbathron na le cenedh i dortha:",
+      "expires": "I dortha na 24 awr."
+    }
+  },
+  "settings": {
+    "title": "Gwedh",
+    "subtitle": "Personoli i Chû amman i Dregol Sefron",
+    "resetToDefaults": "Adlanna i Dregol",
+    "resetConfirm": "Adlanna i gwedh oll i dregol? Man sadannen, ní thâf na dortha.",
+    "previewLabel": "Tortha",
+    "languageLabel": "Telya",
+    "appearance": {
+      "heading": "Cû",
+      "themeLabel": "Them",
+      "boardThemeLabel": "Dant i dâg",
+      "pieceSetLabel": "Dregol i fêr",
+      "showCoordinatesLabel": "Tortha i chêl i dâg",
+      "boardAnimationsLabel": "Dregol i hammad i fêr",
+      "soundLabel": "Peth i thond",
+      "snowLabel": "Eil i nîf"
+    },
+    "boardOrientation": {
+      "heading": "Dûr i dâg",
+      "auto": "Audo — dortha i dâg i lû i hammad",
+      "white": "Gwaned i Mîl lin",
+      "black": "Gwaned i Dûr lin"
+    },
+    "boardThemes": {
+      "default": "Dregol",
+      "default-contrast": "Dregol (dûr neth)",
+      "green": "Calen",
+      "blue": "Luin",
+      "chess-club": "Maethor i Gorthaur",
+      "chessboard-js": "Dregol",
+      "black-and-white": "Dûr a Mîl"
+    },
+    "pieceSets": {
+      "standard": "Sefron",
+      "staunty": "Stauntya",
+      "merida": "Merida",
+      "pirouetti": "Pirouetti",
+      "chessnut": "Chessnut"
+    }
+  }
+}

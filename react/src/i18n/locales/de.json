@@ -14,9 +14,7 @@
     "viewSource": "Quelltext auf GitHub ansehen"
   },
   "language": {
-    "toggle": "Sprache",
-    "en": "English",
-    "kl": "Klingon"
+    "toggle": "Sprache"
   },
   "theme": {
     "toggle": "Design wechseln",
@@ -28,19 +26,6 @@
     "label": "Brett drehen"
   },
   "dashboard": {
-    "header": {
-      "title": "Knight School",
-      "greetingMorning": "Good morning ☀️",
-      "greetingAfternoon": "Good afternoon 🌤️",
-      "greetingEvening": "Good evening 🌙",
-      "nav": "Primary",
-      "openings": "Openings",
-      "puzzles": "Puzzles",
-      "login": "Login",
-      "register": "Register",
-      "logout": "Logout",
-      "viewSource": "View source on GitHub"
-    },
     "progress": {
       "yourProgress": "Dein Fortschritt",
       "trainingLabel": "Trainingsfortschritt",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "Puzzles",
     "noPuzzlesDue": "Aktuell sind keine Rätsel fällig — schau später wieder vorbei.",
     "loadFailed": "Rätsel konnten nicht geladen werden. Prüfe deine Verbindung.",
     "correct": "✅ Richtig!",
@@ -109,7 +93,6 @@
     "backToDashboard": "← Zurück zum Dashboard"
   },
   "training": {
-    "label": "Training",
     "whiteToMove": "Weiß am Zug",
     "blackToMove": "Schwarz am Zug",
     "showHint": "Tipp anzeigen",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "Login",
       "title": "Anmelden",
       "subtitle": "Willkommen zurück.",
       "usernameLabel": "Benutzername",
@@ -144,7 +126,6 @@
       "errorResendFailed": "Senden der Bestätigungs-E-Mail fehlgeschlagen"
     },
     "register": {
-      "label": "Register",
       "title": "Registrieren",
       "subtitle": "Erstelle dein Konto.",
       "emailLabel": "E-Mail",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "Passwort bestätigen",
       "passwordMismatch": "Passwörter stimmen nicht überein"
     },
-    "logout": {
-      "label": "Logout"
-    },
     "verifyEmail": {
-      "label": "Verify email",
       "loadingTitle": "Wird überprüft...",
       "loadingSubtitle": "Deine E-Mail wird überprüft…",
       "successTitle": "E-Mail bestätigt",

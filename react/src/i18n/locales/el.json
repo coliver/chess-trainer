@@ -14,9 +14,7 @@
     "viewSource": "Προβολή πηγής στο GitHub"
   },
   "language": {
-    "toggle": "Γλώσσα",
-    "en": "Αγγλικά",
-    "kl": "Κλίνγκον"
+    "toggle": "Γλώσσα"
   },
   "theme": {
     "toggle": "Αλλαγή θέματος",
@@ -28,19 +26,6 @@
     "label": "Αναστροφή σκακιέρας"
   },
   "dashboard": {
-    "header": {
-      "title": "Σχολή Ιπποτών",
-      "greetingMorning": "Καλημέρα ☀️",
-      "greetingAfternoon": "Καλό απόγευμα 🌤️",
-      "greetingEvening": "Καλησπέρα 🌙",
-      "nav": "Κεντρικό",
-      "openings": "Ανοίγματα",
-      "puzzles": "Γρίφοι",
-      "login": "Σύνδεση",
-      "register": "Εγγραφή",
-      "logout": "Αποσύνδεση",
-      "viewSource": "Προβολή πηγής στο GitHub"
-    },
     "progress": {
       "yourProgress": "Η πρόοδός σας",
       "trainingLabel": "Πρόοδος εκπαίδευσης",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "Γρίφοι",
     "noPuzzlesDue": "Δεν υπάρχουν γρίφοι αυτή τη στιγμή — δοκιμάστε αργότερα.",
     "loadFailed": "Αποτυχία φόρτωσης γρίφου. Ελέγξτε τη σύνδεσή σας.",
     "correct": "✅ Σωστά!",
@@ -109,7 +93,6 @@
     "backToDashboard": "← Πίσω στον πίνακα"
   },
   "training": {
-    "label": "Εκπαίδευση",
     "whiteToMove": "Κινεί τα λευκά",
     "blackToMove": "Κινεί τα μαύρα",
     "showHint": "Εμφάνιση υπόδειξης",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "Σύνδεση",
       "title": "Σύνδεση",
       "subtitle": "Καλώς ορίσατε ξανά.",
       "usernameLabel": "Όνομα χρήστη",
@@ -144,7 +126,6 @@
       "errorResendFailed": "Αποτυχία επαναποστολής email επαλήθευσης"
     },
     "register": {
-      "label": "Εγγραφή",
       "title": "Εγγραφή",
       "subtitle": "Δημιουργήστε τον λογαριασμό σας.",
       "emailLabel": "Email",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "Επιβεβαίωση κωδικού πρόσβασης",
       "passwordMismatch": "Οι κωδικοί πρόσβασης δεν ταιριάζουν"
     },
-    "logout": {
-      "label": "Αποσύνδεση"
-    },
     "verifyEmail": {
-      "label": "Επαλήθευση email",
       "loadingTitle": "Επαλήθευση...",
       "loadingSubtitle": "Επαληθεύεται το email σας…",
       "successTitle": "Το email επαληθεύτηκε",

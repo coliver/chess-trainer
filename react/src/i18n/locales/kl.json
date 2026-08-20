@@ -14,9 +14,7 @@
     "viewSource": "GitHubDaq ghItlh'e' yIlegh"
   },
   "language": {
-    "toggle": "qaD",
-    "en": "English",
-    "kl": "Klingon"
+    "toggle": "qaD"
   },
   "theme": {
     "toggle": "qaD",
@@ -28,19 +26,6 @@
     "label": "Flip board"
   },
   "dashboard": {
-    "header": {
-      "title": "ra'taHbogh loDnI' paq",
-      "greetingMorning": "Qapla'! po vItIv, SoH yIH! ☀️",
-      "greetingAfternoon": "Qapla'! rep vItIv, SoH yIH! 🌤️",
-      "greetingEvening": "Qapla'! ram vItIv, SoH yIH! 🌙",
-      "nav": "qelI'qam",
-      "openings": "poHmey",
-      "puzzles": "bIQtIq SeH",
-      "login": "nuqneH — yI'el",
-      "register": "EmpireDaq chel",
-      "logout": "joH'a' lurghDaq bIrgh",
-      "viewSource": "GitHubDaq ghItlh'e' yIlegh"
-    },
     "progress": {
       "yourProgress": "SoH Qap",
       "trainingLabel": "QorDu'",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "bIQtIq",
     "noPuzzlesDue": "bIQtIqmey pagh",
     "loadFailed": "bIQtIqmey tlheghlaHbe'",
     "correct": "Qap",
@@ -109,7 +93,6 @@
     "backToDashboard": "dashboardDaq chegh"
   },
   "training": {
-    "label": "QorDu'",
     "whiteToMove": "chIS yIghoS",
     "blackToMove": "qIj yIghoS",
     "showHint": "qI' yI'ang",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "yI'el",
       "title": "yI'el",
       "subtitle": "nuqneH. SoH yIchoq, loDnI'.",
       "usernameLabel": "Haj",
@@ -144,7 +126,6 @@
       "errorResendFailed": "verification email ta'meH Qagh"
     },
     "register": {
-      "label": "chel",
       "title": "chel",
       "subtitle": "EmpireDaq chel.",
       "emailLabel": "Email",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "qapla' password",
       "passwordMismatch": "passwords not honor"
     },
-    "logout": {
-      "label": "Logout"
-    },
     "verifyEmail": {
-      "label": "Verify email",
       "loadingTitle": "yI'angtaH...",
       "loadingSubtitle": "emaillIj yI'angtaH…",
       "successTitle": "Email Qap",

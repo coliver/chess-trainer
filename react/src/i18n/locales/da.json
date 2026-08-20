@@ -14,9 +14,7 @@
     "viewSource": "Se kildekoden på GitHub"
   },
   "language": {
-    "toggle": "Sprog",
-    "en": "Engelsk",
-    "kl": "Klingonsk"
+    "toggle": "Sprog"
   },
   "theme": {
     "toggle": "Skift tema",
@@ -28,19 +26,6 @@
     "label": "Vend brettet"
   },
   "dashboard": {
-    "header": {
-      "title": "Ridderskolen",
-      "greetingMorning": "God morgen ☀️",
-      "greetingAfternoon": "God eftermiddag 🌤️",
-      "greetingEvening": "God aften 🌙",
-      "nav": "Primært",
-      "openings": "Åbninger",
-      "puzzles": "Opgaver",
-      "login": "Log ind",
-      "register": "Registrer dig",
-      "logout": "Log ud",
-      "viewSource": "Se kildekoden på GitHub"
-    },
     "progress": {
       "yourProgress": "Din fremskridt",
       "trainingLabel": "Træningsfremskridt",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "Opgaver",
     "noPuzzlesDue": "Ingen opgaver lige nu — kom tilbage senere.",
     "loadFailed": "Kunne ikke indlæse en opgave. Tjek din forbindelse.",
     "correct": "✅ Korrekt!",
@@ -109,7 +93,6 @@
     "backToDashboard": "← Tilbage til dashboard"
   },
   "training": {
-    "label": "Træning",
     "whiteToMove": "Hvid skal flytte",
     "blackToMove": "Sort skal flytte",
     "showHint": "Vis et tip",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "Log ind",
       "title": "Log ind",
       "subtitle": "Velkommen tilbage.",
       "usernameLabel": "Brugernavn",
@@ -144,7 +126,6 @@
       "errorResendFailed": "Kunne ikke gensende bekræftelsesmail"
     },
     "register": {
-      "label": "Registrer dig",
       "title": "Registrer dig",
       "subtitle": "Opret din konto.",
       "emailLabel": "E-mail",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "Bekræft adgangskode",
       "passwordMismatch": "Adgangskoderne stemmer ikke overens"
     },
-    "logout": {
-      "label": "Log ud"
-    },
     "verifyEmail": {
-      "label": "Bekræft e-mail",
       "loadingTitle": "Bekræfter...",
       "loadingSubtitle": "Bekræfter din e-mail…",
       "successTitle": "E-mail bekræftet",

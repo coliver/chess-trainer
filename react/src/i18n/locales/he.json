@@ -14,9 +14,7 @@
     "viewSource": "צפה בקוד המקור ב-GitHub"
   },
   "language": {
-    "toggle": "שפה",
-    "en": "אנגלית",
-    "kl": "קלינגונית"
+    "toggle": "שפה"
   },
   "theme": {
     "toggle": "החלפת ערכת נושא",
@@ -28,19 +26,6 @@
     "label": "הפוך את הלוח"
   },
   "dashboard": {
-    "header": {
-      "title": "בית הספר לאבירים",
-      "greetingMorning": "בוקר טוב ☀️",
-      "greetingAfternoon": "צהריים טובים 🌤️",
-      "greetingEvening": "ערב טוב 🌙",
-      "nav": "ראשי",
-      "openings": "פתיחות",
-      "puzzles": "חידות",
-      "login": "התחברות",
-      "register": "הרשמה",
-      "logout": "התנתקות",
-      "viewSource": "צפה בקוד המקור ב-GitHub"
-    },
     "progress": {
       "yourProgress": "ההתקדמות שלך",
       "trainingLabel": "התקדמות האימון",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "חידות",
     "noPuzzlesDue": "אין חידות כרגע — נסו שוב מאוחר יותר.",
     "loadFailed": "טעינת החידה נכשלה. בדקו את החיבור.",
     "correct": "✅ נכון!",
@@ -109,7 +93,6 @@
     "backToDashboard": "← חזרה ללוח הבקרה"
   },
   "training": {
-    "label": "אימון",
     "whiteToMove": "לבן בתור",
     "blackToMove": "שחור בתור",
     "showHint": "הצג רמז",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "התחברות",
       "title": "התחברות",
       "subtitle": "ברוכים השבים.",
       "usernameLabel": "שם משתמש",
@@ -144,7 +126,6 @@
       "errorResendFailed": "שליחת אימייל האימות מחדש נכשלה"
     },
     "register": {
-      "label": "הרשמה",
       "title": "הרשמה",
       "subtitle": "צרו חשבון.",
       "emailLabel": "אימייל",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "אישור סיסמה",
       "passwordMismatch": "הסיסמאות לא תואמות"
     },
-    "logout": {
-      "label": "התנתקות"
-    },
     "verifyEmail": {
-      "label": "אימות אימייל",
       "loadingTitle": "מאמת...",
       "loadingSubtitle": "מאמת את האימייל שלך…",
       "successTitle": "האימייל אומת",

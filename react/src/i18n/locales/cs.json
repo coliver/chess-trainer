@@ -14,9 +14,7 @@
     "viewSource": "Zobrazit zdroj na GitHubu"
   },
   "language": {
-    "toggle": "Jazyk",
-    "en": "Angličtina",
-    "kl": "Klingonština"
+    "toggle": "Jazyk"
   },
   "theme": {
     "toggle": "Přepnout motiv",
@@ -28,19 +26,6 @@
     "label": "Otočit šachovnici"
   },
   "dashboard": {
-    "header": {
-      "title": "Škola rytířů",
-      "greetingMorning": "Dobré ráno ☀️",
-      "greetingAfternoon": "Dobrý den 🌤️",
-      "greetingEvening": "Dobrý večer 🌙",
-      "nav": "Hlavní",
-      "openings": "Otevření",
-      "puzzles": "Úlohy",
-      "login": "Přihlásit se",
-      "register": "Zaregistrovat se",
-      "logout": "Odhlásit se",
-      "viewSource": "Zobrazit zdroj na GitHubu"
-    },
     "progress": {
       "yourProgress": "Váš pokrok",
       "trainingLabel": "Pokrok v tréninku",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "Úlohy",
     "noPuzzlesDue": "Právě teď nejsou žádné úlohy — zkuste to později.",
     "loadFailed": "Nepodařilo se načíst úlohu. Zkontrolujte připojení.",
     "correct": "✅ Správně!",
@@ -109,7 +93,6 @@
     "backToDashboard": "← Zpět na nástěnku"
   },
   "training": {
-    "label": "Trénink",
     "whiteToMove": "Na tahu bílé",
     "blackToMove": "Na tahu černé",
     "showHint": "Zobrazit nápovědu",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "Přihlásit se",
       "title": "Přihlásit se",
       "subtitle": "Vítejte zpět.",
       "usernameLabel": "Uživatelské jméno",
@@ -144,7 +126,6 @@
       "errorResendFailed": "Nepodařilo se znovu odeslat ověřovací e-mail"
     },
     "register": {
-      "label": "Zaregistrovat se",
       "title": "Zaregistrovat se",
       "subtitle": "Vytvořte si účet.",
       "emailLabel": "E-mail",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "Potvrďte heslo",
       "passwordMismatch": "Hesla se neshodují"
     },
-    "logout": {
-      "label": "Odhlásit se"
-    },
     "verifyEmail": {
-      "label": "Ověřit e-mail",
       "loadingTitle": "Ověřování...",
       "loadingSubtitle": "Ověřuji váš e-mail…",
       "successTitle": "E-mail ověřen",

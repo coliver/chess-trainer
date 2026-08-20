@@ -14,9 +14,7 @@
     "viewSource": "GitHub에서 소스 보기"
   },
   "language": {
-    "toggle": "언어",
-    "en": "영어",
-    "kl": "클링온어"
+    "toggle": "언어"
   },
   "theme": {
     "toggle": "테마 전환",
@@ -28,19 +26,6 @@
     "label": "보드 뒤집기"
   },
   "dashboard": {
-    "header": {
-      "title": "Knight School",
-      "greetingMorning": "좋은 아침입니다 ☀️",
-      "greetingAfternoon": "좋은 오후입니다 🌤️",
-      "greetingEvening": "좋은 저녁입니다 🌙",
-      "nav": "주 메뉴",
-      "openings": "오프닝",
-      "puzzles": "퍼즐",
-      "login": "로그인",
-      "register": "회원가입",
-      "logout": "로그아웃",
-      "viewSource": "GitHub에서 소스 보기"
-    },
     "progress": {
       "yourProgress": "진행 상황",
       "trainingLabel": "훈련 진행도",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "퍼즐",
     "noPuzzlesDue": "지금은 해결할 퍼즐이 없습니다 — 나중에 다시 확인하세요.",
     "loadFailed": "퍼즐을 불러오지 못했습니다. 연결을 확인하세요.",
     "correct": "✅ 정답!",
@@ -109,7 +93,6 @@
     "backToDashboard": "← 대시보드로 돌아가기"
   },
   "training": {
-    "label": "훈련",
     "whiteToMove": "백 차례",
     "blackToMove": "흑 차례",
     "showHint": "힌트 보기",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "로그인",
       "title": "로그인",
       "subtitle": "다시 오신 것을 환영합니다.",
       "usernameLabel": "사용자 이름",
@@ -144,7 +126,6 @@
       "errorResendFailed": "인증 이메일 재전송 실패"
     },
     "register": {
-      "label": "회원가입",
       "title": "회원가입",
       "subtitle": "계정을 만들어보세요.",
       "emailLabel": "이메일",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "비밀번호 확인",
       "passwordMismatch": "비밀번호가 일치하지 않습니다"
     },
-    "logout": {
-      "label": "로그아웃"
-    },
     "verifyEmail": {
-      "label": "이메일 인증",
       "loadingTitle": "인증 중...",
       "loadingSubtitle": "이메일을 인증하는 중…",
       "successTitle": "이메일 인증 완료",

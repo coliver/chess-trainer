@@ -14,9 +14,7 @@
     "viewSource": "عرض المصدر على GitHub"
   },
   "language": {
-    "toggle": "اللغة",
-    "en": "الإنجليزية",
-    "kl": "الكlingon"
+    "toggle": "اللغة"
   },
   "theme": {
     "toggle": "تبديل المظهر",
@@ -28,19 +26,6 @@
     "label": "تدوير اللوحة"
   },
   "dashboard": {
-    "header": {
-      "title": "مدرسة الفارس",
-      "greetingMorning": "صباح الخير ☀️",
-      "greetingAfternoon": "مساء الخير 🌤️",
-      "greetingEvening": "مساء الخير 🌙",
-      "nav": "الرئيسية",
-      "openings": "الافتتاحيات",
-      "puzzles": "الألغاز",
-      "login": "تسجيل الدخول",
-      "register": "إنشاء حساب",
-      "logout": "تسجيل الخروج",
-      "viewSource": "عرض المصدر على GitHub"
-    },
     "progress": {
       "yourProgress": "تقدمك",
       "trainingLabel": "تقدم التدريب",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "الألغاز",
     "noPuzzlesDue": "لا توجد ألغاز مستحقة الآن — عد لاحقًا.",
     "loadFailed": "فشل تحميل اللغز. تحقق من اتصالك.",
     "correct": "✅ صحيح!",
@@ -109,7 +93,6 @@
     "backToDashboard": "← العودة إلى لوحة التحكم"
   },
   "training": {
-    "label": "التدريب",
     "whiteToMove": "دور الأبيض",
     "blackToMove": "دور الأسود",
     "showHint": "إظهار تلميح",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "تسجيل الدخول",
       "title": "تسجيل الدخول",
       "subtitle": "مرحبًا بعودتك.",
       "usernameLabel": "اسم المستخدم",
@@ -144,7 +126,6 @@
       "errorResendFailed": "فشل إعادة إرسال رسالة التحقق"
     },
     "register": {
-      "label": "إنشاء حساب",
       "title": "إنشاء حساب",
       "subtitle": "أنشئ حسابك.",
       "emailLabel": "البريد الإلكتروني",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "تأكيد كلمة المرور",
       "passwordMismatch": "كلمات المرور غير متطابقة"
     },
-    "logout": {
-      "label": "تسجيل الخروج"
-    },
     "verifyEmail": {
-      "label": "التحقق من البريد الإلكتروني",
       "loadingTitle": "جارٍ التحقق...",
       "loadingSubtitle": "جارٍ التحقق من بريدك الإلكتروني…",
       "successTitle": "تم التحقق من البريد الإلكتروني",

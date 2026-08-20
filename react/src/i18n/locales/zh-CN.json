@@ -14,9 +14,7 @@
     "viewSource": "在 GitHub 查看源代码"
   },
   "language": {
-    "toggle": "语言",
-    "en": "英语",
-    "kl": "克林贡语"
+    "toggle": "语言"
   },
   "theme": {
     "toggle": "切换主题",
@@ -28,19 +26,6 @@
     "label": "翻转棋盘"
   },
   "dashboard": {
-    "header": {
-      "title": "骑士学堂",
-      "greetingMorning": "早上好 ☀️",
-      "greetingAfternoon": "下午好 🌤️",
-      "greetingEvening": "晚上好 🌙",
-      "nav": "主导航",
-      "openings": "开局",
-      "puzzles": "谜题",
-      "login": "登录",
-      "register": "注册",
-      "logout": "退出登录",
-      "viewSource": "在 GitHub 查看源代码"
-    },
     "progress": {
       "yourProgress": "你的进度",
       "trainingLabel": "训练进度",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "谜题",
     "noPuzzlesDue": "目前没有待做谜题，稍后再来吧。",
     "loadFailed": "加载谜题失败。请检查连接。",
     "correct": "✅ 正确！",
@@ -109,7 +93,6 @@
     "backToDashboard": "← 返回仪表盘"
   },
   "training": {
-    "label": "训练",
     "whiteToMove": "白方走棋",
     "blackToMove": "黑方走棋",
     "showHint": "显示提示",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "登录",
       "title": "登录",
       "subtitle": "欢迎回来。",
       "usernameLabel": "用户名",
@@ -144,7 +126,6 @@
       "errorResendFailed": "重新发送验证邮件失败"
     },
     "register": {
-      "label": "注册",
       "title": "注册",
       "subtitle": "创建你的账号。",
       "emailLabel": "邮箱",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "确认密码",
       "passwordMismatch": "密码不匹配"
     },
-    "logout": {
-      "label": "退出登录"
-    },
     "verifyEmail": {
-      "label": "验证邮箱",
       "loadingTitle": "验证中...",
       "loadingSubtitle": "正在验证你的邮箱…",
       "successTitle": "邮箱已验证",

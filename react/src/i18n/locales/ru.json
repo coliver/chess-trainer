@@ -14,9 +14,7 @@
     "viewSource": "Посмотреть исходный код на GitHub"
   },
   "language": {
-    "toggle": "Язык",
-    "en": "English",
-    "kl": "Klingon"
+    "toggle": "Язык"
   },
   "theme": {
     "toggle": "Переключить тему",
@@ -28,19 +26,6 @@
     "label": "Повернуть доску"
   },
   "dashboard": {
-    "header": {
-      "title": "Knight School",
-      "greetingMorning": "Good morning ☀️",
-      "greetingAfternoon": "Good afternoon 🌤️",
-      "greetingEvening": "Good evening 🌙",
-      "nav": "Primary",
-      "openings": "Openings",
-      "puzzles": "Puzzles",
-      "login": "Login",
-      "register": "Register",
-      "logout": "Logout",
-      "viewSource": "View source on GitHub"
-    },
     "progress": {
       "yourProgress": "Ваш прогресс",
       "trainingLabel": "Прогресс тренировки",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "Puzzles",
     "noPuzzlesDue": "Сейчас нет задач на повторение — зайдите позже.",
     "loadFailed": "Не удалось загрузить задачу. Проверьте подключение.",
     "correct": "✅ Верно!",
@@ -109,7 +93,6 @@
     "backToDashboard": "← Назад на панель"
   },
   "training": {
-    "label": "Training",
     "whiteToMove": "Ход белых",
     "blackToMove": "Ход чёрных",
     "showHint": "Показать подсказку",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "Login",
       "title": "Вход",
       "subtitle": "С возвращением.",
       "usernameLabel": "Имя пользователя",
@@ -144,7 +126,6 @@
       "errorResendFailed": "Не удалось повторно отправить письмо для подтверждения"
     },
     "register": {
-      "label": "Register",
       "title": "Регистрация",
       "subtitle": "Создайте свой аккаунт.",
       "emailLabel": "Email",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "Подтвердите пароль",
       "passwordMismatch": "Пароли не совпадают"
     },
-    "logout": {
-      "label": "Logout"
-    },
     "verifyEmail": {
-      "label": "Verify email",
       "loadingTitle": "Проверка…",
       "loadingSubtitle": "Проверяем ваш email…",
       "successTitle": "Email подтверждён",

@@ -14,9 +14,7 @@
     "viewSource": "Ver el código fuente en GitHub"
   },
   "language": {
-    "toggle": "Idioma",
-    "en": "English",
-    "kl": "Klingon"
+    "toggle": "Idioma"
   },
   "theme": {
     "toggle": "Cambiar tema",
@@ -28,19 +26,6 @@
     "label": "Girar tablero"
   },
   "dashboard": {
-    "header": {
-      "title": "Academia del Caballo",
-      "greetingMorning": "Buenos días ☀️",
-      "greetingAfternoon": "Buenas tardes 🌤️",
-      "greetingEvening": "Buenas noches 🌙",
-      "nav": "Principal",
-      "openings": "Aperturas",
-      "puzzles": "Problemas",
-      "login": "Iniciar sesión",
-      "register": "Registrarse",
-      "logout": "Cerrar sesión",
-      "viewSource": "Ver el código fuente en GitHub"
-    },
     "progress": {
       "yourProgress": "Tu progreso",
       "trainingLabel": "Progreso de entrenamiento",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "Problemas",
     "noPuzzlesDue": "No hay puzzles pendientes ahora mismo — vuelve más tarde.",
     "loadFailed": "No se pudo cargar el puzzle. Verifica tu conexión.",
     "correct": "✅ ¡Correcto!",
@@ -109,7 +93,6 @@
     "backToDashboard": "← Volver al panel"
   },
   "training": {
-    "label": "Training",
     "whiteToMove": "Mueven las blancas",
     "blackToMove": "Mueven las negras",
     "showHint": "Mostrar pista",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "Login",
       "title": "Iniciar sesión",
       "subtitle": "Bienvenido de nuevo.",
       "usernameLabel": "Usuario",
@@ -144,7 +126,6 @@
       "errorResendFailed": "Error al reenviar el correo de verificación"
     },
     "register": {
-      "label": "Register",
       "title": "Registrarse",
       "subtitle": "Crea tu cuenta.",
       "emailLabel": "Correo electrónico",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "Confirmar contraseña",
       "passwordMismatch": "Las contraseñas no coinciden"
     },
-    "logout": {
-      "label": "Logout"
-    },
     "verifyEmail": {
-      "label": "Verificar correo electrónico",
       "loadingTitle": "Verificando...",
       "loadingSubtitle": "Verificando tu correo electrónico…",
       "successTitle": "Correo verificado",

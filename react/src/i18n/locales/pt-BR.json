@@ -14,9 +14,7 @@
     "viewSource": "Ver o código-fonte no GitHub"
   },
   "language": {
-    "toggle": "Idioma",
-    "en": "Inglês",
-    "kl": "Klingon"
+    "toggle": "Idioma"
   },
   "theme": {
     "toggle": "Alternar tema",
@@ -28,19 +26,6 @@
     "label": "Virar tabuleiro"
   },
   "dashboard": {
-    "header": {
-      "title": "Knight School",
-      "greetingMorning": "Bom dia ☀️",
-      "greetingAfternoon": "Boa tarde 🌤️",
-      "greetingEvening": "Boa noite 🌙",
-      "nav": "Principal",
-      "openings": "Aberturas",
-      "puzzles": "Problemas",
-      "login": "Entrar",
-      "register": "Cadastrar",
-      "logout": "Sair",
-      "viewSource": "Ver o código-fonte no GitHub"
-    },
     "progress": {
       "yourProgress": "Seu progresso",
       "trainingLabel": "Progresso do treino",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "Problemas",
     "noPuzzlesDue": "Nenhum problema pendente agora — volte mais tarde.",
     "loadFailed": "Falha ao carregar um problema. Verifique sua conexão.",
     "correct": "✅ Correto!",
@@ -109,7 +93,6 @@
     "backToDashboard": "← Voltar ao painel"
   },
   "training": {
-    "label": "Treino",
     "whiteToMove": "Brancas jogam",
     "blackToMove": "Pretas jogam",
     "showHint": "Mostrar dica",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "Entrar",
       "title": "Entrar",
       "subtitle": "Bem-vindo de volta.",
       "usernameLabel": "Usuário",
@@ -144,7 +126,6 @@
       "errorResendFailed": "Falha ao reenviar o e-mail de verificação"
     },
     "register": {
-      "label": "Cadastrar",
       "title": "Cadastrar",
       "subtitle": "Crie sua conta.",
       "emailLabel": "E-mail",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "Confirmar senha",
       "passwordMismatch": "As senhas não coincidem"
     },
-    "logout": {
-      "label": "Sair"
-    },
     "verifyEmail": {
-      "label": "Verificar e-mail",
       "loadingTitle": "Verificando...",
       "loadingSubtitle": "Verificando seu e-mail…",
       "successTitle": "E-mail verificado",

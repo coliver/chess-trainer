@@ -14,9 +14,7 @@
     "viewSource": "Forrás megtekintése a GitHubon"
   },
   "language": {
-    "toggle": "Nyelv",
-    "en": "Angol",
-    "kl": "Klingon"
+    "toggle": "Nyelv"
   },
   "theme": {
     "toggle": "Téma váltása",
@@ -28,19 +26,6 @@
     "label": "Tábla megfordítása"
   },
   "dashboard": {
-    "header": {
-      "title": "Knight School",
-      "greetingMorning": "Jó reggelt ☀️",
-      "greetingAfternoon": "Jó napot 🌤️",
-      "greetingEvening": "Jó estét 🌙",
-      "nav": "Főmenü",
-      "openings": "Megnyitások",
-      "puzzles": "Feladványok",
-      "login": "Bejelentkezés",
-      "register": "Regisztráció",
-      "logout": "Kijelentkezés",
-      "viewSource": "Forrás megtekintése a GitHubon"
-    },
     "progress": {
       "yourProgress": "A te haladásod",
       "trainingLabel": "Edzési haladás",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "Feladványok",
     "noPuzzlesDue": "Most nincs esedékes feladvány — nézz vissza később.",
     "loadFailed": "Nem sikerült betölteni a feladványt. Ellenőrizd a kapcsolatodat.",
     "correct": "✅ Helyes!",
@@ -109,7 +93,6 @@
     "backToDashboard": "← Vissza az irányítópultra"
   },
   "training": {
-    "label": "Edzés",
     "whiteToMove": "Világos következik",
     "blackToMove": "Sötét következik",
     "showHint": "Tipp megjelenítése",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "Bejelentkezés",
       "title": "Bejelentkezés",
       "subtitle": "Üdv újra.",
       "usernameLabel": "Felhasználónév",
@@ -144,7 +126,6 @@
       "errorResendFailed": "Az ellenőrző e-mail újraküldése sikertelen"
     },
     "register": {
-      "label": "Regisztráció",
       "title": "Regisztráció",
       "subtitle": "Hozd létre a fiókodat.",
       "emailLabel": "E-mail",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "Jelszó megerősítése",
       "passwordMismatch": "A jelszavak nem egyeznek"
     },
-    "logout": {
-      "label": "Kijelentkezés"
-    },
     "verifyEmail": {
-      "label": "E-mail ellenőrzése",
       "loadingTitle": "Ellenőrzés...",
       "loadingSubtitle": "Az e-mail-cím ellenőrzése…",
       "successTitle": "E-mail ellenőrizve",

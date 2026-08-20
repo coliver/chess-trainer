@@ -14,9 +14,7 @@
     "viewSource": "Visualizza sorgente su GitHub"
   },
   "language": {
-    "toggle": "Lingua",
-    "en": "English",
-    "kl": "Klingon"
+    "toggle": "Lingua"
   },
   "theme": {
     "toggle": "Cambia tema",
@@ -28,19 +26,6 @@
     "label": "Capovolgi scacchiera"
   },
   "dashboard": {
-    "header": {
-      "title": "Knight School",
-      "greetingMorning": "Good morning ☀️",
-      "greetingAfternoon": "Good afternoon 🌤️",
-      "greetingEvening": "Good evening 🌙",
-      "nav": "Primary",
-      "openings": "Openings",
-      "puzzles": "Puzzles",
-      "login": "Login",
-      "register": "Register",
-      "logout": "Logout",
-      "viewSource": "View source on GitHub"
-    },
     "progress": {
       "yourProgress": "Il tuo progresso",
       "trainingLabel": "Progresso dell’allenamento",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "Puzzles",
     "noPuzzlesDue": "Nessun puzzle da fare in questo momento — torna più tardi.",
     "loadFailed": "Caricamento puzzle non riuscito. Controlla la connessione.",
     "correct": "✅ Giusto!",
@@ -109,7 +93,6 @@
     "backToDashboard": "← Torna alla dashboard"
   },
   "training": {
-    "label": "Training",
     "whiteToMove": "Tocca ai Bianchi",
     "blackToMove": "Tocca ai Neri",
     "showHint": "Mostra un suggerimento",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "Login",
       "title": "Accedi",
       "subtitle": "Bentornato/a.",
       "usernameLabel": "Nome utente",
@@ -144,7 +126,6 @@
       "errorResendFailed": "Impossibile rinviare l’email di verifica"
     },
     "register": {
-      "label": "Register",
       "title": "Registrati",
       "subtitle": "Crea il tuo account.",
       "emailLabel": "Email",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "Conferma password",
       "passwordMismatch": "Le password non coincidono"
     },
-    "logout": {
-      "label": "Logout"
-    },
     "verifyEmail": {
-      "label": "Verify email",
       "loadingTitle": "Verifica in corso…",
       "loadingSubtitle": "Verifica della tua email…",
       "successTitle": "Email verificata",

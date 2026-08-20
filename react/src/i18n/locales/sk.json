@@ -14,9 +14,7 @@
     "viewSource": "Zobraziť zdroj na GitHube"
   },
   "language": {
-    "toggle": "Jazyk",
-    "en": "Angličtina",
-    "kl": "Klingončina"
+    "toggle": "Jazyk"
   },
   "theme": {
     "toggle": "Prepnúť tému",
@@ -28,19 +26,6 @@
     "label": "Otočiť šachovnicu"
   },
   "dashboard": {
-    "header": {
-      "title": "Knight School",
-      "greetingMorning": "Dobré ráno ☀️",
-      "greetingAfternoon": "Dobrý deň 🌤️",
-      "greetingEvening": "Dobrý večer 🌙",
-      "nav": "Domov",
-      "openings": "Otvárania",
-      "puzzles": "Úlohy",
-      "login": "Prihlásiť sa",
-      "register": "Zaregistrovať sa",
-      "logout": "Odhlásiť sa",
-      "viewSource": "Zobraziť zdroj na GitHube"
-    },
     "progress": {
       "yourProgress": "Váš pokrok",
       "trainingLabel": "Pokrok tréningu",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "Úlohy",
     "noPuzzlesDue": "Momentálne nie sú žiadne úlohy — skúste neskôr.",
     "loadFailed": "Nepodarilo sa načítať úlohy. Skontrolujte pripojenie.",
     "correct": "✅ Správne!",
@@ -109,7 +93,6 @@
     "backToDashboard": "← Späť na nástenku"
   },
   "training": {
-    "label": "Tréning",
     "whiteToMove": "Ťahá biely",
     "blackToMove": "Ťahá čierny",
     "showHint": "Zobraziť nápovedu",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "Prihlásiť sa",
       "title": "Prihlásiť sa",
       "subtitle": "Vitajte späť.",
       "usernameLabel": "Používateľské meno",
@@ -144,7 +126,6 @@
       "errorResendFailed": "Nepodarilo sa znova poslať overovací e-mail"
     },
     "register": {
-      "label": "Zaregistrovať sa",
       "title": "Zaregistrovať sa",
       "subtitle": "Vytvorte si účet.",
       "emailLabel": "E-mail",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "Potvrdenie hesla",
       "passwordMismatch": "Heslá sa nezhodujú"
     },
-    "logout": {
-      "label": "Odhlásiť sa"
-    },
     "verifyEmail": {
-      "label": "Potvrdiť e-mail",
       "loadingTitle": "Potvrdzuje sa...",
       "loadingSubtitle": "Potvrdzuje sa váš e-mail…",
       "successTitle": "E-mail potvrdený",

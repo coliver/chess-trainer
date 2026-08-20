@@ -14,9 +14,7 @@
     "viewSource": "Bekijk de bron op GitHub"
   },
   "language": {
-    "toggle": "Taal",
-    "en": "English",
-    "kl": "Klingon"
+    "toggle": "Taal"
   },
   "theme": {
     "toggle": "Thema wisselen",
@@ -28,19 +26,6 @@
     "label": "Bord omdraaien"
   },
   "dashboard": {
-    "header": {
-      "title": "Knight School",
-      "greetingMorning": "Good morning ☀️",
-      "greetingAfternoon": "Good afternoon 🌤️",
-      "greetingEvening": "Good evening 🌙",
-      "nav": "Primary",
-      "openings": "Openings",
-      "puzzles": "Puzzles",
-      "login": "Login",
-      "register": "Register",
-      "logout": "Logout",
-      "viewSource": "View source on GitHub"
-    },
     "progress": {
       "yourProgress": "Jouw voortgang",
       "trainingLabel": "Trainingsvoortgang",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "Puzzles",
     "noPuzzlesDue": "Nu geen puzzels gepland — kom later terug.",
     "loadFailed": "Het laden van een puzzel is mislukt. Controleer je verbinding.",
     "correct": "✅ Correct!",
@@ -109,7 +93,6 @@
     "backToDashboard": "← Terug naar dashboard"
   },
   "training": {
-    "label": "Training",
     "whiteToMove": "Wit aan zet",
     "blackToMove": "Zwart aan zet",
     "showHint": "Toon een hint",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "Login",
       "title": "Inloggen",
       "subtitle": "Welkom terug.",
       "usernameLabel": "Gebruikersnaam",
@@ -144,7 +126,6 @@
       "errorResendFailed": "Het opnieuw verzenden van de verificatiemail is mislukt"
     },
     "register": {
-      "label": "Register",
       "title": "Registreren",
       "subtitle": "Maak je account aan.",
       "emailLabel": "E-mail",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "Wachtwoord bevestigen",
       "passwordMismatch": "Wachtwoorden komen niet overeen"
     },
-    "logout": {
-      "label": "Logout"
-    },
     "verifyEmail": {
-      "label": "Verify email",
       "loadingTitle": "Bezig met verifiëren...",
       "loadingSubtitle": "Je e-mail verifiëren…",
       "successTitle": "E-mail geverifieerd",

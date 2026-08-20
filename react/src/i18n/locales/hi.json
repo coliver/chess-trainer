@@ -14,9 +14,7 @@
     "viewSource": "GitHub पर सोर्स देखें"
   },
   "language": {
-    "toggle": "भाषा",
-    "en": "अंग्रेज़ी",
-    "kl": "क्लिंगन"
+    "toggle": "भाषा"
   },
   "theme": {
     "toggle": "थीम बदलें",
@@ -28,19 +26,6 @@
     "label": "बोर्ड पलटें"
   },
   "dashboard": {
-    "header": {
-      "title": "Knight School",
-      "greetingMorning": "सुप्रभात ☀️",
-      "greetingAfternoon": "शुभ दोपहर 🌤️",
-      "greetingEvening": "शुभ संध्या 🌙",
-      "nav": "मुख्य",
-      "openings": "ओपनिंग्स",
-      "puzzles": "पहेलियाँ",
-      "login": "लॉगिन",
-      "register": "पंजीकरण",
-      "logout": "लॉगआउट",
-      "viewSource": "GitHub पर सोर्स देखें"
-    },
     "progress": {
       "yourProgress": "आपकी प्रगति",
       "trainingLabel": "प्रशिक्षण प्रगति",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "पहेलियाँ",
     "noPuzzlesDue": "अभी कोई पहेली due नहीं है — बाद में देखें।",
     "loadFailed": "पहेली लोड करने में विफल। अपना कनेक्शन जाँचें।",
     "correct": "✅ सही!",
@@ -109,7 +93,6 @@
     "backToDashboard": "← डैशबोर्ड पर वापस"
   },
   "training": {
-    "label": "प्रशिक्षण",
     "whiteToMove": "सफ़ेद की चाल",
     "blackToMove": "काले की चाल",
     "showHint": "संकेत दिखाएँ",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "लॉगिन",
       "title": "लॉगिन",
       "subtitle": "वापसी पर स्वागत है।",
       "usernameLabel": "उपयोगकर्ता नाम",
@@ -144,7 +126,6 @@
       "errorResendFailed": "सत्यापन ईमेल फिर से भेजने में विफल"
     },
     "register": {
-      "label": "पंजीकरण",
       "title": "पंजीकरण",
       "subtitle": "अपना खाता बनाएँ।",
       "emailLabel": "ईमेल",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "पासवर्ड की पुष्टि करें",
       "passwordMismatch": "पासवर्ड मेल नहीं खाते"
     },
-    "logout": {
-      "label": "लॉगआउट"
-    },
     "verifyEmail": {
-      "label": "ईमेल सत्यापित करें",
       "loadingTitle": "सत्यापित किया जा रहा है...",
       "loadingSubtitle": "आपका ईमेल सत्यापित किया जा रहा है…",
       "successTitle": "ईमेल सत्यापित",

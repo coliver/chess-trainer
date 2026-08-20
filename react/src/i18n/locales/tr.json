@@ -14,9 +14,7 @@
     "viewSource": "GitHub’da kaynak kodu görüntüle"
   },
   "language": {
-    "toggle": "Dil",
-    "en": "English",
-    "kl": "Klingon"
+    "toggle": "Dil"
   },
   "theme": {
     "toggle": "Temayı değiştir",
@@ -28,19 +26,6 @@
     "label": "Tahtayı çevir"
   },
   "dashboard": {
-    "header": {
-      "title": "Knight School",
-      "greetingMorning": "Good morning ☀️",
-      "greetingAfternoon": "Good afternoon 🌤️",
-      "greetingEvening": "Good evening 🌙",
-      "nav": "Primary",
-      "openings": "Openings",
-      "puzzles": "Puzzles",
-      "login": "Login",
-      "register": "Register",
-      "logout": "Logout",
-      "viewSource": "View source on GitHub"
-    },
     "progress": {
       "yourProgress": "İlerleyişiniz",
       "trainingLabel": "Antrenman ilerleyişi",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "Puzzles",
     "noPuzzlesDue": "Şu an çözülmesi gereken bulmaca yok — sonra tekrar kontrol edin.",
     "loadFailed": "Bir bulmaca yüklenemedi. Bağlantınızı kontrol edin.",
     "correct": "✅ Doğru!",
@@ -109,7 +93,6 @@
     "backToDashboard": "← Gösterge paneline dön"
   },
   "training": {
-    "label": "Training",
     "whiteToMove": "Sıra beyazda",
     "blackToMove": "Sıra siyahta",
     "showHint": "İpucu göster",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "Login",
       "title": "Giriş yap",
       "subtitle": "Tekrar hoş geldiniz.",
       "usernameLabel": "Kullanıcı adı",
@@ -144,7 +126,6 @@
       "errorResendFailed": "Doğrulama e-postası yeniden gönderilemedi"
     },
     "register": {
-      "label": "Register",
       "title": "Kayıt ol",
       "subtitle": "Hesabınızı oluşturun.",
       "emailLabel": "E-posta",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "Şifreyi Onayla",
       "passwordMismatch": "Şifreler eşleşmiyor"
     },
-    "logout": {
-      "label": "Logout"
-    },
     "verifyEmail": {
-      "label": "Verify email",
       "loadingTitle": "Doğrulanıyor...",
       "loadingSubtitle": "E-postanız doğrulanıyor…",
       "successTitle": "E-posta Doğrulandı",

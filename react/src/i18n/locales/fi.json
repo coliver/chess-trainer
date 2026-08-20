@@ -14,9 +14,7 @@
     "viewSource": "Näytä lähde GitHubissa"
   },
   "language": {
-    "toggle": "Kieli",
-    "en": "Englanti",
-    "kl": "Klingon"
+    "toggle": "Kieli"
   },
   "theme": {
     "toggle": "Vaihda teema",
@@ -28,19 +26,6 @@
     "label": "Käännä lautaa"
   },
   "dashboard": {
-    "header": {
-      "title": "Ritarikoulu",
-      "greetingMorning": "Hyvää huomenta ☀️",
-      "greetingAfternoon": "Hyvää iltapäivää 🌤️",
-      "greetingEvening": "Hyvää iltaa 🌙",
-      "nav": "Pää",
-      "openings": "Avaukset",
-      "puzzles": "Pulmat",
-      "login": "Kirjaudu sisään",
-      "register": "Rekisteröidy",
-      "logout": "Kirjaudu ulos",
-      "viewSource": "Näytä lähde GitHubissa"
-    },
     "progress": {
       "yourProgress": "Edistymisesi",
       "trainingLabel": "Harjoittelun edistyminen",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "Pulmat",
     "noPuzzlesDue": "Ei pulmia juuri nyt — tule myöhemmin takaisin.",
     "loadFailed": "Pulman lataus epäonnistui. Tarkista yhteytesi.",
     "correct": "✅ Oikein!",
@@ -109,7 +93,6 @@
     "backToDashboard": "← Takaisin kojelautaan"
   },
   "training": {
-    "label": "Harjoittelu",
     "whiteToMove": "Valkoiset siirtävät",
     "blackToMove": "Mustat siirtävät",
     "showHint": "Näytä vihje",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "Kirjaudu sisään",
       "title": "Kirjaudu sisään",
       "subtitle": "Tervetuloa takaisin.",
       "usernameLabel": "Käyttäjänimi",
@@ -144,7 +126,6 @@
       "errorResendFailed": "Vahvistussähköpostin uudelleenlähetys epäonnistui"
     },
     "register": {
-      "label": "Rekisteröidy",
       "title": "Rekisteröidy",
       "subtitle": "Luo tilisi.",
       "emailLabel": "Sähköposti",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "Vahvista salasana",
       "passwordMismatch": "Salasanat eivät täsmää"
     },
-    "logout": {
-      "label": "Kirjaudu ulos"
-    },
     "verifyEmail": {
-      "label": "Vahvista sähköposti",
       "loadingTitle": "Vahvistetaan...",
       "loadingSubtitle": "Vahvistetaan sähköpostiasi…",
       "successTitle": "Sähköposti vahvistettu",

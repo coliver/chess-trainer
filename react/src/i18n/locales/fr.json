@@ -14,9 +14,7 @@
     "viewSource": "Voir le code sur GitHub"
   },
   "language": {
-    "toggle": "Langue",
-    "en": "English",
-    "kl": "Klingon"
+    "toggle": "Langue"
   },
   "theme": {
     "toggle": "Changer de thème",
@@ -28,19 +26,6 @@
     "label": "Retourner l’échiquier"
   },
   "dashboard": {
-    "header": {
-      "title": "Knight School",
-      "greetingMorning": "Good morning ☀️",
-      "greetingAfternoon": "Good afternoon 🌤️",
-      "greetingEvening": "Good evening 🌙",
-      "nav": "Primary",
-      "openings": "Openings",
-      "puzzles": "Puzzles",
-      "login": "Login",
-      "register": "Register",
-      "logout": "Logout",
-      "viewSource": "View source on GitHub"
-    },
     "progress": {
       "yourProgress": "Votre progression",
       "trainingLabel": "Progression d’entraînement",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "Puzzles",
     "noPuzzlesDue": "Aucun puzzle à faire pour le moment — revenez plus tard.",
     "loadFailed": "Impossible de charger un puzzle. Vérifiez votre connexion.",
     "correct": "✅ Correct !",
@@ -109,7 +93,6 @@
     "backToDashboard": "← Retour au tableau de bord"
   },
   "training": {
-    "label": "Training",
     "whiteToMove": "Au trait : Blanc",
     "blackToMove": "Au trait : Noir",
     "showHint": "Afficher un indice",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "Login",
       "title": "Connexion",
       "subtitle": "Bon retour.",
       "usernameLabel": "Nom d’utilisateur",
@@ -144,7 +126,6 @@
       "errorResendFailed": "Impossible de renvoyer l’email de vérification"
     },
     "register": {
-      "label": "Register",
       "title": "S’inscrire",
       "subtitle": "Créez votre compte.",
       "emailLabel": "Email",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "Confirmer le mot de passe",
       "passwordMismatch": "Les mots de passe ne correspondent pas"
     },
-    "logout": {
-      "label": "Logout"
-    },
     "verifyEmail": {
-      "label": "Verify email",
       "loadingTitle": "Vérification…",
       "loadingSubtitle": "Vérification de votre email…",
       "successTitle": "Email vérifié",

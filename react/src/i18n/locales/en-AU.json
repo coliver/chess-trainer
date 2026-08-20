@@ -14,9 +14,7 @@
     "viewSource": "View source on GitHub"
   },
   "language": {
-    "toggle": "Language",
-    "en": "English",
-    "kl": "Klingon"
+    "toggle": "Language"
   },
   "theme": {
     "toggle": "Toggle theme",
@@ -28,19 +26,6 @@
     "label": "Flip board"
   },
   "dashboard": {
-    "header": {
-      "title": "Knight School",
-      "greetingMorning": "Good morning ☀️",
-      "greetingAfternoon": "Good afternoon 🌤️",
-      "greetingEvening": "Good evening 🌙",
-      "nav": "Primary",
-      "openings": "Openings",
-      "puzzles": "Puzzles",
-      "login": "Log in",
-      "register": "Register",
-      "logout": "Log out",
-      "viewSource": "View source on GitHub"
-    },
     "progress": {
       "yourProgress": "Your progress",
       "trainingLabel": "Training progress",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "Puzzles",
     "noPuzzlesDue": "No puzzles due right now — check back later.",
     "loadFailed": "Couldn’t load a puzzle. Check your connection.",
     "correct": "✅ Correct!",
@@ -109,7 +93,6 @@
     "backToDashboard": "← Back to dashboard"
   },
   "training": {
-    "label": "Training",
     "whiteToMove": "White to move",
     "blackToMove": "Black to move",
     "showHint": "Show a hint",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "Log in",
       "title": "Log in",
       "subtitle": "Welcome back.",
       "usernameLabel": "Username",
@@ -144,7 +126,6 @@
       "errorResendFailed": "Failed to resend verification email"
     },
     "register": {
-      "label": "Register",
       "title": "Register",
       "subtitle": "Create your account.",
       "emailLabel": "Email",
@@ -161,11 +142,7 @@
       "loginLink": "Log in",
       "errorGeneric": "Failed to register. Please try again later."
     },
-    "logout": {
-      "label": "Log out"
-    },
     "verifyEmail": {
-      "label": "Verify email",
       "loadingTitle": "Verifying...",
       "loadingSubtitle": "Verifying your email…",
       "successTitle": "Email Verified",

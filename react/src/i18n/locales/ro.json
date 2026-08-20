@@ -14,9 +14,7 @@
     "viewSource": "Vezi sursa pe GitHub"
   },
   "language": {
-    "toggle": "Limbă",
-    "en": "Engleză",
-    "kl": "Klingonă"
+    "toggle": "Limbă"
   },
   "theme": {
     "toggle": "Schimbă tema",
@@ -28,19 +26,6 @@
     "label": "Inversează tabla"
   },
   "dashboard": {
-    "header": {
-      "title": "Knight School",
-      "greetingMorning": "Bună dimineața ☀️",
-      "greetingAfternoon": "Bună ziua 🌤️",
-      "greetingEvening": "Bună seara 🌙",
-      "nav": "Acasă",
-      "openings": "Deschideri",
-      "puzzles": "Puzzle-uri",
-      "login": "Autentificare",
-      "register": "Înregistrare",
-      "logout": "Deconectare",
-      "viewSource": "Vezi sursa pe GitHub"
-    },
     "progress": {
       "yourProgress": "Progresul tău",
       "trainingLabel": "Progresul antrenamentului",
@@ -92,7 +77,6 @@
     }
   },
   "puzzles": {
-    "label": "Puzzle-uri",
     "noPuzzlesDue": "Nu ai puzzle-uri de rezolvat acum — încearcă mai târziu.",
     "loadFailed": "Nu s-au putut încărca puzzle-urile. Verifică conexiunea.",
     "correct": "✅ Corect!",
@@ -109,7 +93,6 @@
     "backToDashboard": "← Înapoi la panou"
   },
   "training": {
-    "label": "Antrenament",
     "whiteToMove": "Alb la mutare",
     "blackToMove": "Negru la mutare",
     "showHint": "Arată indiciu",
@@ -126,7 +109,6 @@
   },
   "auth": {
     "login": {
-      "label": "Autentificare",
       "title": "Autentificare",
       "subtitle": "Bine ai revenit.",
       "usernameLabel": "Nume utilizator",
@@ -144,7 +126,6 @@
       "errorResendFailed": "Nu s-a putut retrimite e-mailul de confirmare"
     },
     "register": {
-      "label": "Înregistrare",
       "title": "Înregistrare",
       "subtitle": "Creează-ți contul.",
       "emailLabel": "E-mail",
@@ -161,11 +142,7 @@
       "passwordConfirmLabel": "Confirmați parola",
       "passwordMismatch": "Parolele nu se potrivesc"
     },
-    "logout": {
-      "label": "Deconectare"
-    },
     "verifyEmail": {
-      "label": "Confirmă e-mailul",
       "loadingTitle": "Se confirmă...",
       "loadingSubtitle": "Se confirmă e-mailul tău…",
       "successTitle": "E-mail confirmat",
