@@ -157,7 +157,9 @@
       "returnToLogin": "Kembali ke log masuk",
       "haveAccount": "Sudah ada akaun?",
       "loginLink": "Log masuk",
-      "errorGeneric": "Gagal mendaftar. Sila cuba lagi nanti."
+      "errorGeneric": "Gagal mendaftar. Sila cuba lagi nanti.",
+      "passwordConfirmLabel": "Sahkan kata laluan",
+      "passwordMismatch": "Kata laluan tidak sepadan"
     },
     "logout": {
       "label": "Log keluar"

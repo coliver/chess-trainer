@@ -157,7 +157,9 @@
       "returnToLogin": "Voltar ao login",
       "haveAccount": "Já tem uma conta?",
       "loginLink": "Entrar",
-      "errorGeneric": "Falha ao cadastrar. Tente novamente mais tarde."
+      "errorGeneric": "Falha ao cadastrar. Tente novamente mais tarde.",
+      "passwordConfirmLabel": "Confirmar senha",
+      "passwordMismatch": "As senhas não coincidem"
     },
     "logout": {
       "label": "Sair"

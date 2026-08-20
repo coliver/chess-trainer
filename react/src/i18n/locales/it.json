@@ -157,7 +157,9 @@
       "returnToLogin": "Torna all’accesso",
       "haveAccount": "Hai già un account?",
       "loginLink": "Accedi",
-      "errorGeneric": "Registrazione non riuscita. Riprova più tardi."
+      "errorGeneric": "Registrazione non riuscita. Riprova più tardi.",
+      "passwordConfirmLabel": "Conferma password",
+      "passwordMismatch": "Le password non coincidono"
     },
     "logout": {
       "label": "Logout"

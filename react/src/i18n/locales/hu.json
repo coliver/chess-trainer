@@ -157,7 +157,9 @@
       "returnToLogin": "Vissza a bejelentkezéshez",
       "haveAccount": "Már van fiókod?",
       "loginLink": "Bejelentkezés",
-      "errorGeneric": "A regisztráció sikertelen. Kérjük, próbáld újra később."
+      "errorGeneric": "A regisztráció sikertelen. Kérjük, próbáld újra később.",
+      "passwordConfirmLabel": "Jelszó megerősítése",
+      "passwordMismatch": "A jelszavak nem egyeznek"
     },
     "logout": {
       "label": "Kijelentkezés"

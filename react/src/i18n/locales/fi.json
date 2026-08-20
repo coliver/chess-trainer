@@ -157,7 +157,9 @@
       "returnToLogin": "Takaisin kirjautumiseen",
       "haveAccount": "Onko sinulla jo tili?",
       "loginLink": "Kirjaudu sisään",
-      "errorGeneric": "Rekisteröityminen epäonnistui. Yritä myöhemmin uudelleen."
+      "errorGeneric": "Rekisteröityminen epäonnistui. Yritä myöhemmin uudelleen.",
+      "passwordConfirmLabel": "Vahvista salasana",
+      "passwordMismatch": "Salasanat eivät täsmää"
     },
     "logout": {
       "label": "Kirjaudu ulos"

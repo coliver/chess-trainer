@@ -151,6 +151,8 @@
       "emailDisclaimer": "We only be askin' fer this to keep the bots at bay — we don't care what it be and won't be sendin' ye spam.",
       "usernameLabel": "Username",
       "passwordLabel": "Password",
+      "passwordConfirmLabel": "Confirm password",
+      "passwordMismatch": "Passwords do not match",
       "submit": "Register",
       "submitting": "Registering...",
       "successMessage": "Registration successful! Check your inbox at <strong>{{email}}</strong> for a verification link before logging in.",

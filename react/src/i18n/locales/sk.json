@@ -157,7 +157,9 @@
       "returnToLogin": "Späť na prihlásenie",
       "haveAccount": "Už máte účet?",
       "loginLink": "Prihlásiť sa",
-      "errorGeneric": "Nepodarilo sa zaregistrovať. Skúste to znova neskôr."
+      "errorGeneric": "Nepodarilo sa zaregistrovať. Skúste to znova neskôr.",
+      "passwordConfirmLabel": "Potvrdenie hesla",
+      "passwordMismatch": "Heslá sa nezhodujú"
     },
     "logout": {
       "label": "Odhlásiť sa"

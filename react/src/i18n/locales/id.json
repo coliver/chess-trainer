@@ -157,7 +157,9 @@
       "returnToLogin": "Kembali ke login",
       "haveAccount": "Sudah punya akun?",
       "loginLink": "Masuk",
-      "errorGeneric": "Gagal mendaftar. Silakan coba lagi nanti."
+      "errorGeneric": "Gagal mendaftar. Silakan coba lagi nanti.",
+      "passwordConfirmLabel": "Konfirmasi sandi",
+      "passwordMismatch": "Sandi tidak cocok"
     },
     "logout": {
       "label": "Keluar"

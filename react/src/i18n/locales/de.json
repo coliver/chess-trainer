@@ -157,7 +157,9 @@
       "returnToLogin": "Zur Anmeldung zurück",
       "haveAccount": "Schon ein Konto?",
       "loginLink": "Anmelden",
-      "errorGeneric": "Registrierung fehlgeschlagen. Bitte versuche es später erneut."
+      "errorGeneric": "Registrierung fehlgeschlagen. Bitte versuche es später erneut.",
+      "passwordConfirmLabel": "Passwort bestätigen",
+      "passwordMismatch": "Passwörter stimmen nicht überein"
     },
     "logout": {
       "label": "Logout"

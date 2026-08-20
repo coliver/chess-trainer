@@ -157,7 +157,9 @@
       "returnToLogin": "Tillbaka till inloggning",
       "haveAccount": "Har du redan ett konto?",
       "loginLink": "Logga in",
-      "errorGeneric": "Det gick inte att registrera. Försök igen senare."
+      "errorGeneric": "Det gick inte att registrera. Försök igen senare.",
+      "passwordConfirmLabel": "Bekräfta lösenord",
+      "passwordMismatch": "Lösenorden matchar inte"
     },
     "logout": {
       "label": "Logga ut"

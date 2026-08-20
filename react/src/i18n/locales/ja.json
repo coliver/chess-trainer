@@ -157,7 +157,9 @@
       "returnToLogin": "ログインに戻る",
       "haveAccount": "すでにアカウントをお持ちですか？",
       "loginLink": "ログイン",
-      "errorGeneric": "登録に失敗しました。後でもう一度お試しください。"
+      "errorGeneric": "登録に失敗しました。後でもう一度お試しください。",
+      "passwordConfirmLabel": "パスワード確認",
+      "passwordMismatch": "パスワードが一致しません"
     },
     "logout": {
       "label": "ログアウト"

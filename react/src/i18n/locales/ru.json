@@ -157,7 +157,9 @@
       "returnToLogin": "Вернуться ко входу",
       "haveAccount": "Уже есть аккаунт?",
       "loginLink": "Войти",
-      "errorGeneric": "Не удалось зарегистрироваться. Попробуйте ещё раз позже."
+      "errorGeneric": "Не удалось зарегистрироваться. Попробуйте ещё раз позже.",
+      "passwordConfirmLabel": "Подтвердите пароль",
+      "passwordMismatch": "Пароли не совпадают"
     },
     "logout": {
       "label": "Logout"

@@ -157,7 +157,9 @@
       "returnToLogin": "Înapoi la autentificare",
       "haveAccount": "Ai deja un cont?",
       "loginLink": "Autentificare",
-      "errorGeneric": "Nu s-a putut face înregistrarea. Încearcă din nou mai târziu."
+      "errorGeneric": "Nu s-a putut face înregistrarea. Încearcă din nou mai târziu.",
+      "passwordConfirmLabel": "Confirmați parola",
+      "passwordMismatch": "Parolele nu se potrivesc"
     },
     "logout": {
       "label": "Deconectare"

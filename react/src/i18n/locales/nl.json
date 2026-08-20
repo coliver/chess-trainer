@@ -157,7 +157,9 @@
       "returnToLogin": "Terug naar inloggen",
       "haveAccount": "Heb je al een account?",
       "loginLink": "Inloggen",
-      "errorGeneric": "Registreren is mislukt. Probeer het later opnieuw."
+      "errorGeneric": "Registreren is mislukt. Probeer het later opnieuw.",
+      "passwordConfirmLabel": "Wachtwoord bevestigen",
+      "passwordMismatch": "Wachtwoorden komen niet overeen"
     },
     "logout": {
       "label": "Logout"

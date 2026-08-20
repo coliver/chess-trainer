@@ -151,6 +151,8 @@
       "emailDisclaimer": "I am Groot.",
       "usernameLabel": "Username",
       "passwordLabel": "Password",
+      "passwordConfirmLabel": "Confirm password",
+      "passwordMismatch": "Passwords do not match",
       "submit": "Register",
       "submitting": "Registering...",
       "successMessage": "Registration successful! Check your inbox at <strong>{{email}}</strong> for a verification link before logging in.",

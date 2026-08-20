@@ -157,7 +157,9 @@
       "returnToLogin": "Volver a iniciar sesión",
       "haveAccount": "¿Ya tienes una cuenta?",
       "loginLink": "Inicia sesión",
-      "errorGeneric": "Error al registrarse. Inténtalo de nuevo más tarde."
+      "errorGeneric": "Error al registrarse. Inténtalo de nuevo más tarde.",
+      "passwordConfirmLabel": "Confirmar contraseña",
+      "passwordMismatch": "Las contraseñas no coinciden"
     },
     "logout": {
       "label": "Logout"

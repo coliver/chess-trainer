@@ -157,7 +157,9 @@
       "returnToLogin": "로그인으로 돌아가기",
       "haveAccount": "이미 계정이 있으신가요?",
       "loginLink": "로그인",
-      "errorGeneric": "회원가입에 실패했습니다. 나중에 다시 시도하세요."
+      "errorGeneric": "회원가입에 실패했습니다. 나중에 다시 시도하세요.",
+      "passwordConfirmLabel": "비밀번호 확인",
+      "passwordMismatch": "비밀번호가 일치하지 않습니다"
     },
     "logout": {
       "label": "로그아웃"

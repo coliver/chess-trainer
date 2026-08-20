@@ -157,7 +157,9 @@
       "returnToLogin": "लॉगिन पर लौटें",
       "haveAccount": "पहले से खाता है?",
       "loginLink": "लॉगिन",
-      "errorGeneric": "पंजीकरण विफल। कृपया बाद में फिर से कोशिश करें।"
+      "errorGeneric": "पंजीकरण विफल। कृपया बाद में फिर से कोशिश करें।",
+      "passwordConfirmLabel": "पासवर्ड की पुष्टि करें",
+      "passwordMismatch": "पासवर्ड मेल नहीं खाते"
     },
     "logout": {
       "label": "लॉगआउट"

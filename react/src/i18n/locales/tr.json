@@ -157,7 +157,9 @@
       "returnToLogin": "Girişe dön",
       "haveAccount": "Zaten hesabınız var mı?",
       "loginLink": "Giriş",
-      "errorGeneric": "Kayıt yapılamadı. Lütfen daha sonra tekrar deneyin."
+      "errorGeneric": "Kayıt yapılamadı. Lütfen daha sonra tekrar deneyin.",
+      "passwordConfirmLabel": "Şifreyi Onayla",
+      "passwordMismatch": "Şifreler eşleşmiyor"
     },
     "logout": {
       "label": "Logout"

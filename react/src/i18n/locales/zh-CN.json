@@ -157,7 +157,9 @@
       "returnToLogin": "返回登录",
       "haveAccount": "已有账号？",
       "loginLink": "登录",
-      "errorGeneric": "注册失败，请稍后再试。"
+      "errorGeneric": "注册失败，请稍后再试。",
+      "passwordConfirmLabel": "确认密码",
+      "passwordMismatch": "密码不匹配"
     },
     "logout": {
       "label": "退出登录"

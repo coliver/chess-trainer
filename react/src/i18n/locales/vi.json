@@ -157,7 +157,9 @@
       "returnToLogin": "Quay lại đăng nhập",
       "haveAccount": "Đã có tài khoản?",
       "loginLink": "Đăng nhập",
-      "errorGeneric": "Không thể đăng ký. Vui lòng thử lại sau."
+      "errorGeneric": "Không thể đăng ký. Vui lòng thử lại sau.",
+      "passwordConfirmLabel": "Xác nhận mật khẩu",
+      "passwordMismatch": "Mật khẩu không khớp"
     },
     "logout": {
       "label": "Đăng xuất"

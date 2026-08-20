@@ -157,7 +157,9 @@
       "returnToLogin": "العودة إلى تسجيل الدخول",
       "haveAccount": "لديك حساب بالفعل؟",
       "loginLink": "تسجيل الدخول",
-      "errorGeneric": "فشل إنشاء الحساب. حاول مرة أخرى لاحقًا."
+      "errorGeneric": "فشل إنشاء الحساب. حاول مرة أخرى لاحقًا.",
+      "passwordConfirmLabel": "تأكيد كلمة المرور",
+      "passwordMismatch": "كلمات المرور غير متطابقة"
     },
     "logout": {
       "label": "تسجيل الخروج"

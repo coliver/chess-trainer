@@ -157,7 +157,9 @@
       "returnToLogin": "Wróć do logowania",
       "haveAccount": "Masz już konto?",
       "loginLink": "Zaloguj się",
-      "errorGeneric": "Nie udało się zarejestrować. Spróbuj ponownie później."
+      "errorGeneric": "Nie udało się zarejestrować. Spróbuj ponownie później.",
+      "passwordConfirmLabel": "Potwierdź hasło",
+      "passwordMismatch": "Hasła się nie zgadzają"
     },
     "logout": {
       "label": "Logout"

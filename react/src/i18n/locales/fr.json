@@ -157,7 +157,9 @@
       "returnToLogin": "Retour à la connexion",
       "haveAccount": "Vous avez déjà un compte ?",
       "loginLink": "Connexion",
-      "errorGeneric": "Échec de l’inscription. Veuillez réessayer plus tard."
+      "errorGeneric": "Échec de l’inscription. Veuillez réessayer plus tard.",
+      "passwordConfirmLabel": "Confirmer le mot de passe",
+      "passwordMismatch": "Les mots de passe ne correspondent pas"
     },
     "logout": {
       "label": "Logout"

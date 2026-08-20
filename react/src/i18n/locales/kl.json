@@ -157,7 +157,9 @@
       "returnToLogin": "yI'elDaq yIchegh",
       "haveAccount": "pagh yIghaj?",
       "loginLink": "yI'el",
-      "errorGeneric": "chelmeH Qagh. tugh yIloS 'ej yItlhobqa'."
+      "errorGeneric": "chelmeH Qagh. tugh yIloS 'ej yItlhobqa'.",
+      "passwordConfirmLabel": "qapla' password",
+      "passwordMismatch": "passwords not honor"
     },
     "logout": {
       "label": "Logout"

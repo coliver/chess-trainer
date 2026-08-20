@@ -157,7 +157,9 @@
       "returnToLogin": "Tilbage til login",
       "haveAccount": "Har du allerede en konto?",
       "loginLink": "Log ind",
-      "errorGeneric": "Kunne ikke registrere dig. Prøv igen senere."
+      "errorGeneric": "Kunne ikke registrere dig. Prøv igen senere.",
+      "passwordConfirmLabel": "Bekræft adgangskode",
+      "passwordMismatch": "Adgangskoderne stemmer ikke overens"
     },
     "logout": {
       "label": "Log ud"

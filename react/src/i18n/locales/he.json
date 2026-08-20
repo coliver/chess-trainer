@@ -157,7 +157,9 @@
       "returnToLogin": "חזרה להתחברות",
       "haveAccount": "כבר יש לכם חשבון?",
       "loginLink": "התחברות",
-      "errorGeneric": "ההרשמה נכשלה. נסו שוב מאוחר יותר."
+      "errorGeneric": "ההרשמה נכשלה. נסו שוב מאוחר יותר.",
+      "passwordConfirmLabel": "אישור סיסמה",
+      "passwordMismatch": "הסיסמאות לא תואמות"
     },
     "logout": {
       "label": "התנתקות"

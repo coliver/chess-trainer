@@ -9,6 +9,7 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -16,6 +17,12 @@ export default function Register() {
   const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
+
+    if (password !== passwordConfirm) {
+      setError(t("auth.register.passwordMismatch"));
+      return;
+    }
+
     setSubmitting(true);
 
     try {
@@ -83,6 +90,18 @@ export default function Register() {
                 className="text-input"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                type="password"
+                required
+                autoComplete="new-password"
+              />
+            </label>
+
+            <label className="auth-field">
+              <span className="auth-label">{t("auth.register.passwordConfirmLabel")}</span>
+              <input
+                className="text-input"
+                value={passwordConfirm}
+                onChange={(e) => setPasswordConfirm(e.target.value)}
                 type="password"
                 required
                 autoComplete="new-password"
