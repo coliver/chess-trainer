@@ -72,6 +72,7 @@
   border-radius: 999px;
   background: var(--border);
   transition: background-color 0.15s ease;
+  pointer-events: none;
 }
 
 .settings-switch-track::before {

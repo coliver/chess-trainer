@@ -128,7 +128,7 @@ export const Puzzles = () => {
             setBestStreak((best) => Math.max(best, next));
             return next;
           });
-          advanceTimeoutRef.current = setTimeout(() => void loadNext(), 600);
+          advanceTimeoutRef.current = setTimeout(() => void loadNext(), 1000);
         } else {
           playSound("puzzleWrong");
           setFeedback(

@@ -23,7 +23,7 @@ When adding new text to the UI:
 
 1. Add the key to **en-US.json** with English text
 2. Run the test suite (`npm run test -- --run`) to identify missing keys in other locales
-3. Use translation agents (Haiku 4.5 subagents) to generate translations for all missing keys
+3. Use translation agents (Haiku 4.5 low effort subagents) to generate translations for all missing keys
 4. Update all locale files with the translated values
 5. Ensure all tests pass
 
@@ -35,6 +35,10 @@ npm run test -- locales.test.ts  # See which locales are missing keys
 # Then update all locale files
 npm run test -- --run  # Verify all keys are present and complete
 ```
+
+## Translation Context
+
+For details about what each translation string does, its interpolation variables, pluralization rules, and guidance for translators, see [locales/TRANSLATIONS.md](locales/TRANSLATIONS.md). Update it whenever adding new strings that need explanation or when existing strings require clarification.
 
 ## Translation Keys Structure
 
