@@ -1,6 +1,7 @@
 ## 2026-08-20
 
 ### Features
+- feat(i18n): add Khuzdul (khz) locale using attested vocabulary from Magnus Åberg's linguistic analysis; greetings (Baruk!), colors (Zirak/Narag), and title (Khazad-dûm) are Tolkien-sourced, with reconstructed "Baruk-dûm" for welcome-back and fallback to English for untranslated UI terms; pickaxe emoji flag in the language selector
 - feat(i18n): add Sindarin (sd) locale with complete translations and elf emoji flag in the language selector
 - feat(react): move the "Good morning/afternoon/evening, {username}" greeting out of the site header and onto the Dashboard page, above the progress-overview card — the header had grown too crowded (nav links, settings/logout, source link, language/theme toggles) to keep it readable at the widths where it was already showing; wrapped the greeting + card in a new `.dashboard-stack` column-flex container
 
