@@ -87,6 +87,7 @@ export default function Board({
       orientation: orientation === "black" ? COLOR.black : COLOR.white,
       responsive: true,
       assetsUrl: ASSETS_URL,
+      assetsCache: false,
       style: {
         cssClass: boardTheme,
         showCoordinates: effectiveShowCoordinates,
