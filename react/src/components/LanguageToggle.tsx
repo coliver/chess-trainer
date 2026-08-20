@@ -43,6 +43,8 @@ const FLAGS: Record<string, string> = {
 
   "en-x-pirate": "🏴‍☠️",
   "en-x-groot": "🌱",
+
+  sd: "🧝",
 };
 
 

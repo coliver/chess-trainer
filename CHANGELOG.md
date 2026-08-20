@@ -1,7 +1,11 @@
 ## 2026-08-20
 
 ### Features
+- feat(i18n): add Sindarin (sd) locale with complete translations and elf emoji flag in the language selector
 - feat(react): move the "Good morning/afternoon/evening, {username}" greeting out of the site header and onto the Dashboard page, above the progress-overview card — the header had grown too crowded (nav links, settings/logout, source link, language/theme toggles) to keep it readable at the widths where it was already showing; wrapped the greeting + card in a new `.dashboard-stack` column-flex container
+
+### Fixes
+- fix(i18n): remove 19 unused translation keys (dashboard.header duplicate of header section, nav sidebar labels, language option labels) and update all 35 locale files for consistency; all keys are now actively used in the UI
 - feat(training): auto-escalate hints based on repeated wrong attempts on the current move — 2 misses reveals the source-square hint (same as one manual hint click), 4 misses reveals the target square too and draws an arrow to it via `Board.tsx`'s existing `arrows` prop; miss-counting is keyed off the submit lifecycle (`isSubmitting` true→false) rather than diffing feedback text, since the backend reports the identical `"wrong move"` reason for every incorrect-but-legal move and a text-diff would silently miss consecutive wrong tries; resets to zero on a correct answer or when advancing to the next training item
 - feat(react): add the cm-chessboard `Accessibility` extension to `Board.tsx` — screen readers get a hidden move-form/table/piece-list description of the position plus braille notation in the SVG `alt`; keyboard move input (arrow keys, Enter/Space, Escape) is enabled only when the board is `interactive`, so read-only preview boards (Settings, dashboard cards) stay descriptive without claiming a keyboard-operable focus stop they can't act on; `language` is derived from the active i18n locale, narrowed to the extension's supported `de`/`en` (falling back to `en`)
 - feat(react): add a small disclaimer under Register's email field reassuring users it's only collected to keep bots out, not for anything else
