@@ -1,3 +1,6 @@
+## 2026-08-20
+- fix(react): the Settings preview board stopped accepting moves after toggling any board style preference (animations, coordinates, theme, piece set) — `Board.tsx` destroys and recreates the underlying `cm-chessboard` instance on those changes, but the move-input effect only re-ran on `interactive`/`moveColor` changes, so the new instance never got its click/drag handler registered; added a `boardVersion` counter bumped on recreation, included in the dependent effects' deps so they reattach to the new instance, and fixed a resulting cleanup-ordering crash where the move-input cleanup called `disableMoveInput()` on an already-destroyed board
+
 ## 2026-08-19
 - feat(react): add merida, pirouetti, and chessnut piece sets (free/open, sourced from the lichess client) to the Settings piece-set switcher, alongside the existing standard (cburnett) and staunty sets
 - fix(react): the snow easter egg kept falling for up to 15s after unchecking it in Settings — `snow()`'s `requestAnimationFrame` loop ran its full duration regardless of the toggle; `snow()` now returns a stop function that the effect cleanup calls immediately

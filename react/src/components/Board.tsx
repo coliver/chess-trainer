@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Chessboard,
   COLOR,
@@ -69,6 +69,10 @@ export default function Board({
 
   const hostRef = useRef<HTMLDivElement | null>(null);
   const boardRef = useRef<Chessboard | null>(null);
+  // Bumped whenever the board instance below is destroyed and recreated, so
+  // effects that operate on boardRef.current (move input, orientation,
+  // position, markers) know to re-run against the new instance.
+  const [boardVersion, setBoardVersion] = useState(0);
 
   // Keep the latest callbacks reachable from the single move-input handler,
   // which is registered once per interactive session.
@@ -98,6 +102,7 @@ export default function Board({
       extensions: [{ class: Markers, props: { autoMarkers: MARKER_TYPE.frame } }],
     });
     boardRef.current = board;
+    setBoardVersion((v) => v + 1);
 
     return () => {
       board.destroy();
@@ -118,7 +123,7 @@ export default function Board({
     if (board.getOrientation() !== desired) {
       void board.setOrientation(desired, effectiveAnimated);
     }
-  }, [orientation, effectiveAnimated]);
+  }, [orientation, effectiveAnimated, boardVersion]);
 
   // Position: only re-set when the piece placement actually changes, so an
   // accepted user move (already reflected on the board) does not re-animate.
@@ -128,7 +133,7 @@ export default function Board({
     const desired = position.split(" ")[0];
     const current = board.getPosition()?.split(" ")[0];
     if (desired !== current) void board.setPosition(position, effectiveAnimated);
-  }, [position, effectiveAnimated]);
+  }, [position, effectiveAnimated, boardVersion]);
 
   // Enable/disable move input and register the handler.
   useEffect(() => {
@@ -176,12 +181,13 @@ export default function Board({
       handler,
       moveColor === "black" ? COLOR.black : COLOR.white,
     );
-    // Only disable if the board still exists; when the component unmounts the
-    // creation effect's cleanup may have already destroyed it.
+    // Only disable if this is still the live board; when the component
+    // unmounts or the board is recreated (style prop change), the creation
+    // effect's cleanup may already have destroyed this instance.
     return () => {
-      if (boardRef.current) board.disableMoveInput();
+      if (boardRef.current === board) board.disableMoveInput();
     };
-  }, [interactive, moveColor]);
+  }, [interactive, moveColor, boardVersion]);
 
   // Persistent hint/blink markers. This layer owns only the custom marker
   // types, so it never disturbs the auto (selection) frame or legal-move dots.
@@ -194,7 +200,7 @@ export default function Board({
     for (const m of markers ?? []) {
       board.addMarker(CUSTOM_MARKER[m.type], m.square);
     }
-  }, [markers]);
+  }, [markers, boardVersion]);
 
   return <div ref={hostRef} className="board-host" />;
 }
