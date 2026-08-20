@@ -405,6 +405,92 @@ describe("Training Page", () => {
     });
   });
 
+  describe("Auto-hint on repeated misses", () => {
+    // Simulates one submitted-and-wrong attempt via the same isSubmitting
+    // true -> false lifecycle the real hook goes through. The backend always
+    // reports the identical "❌ wrong move" text for any wrong-but-legal
+    // move, so this deliberately reuses that exact string every time to
+    // prove misses are counted by the submit lifecycle, not by feedback text
+    // changing.
+    const missOnce = (rerender: ReturnType<typeof render>["rerender"]) => {
+      useTrainingSession.mockReturnValue({
+        ...baseHookValue,
+        isSubmitting: true,
+        feedback: "",
+      });
+      rerender(renderTraining());
+
+      useTrainingSession.mockReturnValue({
+        ...baseHookValue,
+        isSubmitting: false,
+        feedback: "❌ wrong move",
+      });
+      rerender(renderTraining());
+    };
+
+    it("does nothing after a single miss", async () => {
+      const { rerender } = render(renderTraining());
+      await waitFor(() => expect(capturedProps).toBeDefined());
+
+      missOnce(rerender);
+
+      expect(hasMarker("e2", "hint")).toBe(false);
+      expect(capturedProps.arrows ?? []).toHaveLength(0);
+    });
+
+    it("shows the source-square hint after 2 misses, even with identical feedback text each time", async () => {
+      const { rerender } = render(renderTraining());
+      await waitFor(() => expect(capturedProps).toBeDefined());
+
+      missOnce(rerender);
+      missOnce(rerender);
+
+      expect(hasMarker("e2", "hint")).toBe(true);
+      expect(hasMarker("e4", "hint")).toBe(false);
+      expect(capturedProps.arrows ?? []).toHaveLength(0);
+    });
+
+    it("reveals the target square and draws an arrow to it after 4 misses", async () => {
+      const { rerender } = render(renderTraining());
+      await waitFor(() => expect(capturedProps).toBeDefined());
+
+      missOnce(rerender);
+      missOnce(rerender);
+      missOnce(rerender);
+      missOnce(rerender);
+
+      expect(hasMarker("e2", "hint")).toBe(true);
+      expect(hasMarker("e4", "hint")).toBe(true);
+      expect(capturedProps.arrows).toEqual([
+        { from: "e2", to: "e4", type: "info" },
+      ]);
+    });
+
+    it("resets the miss count and hint level once the move is answered correctly", async () => {
+      const { rerender } = render(renderTraining());
+      await waitFor(() => expect(capturedProps).toBeDefined());
+
+      missOnce(rerender);
+      missOnce(rerender);
+      expect(hasMarker("e2", "hint")).toBe(true);
+
+      useTrainingSession.mockReturnValue({
+        ...baseHookValue,
+        isSubmitting: false,
+        feedback: "✅ Correct!",
+      });
+      rerender(renderTraining());
+
+      expect(hasMarker("e2", "hint")).toBe(false);
+      expect(capturedProps.arrows ?? []).toHaveLength(0);
+
+      // A single miss on the next move must not immediately re-show the
+      // hint — the count should have restarted at 0, not resumed at 2.
+      missOnce(rerender);
+      expect(hasMarker("e2", "hint")).toBe(false);
+    });
+  });
+
   it("resets hint level after feedback is '✅ Correct!'", async () => {
     const { rerender } = render(renderTraining());
     await waitFor(() => expect(capturedProps).toBeDefined());

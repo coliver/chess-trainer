@@ -8,7 +8,7 @@ import React, {
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../api";
-import Board, { type BoardMarker } from "../components/Board";
+import Board, { type BoardArrow, type BoardMarker } from "../components/Board";
 import { FlipBoardButton } from "../components/FlipBoardButton";
 import {
   sideToMove,
@@ -58,6 +58,7 @@ export const Training = () => {
   const { preferences } = usePreferences();
   const { orientation, flip, setOrientation } = useBoardOrientation();
   const [hintLevel, setHintLevel] = useState(-1);
+  const [wrongAttempts, setWrongAttempts] = useState(0);
   const [lastMove, setLastMove] = useState<{ from: string; to: string } | null>(
     null,
   );
@@ -104,6 +105,7 @@ export const Training = () => {
       feedback === "✅ Correct!"
     ) {
       setHintLevel(-1);
+      setWrongAttempts(0);
       if (pendingMoveRef.current) {
         setLastMove(pendingMoveRef.current);
         pendingMoveRef.current = null;
@@ -111,6 +113,28 @@ export const Training = () => {
     }
     prevFeedbackRef.current = feedback;
   }, [feedback]);
+
+  // Count misses on the submit lifecycle (isSubmitting true -> false), not by
+  // diffing feedback text: the backend always reports "❌ wrong move" for any
+  // incorrect-but-legal move, so two different wrong tries in a row produce
+  // identical feedback text and a text-diff would silently miss the second one.
+  const prevIsSubmittingRef = useRef(isSubmitting);
+  useEffect(() => {
+    const wasSubmitting = prevIsSubmittingRef.current;
+    prevIsSubmittingRef.current = isSubmitting;
+    if (wasSubmitting && !isSubmitting && feedback.startsWith("❌")) {
+      setWrongAttempts((n) => n + 1);
+    }
+  }, [isSubmitting, feedback]);
+
+  // After 2 misses on this move, reveal the source-square hint; after 2 more
+  // (4 total), reveal the target square too and draw an arrow to it. Derived
+  // (not stored) so it only ever raises whatever the manual hint button set,
+  // and never fights that button's own state via a second effect.
+  const effectiveHintLevel = Math.max(
+    hintLevel,
+    wrongAttempts >= 4 ? 1 : wrongAttempts >= 2 ? 0 : -1,
+  );
 
   useEffect(() => {
     if (feedback === "✅ Correct!" && lastSubmittedMoveUciRef.current) {
@@ -165,6 +189,7 @@ export const Training = () => {
       setLocalFeedback("");
       setMoveInput("");
       setHintLevel(-1);
+      setWrongAttempts(0);
       setIsRestarting(false);
       pendingMoveRef.current = null;
     }
@@ -340,7 +365,7 @@ export const Training = () => {
 
     const hint = deriveHintMarkers(
       correctMoveUci,
-      hintLevel,
+      effectiveHintLevel,
       isSessionCompleted,
     );
     if (hint) {
@@ -351,7 +376,15 @@ export const Training = () => {
     if (blinkSquare) arr.push({ square: blinkSquare, type: "blink" });
 
     return arr;
-  }, [correctMoveUci, hintLevel, blinkSquare, isSessionCompleted, lastMove]);
+  }, [correctMoveUci, effectiveHintLevel, blinkSquare, isSessionCompleted, lastMove]);
+
+  // Arrow to the correct square once the deep hint (level 1) kicks in.
+  const hintArrows = useMemo((): BoardArrow[] => {
+    if (effectiveHintLevel < 1 || isSessionCompleted || !correctMoveUci) return [];
+    return [
+      { from: correctMoveUci.slice(0, 2), to: correctMoveUci.slice(2, 4), type: "info" },
+    ];
+  }, [effectiveHintLevel, isSessionCompleted, correctMoveUci]);
 
   // Split "C50 Italian Game" into an ECO chip + name for the rail header.
   const { eco, openingName } = splitOpeningLabel(openingLabel);
@@ -360,7 +393,7 @@ export const Training = () => {
   const status = deriveStatus({
     isSessionCompleted,
     feedback: shownFeedback,
-    hintLevel,
+    hintLevel: effectiveHintLevel,
     isPlayerToMove,
     playerColor,
   });
@@ -400,6 +433,7 @@ export const Training = () => {
                 interactive
                 moveColor={playerColor === "b" ? "black" : "white"}
                 markers={markers}
+                arrows={hintArrows}
                 getLegalMoves={getLegalMoves}
                 onMoveStart={canPickUp}
                 onMove={onMove}
