@@ -188,6 +188,8 @@
   "settings": {
     "title": "I am Groot",
     "subtitle": "I am Groot.",
+    "resetToDefaults": "I am Groot!",
+    "resetConfirm": "I am Groot? I am Groot.",
     "previewLabel": "I am Groot",
     "languageLabel": "I am Groot",
     "appearance": {

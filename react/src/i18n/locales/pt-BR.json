@@ -188,6 +188,8 @@
   "settings": {
     "title": "Configurações",
     "subtitle": "Personalize como o Knight School se parece e joga.",
+    "resetToDefaults": "Redefinir para padrão",
+    "resetConfirm": "Redefinir todas as configurações para padrão? Esta ação não pode ser desfeita.",
     "previewLabel": "Pré-visualização",
     "languageLabel": "Idioma",
     "appearance": {

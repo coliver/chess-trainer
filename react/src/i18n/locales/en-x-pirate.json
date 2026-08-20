@@ -188,6 +188,8 @@
   "settings": {
     "title": "Rigging, ye sea dog",
     "subtitle": "Customize yer ship's appearance and sailin' style.",
+    "resetToDefaults": "Set Yer Rigging Back to Standard, Ye Scallywag",
+    "resetConfirm": "Restore all yer settings to the original specs? This can't be undone, cap'n.",
     "previewLabel": "A peek at yer board",
     "languageLabel": "Speak in a different tongue",
     "appearance": {

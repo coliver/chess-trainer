@@ -188,6 +188,8 @@
   "settings": {
     "title": "Ayarlar",
     "subtitle": "Knight School'un nasıl göründüğünü ve çalıştığını kişiselleştirin.",
+    "resetToDefaults": "Varsayılan Ayarlara Sıfırla",
+    "resetConfirm": "Tüm ayarları varsayılan değerlere sıfırla mı? Bu işlem geri alınamaz.",
     "previewLabel": "Önizleme",
     "languageLabel": "Dil",
     "appearance": {

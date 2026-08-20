@@ -5,6 +5,7 @@ import { useSnowPreference } from "../hooks/useSnowPreference";
 import { useSound } from "../hooks/useSound";
 import { getMoveSound } from "../utils/sound";
 import { LanguageToggle } from "../components/LanguageToggle";
+import { Button } from "../components/Button";
 import Board from "../components/Board";
 import { START_FEN, applyMove, legalMoves } from "@knight-school/chess-core";
 import type {
@@ -28,7 +29,7 @@ const PIECE_SETS: PieceSet[] = ["standard", "staunty", "merida", "pirouetti", "c
 
 export default function Settings() {
   const { t } = useTranslation();
-  const { preferences, update } = usePreferences();
+  const { preferences, update, reset } = usePreferences();
   const { snowEnabled, setSnowEnabled } = useSnowPreference();
   const { play } = useSound();
   const [previewFen, setPreviewFen] = useState(START_FEN);
@@ -49,6 +50,12 @@ export default function Settings() {
     },
     [previewFen, play],
   );
+
+  const handleReset = useCallback(() => {
+    if (!window.confirm(t("settings.resetConfirm"))) return;
+    reset();
+    setSnowEnabled(false);
+  }, [reset, setSnowEnabled, t]);
 
   return (
     <main className="page">
@@ -203,6 +210,12 @@ export default function Settings() {
               </label>
             ))}
           </div>
+        </section>
+
+        <section className="settings-section settings-section--footer">
+          <Button variant="secondary" onClick={handleReset}>
+            {t("settings.resetToDefaults")}
+          </Button>
         </section>
       </div>
     </main>

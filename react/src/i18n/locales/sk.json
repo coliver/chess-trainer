@@ -188,6 +188,8 @@
   "settings": {
     "title": "Nastavenia",
     "subtitle": "Prispôsobte si, ako Knight School vyzerá a funguje.",
+    "resetToDefaults": "Obnoviť štandardné",
+    "resetConfirm": "Obnoviť všetky nastavenia na štandardné hodnoty? Túto operáciu nie je možné vrátiť.",
     "previewLabel": "Náhľad",
     "languageLabel": "Jazyk",
     "appearance": {

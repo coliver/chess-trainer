@@ -188,6 +188,8 @@
   "settings": {
     "title": "Asetukset",
     "subtitle": "Mukauta Knight Schoolin ulkoasua ja peliä.",
+    "resetToDefaults": "Palauta oletusarvot",
+    "resetConfirm": "Palautaa kaikki asetukset oletusarvoihin? Tätä ei voi kumota.",
     "previewLabel": "Esikatselu",
     "languageLabel": "Kieli",
     "appearance": {

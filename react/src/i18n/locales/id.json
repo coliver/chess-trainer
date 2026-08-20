@@ -188,6 +188,8 @@
   "settings": {
     "title": "Pengaturan",
     "subtitle": "Sesuaikan cara Knight School ditampilkan dan dimainkan.",
+    "resetToDefaults": "Atur ulang ke bawaan",
+    "resetConfirm": "Atur ulang semua pengaturan ke bawaan? Tindakan ini tidak dapat dibatalkan.",
     "previewLabel": "Pratinjau",
     "languageLabel": "Bahasa",
     "appearance": {

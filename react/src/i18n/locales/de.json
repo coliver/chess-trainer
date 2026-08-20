@@ -188,6 +188,8 @@
   "settings": {
     "title": "Einstellungen",
     "subtitle": "Passe an, wie Knight School aussieht und spielt.",
+    "resetToDefaults": "Auf Standard zurücksetzen",
+    "resetConfirm": "Alle Einstellungen auf die Standards zurücksetzen? Das kann nicht rückgängig gemacht werden.",
     "previewLabel": "Vorschau",
     "languageLabel": "Sprache",
     "appearance": {

@@ -188,6 +188,8 @@
   "settings": {
     "title": "Setări",
     "subtitle": "Personalizează modul în care Knight School arată și funcționează.",
+    "resetToDefaults": "Restabilire setări implicite",
+    "resetConfirm": "Restabiliți toate setările la valorile implicite? Această acțiune nu poate fi anulată.",
     "previewLabel": "Previzualizare",
     "languageLabel": "Limbă",
     "appearance": {

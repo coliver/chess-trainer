@@ -43,3 +43,56 @@ describe("Settings page — snow toggle", () => {
     expect(checkbox.checked).toBe(true);
   });
 });
+
+describe("Settings page — reset to defaults", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  const renderSettings = () =>
+    render(
+      <PreferencesProvider>
+        <Settings />
+      </PreferencesProvider>,
+    );
+
+  it("asks for confirmation and does nothing if declined", async () => {
+    const user = userEvent.setup();
+    const confirmSpy = vi.spyOn(window, "confirm").mockReturnValue(false);
+    renderSettings();
+
+    const themeRadio = screen.getByRole("radio", { name: "Dark" }) as HTMLInputElement;
+    await user.click(themeRadio);
+    expect(themeRadio.checked).toBe(true);
+
+    await user.click(screen.getByRole("button", { name: "Reset to Defaults" }));
+
+    expect(confirmSpy).toHaveBeenCalledTimes(1);
+    expect(themeRadio.checked).toBe(true);
+
+    confirmSpy.mockRestore();
+  });
+
+  it("resets preferences and the snow toggle when confirmed", async () => {
+    const user = userEvent.setup();
+    const confirmSpy = vi.spyOn(window, "confirm").mockReturnValue(true);
+    renderSettings();
+
+    const themeRadio = screen.getByRole("radio", { name: "Dark" }) as HTMLInputElement;
+    await user.click(themeRadio);
+    const snowCheckbox = screen.getByLabelText("Snow effect") as HTMLInputElement;
+    await user.click(snowCheckbox);
+    expect(themeRadio.checked).toBe(true);
+    expect(snowCheckbox.checked).toBe(true);
+
+    await user.click(screen.getByRole("button", { name: "Reset to Defaults" }));
+
+    expect(confirmSpy).toHaveBeenCalledTimes(1);
+    const systemRadio = screen.getByRole("radio", { name: "System" }) as HTMLInputElement;
+    expect(systemRadio.checked).toBe(true);
+    expect(snowCheckbox.checked).toBe(false);
+    expect(localStorage.getItem("snow_enabled")).toBe("false");
+
+    confirmSpy.mockRestore();
+  });
+});

@@ -188,6 +188,8 @@
   "settings": {
     "title": "Beállítások",
     "subtitle": "Személyre szabja a Knight School megjelenítésének és játéknak módját.",
+    "resetToDefaults": "Alapértékekre visszaállítás",
+    "resetConfirm": "Az összes beállítást az alapértelmezettekre akarod visszaállítani? Ez nem vonható vissza.",
     "previewLabel": "Előnézet",
     "languageLabel": "Nyelv",
     "appearance": {

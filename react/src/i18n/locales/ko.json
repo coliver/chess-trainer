@@ -188,6 +188,8 @@
   "settings": {
     "title": "설정",
     "subtitle": "Knight School이 어떻게 보이고 작동하는지 맞춤설정하세요.",
+    "resetToDefaults": "기본값으로 재설정",
+    "resetConfirm": "모든 설정을 기본값으로 재설정하시겠습니까? 이 작업은 실행 취소할 수 없습니다.",
     "previewLabel": "미리보기",
     "languageLabel": "언어",
     "appearance": {

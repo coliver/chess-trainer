@@ -188,6 +188,8 @@
   "settings": {
     "title": "設定",
     "subtitle": "ナイトスクールの外観と進め方をカスタマイズします。",
+    "resetToDefaults": "デフォルトに戻す",
+    "resetConfirm": "すべての設定をデフォルトに戻しますか？この操作は取り消せません。",
     "previewLabel": "プレビュー",
     "languageLabel": "言語",
     "appearance": {

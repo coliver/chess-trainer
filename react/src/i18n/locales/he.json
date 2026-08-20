@@ -188,6 +188,8 @@
   "settings": {
     "title": "הגדרות",
     "subtitle": "התאימו את אופן ההצגה והמשחק של Knight School.",
+    "resetToDefaults": "איפוס להגדרות ברירת המחדל",
+    "resetConfirm": "אתה בטוח שברצונך להחזיר את כל ההגדרות לברירת המחדל? לא ניתן לבטל זאת.",
     "previewLabel": "תצוגה מקדימה",
     "languageLabel": "שפה",
     "appearance": {

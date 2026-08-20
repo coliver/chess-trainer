@@ -188,6 +188,8 @@
   "settings": {
     "title": "Nastavení",
     "subtitle": "Přizpůsobte si, jak Knight School vypadá a jak se hraje.",
+    "resetToDefaults": "Obnovit výchozí hodnoty",
+    "resetConfirm": "Obnovit všechna nastavení na výchozí hodnoty? Toto nelze vrátit zpět.",
     "previewLabel": "Náhled",
     "languageLabel": "Jazyk",
     "appearance": {

@@ -5,6 +5,10 @@
   text-align: left;
 }
 
+.settings-section--footer {
+  align-items: flex-start;
+}
+
 .settings-section {
   display: flex;
   flex-direction: column;

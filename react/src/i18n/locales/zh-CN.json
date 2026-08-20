@@ -188,6 +188,8 @@
   "settings": {
     "title": "设置",
     "subtitle": "自定义 Knight School 的外观和行为。",
+    "resetToDefaults": "恢复默认设置",
+    "resetConfirm": "将所有设置恢复为默认值？此操作无法撤消。",
     "previewLabel": "预览",
     "languageLabel": "语言",
     "appearance": {

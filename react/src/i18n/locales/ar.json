@@ -188,6 +188,8 @@
   "settings": {
     "title": "الإعدادات",
     "subtitle": "خصص كيفية ظهور ولعب Knight School.",
+    "resetToDefaults": "استعادة القيم الافتراضية",
+    "resetConfirm": "استعادة جميع الإعدادات إلى قيمها الافتراضية؟ لا يمكن التراجع عن هذا.",
     "previewLabel": "معاينة",
     "languageLabel": "اللغة",
     "appearance": {

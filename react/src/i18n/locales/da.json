@@ -188,6 +188,8 @@
   "settings": {
     "title": "Indstillinger",
     "subtitle": "Tilpas hvordan Ridderskolen ser ud og spilles.",
+    "resetToDefaults": "Gendan til standard",
+    "resetConfirm": "Gendanne alle indstillinger til standard? Dette kan ikke fortrydes.",
     "previewLabel": "Forhåndsvisning",
     "languageLabel": "Sprog",
     "appearance": {

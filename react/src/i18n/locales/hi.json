@@ -188,6 +188,8 @@
   "settings": {
     "title": "सेटिंग्स",
     "subtitle": "Knight School को अपनी पसंद के अनुसार बनाएँ।",
+    "resetToDefaults": "डिफ़ॉल्ट पर रीसेट करें",
+    "resetConfirm": "सभी सेटिंग्स को डिफ़ॉल्ट पर रीसेट करें? यह पूर्ववत नहीं किया जा सकता।",
     "previewLabel": "पूर्वावलोकन",
     "languageLabel": "भाषा",
     "appearance": {

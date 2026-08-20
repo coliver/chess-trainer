@@ -188,6 +188,8 @@
   "settings": {
     "title": "Tetapan",
     "subtitle": "Suaikan cara Knight School kelihatan dan bermain.",
+    "resetToDefaults": "Tetapkan semula ke default",
+    "resetConfirm": "Tetapkan semula semua tetapan ke default? Tindakan ini tidak boleh dibuat asal.",
     "previewLabel": "Pratonton",
     "languageLabel": "Bahasa",
     "appearance": {

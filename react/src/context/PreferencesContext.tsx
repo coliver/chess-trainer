@@ -11,6 +11,7 @@ import api from "../api";
 import { useAuth } from "../hooks/useAuth";
 import { setSoundsEnabled } from "../utils/sound";
 import {
+  DEFAULT_PREFERENCES,
   readLocalPreferences,
   writeLocalPreferences,
   type Preferences,
@@ -19,6 +20,7 @@ import {
 type PreferencesContextValue = {
   preferences: Preferences;
   update: (partial: Partial<Preferences>) => void;
+  reset: () => void;
 };
 
 const PreferencesContext = createContext<PreferencesContextValue | null>(null);
@@ -77,8 +79,18 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
     [isLoggedIn],
   );
 
+  const reset = useCallback(() => {
+    setPreferences(DEFAULT_PREFERENCES);
+    writeLocalPreferences(DEFAULT_PREFERENCES);
+    if (isLoggedIn) {
+      api.patch("/users/me/preferences", DEFAULT_PREFERENCES).catch(() => {
+        // Best-effort sync; local state is already applied optimistically.
+      });
+    }
+  }, [isLoggedIn]);
+
   return (
-    <PreferencesContext.Provider value={{ preferences, update }}>
+    <PreferencesContext.Provider value={{ preferences, update, reset }}>
       {children}
     </PreferencesContext.Provider>
   );

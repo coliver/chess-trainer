@@ -188,6 +188,8 @@
   "settings": {
     "title": "Impostazioni",
     "subtitle": "Personalizza come Knight School viene visualizzato e giocato.",
+    "resetToDefaults": "Ripristina impostazioni predefinite",
+    "resetConfirm": "Ripristinare tutte le impostazioni ai valori predefiniti? Questa operazione non può essere annullata.",
     "previewLabel": "Anteprima",
     "languageLabel": "Lingua",
     "appearance": {

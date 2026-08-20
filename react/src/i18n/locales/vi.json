@@ -188,6 +188,8 @@
   "settings": {
     "title": "Cài đặt",
     "subtitle": "Cá nhân hóa cách Knight School trông và hoạt động.",
+    "resetToDefaults": "Đặt lại về mặc định",
+    "resetConfirm": "Đặt lại tất cả cài đặt về mặc định? Không thể hoàn tác được.",
     "previewLabel": "Xem trước",
     "languageLabel": "Ngôn ngữ",
     "appearance": {

@@ -188,6 +188,8 @@
   "settings": {
     "title": "Segh",
     "subtitle": "Knight SchoolDaq SoH Segh yISoQ'eH.",
+    "resetToDefaults": "baQa' Segh yISoQ'eH",
+    "resetConfirm": "Hoch Segh baQa' yISoQ'eH'a'? DaH chaH naQbe'.",
     "previewLabel": "leghpa'",
     "languageLabel": "qaD",
     "appearance": {

@@ -188,6 +188,8 @@
   "settings": {
     "title": "Innstillinger",
     "subtitle": "Tilpass hvordan Knight School ser ut og spilles.",
+    "resetToDefaults": "Tilbakestill til standard",
+    "resetConfirm": "Tilbakestill alle innstillinger til standard? Dette kan ikke angres.",
     "previewLabel": "Forhåndsvisning",
     "languageLabel": "Språk",
     "appearance": {
