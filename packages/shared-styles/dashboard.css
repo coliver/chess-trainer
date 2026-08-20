@@ -19,22 +19,40 @@
 }
 .progress-group-row {
   display: flex;
-  align-items: flex-start;
-  gap: 28px;
+  align-items: stretch;
+  gap: 14px;
   flex-wrap: wrap;
   text-align: left;
 }
 .progress-stat {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 2px;
-  min-width: 90px;
+  min-width: 100px;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--code-bg);
+}
+.progress-stat:has(.progress-review-btn) {
+  border: none;
+  background: none;
+  padding: 0;
 }
 .progress-stat-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-size: 22px;
   font-weight: 750;
   letter-spacing: -0.02em;
   color: var(--text-h);
+}
+.progress-stat-icon {
+  font-size: 14px;
+  line-height: 1;
+  opacity: 0.55;
 }
 .progress-stat-label {
   font-size: 12px;
@@ -78,6 +96,7 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  margin-top: 14px;
   padding: 10px 14px;
   border-radius: 12px;
   background: var(--code-bg);
@@ -92,6 +111,22 @@
 }
 .progress-weak-spots li {
   padding: 1px 0;
+}
+
+/* On wide screens, put Training and Puzzles side by side as one KPI
+   strip instead of two short stacked rows with dead space beside them. */
+@media (min-width: 981px) {
+  .progress-overview {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    align-items: start;
+    column-gap: 24px;
+    row-gap: 0;
+  }
+  .progress-group--puzzles {
+    padding-left: 24px;
+    border-left: 1px solid var(--border);
+  }
 }
 
 /* ===== Dashboard: opening browser ===== */
@@ -640,7 +675,6 @@
     opacity: 1;
   }
   .progress-weak-spots {
-    grid-column: 1 / -1;
     padding: 12px 14px;
     gap: 8px;
   }

@@ -234,6 +234,9 @@ export const Dashboard = () => {
             <div className="progress-group-row">
               <div className="progress-stat">
                 <span className="progress-stat-value">
+                  <span className="progress-stat-icon" aria-hidden="true">
+                    ♟️
+                  </span>
                   {summary?.positionsSeen ?? 0}
                 </span>
                 <span className="progress-stat-label">
@@ -242,6 +245,9 @@ export const Dashboard = () => {
               </div>
               <div className="progress-stat">
                 <span className="progress-stat-value">
+                  <span className="progress-stat-icon" aria-hidden="true">
+                    🎯
+                  </span>
                   {summary?.overallAccuracy != null
                     ? `${Math.round(summary.overallAccuracy * 100)}%`
                     : "—"}
@@ -253,6 +259,9 @@ export const Dashboard = () => {
               </div>
               <div className="progress-stat">
                 <span className="progress-stat-value">
+                  <span className="progress-stat-icon" aria-hidden="true">
+                    📅
+                  </span>
                   {summary?.currentStreak ?? 0}
                   {(summary?.currentStreak ?? 0) > 0 ? " 🔥" : ""}
                 </span>
@@ -266,6 +275,9 @@ export const Dashboard = () => {
               </div>
               <div className="progress-stat progress-stat--mastery">
                 <span className="progress-stat-value">
+                  <span className="progress-stat-icon" aria-hidden="true">
+                    🏆
+                  </span>
                   {summary?.mastered ?? 0}
                 </span>
                 <span className="progress-stat-label">
@@ -297,29 +309,29 @@ export const Dashboard = () => {
                   {t("dashboard.progress.reviewDue", { count: dueCount })}
                 </button>
               </div>
-              {weakSpots.length > 0 && (
-                <div className="progress-weak-spots">
-                  <span className="progress-stat-label">
-                    {t("dashboard.progress.weakSpots")}
-                  </span>
-                  <ul>
-                    {weakSpots.map((w) => (
-                      <li
-                        key={`${w.openingName ?? "Opening"}-${w.fen ?? ""}-${w.correctMoveUci ?? ""}`}
-                      >
-                        {t("dashboard.progress.weakSpotItem", {
-                          name:
-                            w.openingName ??
-                            t("dashboard.progress.weakSpotFallbackName"),
-                          correct: w.correctCount,
-                          attempts: w.attempts,
-                        })}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
             </div>
+            {weakSpots.length > 0 && (
+              <div className="progress-weak-spots">
+                <span className="progress-stat-label">
+                  {t("dashboard.progress.weakSpots")}
+                </span>
+                <ul>
+                  {weakSpots.map((w) => (
+                    <li
+                      key={`${w.openingName ?? "Opening"}-${w.fen ?? ""}-${w.correctMoveUci ?? ""}`}
+                    >
+                      {t("dashboard.progress.weakSpotItem", {
+                        name:
+                          w.openingName ??
+                          t("dashboard.progress.weakSpotFallbackName"),
+                        correct: w.correctCount,
+                        attempts: w.attempts,
+                      })}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
 
           <div
@@ -332,6 +344,9 @@ export const Dashboard = () => {
             <div className="progress-group-row">
               <div className="progress-stat">
                 <span className="progress-stat-value">
+                  <span className="progress-stat-icon" aria-hidden="true">
+                    🧩
+                  </span>
                   {puzzleSummary?.puzzlesSeen ?? 0}
                 </span>
                 <span className="progress-stat-label">
@@ -340,6 +355,9 @@ export const Dashboard = () => {
               </div>
               <div className="progress-stat">
                 <span className="progress-stat-value">
+                  <span className="progress-stat-icon" aria-hidden="true">
+                    🎯
+                  </span>
                   {puzzleSummary
                     ? `${Math.round(puzzleSummary.overallAccuracy * 100)}%`
                     : "—"}
@@ -350,6 +368,9 @@ export const Dashboard = () => {
               </div>
               <div className="progress-stat">
                 <span className="progress-stat-value">
+                  <span className="progress-stat-icon" aria-hidden="true">
+                    🏆
+                  </span>
                   {puzzleSummary?.mastered ?? 0}
                 </span>
                 <span className="progress-stat-label">
