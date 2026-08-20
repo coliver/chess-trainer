@@ -58,10 +58,27 @@ const { FakeChessboard } = vi.hoisted(() => {
       return undefined;
     }
 
+    markerCalls: unknown[] = [];
+    arrowCalls: unknown[] = [];
+
     removeLegalMovesMarkers() {}
     addLegalMovesMarkers() {}
-    removeMarkers() {}
-    addMarker() {}
+
+    removeMarkers() {
+      this.markerCalls.push({ op: "remove" });
+    }
+
+    addMarker(type: unknown, square: string) {
+      this.markerCalls.push({ op: "add", type, square });
+    }
+
+    removeArrows() {
+      this.arrowCalls.push({ op: "remove" });
+    }
+
+    addArrow(type: unknown, from: string, to: string) {
+      this.arrowCalls.push({ op: "add", type, from, to });
+    }
   }
 
   return { FakeChessboard };
@@ -86,6 +103,18 @@ vi.mock("cm-chessboard/src/extensions/markers/Markers.js", () => ({
 
 vi.mock("cm-chessboard/src/extensions/accessibility/Accessibility.js", () => ({
   Accessibility: class {},
+}));
+
+vi.mock("cm-chessboard/src/extensions/arrows/Arrows.js", () => ({
+  Arrows: class {},
+  ARROW_TYPE: {
+    default: { class: "arrow-success" },
+    success: { class: "arrow-success" },
+    secondary: { class: "arrow-secondary" },
+    warning: { class: "arrow-warning" },
+    info: { class: "arrow-info" },
+    danger: { class: "arrow-danger" },
+  },
 }));
 
 const START_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
@@ -142,5 +171,71 @@ describe("Board", () => {
         </PreferencesProvider>,
       ),
     ).not.toThrow();
+  });
+
+  // The markers/arrows sync effects can legitimately re-run more than once
+  // per prop change (e.g. while PreferencesContext hydrates), same as the
+  // move-input effect above, so these assert on the final state (the last
+  // remove+add pair) rather than an exact call count.
+  it("syncs the arrows prop to addArrow/removeArrows calls", () => {
+    FakeChessboard.instances.length = 0;
+    const { rerender } = renderBoard({
+      arrows: [{ from: "e2", to: "e4" }],
+    });
+
+    const board = FakeChessboard.instances[0];
+    expect(board.arrowCalls.at(-1)).toEqual({
+      op: "add",
+      type: { class: "arrow-success" },
+      from: "e2",
+      to: "e4",
+    });
+    expect(board.arrowCalls.at(-2)).toEqual({ op: "remove" });
+
+    board.arrowCalls = [];
+    rerender(
+      <PreferencesProvider>
+        <Board
+          position={START_FEN}
+          interactive
+          onMove={() => true}
+          arrows={[{ from: "d2", to: "d4", type: "danger" }]}
+        />
+      </PreferencesProvider>,
+    );
+
+    expect(board.arrowCalls.at(-1)).toEqual({
+      op: "add",
+      type: { class: "arrow-danger" },
+      from: "d2",
+      to: "d4",
+    });
+    expect(board.arrowCalls.at(-2)).toEqual({ op: "remove" });
+
+    board.arrowCalls = [];
+    rerender(
+      <PreferencesProvider>
+        <Board position={START_FEN} interactive onMove={() => true} />
+      </PreferencesProvider>,
+    );
+
+    expect(board.arrowCalls).toEqual([{ op: "remove" }]);
+  });
+
+  it("syncs the markers prop to addMarker/removeMarkers calls", () => {
+    FakeChessboard.instances.length = 0;
+    renderBoard({ markers: [{ square: "e4", type: "hint" }] });
+
+    const board = FakeChessboard.instances[0];
+    expect(board.markerCalls.at(-1)).toEqual({
+      op: "add",
+      type: { class: "marker-square-hint", slice: "markerSquare" },
+      square: "e4",
+    });
+    expect(board.markerCalls.slice(-4, -1)).toEqual([
+      { op: "remove" },
+      { op: "remove" },
+      { op: "remove" },
+    ]);
   });
 });

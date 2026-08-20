@@ -12,8 +12,13 @@ import {
   MARKER_TYPE,
 } from "cm-chessboard/src/extensions/markers/Markers.js";
 import { Accessibility } from "cm-chessboard/src/extensions/accessibility/Accessibility.js";
+import {
+  Arrows,
+  ARROW_TYPE,
+} from "cm-chessboard/src/extensions/arrows/Arrows.js";
 import "cm-chessboard/assets/chessboard.css";
 import "cm-chessboard/assets/extensions/markers/markers.css";
+import "cm-chessboard/assets/extensions/arrows/arrows.css";
 import "../../../packages/shared-styles/board.css";
 import { usePreferences } from "../context/PreferencesContext";
 
@@ -22,6 +27,11 @@ const ASSETS_URL = "/cm-chessboard-assets/";
 
 export type BoardMarkerKind = "hint" | "blink" | "lastmove";
 export type BoardMarker = { square: string; type: BoardMarkerKind };
+export type BoardArrow = {
+  from: string;
+  to: string;
+  type?: keyof typeof ARROW_TYPE;
+};
 
 // Custom marker types (defined in styles/board.css). Kept as stable object
 // references so removeMarkers(type) matches them by identity.
@@ -43,6 +53,8 @@ export type BoardProps = {
   moveColor?: "white" | "black";
   /** Persistent highlights (hints, correct-move blink). */
   markers?: BoardMarker[];
+  /** Persistent arrows (e.g. suggested/best move). */
+  arrows?: BoardArrow[];
   /** Legal targets for the square being picked up (shows dots). */
   getLegalMoves?: (square: string) => { to: string; promotion?: string }[];
   /** Return false to block picking up a piece on `square`. */
@@ -59,6 +71,7 @@ export default function Board({
   showCoordinates,
   moveColor = "white",
   markers,
+  arrows,
   getLegalMoves,
   onMoveStart,
   onMove,
@@ -123,6 +136,7 @@ export default function Board({
       },
       extensions: [
         { class: Markers, props: { autoMarkers: MARKER_TYPE.frame } },
+        { class: Arrows, props: {} },
         {
           class: Accessibility,
           props: {
@@ -250,6 +264,16 @@ export default function Board({
       board.addMarker(CUSTOM_MARKER[m.type], m.square);
     }
   }, [markers, boardVersion]);
+
+  // Persistent arrows (e.g. suggested/best move).
+  useEffect(() => {
+    const board = boardRef.current;
+    if (!board) return;
+    board.removeArrows();
+    for (const a of arrows ?? []) {
+      board.addArrow(ARROW_TYPE[a.type ?? "default"], a.from, a.to);
+    }
+  }, [arrows, boardVersion]);
 
   return <div ref={hostRef} className="board-host" />;
 }

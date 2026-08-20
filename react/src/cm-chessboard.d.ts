@@ -64,6 +64,10 @@ declare module "cm-chessboard/src/Chessboard.js" {
       moves: Array<{ to: string; promotion?: string }>,
     ): void;
     removeLegalMovesMarkers(): void;
+    // Methods added at runtime by the Arrows extension:
+    addArrow(type: unknown, from: string, to: string): void;
+    getArrows(type?: unknown, from?: string, to?: string): unknown[];
+    removeArrows(type?: unknown, from?: string, to?: string): void;
     destroy(): void;
   }
 }
@@ -74,6 +78,11 @@ declare module "cm-chessboard/src/extensions/markers/Markers.js" {
     { class: string; slice: string; position?: string }
   >;
   export class Markers {}
+}
+
+declare module "cm-chessboard/src/extensions/arrows/Arrows.js" {
+  export const ARROW_TYPE: Record<string, { class: string }>;
+  export class Arrows {}
 }
 
 declare module "cm-chessboard/src/extensions/accessibility/Accessibility.js" {
