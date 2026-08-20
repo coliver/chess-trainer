@@ -9,13 +9,11 @@ jobs:
     uses: ./.github/workflows/core.yml
   react:
     uses: ./.github/workflows/react.yml
-  angular:
-    uses: ./.github/workflows/angular.yml
   tests:
     uses: ./.github/workflows/tests.yml
 
   deploy:
-    needs: [core, react, angular, tests]
+    needs: [core, react, tests]
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to knightschool.click

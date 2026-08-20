@@ -1,6 +1,6 @@
 // Framework-neutral move logic. No React — imports only chess.js.
 // chess.js stays the single source of truth for move legality; these helpers
-// wrap it so both the React hooks and the future Angular service share it.
+// wrap it so the React hooks share it.
 import { Chess, type Square } from "chess.js";
 
 export type UciMove = { from: string; to: string; promotion?: string };

@@ -1,16 +1,15 @@
 # ♟️ @knight-school/chess-core
 
-Framework-neutral chess logic — FEN handling, move validation, and opening-preview positions — built on `chess.js` and shared by both the React and Angular frontends as a single source of truth.
+Framework-neutral chess logic — FEN handling, move validation, and opening-preview positions — built on `chess.js`, used by the frontend as a single source of truth.
 
 ## Why This Package Exists
 
-Both the React and Angular frontends need to handle chess moves, validate them against standard rules, and preview opening positions. Rather than duplicate this logic or couple it to either framework, we isolate it in a **framework-agnostic package** that both frontends consume via a `file:` dependency.
+The frontend needs to handle chess moves, validate them against standard rules, and preview opening positions. Rather than couple this logic to the framework, we isolate it in a **framework-agnostic package** consumed via a `file:` dependency.
 
 The result:
 - **Single source of truth** for chess rules (no sync issues)
 - **No framework boilerplate** — just functions that wrap `chess.js`
-- **Shared dependency tree** avoided — React and Angular each get their own `node_modules` copy, so no version conflicts
-- **Independently tested** against real `chess.js` before either UI ever calls it
+- **Independently tested** against real `chess.js` before the UI ever calls it
 
 ## 📦 Public API
 
@@ -158,7 +157,7 @@ Runs `vitest` against real `chess.js` to verify all move logic.
 
 ## 📥 How Frontends Consume It
 
-Each frontend declares a `file:` dependency in its `package.json`:
+The frontend declares a `file:` dependency in its `package.json`:
 
 ```json
 {
@@ -170,7 +169,7 @@ Each frontend declares a `file:` dependency in its `package.json`:
 
 ### Docker Build Flow
 
-In both React and Angular Dockerfiles, the package is **built before** the frontend installs:
+In the React Dockerfile, the package is **built before** the frontend installs:
 
 ```dockerfile
 # Build the shared chess-core package first
@@ -183,9 +182,8 @@ RUN npm ci
 ```
 
 This ensures:
-1. Each frontend has its own isolated `node_modules`
+1. The frontend has its own isolated `node_modules`
 2. Chess-core is built once and reused
-3. No dependency conflicts between React and Angular
 
 ## 🚀 CI
 
@@ -197,4 +195,3 @@ See [`.github/workflows/core.yml`](.github/workflows/core.yml) — runs linting,
 
 - **[Root README](../../README.md)** — Architecture overview
 - **[React Frontend](../../react/README.md)** — How React uses chess-core
-- **[Angular Frontend](../../angular/README.md)** — How Angular uses chess-core

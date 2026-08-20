@@ -1,6 +1,5 @@
 // Framework-neutral parsing of `GET /training-sessions/:id/next` responses.
-// Both the React hook and the Angular service normalize the same loose
-// backend shape into the same TrainingItem — this is that shared logic.
+// Normalizes the loose backend shape into a TrainingItem.
 import { normalizeFen } from "./fen";
 
 /** Loose shape of the `next` endpoint response — backend field names vary. */

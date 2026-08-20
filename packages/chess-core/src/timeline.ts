@@ -1,5 +1,5 @@
-// Framework-neutral move timeline. No React/Angular — pure state + reducers.
-// Backs the "prev/next" stepper in both the React and Angular training pages.
+// Framework-neutral move timeline. No React — pure state + reducers.
+// Backs the "prev/next" stepper in the React training page.
 
 export type Timeline = {
   fens: string[];

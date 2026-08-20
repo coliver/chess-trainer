@@ -17,7 +17,7 @@ command explicitly `cd`s to the repo root for `docker compose`.
 
 ## Prerequisites
 
-None beyond Docker — the whole stack (react, api, db, nginx, angular)
+None beyond Docker — the whole stack (react, api, db, nginx)
 runs via `docker compose`. From the repo root:
 
 ```bash

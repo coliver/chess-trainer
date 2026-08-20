@@ -2,7 +2,6 @@
 
 [![tests](https://github.com/coliver/chess-trainer/actions/workflows/tests.yml/badge.svg)](https://github.com/coliver/chess-trainer/actions/workflows/tests.yml)
 [![react](https://github.com/coliver/chess-trainer/actions/workflows/react.yml/badge.svg)](https://github.com/coliver/chess-trainer/actions/workflows/react.yml)
-[![angular](https://github.com/coliver/chess-trainer/actions/workflows/angular.yml/badge.svg)](https://github.com/coliver/chess-trainer/actions/workflows/angular.yml)
 
 A web-based chess openings trainer designed to drill specific lines and track performance metrics.
 
@@ -23,8 +22,7 @@ This is a work in progress — see the [Roadmap](./ROADMAP.md) for planned work.
 ### 📂 Project Navigation
 - **[Backend](./backend/README.md)**: API logic, Database schema, and Chess engine rules.
 - **[React frontend](./react/README.md)**: React components, State management, and UI/UX.
-- **[Angular frontend](./angular/README.md)**: Alternate frontend against the same API.
-- **[Shared core](./packages/chess-core)**: Framework-neutral chess logic (`chess.js`) shared by both frontends.
+- **[Shared core](./packages/chess-core)**: Framework-neutral chess logic (`chess.js`) used by the frontend.
 - **[Infrastructure](./nginx)**: Nginx configuration and Docker orchestration.
 
 ---
@@ -33,8 +31,8 @@ This is a work in progress — see the [Roadmap](./ROADMAP.md) for planned work.
 | Layer | Technologies |
 | :--- | :--- |
 | **Backend** | Python 3.12, FastAPI, SQLAlchemy, Alembic, `python-chess` |
-| **Frontends** | React + Vite (`/`) and Angular 19 (`/angular/`) — both against the same API |
-| **Shared** | `@knight-school/chess-core` — framework-neutral chess logic (`chess.js`) used by both frontends |
+| **Frontend** | React + Vite (`/`) |
+| **Shared** | `@knight-school/chess-core` — framework-neutral chess logic (`chess.js`) used by the frontend |
 | **Infrastructure** | PostgreSQL 16, Nginx, Docker |
 
 ---
@@ -62,7 +60,6 @@ Once the containers are running, populate the database with the chess openings:
 ### 4. Access the App
 
 - **React frontend:** http://localhost (via Nginx)
-- **Angular frontend:** http://localhost/angular/
 - **API Documentation:** http://localhost:8000/docs
 
 ---
@@ -71,26 +68,25 @@ Once the containers are running, populate the database with the chess openings:
 
 Knight School uses a decoupled architecture to separate the chess engine from the user interface:
 
-1. **Frontends:** Two independent SPAs — [React](./react) at `/` and [Angular](./angular) at `/angular/` — that handle board visualization and user interaction.
+1. **Frontend:** [React](./react) at `/`, handling board visualization and user interaction.
 2. **Backend:** A modular FastAPI server that validates moves against the `python-chess` library and manages user sessions in PostgreSQL.
 3. **Reverse Proxy:** Nginx handles routing and serves the production frontend build. SSL is configured in the Nginx container (the repo’s default config points to self-signed certificate files).
 
 ### 🔁 Swappable frontends
 
-Both frontends talk to the backend the same way: they call the **root-absolute `/api`**
-path, and nginx (the single integration point) serves each SPA and proxies `/api/` to
+The frontend talks to the backend via the **root-absolute `/api`**
+path, and nginx (the single integration point) serves the SPA and proxies `/api/` to
 FastAPI. Everything is **same-origin**, so there is **no CORS** and the backend is
-frontend-agnostic. Because both share the `localhost` origin they also share
-`localStorage`, so a login in one frontend carries over to the other.
+frontend-agnostic.
 
 **To add another frontend** (e.g. Vue, Svelte), follow the convention:
 
 1. Create a **named folder** (e.g. `vue/`) whose app calls `/api` and serves under `/vue/`.
 2. Add a **named compose service** in `docker-compose.yml` (build context `.`, its own
-   dev-server port), mirroring the `react`/`angular` services.
+   dev-server port), mirroring the `react` service.
 3. Add **one nginx `location /vue/` block** in [`nginx/default.conf`](nginx/default.conf)
-   pointing at that service (copy the `/angular/` block).
-4. Add a CI workflow (copy `.github/workflows/angular.yml`).
+   pointing at that service.
+4. Add a CI workflow (copy `.github/workflows/react.yml`).
 
 No backend changes are ever required.
 
@@ -98,17 +94,16 @@ No backend changes are ever required.
 
 The framework-neutral chess logic — FEN handling, move validation, and opening-preview
 positions, all built on `chess.js` with **no** framework code — lives in a standalone package,
-[`@knight-school/chess-core`](./packages/chess-core). Each frontend pulls it in with a **`file:`
-dependency**, so they share **one source of truth without sharing `node_modules`**: React and
-Angular keep entirely separate dependency trees. The package builds to an ESM bundle + type
-declarations and is unit-tested against real `chess.js` independently of either UI, so the UIs
-only test their own wiring (mocking the package boundary).
+[`@knight-school/chess-core`](./packages/chess-core). The frontend pulls it in with a **`file:`
+dependency**. The package builds to an ESM bundle + type declarations and is unit-tested
+against real `chess.js` independently of the UI, so the UI only tests its own wiring
+(mocking the package boundary).
 
 ---
 
 ## 🤝 Contribution
 
-- **Development:** Please refer to the [Backend](./backend/README.md), [React](./react/README.md), and [Angular](./angular/README.md) guides for specific coding standards.
+- **Development:** Please refer to the [Backend](./backend/README.md) and [React](./react/README.md) guides for specific coding standards.
 - **Commits:** Use conventional commits (`feat:`, `fix:`, `docs:`, `test:`).
 - **PRs:** Ensure all new logic is covered by tests.
 

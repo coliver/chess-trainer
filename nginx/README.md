@@ -4,7 +4,7 @@ Nginx serves as the single integration point for Knight School, routing all traf
 
 ## Architecture
 
-Nginx is configured in a **same-origin design** — all frontends and the API live under `localhost`, so there is **no CORS** to manage. Both the React and Angular frontends talk to the API via root-absolute `/api/` paths; nginx proxies those calls to FastAPI while serving each SPA under its own path.
+Nginx is configured in a **same-origin design** — the frontend and the API live under `localhost`, so there is **no CORS** to manage. The React frontend talks to the API via root-absolute `/api/` paths; nginx proxies those calls to FastAPI while serving the SPA.
 
 ```
 ┌─────────────────────────────────────┐
@@ -16,12 +16,12 @@ Nginx is configured in a **same-origin design** — all frontends and the API li
 │  • Listen on :80 (+ :443 SSL)       │
 │  • Route requests by path           │
 └────────────────────┬────────────────┘
-            ┌───────┼────────┬──────────┐
-            │       │        │          │
-    ┌───────▼──┐ ┌──▼──┐ ┌──▼──────┐ ┌▼────────┐
-    │  /api/   │ │  /  │ │/angular/│ │/htmlcov/│
-    │ (FastAPI)│ │React│ │ Angular │ │  (cov)  │
-    └──────────┘ └─────┘ └─────────┘ └─────────┘
+            ┌───────┼──────────┐
+            │       │          │
+    ┌───────▼──┐ ┌──▼──┐ ┌────▼────┐
+    │  /api/   │ │  /  │ │/htmlcov/│
+    │ (FastAPI)│ │React│ │  (cov)  │
+    └──────────┘ └─────┘ └─────────┘
 ```
 
 ## Location Blocks
@@ -32,7 +32,6 @@ The Nginx configuration in `default.conf` defines these routes:
 |------|----------|---------|
 | `/api/` | `http://api:8000/` | FastAPI backend (proxied with headers for real IP, protocol forwarding) |
 | `/` | `http://react:5173` | React SPA (dev server in Docker) |
-| `/angular/` | `http://angular:4200` | Angular SPA (dev server in Docker) |
 | `/vite-hmr` | `http://react:5173` | Vite HMR WebSocket (for React hot reload) |
 | `/htmlcov/` | `/app/htmlcov/` | Coverage report (alias to mounted volume) |
 
@@ -50,13 +49,13 @@ The container expects self-signed certificates at `/etc/nginx/certs/`. These are
 
 ## Adding a New Frontend
 
-To add another frontend (e.g., Vue, Svelte), follow the **same pattern** used for Angular:
+To add another frontend (e.g., Vue, Svelte), follow the **same pattern** used for React:
 
 ### 1. Create a Named Folder
 Create `vue/` (or your frontend name) with its own dev server setup.
 
 ### 2. Add a Compose Service
-In `docker-compose.yml`, add a service entry (mirroring `react`/`angular`):
+In `docker-compose.yml`, add a service entry (mirroring `react`):
 ```yaml
 vue:
   build:
@@ -91,7 +90,7 @@ location /vue/ {
 ```
 
 ### 4. Add CI Workflow
-Create `.github/workflows/vue.yml` (copy from `.github/workflows/angular.yml` and adjust).
+Create `.github/workflows/vue.yml` (copy from `.github/workflows/react.yml` and adjust).
 
 ### 5. No Backend Changes Required
 Because all frontends call the same `/api/` path and share the same origin, the FastAPI backend needs no changes — it is frontend-agnostic.

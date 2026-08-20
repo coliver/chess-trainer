@@ -64,21 +64,6 @@ services:
     restart: unless-stopped
     logging: *default-logging
 
-  angular:
-    build:
-      context: .
-      dockerfile: angular/Dockerfile
-    volumes:
-      - ./angular:/app             # Syncs the code
-      - ./packages:/packages       # Shared workspace packages (chess-core, shared-styles)
-      - /app/node_modules          # Keeps container modules separate
-    expose:
-      - "4200"
-    depends_on:
-      - api
-    restart: unless-stopped
-    logging: *default-logging
-
   nginx:
     image: nginx:1.27
     depends_on:

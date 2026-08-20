@@ -1,5 +1,5 @@
 // Framework-neutral FEN helpers. No React — imports only chess.js.
-// The React hooks and the future Angular service both build on this.
+// The React hooks build on this.
 import { Chess } from "chess.js";
 
 export const START_FEN =

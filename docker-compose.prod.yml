@@ -6,8 +6,8 @@
 #   npm --prefix react run build         # writes react/dist
 #   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build db api nginx
 #
-# Only db, api, and nginx run in prod — react/angular are dev-server-only
-# services and are intentionally not started.
+# Only db, api, and nginx run in prod — react is a dev-server-only
+# service and is intentionally not started.
 #
 # nginx/conf.d note: the base compose file bind-mounts the whole ./nginx
 # directory at /etc/nginx/conf.d, and nginx's `include conf.d/*.conf` picks

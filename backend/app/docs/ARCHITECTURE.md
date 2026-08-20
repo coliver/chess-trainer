@@ -107,9 +107,9 @@ references it.
 
 ## Frontends & Shared Chess Core
 
-The backend is UI-agnostic: two interchangeable SPAs — `react/` (Vite, served at `/`) and
-`angular/` (Angular 19, served at `/angular/`) — call the same root-absolute `/api`, so
-everything is same-origin (no CORS). nginx is the only integration point.
+The backend is UI-agnostic: the frontend, `react/` (Vite, served at `/`), calls the
+root-absolute `/api`, so everything is same-origin (no CORS). nginx is the only integration
+point.
 
 Chess logic that is **not** UI-specific (FEN handling, move validation, opening-preview
 positions — all `chess.js`, no framework code) lives in a standalone package,
@@ -117,8 +117,8 @@ positions — all `chess.js`, no framework code) lives in a standalone package,
 
 - **Shared, not copied.** Each frontend depends on it via a **`file:` dependency**
   (`file:../packages/chess-core`), giving one source of truth.
-- **Isolated `node_modules`.** No npm workspaces / hoisting — React and Angular keep entirely
-  separate dependency trees; only the built package is shared.
+- **Isolated `node_modules`.** No npm workspaces / hoisting — each frontend keeps its own
+  dependency tree; only the built package is shared.
 - **Built + tested independently.** `tsup` emits an ESM bundle + `.d.ts`; the package's own
   vitest suite exercises the real `chess.js`. The UIs mock the package boundary and test only
   their own wiring. Its CI job is `.github/workflows/core.yml`.

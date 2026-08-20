@@ -1,6 +1,6 @@
 // Framework-neutral derived-UI logic for the training page: the status
-// banner, the eco/opening-name split, and hint-marker squares. Both the
-// React and Angular training pages compute these from the same inputs.
+// banner, the eco/opening-name split, and hint-marker squares. The
+// React training page computes these from the same inputs.
 
 export type StatusKind = "your" | "good" | "bad" | "hint" | "done";
 
