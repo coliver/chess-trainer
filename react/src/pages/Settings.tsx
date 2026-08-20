@@ -1,9 +1,12 @@
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { usePreferences } from "../context/PreferencesContext";
 import { useSnowPreference } from "../hooks/useSnowPreference";
+import { useSound } from "../hooks/useSound";
+import { getMoveSound } from "../utils/sound";
 import { LanguageToggle } from "../components/LanguageToggle";
 import Board from "../components/Board";
-import { START_FEN } from "@knight-school/chess-core";
+import { START_FEN, applyMove, legalMoves } from "@knight-school/chess-core";
 import type {
   BoardOrientationMode,
   BoardTheme,
@@ -27,6 +30,25 @@ export default function Settings() {
   const { t } = useTranslation();
   const { preferences, update } = usePreferences();
   const { snowEnabled, setSnowEnabled } = useSnowPreference();
+  const { play } = useSound();
+  const [previewFen, setPreviewFen] = useState(START_FEN);
+
+  const previewGetLegalMoves = useCallback(
+    (square: string) => legalMoves(previewFen, square),
+    [previewFen],
+  );
+
+  const previewOnMove = useCallback(
+    (from: string, to: string): boolean => {
+      if (!from || !to || from === to) return false;
+      const result = applyMove(previewFen, from, to, `${from}${to}q`);
+      if (!result) return false;
+      play(getMoveSound(previewFen, result.uci));
+      setPreviewFen(result.nextFen);
+      return true;
+    },
+    [previewFen, play],
+  );
 
   return (
     <main className="page">
@@ -38,8 +60,12 @@ export default function Settings() {
           <span className="settings-row-label">{t("settings.previewLabel")}</span>
           <div className="settings-preview-board">
             <Board
-              position={START_FEN}
+              position={previewFen}
               orientation={preferences.board_orientation_mode === "black" ? "black" : "white"}
+              interactive
+              moveColor={previewFen.split(" ")[1] === "b" ? "black" : "white"}
+              getLegalMoves={previewGetLegalMoves}
+              onMove={previewOnMove}
             />
           </div>
         </section>
