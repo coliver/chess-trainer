@@ -148,6 +148,7 @@
       "title": "Registrera",
       "subtitle": "Skapa ditt konto.",
       "emailLabel": "E-post",
+      "emailDisclaimer": "Vi frågar bara om detta för att hålla bots borta — vi bryr oss inte om vad det är och vi skickar dig inte spam.",
       "usernameLabel": "Användarnamn",
       "passwordLabel": "Lösenord",
       "submit": "Registrera",

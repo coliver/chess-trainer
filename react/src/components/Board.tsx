@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Chessboard,
   COLOR,
@@ -10,6 +11,7 @@ import {
   Markers,
   MARKER_TYPE,
 } from "cm-chessboard/src/extensions/markers/Markers.js";
+import { Accessibility } from "cm-chessboard/src/extensions/accessibility/Accessibility.js";
 import "cm-chessboard/assets/chessboard.css";
 import "cm-chessboard/assets/extensions/markers/markers.css";
 import "../../../packages/shared-styles/board.css";
@@ -66,6 +68,26 @@ export default function Board({
   const pieceSet = preferences.piece_set;
   const effectiveShowCoordinates = showCoordinates ?? preferences.show_coordinates;
   const effectiveAnimated = animated ?? preferences.board_animations;
+  const { i18n } = useTranslation();
+  // The accessibility extension only ships piece-name translations for "de"
+  // and "en" (falling back to "en" otherwise), so narrow our locale codes
+  // (e.g. "en-US", "pt-BR") down to their base language.
+  const accessibilityLanguage = i18n.language.slice(0, 2).toLowerCase();
+
+  // Latches to true the first time this board becomes interactive, and never
+  // goes back to false. This is what actually gates the Accessibility
+  // extension's keyboard input / move-form (both constructor-only, see
+  // below) — using the raw `interactive` prop instead would rebuild the
+  // whole board (and refetch its piece sprites, since assetsCache is off)
+  // on every toggle, which is disruptive for callers like Puzzles.tsx that
+  // flip `interactive` off for the duration of each move submission.
+  // Boards that are never interactive (preview cards) correctly never latch.
+  const [prevInteractive, setPrevInteractive] = useState(interactive);
+  const [keyboardCapable, setKeyboardCapable] = useState(interactive);
+  if (interactive !== prevInteractive) {
+    setPrevInteractive(interactive);
+    if (interactive) setKeyboardCapable(true);
+  }
 
   const hostRef = useRef<HTMLDivElement | null>(null);
   const boardRef = useRef<Chessboard | null>(null);
@@ -99,7 +121,24 @@ export default function Board({
         pieces: { file: `pieces/${pieceSet}.svg` },
         animationDuration: effectiveAnimated ? 300 : 0,
       },
-      extensions: [{ class: Markers, props: { autoMarkers: MARKER_TYPE.frame } }],
+      extensions: [
+        { class: Markers, props: { autoMarkers: MARKER_TYPE.frame } },
+        {
+          class: Accessibility,
+          props: {
+            language: accessibilityLanguage,
+            // Both are constructor-only and let an assistive-tech user act on
+            // the board, so both are gated on `keyboardCapable`: a preview
+            // board should describe the position (braille alt text, table,
+            // piece list all stay on) without offering controls it can't
+            // honor — the hidden move-piece form calls into cm-chessboard's
+            // move-input callback, which is never set up on a non-interactive
+            // board and throws if invoked.
+            keyboardMoveInput: keyboardCapable,
+            movePieceForm: keyboardCapable,
+          },
+        },
+      ],
     });
     boardRef.current = board;
     setBoardVersion((v) => v + 1);
@@ -110,10 +149,20 @@ export default function Board({
     };
     // Position/orientation/move changes are applied by the effects below;
     // this effect only needs to re-run (destroy + recreate) when the
-    // cosmetic style options change, since cm-chessboard's `style` is
-    // constructor-only.
+    // cosmetic style options (or keyboardCapable, which the Accessibility
+    // extension's keyboardMoveInput/movePieceForm need at construction time)
+    // change, since cm-chessboard's `style` and `extensions` are
+    // constructor-only. keyboardCapable only ever flips false->true once, so
+    // this doesn't churn on every `interactive` toggle.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [boardTheme, pieceSet, effectiveShowCoordinates, effectiveAnimated]);
+  }, [
+    boardTheme,
+    pieceSet,
+    effectiveShowCoordinates,
+    effectiveAnimated,
+    accessibilityLanguage,
+    keyboardCapable,
+  ]);
 
   // Orientation (white/black at bottom).
   useEffect(() => {

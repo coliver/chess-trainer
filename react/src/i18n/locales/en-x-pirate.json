@@ -148,6 +148,7 @@
       "title": "Register",
       "subtitle": "Create your account, arrr.",
       "emailLabel": "Email",
+      "emailDisclaimer": "We only be askin' fer this to keep the bots at bay — we don't care what it be and won't be sendin' ye spam.",
       "usernameLabel": "Username",
       "passwordLabel": "Password",
       "submit": "Register",

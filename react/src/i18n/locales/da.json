@@ -148,6 +148,7 @@
       "title": "Registrer dig",
       "subtitle": "Opret din konto.",
       "emailLabel": "E-mail",
+      "emailDisclaimer": "Vi spørger kun om dette for at holde bots ude — vi er ligeglad med hvad det er og sender dig ikke spam.",
       "usernameLabel": "Brugernavn",
       "passwordLabel": "Adgangskode",
       "submit": "Registrer",

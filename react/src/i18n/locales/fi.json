@@ -148,6 +148,7 @@
       "title": "Rekisteröidy",
       "subtitle": "Luo tilisi.",
       "emailLabel": "Sähköposti",
+      "emailDisclaimer": "Pyydämme sitä vain bottien pitämiseksi loitolla — meille on sama mikä se on eikä lähetä sinulle roskapostia.",
       "usernameLabel": "Käyttäjänimi",
       "passwordLabel": "Salasana",
       "submit": "Rekisteröidy",

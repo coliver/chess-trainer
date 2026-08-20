@@ -148,6 +148,7 @@
       "title": "登録",
       "subtitle": "アカウントを作成しましょう。",
       "emailLabel": "メールアドレス",
+      "emailDisclaimer": "ボットを排除するためだけに求めています — 何であるかは気にしませんし、スパムを送ることもありません。",
       "usernameLabel": "ユーザー名",
       "passwordLabel": "パスワード",
       "submit": "登録",

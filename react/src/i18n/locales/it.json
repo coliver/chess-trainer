@@ -148,6 +148,7 @@
       "title": "Registrati",
       "subtitle": "Crea il tuo account.",
       "emailLabel": "Email",
+      "emailDisclaimer": "Lo chiediamo solo per tenere lontani i bot — non ci importa cosa sia e non ti manderemo spam.",
       "usernameLabel": "Nome utente",
       "passwordLabel": "Password",
       "submit": "Registrati",

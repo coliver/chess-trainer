@@ -63,6 +63,7 @@ export default function Register() {
                 required
                 autoComplete="email"
               />
+              <span className="auth-hint">{t("auth.register.emailDisclaimer")}</span>
             </label>
 
             <label className="auth-field">

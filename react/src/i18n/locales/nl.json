@@ -148,6 +148,7 @@
       "title": "Registreren",
       "subtitle": "Maak je account aan.",
       "emailLabel": "E-mail",
+      "emailDisclaimer": "We vragen hierom alleen om bots te houden — het maakt ons niet uit wat het is en we sturen je geen spam.",
       "usernameLabel": "Gebruikersnaam",
       "passwordLabel": "Wachtwoord",
       "submit": "Registreren",

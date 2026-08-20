@@ -148,6 +148,7 @@
       "title": "Daftar",
       "subtitle": "Buat akun Anda.",
       "emailLabel": "Email",
+      "emailDisclaimer": "Kami hanya meminta ini untuk menjaga agar bot tetap jauh — kami tidak peduli apa itu dan kami tidak akan mengirimkan spam kepada Anda.",
       "usernameLabel": "Nama pengguna",
       "passwordLabel": "Kata sandi",
       "submit": "Daftar",

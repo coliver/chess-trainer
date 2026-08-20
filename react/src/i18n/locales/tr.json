@@ -148,6 +148,7 @@
       "title": "Kayıt ol",
       "subtitle": "Hesabınızı oluşturun.",
       "emailLabel": "E-posta",
+      "emailDisclaimer": "Bunu sadece botları uzak tutmak için istiyoruz — ne olduğu umurumuzda değil ve sana spam göndermeyiz.",
       "usernameLabel": "Kullanıcı adı",
       "passwordLabel": "Parola",
       "submit": "Kaydol",

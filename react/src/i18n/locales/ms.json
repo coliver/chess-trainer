@@ -148,6 +148,7 @@
       "title": "Daftar",
       "subtitle": "Cipta akaun anda.",
       "emailLabel": "E-mel",
+      "emailDisclaimer": "Kami hanya meminta ini untuk menjaga agar bot tidak masuk — kami tidak peduli apa itu dan kami tidak akan menghantar spam kepada anda.",
       "usernameLabel": "Nama pengguna",
       "passwordLabel": "Kata laluan",
       "submit": "Daftar",

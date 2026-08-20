@@ -75,3 +75,18 @@ declare module "cm-chessboard/src/extensions/markers/Markers.js" {
   >;
   export class Markers {}
 }
+
+declare module "cm-chessboard/src/extensions/accessibility/Accessibility.js" {
+  export interface AccessibilityProps {
+    language?: string;
+    brailleNotationInAlt?: boolean;
+    movePieceForm?: boolean;
+    boardAsTable?: boolean;
+    piecesAsList?: boolean;
+    keyboardMoveInput?: boolean;
+    visuallyHidden?: boolean;
+  }
+  export class Accessibility {
+    constructor(chessboard: unknown, props?: AccessibilityProps);
+  }
+}

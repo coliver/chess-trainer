@@ -148,6 +148,7 @@
       "title": "S’inscrire",
       "subtitle": "Créez votre compte.",
       "emailLabel": "Email",
+      "emailDisclaimer": "Nous le demandons uniquement pour tenir les bots à distance — on ne regarde pas ce que c'est et nous ne vous enverront pas de spam.",
       "usernameLabel": "Nom d’utilisateur",
       "passwordLabel": "Mot de passe",
       "submit": "Créer un compte",

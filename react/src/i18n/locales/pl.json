@@ -148,6 +148,7 @@
       "title": "Rejestracja",
       "subtitle": "Utwórz swoje konto.",
       "emailLabel": "Email",
+      "emailDisclaimer": "Pytamy o to tylko aby trzymać boty z dala — nie obchodzi nas co to jest i nie wyślemy ci spamu.",
       "usernameLabel": "Nazwa użytkownika",
       "passwordLabel": "Hasło",
       "submit": "Zarejestruj się",

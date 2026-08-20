@@ -148,6 +148,7 @@
       "title": "注册",
       "subtitle": "创建你的账号。",
       "emailLabel": "邮箱",
+      "emailDisclaimer": "我们只是为了阻止机器人而要求这个——我们不在乎它是什么，也不会向你发送垃圾邮件。",
       "usernameLabel": "用户名",
       "passwordLabel": "密码",
       "submit": "注册",

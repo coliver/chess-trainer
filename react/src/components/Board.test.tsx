@@ -84,6 +84,10 @@ vi.mock("cm-chessboard/src/extensions/markers/Markers.js", () => ({
   MARKER_TYPE: { frame: "frame" },
 }));
 
+vi.mock("cm-chessboard/src/extensions/accessibility/Accessibility.js", () => ({
+  Accessibility: class {},
+}));
+
 const START_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
 const renderBoard = (props: Partial<React.ComponentProps<typeof Board>> = {}) =>

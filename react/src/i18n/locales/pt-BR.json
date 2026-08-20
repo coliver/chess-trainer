@@ -148,6 +148,7 @@
       "title": "Cadastrar",
       "subtitle": "Crie sua conta.",
       "emailLabel": "E-mail",
+      "emailDisclaimer": "Só pedimos isso para manter os bots afastados — não nos importa o que é e não vamos enviar spam para você.",
       "usernameLabel": "Usuário",
       "passwordLabel": "Senha",
       "submit": "Cadastrar",

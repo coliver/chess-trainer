@@ -148,6 +148,7 @@
       "title": "Register",
       "subtitle": "I am Groot.",
       "emailLabel": "Email",
+      "emailDisclaimer": "I am Groot.",
       "usernameLabel": "Username",
       "passwordLabel": "Password",
       "submit": "Register",

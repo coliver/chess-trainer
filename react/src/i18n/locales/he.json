@@ -148,6 +148,7 @@
       "title": "הרשמה",
       "subtitle": "צרו חשבון.",
       "emailLabel": "אימייל",
+      "emailDisclaimer": "אנחנו רק מבקשים זאת כדי להרחיק בוטים — לא אכפת לנו מה זה ולא נשלח לך דוא״ל זבל.",
       "usernameLabel": "שם משתמש",
       "passwordLabel": "סיסמה",
       "submit": "הירשמו",

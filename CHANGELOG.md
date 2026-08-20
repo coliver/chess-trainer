@@ -1,7 +1,12 @@
 ## 2026-08-20
 
+### Features
+- feat(react): add the cm-chessboard `Accessibility` extension to `Board.tsx` — screen readers get a hidden move-form/table/piece-list description of the position plus braille notation in the SVG `alt`; keyboard move input (arrow keys, Enter/Space, Escape) is enabled only when the board is `interactive`, so read-only preview boards (Settings, dashboard cards) stay descriptive without claiming a keyboard-operable focus stop they can't act on; `language` is derived from the active i18n locale, narrowed to the extension's supported `de`/`en` (falling back to `en`)
+- feat(react): add a small disclaimer under Register's email field reassuring users it's only collected to keep bots out, not for anything else
+
 ### Fixes
 - fix(react): the Settings preview board stopped accepting moves after toggling any board style preference (animations, coordinates, theme, piece set) — `Board.tsx` destroys and recreates the underlying `cm-chessboard` instance on those changes, but the move-input effect only re-ran on `interactive`/`moveColor` changes, so the new instance never got its click/drag handler registered; added a `boardVersion` counter bumped on recreation, included in the dependent effects' deps so they reattach to the new instance, and fixed a resulting cleanup-ordering crash where the move-input cleanup called `disableMoveInput()` on an already-destroyed board
+- fix(react): the newly-added Accessibility extension had two bugs found in code review — its hidden move-piece form stayed enabled on read-only preview boards even though nothing had called `enableMoveInput()` there, so an assistive-tech user submitting it would hit a `TypeError` from cm-chessboard's null move-input callback; and gating `keyboardMoveInput` on the raw `interactive` prop meant Puzzles' `interactive={!!puzzleId && !isSubmitting}` destroyed and rebuilt the whole board (re-fetching piece sprites, since `assetsCache` is off) on every move submission — both are now gated on a `keyboardCapable` ref that latches true the first time a board goes interactive and never flips back, so a board that's only briefly disabled mid-submission no longer gets rebuilt
 
 ## 2026-08-19
 
