@@ -106,38 +106,54 @@ export default function Settings() {
 
           <label className="settings-row settings-row--checkbox">
             <span className="settings-row-label">{t("settings.appearance.showCoordinatesLabel")}</span>
-            <input
-              type="checkbox"
-              checked={preferences.show_coordinates}
-              onChange={(e) => update({ show_coordinates: e.target.checked })}
-            />
+            <span className="settings-switch">
+              <input
+                type="checkbox"
+                role="switch"
+                checked={preferences.show_coordinates}
+                onChange={(e) => update({ show_coordinates: e.target.checked })}
+              />
+              <span className="settings-switch-track" aria-hidden="true" />
+            </span>
           </label>
 
           <label className="settings-row settings-row--checkbox">
             <span className="settings-row-label">{t("settings.appearance.boardAnimationsLabel")}</span>
-            <input
-              type="checkbox"
-              checked={preferences.board_animations}
-              onChange={(e) => update({ board_animations: e.target.checked })}
-            />
+            <span className="settings-switch">
+              <input
+                type="checkbox"
+                role="switch"
+                checked={preferences.board_animations}
+                onChange={(e) => update({ board_animations: e.target.checked })}
+              />
+              <span className="settings-switch-track" aria-hidden="true" />
+            </span>
           </label>
 
           <label className="settings-row settings-row--checkbox">
             <span className="settings-row-label">{t("settings.appearance.soundLabel")}</span>
-            <input
-              type="checkbox"
-              checked={preferences.sound}
-              onChange={(e) => update({ sound: e.target.checked })}
-            />
+            <span className="settings-switch">
+              <input
+                type="checkbox"
+                role="switch"
+                checked={preferences.sound}
+                onChange={(e) => update({ sound: e.target.checked })}
+              />
+              <span className="settings-switch-track" aria-hidden="true" />
+            </span>
           </label>
 
           <label className="settings-row settings-row--checkbox">
             <span className="settings-row-label">{t("settings.appearance.snowLabel")}</span>
-            <input
-              type="checkbox"
-              checked={snowEnabled}
-              onChange={(e) => setSnowEnabled(e.target.checked)}
-            />
+            <span className="settings-switch">
+              <input
+                type="checkbox"
+                role="switch"
+                checked={snowEnabled}
+                onChange={(e) => setSnowEnabled(e.target.checked)}
+              />
+              <span className="settings-switch-track" aria-hidden="true" />
+            </span>
           </label>
         </section>
 
