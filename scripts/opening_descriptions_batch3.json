@@ -1,0 +1,482 @@
+[
+    {
+        "eco":  "A40",
+        "name":  "Queen\u0027s Pawn Game: Anglo-Slav Opening",
+        "description":  "White establishes central control while Black constructs a solid Slav pawn chain for flexible development."
+    },
+    {
+        "eco":  "A40",
+        "name":  "Queen\u0027s Pawn Game: Modern Defense",
+        "description":  "Black fianchettoes the kingside bishop to control the center from afar while preparing flexible development."
+    },
+    {
+        "eco":  "A40",
+        "name":  "Slav Indian: Kudischewitsch Gambit",
+        "description":  "Black offers a queenside pawn break with b5, creating imbalanced play after White captures."
+    },
+    {
+        "eco":  "A41",
+        "name":  "Modern Defense: Neo-Modern Defense",
+        "description":  "Black fianchettoes then strikes at White\u0027s center with e5, generating active counterplay against the pawn chain."
+    },
+    {
+        "eco":  "A41",
+        "name":  "Queen\u0027s Pawn Game: Rossolimo Variation",
+        "description":  "Black constructs a modest pawn structure while preparing kingside fianchetto for defensive flexibility."
+    },
+    {
+        "eco":  "A41",
+        "name":  "Rat Defense: English Rat",
+        "description":  "Black immediately attacks White\u0027s center with e5, creating tactical tension after the setup."
+    },
+    {
+        "eco":  "A41",
+        "name":  "Rat Defense: English Rat, Lisbon Gambit",
+        "description":  "White captures the e5 pawn while Black develops the knight to c6 for counterplay."
+    },
+    {
+        "eco":  "A41",
+        "name":  "Rat Defense: English Rat, Pounds Gambit",
+        "description":  "White trades central tension while Black develops the bishop to e6 for stability."
+    },
+    {
+        "eco":  "A41",
+        "name":  "Robatsch Defense: Rossolimo Variation",
+        "description":  "White expands the center with e4 while Black pins the knight with Bg4 for compensation."
+    },
+    {
+        "eco":  "A41",
+        "name":  "Zukertort Opening: Wade Defense, Chigorin Plan",
+        "description":  "Black prepares queenside counterplay with Bg4, Nd7, and Rb8 against White\u0027s central pressure."
+    },
+    {
+        "eco":  "A42",
+        "name":  "Modern Defense: Averbakh System",
+        "description":  "White builds a powerful center with e4 against Black\u0027s solid fianchettoed kingside structure."
+    },
+    {
+        "eco":  "A42",
+        "name":  "Modern Defense: Averbakh Variation, Pseudo-Sämisch",
+        "description":  "White constructs a closed pawn center with Be3 and f3, preparing for space domination."
+    },
+    {
+        "eco":  "A42",
+        "name":  "Modern Defense: Kotov Variation",
+        "description":  "White gains space with e4 while Black develops the knight to pressurize the center."
+    },
+    {
+        "eco":  "A42",
+        "name":  "Modern Defense: Randspringer Variation",
+        "description":  "Black strikes at White\u0027s center with f5, creating immediate tactical and pawn structure tensions."
+    },
+    {
+        "eco":  "A42",
+        "name":  "Pterodactyl Defense: Central, Bogolubovia",
+        "description":  "Black creates central tension with c5 while the queen maneuver to a5 adds tactical pressure."
+    },
+    {
+        "eco":  "A43",
+        "name":  "Benoni Defense: Benoni Gambit Accepted",
+        "description":  "White captures the gambit pawn, gaining material but allowing Black active piece play."
+    },
+    {
+        "eco":  "A43",
+        "name":  "Benoni Defense: Benoni Gambit, Schlenker Defense",
+        "description":  "Black develops the knight to attack the captured gambit pawn and generate counterplay."
+    },
+    {
+        "eco":  "A43",
+        "name":  "Benoni Defense: Benoni-Indian Defense",
+        "description":  "White advances the pawn center while Black develops the knight with flexible setup options."
+    },
+    {
+        "eco":  "A43",
+        "name":  "Benoni Defense: Benoni-Indian Defense, Kingside Move Order",
+        "description":  "White develops the knight while maintaining advanced pawn center control and space advantage."
+    },
+    {
+        "eco":  "A43",
+        "name":  "Benoni Defense: Benoni-Staunton Gambit",
+        "description":  "Black creates sharp pawn tension with f5 while White expands the center aggressively."
+    },
+    {
+        "eco":  "A43",
+        "name":  "Benoni Defense: Cormorant Gambit",
+        "description":  "White captures the pawn while Black prepares to recapture with the b-pawn for compensation."
+    },
+    {
+        "eco":  "A43",
+        "name":  "Benoni Defense: French Benoni",
+        "description":  "White maintains central space with the French pawn chain as Black counters with c5."
+    },
+    {
+        "eco":  "A43",
+        "name":  "Benoni Defense: Hawk Variation",
+        "description":  "Black strikes at the center with c5 then advances to c4, restricting White\u0027s pieces."
+    },
+    {
+        "eco":  "A43",
+        "name":  "Benoni Defense: Old Benoni",
+        "description":  "White establishes pawn center space while Black accepts a solid defensive pawn structure."
+    },
+    {
+        "eco":  "A43",
+        "name":  "Benoni Defense: Old Benoni, Mujannah Formation",
+        "description":  "Black responds to center with aggressive f5 break, creating sharp pawn structure tensions."
+    },
+    {
+        "eco":  "A43",
+        "name":  "Benoni Defense: Old Benoni, Schmid Variation",
+        "description":  "Black accepts the center while preparing kingside fianchetto for active defensive counterplay."
+    },
+    {
+        "eco":  "A43",
+        "name":  "Benoni Defense: Snail Variation",
+        "description":  "Black develops the knight to a6 unconventionally while accepting White\u0027s center control."
+    },
+    {
+        "eco":  "A43",
+        "name":  "Benoni Defense: Woozle",
+        "description":  "Black develops pieces actively with the knight and queen, creating immediate tactical complications."
+    },
+    {
+        "eco":  "A43",
+        "name":  "Benoni Defense: Zilbermints-Benoni Gambit",
+        "description":  "White offers a b-pawn gambit after Black captures the d4 center pawn."
+    },
+    {
+        "eco":  "A43",
+        "name":  "Benoni Defense: Zilbermints-Benoni Gambit, Tamarkin Countergambit",
+        "description":  "White sacrifices the b-pawn while Black counter-strikes with e5 for central control."
+    },
+    {
+        "eco":  "A43",
+        "name":  "Indian Defense: Pseudo-Benko",
+        "description":  "Black offers a queenside pawn to counter White\u0027s center space advantage strategically."
+    },
+    {
+        "eco":  "A43",
+        "name":  "Queen\u0027s Pawn Game: Liedmann Gambit",
+        "description":  "White offers the center pawn and prepares to recapture and build a strong center."
+    },
+    {
+        "eco":  "A44",
+        "name":  "Benoni Defense: Old Benoni",
+        "description":  "White maintains center space as Black builds pawn tension with e5 for counterplay."
+    },
+    {
+        "eco":  "A44",
+        "name":  "Benoni Defense: Semi-Benoni",
+        "description":  "White constructs a powerful pawn chain while Black prepares solid defensive pawn setup."
+    },
+    {
+        "eco":  "A45",
+        "name":  "Amazon Attack: Siberian Attack",
+        "description":  "White develops the queen to d3, preparing to support the center and queenside control."
+    },
+    {
+        "eco":  "A45",
+        "name":  "Indian Defense: Accelerated London System",
+        "description":  "White constructs a solid setup with bishop fianchetto for positional control and solidity."
+    },
+    {
+        "eco":  "A45",
+        "name":  "Indian Defense: Gedult Attack",
+        "description":  "White expands aggressively on the kingside while Black builds central control with d5."
+    },
+    {
+        "eco":  "A45",
+        "name":  "Indian Defense: Gibbins-Weidenhagen Gambit",
+        "description":  "White offers a kingside gambit pawn for rapid piece development and attacking chances."
+    },
+    {
+        "eco":  "A45",
+        "name":  "Indian Defense: Gibbins-Weidenhagen Gambit Accepted",
+        "description":  "Black captures the kingside gambit pawn, accepting material while White maintains attacking pressure."
+    },
+    {
+        "eco":  "A45",
+        "name":  "Indian Defense: Gibbins-Weidenhagen Gambit, Maltese Falcon",
+        "description":  "White recaptures and builds a powerful center with e4 for attacking piece coordination."
+    },
+    {
+        "eco":  "A45",
+        "name":  "Indian Defense: Gibbins-Weidenhagen Gambit, Oshima Defense",
+        "description":  "Black strikes at center with e5, declining the gambit to maintain central control."
+    },
+    {
+        "eco":  "A45",
+        "name":  "Indian Defense: Gibbins-Weidenhagen Gambit, Stummer Gambit",
+        "description":  "White builds a solid attacking setup while Black constructs a modest pawn structure."
+    },
+    {
+        "eco":  "A45",
+        "name":  "Indian Defense: Lazard Gambit",
+        "description":  "Black strikes at center with e5 as White develops the knight to d2."
+    },
+    {
+        "eco":  "A45",
+        "name":  "Indian Defense: Maddigan Gambit",
+        "description":  "Black immediately strikes at center with e5 as White develops the knight to c3."
+    },
+    {
+        "eco":  "A45",
+        "name":  "Indian Defense: Omega Gambit",
+        "description":  "White immediately advances to e4, establishing maximum central space and pawn control."
+    },
+    {
+        "eco":  "A45",
+        "name":  "Indian Defense: Omega Gambit, Arafat Gambit",
+        "description":  "White sacrifices the center pawn while the bishop pins the knight for complications."
+    },
+    {
+        "eco":  "A45",
+        "name":  "Indian Defense: Paleface Attack, Blackmar-Diemer Gambit Deferred",
+        "description":  "White supports the center with f3 before advancing to e4 for space control."
+    },
+    {
+        "eco":  "A45",
+        "name":  "Indian Defense: Pawn Push Variation",
+        "description":  "White immediately advances the pawn to d5, restricting Black\u0027s piece development options."
+    },
+    {
+        "eco":  "A45",
+        "name":  "Indian Defense: Reversed Chigorin Defense",
+        "description":  "Black strikes at center with c5 as White controls with the centralized knight."
+    },
+    {
+        "eco":  "A45",
+        "name":  "Indian Defense: Tartakower Attack",
+        "description":  "White fianchettoes the kingside bishop, preparing solid positional control and strategic play."
+    },
+    {
+        "eco":  "A45",
+        "name":  "Queen\u0027s Pawn Game: Chigorin Variation",
+        "description":  "Both sides control the center with pawns and develop knights centrally for balanced play."
+    },
+    {
+        "eco":  "A45",
+        "name":  "Queen\u0027s Pawn Game: Veresov, Richter Attack",
+        "description":  "White reinforces the d4 pawn with f3 and Nc3 while Black challenges with d5."
+    },
+    {
+        "eco":  "A45",
+        "name":  "Trompowsky Attack: Borg Variation",
+        "description":  "White\u0027s bishop retreats from the pin as Black launches a kingside attack with g5."
+    },
+    {
+        "eco":  "A45",
+        "name":  "Trompowsky Attack: Classical Defense",
+        "description":  "White pins the knight with Bg5 while Black solidifies the center with e6."
+    },
+    {
+        "eco":  "A45",
+        "name":  "Trompowsky Attack: Classical Defense, Big Center Variation",
+        "description":  "White establishes a powerful pawn center with e4 while maintaining the pin on the knight."
+    },
+    {
+        "eco":  "A45",
+        "name":  "Trompowsky Attack: Edge Variation",
+        "description":  "Black develops aggressively with Ne4, forcing the bishop to retreat to the edge at h4."
+    },
+    {
+        "eco":  "A45",
+        "name":  "Trompowsky Attack: Edge Variation, Hergert Gambit",
+        "description":  "White sacrifices the bishop for attacking chances while Black counter-strikes at the center with e5."
+    },
+    {
+        "eco":  "A45",
+        "name":  "Trompowsky Attack: Poisoned Pawn Variation",
+        "description":  "Black strikes at the center with c5 as White advances to d5 and Black\u0027s queen targets b2."
+    },
+    {
+        "eco":  "A45",
+        "name":  "Trompowsky Attack: Raptor Variation",
+        "description":  "Black develops actively at e4 while White launches a kingside attack with h4."
+    },
+    {
+        "eco":  "A45",
+        "name":  "Trompowsky Attack: Raptor Variation, Hergert Gambit",
+        "description":  "White sacrifices the bishop for attacking chances while Black launches a center counter-attack with e5."
+    },
+    {
+        "eco":  "A46",
+        "name":  "Indian Defense: Czech-Indian",
+        "description":  "Black supports the center with c6, preparing a solid defense and challenge to d4."
+    },
+    {
+        "eco":  "A46",
+        "name":  "Indian Defense: Knights Variation",
+        "description":  "White and Black develop knights centrally, establishing flexible maneuverable positions for play."
+    },
+    {
+        "eco":  "A46",
+        "name":  "Indian Defense: Knights Variation, Alburt-Miles Variation",
+        "description":  "Black plays a6, preparing queenside expansion with b5 while defending against piece incursions."
+    },
+    {
+        "eco":  "A46",
+        "name":  "Indian Defense: London System",
+        "description":  "White develops the bishop to the active f4 square while Black solidifies the center with e6."
+    },
+    {
+        "eco":  "A46",
+        "name":  "Indian Defense: Polish Variation",
+        "description":  "Black immediately attacks the center with b5, launching a bold queenside gambit for counterplay."
+    },
+    {
+        "eco":  "A46",
+        "name":  "Indian Defense: Spielmann-Indian",
+        "description":  "Black immediately attacks the center with c5, seeking active piece play and dynamic middlegame counterplay."
+    },
+    {
+        "eco":  "A46",
+        "name":  "Indian Defense: Wade-Tartakower Defense",
+        "description":  "Black prepares a flexible, solid setup with d6, supporting the center and enabling varied strategic plans."
+    },
+    {
+        "eco":  "A46",
+        "name":  "Queen\u0027s Pawn Game: Torre Attack, Breyer Variation",
+        "description":  "White solidifies the center with e3 and c3 while Black pressures d4 with c5 and Qb6."
+    },
+    {
+        "eco":  "A46",
+        "name":  "Queen\u0027s Pawn Game: Veresov Attack, Classical Defense",
+        "description":  "White develops the knight and bishop while Black solidifies the center with e6 and d5."
+    },
+    {
+        "eco":  "A46",
+        "name":  "Torre Attack: Classical Defense",
+        "description":  "White develops the bishop to pin Black\u0027s knight as Black solidifies the center with e6."
+    },
+    {
+        "eco":  "A46",
+        "name":  "Torre Attack: Classical Defense, Nimzowitsch Variation",
+        "description":  "White pins the knight while Black prepares to break the pin with h6, forcing critical decisions."
+    },
+    {
+        "eco":  "A46",
+        "name":  "Torre Attack: Classical Defense, Petrosian Gambit",
+        "description":  "White sacrifices the center with d5 to gain compensation while Black pressures with c5 and b6."
+    },
+    {
+        "eco":  "A46",
+        "name":  "Torre Attack: Wagner Gambit",
+        "description":  "White builds a large center with e4, accepting Black\u0027s attack on d4 with c5."
+    },
+    {
+        "eco":  "A47",
+        "name":  "Indian Defense: Schnepper Gambit",
+        "description":  "Black attacks the center with e5, testing White\u0027s setup while White supports with c3."
+    },
+    {
+        "eco":  "A47",
+        "name":  "Marienbad System: Berg Variation",
+        "description":  "White fianchettoes to control the center while Black develops the bishop on b7 and attacks with c5."
+    },
+    {
+        "eco":  "A48",
+        "name":  "Indian Defense: Colle System, King\u0027s Indian Variation",
+        "description":  "Black fianchettoes the bishop while White develops a solid, flexible setup with controlled pawn structure."
+    },
+    {
+        "eco":  "A48",
+        "name":  "Queen\u0027s Pawn Game: Barry Attack",
+        "description":  "White develops the bishop actively to f4 while Black fianchettoes the kingside bishop for long-range control."
+    },
+    {
+        "eco":  "A48",
+        "name":  "Queen\u0027s Pawn Game: Barry Attack, Grünfeld Variation",
+        "description":  "White continues solid development with e3 and Be2 while Black castles kingside to secure the king."
+    },
+    {
+        "eco":  "A48",
+        "name":  "Queen\u0027s Pawn Game: Barry Attack, Tarzan Attack",
+        "description":  "White develops the queen actively to d2, preparing kingside attacks while Black fianchettoes the bishop on g7."
+    },
+    {
+        "eco":  "A48",
+        "name":  "Queen\u0027s Pawn Game: Torre Attack, Grünfeld Variation, Main Line",
+        "description":  "White solidifies with e3 and Nbd2 while Black fianchettoes the bishop and castles kingside safely."
+    },
+    {
+        "eco":  "A48",
+        "name":  "Torre Attack: Fianchetto Defense",
+        "description":  "White pins the knight with Bg5 while Black fianchettoes the bishop for long-range central control."
+    },
+    {
+        "eco":  "A48",
+        "name":  "Torre Attack: Fianchetto Defense, Euwe Variation",
+        "description":  "White develops solidly with Nbd2 while Black fianchettoes and counterattacks the center effectively with c5."
+    },
+    {
+        "eco":  "A49",
+        "name":  "Indian Defense: Przepiorka Variation",
+        "description":  "White fianchettoes the bishop while Black prepares to fianchetto, creating flexible strategic positions for both."
+    },
+    {
+        "eco":  "A50",
+        "name":  "Indian Defense: Medusa Gambit",
+        "description":  "Black sacrifices pawns with an aggressive g5 attack, seeking active piece play for tactical compensation."
+    },
+    {
+        "eco":  "A50",
+        "name":  "Indian Defense: Normal Variation",
+        "description":  "White controls the center with d4 and c4 while Black develops the knight flexibly with Nf6."
+    },
+    {
+        "eco":  "A50",
+        "name":  "Indian Defense: Pyrenees Gambit",
+        "description":  "Black immediately attacks White\u0027s c4 pawn with b5, sacrificing pawns for piece activity and counterplay."
+    },
+    {
+        "eco":  "A50",
+        "name":  "Mexican Defense: Horsefly Gambit",
+        "description":  "White opens lines aggressively with f4 while Black centralizes the knight at e5 for piece activity."
+    },
+    {
+        "eco":  "A51",
+        "name":  "Indian Defense: Budapest Gambit",
+        "description":  "Black attacks the center with e5, offering a pawn for active piece play and tactical counterplay."
+    },
+    {
+        "eco":  "A51",
+        "name":  "Indian Defense: Budapest Gambit Accepted",
+        "description":  "White captures e5, gaining material but allowing Black active piece play for tactical compensation in the middlegame."
+    },
+    {
+        "eco":  "A51",
+        "name":  "Indian Defense: Budapest Gambit Accepted, Fajarowicz Defense",
+        "description":  "Black counterattacks immediately with Ne4, seeking active piece play and tactical compensation for the sacrificed pawn."
+    },
+    {
+        "eco":  "A51",
+        "name":  "Indian Defense: Budapest Gambit Accepted, Fajarowicz Defense, Bonsdorf Variation",
+        "description":  "White plays a3, restraining Black\u0027s aggressive piece activity while safely maintaining the extra pawn advantage."
+    },
+    {
+        "eco":  "A51",
+        "name":  "Indian Defense: Budapest Gambit Accepted, Fajarowicz Defense, Steiner Variation",
+        "description":  "White develops the queen to c2, supporting the center and consolidating the extra pawn advantage."
+    },
+    {
+        "eco":  "A52",
+        "name":  "Indian Defense: Budapest Gambit Accepted, Main Line",
+        "description":  "Black attacks e5 with Ng4, launching tactical attacks seeking active piece compensation and tactical counterplay."
+    },
+    {
+        "eco":  "A52",
+        "name":  "Indian Defense: Budapest Gambit Accepted, Main Line, Adler Variation",
+        "description":  "White develops the knight to f3, supporting e5 while controlling all the important central squares."
+    },
+    {
+        "eco":  "A52",
+        "name":  "Indian Defense: Budapest Gambit Accepted, Main Line, Alekhine Variation",
+        "description":  "White builds a large center with e4, bravely accepting tactical complications from Black\u0027s active pieces."
+    },
+    {
+        "eco":  "A52",
+        "name":  "Indian Defense: Budapest Gambit Accepted, Main Line, Alekhine Variation, Abonyi Variation",
+        "description":  "Black captures e5 with the knight, centralizing the piece and creating tactical complications for White\u0027s center."
+    }
+]
