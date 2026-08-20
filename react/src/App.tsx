@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -8,8 +9,21 @@ import { Puzzles } from "./pages/Puzzles";
 import Settings from "./pages/Settings";
 import Header from "./components/Header";
 import { RequireAuth } from "./RequireAuth";
+import { useSnowPreference } from "./hooks/useSnowPreference";
+import { snow } from "./utils/snow";
+
+const SNOW_CYCLE_MS = 15 * 1000;
 
 function App() {
+  const { snowEnabled } = useSnowPreference();
+
+  useEffect(() => {
+    if (!snowEnabled) return;
+    snow();
+    const interval = setInterval(snow, SNOW_CYCLE_MS);
+    return () => clearInterval(interval);
+  }, [snowEnabled]);
+
   return (
     <>
       <Header />
