@@ -32,10 +32,11 @@ Chess rules:
 
 ## Status
 
-Past the MVP stage — two full frontends (React + Angular) against one API, with auth,
-opening training, puzzles, spaced-repetition progress tracking, i18n (30+ locales), and
-sound feedback all shipped. See [`CHANGELOG.md`](./CHANGELOG.md) for what's landed and
-[`ROADMAP.md`](./ROADMAP.md) for what's next.
+Past the MVP stage — React frontend and FastAPI backend, with auth, opening training,
+puzzles, spaced-repetition progress tracking, i18n (30+ locales), and sound feedback all
+shipped. The `angular/` directory contains legacy source code that is no longer built or
+deployed. See [`CHANGELOG.md`](./CHANGELOG.md) for what's landed and [`ROADMAP.md`](./ROADMAP.md)
+for what's next.
 
 ### Auth (FastAPI paths; nginx exposes them under `/api`)
 - `POST /auth/register` — creates an account and emails a verification link
