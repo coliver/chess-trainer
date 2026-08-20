@@ -104,6 +104,7 @@ def test_get_preferences_returns_current_values():
         show_coordinates=False,
         board_animations=False,
         board_orientation_mode="white",
+        sound=False,
     )
 
     result = get_preferences(current_user=user)
@@ -116,6 +117,7 @@ def test_get_preferences_returns_current_values():
     assert result.show_coordinates is False
     assert result.board_animations is False
     assert result.board_orientation_mode == "white"
+    assert result.sound is False
 
 
 def test_update_preferences_updates_one_field_without_touching_others():
@@ -133,6 +135,7 @@ def test_update_preferences_updates_one_field_without_touching_others():
         show_coordinates=True,
         board_animations=True,
         board_orientation_mode="auto",
+        sound=False,
     )
     db = FakeDB(users=[user])
 
@@ -150,6 +153,7 @@ def test_update_preferences_updates_one_field_without_touching_others():
     assert result.show_coordinates is True
     assert result.board_animations is True
     assert result.board_orientation_mode == "auto"
+    assert result.sound is False
 
     # Check the user object was mutated
     assert user.theme == "dark"
@@ -172,6 +176,7 @@ def test_update_preferences_rejects_invalid_board_theme():
         show_coordinates=True,
         board_animations=True,
         board_orientation_mode="auto",
+        sound=False,
     )
     db = FakeDB(users=[user])
 
@@ -200,6 +205,7 @@ def test_update_preferences_rejects_invalid_theme():
         show_coordinates=True,
         board_animations=True,
         board_orientation_mode="auto",
+        sound=False,
     )
     db = FakeDB(users=[user])
 
@@ -228,6 +234,7 @@ def test_update_preferences_rejects_invalid_piece_set():
         show_coordinates=True,
         board_animations=True,
         board_orientation_mode="auto",
+        sound=False,
     )
     db = FakeDB(users=[user])
 
@@ -256,6 +263,7 @@ def test_update_preferences_rejects_invalid_board_orientation_mode():
         show_coordinates=True,
         board_animations=True,
         board_orientation_mode="auto",
+        sound=False,
     )
     db = FakeDB(users=[user])
 
@@ -284,6 +292,7 @@ def test_update_preferences_language_rejects_unsupported():
         show_coordinates=True,
         board_animations=True,
         board_orientation_mode="auto",
+        sound=False,
     )
     db = FakeDB(users=[user])
 
@@ -312,6 +321,7 @@ def test_update_preferences_language_accepts_supported():
         show_coordinates=True,
         board_animations=True,
         board_orientation_mode="auto",
+        sound=False,
     )
     db = FakeDB(users=[user])
 
@@ -340,6 +350,7 @@ def test_update_preferences_partial_update_with_no_fields_is_noop():
         show_coordinates=False,
         board_animations=False,
         board_orientation_mode="white",
+        sound=False,
     )
     db = FakeDB(users=[user])
 
@@ -357,6 +368,7 @@ def test_update_preferences_partial_update_with_no_fields_is_noop():
     assert result.show_coordinates is False
     assert result.board_animations is False
     assert result.board_orientation_mode == "white"
+    assert result.sound is False
 
     # User object should be unchanged
     assert user.language == "de"
@@ -366,3 +378,4 @@ def test_update_preferences_partial_update_with_no_fields_is_noop():
     assert user.show_coordinates is False
     assert user.board_animations is False
     assert user.board_orientation_mode == "white"
+    assert user.sound is False

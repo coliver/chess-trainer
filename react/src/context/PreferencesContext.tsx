@@ -9,6 +9,7 @@ import {
 import i18n from "../i18n/i18n";
 import api from "../api";
 import { useAuth } from "../hooks/useAuth";
+import { setSoundsEnabled } from "../utils/sound";
 import {
   readLocalPreferences,
   writeLocalPreferences,
@@ -57,6 +58,11 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
       void i18n.changeLanguage(preferences.language);
     }
   }, [preferences.language]);
+
+  // Keep sound system in sync with preferences.
+  useEffect(() => {
+    setSoundsEnabled(preferences.sound);
+  }, [preferences.sound]);
 
   const update = useCallback(
     (partial: Partial<Preferences>) => {

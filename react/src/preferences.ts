@@ -19,6 +19,7 @@ export type Preferences = {
   show_coordinates: boolean;
   board_animations: boolean;
   board_orientation_mode: BoardOrientationMode;
+  sound: boolean;
 };
 
 export const DEFAULT_PREFERENCES: Preferences = {
@@ -29,6 +30,7 @@ export const DEFAULT_PREFERENCES: Preferences = {
   show_coordinates: true,
   board_animations: true,
   board_orientation_mode: "auto",
+  sound: false,
 };
 
 const STORAGE_KEYS: Record<keyof Preferences, string> = {
@@ -39,6 +41,7 @@ const STORAGE_KEYS: Record<keyof Preferences, string> = {
   show_coordinates: "show_coordinates",
   board_animations: "board_animations",
   board_orientation_mode: "board_orientation_mode",
+  sound: "sound",
 };
 
 /** Reads locally-persisted preferences (guest/pre-hydration state), falling back to defaults. */

@@ -30,6 +30,7 @@ class User(Base):
     show_coordinates: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
     board_animations: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
     board_orientation_mode: Mapped[str] = mapped_column(String(10), nullable=False, default="auto")
+    sound: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime, nullable=False, server_default=func.now()

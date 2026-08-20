@@ -31,6 +31,7 @@ class PreferencesOut(BaseModel):
     show_coordinates: bool
     board_animations: bool
     board_orientation_mode: str
+    sound: bool
 
 
 class PreferencesUpdate(BaseModel):
@@ -41,6 +42,7 @@ class PreferencesUpdate(BaseModel):
     show_coordinates: bool | None = None
     board_animations: bool | None = None
     board_orientation_mode: str | None = None
+    sound: bool | None = None
 
 
 def _serialize(user: User) -> PreferencesOut:
@@ -52,6 +54,7 @@ def _serialize(user: User) -> PreferencesOut:
         show_coordinates=user.show_coordinates,
         board_animations=user.board_animations,
         board_orientation_mode=user.board_orientation_mode,
+        sound=user.sound,
     )
 
 
