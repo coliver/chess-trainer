@@ -148,6 +148,7 @@
       "title": "Regisztráció",
       "subtitle": "Hozd létre a fiókodat.",
       "emailLabel": "E-mail",
+      "emailDisclaimer": "Csak azért kérjük ezt hogy távol tartsuk a botokat — nem érdekel bennünket mi az és nem küldünk neked spamot.",
       "usernameLabel": "Felhasználónév",
       "passwordLabel": "Jelszó",
       "submit": "Regisztráció",

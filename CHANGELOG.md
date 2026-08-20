@@ -1,5 +1,9 @@
 ## 2026-08-20
 
+### Features
+- feat(react): add the cm-chessboard `Accessibility` extension to `Board.tsx` — screen readers get a hidden move-form/table/piece-list description of the position plus braille notation in the SVG `alt`; keyboard move input (arrow keys, Enter/Space, Escape) is enabled only when the board is `interactive`, so read-only preview boards (Settings, dashboard cards) stay descriptive without claiming a keyboard-operable focus stop they can't act on; `language` is derived from the active i18n locale, narrowed to the extension's supported `de`/`en` (falling back to `en`)
+- feat(react): add a small disclaimer under Register's email field reassuring users it's only collected to keep bots out, not for anything else
+
 ### Fixes
 - fix(react): the Settings preview board stopped accepting moves after toggling any board style preference (animations, coordinates, theme, piece set) — `Board.tsx` destroys and recreates the underlying `cm-chessboard` instance on those changes, but the move-input effect only re-ran on `interactive`/`moveColor` changes, so the new instance never got its click/drag handler registered; added a `boardVersion` counter bumped on recreation, included in the dependent effects' deps so they reattach to the new instance, and fixed a resulting cleanup-ordering crash where the move-input cleanup called `disableMoveInput()` on an already-destroyed board
 

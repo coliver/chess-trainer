@@ -148,6 +148,7 @@
       "title": "Đăng ký",
       "subtitle": "Tạo tài khoản của bạn.",
       "emailLabel": "Email",
+      "emailDisclaimer": "Chúng tôi chỉ yêu cầu điều này để giữ các bot ở ngoài — chúng tôi không quan tâm nó là gì và chúng tôi sẽ không gửi spam cho bạn.",
       "usernameLabel": "Tên người dùng",
       "passwordLabel": "Mật khẩu",
       "submit": "Đăng ký",

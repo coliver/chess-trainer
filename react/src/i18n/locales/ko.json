@@ -148,6 +148,7 @@
       "title": "회원가입",
       "subtitle": "계정을 만들어보세요.",
       "emailLabel": "이메일",
+      "emailDisclaimer": "봇을 막기 위해서만 요청합니다 — 그게 뭐든 상관없고 스팸을 보내지 않습니다.",
       "usernameLabel": "사용자 이름",
       "passwordLabel": "비밀번호",
       "submit": "회원가입",

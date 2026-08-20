@@ -148,6 +148,7 @@
       "title": "Registrieren",
       "subtitle": "Erstelle dein Konto.",
       "emailLabel": "E-Mail",
+      "emailDisclaimer": "Wir bitten Sie um diese Information nur um Bots fernzuhalten — es ist uns egal was sie ist und wir schicken dir keinen Spam.",
       "usernameLabel": "Benutzername",
       "passwordLabel": "Passwort",
       "submit": "Registrieren",

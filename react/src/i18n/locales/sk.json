@@ -148,6 +148,7 @@
       "title": "Zaregistrovať sa",
       "subtitle": "Vytvorte si účet.",
       "emailLabel": "E-mail",
+      "emailDisclaimer": "Prosíme vás o toto iba preto aby sme udržali botov ďalej — nedbá nás čo to je a nič vám nebudeme posielať spam.",
       "usernameLabel": "Používateľské meno",
       "passwordLabel": "Heslo",
       "submit": "Registrovať",

@@ -148,6 +148,7 @@
       "title": "Înregistrare",
       "subtitle": "Creează-ți contul.",
       "emailLabel": "E-mail",
+      "emailDisclaimer": "Cerem doar pentru a ține boții departe — nu ne pasă ce este și nu îți vom trimite spam.",
       "usernameLabel": "Nume utilizator",
       "passwordLabel": "Parolă",
       "submit": "Înregistrează-te",
