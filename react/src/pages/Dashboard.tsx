@@ -316,19 +316,40 @@ export const Dashboard = () => {
                   {t("dashboard.progress.weakSpots")}
                 </span>
                 <ul>
-                  {weakSpots.map((w) => (
-                    <li
-                      key={`${w.openingName ?? "Opening"}-${w.fen ?? ""}-${w.correctMoveUci ?? ""}`}
-                    >
-                      {t("dashboard.progress.weakSpotItem", {
-                        name:
-                          w.openingName ??
-                          t("dashboard.progress.weakSpotFallbackName"),
-                        correct: w.correctCount,
-                        attempts: w.attempts,
-                      })}
-                    </li>
-                  ))}
+                  {weakSpots.map((w) => {
+                    const name =
+                      w.openingName ??
+                      t("dashboard.progress.weakSpotFallbackName");
+                    const pct =
+                      w.attempts > 0
+                        ? Math.round((w.correctCount / w.attempts) * 100)
+                        : 0;
+                    return (
+                      <li
+                        key={`${w.openingName ?? "Opening"}-${w.fen ?? ""}-${w.correctMoveUci ?? ""}`}
+                      >
+                        <div className="ws-row">
+                          <span className="ws-name" title={name}>
+                            {name}
+                          </span>
+                          <span className="ws-pct">{pct}%</span>
+                        </div>
+                        <div className="ws-bar" aria-hidden="true">
+                          <div
+                            className="ws-bar-fill"
+                            style={{ width: `${pct}%` }}
+                          />
+                        </div>
+                        <span className="sr-only">
+                          {t("dashboard.progress.weakSpotItem", {
+                            name,
+                            correct: w.correctCount,
+                            attempts: w.attempts,
+                          })}
+                        </span>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             )}
