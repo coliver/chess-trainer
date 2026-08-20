@@ -93,7 +93,7 @@ docker compose up -d --build
 The application expects API requests to be served under the `/api` path (the frontend Axios client uses `baseURL: "/api"`).
 
 - **Base path for frontend API calls:** `/api`
-- **Authorization:** on login, the access token, refresh token, `user_id`, `username`, and `email` are all written to `localStorage` (see `src/pages/Login.tsx`). The Axios request interceptor in `src/api.ts` attaches `Authorization: Bearer <token>` from the `token` key; `Header.tsx` reads `username` back out to render the greeting. `auth.ts#logout()` clears all five keys.
+- **Authorization:** on login, the access token, refresh token, `user_id`, `username`, and `email` are all written to `localStorage` (see `src/pages/Login.tsx`). The Axios request interceptor in `src/api.ts` attaches `Authorization: Bearer <token>` from the `token` key; `Dashboard.tsx` reads `username` back out (via `useAuth`) to render its "Good morning/afternoon/evening" greeting — moved there from `Header.tsx`, which had gotten too crowded to fit it. `auth.ts#logout()` clears all five keys.
 
 ## 🔄 Key Logic Flows
 

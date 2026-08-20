@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import api from "../api";
 import { useApiResource } from "../hooks/useApiResource";
+import { useAuth } from "../hooks/useAuth";
 
 import BoardPreview from "../components/openings/BoardPreview";
 import OpeningCard from "../components/openings/OpeningCard";
@@ -55,6 +56,19 @@ type PuzzleSummary = {
 export const Dashboard = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { username } = useAuth();
+
+  const greeting = useMemo(() => {
+    const hour = new Date().getHours();
+    const base =
+      hour < 12
+        ? t("header.greetingMorning")
+        : hour < 18
+          ? t("header.greetingAfternoon")
+          : t("header.greetingEvening");
+    const who = username ? `, ${username}` : "";
+    return `${base}${who}`;
+  }, [username, t]);
 
   const [openings, setOpenings] = useState<Opening[]>([]);
   const [query, setQuery] = useState("");
@@ -219,394 +233,402 @@ export const Dashboard = () => {
 
   return (
     <main className="page">
-      <div className="card">
-        <section
-          className="progress-overview"
-          aria-label={t("dashboard.progress.yourProgress")}
-        >
-          <div
-            className="progress-group"
-            aria-label={t("dashboard.progress.trainingLabel")}
+      <div className="dashboard-stack">
+        <div role="heading" className="dashboard-greeting">
+          {greeting}
+        </div>
+        <div className="card">
+          <section
+            className="progress-overview"
+            aria-label={t("dashboard.progress.yourProgress")}
           >
-            <h2 className="progress-group-label">
-              {t("dashboard.progress.trainingHeading")}
-            </h2>
-            <div className="progress-group-row">
-              <div className="progress-stat">
-                <span className="progress-stat-value">
-                  <span className="progress-stat-icon" aria-hidden="true">
-                    ♟️
+            <div
+              className="progress-group"
+              aria-label={t("dashboard.progress.trainingLabel")}
+            >
+              <h2 className="progress-group-label">
+                {t("dashboard.progress.trainingHeading")}
+              </h2>
+              <div className="progress-group-row">
+                <div className="progress-stat">
+                  <span className="progress-stat-value">
+                    <span className="progress-stat-icon" aria-hidden="true">
+                      ♟️
+                    </span>
+                    {summary?.positionsSeen ?? 0}
                   </span>
-                  {summary?.positionsSeen ?? 0}
-                </span>
-                <span className="progress-stat-label">
-                  {t("dashboard.progress.positionsTrained")}
-                </span>
-              </div>
-              <div className="progress-stat">
-                <span className="progress-stat-value">
-                  <span className="progress-stat-icon" aria-hidden="true">
-                    🎯
+                  <span className="progress-stat-label">
+                    {t("dashboard.progress.positionsTrained")}
                   </span>
-                  {summary?.overallAccuracy != null
-                    ? `${Math.round(summary.overallAccuracy * 100)}%`
-                    : "—"}
-                </span>
+                </div>
+                <div className="progress-stat">
+                  <span className="progress-stat-value">
+                    <span className="progress-stat-icon" aria-hidden="true">
+                      🎯
+                    </span>
+                    {summary?.overallAccuracy != null
+                      ? `${Math.round(summary.overallAccuracy * 100)}%`
+                      : "—"}
+                  </span>
 
-                <span className="progress-stat-label">
-                  {t("dashboard.progress.accuracy")}
-                </span>
-              </div>
-              <div className="progress-stat">
-                <span className="progress-stat-value">
-                  <span className="progress-stat-icon" aria-hidden="true">
-                    📅
+                  <span className="progress-stat-label">
+                    {t("dashboard.progress.accuracy")}
                   </span>
-                  {summary?.currentStreak ?? 0}
-                  {(summary?.currentStreak ?? 0) > 0 ? " 🔥" : ""}
-                </span>
-                <span className="progress-stat-label">
-                  {summary?.longestStreak
-                    ? t("dashboard.progress.dayStreakBest", {
-                        best: summary.longestStreak,
-                      })
-                    : t("dashboard.progress.dayStreak")}
-                </span>
-              </div>
-              <div className="progress-stat progress-stat--mastery">
-                <span className="progress-stat-value">
-                  <span className="progress-stat-icon" aria-hidden="true">
-                    🏆
+                </div>
+                <div className="progress-stat">
+                  <span className="progress-stat-value">
+                    <span className="progress-stat-icon" aria-hidden="true">
+                      📅
+                    </span>
+                    {summary?.currentStreak ?? 0}
+                    {(summary?.currentStreak ?? 0) > 0 ? " 🔥" : ""}
                   </span>
-                  {summary?.mastered ?? 0}
+                  <span className="progress-stat-label">
+                    {summary?.longestStreak
+                      ? t("dashboard.progress.dayStreakBest", {
+                          best: summary.longestStreak,
+                        })
+                      : t("dashboard.progress.dayStreak")}
+                  </span>
+                </div>
+                <div className="progress-stat progress-stat--mastery">
+                  <span className="progress-stat-value">
+                    <span className="progress-stat-icon" aria-hidden="true">
+                      🏆
+                    </span>
+                    {summary?.mastered ?? 0}
+                  </span>
+                  <span className="progress-stat-label">
+                    {t("dashboard.progress.mastered")}
+                  </span>
+                  {summary && summary.positionsSeen > 0 && (
+                    <div className="mastery-bar" aria-hidden="true">
+                      <div
+                        className="mastery-bar-fill"
+                        style={{
+                          width: `${Math.min(
+                            100,
+                            Math.round(
+                              (summary.mastered / summary.positionsSeen) * 100,
+                            ),
+                          )}%`,
+                        }}
+                      />
+                    </div>
+                  )}
+                </div>
+                <div className="progress-stat">
+                  <button
+                    type="button"
+                    className="progress-review-btn"
+                    disabled={dueCount === 0}
+                    onClick={startReviewSession}
+                  >
+                    {t("dashboard.progress.reviewDue", { count: dueCount })}
+                  </button>
+                </div>
+              </div>
+              {weakSpots.length > 0 && (
+                <div className="progress-weak-spots">
+                  <span className="progress-stat-label">
+                    {t("dashboard.progress.weakSpots")}
+                  </span>
+                  <ul>
+                    {weakSpots.map((w) => {
+                      const name =
+                        w.openingName ??
+                        t("dashboard.progress.weakSpotFallbackName");
+                      const pct =
+                        w.attempts > 0
+                          ? Math.round((w.correctCount / w.attempts) * 100)
+                          : 0;
+                      return (
+                        <li
+                          key={`${w.openingName ?? "Opening"}-${w.fen ?? ""}-${w.correctMoveUci ?? ""}`}
+                        >
+                          <div className="ws-row">
+                            <span className="ws-name" title={name}>
+                              {name}
+                            </span>
+                            <span className="ws-pct">{pct}%</span>
+                          </div>
+                          <div className="ws-bar" aria-hidden="true">
+                            <div
+                              className="ws-bar-fill"
+                              style={{ width: `${pct}%` }}
+                            />
+                          </div>
+                          <span className="sr-only">
+                            {t("dashboard.progress.weakSpotItem", {
+                              name,
+                              correct: w.correctCount,
+                              attempts: w.attempts,
+                            })}
+                          </span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              )}
+            </div>
+
+            <div
+              className="progress-group progress-group--puzzles"
+              aria-label={t("dashboard.progress.puzzleLabel")}
+            >
+              <h2 className="progress-group-label">
+                {t("dashboard.progress.puzzlesHeading")}
+              </h2>
+              <div className="progress-group-row">
+                <div className="progress-stat">
+                  <span className="progress-stat-value">
+                    <span className="progress-stat-icon" aria-hidden="true">
+                      🧩
+                    </span>
+                    {puzzleSummary?.puzzlesSeen ?? 0}
+                  </span>
+                  <span className="progress-stat-label">
+                    {t("dashboard.progress.puzzlesSolved")}
+                  </span>
+                </div>
+                <div className="progress-stat">
+                  <span className="progress-stat-value">
+                    <span className="progress-stat-icon" aria-hidden="true">
+                      🎯
+                    </span>
+                    {puzzleSummary
+                      ? `${Math.round(puzzleSummary.overallAccuracy * 100)}%`
+                      : "—"}
+                  </span>
+                  <span className="progress-stat-label">
+                    {t("dashboard.progress.accuracy")}
+                  </span>
+                </div>
+                <div className="progress-stat">
+                  <span className="progress-stat-value">
+                    <span className="progress-stat-icon" aria-hidden="true">
+                      🏆
+                    </span>
+                    {puzzleSummary?.mastered ?? 0}
+                  </span>
+                  <span className="progress-stat-label">
+                    {t("dashboard.progress.mastered")}
+                  </span>
+                </div>
+                <div className="progress-stat">
+                  <button
+                    type="button"
+                    className="progress-review-btn"
+                    onClick={() => navigate("/puzzles")}
+                  >
+                    {t("dashboard.progress.practicePuzzles")}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="opening-browser">
+            <header className="ob-toolbar">
+              <div className="ob-heading">
+                <h1 className="ob-title">{t("dashboard.openings.title")}</h1>
+                <p className="ob-sub">{subText}</p>
+              </div>
+              <span className="ob-grow" />
+              <div className="ob-search">
+                <span className="ob-search-icon" aria-hidden="true">
+                  ⌕
                 </span>
-                <span className="progress-stat-label">
-                  {t("dashboard.progress.mastered")}
-                </span>
-                {summary && summary.positionsSeen > 0 && (
-                  <div className="mastery-bar" aria-hidden="true">
-                    <div
-                      className="mastery-bar-fill"
-                      style={{
-                        width: `${Math.min(
-                          100,
-                          Math.round(
-                            (summary.mastered / summary.positionsSeen) * 100,
-                          ),
-                        )}%`,
-                      }}
+                <input
+                  type="search"
+                  aria-label={t("dashboard.openings.searchAriaLabel")}
+                  placeholder={t("dashboard.openings.searchPlaceholder")}
+                  value={query}
+                  autoComplete="off"
+                  onChange={(e) => {
+                    setQuery(e.target.value);
+                    setSearchLimit(SEARCH_PAGE);
+                  }}
+                />
+              </div>
+              {view === "bases" && (
+                <>
+                  <button
+                    type="button"
+                    className="ob-sort"
+                    onClick={() => setSortAZ((s) => !s)}
+                  >
+                    {t("dashboard.openings.sortButton", {
+                      mode: sortAZ
+                        ? t("dashboard.openings.sortAZ")
+                        : t("dashboard.openings.sortPopular"),
+                    })}
+                  </button>
+                  <div
+                    className="ob-color-filter"
+                    role="radiogroup"
+                    aria-label={t("dashboard.openings.filterByColor")}
+                  >
+                    <button
+                      type="button"
+                      role="radio"
+                      aria-checked={colorFilter === "all"}
+                      className={`ob-color-filter-btn${
+                        colorFilter === "all" ? " selected" : ""
+                      }`}
+                      onClick={() => setColorFilter("all")}
+                    >
+                      {t("dashboard.openings.all")}
+                    </button>
+                    <button
+                      type="button"
+                      role="radio"
+                      aria-checked={colorFilter === "w"}
+                      className={`ob-color-filter-btn${
+                        colorFilter === "w" ? " selected" : ""
+                      }`}
+                      onClick={() => setColorFilter("w")}
+                    >
+                      {t("dashboard.openings.white")}
+                    </button>
+                    <button
+                      type="button"
+                      role="radio"
+                      aria-checked={colorFilter === "b"}
+                      className={`ob-color-filter-btn${
+                        colorFilter === "b" ? " selected" : ""
+                      }`}
+                      onClick={() => setColorFilter("b")}
+                    >
+                      {t("dashboard.openings.black")}
+                    </button>
+                  </div>
+                </>
+              )}
+            </header>
+
+            <div className="ob-body">
+              <div className="ob-content">
+                {view === "search" && (
+                  <SearchResults
+                    matches={searchMatches}
+                    limit={searchLimit}
+                    selectedKey={selected ? selected.eco + selected.name : null}
+                    query={query}
+                    onPick={pickFromSearch}
+                    onMore={() => setSearchLimit((n) => n + SEARCH_PAGE)}
+                  />
+                )}
+
+                {view === "variations" && activeGroup && (
+                  <>
+                    <nav
+                      className="ob-crumbs"
+                      aria-label={t("dashboard.openings.breadcrumb")}
+                    >
+                      <button type="button" onClick={goHome}>
+                        {t("dashboard.openings.allOpenings")}
+                      </button>
+                      <span className="sep">/</span>
+                      <span className="here">{activeGroup.base}</span>
+                    </nav>
+                    <VariationList
+                      rows={activeGroup.members}
+                      selectedKey={
+                        selected ? selected.eco + selected.name : null
+                      }
+                      onPick={selectOpening}
                     />
+                  </>
+                )}
+
+                {view === "bases" && (
+                  <div className="opening-grid">
+                    {colorFilteredGroups.map((g) => (
+                      <OpeningCard
+                        key={g.base}
+                        group={g}
+                        selected={
+                          selected != null &&
+                          baseNameOf(selected.name) === g.base
+                        }
+                        onSelect={() => openBase(g)}
+                      />
+                    ))}
                   </div>
                 )}
               </div>
-              <div className="progress-stat">
-                <button
-                  type="button"
-                  className="progress-review-btn"
-                  disabled={dueCount === 0}
-                  onClick={startReviewSession}
-                >
-                  {t("dashboard.progress.reviewDue", { count: dueCount })}
-                </button>
-              </div>
-            </div>
-            {weakSpots.length > 0 && (
-              <div className="progress-weak-spots">
-                <span className="progress-stat-label">
-                  {t("dashboard.progress.weakSpots")}
-                </span>
-                <ul>
-                  {weakSpots.map((w) => {
-                    const name =
-                      w.openingName ??
-                      t("dashboard.progress.weakSpotFallbackName");
-                    const pct =
-                      w.attempts > 0
-                        ? Math.round((w.correctCount / w.attempts) * 100)
-                        : 0;
-                    return (
-                      <li
-                        key={`${w.openingName ?? "Opening"}-${w.fen ?? ""}-${w.correctMoveUci ?? ""}`}
-                      >
-                        <div className="ws-row">
-                          <span className="ws-name" title={name}>
-                            {name}
-                          </span>
-                          <span className="ws-pct">{pct}%</span>
-                        </div>
-                        <div className="ws-bar" aria-hidden="true">
-                          <div
-                            className="ws-bar-fill"
-                            style={{ width: `${pct}%` }}
-                          />
-                        </div>
-                        <span className="sr-only">
-                          {t("dashboard.progress.weakSpotItem", {
-                            name,
-                            correct: w.correctCount,
-                            attempts: w.attempts,
-                          })}
-                        </span>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            )}
-          </div>
 
-          <div
-            className="progress-group progress-group--puzzles"
-            aria-label={t("dashboard.progress.puzzleLabel")}
-          >
-            <h2 className="progress-group-label">
-              {t("dashboard.progress.puzzlesHeading")}
-            </h2>
-            <div className="progress-group-row">
-              <div className="progress-stat">
-                <span className="progress-stat-value">
-                  <span className="progress-stat-icon" aria-hidden="true">
-                    🧩
-                  </span>
-                  {puzzleSummary?.puzzlesSeen ?? 0}
-                </span>
-                <span className="progress-stat-label">
-                  {t("dashboard.progress.puzzlesSolved")}
-                </span>
-              </div>
-              <div className="progress-stat">
-                <span className="progress-stat-value">
-                  <span className="progress-stat-icon" aria-hidden="true">
-                    🎯
-                  </span>
-                  {puzzleSummary
-                    ? `${Math.round(puzzleSummary.overallAccuracy * 100)}%`
-                    : "—"}
-                </span>
-                <span className="progress-stat-label">
-                  {t("dashboard.progress.accuracy")}
-                </span>
-              </div>
-              <div className="progress-stat">
-                <span className="progress-stat-value">
-                  <span className="progress-stat-icon" aria-hidden="true">
-                    🏆
-                  </span>
-                  {puzzleSummary?.mastered ?? 0}
-                </span>
-                <span className="progress-stat-label">
-                  {t("dashboard.progress.mastered")}
-                </span>
-              </div>
-              <div className="progress-stat">
-                <button
-                  type="button"
-                  className="progress-review-btn"
-                  onClick={() => navigate("/puzzles")}
-                >
-                  {t("dashboard.progress.practicePuzzles")}
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="opening-browser">
-          <header className="ob-toolbar">
-            <div className="ob-heading">
-              <h1 className="ob-title">{t("dashboard.openings.title")}</h1>
-              <p className="ob-sub">{subText}</p>
-            </div>
-            <span className="ob-grow" />
-            <div className="ob-search">
-              <span className="ob-search-icon" aria-hidden="true">
-                ⌕
-              </span>
-              <input
-                type="search"
-                aria-label={t("dashboard.openings.searchAriaLabel")}
-                placeholder={t("dashboard.openings.searchPlaceholder")}
-                value={query}
-                autoComplete="off"
-                onChange={(e) => {
-                  setQuery(e.target.value);
-                  setSearchLimit(SEARCH_PAGE);
-                }}
-              />
-            </div>
-            {view === "bases" && (
-              <>
-                <button
-                  type="button"
-                  className="ob-sort"
-                  onClick={() => setSortAZ((s) => !s)}
-                >
-                  {t("dashboard.openings.sortButton", {
-                    mode: sortAZ
-                      ? t("dashboard.openings.sortAZ")
-                      : t("dashboard.openings.sortPopular"),
-                  })}
-                </button>
-                <div
-                  className="ob-color-filter"
-                  role="radiogroup"
-                  aria-label={t("dashboard.openings.filterByColor")}
-                >
-                  <button
-                    type="button"
-                    role="radio"
-                    aria-checked={colorFilter === "all"}
-                    className={`ob-color-filter-btn${
-                      colorFilter === "all" ? " selected" : ""
-                    }`}
-                    onClick={() => setColorFilter("all")}
-                  >
-                    {t("dashboard.openings.all")}
-                  </button>
-                  <button
-                    type="button"
-                    role="radio"
-                    aria-checked={colorFilter === "w"}
-                    className={`ob-color-filter-btn${
-                      colorFilter === "w" ? " selected" : ""
-                    }`}
-                    onClick={() => setColorFilter("w")}
-                  >
-                    {t("dashboard.openings.white")}
-                  </button>
-                  <button
-                    type="button"
-                    role="radio"
-                    aria-checked={colorFilter === "b"}
-                    className={`ob-color-filter-btn${
-                      colorFilter === "b" ? " selected" : ""
-                    }`}
-                    onClick={() => setColorFilter("b")}
-                  >
-                    {t("dashboard.openings.black")}
-                  </button>
-                </div>
-              </>
-            )}
-          </header>
-
-          <div className="ob-body">
-            <div className="ob-content">
-              {view === "search" && (
-                <SearchResults
-                  matches={searchMatches}
-                  limit={searchLimit}
-                  selectedKey={selected ? selected.eco + selected.name : null}
-                  query={query}
-                  onPick={pickFromSearch}
-                  onMore={() => setSearchLimit((n) => n + SEARCH_PAGE)}
-                />
-              )}
-
-              {view === "variations" && activeGroup && (
-                <>
-                  <nav
-                    className="ob-crumbs"
-                    aria-label={t("dashboard.openings.breadcrumb")}
-                  >
-                    <button type="button" onClick={goHome}>
-                      {t("dashboard.openings.allOpenings")}
-                    </button>
-                    <span className="sep">/</span>
-                    <span className="here">{activeGroup.base}</span>
-                  </nav>
-                  <VariationList
-                    rows={activeGroup.members}
-                    selectedKey={selected ? selected.eco + selected.name : null}
-                    onPick={selectOpening}
-                  />
-                </>
-              )}
-
-              {view === "bases" && (
-                <div className="opening-grid">
-                  {colorFilteredGroups.map((g) => (
-                    <OpeningCard
-                      key={g.base}
-                      group={g}
-                      selected={
-                        selected != null && baseNameOf(selected.name) === g.base
-                      }
-                      onSelect={() => openBase(g)}
+              <aside
+                ref={previewRef}
+                className={`ob-preview${selected ? "" : " is-empty"}`}
+              >
+                {selected ? (
+                  <div className="ob-preview-inner">
+                    <BoardPreview
+                      key={selected.name}
+                      openings={[selected]}
+                      selectedOpeningName={selected.name}
+                      playerColor={playerColor}
                     />
-                  ))}
+                    <h2 className="pv-title">{previewFullName}</h2>
+                    <p className="pv-eco">{selected.eco}</p>
+                    <p className="opening-description">
+                      {describeOpening(selected)}
+                    </p>
+                  </div>
+                ) : (
+                  <div className="ob-empty-state">
+                    <span className="ob-empty-glyph" aria-hidden="true">
+                      ♞
+                    </span>
+                    <p className="opening-description opening-description--empty">
+                      {t("dashboard.openings.pickToPreview")}
+                    </p>
+                  </div>
+                )}
+
+                <div
+                  className="ob-color-toggle"
+                  role="radiogroup"
+                  aria-label={t("dashboard.openings.playAs")}
+                >
+                  <button
+                    type="button"
+                    role="radio"
+                    aria-checked={playerColor === "w"}
+                    className={`ob-color-btn${playerColor === "w" ? " selected" : ""}`}
+                    onClick={() => setPlayerColor("w")}
+                  >
+                    {t("dashboard.openings.playAsWhite")}
+                  </button>
+                  <button
+                    type="button"
+                    role="radio"
+                    aria-checked={playerColor === "b"}
+                    className={`ob-color-btn${playerColor === "b" ? " selected" : ""}`}
+                    onClick={() => setPlayerColor("b")}
+                  >
+                    {t("dashboard.openings.playAsBlack")}
+                  </button>
                 </div>
-              )}
+
+                <Button
+                  className="tile-action ob-start"
+                  type="button"
+                  disabled={!selected}
+                  onClick={() =>
+                    selected &&
+                    startSession(selected.eco, selected.name, playerColor)
+                  }
+                >
+                  {startLabel}
+                </Button>
+              </aside>
             </div>
-
-            <aside
-              ref={previewRef}
-              className={`ob-preview${selected ? "" : " is-empty"}`}
-            >
-              {selected ? (
-                <div className="ob-preview-inner">
-                  <BoardPreview
-                    key={selected.name}
-                    openings={[selected]}
-                    selectedOpeningName={selected.name}
-                    playerColor={playerColor}
-                  />
-                  <h2 className="pv-title">{previewFullName}</h2>
-                  <p className="pv-eco">{selected.eco}</p>
-                  <p className="opening-description">
-                    {describeOpening(selected)}
-                  </p>
-                </div>
-              ) : (
-                <div className="ob-empty-state">
-                  <span className="ob-empty-glyph" aria-hidden="true">
-                    ♞
-                  </span>
-                  <p className="opening-description opening-description--empty">
-                    {t("dashboard.openings.pickToPreview")}
-                  </p>
-                </div>
-              )}
-
-              <div
-                className="ob-color-toggle"
-                role="radiogroup"
-                aria-label={t("dashboard.openings.playAs")}
-              >
-                <button
-                  type="button"
-                  role="radio"
-                  aria-checked={playerColor === "w"}
-                  className={`ob-color-btn${playerColor === "w" ? " selected" : ""}`}
-                  onClick={() => setPlayerColor("w")}
-                >
-                  {t("dashboard.openings.playAsWhite")}
-                </button>
-                <button
-                  type="button"
-                  role="radio"
-                  aria-checked={playerColor === "b"}
-                  className={`ob-color-btn${playerColor === "b" ? " selected" : ""}`}
-                  onClick={() => setPlayerColor("b")}
-                >
-                  {t("dashboard.openings.playAsBlack")}
-                </button>
-              </div>
-
-              <Button
-                className="tile-action ob-start"
-                type="button"
-                disabled={!selected}
-                onClick={() =>
-                  selected &&
-                  startSession(selected.eco, selected.name, playerColor)
-                }
-              >
-                {startLabel}
-              </Button>
-            </aside>
-          </div>
-        </section>
+          </section>
+        </div>
       </div>
     </main>
   );

@@ -47,18 +47,6 @@
   white-space: nowrap;
 }
 
-.site-header-greeting {
-  display: none;
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-@media (min-width: 1024px) {
-  .site-header-greeting {
-    display: block;
-  }
-}
-
 .site-header-nav {
   display: flex;
   align-items: center;
@@ -248,16 +236,6 @@
   .site-header-nav {
     flex-wrap: wrap;
     gap: 8px;
-  }
-
-  /* Greeting is nice-to-have; drop it to reclaim width on phones */
-  .site-header-greeting {
-    display: block;
-    font-size: 0.75rem;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
 
   .site-header-link {

@@ -1,5 +1,5 @@
 // frontend/src/pages/Dashboard.test.tsx
-import { render, screen, waitFor } from "@testing-library/react";
+import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi, describe, it, expect, beforeEach } from "vitest";
 import { MemoryRouter } from "react-router-dom";
@@ -196,9 +196,7 @@ describe("Dashboard", () => {
     const search = screen.getByRole("searchbox", { name: "Search openings" });
     await user.type(search, "zzzznotfound");
 
-    expect(
-      await screen.findByText(/No openings match/i),
-    ).toBeInTheDocument();
+    expect(await screen.findByText(/No openings match/i)).toBeInTheDocument();
   });
 
   it("search pagination shows a 'Show N more' button and reveals more matches", async () => {
@@ -278,7 +276,9 @@ describe("Dashboard", () => {
     expect(screen.getByText("76%")).toBeInTheDocument();
     expect(screen.getByText(/3 🔥/)).toBeInTheDocument();
     expect(screen.getByText(/best 7/)).toBeInTheDocument();
-    expect(screen.getByText(/Sicilian Defense — 2\/5 correct/)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Sicilian Defense — 2\/5 correct/),
+    ).toBeInTheDocument();
 
     const reviewBtn = screen.getByRole("button", { name: /Review due \(2\)/i });
     expect(reviewBtn).toBeEnabled();
@@ -400,7 +400,9 @@ describe("Dashboard", () => {
 
     renderDashboard();
 
-    expect(await screen.findByText("0 openings · pick one to train")).toBeInTheDocument();
+    expect(
+      await screen.findByText("0 openings · pick one to train"),
+    ).toBeInTheDocument();
   });
 
   it("weak spots fall back to 'Opening' and an empty fen/move in the list key when fields are missing", async () => {
@@ -417,7 +419,9 @@ describe("Dashboard", () => {
 
     renderDashboard();
 
-    expect(await screen.findByText(/Opening — 1\/3 correct/)).toBeInTheDocument();
+    expect(
+      await screen.findByText(/Opening — 1\/3 correct/),
+    ).toBeInTheDocument();
   });
 
   it("logs and swallows errors when the openings/progress requests fail", async () => {
@@ -430,5 +434,65 @@ describe("Dashboard", () => {
 
     await waitFor(() => expect(errSpy).toHaveBeenCalled());
     errSpy.mockRestore();
+  });
+
+  describe("Greetings", () => {
+    beforeEach(() => {
+      vi.useFakeTimers();
+    });
+
+    afterEach(() => {
+      vi.useRealTimers();
+      localStorage.removeItem("username");
+    });
+
+    const setSystemHour = (hour: number) => {
+      // Build the date from LOCAL components (not a UTC "Z" string) so it
+      // matches the component's use of Date#getHours(), which is local time.
+      // A UTC time would shift across greeting boundaries on non-UTC runners.
+      vi.setSystemTime(new Date(2026, 0, 1, hour, 0, 0));
+    };
+
+    it("shows morning greeting when hour < 12 and includes username", async () => {
+      localStorage.setItem("username", "Chris");
+      setSystemHour(9);
+
+      renderDashboard();
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(0);
+      });
+
+      expect(
+        screen.getByRole("heading", { name: /Good morning/i }),
+      ).toHaveTextContent("Good morning ☀️, Chris");
+    });
+
+    it("shows afternoon greeting when 12 <= hour < 18 (no username)", async () => {
+      setSystemHour(14);
+      localStorage.removeItem("username");
+
+      renderDashboard();
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(0);
+      });
+
+      expect(
+        screen.getByRole("heading", { name: /Good afternoon/i }),
+      ).toHaveTextContent("Good afternoon 🌤️");
+    });
+
+    it("shows evening greeting when hour >= 18 and includes username", async () => {
+      setSystemHour(20);
+      localStorage.setItem("username", "Chris");
+
+      renderDashboard();
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(0);
+      });
+
+      expect(
+        screen.getByRole("heading", { name: /Good evening/i }),
+      ).toHaveTextContent("Good evening 🌙, Chris");
+    });
   });
 });

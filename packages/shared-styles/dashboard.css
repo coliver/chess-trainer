@@ -1,3 +1,26 @@
+/* ===== Dashboard: page-level greeting ===== */
+.dashboard-stack {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+/* .card (ui.css) is width:100% + padding with content-box sizing. As the
+   lone child of .page's row flexbox elsewhere, flex's main-axis shrink-to-fit
+   quietly absorbs that padding. Here .card sits in this column flex
+   container's cross axis instead, which gets no such protection, so its
+   border-box balloons past the container by the padding+border width. */
+.dashboard-stack .card {
+  box-sizing: border-box;
+}
+.dashboard-greeting {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text);
+  opacity: 0.75;
+  padding: 0 4px;
+}
+
 /* ===== Dashboard: progress overview (training + puzzles) ===== */
 .progress-overview {
   display: flex;

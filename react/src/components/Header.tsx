@@ -1,5 +1,4 @@
 // frontend/src/components/Header.tsx
-import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { LogIn, UserPlus, LogOut, Settings } from "lucide-react";
@@ -15,24 +14,12 @@ export default function Header() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
-  const { isLoggedIn, username } = useAuth();
+  const { isLoggedIn } = useAuth();
 
   const onLogout = () => {
     logout();
     navigate("/login");
   };
-
-  const greeting = useMemo(() => {
-    const hour = new Date().getHours();
-    const base =
-      hour < 12
-        ? t("header.greetingMorning")
-        : hour < 18
-          ? t("header.greetingAfternoon")
-          : t("header.greetingEvening");
-    const who = username ? `, ${username}` : "";
-    return `${base}${who}`;
-  }, [username, t]);
 
   return (
     <header className="site-header">
@@ -50,10 +37,6 @@ export default function Header() {
         </div>
 
         <div className="site-header-right">
-          <div role="heading" className="site-header-greeting">
-            {greeting}
-          </div>
-
           <nav className="site-header-nav" aria-label={t("header.nav")}>
             {isLoggedIn && (
               <>
