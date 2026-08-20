@@ -1,0 +1,207 @@
+{
+  "header": {
+    "title": "[TODO]",
+    "greetingMorning": "[TODO] ☀️",
+    "greetingAfternoon": "[TODO] 🌤️",
+    "greetingEvening": "[TODO] 🌙",
+    "nav": "[TODO]",
+    "openings": "[TODO]",
+    "puzzles": "[TODO]",
+    "login": "[TODO]",
+    "register": "[TODO]",
+    "logout": "[TODO]",
+    "settings": "[TODO]",
+    "viewSource": "[TODO]"
+  },
+  "language": {
+    "toggle": "[TODO]"
+  },
+  "theme": {
+    "toggle": "[TODO]",
+    "dark": "[TODO]",
+    "light": "[TODO]",
+    "system": "[TODO]"
+  },
+  "flipBoard": {
+    "label": "[TODO]"
+  },
+  "dashboard": {
+    "progress": {
+      "yourProgress": "[TODO]",
+      "trainingLabel": "[TODO]",
+      "trainingHeading": "[TODO]",
+      "positionsTrained": "[TODO]",
+      "accuracy": "[TODO]",
+      "dayStreak": "[TODO]",
+      "dayStreakBest": "[TODO] {{best}}",
+      "mastered": "[TODO]",
+      "reviewDue": "[TODO] ({{count}})",
+      "weakSpots": "[TODO]",
+      "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} [TODO]",
+      "weakSpotFallbackName": "[TODO]",
+      "puzzleLabel": "[TODO]",
+      "puzzlesHeading": "[TODO]",
+      "puzzlesSolved": "[TODO]",
+      "practicePuzzles": "[TODO]",
+      "startSessionFailed": "[TODO]",
+      "reviewSessionFailed": "[TODO]"
+    },
+    "openings": {
+      "title": "[TODO]",
+      "searchAriaLabel": "[TODO]",
+      "searchPlaceholder": "[TODO]",
+      "sortAZ": "A–Z",
+      "sortPopular": "[TODO]",
+      "sortButton": "[TODO] {{mode}}",
+      "filterByColor": "[TODO]",
+      "all": "[TODO]",
+      "white": "[TODO]",
+      "black": "[TODO]",
+      "breadcrumb": "[TODO]",
+      "allOpenings": "[TODO]",
+      "playAs": "[TODO]",
+      "playAsWhite": "[TODO]",
+      "playAsBlack": "[TODO]",
+      "pickToPreview": "[TODO]",
+      "startLabel": "[TODO] {{name}}",
+      "chooseOpening": "[TODO]",
+      "matches_one": "{{count}} [TODO]",
+      "matches_other": "{{count}} [TODO]",
+      "variationsInLibrary": "{{count}} [TODO]",
+      "openingsToTrain_one": "{{count}} [TODO]",
+      "openingsToTrain_other": "{{count}} [TODO]",
+      "variationCount_one": "{{count}} [TODO]",
+      "variationCount_other": "{{count}} [TODO]",
+      "boardPreviewStart": "[TODO]",
+      "boardPreviewAfterPly": "[TODO] {{ply}}"
+    }
+  },
+  "puzzles": {
+    "noPuzzlesDue": "[TODO]",
+    "loadFailed": "[TODO]",
+    "correct": "✅ [TODO]",
+    "incorrectFallback": "[TODO]",
+    "submitError": "[TODO]",
+    "findBestMove": "[TODO]",
+    "eyebrow": "[TODO]",
+    "title": "[TODO]",
+    "rating": "[TODO] ~{{rating}}",
+    "solved": "[TODO] {{count}}",
+    "streak": "[TODO] {{count}}",
+    "streakBest": " · [TODO] {{best}}",
+    "skipPuzzle": "[TODO] ›",
+    "backToDashboard": "← [TODO]"
+  },
+  "training": {
+    "whiteToMove": "[TODO]",
+    "blackToMove": "[TODO]",
+    "showHint": "[TODO]",
+    "eyebrow": "[TODO]",
+    "prev": "‹ [TODO]",
+    "next": "[TODO] ›",
+    "movePlaceholder": "[TODO]",
+    "play": "[TODO]",
+    "jumpToLatest": "[TODO]",
+    "backToOpenings": "← [TODO]",
+    "trainAgain": "[TODO]",
+    "restarting": "[TODO]",
+    "chooseAnother": "[TODO]"
+  },
+  "auth": {
+    "login": {
+      "title": "[TODO]",
+      "subtitle": "[TODO]",
+      "usernameLabel": "[TODO]",
+      "passwordLabel": "[TODO]",
+      "submit": "[TODO]",
+      "submitting": "[TODO]",
+      "emailNotVerified": "[TODO]",
+      "resendVerification": "[TODO]",
+      "resendSending": "[TODO]",
+      "resendSent": "[TODO]",
+      "needAccount": "[TODO]",
+      "registerLink": "[TODO]",
+      "errorGeneric": "[TODO]",
+      "errorLoginFailed": "[TODO]",
+      "errorResendFailed": "[TODO]"
+    },
+    "register": {
+      "title": "[TODO]",
+      "subtitle": "[TODO]",
+      "emailLabel": "[TODO]",
+      "emailDisclaimer": "[TODO]",
+      "usernameLabel": "[TODO]",
+      "passwordLabel": "[TODO]",
+      "passwordConfirmLabel": "[TODO]",
+      "passwordMismatch": "[TODO]",
+      "submit": "[TODO]",
+      "submitting": "[TODO]",
+      "successMessage": "[TODO]",
+      "returnToLogin": "[TODO]",
+      "haveAccount": "[TODO]",
+      "loginLink": "[TODO]",
+      "errorGeneric": "[TODO]"
+    },
+    "verifyEmail": {
+      "loadingTitle": "[TODO]",
+      "loadingSubtitle": "[TODO]",
+      "successTitle": "[TODO]",
+      "successSubtitleWithEmail": "[TODO]",
+      "successSubtitleNoEmail": "[TODO]",
+      "goToLogin": "[TODO]",
+      "errorTitle": "[TODO]",
+      "errorSubtitle": "[TODO]",
+      "returnToLogin": "[TODO]"
+    }
+  },
+  "email": {
+    "verify": {
+      "label": "[TODO]",
+      "subject": "[TODO]",
+      "heading": "[TODO]",
+      "instructions": "[TODO]",
+      "instructionsHtml": "[TODO]",
+      "expires": "[TODO]"
+    }
+  },
+  "settings": {
+    "title": "[TODO]",
+    "subtitle": "[TODO]",
+    "resetToDefaults": "[TODO]",
+    "resetConfirm": "[TODO]",
+    "previewLabel": "[TODO]",
+    "languageLabel": "[TODO]",
+    "appearance": {
+      "heading": "[TODO]",
+      "themeLabel": "[TODO]",
+      "boardThemeLabel": "[TODO]",
+      "pieceSetLabel": "[TODO]",
+      "showCoordinatesLabel": "[TODO]",
+      "boardAnimationsLabel": "[TODO]",
+      "soundLabel": "[TODO]",
+      "snowLabel": "[TODO]"
+    },
+    "boardOrientation": {
+      "heading": "[TODO]",
+      "auto": "[TODO]",
+      "white": "[TODO]",
+      "black": "[TODO]"
+    },
+    "boardThemes": {
+      "default": "[TODO]",
+      "default-contrast": "[TODO]",
+      "green": "[TODO]",
+      "blue": "[TODO]",
+      "chess-club": "[TODO]",
+      "chessboard-js": "[TODO]",
+      "black-and-white": "[TODO]"
+    },
+    "pieceSets": {
+      "standard": "[TODO]",
+      "staunty": "[TODO]",
+      "merida": "[TODO]",
+      "pirouetti": "[TODO]",
+      "chessnut": "[TODO]"
+    }
+  }
+}

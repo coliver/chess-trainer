@@ -45,6 +45,7 @@ const FLAGS: Record<string, string> = {
   "en-x-groot": "🌱",
 
   sd: "🧝",
+  khz: "⛏️",
 };
 
 
