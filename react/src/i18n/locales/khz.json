@@ -7,7 +7,7 @@
     "nav": "Primary",
     "openings": "Openings",
     "puzzles": "Puzzles",
-    "login": "Login",
+    "login": "Medan",
     "register": "Register",
     "logout": "Logout",
     "settings": "Settings",
@@ -109,7 +109,7 @@
   },
   "auth": {
     "login": {
-      "title": "Login",
+      "title": "Medan",
       "subtitle": "Welcome back.",
       "usernameLabel": "Username",
       "passwordLabel": "Password",
