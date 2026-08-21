@@ -85,7 +85,7 @@ docker compose up -d --build
 - **Unit/component tests:** `npm run test` (Vitest + Testing Library + jsdom). API calls are mocked via MSW (`src/tests/msw/`), not a live backend.
 - **Watch mode:** `npm run test:watch`
 - **E2E:** `npm run test:playwright` (runs `e2e/playwright-dashboard.spec.ts`; the Docker image is built from `mcr.microsoft.com/playwright:v1.62.0-jammy` so browsers are preinstalled in the container). See `e2e/README.md` for a flow-by-flow coverage map (what's tested, what's a screenshot-only gap, what's not built).
-- **Gap-flow coverage:** `npx playwright test e2e/playwright-gap-flows.spec.ts` — auth-guard redirect, logout, and invalid-login-error paths not covered by the smoke/dashboard specs.
+- **Auth & flows coverage:** `npx playwright test e2e/playwright-auth-and-flows.spec.ts` — auth-guard redirect, logout, and invalid-login-error paths not covered by the smoke/dashboard specs.
 - **Prod smoke test:** `npm run test:smoke` (runs `e2e/playwright-prod-smoke.spec.ts` against `https://knightschool.click` by default, override with `BASE_URL`). Logs into the persistent `smoketest-persistent` account and walks dashboard → puzzles to confirm a real deploy actually works, without registering a fresh throwaway account each run. If that account ever needs recreating, run `playwright-prod-register.spec.ts` once with `SMOKE_USERNAME`/`SMOKE_PASSWORD` set (it's a no-op skip otherwise, and isn't part of `test:smoke`).
 - **Lint:** `npm run lint` (ESLint, including `eslint-plugin-playwright` for the E2E spec).
 

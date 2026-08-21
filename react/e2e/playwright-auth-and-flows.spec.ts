@@ -1,36 +1,12 @@
-import { test, expect, type Page } from "@playwright/test";
+import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
+import { mockAuth } from "./auth-helpers";
 
 const baseURL = process.env.BASE_URL ?? "http://localhost:5173";
 
-async function mockAuth(page: Page) {
-  await page.addInitScript(() => {
-    localStorage.setItem("username", "lobter");
-    localStorage.setItem("token", "test-token");
-  });
-  await page.route("**/api/auth/me", async (route) => {
-    await route.fulfill({
-      status: 200,
-      contentType: "application/json",
-      body: JSON.stringify({ id: 1, username: "lobter" }),
-    });
-  });
-  // PreferencesContext (wraps the whole app) fetches this on every
-  // authenticated page; unmocked it hits the real backend, gets a real 401,
-  // and api.ts's response interceptor hard-navigates to /login before the
-  // page under test ever renders.
-  await page.route("**/api/users/me/preferences", async (route) => {
-    await route.fulfill({
-      status: 200,
-      contentType: "application/json",
-      body: JSON.stringify({}),
-    });
-  });
-}
-
 const START_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
-test.describe("Gap flow coverage", () => {
+test.describe("Auth & flows coverage", () => {
 
   test("unauthenticated user is redirected to /login", async ({ page }) => {
     await page.route("**/api/auth/me", async (route) => {
@@ -121,22 +97,6 @@ test.describe("Gap flow coverage", () => {
         status: 401,
         contentType: "application/json",
         body: JSON.stringify({ detail: "Invalid credentials" }),
-      });
-    });
-
-    // api.ts's response interceptor retries any 401 through /auth/refresh
-    // before giving up. Without a refresh_token this throws synchronously
-    // and hard-navigates to /login (wiping the just-rendered error), so
-    // seed a refresh_token and let the refresh call "succeed" to let the
-    // retried /auth/login 401 propagate normally to the component's catch.
-    await page.addInitScript(() => {
-      localStorage.setItem("refresh_token", "seed-refresh-token");
-    });
-    await page.route("**/api/auth/refresh", async (route) => {
-      await route.fulfill({
-        status: 200,
-        contentType: "application/json",
-        body: JSON.stringify({ access_token: "seed-access-token" }),
       });
     });
 
@@ -383,6 +343,17 @@ test.describe("Gap flow coverage", () => {
         status: 200,
         contentType: "application/json",
         body: JSON.stringify([]),
+      });
+    });
+    await page.route("**/api/puzzles/summary", async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          puzzlesSeen: 0,
+          overallAccuracy: 0,
+          mastered: 0,
+        }),
       });
     });
 

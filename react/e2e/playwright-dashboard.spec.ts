@@ -1,4 +1,5 @@
 import { test, type Page } from "@playwright/test";
+import { mockAuth } from "./auth-helpers";
 
 const baseURL = process.env.BASE_URL ?? "http://localhost:5173";
 
@@ -32,22 +33,6 @@ async function applyTheme(page: Page, theme: (typeof THEMES)[number]) {
     const el = document.documentElement;
     if (el) el.setAttribute("data-theme", t);
   }, theme);
-}
-
-// RequireAuth gates protected routes on a valid GET /auth/me response. These
-// tests hit the Vite dev server directly (no nginx /api proxy), so that
-// request must be mocked explicitly rather than passing via SPA fallback.
-async function mockAuth(page: Page) {
-  await page.addInitScript(() => {
-    localStorage.setItem("username", "lobter");
-  });
-  await page.route("**/api/auth/me", async (route) => {
-    await route.fulfill({
-      status: 200,
-      contentType: "application/json",
-      body: JSON.stringify({ id: 1, username: "lobter" }),
-    });
-  });
 }
 
 test.describe("Dashboard screenshots (breakpoints × theme)", () => {
@@ -174,6 +159,17 @@ test.describe("Dashboard screenshots (breakpoints × theme)", () => {
                 incorrectCount: 1,
               },
             ]),
+          });
+        });
+        await page.route("**/api/puzzles/summary", async (route) => {
+          await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({
+              puzzlesSeen: 0,
+              overallAccuracy: 0,
+              mastered: 0,
+            }),
           });
         });
 

@@ -19,11 +19,8 @@ test("register the persistent smoke-test account", async ({ page }) => {
   await page.getByLabel(/username/i).fill(username!);
   await page.getByLabel(/^password/i).fill(password!);
   const confirm = page.getByLabel(/confirm password/i);
-  if (await confirm.count()) await confirm.fill(password!);
-  await Promise.all([
-    page.waitForURL(/\/(login|dashboard)/, { timeout: 15000 }),
-    page.getByRole("button", { name: /register|sign up|create account/i }).click(),
-  ]);
-
+  if (await confirm.isVisible()) await confirm.fill(password!);
+  await page.getByRole("button", { name: /register|sign up|create account/i }).click();
+  await expect(page.getByRole("link", { name: /return to login|back to login/i })).toBeVisible({ timeout: 15000 });
   await expect(page.getByText(/username.*taken|already exists/i)).not.toBeVisible();
 });

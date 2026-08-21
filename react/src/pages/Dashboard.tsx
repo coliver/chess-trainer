@@ -240,7 +240,7 @@ export const Dashboard = () => {
   return (
     <main className="page">
       <div className="dashboard-stack">
-        <div role="heading" className="dashboard-greeting">
+        <div role="heading" aria-level={1} className="dashboard-greeting">
           {greeting.before}
           {greeting.emoji && (
             <span className="dashboard-greeting-emoji"> {greeting.emoji}</span>

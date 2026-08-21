@@ -16,5 +16,12 @@ export default defineConfig({
       clientPort: 443,
       path: '/vite-hmr',
     },
+    proxy: {
+      '/api': {
+        target: 'http://api:8000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
   },
 });

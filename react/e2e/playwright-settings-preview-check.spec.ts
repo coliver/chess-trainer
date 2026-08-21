@@ -1,19 +1,7 @@
 import { test, expect } from "@playwright/test";
+import { mockAuth } from "./auth-helpers";
 
 const baseURL = process.env.BASE_URL ?? "http://localhost:5173";
-
-async function mockAuth(page: import("@playwright/test").Page) {
-  await page.addInitScript(() => {
-    localStorage.setItem("username", "lobter");
-  });
-  await page.route("**/api/auth/me", async (route) => {
-    await route.fulfill({
-      status: 200,
-      contentType: "application/json",
-      body: JSON.stringify({ id: 1, username: "lobter" }),
-    });
-  });
-}
 
 test("settings page shows a live board preview that updates with preference changes", async ({
   page,
