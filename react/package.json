@@ -9,9 +9,9 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest",
-    "test:playwright": "playwright test playwright-dashboard.spec.ts",
-    "test:settings": "playwright test playwright-settings-preview-check.spec.ts",
-    "test:smoke": "playwright test playwright-prod-smoke.spec.ts",
+    "test:playwright": "playwright test e2e/playwright-dashboard.spec.ts",
+    "test:settings": "playwright test e2e/playwright-settings-preview-check.spec.ts",
+    "test:smoke": "playwright test e2e/playwright-prod-smoke.spec.ts",
     "test:watch": "vitest --watch",
     "purgecss": "purgecss --config purgecss.config.cjs",
     "i18n:sync": "node scripts/sync-locales.mjs",
@@ -30,6 +30,7 @@
     "react-router-dom": "^7.18.2"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.62.0",
     "@testing-library/jest-dom": "^7.0.1",

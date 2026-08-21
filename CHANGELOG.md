@@ -1,3 +1,8 @@
+## 2026-08-21
+
+### Tests
+- test(e2e): audit key user flows against existing Playwright coverage and add `react/e2e/README.md` as a living tracker (flow table + mermaid map, color-coded covered/partial/gap/not-built); add `e2e/playwright-gap-flows.spec.ts` with 10 tests covering previously-untested gaps — unauthenticated redirect via `RequireAuth`, logout clearing the session, invalid-credentials error on `/login`, email verification success/error, a real click-click training move with correct-feedback assertion, a wrong puzzle move with incorrect-feedback assertion, settings-preference persistence across reload, and `@axe-core/playwright` WCAG 2 A/AA scans of `/login` and `/dashboard`; recorded a passing video per test into `e2e/videos/`. Two findings along the way, documented (not fixed, out of scope): `src/api.ts`'s 401-retry interceptor can hard-navigate to `/login` on a failed login attempt itself (no `refresh_token` yet), wiping the error message before it's read; and the header's build-version badge (`.site-header-version`) fails WCAG AA color contrast (3.04 vs 4.5:1), excluded from the new a11y scans so they still catch regressions elsewhere.
+
 ## 2026-08-20
 
 ### Features

@@ -48,7 +48,7 @@ react/
 │   └── index.css               # Global styles (imports src/styles/*.css)
 │   └── i18n/                   # react-i18next config + locales/*.json translation resources
 ├── public/                     # favicon.svg, quotes.txt, cm-chessboard-assets/ (board sprites), sounds/ (feedback audio)
-├── playwright-dashboard.spec.ts  # Playwright E2E spec
+├── e2e/                          # Playwright E2E specs + README.md (flow-coverage tracker) + videos/
 ├── vite.config.ts               # Vite configuration
 ├── vitest.config.ts             # Vitest configuration (jsdom, MSW-backed unit tests)
 └── tsconfig.json                # TypeScript configuration
@@ -84,8 +84,9 @@ docker compose up -d --build
 
 - **Unit/component tests:** `npm run test` (Vitest + Testing Library + jsdom). API calls are mocked via MSW (`src/tests/msw/`), not a live backend.
 - **Watch mode:** `npm run test:watch`
-- **E2E:** `npm run test:playwright` (runs `playwright-dashboard.spec.ts`; the Docker image is built from `mcr.microsoft.com/playwright:v1.62.0-jammy` so browsers are preinstalled in the container).
-- **Prod smoke test:** `npm run test:smoke` (runs `playwright-prod-smoke.spec.ts` against `https://knightschool.click` by default, override with `BASE_URL`). Logs into the persistent `smoketest-persistent` account and walks dashboard → puzzles to confirm a real deploy actually works, without registering a fresh throwaway account each run. If that account ever needs recreating, run `playwright-prod-register.spec.ts` once with `SMOKE_USERNAME`/`SMOKE_PASSWORD` set (it's a no-op skip otherwise, and isn't part of `test:smoke`).
+- **E2E:** `npm run test:playwright` (runs `e2e/playwright-dashboard.spec.ts`; the Docker image is built from `mcr.microsoft.com/playwright:v1.62.0-jammy` so browsers are preinstalled in the container). See `e2e/README.md` for a flow-by-flow coverage map (what's tested, what's a screenshot-only gap, what's not built).
+- **Gap-flow coverage:** `npx playwright test e2e/playwright-gap-flows.spec.ts` — auth-guard redirect, logout, and invalid-login-error paths not covered by the smoke/dashboard specs.
+- **Prod smoke test:** `npm run test:smoke` (runs `e2e/playwright-prod-smoke.spec.ts` against `https://knightschool.click` by default, override with `BASE_URL`). Logs into the persistent `smoketest-persistent` account and walks dashboard → puzzles to confirm a real deploy actually works, without registering a fresh throwaway account each run. If that account ever needs recreating, run `playwright-prod-register.spec.ts` once with `SMOKE_USERNAME`/`SMOKE_PASSWORD` set (it's a no-op skip otherwise, and isn't part of `test:smoke`).
 - **Lint:** `npm run lint` (ESLint, including `eslint-plugin-playwright` for the E2E spec).
 
 ## 🌐 Network Architecture
@@ -96,6 +97,8 @@ The application expects API requests to be served under the `/api` path (the fro
 - **Authorization:** on login, the access token, refresh token, `user_id`, `username`, and `email` are all written to `localStorage` (see `src/pages/Login.tsx`). The Axios request interceptor in `src/api.ts` attaches `Authorization: Bearer <token>` from the `token` key; `Dashboard.tsx` reads `username` back out (via `useAuth`) to render its "Good morning/afternoon/evening" greeting — moved there from `Header.tsx`, which had gotten too crowded to fit it. `auth.ts#logout()` clears all five keys.
 
 ## 🔄 Key Logic Flows
+
+> See also: [Typical user paths through the site](https://claude.ai/code/artifact/79e26336-9c11-444c-aeb4-e71eb4d7e142) — a diagram of navigation from login through the dashboard hub into puzzle training, opening training, and settings.
 
 ### Authentication Flow
 
