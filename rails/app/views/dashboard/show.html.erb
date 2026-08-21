@@ -1,0 +1,11 @@
+<% content_for :title, "Dashboard" %>
+
+<main class="page">
+  <div class="card" style="max-width: 520px; margin-top: 20px;">
+    <h1 class="title" style="margin-bottom: 6px;">Dashboard</h1>
+    <p class="subtitle">Logged in as <strong><%= @current_user["username"] %></strong>. (Full dashboard lands in step 4.)</p>
+    <p style="margin-top: 20px;">
+      <%= button_to "Log out", logout_path, method: :delete, class: "btn" %>
+    </p>
+  </div>
+</main>
