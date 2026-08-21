@@ -1,11 +1,79 @@
 <% content_for :title, "Training" %>
 
 <main class="page">
-  <div class="card" style="max-width: 520px; margin-top: 20px;">
-    <h1 class="title" style="margin-bottom: 6px;">Training session #<%= @id %></h1>
-    <p class="subtitle">Started. The full training board lands in step 5.</p>
-    <p style="margin-top: 20px;">
-      <%= link_to "Back to dashboard", dashboard_path, class: "btn" %>
-    </p>
+  <div class="card">
+    <div class="train"
+         data-controller="training"
+         data-training-training-id-value="<%= @training_id %>"
+         data-training-fen-value="<%= @fen %>"
+         data-training-item-id-value="<%= @item_id %>"
+         data-training-correct-move-uci-value="<%= @correct_move_uci %>"
+         data-training-player-color-value="<%= @player_color %>"
+         data-training-eco-value="<%= @eco %>"
+         data-training-opening-name-value="<%= @opening_name %>"
+         data-training-next-url-value="<%= training_next_path(@training_id) %>"
+         data-training-moves-url-value="<%= training_moves_path(@training_id) %>"
+         data-training-dashboard-url-value="<%= dashboard_path %>">
+      <div class="train-board-col">
+        <div class="training-board-wrap" data-training-target="host"></div>
+        <div class="board-under">
+          <span class="turn" data-training-target="turn">
+            <span class="turn-dot" aria-hidden="true"></span>
+            <span data-training-target="turnLabel">White to move</span>
+          </span>
+          <div class="board-toolbar">
+            <button type="button" class="btn icon-btn" data-action="training#flip" aria-label="Flip board" title="Flip board">
+              <span class="flip-icon" data-training-target="flipIcon" aria-hidden="true">⟳</span>
+            </button>
+            <button type="button" class="btn icon-btn hint-icon" data-action="training#showHint" data-training-target="hintButton" aria-label="Show hint" title="Show hint">
+              💡
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="train-rail">
+        <div class="rail-head">
+          <div class="rail-eyebrow">Training</div>
+          <div class="rail-title">
+            <h1 data-training-target="openingName"><%= @opening_name %></h1>
+            <% if @eco.present? %>
+              <span class="eco-chip" data-training-target="ecoChip"><%= @eco %></span>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="train-status your" data-training-target="status" role="status">
+          <span class="train-status-ic" data-training-target="statusIcon" aria-hidden="true">♔</span>
+          <div>
+            <div class="train-status-msg" data-training-target="statusMsg">Your move</div>
+            <div class="train-status-sub" data-training-target="statusSub"></div>
+          </div>
+        </div>
+
+        <div class="train-controls" data-training-target="inProgressControls">
+          <div class="train-stepper">
+            <button class="btn" type="button" data-action="training#prev" data-training-target="prevButton">Prev</button>
+            <button class="btn" type="button" data-action="training#next" data-training-target="nextButton">Next</button>
+          </div>
+
+          <form class="train-type-move" data-action="training#submitTyped">
+            <input class="text-input" type="text" placeholder="e2e4" data-training-target="moveInput" autocomplete="off">
+            <button class="btn primary" type="submit" data-training-target="playButton">Play</button>
+          </form>
+        </div>
+
+        <div class="train-controls" data-training-target="completedControls" hidden>
+          <%= button_to "Train again",
+                trainings_path(opening_eco: @eco, opening_name: @opening_name, player_color: @player_color),
+                class: "btn primary" %>
+          <%= link_to "Choose another", dashboard_path, class: "btn" %>
+        </div>
+
+        <button class="train-exit" type="button" data-training-target="exitButton" data-action="training#exit">
+          Back to openings
+        </button>
+      </aside>
+    </div>
   </div>
 </main>

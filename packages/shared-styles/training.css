@@ -223,6 +223,9 @@ html[data-theme="dark"] {
   flex-direction: column;
   gap: 10px;
 }
+.train-controls[hidden] {
+  display: none;
+}
 .train-stepper {
   display: flex;
   gap: 8px;

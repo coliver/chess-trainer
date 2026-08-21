@@ -9,3 +9,6 @@ application.register("hello", HelloController)
 
 import BoardPreviewController from "./board_preview_controller"
 application.register("board-preview", BoardPreviewController)
+
+import TrainingController from "./training_controller"
+application.register("training", TrainingController)
