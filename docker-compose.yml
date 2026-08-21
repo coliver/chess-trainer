@@ -64,6 +64,24 @@ services:
     restart: unless-stopped
     logging: *default-logging
 
+  rails:
+    build:
+      context: .
+      dockerfile: rails/Dockerfile
+    volumes:
+      - ./rails:/app               # Syncs the code
+      - ./packages:/packages       # Shared workspace packages (chess-core, shared-styles)
+      - /app/node_modules          # Keeps container modules separate
+    environment:
+      API_BASE_URL: http://api:8000
+      RAILS_ENV: development
+    expose:
+      - "3000"
+    depends_on:
+      - api
+    restart: unless-stopped
+    logging: *default-logging
+
   nginx:
     image: nginx:1.27
     depends_on:

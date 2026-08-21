@@ -1,0 +1,2 @@
+web: bin/rails server --binding 0.0.0.0
+js: npm run build -- --watch=forever

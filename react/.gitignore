@@ -61,3 +61,8 @@ coverage
 /public/sounds/move-self.mp3
 /public/sounds/premove.mp3
 /public/sounds/puzzle-correct.mp3
+
+# Generated locally by scripts/copy-shared-assets.mjs from packages/shared-assets/
+# (source of truth lives there now, not under react/public/).
+/public/cm-chessboard-assets/
+/public/sounds/
