@@ -4,6 +4,7 @@
 - refactor(react): extract shared `AuthCard` component (`src/components/AuthCard.tsx`) and `apiErrorMessage` util (`src/utils/apiError.ts`) from the identical page-wrapper markup and axios-error-handling logic duplicated across `Login.tsx`, `Register.tsx`, and `VerifyEmail.tsx`
 - refactor(react): extract `SettingsToggleRow` and `SettingsRadioGroup` components (`src/components/`) from the copy-pasted switch/radiogroup markup repeated 5+ times in `Settings.tsx`
 - refactor(react): add `openingKey(opening)` to `src/lib/groupOpenings.ts` and use it in `Dashboard.tsx` and `VariationList.tsx` instead of each spot manually computing the `eco + name` composite key (the latter had its own near-identical `rowKey` helper)
+- refactor(react): extract `ProgressStat` component (`src/components/ProgressStat.tsx`) from the icon/value/label markup copy-pasted 7 times across the training and puzzle stat rows in `Dashboard.tsx`
 
 ### Fixes
 - fix(react): `src/api.ts`'s response interceptor no longer retries a 401 from `/auth/login`, `/auth/register`, or `/auth/refresh` itself through the refresh flow — previously, with no `refresh_token` yet in `localStorage` (the normal case for a first-time visitor), the refresh attempt threw synchronously and hard-navigated to `/login`, wiping the just-rendered "Invalid credentials" error before it could be read

@@ -10,6 +10,7 @@ import BoardPreview from "../components/openings/BoardPreview";
 import OpeningCard from "../components/openings/OpeningCard";
 import VariationList from "../components/openings/VariationList";
 import { Button } from "../components/Button";
+import { ProgressStat } from "../components/ProgressStat";
 import {
   groupByBase,
   baseNameOf,
@@ -261,57 +262,42 @@ export const Dashboard = () => {
                 {t("dashboard.progress.trainingHeading")}
               </h2>
               <div className="progress-group-row">
-                <div className="progress-stat">
-                  <span className="progress-stat-value">
-                    <span className="progress-stat-icon" aria-hidden="true">
-                      ♟️
-                    </span>
-                    {summary?.positionsSeen ?? 0}
-                  </span>
-                  <span className="progress-stat-label">
-                    {t("dashboard.progress.positionsTrained")}
-                  </span>
-                </div>
-                <div className="progress-stat">
-                  <span className="progress-stat-value">
-                    <span className="progress-stat-icon" aria-hidden="true">
-                      🎯
-                    </span>
-                    {summary?.overallAccuracy != null
+                <ProgressStat
+                  icon="♟️"
+                  value={summary?.positionsSeen ?? 0}
+                  label={t("dashboard.progress.positionsTrained")}
+                />
+                <ProgressStat
+                  icon="🎯"
+                  value={
+                    summary?.overallAccuracy != null
                       ? `${Math.round(summary.overallAccuracy * 100)}%`
-                      : "—"}
-                  </span>
-
-                  <span className="progress-stat-label">
-                    {t("dashboard.progress.accuracy")}
-                  </span>
-                </div>
-                <div className="progress-stat">
-                  <span className="progress-stat-value">
-                    <span className="progress-stat-icon" aria-hidden="true">
-                      📅
-                    </span>
-                    {summary?.currentStreak ?? 0}
-                    {(summary?.currentStreak ?? 0) > 0 ? " 🔥" : ""}
-                  </span>
-                  <span className="progress-stat-label">
-                    {summary?.longestStreak
+                      : "—"
+                  }
+                  label={t("dashboard.progress.accuracy")}
+                />
+                <ProgressStat
+                  icon="📅"
+                  value={
+                    <>
+                      {summary?.currentStreak ?? 0}
+                      {(summary?.currentStreak ?? 0) > 0 ? " 🔥" : ""}
+                    </>
+                  }
+                  label={
+                    summary?.longestStreak
                       ? t("dashboard.progress.dayStreakBest", {
                           best: summary.longestStreak,
                         })
-                      : t("dashboard.progress.dayStreak")}
-                  </span>
-                </div>
-                <div className="progress-stat progress-stat--mastery">
-                  <span className="progress-stat-value">
-                    <span className="progress-stat-icon" aria-hidden="true">
-                      🏆
-                    </span>
-                    {summary?.mastered ?? 0}
-                  </span>
-                  <span className="progress-stat-label">
-                    {t("dashboard.progress.mastered")}
-                  </span>
+                      : t("dashboard.progress.dayStreak")
+                  }
+                />
+                <ProgressStat
+                  icon="🏆"
+                  value={summary?.mastered ?? 0}
+                  label={t("dashboard.progress.mastered")}
+                  variant="mastery"
+                >
                   {summary && summary.positionsSeen > 0 && (
                     <div className="mastery-bar" aria-hidden="true">
                       <div
@@ -327,7 +313,7 @@ export const Dashboard = () => {
                       />
                     </div>
                   )}
-                </div>
+                </ProgressStat>
                 <div className="progress-stat">
                   <button
                     type="button"
@@ -392,41 +378,25 @@ export const Dashboard = () => {
                 {t("dashboard.progress.puzzlesHeading")}
               </h2>
               <div className="progress-group-row">
-                <div className="progress-stat">
-                  <span className="progress-stat-value">
-                    <span className="progress-stat-icon" aria-hidden="true">
-                      🧩
-                    </span>
-                    {puzzleSummary?.puzzlesSeen ?? 0}
-                  </span>
-                  <span className="progress-stat-label">
-                    {t("dashboard.progress.puzzlesSolved")}
-                  </span>
-                </div>
-                <div className="progress-stat">
-                  <span className="progress-stat-value">
-                    <span className="progress-stat-icon" aria-hidden="true">
-                      🎯
-                    </span>
-                    {puzzleSummary
+                <ProgressStat
+                  icon="🧩"
+                  value={puzzleSummary?.puzzlesSeen ?? 0}
+                  label={t("dashboard.progress.puzzlesSolved")}
+                />
+                <ProgressStat
+                  icon="🎯"
+                  value={
+                    puzzleSummary
                       ? `${Math.round(puzzleSummary.overallAccuracy * 100)}%`
-                      : "—"}
-                  </span>
-                  <span className="progress-stat-label">
-                    {t("dashboard.progress.accuracy")}
-                  </span>
-                </div>
-                <div className="progress-stat">
-                  <span className="progress-stat-value">
-                    <span className="progress-stat-icon" aria-hidden="true">
-                      🏆
-                    </span>
-                    {puzzleSummary?.mastered ?? 0}
-                  </span>
-                  <span className="progress-stat-label">
-                    {t("dashboard.progress.mastered")}
-                  </span>
-                </div>
+                      : "—"
+                  }
+                  label={t("dashboard.progress.accuracy")}
+                />
+                <ProgressStat
+                  icon="🏆"
+                  value={puzzleSummary?.mastered ?? 0}
+                  label={t("dashboard.progress.mastered")}
+                />
                 <div className="progress-stat">
                   <button
                     type="button"
