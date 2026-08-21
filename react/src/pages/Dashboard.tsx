@@ -15,6 +15,7 @@ import {
   baseNameOf,
   colorOf,
   variationLabelOf,
+  openingKey,
   type OpeningGroup,
 } from "../lib/groupOpenings";
 import { describeOpening } from "../data/openingText";
@@ -524,7 +525,7 @@ export const Dashboard = () => {
                   <SearchResults
                     matches={searchMatches}
                     limit={searchLimit}
-                    selectedKey={selected ? selected.eco + selected.name : null}
+                    selectedKey={selected ? openingKey(selected) : null}
                     query={query}
                     onPick={pickFromSearch}
                     onMore={() => setSearchLimit((n) => n + SEARCH_PAGE)}
@@ -545,9 +546,7 @@ export const Dashboard = () => {
                     </nav>
                     <VariationList
                       rows={activeGroup.members}
-                      selectedKey={
-                        selected ? selected.eco + selected.name : null
-                      }
+                      selectedKey={selected ? openingKey(selected) : null}
                       onPick={selectOpening}
                     />
                   </>
@@ -674,12 +673,12 @@ function SearchResults({
       <div className="variation-rows" role="list">
         {shown.map((o) => (
           <button
-            key={o.eco + o.name}
+            key={openingKey(o)}
             type="button"
             role="listitem"
-            className={`variation-row${selectedKey === o.eco + o.name ? " selected" : ""}`}
+            className={`variation-row${selectedKey === openingKey(o) ? " selected" : ""}`}
             onClick={() => onPick(o)}
-            aria-pressed={selectedKey === o.eco + o.name}
+            aria-pressed={selectedKey === openingKey(o)}
           >
             <span className="r-eco">{o.eco}</span>
             <span className="r-name">{o.name}</span>

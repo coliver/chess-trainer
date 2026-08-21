@@ -18,6 +18,12 @@ export type OpeningGroup = {
   count: number;
 };
 
+/** Composite identity key for an opening row (eco + name isn't guaranteed
+ * unique on either alone, but the pair is). */
+export function openingKey(opening: Opening): string {
+  return opening.eco + opening.name;
+}
+
 /** "Sicilian Defense: Najdorf Variation" -> "Sicilian Defense". */
 export function baseNameOf(name: string): string {
   const i = name.indexOf(":");
