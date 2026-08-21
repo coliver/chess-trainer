@@ -304,6 +304,27 @@ describe("Dashboard", () => {
     expect(screen.getByText("4")).toBeInTheDocument();
   });
 
+  it("shows a dash instead of NaN for puzzle accuracy when the user has no puzzles", async () => {
+    (api.get as unknown as ReturnType<typeof vi.fn>).mockImplementation(
+      (url: string) => {
+        if (url === "/openings") return Promise.resolve({ data: openings });
+        if (url === "/puzzles/summary")
+          return Promise.resolve({
+            data: { puzzlesSeen: 0, overallAccuracy: 0, mastered: 0 },
+          });
+        return Promise.resolve({ data: null });
+      },
+    );
+
+    renderDashboard();
+
+    expect(await screen.findByText("Puzzles solved")).toBeInTheDocument();
+    expect(screen.queryByText(/NaN/)).not.toBeInTheDocument();
+    expect(
+      screen.getByLabelText("Puzzle progress").textContent,
+    ).toContain("—");
+  });
+
   it("startSession failure shows an alert", async () => {
     const alertSpy = vi.spyOn(window, "alert").mockImplementation(() => {});
     (api.post as unknown as ReturnType<typeof vi.fn>).mockRejectedValueOnce(

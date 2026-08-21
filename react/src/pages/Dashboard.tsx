@@ -386,7 +386,8 @@ export const Dashboard = () => {
                 <ProgressStat
                   icon="🎯"
                   value={
-                    puzzleSummary
+                    puzzleSummary?.overallAccuracy != null &&
+                    puzzleSummary.puzzlesSeen > 0
                       ? `${Math.round(puzzleSummary.overallAccuracy * 100)}%`
                       : "—"
                   }
