@@ -1,0 +1,32 @@
+<div class="variation-rows" role="list">
+  <% groups.each do |g| %>
+    <% if g.rows.size == 1 %>
+      <% o = g.rows.first %>
+      <%= link_to dashboard_path(base: @base, eco: o["eco"], name: o["name"]), role: "listitem",
+            class: "variation-row#{" selected" if opening_row_selected?(@selected, o)}",
+            data: { turbo_frame: "opening_browser" } do %>
+        <span class="r-eco"><%= o["eco"] %></span>
+        <span class="r-name"><%= OpeningGrouping.variation_label_of(o["name"]) %></span>
+      <% end %>
+    <% else %>
+      <% contains_selected = g.rows.any? { |o| opening_row_selected?(@selected, o) } %>
+      <details class="variation-group"<%= " open".html_safe if contains_selected %>>
+        <summary class="variation-group-header">
+          <span class="vg-caret" aria-hidden="true">▸</span>
+          <span class="vg-label"><%= g.label %></span>
+          <span class="vg-count"><%= g.rows.size %></span>
+        </summary>
+        <div class="variation-group-rows" role="list">
+          <% g.rows.each do |o| %>
+            <%= link_to dashboard_path(base: @base, eco: o["eco"], name: o["name"]), role: "listitem",
+                  class: "variation-row#{" selected" if opening_row_selected?(@selected, o)}",
+                  data: { turbo_frame: "opening_browser" } do %>
+              <span class="r-eco"><%= o["eco"] %></span>
+              <span class="r-name"><%= OpeningGrouping.sub_variation_label_of(o["name"]) %></span>
+            <% end %>
+          <% end %>
+        </div>
+      </details>
+    <% end %>
+  <% end %>
+</div>

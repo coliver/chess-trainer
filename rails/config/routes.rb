@@ -16,6 +16,9 @@ Rails.application.routes.draw do
 
     get "dashboard" => "dashboard#show", as: :dashboard
 
+    get "trainings/:id" => "trainings#show", as: :training
+    post "trainings" => "trainings#create", as: :trainings
+
     root "sessions#new"
   end
 end

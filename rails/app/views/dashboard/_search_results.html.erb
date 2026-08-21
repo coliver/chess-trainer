@@ -1,0 +1,24 @@
+<% if @search_matches.empty? %>
+  <div class="ob-noresults">
+    No openings match &ldquo;<%= @query %>&rdquo;.
+    <br>
+    Try a name (Sicilian) or an ECO code (B90).
+  </div>
+<% else %>
+  <div class="variation-rows" role="list">
+    <% @search_matches.first(@search_limit).each do |o| %>
+      <%= link_to dashboard_path(q: @query, eco: o["eco"], name: o["name"], base: OpeningGrouping.base_name_of(o["name"])),
+            role: "listitem",
+            class: "variation-row#{" selected" if opening_row_selected?(@selected, o)}",
+            data: { turbo_frame: "opening_browser" } do %>
+        <span class="r-eco"><%= o["eco"] %></span>
+        <span class="r-name"><%= o["name"] %></span>
+      <% end %>
+    <% end %>
+  </div>
+  <% if @search_matches.size > @search_limit %>
+    <%= link_to "Show #{@search_matches.size - @search_limit} more",
+          dashboard_path(q: @query, limit: @search_limit + DashboardController::SEARCH_PAGE),
+          class: "ob-showmore", data: { turbo_frame: "opening_browser" } %>
+  <% end %>
+<% end %>

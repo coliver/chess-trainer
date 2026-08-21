@@ -6,7 +6,9 @@
   },
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
-    "@hotwired/turbo-rails": "^8.0.16"
+    "@hotwired/turbo-rails": "^8.0.16",
+    "@knight-school/chess-core": "file:../packages/chess-core",
+    "cm-chessboard": "^8.12.19"
   },
   "devDependencies": {
     "esbuild": "^0.24.0"

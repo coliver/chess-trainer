@@ -1,11 +1,88 @@
 <% content_for :title, "Dashboard" %>
 
 <main class="page">
-  <div class="card" style="max-width: 520px; margin-top: 20px;">
-    <h1 class="title" style="margin-bottom: 6px;">Dashboard</h1>
-    <p class="subtitle">Logged in as <strong><%= @current_user["username"] %></strong>. (Full dashboard lands in step 4.)</p>
-    <p style="margin-top: 20px;">
-      <%= button_to "Log out", logout_path, method: :delete, class: "btn" %>
-    </p>
+  <div class="dashboard-stack">
+    <div class="dashboard-greeting">
+      Welcome back<%= @current_user["username"].present? ? ", #{@current_user["username"]}" : "" %>
+    </div>
+
+    <% if flash[:alert] %>
+      <div class="auth-error"><%= flash[:alert] %></div>
+    <% end %>
+
+    <div class="card">
+      <section class="progress-overview" aria-label="Your progress">
+        <div class="progress-group" aria-label="Training">
+          <h2 class="progress-group-label">Training</h2>
+          <div class="progress-group-row">
+            <div class="progress-stat">
+              <span class="progress-stat-value">
+                <span class="progress-stat-icon" aria-hidden="true">♟️</span>
+                <%= @summary["positionsSeen"] || 0 %>
+              </span>
+              <span class="progress-stat-label">Positions trained</span>
+            </div>
+            <div class="progress-stat">
+              <span class="progress-stat-value">
+                <span class="progress-stat-icon" aria-hidden="true">🎯</span>
+                <%= @summary["overallAccuracy"] ? "#{(@summary["overallAccuracy"] * 100).round}%" : "—" %>
+              </span>
+              <span class="progress-stat-label">Accuracy</span>
+            </div>
+            <div class="progress-stat">
+              <span class="progress-stat-value">
+                <span class="progress-stat-icon" aria-hidden="true">📅</span>
+                <%= @summary["currentStreak"] || 0 %><%= (@summary["currentStreak"].to_i > 0) ? " 🔥" : "" %>
+              </span>
+              <span class="progress-stat-label">
+                <%= @summary["longestStreak"].to_i > 0 ? "Day streak (best #{@summary["longestStreak"]})" : "Day streak" %>
+              </span>
+            </div>
+            <div class="progress-stat progress-stat--mastery">
+              <span class="progress-stat-value">
+                <span class="progress-stat-icon" aria-hidden="true">🏆</span>
+                <%= @summary["mastered"] || 0 %>
+              </span>
+              <span class="progress-stat-label">Mastered</span>
+              <% if @summary["positionsSeen"].to_i > 0 %>
+                <div class="mastery-bar" aria-hidden="true">
+                  <div class="mastery-bar-fill" style="width: <%= [100, ((@summary["mastered"].to_f / @summary["positionsSeen"]) * 100).round].min %>%;"></div>
+                </div>
+              <% end %>
+            </div>
+            <div class="progress-stat">
+              <%= button_to "Review #{@due_count} due", trainings_path, params: { from_due: true },
+                    class: "progress-review-btn", disabled: @due_count.zero? %>
+            </div>
+          </div>
+
+          <% if @weak_spots.any? %>
+            <div class="progress-weak-spots">
+              <span class="progress-stat-label">Weak spots</span>
+              <ul>
+                <% @weak_spots.each do |w| %>
+                  <% pct = w["attempts"].to_i > 0 ? ((w["correctCount"].to_f / w["attempts"]) * 100).round : 0 %>
+                  <li>
+                    <div class="ws-row">
+                      <span class="ws-name" title="<%= w["openingName"] || "Opening" %>"><%= w["openingName"] || "Opening" %></span>
+                      <span class="ws-pct"><%= pct %>%</span>
+                    </div>
+                    <div class="ws-bar" aria-hidden="true">
+                      <div class="ws-bar-fill" style="width: <%= pct %>%;"></div>
+                    </div>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+      </section>
+
+      <section class="opening-browser">
+        <%= turbo_frame_tag "opening_browser" do %>
+          <%= render "opening_browser" %>
+        <% end %>
+      </section>
+    </div>
   </div>
 </main>

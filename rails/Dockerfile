@@ -11,6 +11,12 @@ RUN apt-get update -qq && \
 COPY rails/Gemfile rails/Gemfile.lock ./
 RUN bundle install
 
+# Build the shared chess-core package first — Rails depends on it via
+# `file:../packages/chess-core`, which resolves from /app to /packages/chess-core
+# (same two-line pattern as react/Dockerfile).
+COPY packages/chess-core /packages/chess-core
+RUN cd /packages/chess-core && npm ci && npm run build
+
 COPY rails/package*.json ./
 RUN npm ci
 

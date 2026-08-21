@@ -1,0 +1,122 @@
+<header class="ob-toolbar">
+  <div class="ob-heading">
+    <h1 class="ob-title">Openings</h1>
+    <p class="ob-sub">
+      <% if @view == :search %>
+        <%= pluralize(@search_matches.size, "match", plural: "matches") %>
+      <% elsif @view == :variations && @active_group %>
+        <%= pluralize(@active_group.count, "variation") %> in library
+      <% else %>
+        <%= pluralize(@visible_groups.size, "opening") %> to train
+      <% end %>
+    </p>
+  </div>
+  <span class="ob-grow"></span>
+  <div class="ob-search">
+    <span class="ob-search-icon" aria-hidden="true">⌕</span>
+    <%= form_with url: dashboard_path, method: :get, data: { turbo_frame: "opening_browser" } do %>
+      <%= search_field_tag :q, @query, placeholder: "Search openings or ECO code", autocomplete: "off",
+            oninput: "this.form.requestSubmit()", aria: { label: "Search openings" } %>
+      <% if @selected %>
+        <%= hidden_field_tag :eco, @selected["eco"] %>
+        <%= hidden_field_tag :name, @selected["name"] %>
+      <% end %>
+    <% end %>
+  </div>
+  <% if @view == :bases %>
+    <%= link_to "Sort: #{@sort_az ? "A–Z" : "Popular"}",
+          dashboard_path(sort: @sort_az ? nil : "az", color: @color_filter == "all" ? nil : @color_filter),
+          class: "ob-sort", data: { turbo_frame: "opening_browser" } %>
+    <div class="ob-color-filter" role="radiogroup" aria-label="Filter by color">
+      <% [["all", "All"], ["w", "White"], ["b", "Black"]].each do |value, label| %>
+        <%= link_to label, dashboard_path(color: value, sort: @sort_az ? "az" : nil), role: "radio",
+              aria: { checked: @color_filter == value },
+              class: "ob-color-filter-btn#{" selected" if @color_filter == value}",
+              data: { turbo_frame: "opening_browser" } %>
+      <% end %>
+    </div>
+  <% end %>
+</header>
+
+<div class="ob-body">
+  <div class="ob-content">
+    <% if @view == :search %>
+      <%= render "search_results" %>
+    <% elsif @view == :variations && @active_group %>
+      <nav class="ob-crumbs" aria-label="Breadcrumb">
+        <%= link_to "All openings", dashboard_path, data: { turbo_frame: "opening_browser" } %>
+        <span class="sep">/</span>
+        <span class="here"><%= @active_group.base %></span>
+      </nav>
+      <%= render "variation_list", groups: OpeningGrouping.group_variations(@active_group.members) %>
+    <% elsif @view == :bases %>
+      <div class="opening-grid">
+        <% @visible_groups.each do |g| %>
+          <%= link_to dashboard_path(base: g.base, eco: g.representative["eco"], name: g.representative["name"]),
+                class: "opening-card#{" selected" if @selected && OpeningGrouping.base_name_of(@selected["name"]) == g.base}",
+                data: { turbo_frame: "opening_browser" } do %>
+            <div class="oc-thumb"><div class="oc-thumb-ph" aria-hidden="true"></div></div>
+            <div class="oc-name"><%= g.base %></div>
+            <div class="oc-foot">
+              <span class="oc-count"><%= pluralize(g.count, "variation") %></span>
+              <span class="eco-chip"><%= g.eco %></span>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <aside class="ob-preview<%= @selected ? "" : " is-empty" %>"
+    data-controller="board-preview"
+    <% if @selected %>
+      data-board-preview-epd-value="<%= @selected["epd"] %>"
+      data-board-preview-uci-moves-value="<%= @selected["uci_moves"] %>"
+      data-board-preview-orientation-value="<%= @player_color == "b" ? "black" : "white" %>"
+    <% end %>>
+    <% if @selected %>
+      <div class="ob-preview-inner">
+        <div class="boardPreview">
+          <div class="boardPreview-board" data-board-preview-target="host"></div>
+          <% moves = (@selected["uci_moves"] || "").split(/\s+/) %>
+          <div class="ply-stepper">
+            <button type="button" class="ply-btn<%= " active" if moves.empty? %>"
+                  data-action="board-preview#setPly" data-ply="0">Start</button>
+            <% moves.each_with_index do |uci, idx| %>
+              <button type="button" class="ply-btn<%= " active" if idx + 1 == moves.size %>"
+                    data-action="board-preview#setPly" data-ply="<%= idx + 1 %>"><%= uci %></button>
+            <% end %>
+          </div>
+        </div>
+        <h2 class="pv-title"><%= opening_preview_full_name(@selected) %></h2>
+        <p class="pv-eco"><%= @selected["eco"] %></p>
+        <p class="opening-description"><%= @selected["description"] %></p>
+      </div>
+    <% else %>
+      <div class="ob-empty-state">
+        <span class="ob-empty-glyph" aria-hidden="true">♞</span>
+        <p class="opening-description opening-description--empty">Pick an opening to preview it here.</p>
+      </div>
+    <% end %>
+
+    <div class="ob-color-toggle" role="radiogroup" aria-label="Play as">
+      <button type="button" role="radio" aria-checked="<%= @player_color != "b" %>"
+            class="ob-color-btn<%= " selected" unless @player_color == "b" %>"
+            data-action="board-preview#playWhite">Play as White</button>
+      <button type="button" role="radio" aria-checked="<%= @player_color == "b" %>"
+            class="ob-color-btn<%= " selected" if @player_color == "b" %>"
+            data-action="board-preview#playBlack">Play as Black</button>
+    </div>
+
+    <%= form_with url: trainings_path, method: :post do %>
+      <% if @selected %>
+        <%= hidden_field_tag :opening_eco, @selected["eco"] %>
+        <%= hidden_field_tag :opening_name, @selected["name"] %>
+      <% end %>
+      <%= hidden_field_tag :player_color, @player_color, data: { board_preview_target: "playerColorField" } %>
+      <button type="submit" class="tile-action ob-start" <%= "disabled" unless @selected %>>
+        <%= @selected ? "Start training: #{opening_start_label(@selected)}" : "Choose an opening" %>
+      </button>
+    <% end %>
+  </aside>
+</div>

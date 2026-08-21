@@ -29,9 +29,32 @@ RSpec.describe "Dashboard", type: :request do
         headers: { "Content-Type" => "application/json" }
       )
 
+      stub_request(:get, "#{base}/progress/summary").to_return(
+        status: 200,
+        body: {
+          positionsSeen: 0, overallAccuracy: 0, mastered: 0,
+          openingBreakdown: [], currentStreak: 0, longestStreak: 0
+        }.to_json,
+        headers: { "Content-Type" => "application/json" }
+      )
+      stub_request(:get, "#{base}/progress/due").to_return(
+        status: 200, body: "[]", headers: { "Content-Type" => "application/json" }
+      )
+      stub_request(:get, "#{base}/progress/weak-spots").to_return(
+        status: 200, body: "[]", headers: { "Content-Type" => "application/json" }
+      )
+      stub_request(:get, "#{base}/openings").to_return(
+        status: 200,
+        body: [
+          { eco: "B20", name: "Sicilian Defense", epd: nil, pgn: nil, uci_moves: "e2e4 c7c5", description: nil }
+        ].to_json,
+        headers: { "Content-Type" => "application/json" }
+      )
+
       get dashboard_path, env: env
       expect(response).to have_http_status(:ok)
       expect(response.body).to include("coliver")
+      expect(response.body).to include("Sicilian Defense")
     end
 
     it "redirects to login and clears session on invalid /auth/me response" do
