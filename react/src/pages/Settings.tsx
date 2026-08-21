@@ -6,6 +6,8 @@ import { useSound } from "../hooks/useSound";
 import { getMoveSound } from "../utils/sound";
 import { LanguageToggle } from "../components/LanguageToggle";
 import { Button } from "../components/Button";
+import { SettingsToggleRow } from "../components/SettingsToggleRow";
+import { SettingsRadioGroup } from "../components/SettingsRadioGroup";
 import Board from "../components/Board";
 import { START_FEN, applyMove, legalMoves } from "@knight-school/chess-core";
 import type {
@@ -25,7 +27,13 @@ const BOARD_THEMES: BoardTheme[] = [
   "black-and-white",
 ];
 
-const PIECE_SETS: PieceSet[] = ["standard", "staunty", "merida", "pirouetti", "chessnut"];
+const PIECE_SETS: PieceSet[] = [
+  "standard",
+  "staunty",
+  "merida",
+  "pirouetti",
+  "chessnut",
+];
 
 export default function Settings() {
   const { t } = useTranslation();
@@ -64,11 +72,17 @@ export default function Settings() {
         <p className="subtitle">{t("settings.subtitle")}</p>
 
         <section className="settings-section settings-section--preview">
-          <span className="settings-row-label">{t("settings.previewLabel")}</span>
+          <span className="settings-row-label">
+            {t("settings.previewLabel")}
+          </span>
           <div className="settings-preview-board">
             <Board
               position={previewFen}
-              orientation={preferences.board_orientation_mode === "black" ? "black" : "white"}
+              orientation={
+                preferences.board_orientation_mode === "black"
+                  ? "black"
+                  : "white"
+              }
               interactive
               moveColor={previewFen.split(" ")[1] === "b" ? "black" : "white"}
               getLegalMoves={previewGetLegalMoves}
@@ -79,39 +93,41 @@ export default function Settings() {
 
         <section className="settings-section">
           <div className="settings-row">
-            <span className="settings-row-label">{t("settings.languageLabel")}</span>
+            <span className="settings-row-label">
+              {t("settings.languageLabel")}
+            </span>
             <LanguageToggle />
           </div>
         </section>
 
         <section className="settings-section">
-          <h2 className="settings-section-heading">{t("settings.appearance.heading")}</h2>
+          <h2 className="settings-section-heading">
+            {t("settings.appearance.heading")}
+          </h2>
 
-          <div className="settings-row">
-            <span className="settings-row-label">{t("settings.appearance.themeLabel")}</span>
-            <div className="settings-radio-group" role="radiogroup" aria-label={t("settings.appearance.themeLabel")}>
-              {(["light", "dark", "system"] as Theme[]).map((theme) => (
-                <label key={theme} className="settings-radio">
-                  <input
-                    type="radio"
-                    name="theme"
-                    value={theme}
-                    checked={preferences.theme === theme}
-                    onChange={() => update({ theme })}
-                  />
-                  {t(`theme.${theme}`)}
-                </label>
-              ))}
-            </div>
-          </div>
+          <SettingsRadioGroup
+            name="theme"
+            ariaLabel={t("settings.appearance.themeLabel")}
+            rowLabel={t("settings.appearance.themeLabel")}
+            value={preferences.theme}
+            options={(["light", "dark", "system"] as Theme[]).map((theme) => ({
+              value: theme,
+              label: t(`theme.${theme}`),
+            }))}
+            onChange={(theme) => update({ theme })}
+          />
 
           <label className="settings-row" htmlFor="settings-board-theme">
-            <span className="settings-row-label">{t("settings.appearance.boardThemeLabel")}</span>
+            <span className="settings-row-label">
+              {t("settings.appearance.boardThemeLabel")}
+            </span>
             <select
               id="settings-board-theme"
               className="text-input settings-select"
               value={preferences.board_theme}
-              onChange={(e) => update({ board_theme: e.target.value as BoardTheme })}
+              onChange={(e) =>
+                update({ board_theme: e.target.value as BoardTheme })
+              }
             >
               {BOARD_THEMES.map((boardTheme) => (
                 <option key={boardTheme} value={boardTheme}>
@@ -122,12 +138,16 @@ export default function Settings() {
           </label>
 
           <label className="settings-row" htmlFor="settings-piece-set">
-            <span className="settings-row-label">{t("settings.appearance.pieceSetLabel")}</span>
+            <span className="settings-row-label">
+              {t("settings.appearance.pieceSetLabel")}
+            </span>
             <select
               id="settings-piece-set"
               className="text-input settings-select"
               value={preferences.piece_set}
-              onChange={(e) => update({ piece_set: e.target.value as PieceSet })}
+              onChange={(e) =>
+                update({ piece_set: e.target.value as PieceSet })
+              }
             >
               {PIECE_SETS.map((pieceSet) => (
                 <option key={pieceSet} value={pieceSet}>
@@ -137,79 +157,48 @@ export default function Settings() {
             </select>
           </label>
 
-          <label className="settings-row settings-row--checkbox">
-            <span className="settings-row-label">{t("settings.appearance.showCoordinatesLabel")}</span>
-            <span className="settings-switch">
-              <input
-                type="checkbox"
-                role="switch"
-                checked={preferences.show_coordinates}
-                onChange={(e) => update({ show_coordinates: e.target.checked })}
-              />
-              <span className="settings-switch-track" aria-hidden="true" />
-            </span>
-          </label>
+          <SettingsToggleRow
+            label={t("settings.appearance.showCoordinatesLabel")}
+            checked={preferences.show_coordinates}
+            onChange={(checked) => update({ show_coordinates: checked })}
+          />
 
-          <label className="settings-row settings-row--checkbox">
-            <span className="settings-row-label">{t("settings.appearance.boardAnimationsLabel")}</span>
-            <span className="settings-switch">
-              <input
-                type="checkbox"
-                role="switch"
-                checked={preferences.board_animations}
-                onChange={(e) => update({ board_animations: e.target.checked })}
-              />
-              <span className="settings-switch-track" aria-hidden="true" />
-            </span>
-          </label>
+          <SettingsToggleRow
+            label={t("settings.appearance.boardAnimationsLabel")}
+            checked={preferences.board_animations}
+            onChange={(checked) => update({ board_animations: checked })}
+          />
 
-          <label className="settings-row settings-row--checkbox">
-            <span className="settings-row-label">{t("settings.appearance.soundLabel")}</span>
-            <span className="settings-switch">
-              <input
-                type="checkbox"
-                role="switch"
-                checked={preferences.sound}
-                onChange={(e) => update({ sound: e.target.checked })}
-              />
-              <span className="settings-switch-track" aria-hidden="true" />
-            </span>
-          </label>
+          <SettingsToggleRow
+            label={t("settings.appearance.soundLabel")}
+            checked={preferences.sound}
+            onChange={(checked) => update({ sound: checked })}
+          />
 
-          <label className="settings-row settings-row--checkbox">
-            <span className="settings-row-label">{t("settings.appearance.snowLabel")}</span>
-            <span className="settings-switch">
-              <input
-                type="checkbox"
-                role="switch"
-                checked={snowEnabled}
-                onChange={(e) => setSnowEnabled(e.target.checked)}
-              />
-              <span className="settings-switch-track" aria-hidden="true" />
-            </span>
-          </label>
+          <SettingsToggleRow
+            label={t("settings.appearance.snowLabel")}
+            checked={snowEnabled}
+            onChange={setSnowEnabled}
+          />
         </section>
 
         <section className="settings-section">
-          <h2 className="settings-section-heading">{t("settings.boardOrientation.heading")}</h2>
-          <div
-            className="settings-radio-group settings-radio-group--stacked"
-            role="radiogroup"
-            aria-label={t("settings.boardOrientation.heading")}
-          >
-            {(["auto", "white", "black"] as BoardOrientationMode[]).map((mode) => (
-              <label key={mode} className="settings-radio">
-                <input
-                  type="radio"
-                  name="board-orientation-mode"
-                  value={mode}
-                  checked={preferences.board_orientation_mode === mode}
-                  onChange={() => update({ board_orientation_mode: mode })}
-                />
-                {t(`settings.boardOrientation.${mode}`)}
-              </label>
-            ))}
-          </div>
+          <h2 className="settings-section-heading">
+            {t("settings.boardOrientation.heading")}
+          </h2>
+          <SettingsRadioGroup
+            name="board-orientation-mode"
+            ariaLabel={t("settings.boardOrientation.heading")}
+            stacked
+            value={preferences.board_orientation_mode}
+            options={(["auto", "white", "black"] as BoardOrientationMode[]).map(
+              (mode) => ({
+                value: mode,
+                label: t(`settings.boardOrientation.${mode}`),
+              }),
+            )}
+            onChange={(mode) => update({ board_orientation_mode: mode })}
+          />
         </section>
 
         <section className="settings-section settings-section--footer">
