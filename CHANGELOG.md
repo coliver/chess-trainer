@@ -1,5 +1,8 @@
 ## 2026-08-21
 
+### Refactors
+- refactor(react): extract shared `AuthCard` component (`src/components/AuthCard.tsx`) and `apiErrorMessage` util (`src/utils/apiError.ts`) from the identical page-wrapper markup and axios-error-handling logic duplicated across `Login.tsx`, `Register.tsx`, and `VerifyEmail.tsx`
+
 ### Fixes
 - fix(react): `src/api.ts`'s response interceptor no longer retries a 401 from `/auth/login`, `/auth/register`, or `/auth/refresh` itself through the refresh flow — previously, with no `refresh_token` yet in `localStorage` (the normal case for a first-time visitor), the refresh attempt threw synchronously and hard-navigated to `/login`, wiping the just-rendered "Invalid credentials" error before it could be read
 - fix(react): fix two real WCAG AA color-contrast failures on the dashboard uncovered once the interceptor fix let the accessibility scan actually finish — `.progress-group-label` ("Training"/"Puzzles" headings) and `.dashboard-greeting` both used low `opacity` on `var(--text)` (3.99:1 and 4.34:1 respectively, below the 4.5:1 minimum); raised both to `opacity: 0.85` (`packages/shared-styles/dashboard.css`)
