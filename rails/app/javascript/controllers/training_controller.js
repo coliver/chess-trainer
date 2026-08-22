@@ -86,11 +86,7 @@ export default class extends Controller {
 
     setSoundsEnabled(this.soundEnabledValue !== "false")
 
-    const orientationMode = this.boardOrientationModeValue || "auto"
-    this.orientation =
-      orientationMode === "white" ? "white" :
-      orientationMode === "black" ? "black" :
-      this.playerColor === "b" ? "black" : "white"
+    this.orientation = this.computeOrientation()
 
     this.board = createTrainingBoard(this.hostTarget, {
       position: this.fen,
@@ -100,10 +96,7 @@ export default class extends Controller {
       showCoordinates: this.showCoordinatesValue !== "false",
       animated: this.boardAnimationsValue !== "false",
     })
-    this.board.enableMoveInput(
-      this.handleMoveInput.bind(this),
-      this.playerColor === "b" ? COLOR.black : COLOR.white,
-    )
+    this.lockMoveInputToPlayerColor()
     this.lastBoardFen = this.fen
 
     playSound("gameStart")
@@ -283,6 +276,28 @@ export default class extends Controller {
     this.lastMove = null
     this.pendingMove = null
     this.timeline = createTimeline(this.fen)
+
+    // The next item can flip which side the trainee plays (e.g. a session
+    // mixing White and Black openings) — re-derive orientation and re-lock
+    // move input to the new playerColor, or the board keeps accepting input
+    // for the previous item's side.
+    this.orientation = this.computeOrientation()
+    this.board?.setOrientation(this.orientation === "black" ? COLOR.black : COLOR.white)
+    this.lockMoveInputToPlayerColor()
+  }
+
+  computeOrientation() {
+    const mode = this.boardOrientationModeValue || "auto"
+    if (mode === "white") return "white"
+    if (mode === "black") return "black"
+    return this.playerColor === "b" ? "black" : "white"
+  }
+
+  lockMoveInputToPlayerColor() {
+    this.board?.enableMoveInput(
+      this.handleMoveInput.bind(this),
+      this.playerColor === "b" ? COLOR.black : COLOR.white,
+    )
   }
 
   // Opponent's scripted reply: when it isn't the player's turn, the current
