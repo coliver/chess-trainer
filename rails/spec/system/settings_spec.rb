@@ -6,6 +6,12 @@ require "rails_helper"
 # saved preference. Both only show up with a real browser driving real JS.
 RSpec.describe "Settings", type: :system do
   let(:base) { ENV.fetch("API_BASE_URL", "http://api:8000") }
+  let(:preferences) do
+    {
+      language: "en-US", theme: "light", board_theme: "default", piece_set: "standard",
+      show_coordinates: false, board_animations: true, board_orientation_mode: "auto", sound: false
+    }
+  end
 
   def log_in
     stub_request(:post, "#{base}/auth/login").to_return(
@@ -51,13 +57,6 @@ RSpec.describe "Settings", type: :system do
       current.merge!(JSON.parse(request.body).symbolize_keys)
       { status: 200, body: current.to_json, headers: { "Content-Type" => "application/json" } }
     end
-  end
-
-  let(:preferences) do
-    {
-      language: "en-US", theme: "light", board_theme: "default", piece_set: "standard",
-      show_coordinates: false, board_animations: true, board_orientation_mode: "auto", sound: false
-    }
   end
 
   before do

@@ -52,7 +52,7 @@ class SettingsController < ApplicationController
     "en-x-groot" => "🌱",
 
     "sd" => "🧝",
-    "khz" => "⛏️",
+    "khz" => "⛏️"
   }.freeze
 
   # Human-readable labels for the above live in the shared
