@@ -87,7 +87,9 @@ RSpec.describe "Settings", type: :system do
       expect(page).to have_no_css(".coordinates .coordinate")
     end
 
-    check "show_coordinates"
+    # The native checkbox is opacity: 0 (a custom toggle-switch visual sits on
+    # top) — Cuprite treats opacity: 0 as not-visible, so click via its label.
+    check "show_coordinates", allow_label_click: true
 
     within(".settings-preview-board") do
       expect(page).to have_css(".coordinates .coordinate")
