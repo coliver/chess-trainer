@@ -1,0 +1,11 @@
+<% content_for :title, "Server unavailable" %>
+
+<main class="page">
+  <div class="card" style="max-width: 520px; margin-top: 20px;">
+    <h1 class="title" style="margin-bottom: 6px;">Server unavailable</h1>
+    <p class="subtitle">Knight School's server is temporarily unreachable. Please try again shortly.</p>
+    <p class="auth-alt" style="margin-top: 20px;">
+      <%= link_to "Try again", request.path, class: "btn", style: "display: inline-block;" %>
+    </p>
+  </div>
+</main>

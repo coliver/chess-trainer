@@ -21,14 +21,6 @@
       <% if @error %>
         <div class="auth-error"><%= @error %></div>
       <% end %>
-
-      <% if flash[:alert] %>
-        <div class="auth-error"><%= flash[:alert] %></div>
-      <% end %>
-
-      <% if flash[:notice] %>
-        <div class="auth-hint"><%= flash[:notice] %></div>
-      <% end %>
     <% end %>
 
     <% if @email_not_verified %>

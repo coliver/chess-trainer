@@ -6,10 +6,6 @@
       Welcome back<%= @current_user["username"].present? ? ", #{@current_user["username"]}" : "" %>
     </div>
 
-    <% if flash[:alert] %>
-      <div class="auth-error"><%= flash[:alert] %></div>
-    <% end %>
-
     <div class="card">
       <section class="progress-overview" aria-label="Your progress">
         <div class="progress-group" aria-label="Training">

@@ -82,6 +82,7 @@ RSpec.describe "Sessions", type: :request do
       expect(response).to redirect_to(login_path)
       follow_redirect!
       expect(flash[:notice]).to eq("If that account exists and is unverified, a verification email has been sent.")
+      expect(response.body).to include("If that account exists and is unverified, a verification email has been sent.")
     end
   end
 end

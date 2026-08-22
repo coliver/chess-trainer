@@ -10,5 +10,8 @@ application.register("hello", HelloController)
 import BoardPreviewController from "./board_preview_controller"
 application.register("board-preview", BoardPreviewController)
 
+import OpeningThumbController from "./opening_thumb_controller"
+application.register("opening-thumb", OpeningThumbController)
+
 import TrainingController from "./training_controller"
 application.register("training", TrainingController)

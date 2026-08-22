@@ -8,3 +8,17 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+.page-flash {
+  width: 1126px;
+  max-width: 100%;
+  margin: 16px auto 0;
+  padding: 0 20px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.page-flash .auth-hint,
+.page-flash .auth-error {
+  margin-top: 0;
+}

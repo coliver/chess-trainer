@@ -55,7 +55,12 @@
           <%= link_to dashboard_path(base: g.base, eco: g.representative["eco"], name: g.representative["name"]),
                 class: "opening-card#{" selected" if @selected && OpeningGrouping.base_name_of(@selected["name"]) == g.base}",
                 data: { turbo_frame: "opening_browser" } do %>
-            <div class="oc-thumb"><div class="oc-thumb-ph" aria-hidden="true"></div></div>
+            <div class="oc-thumb" data-controller="opening-thumb"
+                  data-opening-thumb-epd-value="<%= g.representative["epd"] %>"
+                  data-opening-thumb-uci-moves-value="<%= g.representative["uci_moves"] %>"
+                  data-opening-thumb-orientation-value="<%= OpeningGrouping.color_of(g.base) == "b" ? "black" : "white" %>">
+              <div class="board-host" data-opening-thumb-target="host"></div>
+            </div>
             <div class="oc-name"><%= g.base %></div>
             <div class="oc-foot">
               <span class="oc-count"><%= pluralize(g.count, "variation") %></span>
@@ -108,7 +113,7 @@
             data-action="board-preview#playBlack">Play as Black</button>
     </div>
 
-    <%= form_with url: trainings_path, method: :post do %>
+    <%= form_with url: trainings_path, method: :post, data: { turbo_frame: "_top" } do %>
       <% if @selected %>
         <%= hidden_field_tag :opening_eco, @selected["eco"] %>
         <%= hidden_field_tag :opening_name, @selected["name"] %>

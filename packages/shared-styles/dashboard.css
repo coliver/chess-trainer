@@ -631,6 +631,27 @@
   background: var(--accent);
   color: #fff;
 }
+.tile-action {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #fff;
+  font-size: 14.5px;
+  font-weight: 650;
+  cursor: pointer;
+}
+.tile-action:hover:not(:disabled) {
+  filter: brightness(1.06);
+}
+.tile-action:disabled {
+  background: var(--code-bg);
+  color: var(--text);
+  border-color: var(--border);
+  cursor: default;
+  opacity: 1;
+}
 .ob-start {
   margin-top: auto;
 }

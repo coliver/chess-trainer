@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   allow_browser versions: :modern
 
   rescue_from "AuthenticatedApiClient::Unauthorized", with: :handle_unauthorized
+  rescue_from Faraday::ConnectionFailed, Faraday::TimeoutError, with: :handle_api_down
 
   helper_method :logged_in?
 
@@ -33,5 +34,9 @@ class ApplicationController < ActionController::Base
   def handle_unauthorized
     reset_session
     redirect_to login_path
+  end
+
+  def handle_api_down
+    render "errors/api_down", status: :service_unavailable
   end
 end
