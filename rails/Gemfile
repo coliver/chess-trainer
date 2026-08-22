@@ -31,6 +31,7 @@ group :test do
   # Stubs HTTP calls to the FastAPI backend in tests, since there's no real API server in test env.
   gem "webmock"
   gem "rspec-rails"
+  gem "simplecov", require: false
 end
 
 group :development, :test do

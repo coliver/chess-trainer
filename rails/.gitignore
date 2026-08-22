@@ -43,3 +43,6 @@
 /config/credentials/*.key
 !/config/credentials/test.key
 
+# SimpleCov output
+/coverage/
+
