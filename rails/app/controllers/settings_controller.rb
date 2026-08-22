@@ -50,7 +50,7 @@ class SettingsController < ApplicationController
   def update
     @preferences = api.patch("/users/me/preferences", body: preferences_params)
     session[:preferences] = @preferences
-    redirect_to settings_path, notice: "Preferences saved."
+    redirect_to safe_return_to || settings_path, notice: "Preferences saved."
   rescue ApiClient::ApiError => e
     flash.now[:alert] = e.detail.presence || "Couldn't save preferences"
     @preferences = preferences_params.stringify_keys
@@ -58,6 +58,14 @@ class SettingsController < ApplicationController
   end
 
   private
+
+  # Lets the header's theme-toggle button submit a preferences update from
+  # any page and land back where it was, instead of always bouncing to
+  # /rails/settings. Only ever a same-origin relative path.
+  def safe_return_to
+    path = params[:return_to]
+    path if path.present? && path.start_with?("/") && !path.start_with?("//")
+  end
 
   def preferences_params
     {
