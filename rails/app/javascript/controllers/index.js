@@ -21,3 +21,6 @@ application.register("puzzle", PuzzleController)
 
 import ThemeToggleController from "./theme_toggle_controller"
 application.register("theme-toggle", ThemeToggleController)
+
+import ThemeSelectController from "./theme_select_controller"
+application.register("theme-select", ThemeSelectController)

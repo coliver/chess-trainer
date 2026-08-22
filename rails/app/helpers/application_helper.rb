@@ -1,21 +1,21 @@
 module ApplicationHelper
   # Serializes the *entire* current-locale translation set into the layout so
   # Stimulus controllers can look strings up via app/javascript/i18n.js's t().
-  # Reuses the same generated file I18nJsonLoader already writes to
-  # tmp/i18n_json_cache (shared-json keys plus this locale's Rails-only
-  # additions from config/locales/en.yml, both already %{}-interpolation-ready),
-  # unwraps its top-level locale key, and flattens it to dot-path keys (e.g.
-  # "puzzles.correct"). There's no separate "js" namespace anymore — a view
-  # and its Stimulus controller reference the literal same key. It's small
-  # (~200 lines of JSON), so serializing the whole set isn't a bundle-size
+  # Reads straight from I18n's own in-memory store (which already merges the
+  # I18nJsonLoader-generated shared-json keys with this locale's Rails-only
+  # additions from config/locales/en.yml — both loaded via config.i18n.load_path,
+  # both already %{}-interpolation-ready) and flattens it to dot-path keys
+  # (e.g. "puzzles.correct"). There's no separate "js" namespace anymore — a
+  # view and its Stimulus controller reference the literal same key. It's
+  # small (~200 lines), so serializing the whole set isn't a bundle-size
   # concern. Nested plural hashes (the few dashboard keys using i18next's
   # _one/_other suffixes) flatten to keys like "dashboard.openings.matches.one" —
   # harmless since no current JS call site looks up a pluralized string.
   def js_translations
-    cache_file = I18nJsonLoader::CACHE_DIR.join("#{I18n.locale}.json")
-    data = JSON.parse(File.read(cache_file))
-    flatten_translation_keys(data[I18n.locale.to_s] || {})
-  rescue Errno::ENOENT, JSON::ParserError
+    backend = I18n.backend
+    backend.send(:init_translations) unless backend.initialized?
+    flatten_translation_keys(backend.translations[I18n.locale] || {})
+  rescue StandardError
     {}
   end
 
