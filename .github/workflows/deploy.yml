@@ -48,6 +48,15 @@ jobs:
             docker compose -f docker-compose.yml -f docker-compose.prod.yml \
               up -d --build db api rails nginx
 
+            # nginx's config is a bind-mounted directory (nginx/conf-prod),
+            # so `up -d` won't recreate the nginx container just because a
+            # .conf file's contents changed underneath it — the running
+            # worker keeps serving whatever config it loaded at last start
+            # or reload. Reload explicitly so config-only changes (new
+            # location blocks, etc.) actually take effect on every deploy.
+            docker compose -f docker-compose.yml -f docker-compose.prod.yml \
+              exec -T nginx nginx -s reload
+
             # Aggressive cleanup: every deploy rebuilds the api image via
             # BuildKit, and `docker image prune -f` alone only removes
             # dangling (untagged) images, so BuildKit's layer cache and any
