@@ -1,5 +1,7 @@
 # Knight School — Rails + Hotwire Frontend
 
+![Coverage](https://img.shields.io/badge/coverage-98%25-brightgreen)
+
 > A second, dev-only frontend against the same `/api` backend. Not deployed to
 > prod. See the root README's "Swappable frontends" section for the
 > convention this follows, and [`PLAN.md`](./PLAN.md) for the full design
@@ -54,9 +56,18 @@ Per this repo's Docker-only convention, run everything through the
 running container, not host Ruby:
 
 ```sh
-docker compose exec rails bundle exec rspec     # request specs (WebMock-stubbed API calls)
-docker compose exec rails bundle exec rubocop   # style (rubocop-rails-omakase)
+docker compose exec rails bundle exec rspec     # request/service/helper specs (WebMock-stubbed API calls)
+docker compose exec rails bundle exec rubocop   # style (rubocop-rails-omakase + rubocop-rspec)
 ```
+
+`rspec` prints a SimpleCov line-coverage summary and writes a full report
+to `coverage/index.html`. rubocop-rspec enforces the automated form of
+[betterspecs.org](https://www.betterspecs.org/) conventions — `context
+"when ..."` wording, `described_class`, one clear behavior per example —
+with `ExampleLength`/`MultipleExpectations`/`NestedGroups` thresholds
+raised in `.rubocop.yml` to fit how the request specs here are actually
+written (several WebMock stubs plus a couple of closely-related
+assertions per example), rather than the gem's stricter defaults.
 
 CI runs the same two checks on every PR — see
 [`.github/workflows/rails.yml`](../.github/workflows/rails.yml). It also
