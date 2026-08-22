@@ -17,7 +17,7 @@ import { fileURLToPath } from "node:url";
 
 const localesDir = path.join(
   path.dirname(fileURLToPath(import.meta.url)),
-  "../src/i18n/locales",
+  "../../packages/i18n-locales/locales",
 );
 const checkOnly = process.argv.includes("--check");
 

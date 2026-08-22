@@ -164,7 +164,7 @@ export default class extends Controller {
 
       if (data.correct) {
         playSound("puzzleCorrect")
-        this.feedback = `✅ ${t("puzzle.correct")}`
+        this.feedback = `✅ ${t("puzzles.correct")}`
         this.solved += 1
         this.streak += 1
         this.bestStreak = Math.max(this.bestStreak, this.streak)
@@ -174,14 +174,14 @@ export default class extends Controller {
       }
 
       playSound("puzzleWrong")
-      this.feedback = `❌ ${data.reason || t("puzzle.incorrect_fallback")}`
+      this.feedback = `❌ ${data.reason || t("puzzles.incorrectFallback")}`
       this.fen = preFen
       this.streak = 0
       this.isSubmitting = false
       this.render()
       this.bindMoveInput()
     } catch (err) {
-      this.feedback = err.detail || t("puzzle.error_submitting")
+      this.feedback = err.detail || t("puzzles.submitError")
       this.isSubmitting = false
       this.render()
     }
@@ -207,9 +207,9 @@ export default class extends Controller {
         this.puzzleId = null
         this.lastMoveUci = ""
         if (this.hasNoPuzzleBoxTarget) this.noPuzzleBoxTarget.hidden = false
-        this.feedback = t("puzzle.no_puzzles_due")
+        this.feedback = t("puzzles.noPuzzlesDue")
       } else {
-        this.feedback = t("puzzle.could_not_load_next")
+        this.feedback = t("puzzles.loadFailed")
       }
       this.isSubmitting = false
       this.render()
@@ -261,7 +261,7 @@ export default class extends Controller {
     const turn = sideToMove(this.fen)
     if (this.hasTurnTarget) this.turnTarget.classList.toggle("black", turn === "b")
     if (this.hasTurnLabelTarget) {
-      this.turnLabelTarget.textContent = turn === "w" ? t("common.white_to_move") : t("common.black_to_move")
+      this.turnLabelTarget.textContent = turn === "w" ? t("training.whiteToMove") : t("training.blackToMove")
     }
   }
 
@@ -272,20 +272,22 @@ export default class extends Controller {
       this.statusIconTarget.textContent = kind === "correct" ? "✅" : kind === "incorrect" ? "❌" : "♟"
     }
     if (this.hasStatusMsgTarget) {
-      this.statusMsgTarget.textContent = this.feedback || (this.puzzleId ? t("puzzle.find_best_move") : "")
+      this.statusMsgTarget.textContent = this.feedback || (this.puzzleId ? t("puzzles.findBestMove") : "")
     }
     if (this.hasRatingChipTarget) {
-      this.ratingChipTarget.textContent = this.rating ? t("puzzle.rating", { rating: this.rating }) : ""
+      this.ratingChipTarget.textContent = this.rating ? t("puzzles.rating", { rating: this.rating }) : ""
     }
   }
 
   renderStats() {
     if (this.hasSolvedStatTarget) {
-      this.solvedStatTarget.textContent = t("puzzle.solved", { count: this.solved })
+      this.solvedStatTarget.textContent = t("puzzles.solved", { count: this.solved })
     }
     if (this.hasStreakStatTarget) {
-      const streakText = t("puzzle.streak", { count: this.streak })
-      this.streakStatTarget.textContent = this.streak > 0 ? `${streakText} 🔥` : streakText
+      let streakText = t("puzzles.streak", { count: this.streak })
+      if (this.streak > 0) streakText += " 🔥"
+      if (this.bestStreak > 0) streakText += t("puzzles.streakBest", { best: this.bestStreak })
+      this.streakStatTarget.textContent = streakText
       this.streakStatTarget.classList.toggle("is-active", this.streak > 0)
     }
   }

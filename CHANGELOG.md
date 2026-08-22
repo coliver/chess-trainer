@@ -1,5 +1,11 @@
 ## 2026-08-22
 
+### Refactors
+- refactor(i18n): unify Rails and React onto one shared translation source instead of two independently-authored copies. Moved React's locale files to `packages/i18n-locales/locales/` (React's `en-US.json` is now the single source of truth for any UI string both frontends render); rewrote every Rails `t()` call site — controllers, views, and `app/javascript/controllers/*.js` — to pull React's exact shared key paths (`t("puzzles.title")`, `t("training.trainAgain")`, etc.) instead of Rails' self-invented namespace, which also fixes the wording drift the two apps had accumulated independently (e.g. `training.trainAgain`: "Train again" → "Train this opening again"; `auth.login.title`: "Log in" → "Login"). Rewrote `ApplicationHelper#js_translations` to serialize the whole current-locale translation set (previously just a hand-curated `js:` subtree, which no longer exists — a view and its Stimulus controller now reference the literal same key) from the same generated cache file `I18nJsonLoader` already produces. `config/locales/en.yml` shrank to only the handful of strings with no React equivalent (flash-redirect messages, the dashboard search-results partial, the server-unavailable page) — everything else now resolves through `packages/i18n-locales/locales/en-US.json` via `config/initializers/i18n_json_loader.rb` (unchanged from the prior session)
+
+### Fixes
+- fix(rails): wire up the Puzzles page's already-tracked `bestStreak` into `puzzle_controller.js#renderStats` — it was computed (`Math.max(bestStreak, streak)`) but never displayed; now appends React's `puzzles.streakBest` suffix (" · best {{best}}") to the streak pill once a best streak exists, matching `Puzzles.tsx`
+
 ### Features
 - feat(rails): roll the I18n engine (server-side `t()` + the `app/javascript/i18n.js` bridge, first wired on Puzzles/header) out to every remaining view, controller, and Stimulus controller — Sessions, Registrations, EmailVerifications, Dashboard, Settings, Trainings, and the shared error page; content stays English-only, but no view or controller has a hardcoded UI string left. Added `config.i18n.raise_on_missing_translations = true` in `config/environments/test.rb` so a missing/mistyped `t()` key fails RSpec loudly instead of silently rendering "translation missing: ..."
 

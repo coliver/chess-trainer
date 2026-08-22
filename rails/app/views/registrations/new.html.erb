@@ -2,32 +2,32 @@
 
 <main class="page">
   <div class="card" style="max-width: 520px; margin-top: 20px;">
-    <h1 class="title" style="margin-bottom: 6px;"><%= t(".title") %></h1>
-    <p class="subtitle"><%= t(".subtitle") %></p>
+    <h1 class="title" style="margin-bottom: 6px;"><%= t("auth.register.title") %></h1>
+    <p class="subtitle"><%= t("auth.register.subtitle") %></p>
 
     <%= form_with url: register_path, method: :post, local: true, class: "auth-form" do %>
       <label class="auth-field">
-        <span class="auth-label"><%= t(".email_label") %></span>
+        <span class="auth-label"><%= t("auth.register.emailLabel") %></span>
         <%= email_field_tag :email, @email, required: true, autocomplete: "email", class: "text-input" %>
-        <span class="auth-hint"><%= t(".email_hint") %></span>
+        <span class="auth-hint"><%= t("auth.register.emailDisclaimer") %></span>
       </label>
 
       <label class="auth-field">
-        <span class="auth-label"><%= t(".username_label") %></span>
+        <span class="auth-label"><%= t("auth.register.usernameLabel") %></span>
         <%= text_field_tag :username, @username, required: true, autocomplete: "username", class: "text-input" %>
       </label>
 
       <label class="auth-field">
-        <span class="auth-label"><%= t(".password_label") %></span>
+        <span class="auth-label"><%= t("auth.register.passwordLabel") %></span>
         <%= password_field_tag :password, nil, required: true, autocomplete: "new-password", class: "text-input" %>
       </label>
 
       <label class="auth-field">
-        <span class="auth-label"><%= t(".confirm_password_label") %></span>
+        <span class="auth-label"><%= t("auth.register.passwordConfirmLabel") %></span>
         <%= password_field_tag :password_confirmation, nil, required: true, autocomplete: "new-password", class: "text-input" %>
       </label>
 
-      <button class="btn" type="submit" style="margin-top: 6px;"><%= t(".submit") %></button>
+      <button class="btn" type="submit" style="margin-top: 6px;"><%= t("auth.register.submit") %></button>
 
       <% if @error %>
         <div class="auth-error"><%= @error %></div>
@@ -35,7 +35,7 @@
     <% end %>
 
     <p class="auth-alt">
-      <%= t(".already_have_account") %> <%= link_to t(".login_link"), login_path %>
+      <%= t("auth.register.haveAccount") %> <%= link_to t("auth.register.loginLink"), login_path %>
     </p>
   </div>
 </main>

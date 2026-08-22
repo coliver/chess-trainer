@@ -20,6 +20,7 @@ class TrainingsController < ApplicationController
     @board_orientation_mode = prefs["board_orientation_mode"]
     @sound_enabled = prefs["sound"]
   rescue ApiClient::ApiError => e
+    # Rails-only key: flash+redirect, no React equivalent flow.
     redirect_to dashboard_path, alert: e.detail.presence || t("trainings.controller.could_not_load")
   end
 
@@ -37,6 +38,7 @@ class TrainingsController < ApplicationController
 
     redirect_to training_path(response["id"])
   rescue ApiClient::ApiError => e
+    # Rails-only key: flash+redirect, no React equivalent flow.
     redirect_to dashboard_path, alert: e.detail.presence || t("trainings.controller.could_not_start")
   end
 

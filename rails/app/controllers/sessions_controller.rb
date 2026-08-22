@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
     if e.status == 403 && e.detail == "Email not verified"
       @email_not_verified = true
     else
-      @error = e.detail.presence || t("sessions.controller.login_failed")
+      @error = e.detail.presence || t("auth.login.errorLoginFailed")
     end
 
     render :new, status: :unprocessable_entity

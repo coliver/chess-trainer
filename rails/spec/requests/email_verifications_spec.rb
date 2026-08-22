@@ -31,13 +31,13 @@ RSpec.describe "Email Verifications", type: :request do
 
       get verify_email_path, params: { token: "bad-token" }, env: env
       expect(response).to have_http_status(:ok)
-      expect(response.body.downcase).to match(/invalid or has expired/)
+      expect(response.body.downcase).to match(/invalid or expired/)
     end
 
     it "shows invalid message and doesn't call API when token is missing" do
       get verify_email_path, env: env
       expect(response).to have_http_status(:ok)
-      expect(response.body.downcase).to match(/invalid or has expired/)
+      expect(response.body.downcase).to match(/invalid or expired/)
       expect(WebMock).not_to have_requested(:get, %r{#{base}/auth/verify-email})
     end
   end

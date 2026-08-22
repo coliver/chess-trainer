@@ -3,22 +3,22 @@
 <main class="page">
   <div class="card" style="max-width: 520px; margin-top: 20px;">
     <% if @state == :success %>
-      <h1 class="title" style="margin-bottom: 6px;"><%= t(".verified_title") %></h1>
+      <h1 class="title" style="margin-bottom: 6px;"><%= t("auth.verifyEmail.successTitle") %></h1>
       <p class="subtitle">
         <% if @email %>
-          <%= t(".verified_with_email", email: @email) %>
+          <%= t("auth.verifyEmail.successSubtitleWithEmail", email: @email) %>
         <% else %>
-          <%= t(".verified_generic") %>
+          <%= t("auth.verifyEmail.successSubtitleNoEmail") %>
         <% end %>
       </p>
       <p style="margin-top: 20px;">
-        <%= link_to t(".go_to_login"), login_path, class: "btn", style: "display: inline-block;" %>
+        <%= link_to t("auth.verifyEmail.goToLogin"), login_path, class: "btn", style: "display: inline-block;" %>
       </p>
     <% else %>
-      <h1 class="title" style="margin-bottom: 6px;"><%= t(".failed_title") %></h1>
-      <p class="subtitle"><%= t(".failed_subtitle") %></p>
+      <h1 class="title" style="margin-bottom: 6px;"><%= t("auth.verifyEmail.errorTitle") %></h1>
+      <p class="subtitle"><%= t("auth.verifyEmail.errorSubtitle") %></p>
       <p style="margin-top: 20px;">
-        <%= link_to t(".return_to_login"), login_path, class: "btn", style: "display: inline-block;" %>
+        <%= link_to t("auth.verifyEmail.returnToLogin"), login_path, class: "btn", style: "display: inline-block;" %>
       </p>
     <% end %>
   </div>

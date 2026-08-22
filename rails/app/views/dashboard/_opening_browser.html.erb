@@ -1,13 +1,13 @@
 <header class="ob-toolbar">
   <div class="ob-heading">
-    <h1 class="ob-title"><%= t(".all_openings") %></h1>
+    <h1 class="ob-title"><%= t("dashboard.openings.allOpenings") %></h1>
     <p class="ob-sub">
       <% if @view == :search %>
-        <%= pluralize(@search_matches.size, "match", plural: "matches") %>
+        <%= t("dashboard.openings.matches", count: @search_matches.size) %>
       <% elsif @view == :variations && @active_group %>
-        <%= pluralize(@active_group.count, "variation") %> <%= t(".in_library") %>
+        <%= t("dashboard.openings.variationsInLibrary", count: @active_group.count) %>
       <% else %>
-        <%= pluralize(@visible_groups.size, "opening") %> <%= t(".to_train") %>
+        <%= t("dashboard.openings.openingsToTrain", count: @visible_groups.size) %>
       <% end %>
     </p>
   </div>
@@ -15,8 +15,8 @@
   <div class="ob-search">
     <span class="ob-search-icon" aria-hidden="true">⌕</span>
     <%= form_with url: dashboard_path, method: :get, data: { turbo_frame: "opening_browser" } do %>
-      <%= search_field_tag :q, @query, placeholder: t(".search_placeholder"), autocomplete: "off",
-            oninput: "this.form.requestSubmit()", aria: { label: t(".search_aria_label") } %>
+      <%= search_field_tag :q, @query, placeholder: t("dashboard.openings.searchPlaceholder"), autocomplete: "off",
+            oninput: "this.form.requestSubmit()", aria: { label: t("dashboard.openings.searchAriaLabel") } %>
       <% if @selected %>
         <%= hidden_field_tag :eco, @selected["eco"] %>
         <%= hidden_field_tag :name, @selected["name"] %>
@@ -24,11 +24,11 @@
     <% end %>
   </div>
   <% if @view == :bases %>
-    <%= link_to @sort_az ? t(".sort_az") : t(".sort_popular"),
+    <%= link_to t("dashboard.openings.sortButton", mode: @sort_az ? t("dashboard.openings.sortAZ") : t("dashboard.openings.sortPopular")),
           dashboard_path(sort: @sort_az ? nil : "az", color: @color_filter == "all" ? nil : @color_filter),
           class: "ob-sort", data: { turbo_frame: "opening_browser" } %>
-    <div class="ob-color-filter" role="radiogroup" aria-label="<%= t(".filter_by_color") %>">
-      <% [["all", t(".color_all")], ["w", t(".color_white")], ["b", t(".color_black")]].each do |value, label| %>
+    <div class="ob-color-filter" role="radiogroup" aria-label="<%= t("dashboard.openings.filterByColor") %>">
+      <% [["all", t("dashboard.openings.all")], ["w", t("dashboard.openings.white")], ["b", t("dashboard.openings.black")]].each do |value, label| %>
         <%= link_to label, dashboard_path(color: value, sort: @sort_az ? "az" : nil), role: "radio",
               aria: { checked: @color_filter == value },
               class: "ob-color-filter-btn#{" selected" if @color_filter == value}",
@@ -43,8 +43,8 @@
     <% if @view == :search %>
       <%= render "search_results" %>
     <% elsif @view == :variations && @active_group %>
-      <nav class="ob-crumbs" aria-label="<%= t(".breadcrumb") %>">
-        <%= link_to t(".all_openings"), dashboard_path, data: { turbo_frame: "opening_browser" } %>
+      <nav class="ob-crumbs" aria-label="<%= t("dashboard.openings.breadcrumb") %>">
+        <%= link_to t("dashboard.openings.allOpenings"), dashboard_path, data: { turbo_frame: "opening_browser" } %>
         <span class="sep">/</span>
         <span class="here"><%= @active_group.base %></span>
       </nav>
@@ -65,7 +65,7 @@
             </div>
             <div class="oc-name"><%= g.base %></div>
             <div class="oc-foot">
-              <span class="oc-count"><%= pluralize(g.count, "variation") %></span>
+              <span class="oc-count"><%= t("dashboard.openings.variationCount", count: g.count) %></span>
               <span class="eco-chip"><%= g.eco %></span>
             </div>
           <% end %>
@@ -90,7 +90,7 @@
           <% moves = (@selected["uci_moves"] || "").split(/\s+/) %>
           <div class="ply-stepper">
             <button type="button" class="ply-btn<%= " active" if moves.empty? %>"
-                  data-action="board-preview#setPly" data-ply="0"><%= t(".start_position") %></button>
+                  data-action="board-preview#setPly" data-ply="0"><%= t("dashboard.openings.boardPreviewStart") %></button>
             <% moves.each_with_index do |uci, idx| %>
               <button type="button" class="ply-btn<%= " active" if idx + 1 == moves.size %>"
                     data-action="board-preview#setPly" data-ply="<%= idx + 1 %>"><%= uci %></button>
@@ -104,17 +104,17 @@
     <% else %>
       <div class="ob-empty-state">
         <span class="ob-empty-glyph" aria-hidden="true">♞</span>
-        <p class="opening-description opening-description--empty"><%= t(".pick_opening_hint") %></p>
+        <p class="opening-description opening-description--empty"><%= t("dashboard.openings.pickToPreview") %></p>
       </div>
     <% end %>
 
-    <div class="ob-color-toggle" role="radiogroup" aria-label="<%= t(".play_as") %>">
+    <div class="ob-color-toggle" role="radiogroup" aria-label="<%= t("dashboard.openings.playAs") %>">
       <button type="button" role="radio" aria-checked="<%= @player_color != "b" %>"
             class="ob-color-btn<%= " selected" unless @player_color == "b" %>"
-            data-action="board-preview#playWhite"><%= t(".play_as_white") %></button>
+            data-action="board-preview#playWhite"><%= t("dashboard.openings.playAsWhite") %></button>
       <button type="button" role="radio" aria-checked="<%= @player_color == "b" %>"
             class="ob-color-btn<%= " selected" if @player_color == "b" %>"
-            data-action="board-preview#playBlack"><%= t(".play_as_black") %></button>
+            data-action="board-preview#playBlack"><%= t("dashboard.openings.playAsBlack") %></button>
     </div>
 
     <%= form_with url: trainings_path, method: :post, data: { turbo_frame: "_top" } do %>
@@ -124,7 +124,7 @@
       <% end %>
       <%= hidden_field_tag :player_color, @player_color, data: { board_preview_target: "playerColorField" } %>
       <button type="submit" class="tile-action ob-start" <%= "disabled" unless @selected %>>
-        <%= @selected ? t(".start_training", label: opening_start_label(@selected)) : t(".choose_opening") %>
+        <%= @selected ? t("dashboard.openings.startLabel", name: opening_start_label(@selected)) : t("dashboard.openings.chooseOpening") %>
       </button>
     <% end %>
   </aside>

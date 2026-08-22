@@ -23,6 +23,7 @@ This is a work in progress — see the [Roadmap](./ROADMAP.md) for planned work.
 - **[Backend](./backend/README.md)**: API logic, Database schema, and Chess engine rules.
 - **[React frontend](./react/README.md)**: React components, State management, and UI/UX.
 - **[Shared core](./packages/chess-core)**: Framework-neutral chess logic (`chess.js`) used by the frontend.
+- **[Shared translations](./packages/i18n-locales)**: UI copy, one JSON file per locale, the single source of truth for translated strings.
 - **[Infrastructure](./nginx)**: Nginx configuration and Docker orchestration.
 
 ---

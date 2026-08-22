@@ -7,14 +7,14 @@
         <div class="train-board-col"></div>
         <aside class="train-rail">
           <div class="rail-head">
-            <div class="rail-eyebrow"><%= t(".eyebrow") %></div>
-            <div class="rail-title"><h1><%= t(".title") %></h1></div>
+            <div class="rail-eyebrow"><%= t("puzzles.eyebrow") %></div>
+            <div class="rail-title"><h1><%= t("puzzles.title") %></h1></div>
           </div>
           <div class="train-status your" role="status">
             <span class="train-status-ic" aria-hidden="true">♟</span>
-            <div><div class="train-status-msg"><%= t(".no_puzzles_due") %></div></div>
+            <div><div class="train-status-msg"><%= t("puzzles.noPuzzlesDue") %></div></div>
           </div>
-          <%= link_to t(".back_to_dashboard"), dashboard_path, class: "puzzles-back-link" %>
+          <%= link_to t("puzzles.backToDashboard"), dashboard_path, class: "puzzles-back-link" %>
         </aside>
       </div>
     <% else %>
@@ -39,10 +39,10 @@
           <div class="board-under">
             <span class="turn" data-puzzle-target="turn">
               <span class="turn-dot" aria-hidden="true"></span>
-              <span data-puzzle-target="turnLabel"><%= t(".white_to_move") %></span>
+              <span data-puzzle-target="turnLabel"><%= t("training.whiteToMove") %></span>
             </span>
             <div class="board-toolbar">
-              <button type="button" class="btn icon-btn" data-action="puzzle#flip" aria-label="<%= t(".flip_board") %>" title="<%= t(".flip_board") %>">
+              <button type="button" class="btn icon-btn" data-action="puzzle#flip" aria-label="<%= t("flipBoard.label") %>" title="<%= t("flipBoard.label") %>">
                 <span class="flip-icon" data-puzzle-target="flipIcon" aria-hidden="true">⟳</span>
               </button>
             </div>
@@ -51,31 +51,31 @@
 
         <aside class="train-rail">
           <div class="rail-head">
-            <div class="rail-eyebrow"><%= t(".eyebrow") %></div>
+            <div class="rail-eyebrow"><%= t("puzzles.eyebrow") %></div>
             <div class="rail-title">
-              <h1><%= t(".title") %></h1>
+              <h1><%= t("puzzles.title") %></h1>
               <span class="eco-chip" data-puzzle-target="ratingChip"></span>
             </div>
           </div>
 
           <div class="puzzles-stats">
-            <span class="stat-pill" data-puzzle-target="solvedStat"><%= t("js.puzzle.solved", count: 0) %></span>
-            <span class="stat-pill" data-puzzle-target="streakStat"><%= t("js.puzzle.streak", count: 0) %></span>
+            <span class="stat-pill" data-puzzle-target="solvedStat"><%= t("puzzles.solved", count: 0) %></span>
+            <span class="stat-pill" data-puzzle-target="streakStat"><%= t("puzzles.streak", count: 0) %></span>
           </div>
 
           <div class="train-status your" data-puzzle-target="status" role="status">
             <span class="train-status-ic" data-puzzle-target="statusIcon" aria-hidden="true">♟</span>
             <div>
-              <div class="train-status-msg" data-puzzle-target="statusMsg"><%= t("js.puzzle.find_best_move") %></div>
+              <div class="train-status-msg" data-puzzle-target="statusMsg"><%= t("puzzles.findBestMove") %></div>
             </div>
           </div>
 
           <button type="button" class="puzzles-skip" data-action="puzzle#skip" data-puzzle-target="skipButton">
-            <%= t(".skip") %>
+            <%= t("puzzles.skipPuzzle") %>
           </button>
 
           <div data-puzzle-target="noPuzzleBox" hidden>
-            <%= link_to t(".back_to_dashboard"), dashboard_path, class: "puzzles-back-link" %>
+            <%= link_to t("puzzles.backToDashboard"), dashboard_path, class: "puzzles-back-link" %>
           </div>
         </aside>
       </div>

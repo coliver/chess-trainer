@@ -6,9 +6,10 @@ class SettingsController < ApplicationController
   PIECE_SETS = %w[standard staunty merida pirouetti chessnut].freeze
   ORIENTATION_MODES = %w[auto white black].freeze
 
-  # Human-readable labels for the above now live in config/locales/en.yml
-  # under settings.show.{theme,board_theme,piece_set,orientation}_labels —
-  # the view looks them up by value via t(".xxx_labels.#{value}").
+  # Human-readable labels for the above live in the shared
+  # packages/i18n-locales/locales/en-US.json under theme.*, settings.boardThemes.*,
+  # settings.pieceSets.*, and settings.boardOrientation.* — the view looks
+  # them up by value via t("settings.xxx.#{value}").
 
   DEFAULTS = {
     theme: "system",

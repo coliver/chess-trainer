@@ -7,6 +7,8 @@ class PuzzlesController < ApplicationController
     if e.status == 404
       @no_puzzle = true
     else
+      # Rails-only key: this is a flash+redirect, a different flow shape than
+      # React's inline puzzles.loadFailed retry UI, so it doesn't share a key.
       redirect_to dashboard_path, alert: e.detail.presence || t("puzzles.controller.could_not_load")
     end
   end

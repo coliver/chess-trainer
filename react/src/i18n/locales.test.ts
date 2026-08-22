@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 
 const localesDir = path.join(
   path.dirname(fileURLToPath(import.meta.url)),
-  "locales",
+  "../../../packages/i18n-locales/locales",
 );
 const localeFiles = fs
   .readdirSync(localesDir)

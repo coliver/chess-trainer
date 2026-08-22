@@ -68,7 +68,7 @@ export default class extends Controller {
     this.itemId = this.itemIdValue || null
     this.correctMoveUci = this.correctMoveUciValue || ""
     this.playerColor = this.playerColorValue === "b" ? "b" : "w"
-    this.openingLabel = this.openingNameValue || t("training.default_opening_name")
+    this.openingLabel = this.openingNameValue || t("trainings.controller.default_opening_name")
     this.eco = this.ecoValue || ""
 
     this.timeline = createTimeline(this.fen)
@@ -161,7 +161,7 @@ export default class extends Controller {
     const result = applyMove(preFen, from, to, this.correctMoveUci)
     if (!result) {
       playSound("illegal")
-      this.feedback = `❌ ${t("common.illegal_move")}`
+      this.feedback = `❌ ${t("trainings.controller.illegal_move")}`
       this.render()
       return false
     }
@@ -196,7 +196,7 @@ export default class extends Controller {
       if (data.correct) {
         if (!silent) {
           playSound("correct")
-          this.feedback = `✅ ${t("puzzle.correct")}`
+          this.feedback = `✅ ${t("puzzles.correct")}`
           this.hintLevel = -1
           this.wrongAttempts = 0
           if (this.pendingMove) {
@@ -209,7 +209,7 @@ export default class extends Controller {
 
         if (data.sessionCompleted) {
           playSound("achievement")
-          this.feedback = `✅ ${t("training.session_completed")}`
+          this.feedback = `✅ ${t("trainings.controller.session_completed")}`
           this.isSessionCompleted = true
           this.isAdvancing = false
           this.isSubmitting = false
@@ -224,7 +224,7 @@ export default class extends Controller {
           try {
             const next = await this.fetchNextItem()
             if (next.itemId === prevItemId) {
-              this.feedback = `✅ ${t("training.opening_complete")}`
+              this.feedback = `✅ ${t("trainings.controller.opening_complete")}`
               this.fen = next.fen
             } else {
               this.applyNextItem(next)
@@ -232,7 +232,7 @@ export default class extends Controller {
               this.isSessionCompleted = false
             }
           } catch (err) {
-            this.feedback = t("training.no_more_moves")
+            this.feedback = t("trainings.controller.no_more_moves")
           } finally {
             this.isAdvancing = false
             this.isSubmitting = false
@@ -246,13 +246,13 @@ export default class extends Controller {
       // Incorrect but legal move — revert to the exact fen used to submit.
       playSound("incorrect")
       this.fen = preFen
-      this.feedback = `❌ ${data.reason || t("puzzle.incorrect_fallback")}`
+      this.feedback = `❌ ${data.reason || t("puzzles.incorrectFallback")}`
       this.wrongAttempts += 1
     } catch (err) {
       this.feedback =
         err.status === 404
-          ? err.detail || t("training.session_completed")
-          : t("puzzle.error_submitting")
+          ? err.detail || t("trainings.controller.session_completed")
+          : t("puzzles.submitError")
     } finally {
       this.isSubmitting = false
       this.render()
@@ -414,7 +414,7 @@ export default class extends Controller {
     const turn = sideToMove(this.fen)
     if (this.hasTurnTarget) this.turnTarget.classList.toggle("black", turn === "b")
     if (this.hasTurnLabelTarget) {
-      this.turnLabelTarget.textContent = turn === "w" ? t("common.white_to_move") : t("common.black_to_move")
+      this.turnLabelTarget.textContent = turn === "w" ? t("training.whiteToMove") : t("training.blackToMove")
     }
   }
 

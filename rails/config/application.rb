@@ -41,8 +41,11 @@ module App
 
     # Engine is wired for future locales, but only English content ships for
     # now (see rails/PLAN.md) — available_locales stays a single-entry
-    # allowlist until translated config/locales/*.yml files exist.
-    config.i18n.default_locale = :en
-    config.i18n.available_locales = [ :en ]
+    # allowlist until more of packages/i18n-locales/locales/*.json is wired
+    # up. Locale id matches React's exactly ("en-US", not "en") since both
+    # frontends load the same JSON files — see
+    # config/initializers/i18n_json_loader.rb.
+    config.i18n.default_locale = :"en-US"
+    config.i18n.available_locales = [ :"en-US" ]
   end
 end

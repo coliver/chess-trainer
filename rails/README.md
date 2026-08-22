@@ -110,9 +110,26 @@ rails/
   language toggle (still English-only) or the snow effect (client-only
   in React, not backend-synced).
 - I18n is wired throughout (`t()` in views/controllers,
-  `app/javascript/i18n.js` bridging `config/locales/en.yml`'s `js:`
-  namespace into Stimulus controllers), but only English content ships —
-  no locale switcher or user-facing language toggle yet. Settings has a
-  `language` preference field, but it isn't applied.
+  `app/javascript/i18n.js` bridging translations into Stimulus
+  controllers), but only English content ships — no locale switcher or
+  user-facing language toggle yet. Settings has a `language` preference
+  field, but it isn't applied.
+- Rails and React now render the same English copy for every UI concept
+  both apps have, pulled from one shared file:
+  `packages/i18n-locales/locales/en-US.json` (the same file React's
+  `i18next` setup reads) is the single source of truth for shared strings.
+  `config/initializers/i18n_json_loader.rb` transforms it at boot — i18next
+  conventions (`{{var}}`, `key_one`/`key_other`) become Ruby I18n's
+  (`%{var}`, `key: { one:, other: }`) — into `tmp/i18n_json_cache/en-US.json`,
+  which is added to `I18n.load_path` like any other locale file, so it
+  participates in normal reload/caching and both `I18n.t` and views' `t()`
+  resolve shared keys (e.g. `t("puzzles.title")`) exactly like React's
+  `t()` does. `ApplicationHelper#js_translations` serializes that same
+  generated file into the layout's `<script id="i18n-strings">` tag, so a
+  Stimulus controller and its ERB view reference the literal same key —
+  there's no separate `js:` namespace. Only strings with no React
+  equivalent — because the concept doesn't exist on that side, or the flow
+  is structurally different (e.g. a full-page flash-redirect vs React's
+  inline optimistic UI) — stay local in `config/locales/en.yml`.
 - Not wired into `docker-compose.prod.yml` or the deploy workflow —
   dev-only, matching how Angular was dev-only before its removal.
