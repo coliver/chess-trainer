@@ -39,13 +39,14 @@ module App
     # Don't generate system test files.
     config.generators.system_tests = nil
 
-    # Engine is wired for future locales, but only English content ships for
-    # now (see rails/PLAN.md) — available_locales stays a single-entry
-    # allowlist until more of packages/i18n-locales/locales/*.json is wired
-    # up. Locale id matches React's exactly ("en-US", not "en") since both
-    # frontends load the same JSON files — see
-    # config/initializers/i18n_json_loader.rb.
+    # Available locales are derived from the same source directory React and
+    # the backend read (packages/i18n-locales/locales/*.json), so adding a
+    # locale file there is enough to make it selectable everywhere — no
+    # separate allowlist to maintain. Locale ids match React's exactly
+    # ("en-US", not "en") since both frontends load the same JSON files —
+    # see config/initializers/i18n_json_loader.rb.
     config.i18n.default_locale = :"en-US"
-    config.i18n.available_locales = [ :"en-US" ]
+    config.i18n.available_locales = Dir.glob(Rails.root.join("../packages/i18n-locales/locales/*.json"))
+      .map { |path| File.basename(path, ".json").to_sym }
   end
 end

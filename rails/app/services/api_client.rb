@@ -9,7 +9,7 @@ class ApiClient
     end
   end
 
-  def initialize(base_url: ENV.fetch("API_BASE_URL"))
+  def initialize(base_url: ENV.fetch("API_BASE_URL", "http://api:8000"))
     @conn = Faraday.new(url: base_url) do |f|
       f.request :json
       f.response :json, content_type: /\bjson$/

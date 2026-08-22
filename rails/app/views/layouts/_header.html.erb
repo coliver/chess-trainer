@@ -43,6 +43,7 @@
             <% prefs = current_preferences %>
             <%= form_with url: settings_path, method: :patch, data: { controller: "theme-toggle" }, style: "display: contents" do %>
               <%= hidden_field_tag :return_to, request.path %>
+              <%= hidden_field_tag :language, prefs["language"] %>
               <%= hidden_field_tag :theme, prefs["theme"], data: { theme_toggle_target: "themeField" } %>
               <%= hidden_field_tag :board_theme, prefs["board_theme"] %>
               <%= hidden_field_tag :piece_set, prefs["piece_set"] %>

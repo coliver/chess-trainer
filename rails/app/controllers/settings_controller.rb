@@ -5,6 +5,9 @@ class SettingsController < ApplicationController
   BOARD_THEMES = %w[default default-contrast green blue chess-club chessboard-js black-and-white].freeze
   PIECE_SETS = %w[standard staunty merida pirouetti chessnut].freeze
   ORIENTATION_MODES = %w[auto white black].freeze
+  # Same source directory config/application.rb derives I18n.available_locales
+  # from, so any locale file added there becomes selectable here too.
+  LANGUAGES = Rails.application.config.i18n.available_locales.map(&:to_s).sort.freeze
 
   # Human-readable labels for the above live in the shared
   # packages/i18n-locales/locales/en-US.json under theme.*, settings.boardThemes.*,
@@ -12,6 +15,7 @@ class SettingsController < ApplicationController
   # them up by value via t("settings.xxx.#{value}").
 
   DEFAULTS = {
+    language: "en-US",
     theme: "system",
     board_theme: "default",
     piece_set: "standard",
@@ -50,6 +54,7 @@ class SettingsController < ApplicationController
 
   def preferences_params
     {
+      language: pick(params[:language], LANGUAGES, DEFAULTS[:language]),
       theme: pick(params[:theme], THEMES, DEFAULTS[:theme]),
       board_theme: pick(params[:board_theme], BOARD_THEMES, DEFAULTS[:board_theme]),
       piece_set: pick(params[:piece_set], PIECE_SETS, DEFAULTS[:piece_set]),

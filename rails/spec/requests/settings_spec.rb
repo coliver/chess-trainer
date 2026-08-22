@@ -81,6 +81,39 @@ RSpec.describe "Settings", type: :request do
       expect(response.body).to include("Preferences saved")
     end
 
+    it "applies the saved language starting on the very next request" do
+      fr_preferences = {
+        language: "fr", theme: "system", board_theme: "default", piece_set: "standard",
+        show_coordinates: true, board_animations: true, board_orientation_mode: "auto", sound: false
+      }
+      stub_request(:patch, "#{base}/users/me/preferences")
+        .with(body: hash_including("language" => "fr"))
+        .to_return(status: 200, body: fr_preferences.to_json, headers: { "Content-Type" => "application/json" })
+      stub_get_preferences(body: fr_preferences)
+
+      patch settings_path, params: { language: "fr" }, env: env
+      follow_redirect!
+
+      expect(response.body).to include("Paramètres")
+    end
+
+    it "falls back to the default when an unsupported language is submitted" do
+      stub_request(:patch, "#{base}/users/me/preferences")
+        .with(body: hash_including("language" => "en-US"))
+        .to_return(
+          status: 200,
+          body: {
+            language: "en-US", theme: "system", board_theme: "default", piece_set: "standard",
+            show_coordinates: true, board_animations: true, board_orientation_mode: "auto", sound: false
+          }.to_json,
+          headers: { "Content-Type" => "application/json" }
+        )
+      stub_get_preferences
+
+      patch settings_path, params: { language: "not-a-real-locale" }, env: env
+      expect(response).to redirect_to(settings_path)
+    end
+
     it "renders an error alert when the preferences update fails" do
       stub_request(:patch, "#{base}/users/me/preferences").to_return(
         status: 422,

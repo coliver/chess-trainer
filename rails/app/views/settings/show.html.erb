@@ -18,6 +18,15 @@
 
     <%= form_with url: settings_path, method: :patch do %>
       <section class="settings-section">
+        <div class="settings-row">
+          <span class="settings-row-label"><%= t("settings.languageLabel") %></span>
+          <%= select_tag :language,
+                options_for_select(SettingsController::LANGUAGES.map { |v| [v, v] }, @preferences["language"]),
+                id: "settings-language", class: "text-input settings-select", onchange: "this.form.requestSubmit()" %>
+        </div>
+      </section>
+
+      <section class="settings-section">
         <h2 class="settings-section-heading"><%= t("settings.appearance.heading") %></h2>
 
         <div class="settings-row">

@@ -52,6 +52,13 @@ Rails.application.configure do
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 
+  # Genuinely Rails-only strings (config/locales/en.yml — flash/redirect
+  # messages with no React equivalent) are only authored in English. Without
+  # this, picking any other language in Settings shows a raw "translation
+  # missing: ..." span wherever one of those keys is hit. Matches
+  # production.rb, which already sets this for the same reason.
+  config.i18n.fallbacks = true
+
   # Annotate rendered view with file names.
   config.action_view.annotate_rendered_view_with_filenames = true
 
