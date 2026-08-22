@@ -11,7 +11,8 @@
             data-board-preview-position-value="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
             data-board-preview-orientation-value="<%= @preferences["board_orientation_mode"] == "black" ? "black" : "white" %>"
             data-board-preview-board-theme-value="<%= @preferences["board_theme"] %>"
-            data-board-preview-piece-set-value="<%= @preferences["piece_set"] %>">
+            data-board-preview-piece-set-value="<%= @preferences["piece_set"] %>"
+            data-board-preview-show-coordinates-value="<%= @preferences["show_coordinates"] %>">
         <div class="boardPreview-board" data-board-preview-target="host"></div>
       </div>
     </section>
@@ -21,7 +22,7 @@
         <div class="settings-row">
           <span class="settings-row-label"><%= t("settings.languageLabel") %></span>
           <%= select_tag :language,
-                options_for_select(SettingsController::LANGUAGES.map { |v| [v, v] }, @preferences["language"]),
+                options_for_select(SettingsController::LANGUAGES.map { |v| [SettingsController::LANGUAGE_FLAGS[v] || v, v] }, @preferences["language"]),
                 id: "settings-language", class: "text-input settings-select", onchange: "this.form.requestSubmit()" %>
         </div>
       </section>
@@ -31,10 +32,10 @@
 
         <div class="settings-row">
           <span class="settings-row-label"><%= t("settings.appearance.themeLabel") %></span>
-          <div class="settings-radio-group" role="radiogroup" aria-label="<%= t("settings.appearance.themeLabel") %>">
+          <div class="settings-radio-group" role="radiogroup" aria-label="<%= t("settings.appearance.themeLabel") %>" data-controller="theme-select">
             <% SettingsController::THEMES.each do |theme| %>
               <label class="settings-radio">
-                <%= radio_button_tag :theme, theme, @preferences["theme"] == theme, onchange: "this.form.requestSubmit()" %>
+                <%= radio_button_tag :theme, theme, @preferences["theme"] == theme, data: { action: "change->theme-select#apply" }, onchange: "this.form.requestSubmit()" %>
                 <%= t("theme.#{theme}") %>
               </label>
             <% end %>

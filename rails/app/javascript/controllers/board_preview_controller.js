@@ -8,7 +8,7 @@ import { createPreviewBoard } from "../chess/board_factory"
 // package React's BoardPreview.tsx uses.
 export default class extends Controller {
   static targets = ["host", "playerColorField"]
-  static values = { epd: String, uciMoves: String, orientation: String, position: String, boardTheme: String, pieceSet: String }
+  static values = { epd: String, uciMoves: String, orientation: String, position: String, boardTheme: String, pieceSet: String, showCoordinates: Boolean }
 
   connect() {
     if (!this.hasHostTarget) return
@@ -20,6 +20,7 @@ export default class extends Controller {
       orientation: this.orientationValue || "white",
       boardTheme: this.boardThemeValue || undefined,
       pieceSet: this.pieceSetValue || undefined,
+      showCoordinates: this.showCoordinatesValue,
     })
   }
 

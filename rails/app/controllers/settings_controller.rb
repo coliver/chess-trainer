@@ -9,6 +9,52 @@ class SettingsController < ApplicationController
   # from, so any locale file added there becomes selectable here too.
   LANGUAGES = Rails.application.config.i18n.available_locales.map(&:to_s).sort.freeze
 
+  # Mirrors react/src/components/LanguageToggle.tsx's FLAGS map. Falls back to
+  # the language code itself if a new locale file is added before its flag is picked.
+  LANGUAGE_FLAGS = {
+    "en-GB" => "🇬🇧",
+    "en-US" => "🇺🇸",
+    "en-AU" => "🇦🇺",
+
+    "es" => "🇪🇸",
+    "fr" => "🇫🇷",
+    "de" => "🇩🇪",
+    "hi" => "🇮🇳",
+    "it" => "🇮🇹",
+    "ja" => "🇯🇵",
+    "kl" => "🖖",
+    "ko" => "🇰🇷",
+    "nl" => "🇳🇱",
+    "pl" => "🇵🇱",
+    "pt" => "🇵🇹",
+    "pt-BR" => "🇧🇷",
+    "ru" => "🇷🇺",
+    "tr" => "🇹🇷",
+    "zh-CN" => "🇨🇳",
+
+    "ar" => "🇸🇦",
+    "cs" => "🇨🇿",
+    "da" => "🇩🇰",
+    "el" => "🇬🇷",
+    "fi" => "🇫🇮",
+    "he" => "🇮🇱",
+    "hu" => "🇭🇺",
+    "id" => "🇮🇩",
+    "ms" => "🇲🇾",
+    "no" => "🇳🇴",
+    "ro" => "🇷🇴",
+    "sk" => "🇸🇰",
+    "sv" => "🇸🇪",
+    "uk" => "🇺🇦",
+    "vi" => "🇻🇳",
+
+    "en-x-pirate" => "🏴‍☠️",
+    "en-x-groot" => "🌱",
+
+    "sd" => "🧝",
+    "khz" => "⛏️"
+  }.freeze
+
   # Human-readable labels for the above live in the shared
   # packages/i18n-locales/locales/en-US.json under theme.*, settings.boardThemes.*,
   # settings.pieceSets.*, and settings.boardOrientation.* — the view looks

@@ -1,7 +1,8 @@
 # ♟️ Knight School (Chess Trainer)
 
-[![tests](https://github.com/coliver/chess-trainer/actions/workflows/tests.yml/badge.svg)](https://github.com/coliver/chess-trainer/actions/workflows/tests.yml)
+[![python](https://github.com/coliver/chess-trainer/actions/workflows/tests.yml/badge.svg)](https://github.com/coliver/chess-trainer/actions/workflows/tests.yml)
 [![react](https://github.com/coliver/chess-trainer/actions/workflows/react.yml/badge.svg)](https://github.com/coliver/chess-trainer/actions/workflows/react.yml)
+[![rails](https://github.com/coliver/chess-trainer/actions/workflows/rails.yml/badge.svg)](https://github.com/coliver/chess-trainer/actions/workflows/rails.yml)
 
 A web-based chess openings trainer designed to drill specific lines and track performance metrics.
 

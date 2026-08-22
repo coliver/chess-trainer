@@ -9,7 +9,23 @@ require_relative '../config/environment'
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 require 'webmock/rspec'
+require 'capybara/rspec'
+require 'capybara/cuprite'
 # Add additional requires below this line. Rails is not loaded until this point!
+
+# Headless Chrome via CDP/Ferrum for spec/system — no selenium/chromedriver
+# version coupling. `disable-dev-shm-usage` avoids Chrome crashing against
+# Docker's small default /dev/shm instead of raising shm_size in compose.
+Capybara.register_driver(:cuprite) do |app|
+  Capybara::Cuprite::Driver.new(
+    app,
+    window_size: [ 1200, 800 ],
+    browser_options: { "no-sandbox" => nil, "disable-dev-shm-usage" => nil },
+    process_timeout: 15
+  )
+end
+Capybara.default_driver = :rack_test
+Capybara.javascript_driver = :cuprite
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -38,6 +54,8 @@ RSpec.configure do |config|
   config.before(:each, type: :request) do
     host! "localhost"
   end
+
+  config.before(:each, type: :system) { driven_by :cuprite }
 
   # If you enable ActiveRecord support you should uncomment these lines,
   # note if you'd prefer not to run each example within a transaction, you

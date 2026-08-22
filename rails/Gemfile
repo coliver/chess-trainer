@@ -32,6 +32,10 @@ group :test do
   gem "webmock"
   gem "rspec-rails"
   gem "simplecov", require: false
+  # Browser-driven system specs (spec/system) — headless Chrome via CDP/Ferrum,
+  # for Turbo/Stimulus behavior request specs can't see.
+  gem "capybara"
+  gem "cuprite"
 end
 
 group :development, :test do

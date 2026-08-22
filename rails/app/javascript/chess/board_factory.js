@@ -21,7 +21,7 @@ export { COLOR, ARROW_TYPE, MARKER_TYPE }
 
 // Defaults match React's DEFAULT_PREFERENCES; callers that know the user's real
 // board_theme/piece_set (the Settings page) can override them.
-export function createPreviewBoard(el, { position, orientation, boardTheme = "default", pieceSet = "standard" }) {
+export function createPreviewBoard(el, { position, orientation, boardTheme = "default", pieceSet = "standard", showCoordinates = false }) {
   return new Chessboard(el, {
     position,
     orientation: orientation === "black" ? COLOR.black : COLOR.white,
@@ -30,7 +30,7 @@ export function createPreviewBoard(el, { position, orientation, boardTheme = "de
     assetsCache: false,
     style: {
       cssClass: boardTheme,
-      showCoordinates: false,
+      showCoordinates,
       borderType: BORDER_TYPE.none,
       pieces: { file: `pieces/${pieceSet}.svg` },
       animationDuration: 300,
