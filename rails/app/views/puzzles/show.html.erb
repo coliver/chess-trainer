@@ -1,0 +1,84 @@
+<% content_for :title, "Puzzles" %>
+
+<main class="page">
+  <div class="card">
+    <% if @no_puzzle %>
+      <div class="train">
+        <div class="train-board-col"></div>
+        <aside class="train-rail">
+          <div class="rail-head">
+            <div class="rail-eyebrow">Puzzles</div>
+            <div class="rail-title"><h1>Puzzles</h1></div>
+          </div>
+          <div class="train-status your" role="status">
+            <span class="train-status-ic" aria-hidden="true">♟</span>
+            <div><div class="train-status-msg">No puzzles due right now!</div></div>
+          </div>
+          <%= link_to "Back to dashboard", dashboard_path, class: "puzzles-back-link" %>
+        </aside>
+      </div>
+    <% else %>
+      <div class="train"
+           data-controller="puzzle"
+           data-puzzle-puzzle-id-value="<%= @puzzle_id %>"
+           data-puzzle-fen-value="<%= @fen %>"
+           data-puzzle-rating-value="<%= @rating %>"
+           data-puzzle-correct-move-uci-value="<%= @correct_move_uci %>"
+           data-puzzle-last-move-uci-value="<%= @last_move_uci %>"
+           data-puzzle-next-url-value="<%= puzzles_next_path %>"
+           data-puzzle-attempts-url-template-value="<%= puzzles_attempts_path("__ID__") %>"
+           data-puzzle-dashboard-url-value="<%= dashboard_path %>"
+           data-puzzle-board-theme-value="<%= @board_theme %>"
+           data-puzzle-piece-set-value="<%= @piece_set %>"
+           data-puzzle-show-coordinates-value="<%= @show_coordinates %>"
+           data-puzzle-board-animations-value="<%= @board_animations %>"
+           data-puzzle-board-orientation-mode-value="<%= @board_orientation_mode %>"
+           data-puzzle-sound-enabled-value="<%= @sound_enabled %>">
+        <div class="train-board-col">
+          <div class="training-board-wrap" data-puzzle-target="host"></div>
+          <div class="board-under">
+            <span class="turn" data-puzzle-target="turn">
+              <span class="turn-dot" aria-hidden="true"></span>
+              <span data-puzzle-target="turnLabel">White to move</span>
+            </span>
+            <div class="board-toolbar">
+              <button type="button" class="btn icon-btn" data-action="puzzle#flip" aria-label="Flip board" title="Flip board">
+                <span class="flip-icon" data-puzzle-target="flipIcon" aria-hidden="true">⟳</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <aside class="train-rail">
+          <div class="rail-head">
+            <div class="rail-eyebrow">Puzzles</div>
+            <div class="rail-title">
+              <h1>Puzzles</h1>
+              <span class="eco-chip" data-puzzle-target="ratingChip"></span>
+            </div>
+          </div>
+
+          <div class="puzzles-stats">
+            <span class="stat-pill" data-puzzle-target="solvedStat">Solved: 0</span>
+            <span class="stat-pill" data-puzzle-target="streakStat">Streak: 0</span>
+          </div>
+
+          <div class="train-status your" data-puzzle-target="status" role="status">
+            <span class="train-status-ic" data-puzzle-target="statusIcon" aria-hidden="true">♟</span>
+            <div>
+              <div class="train-status-msg" data-puzzle-target="statusMsg">Find the best move!</div>
+            </div>
+          </div>
+
+          <button type="button" class="puzzles-skip" data-action="puzzle#skip" data-puzzle-target="skipButton">
+            Skip puzzle
+          </button>
+
+          <div data-puzzle-target="noPuzzleBox" hidden>
+            <%= link_to "Back to dashboard", dashboard_path, class: "puzzles-back-link" %>
+          </div>
+        </aside>
+      </div>
+    <% end %>
+  </div>
+</main>

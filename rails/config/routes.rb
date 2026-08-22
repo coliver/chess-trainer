@@ -23,6 +23,10 @@ Rails.application.routes.draw do
     get "trainings/:id/next" => "trainings#next_item", as: :training_next
     post "trainings/:id/moves" => "trainings#create_response", as: :training_moves
 
+    get "puzzles" => "puzzles#show", as: :puzzles
+    get "puzzles/next" => "puzzles#next_puzzle", as: :puzzles_next
+    post "puzzles/:id/attempts" => "puzzles#create_attempt", as: :puzzles_attempts
+
     root "sessions#new"
   end
 end

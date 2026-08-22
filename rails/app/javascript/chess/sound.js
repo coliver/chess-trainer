@@ -14,6 +14,8 @@ const soundFiles = {
   move: "/rails/sounds/move-check.mp3",
   moveOpponent: "/rails/sounds/move-opponent-check.mp3",
   promote: "/rails/sounds/promote.mp3",
+  puzzleCorrect: "/rails/sounds/puzzle-correct-2.mp3",
+  puzzleWrong: "/rails/sounds/puzzle-wrong.mp3",
 }
 
 const cache = {}

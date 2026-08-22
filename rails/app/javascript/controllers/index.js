@@ -16,5 +16,8 @@ application.register("opening-thumb", OpeningThumbController)
 import TrainingController from "./training_controller"
 application.register("training", TrainingController)
 
+import PuzzleController from "./puzzle_controller"
+application.register("puzzle", PuzzleController)
+
 import ThemeToggleController from "./theme_toggle_controller"
 application.register("theme-toggle", ThemeToggleController)

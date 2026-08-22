@@ -10,10 +10,10 @@
 This is a Rails 8 + Hotwire (Turbo + Stimulus) exploration/learning project,
 built alongside the production React frontend rather than replacing it. It
 covers the "core loop" only: login/register/email verification, a dashboard
-with an opening browser and progress summary, and a training session with
-move submission, hints, and a timeline stepper. Puzzles, Settings, and
-preferences sync are out of scope for v1 — see `PLAN.md`'s Context section
-for the full list of deliberate cuts.
+with an opening browser and progress summary, a training session with move
+submission, hints, and a timeline stepper, a puzzles page, and a settings
+page with preferences sync. See `PLAN.md`'s Context section for the v1 cuts
+that remain (i18n beyond English, prod wiring).
 
 ## Architecture
 
@@ -83,12 +83,13 @@ kept separate from `config/master.key` (gitignored, dev/prod only).
 rails/
 ├── app/
 │   ├── controllers/          # ApplicationController (auth/error rescue), sessions, registrations,
-│   │                          # email_verifications, dashboard, trainings
+│   │                          # email_verifications, dashboard, trainings, puzzles, settings
 │   ├── services/              # ApiClient, AuthenticatedApiClient, OpeningGrouping (Ruby port of
 │   │                          # react/src/lib/groupOpenings.ts)
-│   ├── views/                 # ERB templates + Turbo Frame partials (dashboard/opening browser)
+│   ├── views/                 # ERB templates + Turbo Frame partials (dashboard/opening browser,
+│   │                          # trainings/show, puzzles/show)
 │   ├── javascript/
-│   │   ├── controllers/       # Stimulus: training, board_preview, opening_thumb
+│   │   ├── controllers/       # Stimulus: training, puzzle, board_preview, opening_thumb
 │   │   └── chess/              # board_factory.js (cm-chessboard setup), sound.js
 │   └── assets/stylesheets/    # application.css (page-flash, etc.) — most styling comes from
 │                               # packages/shared-styles/*.css instead
@@ -99,8 +100,10 @@ rails/
 
 ## Known gaps (v1)
 
-- Puzzles page doesn't exist — the header links to Dashboard
-  ("Openings"), Settings, and logout.
+- Puzzles serves the next due puzzle from `/puzzles/next`, tracks a
+  solved/streak counter client-side, and proxies attempts through
+  `POST /rails/puzzles/:id/attempts`; shows a "no puzzles due" panel on
+  a 404 instead of a board.
 - Settings covers theme, board colors/piece set/coordinates/animations,
   board orientation mode, and sound — all round-trip to
   `/users/me/preferences` and actually apply. It does not cover the

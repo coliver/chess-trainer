@@ -24,6 +24,8 @@ prod/CI cost, the user has scoped this down deliberately:
   submission, hints, timeline). **Out of scope for v1**: Puzzles page,
   Settings page, preferences backend sync (board uses hardcoded defaults
   matching React's `DEFAULT_PREFERENCES`).
+  (Both Settings and Puzzles were subsequently built anyway — see
+  `README.md`'s "Known gaps" section for what's actually shipped.)
 - **Board legality**: reuse `@knight-school/chess-core` (already
   framework-neutral, built on `chess.js`, npm `file:` dependency) directly
   from Rails' JS bundle, the same way React and Angular do — not a hand-port.

@@ -1,4 +1,12 @@
+## 2026-08-22
+
+### Tests
+- test(rails): add `spec/requests/puzzles_spec.rb` covering the new Puzzles page (`puzzles_controller.rb`, `views/puzzles/show.html.erb`, `puzzle_controller.js`) — login redirect, board render on a due puzzle, the "no puzzles due" state on a 404 from `/puzzles/next`, and the `GET /rails/puzzles/next` / `POST /rails/puzzles/:id/attempts` JSON proxies (success + error passthrough), mirroring `trainings_spec.rb`'s WebMock pattern; also added the missing `"puzzles"` entry to the layout's `stylesheet_link_tag` list so `packages/shared-styles/puzzles.css` actually loads
+
 ## 2026-08-21
+
+### Documentation
+- docs(react): add an "All Routes" mermaid flowchart to `react/README.md`'s Key Logic Flows section mapping every client-side route (public and `RequireAuth`-guarded), the header nav hub, and the auth/redirect guards (`RequireAuth`'s per-page `/auth/me` check, the Axios 401→refresh→logout interceptor, the catch-all `*` → `/dashboard` redirect); updated the existing artifact link to point at a newer, styled version of the same map with a route legend
 
 ### Refactors
 - refactor(react): extract shared `AuthCard` component (`src/components/AuthCard.tsx`) and `apiErrorMessage` util (`src/utils/apiError.ts`) from the identical page-wrapper markup and axios-error-handling logic duplicated across `Login.tsx`, `Register.tsx`, and `VerifyEmail.tsx`
