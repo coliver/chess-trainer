@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe ApiClient do
   let(:base_url) { "http://api:8000" }
-  let(:client) { ApiClient.new(base_url: base_url) }
+  let(:client) { described_class.new(base_url: base_url) }
 
   describe "#get" do
     it "returns parsed JSON on 200 response" do

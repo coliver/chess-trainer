@@ -134,7 +134,7 @@ RSpec.describe "Trainings", type: :request do
 
       post training_moves_path(1), params: { move_uci: "e2e4", item_id: "item-1" }, env: env
       expect(response).to have_http_status(:ok)
-      expect(JSON.parse(response.body)["correct"]).to eq(true)
+      expect(JSON.parse(response.body)["correct"]).to be(true)
     end
 
     it "proxies API errors with their status" do

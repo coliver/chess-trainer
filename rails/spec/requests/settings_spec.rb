@@ -22,32 +22,47 @@ RSpec.describe "Settings", type: :request do
     )
   end
 
+  def stub_get_preferences(status: 200, body: nil)
+    body ||= {
+      language: "en-US", theme: "dark", board_theme: "green", piece_set: "staunty",
+      show_coordinates: true, board_animations: false, board_orientation_mode: "black", sound: true
+    }
+    payload = status == 200 ? body : { detail: "Server error" }
+    stub_request(:get, "#{base}/users/me/preferences")
+      .to_return(status: status, body: payload.to_json, headers: { "Content-Type" => "application/json" })
+  end
+
   describe "GET /rails/settings" do
-    it "redirects to login when no session" do
+    it "redirects to login when there's no session" do
       get settings_path, env: env
       expect(response).to redirect_to(login_path)
     end
 
-    it "renders current preferences" do
-      log_in
-      stub_request(:get, "#{base}/users/me/preferences").to_return(
-        status: 200,
-        body: {
-          language: "en-US", theme: "dark", board_theme: "green", piece_set: "staunty",
-          show_coordinates: true, board_animations: false, board_orientation_mode: "black", sound: true
-        }.to_json,
-        headers: { "Content-Type" => "application/json" }
-      )
+    context "when authenticated" do
+      before { log_in }
 
-      get settings_path, env: env
-      expect(response).to have_http_status(:ok)
-      expect(response.body).to include("Settings")
+      it "renders current preferences" do
+        stub_get_preferences
+
+        get settings_path, env: env
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include("Settings")
+      end
+
+      it "falls back to defaults when the preferences fetch fails" do
+        stub_get_preferences(status: 500)
+
+        get settings_path, env: env
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include("Settings")
+      end
     end
   end
 
   describe "PATCH /rails/settings" do
+    before { log_in }
+
     it "forwards submitted preferences to the API and redirects with a notice" do
-      log_in
       stub_request(:patch, "#{base}/users/me/preferences")
         .with(body: hash_including("theme" => "dark"))
         .to_return(
@@ -58,19 +73,27 @@ RSpec.describe "Settings", type: :request do
           }.to_json,
           headers: { "Content-Type" => "application/json" }
         )
-      stub_request(:get, "#{base}/users/me/preferences").to_return(
-        status: 200,
-        body: {
-          language: "en-US", theme: "dark", board_theme: "default", piece_set: "standard",
-          show_coordinates: true, board_animations: true, board_orientation_mode: "auto", sound: false
-        }.to_json,
-        headers: { "Content-Type" => "application/json" }
-      )
+      stub_get_preferences
 
       patch settings_path, params: { theme: "dark", show_coordinates: "1", board_animations: "1" }, env: env
       expect(response).to redirect_to(settings_path)
       follow_redirect!
       expect(response.body).to include("Preferences saved")
+    end
+
+    it "renders an error alert when the preferences update fails" do
+      stub_request(:patch, "#{base}/users/me/preferences").to_return(
+        status: 422,
+        body: { detail: "Invalid preference value" }.to_json,
+        headers: { "Content-Type" => "application/json" }
+      )
+      # The layout's header renders a theme-toggle form that reads
+      # current_preferences independently of this action's own @preferences.
+      stub_get_preferences
+
+      patch settings_path, params: { theme: "invalid" }, env: env
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response.body).to include("Invalid preference value")
     end
   end
 end

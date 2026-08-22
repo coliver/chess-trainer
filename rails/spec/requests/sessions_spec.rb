@@ -84,5 +84,18 @@ RSpec.describe "Sessions", type: :request do
       expect(flash[:notice]).to eq("If that account exists and is unverified, a verification email has been sent.")
       expect(response.body).to include("If that account exists and is unverified, a verification email has been sent.")
     end
+
+    it "redirects to login with an alert when the API call fails" do
+      stub_request(:post, "#{base}/auth/resend-verification").to_return(
+        status: 500,
+        body: { detail: "Something went wrong" }.to_json,
+        headers: { "Content-Type" => "application/json" }
+      )
+
+      post resend_verification_path, params: { username: "coliver" }, env: env
+      expect(response).to redirect_to(login_path)
+      follow_redirect!
+      expect(response.body).to include("Something went wrong")
+    end
   end
 end

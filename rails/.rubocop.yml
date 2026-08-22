@@ -1,8 +1,26 @@
 # Omakase Ruby styling for Rails
 inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 
+plugins:
+  - rubocop-rspec
+
 # Overwrite or add rules to create your own house style
 #
 # # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
 # Layout/SpaceInsideArrayLiteralBrackets:
 #   Enabled: false
+
+AllCops:
+  NewCops: disable
+
+# Request specs here stub several endpoints per example and then assert a
+# couple of closely-related outcomes (status + body, or status + a flash
+# message) — that's one behavior, not several, so the strict defaults (5
+# lines / 1 expectation) fight this codebase's grain rather than improving
+# it. Raised to fit how these specs are actually — reasonably — written.
+RSpec/ExampleLength:
+  Max: 15
+RSpec/MultipleExpectations:
+  Max: 3
+RSpec/NestedGroups:
+  Max: 4

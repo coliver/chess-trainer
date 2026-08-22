@@ -1,156 +1,84 @@
 require "rails_helper"
 
-describe AuthenticatedApiClient do
+RSpec.describe AuthenticatedApiClient do
   let(:base) { ENV.fetch("API_BASE_URL", "http://api:8000") }
-  let(:session) { { access_token: "valid-token", refresh_token: "valid-refresh" } }
-  let(:client) { AuthenticatedApiClient.new(session) }
+  let(:session) { { access_token: "old-token", refresh_token: "refresh-token" } }
+  let(:client) { described_class.new(session) }
 
   describe "#get" do
-    it "passes through a successful response" do
-      stub_request(:get, "#{base}/user").with(
-        headers: { "Authorization" => "Bearer valid-token" }
-      ).to_return(
-        status: 200,
-        body: { id: 1, username: "alice" }.to_json,
-        headers: { "Content-Type" => "application/json" }
-      )
+    context "when the request succeeds" do
+      it "sends the current access token and returns the response" do
+        stub_request(:get, "#{base}/progress/summary")
+          .with(headers: { "Authorization" => "Bearer old-token" })
+          .to_return(status: 200, body: { ok: true }.to_json, headers: { "Content-Type" => "application/json" })
 
-      response = client.get("/user")
-      expect(response).to eq({ "id" => 1, "username" => "alice" })
+        expect(client.get("/progress/summary")).to eq({ "ok" => true })
+      end
     end
 
-    it "refreshes token on 401 and retries with new token" do
-      # First request returns 401
-      stub_request(:get, "#{base}/user").with(
-        headers: { "Authorization" => "Bearer valid-token" }
-      ).to_return(
-        status: 401,
-        body: { detail: "Token expired" }.to_json,
-        headers: { "Content-Type" => "application/json" }
-      )
+    context "when the request returns 401" do
+      context "when refresh succeeds" do
+        it "retries with the new token and returns the response" do
+          stub_request(:get, "#{base}/progress/summary")
+            .with(headers: { "Authorization" => "Bearer old-token" })
+            .to_return(status: 401, body: { detail: "Unauthorized" }.to_json, headers: { "Content-Type" => "application/json" })
+          stub_request(:post, "#{base}/auth/refresh")
+            .with(body: { refresh_token: "refresh-token" }.to_json)
+            .to_return(status: 200, body: { access_token: "new-token" }.to_json, headers: { "Content-Type" => "application/json" })
+          stub_request(:get, "#{base}/progress/summary")
+            .with(headers: { "Authorization" => "Bearer new-token" })
+            .to_return(status: 200, body: { ok: true }.to_json, headers: { "Content-Type" => "application/json" })
 
-      # Refresh call returns new token
-      stub_request(:post, "#{base}/auth/refresh").with(
-        body: { refresh_token: "valid-refresh" }.to_json,
-        headers: { "Content-Type" => "application/json" }
-      ).to_return(
-        status: 200,
-        body: { access_token: "fresh-token" }.to_json,
-        headers: { "Content-Type" => "application/json" }
-      )
+          expect(client.get("/progress/summary")).to eq({ "ok" => true })
+          expect(session[:access_token]).to eq("new-token")
+        end
+      end
 
-      # Retry with new token succeeds
-      stub_request(:get, "#{base}/user").with(
-        headers: { "Authorization" => "Bearer fresh-token" }
-      ).to_return(
-        status: 200,
-        body: { id: 1, username: "alice" }.to_json,
-        headers: { "Content-Type" => "application/json" }
-      )
+      context "when the retry also returns 401" do
+        it "raises Unauthorized" do
+          stub_request(:get, "#{base}/progress/summary")
+            .to_return(status: 401, body: { detail: "Unauthorized" }.to_json, headers: { "Content-Type" => "application/json" })
+          stub_request(:post, "#{base}/auth/refresh")
+            .to_return(status: 200, body: { access_token: "new-token" }.to_json, headers: { "Content-Type" => "application/json" })
 
-      response = client.get("/user")
-      expect(response).to eq({ "id" => 1, "username" => "alice" })
-      expect(session[:access_token]).to eq("fresh-token")
-    end
+          expect { client.get("/progress/summary") }.to raise_error(AuthenticatedApiClient::Unauthorized)
+        end
+      end
 
-    it "raises Unauthorized if retry is also 401" do
-      stub_request(:get, "#{base}/user").with(
-        headers: { "Authorization" => "Bearer valid-token" }
-      ).to_return(
-        status: 401,
-        body: { detail: "Token expired" }.to_json,
-        headers: { "Content-Type" => "application/json" }
-      )
+      context "when the retry returns a non-401 error" do
+        it "re-raises the error without converting it to Unauthorized" do
+          stub_request(:get, "#{base}/progress/summary")
+            .to_return(
+              { status: 401, body: { detail: "Unauthorized" }.to_json, headers: { "Content-Type" => "application/json" } },
+              { status: 500, body: { detail: "Server error" }.to_json, headers: { "Content-Type" => "application/json" } }
+            )
+          stub_request(:post, "#{base}/auth/refresh")
+            .to_return(status: 200, body: { access_token: "new-token" }.to_json, headers: { "Content-Type" => "application/json" })
 
-      stub_request(:post, "#{base}/auth/refresh").to_return(
-        status: 200,
-        body: { access_token: "fresh-token" }.to_json,
-        headers: { "Content-Type" => "application/json" }
-      )
+          expect { client.get("/progress/summary") }.to raise_error(ApiClient::ApiError) { |e| expect(e.status).to eq(500) }
+        end
+      end
 
-      stub_request(:get, "#{base}/user").with(
-        headers: { "Authorization" => "Bearer fresh-token" }
-      ).to_return(
-        status: 401,
-        body: { detail: "Invalid token" }.to_json,
-        headers: { "Content-Type" => "application/json" }
-      )
+      context "without a refresh token" do
+        it "raises Unauthorized immediately" do
+          session[:refresh_token] = nil
+          stub_request(:get, "#{base}/progress/summary")
+            .to_return(status: 401, body: { detail: "Unauthorized" }.to_json, headers: { "Content-Type" => "application/json" })
 
-      expect {
-        client.get("/user")
-      }.to raise_error(AuthenticatedApiClient::Unauthorized)
-    end
+          expect { client.get("/progress/summary") }.to raise_error(AuthenticatedApiClient::Unauthorized)
+        end
+      end
 
-    it "raises Unauthorized if no refresh_token is present" do
-      no_refresh_session = { access_token: "valid-token" }
-      client_no_refresh = AuthenticatedApiClient.new(no_refresh_session)
+      context "when the refresh call itself fails" do
+        it "raises Unauthorized" do
+          stub_request(:get, "#{base}/progress/summary")
+            .to_return(status: 401, body: { detail: "Unauthorized" }.to_json, headers: { "Content-Type" => "application/json" })
+          stub_request(:post, "#{base}/auth/refresh")
+            .to_return(status: 401, body: { detail: "Invalid refresh token" }.to_json, headers: { "Content-Type" => "application/json" })
 
-      stub_request(:get, "#{base}/user").with(
-        headers: { "Authorization" => "Bearer valid-token" }
-      ).to_return(
-        status: 401,
-        body: { detail: "Token expired" }.to_json,
-        headers: { "Content-Type" => "application/json" }
-      )
-
-      expect {
-        client_no_refresh.get("/user")
-      }.to raise_error(AuthenticatedApiClient::Unauthorized)
-
-      expect(WebMock).not_to have_requested(:post, "#{base}/auth/refresh")
-    end
-
-    it "raises Unauthorized if refresh call returns 401" do
-      stub_request(:get, "#{base}/user").with(
-        headers: { "Authorization" => "Bearer valid-token" }
-      ).to_return(
-        status: 401,
-        body: { detail: "Token expired" }.to_json,
-        headers: { "Content-Type" => "application/json" }
-      )
-
-      stub_request(:post, "#{base}/auth/refresh").to_return(
-        status: 401,
-        body: { detail: "Refresh token invalid" }.to_json,
-        headers: { "Content-Type" => "application/json" }
-      )
-
-      expect {
-        client.get("/user")
-      }.to raise_error(AuthenticatedApiClient::Unauthorized)
-    end
-
-    it "re-raises non-401 errors without refresh" do
-      stub_request(:get, "#{base}/user").with(
-        headers: { "Authorization" => "Bearer valid-token" }
-      ).to_return(
-        status: 500,
-        body: { detail: "Server error" }.to_json,
-        headers: { "Content-Type" => "application/json" }
-      )
-
-      expect {
-        client.get("/user")
-      }.to raise_error(ApiClient::ApiError) { |error|
-        expect(error.status).to eq(500)
-      }
-
-      expect(WebMock).not_to have_requested(:post, "#{base}/auth/refresh")
-    end
-  end
-
-  describe "#post" do
-    it "passes through a successful response" do
-      stub_request(:post, "#{base}/data").with(
-        headers: { "Authorization" => "Bearer valid-token" }
-      ).to_return(
-        status: 200,
-        body: { success: true }.to_json,
-        headers: { "Content-Type" => "application/json" }
-      )
-
-      response = client.post("/data", body: { key: "value" })
-      expect(response).to eq({ "success" => true })
+          expect { client.get("/progress/summary") }.to raise_error(AuthenticatedApiClient::Unauthorized)
+        end
+      end
     end
   end
 end

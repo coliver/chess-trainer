@@ -14,26 +14,13 @@ RSpec.describe "Registrations", type: :request do
 
   describe "POST /rails/register" do
     it "renders created on successful registration" do
-      stub_request(:post, "#{base}/auth/register").with(
-        body: {
-          email: "a@example.com",
-          username: "a",
-          password: "secret",
-          language: "en-US"
-        }.to_json,
-        headers: { "Content-Type" => "application/json" }
-      ).to_return(
-        status: 200,
-        body: { id: 1, email: "a@example.com", username: "a" }.to_json,
-        headers: { "Content-Type" => "application/json" }
-      )
+      api_body = { email: "a@example.com", username: "a", password: "secret", language: "en-US" }
+      stub_request(:post, "#{base}/auth/register")
+        .with(body: api_body.to_json, headers: { "Content-Type" => "application/json" })
+        .to_return(status: 200, body: { id: 1, email: "a@example.com", username: "a" }.to_json, headers: { "Content-Type" => "application/json" })
 
-      post register_path, params: {
-        email: "a@example.com",
-        username: "a",
-        password: "secret",
-        password_confirmation: "secret"
-      }, env: env
+      params = { email: "a@example.com", username: "a", password: "secret", password_confirmation: "secret" }
+      post register_path, params: params, env: env
 
       expect(response).to have_http_status(:ok)
       expect(response.body).to include("a@example.com")

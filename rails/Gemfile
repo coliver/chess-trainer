@@ -46,6 +46,11 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  # RSpec-specific cops (context/describe wording, no multi-expectation
+  # examples, no instance variables in specs, etc.) — the automated version
+  # of betterspecs.org conventions.
+  gem "rubocop-rspec", require: false
 end
 
 group :development do
