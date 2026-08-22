@@ -1,0 +1,53 @@
+name: rails
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_call: {}
+
+jobs:
+  rails:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: rails
+
+    env:
+      RAILS_ENV: test
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: rails/package-lock.json
+
+      # Rails depends on @knight-school/chess-core via file:../packages/chess-core,
+      # so build the package first (its own isolated install + tsup build).
+      - name: Build chess-core package
+        working-directory: packages/chess-core
+        run: npm ci && npm run build
+
+      - name: Install JS dependencies
+        run: npm ci
+
+      # Request specs render full views, and Propshaft needs the esbuild
+      # output on disk (app/assets/builds/* is gitignored) to resolve
+      # stylesheet_link_tag/javascript_include_tag.
+      - name: Build JS/CSS bundle
+        run: npm run build
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          working-directory: rails
+          bundler-cache: true
+
+      - name: Lint (rubocop)
+        run: bundle exec rubocop
+
+      - name: Run tests
+        run: bundle exec rspec

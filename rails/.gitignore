@@ -36,3 +36,10 @@
 # bind-mounted /packages/shared-assets/ (source of truth for these files).
 /public/rails/cm-chessboard-assets/
 /public/rails/sounds/
+
+# Ignore key files for decrypting credentials and more. test.key is
+# intentionally committed (see below) — it holds no real secrets and CI
+# needs it to boot the app in RAILS_ENV=test.
+/config/credentials/*.key
+!/config/credentials/test.key
+
