@@ -1,5 +1,7 @@
 # 🎨 Knight School (Chess Trainer) — React Frontend
 
+![Coverage](https://img.shields.io/badge/coverage-89%25-green)
+
 > The frontend against the `/api` backend. Served by nginx at `/`.
 
 The frontend for chess-trainer is a TypeScript + React application providing an interactive, position-based chess drilling interface with real-time move validation.
@@ -98,7 +100,65 @@ The application expects API requests to be served under the `/api` path (the fro
 
 ## 🔄 Key Logic Flows
 
-> See also: [Typical user paths through the site](https://claude.ai/code/artifact/79e26336-9c11-444c-aeb4-e71eb4d7e142) — a diagram of navigation from login through the dashboard hub into puzzle training, opening training, and settings.
+> See also: [Knight School Routes](https://claude.ai/code/artifact/c47a64da-6493-4a97-a0c5-3250a8d57e53) — this same map, styled and with a route legend.
+
+### All Routes
+
+Every path a signed-in or signed-out user can take through the app — built from `App.tsx`'s
+route table plus the `navigate()`/`Link` calls that connect the pages.
+
+```mermaid
+flowchart TD
+    Visit(["Visit any URL"]) --> AuthCheck{Signed in?}
+    AuthCheck -- no --> Login
+    AuthCheck -- yes --> Dashboard
+    Unknown(["Unmatched path"]) -.-> Dashboard
+
+    subgraph Public [" Signed out "]
+        Login["/login"]
+        Register["/register"]
+        Sent["Check-your-email notice"]
+        Verify["/verify-email?token=…"]
+    end
+
+    MailLink(["Link in verification email"]) --> Verify
+    Verify -->|verified or invalid| Login
+    Login -->|Create account| Register
+    Register -->|submit| Sent
+    Sent -->|Return to login| Login
+    Register -->|Return to login link| Login
+    Login -->|"Email not verified → resend"| Login
+    Login -->|valid credentials| Dashboard
+
+    subgraph App [" Signed in "]
+        Dashboard["/dashboard"]
+        Training["/training/:id"]
+        Puzzles["/puzzles"]
+        Settings["/settings"]
+        Header{{"Header nav: Openings · Puzzles · ⚙ · Logout"}}
+    end
+
+    Dashboard -->|pick an opening| Training
+    Training -->|train again| Training
+    Training -->|choose another opening| Dashboard
+    Dashboard -->|Puzzles tile| Puzzles
+    Puzzles -->|back to dashboard| Dashboard
+
+    Dashboard --- Header
+    Training --- Header
+    Puzzles --- Header
+    Settings --- Header
+    Header -->|Openings| Dashboard
+    Header -->|Puzzles| Puzzles
+    Header -->|gear icon| Settings
+    Header -->|Logout| Login
+
+    App -.->|session expires or 401| Login
+```
+
+- `RequireAuth` wraps all four signed-in routes and independently calls `GET /auth/me` on mount — a stale or missing token bounces straight to `/login`, page by page, not just at first load.
+- A global Axios interceptor catches any `401`, tries `POST /auth/refresh` once, and if that fails too, clears the stored tokens and hard-navigates to `/login`.
+- Any unmatched path (`*`) redirects to `/dashboard`, which — per the rule above — bounces onward to `/login` if there's no valid session.
 
 ### Authentication Flow
 

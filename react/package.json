@@ -11,6 +11,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest",
+    "test:coverage": "vitest run --coverage",
     "test:playwright": "playwright test e2e/playwright-dashboard.spec.ts",
     "test:settings": "playwright test e2e/playwright-settings-preview-check.spec.ts",
     "test:smoke": "playwright test e2e/playwright-prod-smoke.spec.ts",
