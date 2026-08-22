@@ -11,6 +11,10 @@ class DashboardController < ApplicationController
     @openings = api.get("/openings")
     @groups = OpeningGrouping.group_by_base(@openings)
 
+    prefs = current_preferences
+    @board_theme = prefs["board_theme"]
+    @piece_set = prefs["piece_set"]
+
     @query = params[:q].to_s.strip
     @base = params[:base].presence
     @color_filter = %w[w b].include?(params[:color]) ? params[:color] : "all"

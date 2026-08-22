@@ -25,6 +25,10 @@ class ApiClient
     request(:post, path, body: body, headers: headers)
   end
 
+  def patch(path, body: {}, headers: {})
+    request(:patch, path, body: body, headers: headers)
+  end
+
   private
 
   def request(method, path, params: {}, body: nil, headers: {})

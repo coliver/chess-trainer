@@ -1,6 +1,16 @@
 <!DOCTYPE html>
-<html>
+<% theme_mode = logged_in? ? current_preferences["theme"] : "system" %>
+<html<% if theme_mode == "dark" %> data-theme="dark"<% end %>>
   <head>
+    <% if theme_mode == "system" %>
+      <script>
+        (function () {
+          if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            document.documentElement.dataset.theme = "dark";
+          }
+        })();
+      </script>
+    <% end %>
     <title><%= content_for(:title) || "App" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -17,7 +27,7 @@
     <link rel="icon" href="/rails/favicon.svg" type="image/svg+xml">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag "tokens", "base", "header", "ui", "board", "login", "training", "dashboard", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "tokens", "base", "header", "ui", "board", "login", "training", "dashboard", "settings", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>

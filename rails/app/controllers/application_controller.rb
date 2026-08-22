@@ -5,12 +5,22 @@ class ApplicationController < ActionController::Base
   rescue_from "AuthenticatedApiClient::Unauthorized", with: :handle_unauthorized
   rescue_from Faraday::ConnectionFailed, Faraday::TimeoutError, with: :handle_api_down
 
-  helper_method :logged_in?
+  helper_method :logged_in?, :current_preferences
 
   private
 
   def logged_in?
     session[:access_token].present?
+  end
+
+  def current_preferences
+    return SettingsController::DEFAULTS.stringify_keys unless logged_in?
+
+    session[:preferences] ||= begin
+      api.get("/users/me/preferences")
+    rescue ApiClient::ApiError
+      SettingsController::DEFAULTS.stringify_keys
+    end
   end
 
   def require_auth!

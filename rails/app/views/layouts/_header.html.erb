@@ -12,6 +12,8 @@
                 class: "site-header-nav-link#{' active' if request.path.start_with?(dashboard_path)}" %>
 
           <div class="site-header-actions">
+            <%= link_to "Settings", settings_path,
+                  class: "site-header-nav-link#{" active" if request.path.start_with?(settings_path)}" %>
             <%= button_to "Log out", logout_path, method: :delete,
                   class: "site-header-nav-link", form: { style: "display: contents" } %>
           </div>

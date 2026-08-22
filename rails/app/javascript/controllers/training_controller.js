@@ -14,7 +14,7 @@ import {
   deriveStatus,
 } from "@knight-school/chess-core"
 import { createTrainingBoard, COLOR, ARROW_TYPE, CUSTOM_MARKER } from "../chess/board_factory"
-import { playSound, getMoveSound } from "../chess/sound"
+import { playSound, getMoveSound, setSoundsEnabled } from "../chess/sound"
 
 // Fused controller for the Training page — combines the roles React splits
 // across Board.tsx + Training.tsx + useTrainingSession.ts. cm-chessboard's
@@ -54,6 +54,12 @@ export default class extends Controller {
     nextUrl: String,
     movesUrl: String,
     dashboardUrl: String,
+    boardTheme: String,
+    pieceSet: String,
+    showCoordinates: String,
+    boardAnimations: String,
+    boardOrientationMode: String,
+    soundEnabled: String,
   }
 
   connect() {
@@ -77,11 +83,21 @@ export default class extends Controller {
     this.flipTurns = 0
     this.lastBoardFen = null
 
-    this.orientation = this.playerColor === "b" ? "black" : "white"
+    setSoundsEnabled(this.soundEnabledValue !== "false")
+
+    const orientationMode = this.boardOrientationModeValue || "auto"
+    this.orientation =
+      orientationMode === "white" ? "white" :
+      orientationMode === "black" ? "black" :
+      this.playerColor === "b" ? "black" : "white"
 
     this.board = createTrainingBoard(this.hostTarget, {
       position: this.fen,
       orientation: this.orientation,
+      boardTheme: this.boardThemeValue || undefined,
+      pieceSet: this.pieceSetValue || undefined,
+      showCoordinates: this.showCoordinatesValue !== "false",
+      animated: this.boardAnimationsValue !== "false",
     })
     this.board.enableMoveInput(
       this.handleMoveInput.bind(this),

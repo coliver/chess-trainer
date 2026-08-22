@@ -19,10 +19,9 @@ export const CUSTOM_MARKER = {
 
 export { COLOR, ARROW_TYPE, MARKER_TYPE }
 
-// Shared construction for the dashboard's read-only opening preview board.
-// Matches React's DEFAULT_PREFERENCES (board_theme "default", piece_set
-// "standard") since Settings/preferences sync is out of scope for v1.
-export function createPreviewBoard(el, { position, orientation }) {
+// Defaults match React's DEFAULT_PREFERENCES; callers that know the user's real
+// board_theme/piece_set (the Settings page) can override them.
+export function createPreviewBoard(el, { position, orientation, boardTheme = "default", pieceSet = "standard" }) {
   return new Chessboard(el, {
     position,
     orientation: orientation === "black" ? COLOR.black : COLOR.white,
@@ -30,10 +29,10 @@ export function createPreviewBoard(el, { position, orientation }) {
     assetsUrl: ASSETS_URL,
     assetsCache: false,
     style: {
-      cssClass: "default",
+      cssClass: boardTheme,
       showCoordinates: false,
       borderType: BORDER_TYPE.none,
-      pieces: { file: "pieces/standard.svg" },
+      pieces: { file: `pieces/${pieceSet}.svg` },
       animationDuration: 300,
     },
   })
@@ -42,7 +41,7 @@ export function createPreviewBoard(el, { position, orientation }) {
 // Shared construction for the interactive Training board. Move input is
 // enabled by the caller (training_controller.js) via board.enableMoveInput,
 // since the handler needs access to controller state.
-export function createTrainingBoard(el, { position, orientation }) {
+export function createTrainingBoard(el, { position, orientation, boardTheme = "default", pieceSet = "standard", showCoordinates = true, animated = true }) {
   return new Chessboard(el, {
     position,
     orientation: orientation === "black" ? COLOR.black : COLOR.white,
@@ -50,11 +49,11 @@ export function createTrainingBoard(el, { position, orientation }) {
     assetsUrl: ASSETS_URL,
     assetsCache: false,
     style: {
-      cssClass: "default",
-      showCoordinates: true,
+      cssClass: boardTheme,
+      showCoordinates,
       borderType: BORDER_TYPE.none,
-      pieces: { file: "pieces/standard.svg" },
-      animationDuration: 300,
+      pieces: { file: `pieces/${pieceSet}.svg` },
+      animationDuration: animated ? 300 : 0,
     },
     extensions: [
       { class: Markers, props: { autoMarkers: MARKER_TYPE.frame } },

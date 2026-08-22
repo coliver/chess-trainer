@@ -18,12 +18,24 @@ const soundFiles = {
 
 const cache = {}
 
+let enabled = true
+
+export function setSoundsEnabled(value) {
+  enabled = value
+}
+
+export function getSoundsEnabled() {
+  return enabled
+}
+
 function getAudio(name) {
   if (!cache[name]) cache[name] = new Audio(soundFiles[name])
   return cache[name]
 }
 
 export function playSound(name) {
+  if (!enabled) return
+
   const audio = getAudio(name)
   if (!audio) return
   audio.currentTime = 0

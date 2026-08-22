@@ -8,7 +8,7 @@ import { createPreviewBoard } from "../chess/board_factory"
 // OpeningCard.tsx.
 export default class extends Controller {
   static targets = ["host"]
-  static values = { epd: String, uciMoves: String, orientation: String }
+  static values = { epd: String, uciMoves: String, orientation: String, boardTheme: String, pieceSet: String }
 
   connect() {
     if (!this.hasHostTarget) return
@@ -32,6 +32,8 @@ export default class extends Controller {
     this.board = createPreviewBoard(this.hostTarget, {
       position: previewFen(opening, moveCount),
       orientation: this.orientationValue || "white",
+      boardTheme: this.boardThemeValue || undefined,
+      pieceSet: this.pieceSetValue || undefined,
     })
   }
 }

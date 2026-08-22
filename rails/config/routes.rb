@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     get "verify-email" => "email_verifications#show", as: :verify_email
 
     get "dashboard" => "dashboard#show", as: :dashboard
+    get "settings" => "settings#show", as: :settings
+    patch "settings" => "settings#update"
 
     get "trainings/:id" => "trainings#show", as: :training
     post "trainings" => "trainings#create", as: :trainings

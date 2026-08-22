@@ -11,6 +11,14 @@ class TrainingsController < ApplicationController
     @player_color = item["playerColor"] == "b" ? "b" : "w"
     @opening_name = item["openingName"].presence || "Training"
     @eco = item["openingEco"]
+
+    prefs = current_preferences
+    @board_theme = prefs["board_theme"]
+    @piece_set = prefs["piece_set"]
+    @show_coordinates = prefs["show_coordinates"]
+    @board_animations = prefs["board_animations"]
+    @board_orientation_mode = prefs["board_orientation_mode"]
+    @sound_enabled = prefs["sound"]
   rescue ApiClient::ApiError => e
     redirect_to dashboard_path, alert: e.detail.presence || "Could not load training session"
   end

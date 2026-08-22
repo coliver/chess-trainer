@@ -14,6 +14,10 @@ class AuthenticatedApiClient
     with_refresh { @client.post(path, body: body, headers: auth_headers) }
   end
 
+  def patch(path, body: {})
+    with_refresh { @client.patch(path, body: body, headers: auth_headers) }
+  end
+
   private
 
   def auth_headers

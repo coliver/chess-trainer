@@ -58,7 +58,9 @@
             <div class="oc-thumb" data-controller="opening-thumb"
                   data-opening-thumb-epd-value="<%= g.representative["epd"] %>"
                   data-opening-thumb-uci-moves-value="<%= g.representative["uci_moves"] %>"
-                  data-opening-thumb-orientation-value="<%= OpeningGrouping.color_of(g.base) == "b" ? "black" : "white" %>">
+                  data-opening-thumb-orientation-value="<%= OpeningGrouping.color_of(g.base) == "b" ? "black" : "white" %>"
+                  data-opening-thumb-board-theme-value="<%= @board_theme %>"
+                  data-opening-thumb-piece-set-value="<%= @piece_set %>">
               <div class="board-host" data-opening-thumb-target="host"></div>
             </div>
             <div class="oc-name"><%= g.base %></div>
@@ -78,6 +80,8 @@
       data-board-preview-epd-value="<%= @selected["epd"] %>"
       data-board-preview-uci-moves-value="<%= @selected["uci_moves"] %>"
       data-board-preview-orientation-value="<%= @player_color == "b" ? "black" : "white" %>"
+      data-board-preview-board-theme-value="<%= @board_theme %>"
+      data-board-preview-piece-set-value="<%= @piece_set %>"
     <% end %>>
     <% if @selected %>
       <div class="ob-preview-inner">

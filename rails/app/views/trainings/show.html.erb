@@ -13,7 +13,13 @@
          data-training-opening-name-value="<%= @opening_name %>"
          data-training-next-url-value="<%= training_next_path(@training_id) %>"
          data-training-moves-url-value="<%= training_moves_path(@training_id) %>"
-         data-training-dashboard-url-value="<%= dashboard_path %>">
+         data-training-dashboard-url-value="<%= dashboard_path %>"
+         data-training-board-theme-value="<%= @board_theme %>"
+         data-training-piece-set-value="<%= @piece_set %>"
+         data-training-show-coordinates-value="<%= @show_coordinates %>"
+         data-training-board-animations-value="<%= @board_animations %>"
+         data-training-board-orientation-mode-value="<%= @board_orientation_mode %>"
+         data-training-sound-enabled-value="<%= @sound_enabled %>">
       <div class="train-board-col">
         <div class="training-board-wrap" data-training-target="host"></div>
         <div class="board-under">

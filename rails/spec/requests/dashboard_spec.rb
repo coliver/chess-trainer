@@ -50,6 +50,14 @@ RSpec.describe "Dashboard", type: :request do
         ].to_json,
         headers: { "Content-Type" => "application/json" }
       )
+      stub_request(:get, "#{base}/users/me/preferences").to_return(
+        status: 200,
+        body: {
+          language: "en-US", theme: "system", board_theme: "default", piece_set: "standard",
+          show_coordinates: true, board_animations: true, board_orientation_mode: "auto", sound: false
+        }.to_json,
+        headers: { "Content-Type" => "application/json" }
+      )
 
       get dashboard_path, env: env
       expect(response).to have_http_status(:ok)
