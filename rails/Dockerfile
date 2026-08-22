@@ -23,4 +23,7 @@ RUN npm ci
 COPY rails/ .
 
 EXPOSE 3000
-CMD ["sh", "-c", "mkdir -p public/rails && cp -r /packages/shared-assets/cm-chessboard-assets public/rails/ && cp -r /packages/shared-assets/sounds public/rails/ && exec bin/dev"]
+# In production, run a one-shot JS build + asset precompile and boot Puma
+# directly instead of bin/dev (which watches esbuild and expects foreman) —
+# dev keeps bin/dev's live-reload behavior unchanged.
+CMD ["sh", "-c", "mkdir -p public/rails && cp -r /packages/shared-assets/cm-chessboard-assets public/rails/ && cp -r /packages/shared-assets/sounds public/rails/ && if [ \"$RAILS_ENV\" = \"production\" ]; then npm run build && bin/rails assets:precompile && exec bin/rails server -b 0.0.0.0; else exec bin/dev; fi"]

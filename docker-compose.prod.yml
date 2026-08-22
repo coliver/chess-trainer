@@ -4,10 +4,13 @@
 # nginx instead of silently sitting unused on disk):
 #   npm --prefix packages/chess-core run build
 #   npm --prefix react run build         # writes react/dist
-#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build db api nginx
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build db api rails nginx
 #
-# Only db, api, and nginx run in prod — react is a dev-server-only
-# service and is intentionally not started.
+# db, api, rails, and nginx run in prod — react is a dev-server-only
+# service and is intentionally not started (prod serves its static build
+# instead, mounted into nginx below). Rails needs RAILS_MASTER_KEY set in
+# the server's .env (see rails/config/master.key locally) — it isn't
+# committed, so it must be provisioned on the host once, by hand.
 #
 # nginx/conf.d note: the base compose file bind-mounts the whole ./nginx
 # directory at /etc/nginx/conf.d, and nginx's `include conf.d/*.conf` picks
@@ -17,6 +20,10 @@
 # included) — so this mounts a whole replacement directory at the exact
 # same target instead, which fully replaces the base mount.
 services:
+  rails:
+    environment:
+      RAILS_ENV: production
+      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
   nginx:
     volumes:
       - ./nginx/conf-prod:/etc/nginx/conf.d:ro

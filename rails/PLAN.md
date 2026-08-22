@@ -15,10 +15,12 @@ Given the size of a full frontend, and the cautionary tale of Angular's
 prod/CI cost, the user has scoped this down deliberately:
 
 - **New `rails/` directory in this repo** (not a separate repo).
-- **Dev-only for now** — no prod compose/nginx wiring yet; mirrors how
-  React/Angular are dev-only containers in prod (`docker-compose.prod.yml`
-  only runs `db api nginx`, prod serves a static build instead). Rails can't
-  be reduced to a static build, so full prod wiring is deferred.
+- **Dev-only at first** — no prod compose/nginx wiring initially; React
+  stayed dev-only-container in prod (`docker-compose.prod.yml` only ran
+  `db api nginx`, prod serves its static build instead) because Rails
+  can't be reduced to a static build the same way. Full prod wiring
+  (unlike React's) landed later, once the core loop was solid — see
+  "Docker / nginx / CI wiring" below for what actually shipped.
 - **"Core loop" scope for v1**: Login, Register, VerifyEmail (auth) +
   Dashboard (opening browser + progress summary) + Training (board, move
   submission, hints, timeline). **Out of scope for v1**: Puzzles page,
@@ -183,18 +185,25 @@ the ERB auth views so `login.css` applies unmodified.
 **`rails/Dockerfile`**: `FROM ruby:3.3-slim`, install build-essential + Node
 20 (for esbuild), build `packages/chess-core` first (same two-line pattern
 as `react/Dockerfile`), `bundle install`, `npm ci`, copy source,
-`EXPOSE 3000`, `CMD ["bin/dev"]` (Procfile.dev running rails server + esbuild
-watch; add `foreman` to the Gemfile's dev group so `bin/dev` has a runner).
+`EXPOSE 3000`. `CMD` branches on `RAILS_ENV`: dev still runs `bin/dev`
+(Procfile.dev, rails server + esbuild watch via foreman); production runs
+a one-shot `npm run build && bin/rails assets:precompile` then boots Puma
+directly (`bin/rails server -b 0.0.0.0`) — no foreman/watch mode in prod.
 
-**`docker-compose.yml`**: new `rails` service mirroring `react`'s shape —
+**`docker-compose.yml`**: `rails` service mirroring `react`'s shape —
 `build: {context: ., dockerfile: rails/Dockerfile}`, volumes
 `./rails:/app`, `./packages:/packages`, anonymous `/app/node_modules`,
 `expose: ["3000"]`, `depends_on: api`, env `API_BASE_URL: http://api:8000`,
 `RAILS_ENV: development`, `restart: unless-stopped`, `logging: *default-logging`.
-No changes to `docker-compose.prod.yml` / `nginx/conf-prod` (prod already
-only runs `db api nginx`).
 
-**`nginx/default.conf`**: add, after the `/api/` block:
+**`docker-compose.prod.yml`** overrides `rails`'s environment to
+`RAILS_ENV: production` + `RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}` (pulled
+from the server's `.env`, same convention as `DATABASE_URL`/`JWT_SECRET` —
+`config/master.key` itself is gitignored, so this is a one-time manual
+provisioning step on the host). `db api rails nginx` now all run in prod.
+
+**`nginx/conf-prod/default.conf`**: added, after the `/api/` block (same
+block already drafted here for the dev config, now also in prod):
 ```nginx
 location /rails/ {
   set $rails_upstream rails;
@@ -208,15 +217,13 @@ location /rails/ {
 }
 ```
 
-**`.github/workflows/rails.yml`** (new, standalone `pull_request` +
-`workflow_call` trigger, matching `react.yml`/`core.yml`'s pattern — note
-`tests.yml` is its own standalone backend-only job, not an aggregator, and
-`react.yml`/`core.yml` are only pulled together by `deploy.yml`; since Rails
-is dev-only and not deployed, **`rails.yml` does not need to be added to
-`deploy.yml`**): checkout, setup-node + build `packages/chess-core`,
-`ruby/setup-ruby` with `bundler-cache: true`, `npm ci`,
-`bin/rails assets:precompile RAILS_ENV=test`, a boot smoke check
-(`bin/rails runner 'puts "Rails boots OK"'`).
+**`.github/workflows/rails.yml`** (standalone `pull_request` +
+`workflow_call` trigger, matching `react.yml`/`core.yml`'s pattern):
+checkout, setup-node + build `packages/chess-core`, `ruby/setup-ruby` with
+`bundler-cache: true`, `npm ci`, `bin/rails assets:precompile
+RAILS_ENV=test`, a boot smoke check (`bin/rails runner 'puts "Rails boots
+OK"'`). Now also wired into `deploy.yml`'s `needs:` list, gating deploys on
+it the same way `core`/`react`/`tests` do, since Rails ships to prod now.
 
 **`rails/README.md`**: mirror `react/README.md`'s structure — Project
 Navigation, Project Structure tree, Docker-only dev setup
@@ -290,10 +297,11 @@ prod/i18n out of scope for v1).
 
 ## Notes / risks carried forward
 
-- Ruby 3.3 / Rails 7.2 pinned deliberately (not Rails 8, whose new default
-  Gemfile adds `solid_cache`/`solid_queue`/`solid_cable`/`kamal`/`thruster` —
-  all assume a local-DB/Kamal deploy model that doesn't fit this repo's
-  compose+nginx setup).
+- Ruby 3.3 / Rails 8.1 (`Gemfile.lock` pins `~> 8.1.3, >= 8.1.3.1`) — the
+  Rails 8 default Gemfile's `solid_cache`/`solid_queue`/`solid_cable`/
+  `kamal`/`thruster` additions were deliberately skipped at scaffold time
+  (`--skip-active-record` etc.), since they assume a local-DB/Kamal deploy
+  model that doesn't fit this repo's compose+nginx setup.
 - `docker-compose.override.yml` currently sets `EMAIL_VERIFICATION_REQUIRED:
   "true"` for dev — Step 3's verification flow needs to account for this
   (either complete a real email round-trip via the dev SMTP setup, or note

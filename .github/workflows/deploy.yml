@@ -11,9 +11,11 @@ jobs:
     uses: ./.github/workflows/react.yml
   tests:
     uses: ./.github/workflows/tests.yml
+  rails:
+    uses: ./.github/workflows/rails.yml
 
   deploy:
-    needs: [core, react, tests]
+    needs: [core, react, tests, rails]
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to knightschool.click
@@ -44,7 +46,7 @@ jobs:
               sh -c 'npm ci && npm run build'
 
             docker compose -f docker-compose.yml -f docker-compose.prod.yml \
-              up -d --build db api nginx
+              up -d --build db api rails nginx
 
             # Aggressive cleanup: every deploy rebuilds the api image via
             # BuildKit, and `docker image prune -f` alone only removes

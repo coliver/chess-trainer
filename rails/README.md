@@ -2,10 +2,10 @@
 
 ![Coverage](https://img.shields.io/badge/coverage-98%25-brightgreen)
 
-> A second, dev-only frontend against the same `/api` backend. Not deployed to
-> prod. See the root README's "Swappable frontends" section for the
-> convention this follows, and [`PLAN.md`](./PLAN.md) for the full design
-> rationale and build order this app was implemented against.
+> A second frontend against the same `/api` backend, now deployed alongside
+> React at `/rails/...`. See the root README's "Swappable frontends" section
+> for the convention this follows, and [`PLAN.md`](./PLAN.md) for the full
+> design rationale and build order this app was implemented against.
 
 This is a Rails 8 + Hotwire (Turbo + Stimulus) exploration/learning project,
 built alongside the production React frontend rather than replacing it. It
@@ -13,7 +13,7 @@ covers the "core loop" only: login/register/email verification, a dashboard
 with an opening browser and progress summary, a training session with move
 submission, hints, and a timeline stepper, a puzzles page, and a settings
 page with preferences sync. See `PLAN.md`'s Context section for the v1 cuts
-that remain (i18n beyond English, prod wiring).
+that remain (i18n beyond English).
 
 ## Architecture
 
@@ -111,9 +111,16 @@ rails/
   in React, not backend-synced).
 - I18n is wired throughout (`t()` in views/controllers,
   `app/javascript/i18n.js` bridging translations into Stimulus
-  controllers), but only English content ships — no locale switcher or
-  user-facing language toggle yet. Settings has a `language` preference
-  field, but it isn't applied.
+  controllers). `config.i18n.available_locales` is derived at boot from
+  every file in `packages/i18n-locales/locales/*.json` (currently 37),
+  matching what React's `LanguageToggle` and the backend's
+  `supported_languages()` already offer. Settings' `language` row lets a
+  user pick any of them, round-trips through `/users/me/preferences`, and
+  `ApplicationController#set_locale` applies it to `I18n.locale` on
+  subsequent requests by reading the cached `session[:preferences]` (no
+  extra API call — it takes effect starting with the next full-page
+  request after the one that saved it, since a fresh session hasn't cached
+  preferences yet on its very first request).
 - Rails and React now render the same English copy for every UI concept
   both apps have, pulled from one shared file:
   `packages/i18n-locales/locales/en-US.json` (the same file React's
@@ -131,5 +138,7 @@ rails/
   equivalent — because the concept doesn't exist on that side, or the flow
   is structurally different (e.g. a full-page flash-redirect vs React's
   inline optimistic UI) — stay local in `config/locales/en.yml`.
-- Not wired into `docker-compose.prod.yml` or the deploy workflow —
-  dev-only, matching how Angular was dev-only before its removal.
+- Deployed alongside React and served at `/rails/...` on
+  knightschool.click — `docker-compose.prod.yml` runs it with
+  `RAILS_ENV=production`, and `.github/workflows/deploy.yml` builds/starts
+  it and gates deploys on `rails.yml`'s CI job passing first.
