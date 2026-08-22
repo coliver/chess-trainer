@@ -1,0 +1,22 @@
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-header-brand">
+      <img src="/rails/favicon.svg" alt="" class="site-header-logo" height="40">
+      <%= link_to "Knight School", (logged_in? ? dashboard_path : login_path), class: "site-header-title" %>
+    </div>
+
+    <% if logged_in? %>
+      <div class="site-header-right">
+        <nav class="site-header-nav" aria-label="Main">
+          <%= link_to "Openings", dashboard_path,
+                class: "site-header-nav-link#{' active' if request.path.start_with?(dashboard_path)}" %>
+
+          <div class="site-header-actions">
+            <%= button_to "Log out", logout_path, method: :delete,
+                  class: "site-header-nav-link", form: { style: "display: contents" } %>
+          </div>
+        </nav>
+      </div>
+    <% end %>
+  </div>
+</header>

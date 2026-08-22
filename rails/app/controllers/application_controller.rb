@@ -4,7 +4,13 @@ class ApplicationController < ActionController::Base
 
   rescue_from "AuthenticatedApiClient::Unauthorized", with: :handle_unauthorized
 
+  helper_method :logged_in?
+
   private
+
+  def logged_in?
+    session[:access_token].present?
+  end
 
   def require_auth!
     unless session[:access_token]
