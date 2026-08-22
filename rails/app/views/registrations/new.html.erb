@@ -2,32 +2,32 @@
 
 <main class="page">
   <div class="card" style="max-width: 520px; margin-top: 20px;">
-    <h1 class="title" style="margin-bottom: 6px;">Register</h1>
-    <p class="subtitle">Create your Knight School account.</p>
+    <h1 class="title" style="margin-bottom: 6px;"><%= t(".title") %></h1>
+    <p class="subtitle"><%= t(".subtitle") %></p>
 
     <%= form_with url: register_path, method: :post, local: true, class: "auth-form" do %>
       <label class="auth-field">
-        <span class="auth-label">Email</span>
+        <span class="auth-label"><%= t(".email_label") %></span>
         <%= email_field_tag :email, @email, required: true, autocomplete: "email", class: "text-input" %>
-        <span class="auth-hint">We'll only use this to verify your account.</span>
+        <span class="auth-hint"><%= t(".email_hint") %></span>
       </label>
 
       <label class="auth-field">
-        <span class="auth-label">Username</span>
+        <span class="auth-label"><%= t(".username_label") %></span>
         <%= text_field_tag :username, @username, required: true, autocomplete: "username", class: "text-input" %>
       </label>
 
       <label class="auth-field">
-        <span class="auth-label">Password</span>
+        <span class="auth-label"><%= t(".password_label") %></span>
         <%= password_field_tag :password, nil, required: true, autocomplete: "new-password", class: "text-input" %>
       </label>
 
       <label class="auth-field">
-        <span class="auth-label">Confirm password</span>
+        <span class="auth-label"><%= t(".confirm_password_label") %></span>
         <%= password_field_tag :password_confirmation, nil, required: true, autocomplete: "new-password", class: "text-input" %>
       </label>
 
-      <button class="btn" type="submit" style="margin-top: 6px;">Register</button>
+      <button class="btn" type="submit" style="margin-top: 6px;"><%= t(".submit") %></button>
 
       <% if @error %>
         <div class="auth-error"><%= @error %></div>
@@ -35,7 +35,7 @@
     <% end %>
 
     <p class="auth-alt">
-      Already have an account? <%= link_to "Log in", login_path %>
+      <%= t(".already_have_account") %> <%= link_to t(".login_link"), login_path %>
     </p>
   </div>
 </main>

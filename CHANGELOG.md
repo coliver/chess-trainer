@@ -1,5 +1,8 @@
 ## 2026-08-22
 
+### Features
+- feat(rails): roll the I18n engine (server-side `t()` + the `app/javascript/i18n.js` bridge, first wired on Puzzles/header) out to every remaining view, controller, and Stimulus controller — Sessions, Registrations, EmailVerifications, Dashboard, Settings, Trainings, and the shared error page; content stays English-only, but no view or controller has a hardcoded UI string left. Added `config.i18n.raise_on_missing_translations = true` in `config/environments/test.rb` so a missing/mistyped `t()` key fails RSpec loudly instead of silently rendering "translation missing: ..."
+
 ### Tests
 - test(rails): add `spec/requests/puzzles_spec.rb` covering the new Puzzles page (`puzzles_controller.rb`, `views/puzzles/show.html.erb`, `puzzle_controller.js`) — login redirect, board render on a due puzzle, the "no puzzles due" state on a 404 from `/puzzles/next`, and the `GET /rails/puzzles/next` / `POST /rails/puzzles/:id/attempts` JSON proxies (success + error passthrough), mirroring `trainings_spec.rb`'s WebMock pattern; also added the missing `"puzzles"` entry to the layout's `stylesheet_link_tag` list so `packages/shared-styles/puzzles.css` actually loads
 

@@ -2,21 +2,21 @@
 
 <main class="page">
   <div class="card" style="max-width: 520px; margin-top: 20px;">
-    <h1 class="title" style="margin-bottom: 6px;">Log in</h1>
-    <p class="subtitle">Welcome back to Knight School.</p>
+    <h1 class="title" style="margin-bottom: 6px;"><%= t(".title") %></h1>
+    <p class="subtitle"><%= t(".subtitle") %></p>
 
     <%= form_with url: login_path, method: :post, local: true, class: "auth-form" do %>
       <label class="auth-field">
-        <span class="auth-label">Username</span>
+        <span class="auth-label"><%= t(".username_label") %></span>
         <%= text_field_tag :username, @username, required: true, autocomplete: "username", class: "text-input" %>
       </label>
 
       <label class="auth-field">
-        <span class="auth-label">Password</span>
+        <span class="auth-label"><%= t(".password_label") %></span>
         <%= password_field_tag :password, nil, required: true, autocomplete: "current-password", class: "text-input" %>
       </label>
 
-      <button class="btn" type="submit" style="margin-top: 14px;">Log in</button>
+      <button class="btn" type="submit" style="margin-top: 14px;"><%= t(".submit") %></button>
 
       <% if @error %>
         <div class="auth-error"><%= @error %></div>
@@ -25,13 +25,13 @@
 
     <% if @email_not_verified %>
       <div style="margin-top: 14px;">
-        <div class="auth-error">Please verify your email before logging in.</div>
-        <%= button_to "Resend verification email", resend_verification_path, params: { username: @username }, class: "btn", style: "margin-top: 10px;" %>
+        <div class="auth-error"><%= t(".email_not_verified") %></div>
+        <%= button_to t(".resend_verification"), resend_verification_path, params: { username: @username }, class: "btn", style: "margin-top: 10px;" %>
       </div>
     <% end %>
 
     <p class="auth-alt">
-      Need an account? <%= link_to "Register", register_path %>
+      <%= t(".need_account") %> <%= link_to t(".register_link"), register_path %>
     </p>
   </div>
 </main>

@@ -3,22 +3,22 @@
 <main class="page">
   <div class="card" style="max-width: 520px; margin-top: 20px;">
     <% if @state == :success %>
-      <h1 class="title" style="margin-bottom: 6px;">Email verified</h1>
+      <h1 class="title" style="margin-bottom: 6px;"><%= t(".verified_title") %></h1>
       <p class="subtitle">
         <% if @email %>
-          <%= @email %> is now verified. You can log in.
+          <%= t(".verified_with_email", email: @email) %>
         <% else %>
-          Your email is now verified. You can log in.
+          <%= t(".verified_generic") %>
         <% end %>
       </p>
       <p style="margin-top: 20px;">
-        <%= link_to "Go to login", login_path, class: "btn", style: "display: inline-block;" %>
+        <%= link_to t(".go_to_login"), login_path, class: "btn", style: "display: inline-block;" %>
       </p>
     <% else %>
-      <h1 class="title" style="margin-bottom: 6px;">Verification failed</h1>
-      <p class="subtitle">This link is invalid or has expired.</p>
+      <h1 class="title" style="margin-bottom: 6px;"><%= t(".failed_title") %></h1>
+      <p class="subtitle"><%= t(".failed_subtitle") %></p>
       <p style="margin-top: 20px;">
-        <%= link_to "Return to login", login_path, class: "btn", style: "display: inline-block;" %>
+        <%= link_to t(".return_to_login"), login_path, class: "btn", style: "display: inline-block;" %>
       </p>
     <% end %>
   </div>

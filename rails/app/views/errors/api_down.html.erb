@@ -2,10 +2,10 @@
 
 <main class="page">
   <div class="card" style="max-width: 520px; margin-top: 20px;">
-    <h1 class="title" style="margin-bottom: 6px;">Server unavailable</h1>
-    <p class="subtitle">Knight School's server is temporarily unreachable. Please try again shortly.</p>
+    <h1 class="title" style="margin-bottom: 6px;"><%= t("errors.api_down.title") %></h1>
+    <p class="subtitle"><%= t("errors.api_down.subtitle") %></p>
     <p class="auth-alt" style="margin-top: 20px;">
-      <%= link_to "Try again", request.path, class: "btn", style: "display: inline-block;" %>
+      <%= link_to t("errors.api_down.try_again"), request.path, class: "btn", style: "display: inline-block;" %>
     </p>
   </div>
 </main>

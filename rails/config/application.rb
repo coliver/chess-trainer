@@ -38,5 +38,11 @@ module App
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Engine is wired for future locales, but only English content ships for
+    # now (see rails/PLAN.md) — available_locales stays a single-entry
+    # allowlist until translated config/locales/*.yml files exist.
+    config.i18n.default_locale = :en
+    config.i18n.available_locales = [ :en ]
   end
 end

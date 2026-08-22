@@ -30,6 +30,7 @@
     <%= stylesheet_link_tag "tokens", "base", "header", "ui", "board", "login", "training", "dashboard", "settings", "puzzles", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    <script id="i18n-strings" type="application/json"><%= raw js_translations.to_json %></script>
   </head>
 
   <body>

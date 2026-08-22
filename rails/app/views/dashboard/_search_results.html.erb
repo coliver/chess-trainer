@@ -1,8 +1,8 @@
 <% if @search_matches.empty? %>
   <div class="ob-noresults">
-    No openings match &ldquo;<%= @query %>&rdquo;.
+    <%= t(".no_match_html", query: @query) %>
     <br>
-    Try a name (Sicilian) or an ECO code (B90).
+    <%= t(".search_hint") %>
   </div>
 <% else %>
   <div class="variation-rows" role="list">
@@ -17,7 +17,7 @@
     <% end %>
   </div>
   <% if @search_matches.size > @search_limit %>
-    <%= link_to "Show #{@search_matches.size - @search_limit} more",
+    <%= link_to t(".show_more", count: @search_matches.size - @search_limit),
           dashboard_path(q: @query, limit: @search_limit + DashboardController::SEARCH_PAGE),
           class: "ob-showmore", data: { turbo_frame: "opening_browser" } %>
   <% end %>

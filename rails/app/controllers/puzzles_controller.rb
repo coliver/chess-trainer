@@ -7,7 +7,7 @@ class PuzzlesController < ApplicationController
     if e.status == 404
       @no_puzzle = true
     else
-      redirect_to dashboard_path, alert: e.detail.presence || "Could not load puzzle"
+      redirect_to dashboard_path, alert: e.detail.presence || t("puzzles.controller.could_not_load")
     end
   end
 

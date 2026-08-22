@@ -6,29 +6,9 @@ class SettingsController < ApplicationController
   PIECE_SETS = %w[standard staunty merida pirouetti chessnut].freeze
   ORIENTATION_MODES = %w[auto white black].freeze
 
-  BOARD_THEME_LABELS = {
-    "default" => "Default",
-    "default-contrast" => "Default (high contrast)",
-    "green" => "Green",
-    "blue" => "Blue",
-    "chess-club" => "Chess Club",
-    "chessboard-js" => "Classic",
-    "black-and-white" => "Black & White"
-  }.freeze
-
-  PIECE_SET_LABELS = {
-    "standard" => "Standard",
-    "staunty" => "Staunty",
-    "merida" => "Merida",
-    "pirouetti" => "Pirouetti",
-    "chessnut" => "Chessnut"
-  }.freeze
-
-  ORIENTATION_LABELS = {
-    "auto" => "Auto — flip to the side to move",
-    "white" => "Always keep White on bottom",
-    "black" => "Always keep Black on bottom"
-  }.freeze
+  # Human-readable labels for the above now live in config/locales/en.yml
+  # under settings.show.{theme,board_theme,piece_set,orientation}_labels —
+  # the view looks them up by value via t(".xxx_labels.#{value}").
 
   DEFAULTS = {
     theme: "system",
@@ -50,9 +30,9 @@ class SettingsController < ApplicationController
   def update
     @preferences = api.patch("/users/me/preferences", body: preferences_params)
     session[:preferences] = @preferences
-    redirect_to safe_return_to || settings_path, notice: "Preferences saved."
+    redirect_to safe_return_to || settings_path, notice: t("settings.controller.preferences_saved")
   rescue ApiClient::ApiError => e
-    flash.now[:alert] = e.detail.presence || "Couldn't save preferences"
+    flash.now[:alert] = e.detail.presence || t("settings.controller.save_failed")
     @preferences = preferences_params.stringify_keys
     render :show, status: :unprocessable_entity
   end

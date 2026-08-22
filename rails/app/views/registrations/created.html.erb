@@ -2,11 +2,11 @@
 
 <main class="page">
   <div class="card" style="max-width: 520px; margin-top: 20px;">
-    <h1 class="title" style="margin-bottom: 6px;">Check your email</h1>
-    <p class="subtitle">We sent a verification link to <strong><%= @email %></strong>.</p>
+    <h1 class="title" style="margin-bottom: 6px;"><%= t(".title") %></h1>
+    <p class="subtitle"><%= t(".subtitle") %> <strong><%= @email %></strong>.</p>
 
     <p class="auth-alt" style="margin-top: 20px;">
-      <%= link_to "Return to login", login_path %>
+      <%= link_to t(".return_to_login"), login_path %>
     </p>
   </div>
 </main>

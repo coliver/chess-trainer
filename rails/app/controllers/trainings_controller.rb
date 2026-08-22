@@ -9,7 +9,7 @@ class TrainingsController < ApplicationController
     @item_id = item["itemId"]
     @correct_move_uci = item["correctMoveUci"]
     @player_color = item["playerColor"] == "b" ? "b" : "w"
-    @opening_name = item["openingName"].presence || "Training"
+    @opening_name = item["openingName"].presence || t("trainings.controller.default_opening_name")
     @eco = item["openingEco"]
 
     prefs = current_preferences
@@ -20,7 +20,7 @@ class TrainingsController < ApplicationController
     @board_orientation_mode = prefs["board_orientation_mode"]
     @sound_enabled = prefs["sound"]
   rescue ApiClient::ApiError => e
-    redirect_to dashboard_path, alert: e.detail.presence || "Could not load training session"
+    redirect_to dashboard_path, alert: e.detail.presence || t("trainings.controller.could_not_load")
   end
 
   def create
@@ -37,7 +37,7 @@ class TrainingsController < ApplicationController
 
     redirect_to training_path(response["id"])
   rescue ApiClient::ApiError => e
-    redirect_to dashboard_path, alert: e.detail.presence || "Could not start training session"
+    redirect_to dashboard_path, alert: e.detail.presence || t("trainings.controller.could_not_start")
   end
 
   # JSON proxy for the training board's Stimulus controller: it can't reach

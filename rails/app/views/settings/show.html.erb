@@ -2,11 +2,11 @@
 
 <main class="page">
   <div class="card settings-card">
-    <h1 class="title">Settings</h1>
-    <p class="subtitle">Personalize how Knight School looks and plays.</p>
+    <h1 class="title"><%= t(".title") %></h1>
+    <p class="subtitle"><%= t(".subtitle") %></p>
 
     <section class="settings-section settings-section--preview">
-      <span class="settings-row-label">Preview</span>
+      <span class="settings-row-label"><%= t(".preview_label") %></span>
       <div class="settings-preview-board" data-controller="board-preview"
             data-board-preview-position-value="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
             data-board-preview-orientation-value="<%= @preferences["board_orientation_mode"] == "black" ? "black" : "white" %>"
@@ -18,36 +18,36 @@
 
     <%= form_with url: settings_path, method: :patch do %>
       <section class="settings-section">
-        <h2 class="settings-section-heading">Appearance</h2>
+        <h2 class="settings-section-heading"><%= t(".appearance_heading") %></h2>
 
         <div class="settings-row">
-          <span class="settings-row-label">Theme</span>
-          <div class="settings-radio-group" role="radiogroup" aria-label="Theme">
-            <% SettingsController::THEMES.each do |t| %>
+          <span class="settings-row-label"><%= t(".theme_label") %></span>
+          <div class="settings-radio-group" role="radiogroup" aria-label="<%= t(".theme_label") %>">
+            <% SettingsController::THEMES.each do |theme| %>
               <label class="settings-radio">
-                <%= radio_button_tag :theme, t, @preferences["theme"] == t, onchange: "this.form.requestSubmit()" %>
-                <%= t.capitalize %>
+                <%= radio_button_tag :theme, theme, @preferences["theme"] == theme, onchange: "this.form.requestSubmit()" %>
+                <%= t(".theme_labels.#{theme}") %>
               </label>
             <% end %>
           </div>
         </div>
 
         <label class="settings-row" for="settings-board-theme">
-          <span class="settings-row-label">Board colors</span>
+          <span class="settings-row-label"><%= t(".board_colors_label") %></span>
           <%= select_tag :board_theme,
-                options_for_select(SettingsController::BOARD_THEME_LABELS.map { |v, l| [l, v] }, @preferences["board_theme"]),
+                options_for_select(SettingsController::BOARD_THEMES.map { |v| [t(".board_theme_labels.#{v.tr("-", "_")}"), v] }, @preferences["board_theme"]),
                 id: "settings-board-theme", class: "text-input settings-select", onchange: "this.form.requestSubmit()" %>
         </label>
 
         <label class="settings-row" for="settings-piece-set">
-          <span class="settings-row-label">Piece set</span>
+          <span class="settings-row-label"><%= t(".piece_set_label") %></span>
           <%= select_tag :piece_set,
-                options_for_select(SettingsController::PIECE_SET_LABELS.map { |v, l| [l, v] }, @preferences["piece_set"]),
+                options_for_select(SettingsController::PIECE_SETS.map { |v| [t(".piece_set_labels.#{v}"), v] }, @preferences["piece_set"]),
                 id: "settings-piece-set", class: "text-input settings-select", onchange: "this.form.requestSubmit()" %>
         </label>
 
         <label class="settings-row settings-row--checkbox">
-          <span class="settings-row-label">Show board coordinates</span>
+          <span class="settings-row-label"><%= t(".show_coordinates_label") %></span>
           <span class="settings-switch">
             <%= hidden_field_tag :show_coordinates, "0", id: nil %>
             <%= check_box_tag :show_coordinates, "1", @preferences["show_coordinates"], role: "switch", onchange: "this.form.requestSubmit()" %>
@@ -56,7 +56,7 @@
         </label>
 
         <label class="settings-row settings-row--checkbox">
-          <span class="settings-row-label">Animate piece moves</span>
+          <span class="settings-row-label"><%= t(".animate_piece_moves_label") %></span>
           <span class="settings-switch">
             <%= hidden_field_tag :board_animations, "0", id: nil %>
             <%= check_box_tag :board_animations, "1", @preferences["board_animations"], role: "switch", onchange: "this.form.requestSubmit()" %>
@@ -65,7 +65,7 @@
         </label>
 
         <label class="settings-row settings-row--checkbox">
-          <span class="settings-row-label">Sound effects</span>
+          <span class="settings-row-label"><%= t(".sound_effects_label") %></span>
           <span class="settings-switch">
             <%= hidden_field_tag :sound, "0", id: nil %>
             <%= check_box_tag :sound, "1", @preferences["sound"], role: "switch", onchange: "this.form.requestSubmit()" %>
@@ -75,12 +75,12 @@
       </section>
 
       <section class="settings-section">
-        <h2 class="settings-section-heading">Board orientation</h2>
-        <div class="settings-radio-group settings-radio-group--stacked" role="radiogroup" aria-label="Board orientation">
-          <% SettingsController::ORIENTATION_LABELS.each do |mode, label| %>
+        <h2 class="settings-section-heading"><%= t(".board_orientation_heading") %></h2>
+        <div class="settings-radio-group settings-radio-group--stacked" role="radiogroup" aria-label="<%= t(".board_orientation_heading") %>">
+          <% SettingsController::ORIENTATION_MODES.each do |mode| %>
             <label class="settings-radio">
               <%= radio_button_tag :board_orientation_mode, mode, @preferences["board_orientation_mode"] == mode, onchange: "this.form.requestSubmit()" %>
-              <%= label %>
+              <%= t(".orientation_labels.#{mode}") %>
             </label>
           <% end %>
         </div>
@@ -88,10 +88,10 @@
     <% end %>
 
     <section class="settings-section settings-section--footer">
-      <%= button_to "Reset to Defaults", settings_path, method: :patch,
+      <%= button_to t(".reset_to_defaults"), settings_path, method: :patch,
             params: SettingsController::DEFAULTS,
             class: "btn",
-            data: { turbo_confirm: "Reset all settings to their defaults? This can't be undone." } %>
+            data: { turbo_confirm: t(".reset_confirm") } %>
     </section>
   </div>
 </main>

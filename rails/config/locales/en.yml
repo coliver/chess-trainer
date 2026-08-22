@@ -28,4 +28,196 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  header:
+    openings: "Openings"
+    puzzles: "Puzzles"
+    settings_label: "Settings"
+    logout: "Logout"
+    view_source: "View source on GitHub"
+    toggle_theme: "Toggle theme"
+
+  puzzles:
+    show:
+      eyebrow: "Puzzles"
+      title: "Puzzles"
+      find_best_move: "Find the best move!"
+      no_puzzles_due: "No puzzles due right now!"
+      skip: "Skip puzzle"
+      back_to_dashboard: "Back to dashboard"
+      flip_board: "Flip board"
+      white_to_move: "White to move"
+    controller:
+      could_not_load: "Could not load puzzle"
+
+  sessions:
+    new:
+      title: "Log in"
+      subtitle: "Welcome back to Knight School."
+      username_label: "Username"
+      password_label: "Password"
+      submit: "Log in"
+      email_not_verified: "Please verify your email before logging in."
+      resend_verification: "Resend verification email"
+      need_account: "Need an account?"
+      register_link: "Register"
+    controller:
+      login_failed: "Login failed"
+      verification_sent: "If that account exists and is unverified, a verification email has been sent."
+      resend_failed: "Something went wrong"
+
+  registrations:
+    new:
+      title: "Register"
+      subtitle: "Create your Knight School account."
+      email_label: "Email"
+      email_hint: "We'll only use this to verify your account."
+      username_label: "Username"
+      password_label: "Password"
+      confirm_password_label: "Confirm password"
+      submit: "Register"
+      already_have_account: "Already have an account?"
+      login_link: "Log in"
+    created:
+      title: "Check your email"
+      subtitle: "We sent a verification link to"
+      return_to_login: "Return to login"
+    controller:
+      password_mismatch: "Passwords do not match"
+      registration_failed: "Registration failed"
+
+  email_verifications:
+    show:
+      verified_title: "Email verified"
+      verified_with_email: "%{email} is now verified. You can log in."
+      verified_generic: "Your email is now verified. You can log in."
+      go_to_login: "Go to login"
+      failed_title: "Verification failed"
+      failed_subtitle: "This link is invalid or has expired."
+      return_to_login: "Return to login"
+
+  errors:
+    api_down:
+      title: "Server unavailable"
+      subtitle: "Knight School's server is temporarily unreachable. Please try again shortly."
+      try_again: "Try again"
+
+  dashboard:
+    show:
+      welcome_back: "Welcome back"
+      your_progress: "Your progress"
+      training_heading: "Training"
+      positions_trained: "Positions trained"
+      accuracy: "Accuracy"
+      day_streak: "Day streak"
+      day_streak_with_best: "Day streak (best %{best})"
+      mastered: "Mastered"
+      review_due: "Review %{count} due"
+      weak_spots: "Weak spots"
+      opening_fallback: "Opening"
+    search_results:
+      no_match_html: "No openings match &ldquo;%{query}&rdquo;."
+      search_hint: "Try a name (Sicilian) or an ECO code (B90)."
+      show_more: "Show %{count} more"
+    opening_browser:
+      in_library: "in library"
+      to_train: "to train"
+      search_placeholder: "Search openings or ECO code"
+      search_aria_label: "Search openings"
+      sort_az: "Sort: A–Z"
+      sort_popular: "Sort: Popular"
+      filter_by_color: "Filter by color"
+      color_all: "All"
+      color_white: "White"
+      color_black: "Black"
+      all_openings: "All openings"
+      breadcrumb: "Breadcrumb"
+      pick_opening_hint: "Pick an opening to preview it here."
+      play_as: "Play as"
+      play_as_white: "Play as White"
+      play_as_black: "Play as Black"
+      choose_opening: "Choose an opening"
+      start_training: "Start training: %{label}"
+      start_position: "Start"
+
+  settings:
+    show:
+      title: "Settings"
+      subtitle: "Personalize how Knight School looks and plays."
+      preview_label: "Preview"
+      appearance_heading: "Appearance"
+      theme_label: "Theme"
+      theme_labels:
+        light: "Light"
+        dark: "Dark"
+        system: "System"
+      board_colors_label: "Board colors"
+      board_theme_labels:
+        default: "Default"
+        default_contrast: "Default (high contrast)"
+        green: "Green"
+        blue: "Blue"
+        chess_club: "Chess Club"
+        chessboard_js: "Classic"
+        black_and_white: "Black & White"
+      piece_set_label: "Piece set"
+      piece_set_labels:
+        standard: "Standard"
+        staunty: "Staunty"
+        merida: "Merida"
+        pirouetti: "Pirouetti"
+        chessnut: "Chessnut"
+      show_coordinates_label: "Show board coordinates"
+      animate_piece_moves_label: "Animate piece moves"
+      sound_effects_label: "Sound effects"
+      board_orientation_heading: "Board orientation"
+      orientation_labels:
+        auto: "Auto — flip to the side to move"
+        white: "Always keep White on bottom"
+        black: "Always keep Black on bottom"
+      reset_to_defaults: "Reset to Defaults"
+      reset_confirm: "Reset all settings to their defaults? This can't be undone."
+    controller:
+      preferences_saved: "Preferences saved."
+      save_failed: "Couldn't save preferences"
+
+  trainings:
+    show:
+      flip_board: "Flip board"
+      show_hint: "Show hint"
+      eyebrow: "Training"
+      your_move_status: "Your move"
+      prev: "Prev"
+      next: "Next"
+      play: "Play"
+      train_again: "Train again"
+      choose_another: "Choose another"
+      back_to_openings: "Back to openings"
+    controller:
+      could_not_load: "Could not load training session"
+      could_not_start: "Could not start training session"
+      default_opening_name: "Training"
+
+  # Flattened into a page-level JSON blob for Stimulus controllers — see
+  # app/javascript/i18n.js and ApplicationHelper#js_translations. Keep this
+  # namespace scoped to strings JS actually renders dynamically; anything
+  # server-rendered belongs under the page's own top-level key instead.
+  js:
+    common:
+      white_to_move: "White to move"
+      black_to_move: "Black to move"
+      illegal_move: "Illegal move"
+    puzzle:
+      correct: "Correct!"
+      incorrect_fallback: "Incorrect move"
+      error_submitting: "Error submitting move"
+      no_puzzles_due: "No puzzles due right now!"
+      could_not_load_next: "Could not load the next puzzle"
+      find_best_move: "Find the best move!"
+      solved: "Solved: %{count}"
+      streak: "Streak: %{count}"
+      rating: "Rating %{rating}"
+    training:
+      session_completed: "Session completed."
+      opening_complete: "Opening complete."
+      no_more_moves: "No more moves in this session or session expired."
+      default_opening_name: "Training"

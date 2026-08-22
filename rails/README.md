@@ -109,6 +109,10 @@ rails/
   `/users/me/preferences` and actually apply. It does not cover the
   language toggle (still English-only) or the snow effect (client-only
   in React, not backend-synced).
-- English-only (no i18n).
+- I18n is wired throughout (`t()` in views/controllers,
+  `app/javascript/i18n.js` bridging `config/locales/en.yml`'s `js:`
+  namespace into Stimulus controllers), but only English content ships —
+  no locale switcher or user-facing language toggle yet. Settings has a
+  `language` preference field, but it isn't applied.
 - Not wired into `docker-compose.prod.yml` or the deploy workflow —
   dev-only, matching how Angular was dev-only before its removal.

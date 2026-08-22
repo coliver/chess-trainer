@@ -8,6 +8,7 @@ import {
 } from "@knight-school/chess-core"
 import { createTrainingBoard, COLOR, CUSTOM_MARKER } from "../chess/board_factory"
 import { playSound, getMoveSound, setSoundsEnabled } from "../chess/sound"
+import { t } from "../i18n"
 
 // Puzzles page controller — simpler cousin of training_controller.js: no
 // timeline stepper, no hints, no opponent autoplay. Unlike Training, the
@@ -163,7 +164,7 @@ export default class extends Controller {
 
       if (data.correct) {
         playSound("puzzleCorrect")
-        this.feedback = "✅ Correct!"
+        this.feedback = `✅ ${t("puzzle.correct")}`
         this.solved += 1
         this.streak += 1
         this.bestStreak = Math.max(this.bestStreak, this.streak)
@@ -173,14 +174,14 @@ export default class extends Controller {
       }
 
       playSound("puzzleWrong")
-      this.feedback = `❌ ${data.reason || "Incorrect move"}`
+      this.feedback = `❌ ${data.reason || t("puzzle.incorrect_fallback")}`
       this.fen = preFen
       this.streak = 0
       this.isSubmitting = false
       this.render()
       this.bindMoveInput()
     } catch (err) {
-      this.feedback = err.detail || "Error submitting move"
+      this.feedback = err.detail || t("puzzle.error_submitting")
       this.isSubmitting = false
       this.render()
     }
@@ -206,9 +207,9 @@ export default class extends Controller {
         this.puzzleId = null
         this.lastMoveUci = ""
         if (this.hasNoPuzzleBoxTarget) this.noPuzzleBoxTarget.hidden = false
-        this.feedback = "No puzzles due right now!"
+        this.feedback = t("puzzle.no_puzzles_due")
       } else {
-        this.feedback = "Could not load the next puzzle"
+        this.feedback = t("puzzle.could_not_load_next")
       }
       this.isSubmitting = false
       this.render()
@@ -260,7 +261,7 @@ export default class extends Controller {
     const turn = sideToMove(this.fen)
     if (this.hasTurnTarget) this.turnTarget.classList.toggle("black", turn === "b")
     if (this.hasTurnLabelTarget) {
-      this.turnLabelTarget.textContent = turn === "w" ? "White to move" : "Black to move"
+      this.turnLabelTarget.textContent = turn === "w" ? t("common.white_to_move") : t("common.black_to_move")
     }
   }
 
@@ -271,17 +272,20 @@ export default class extends Controller {
       this.statusIconTarget.textContent = kind === "correct" ? "✅" : kind === "incorrect" ? "❌" : "♟"
     }
     if (this.hasStatusMsgTarget) {
-      this.statusMsgTarget.textContent = this.feedback || (this.puzzleId ? "Find the best move!" : "")
+      this.statusMsgTarget.textContent = this.feedback || (this.puzzleId ? t("puzzle.find_best_move") : "")
     }
     if (this.hasRatingChipTarget) {
-      this.ratingChipTarget.textContent = this.rating ? `Rating ${this.rating}` : ""
+      this.ratingChipTarget.textContent = this.rating ? t("puzzle.rating", { rating: this.rating }) : ""
     }
   }
 
   renderStats() {
-    if (this.hasSolvedStatTarget) this.solvedStatTarget.textContent = `Solved: ${this.solved}`
+    if (this.hasSolvedStatTarget) {
+      this.solvedStatTarget.textContent = t("puzzle.solved", { count: this.solved })
+    }
     if (this.hasStreakStatTarget) {
-      this.streakStatTarget.textContent = `Streak: ${this.streak}${this.streak > 0 ? " 🔥" : ""}`
+      const streakText = t("puzzle.streak", { count: this.streak })
+      this.streakStatTarget.textContent = this.streak > 0 ? `${streakText} 🔥` : streakText
       this.streakStatTarget.classList.toggle("is-active", this.streak > 0)
     }
   }

@@ -4,7 +4,7 @@ class RegistrationsController < ApplicationController
 
   def create
     if params[:password] != params[:password_confirmation]
-      @error = "Passwords do not match"
+      @error = t("registrations.controller.password_mismatch")
       return render :new, status: :unprocessable_entity
     end
 
@@ -18,7 +18,7 @@ class RegistrationsController < ApplicationController
     @email = params[:email]
     render :created
   rescue ApiClient::ApiError => e
-    @error = e.detail.presence || "Registration failed"
+    @error = e.detail.presence || t("registrations.controller.registration_failed")
     render :new, status: :unprocessable_entity
   end
 end

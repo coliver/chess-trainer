@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
     if e.status == 403 && e.detail == "Email not verified"
       @email_not_verified = true
     else
-      @error = e.detail.presence || "Login failed"
+      @error = e.detail.presence || t("sessions.controller.login_failed")
     end
 
     render :new, status: :unprocessable_entity
@@ -31,8 +31,8 @@ class SessionsController < ApplicationController
 
   def resend_verification
     ApiClient.new.post("/auth/resend-verification", body: { username: params[:username] })
-    redirect_to login_path, notice: "If that account exists and is unverified, a verification email has been sent."
+    redirect_to login_path, notice: t("sessions.controller.verification_sent")
   rescue ApiClient::ApiError => e
-    redirect_to login_path, alert: e.detail.presence || "Something went wrong"
+    redirect_to login_path, alert: e.detail.presence || t("sessions.controller.resend_failed")
   end
 end

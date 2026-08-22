@@ -8,15 +8,15 @@
     <% if logged_in? %>
       <div class="site-header-right">
         <nav class="site-header-nav" aria-label="Main">
-          <%= link_to "Openings", dashboard_path,
+          <%= link_to t("header.openings"), dashboard_path,
                 class: "site-header-nav-link#{' active' if request.path.start_with?(dashboard_path)}" %>
-          <%= link_to "Puzzles", puzzles_path,
+          <%= link_to t("header.puzzles"), puzzles_path,
                 class: "site-header-nav-link#{' active' if request.path.start_with?(puzzles_path)}" %>
 
           <div class="site-header-actions">
             <%= link_to settings_path,
                   class: "site-header-profile-link#{" active" if request.path.start_with?(settings_path)}",
-                  aria: { label: "Settings" }, title: "Settings" do %>
+                  aria: { label: t("header.settings_label") }, title: t("header.settings_label") do %>
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
                 <circle cx="12" cy="12" r="3" />
@@ -25,7 +25,7 @@
 
             <%= button_to logout_path, method: :delete,
                   class: "site-header-profile-link", form: { style: "display: contents" },
-                  aria: { label: "Logout" }, title: "Logout" do %>
+                  aria: { label: t("header.logout") }, title: t("header.logout") do %>
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
                 <polyline points="16 17 21 12 16 7" />
@@ -34,7 +34,7 @@
             <% end %>
 
             <a href="https://github.com/coliver/chess-trainer" class="site-header-profile-link"
-                  target="_blank" rel="noopener noreferrer" aria-label="View source on GitHub" title="View source on GitHub">
+                  target="_blank" rel="noopener noreferrer" aria-label="<%= t("header.view_source") %>" title="<%= t("header.view_source") %>">
               <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
                 <path d="M12 2C6.477 2 2 6.58 2 12.239c0 4.526 2.865 8.367 6.839 9.72.5.094.682-.22.682-.489 0-.242-.01-.882-.014-1.731-2.782.62-3.369-1.376-3.369-1.376-.455-1.188-1.11-1.504-1.11-1.504-.908-.636.069-.623.069-.623 1.004.072 1.532 1.05 1.532 1.05.892 1.561 2.341 1.11 2.91.848.091-.662.35-1.11.636-1.365-2.22-.258-4.555-1.134-4.555-5.04 0-1.113.39-2.024 1.029-2.738-.103-.259-.446-1.3.098-2.708 0 0 .84-.275 2.75 1.047A9.3 9.3 0 0 1 12 6.844c.85.004 1.705.116 2.504.34 1.909-1.322 2.747-1.047 2.747-1.047.546 1.408.202 2.449.1 2.708.64.714 1.028 1.625 1.028 2.738 0 3.916-2.339 4.778-4.566 5.03.36.313.678.93.678 1.874 0 1.353-.012 2.443-.012 2.774 0 .272.18.587.688.487A10.246 10.246 0 0 0 22 12.239C22 6.58 17.523 2 12 2Z" />
               </svg>
@@ -50,7 +50,7 @@
               <%= hidden_field_tag :board_animations, prefs["board_animations"] %>
               <%= hidden_field_tag :board_orientation_mode, prefs["board_orientation_mode"] %>
               <%= hidden_field_tag :sound, prefs["sound"] %>
-              <button type="button" class="theme-toggle-btn" data-action="theme-toggle#toggle" aria-label="Toggle theme" title="Toggle theme">
+              <button type="button" class="theme-toggle-btn" data-action="theme-toggle#toggle" aria-label="<%= t("header.toggle_theme") %>" title="<%= t("header.toggle_theme") %>">
                 <span data-theme-toggle-target="sunIcon" hidden aria-hidden="true">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                     <path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z" stroke="currentColor" stroke-width="2" />
