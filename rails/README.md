@@ -88,10 +88,13 @@ rails/
 
 ## Known gaps (v1)
 
-- Puzzles and Settings pages don't exist — the header only links to
-  Dashboard ("Openings") and logout.
-- No preferences sync — the board uses hardcoded defaults matching
-  React's `DEFAULT_PREFERENCES`.
+- Puzzles page doesn't exist — the header links to Dashboard
+  ("Openings"), Settings, and logout.
+- Settings covers theme, board colors/piece set/coordinates/animations,
+  board orientation mode, and sound — all round-trip to
+  `/users/me/preferences` and actually apply. It does not cover the
+  language toggle (still English-only) or the snow effect (client-only
+  in React, not backend-synced).
 - English-only (no i18n).
 - Not wired into `docker-compose.prod.yml` or the deploy workflow —
   dev-only, matching how Angular was dev-only before its removal.
