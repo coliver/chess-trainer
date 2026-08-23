@@ -1,0 +1,252 @@
+[
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Kennedy Variation",
+    "description": "Black immediately contests d4 with e5, cramping White's center while developing the knight to c6."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Kennedy Variation, Bielefelder Gambit",
+    "description": "White captures e5 and Black develops the bishop to c5, seizing the initiative on light squares."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Kennedy Variation, de Smet Gambit",
+    "description": "Black accepts the pawn trade and plays d6 to attack e5, preparing to recapture and reopen lines."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Kennedy Variation, Hammer Gambit",
+    "description": "Black aggressively attacks e5 with f6, opening kingside lines at the cost of pawn structure."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Kennedy Variation, Herford Gambit",
+    "description": "Black immediately develops the queen to h4 with tempo, threatening White's exposed kingside."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Kennedy Variation, Keres Attack",
+    "description": "Black recaptures with the knight and White develops with tempo via Nc3, supporting the centre."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Kennedy Variation, Linksspringer Variation",
+    "description": "White bypasses e5 and advances d5 instead, gaining space and displacing Black's centralized knight."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Kennedy Variation, Main Line",
+    "description": "White plays f4 to dislodge the centralized knight; Black retreats to g6 and regroups."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Kennedy Variation, Paulsen Attack",
+    "description": "White develops naturally with Nf3, attacking the e5 knight and consolidating the centre."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Kennedy Variation, Riemann Defense",
+    "description": "White plays f4 to support the centre; Black's knight retreats to c6, maintaining flexibility."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Mikenas Variation",
+    "description": "Black plays d6 for a flexible setup, preparing a kingside fianchetto or d5 breaks."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Neo-Mongoloid Defense",
+    "description": "Black plays f6 to prepare e5 or d5 breaks while maintaining solid kingside structure."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Pirc Connection",
+    "description": "Black fianchettoes the kingside with g6, preparing to control the long diagonal with the bishop."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Pseudo-Spanish Variation",
+    "description": "White pins the knight with Bb5 in Ruy Lopez style, using Nc6 as leverage instead of Nf6."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Scandinavian Variation",
+    "description": "Black immediately strikes at e4 with d5, leading to early central exchanges and simplification."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Scandinavian Variation, Aachen Gambit",
+    "description": "Black plays Nb4 to attack d4 after White captures on d5, maintaining active piece counterplay."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Scandinavian Variation, Advance Variation",
+    "description": "White advances e5 instead of capturing, closing the position and restricting Black's piece activity."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Scandinavian Variation, Bogoljubow Variation",
+    "description": "Black captures on e4 with Nc3 supporting White's centre; White maintains development tempo."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Scandinavian Variation, Bogoljubow Variation, Brandics Gambit",
+    "description": "Black plays a6 instead of recapturing, preparing b5 and queenside expansion against White's initiative."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Scandinavian Variation, Bogoljubow Variation, Erben Gambit",
+    "description": "Black fianchettoes with g6, aiming for long-diagonal control despite White's space advantage."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Scandinavian Variation, Bogoljubow Variation, Heinola-Deppe Gambit",
+    "description": "Black counterattacks with e5 instead of recapturing, creating central tension and complications."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Scandinavian Variation, Bogoljubow Variation, Nimzowitsch Gambit",
+    "description": "White advances d5 and Black plays Ne5, leading to dynamic tactical interplay in the centre."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Scandinavian Variation, Bogoljubow Variation, Richter Gambit",
+    "description": "White pushes d5 forcing Nb8, then plays f3 to secure the centre and prepare kingside assault."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Scandinavian Variation, Bogoljubow Variation, Vehre Variation",
+    "description": "Black develops Nf6 instead of recapturing, maintaining piece activity and central flexibility."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Scandinavian Variation, Exchange Variation",
+    "description": "White exchanges pawns and Black recaptures with the queen, centralizing it immediately for play."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Scandinavian Variation, Exchange Variation, Marshall Gambit",
+    "description": "White develops Nc3 to attack the centralised queen and contest d5 after early exchanges."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Wheeler Gambit",
+    "description": "White plays b4 immediately, offering the queenside pawn to disrupt Black's piece coordination."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Williams Variation",
+    "description": "White develops Nf3 and Black plays d6, establishing flexibility with fianchetto and central options."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Woodchuck Variation",
+    "description": "Black plays a6 early, preparing queenside expansion with b5 while centralizing the knight."
+  },
+  {
+    "eco": "B00",
+    "name": "Owen Defense: Guatemala Defense",
+    "description": "Black fianchettoes the queenside with b6, placing the bishop on a6 to control the long diagonal."
+  },
+  {
+    "eco": "B00",
+    "name": "Owen Defense: Hekili-Loa Gambit",
+    "description": "Black plays c5 to challenge d4; after White captures, Nc6 enters with immediate counterattacking threats."
+  },
+  {
+    "eco": "B00",
+    "name": "Owen Defense: Matovinsky Gambit",
+    "description": "Black sacrifices the f-pawn and bishop for rapid central counterplay; Black stabilizes with g6."
+  },
+  {
+    "eco": "B00",
+    "name": "Owen Defense: Naselwaus Gambit",
+    "description": "White develops the bishop to g5, pinning Black's fianchettoed b7 bishop after b6."
+  },
+  {
+    "eco": "B00",
+    "name": "Owen Defense: Smith Gambit",
+    "description": "Black fianchettoes and White develops Nf3, pursuing a classical setup against Black's structure."
+  },
+  {
+    "eco": "B00",
+    "name": "Owen Defense: Unicorn Variation",
+    "description": "Black fianchettoes both kingside and queenside, controlling key diagonals with paired bishops."
+  },
+  {
+    "eco": "B00",
+    "name": "Owen Defense: Wind Gambit",
+    "description": "White plays f3 after Black fianchettoes; Black strikes back with e5, creating central tension."
+  },
+  {
+    "eco": "B00",
+    "name": "Pirc Defense: Roscher Gambit",
+    "description": "White develops Nf3 against Black's d6 and Nf6 setup, maintaining a classical centre."
+  },
+  {
+    "eco": "B00",
+    "name": "Rat Defense: Antal Defense",
+    "description": "Black develops the knight to d7 after d6, preparing a flexible fianchetto or e5 advance."
+  },
+  {
+    "eco": "B00",
+    "name": "Rat Defense: Fuller Gambit",
+    "description": "White sacrifices with f4 and e4; Black captures d5 and develops Nf6 for active piece play."
+  },
+  {
+    "eco": "B00",
+    "name": "Rat Defense: Harmonist",
+    "description": "White plays f4 immediately to control e5 and claim kingside space against Black's modest d6."
+  },
+  {
+    "eco": "B00",
+    "name": "Rat Defense: Petruccioli Attack",
+    "description": "White plays h4 to launch rapid kingside expansion and potentially prepare a kingside assault."
+  },
+  {
+    "eco": "B00",
+    "name": "Rat Defense: Spike Attack",
+    "description": "White plays g4 to expand immediately on the kingside, sacrificing pawn structure for attacking chances."
+  },
+  {
+    "eco": "B00",
+    "name": "St. George Defense: Polish Variation",
+    "description": "Black plays a6 and b5 for queenside space, fianchettoes, and supports with e6 for solidity."
+  },
+  {
+    "eco": "B00",
+    "name": "St. George Defense: San Jorge Variation",
+    "description": "Black builds a double fianchetto setup on both wings with careful development and piece coordination."
+  },
+  {
+    "eco": "B00",
+    "name": "St. George Defense: Zilbermints Gambit",
+    "description": "Black plays a6 then immediately strikes with e5, contesting White's centre despite flank play."
+  },
+  {
+    "eco": "B00",
+    "name": "Van Geet Opening: Berlin Gambit",
+    "description": "After captures and Nc3, White plays d5 to gain space and displace Black's centralized knight."
+  },
+  {
+    "eco": "B00",
+    "name": "Ware Defense: Snagglepuss Defense",
+    "description": "Black plays a5 immediately and develops Nc6, pursuing offbeat queenside play and piece coordination."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Anderssen Counterattack",
+    "description": "Black plays e5 to contest d4 aggressively, obtaining active piece play despite the exposed queen."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Anderssen Counterattack, Collijn Variation",
+    "description": "Black develops Bg4 to pin the Nf3 and maintain pressure on White's centre and development."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Anderssen Counterattack, Goteborg System",
+    "description": "White develops with Nf3, leading to a solid setup where both sides have clear piece placement and plans."
+  }
+]

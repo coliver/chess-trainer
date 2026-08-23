@@ -1,0 +1,252 @@
+[
+  {
+    "eco": "A84",
+    "name": "Dutch Defense: Bellon Gambit",
+    "description": "White immediately opens the center with e4, creating tactical opportunities despite allowing Black the c4 pawn. An aggressive approach to the Dutch."
+  },
+  {
+    "eco": "A84",
+    "name": "Dutch Defense: Bladel Variation",
+    "description": "Black fianchettoes the kingside and places the knight on h6, an unconventional setup providing flexibility for Black's piece maneuvering and counterplay."
+  },
+  {
+    "eco": "A84",
+    "name": "Dutch Defense: Classical Variation",
+    "description": "Black establishes the Dutch structure with e6, preparing flexible piece development and central support for the f5 pawn against White's c4 pressure."
+  },
+  {
+    "eco": "A84",
+    "name": "Dutch Defense: Krause Variation",
+    "description": "Black develops minor pieces efficiently toward the center with Nf6 and Nc6 while maintaining the Dutch setup, preparing a resilient middlegame."
+  },
+  {
+    "eco": "A84",
+    "name": "Dutch Defense: Normal Variation",
+    "description": "Black supports the f5 pawn with Nf6, establishing the classical Dutch structure with natural, harmonious piece development."
+  },
+  {
+    "eco": "A84",
+    "name": "Dutch Defense: Rubinstein Variation",
+    "description": "White adds central control with Nc3 while Black maintains the Dutch e6 structure, positioning for flexible kingside development and counterplay."
+  },
+  {
+    "eco": "A85",
+    "name": "Dutch Defense: Queen's Knight Variation",
+    "description": "White develops the knight to c3, supporting the d-pawn and preparing for central play against Black's established Dutch setup."
+  },
+  {
+    "eco": "A86",
+    "name": "Dutch Defense: Fianchetto Variation",
+    "description": "White fianchettoes the kingside bishop, creating a modern hypermodern setup against Black's Dutch structure with long-diagonal control."
+  },
+  {
+    "eco": "A86",
+    "name": "Dutch Defense: Hort-Antoshin System",
+    "description": "Both sides build harmonious structures; Black reinforces with c6 and d6 while White maintains space advantage through careful coordination."
+  },
+  {
+    "eco": "A86",
+    "name": "Dutch Defense: Leningrad Variation",
+    "description": "Both sides fianchetto their kingside bishops, creating a symmetrical and balanced position where White retains a subtle space advantage."
+  },
+  {
+    "eco": "A87",
+    "name": "Dutch Defense: Leningrad Variation",
+    "description": "Pieces develop naturally on optimal squares after both fianchettoes; White maintains slight space while Black secures a solid kingside position."
+  },
+  {
+    "eco": "A88",
+    "name": "Dutch Defense: Leningrad Variation, Warsaw Variation",
+    "description": "White fianchettoes first, allowing Black to mirror; both sides castle safely and White enters the center with c4 on move six."
+  },
+  {
+    "eco": "A89",
+    "name": "Dutch Defense: Leningrad Variation, Matulovic Variation",
+    "description": "Both fianchetto with kings castled to safety; Black develops the c6 knight before White's central c4 push for concrete piece placement."
+  },
+  {
+    "eco": "A90",
+    "name": "Dutch Defense: Classical Variation",
+    "description": "Black maintains the Dutch with e6 and d5; White fianchettoes for long-diagonal control and positional maneuvering advantage."
+  },
+  {
+    "eco": "A90",
+    "name": "Dutch Defense: Nimzo-Dutch Variation",
+    "description": "Black's Bb4+ check forces White to respond to piece pressure, introducing tension and requiring immediate center clarification."
+  },
+  {
+    "eco": "A90",
+    "name": "Dutch Defense: Nimzo-Dutch Variation, Alekhine Variation",
+    "description": "Black's bishop excursion to b4+ yields to Be7, maintaining structural symmetry and a solid setup for the middlegame."
+  },
+  {
+    "eco": "A90",
+    "name": "Dutch Defense: Stonewall Variation, Modern Variation",
+    "description": "Black establishes the Stonewall with d5 and c6; both sides develop naturally for a solid middlegame with Black's counterattacking chances."
+  },
+  {
+    "eco": "A91",
+    "name": "Dutch Defense: Classical Variation",
+    "description": "Pieces develop naturally toward optimal squares; both sides build flexible structures for maneuvering play and long-term strategic battles."
+  },
+  {
+    "eco": "A91",
+    "name": "Dutch Defense: Classical Variation, Blackburne Attack",
+    "description": "White plays the unusual Nh3, preparing f4 expansion and active piece play against Black's solid fianchettoed position."
+  },
+  {
+    "eco": "A92",
+    "name": "Dutch Defense: Alekhine Variation",
+    "description": "Black centralizes the knight with Ne4 after castling, seeking immediate tactical pressure and active piece coordination."
+  },
+  {
+    "eco": "A92",
+    "name": "Dutch Defense: Classical Variation",
+    "description": "Both sides complete development after castling; White maintains space advantage while Black preserves a solid, flexible defensive structure."
+  },
+  {
+    "eco": "A92",
+    "name": "Dutch Defense: Stonewall Variation",
+    "description": "Black establishes the Stonewall with d5 after castling, creating a solid structure with clear piece placement and central tension."
+  },
+  {
+    "eco": "A93",
+    "name": "Dutch Defense: Stonewall Variation, Botvinnik Variation",
+    "description": "White plays b3 preparing Ba3 to pressure the long diagonal; Black's Stonewall provides resilient resistance to White's attacking setup."
+  },
+  {
+    "eco": "A94",
+    "name": "Dutch Defense: Stonewall Variation",
+    "description": "White's Ba3 pressures the long diagonal and e5 square; Black's solid Stonewall provides structural resistance to White's piece pressure."
+  },
+  {
+    "eco": "A95",
+    "name": "Dutch Defense: Stonewall Variation",
+    "description": "White centralizes with Nc3 in the Stonewall setup; Black maintains a solid position with c6 and clear piece coordination."
+  },
+  {
+    "eco": "A95",
+    "name": "Dutch Defense: Stonewall Variation, Chekhover Variation",
+    "description": "White actively develops with Bg5, attacking Black's knight and introducing concrete pressure in the solid Stonewall structure."
+  },
+  {
+    "eco": "A96",
+    "name": "Dutch Defense: Classical Variation",
+    "description": "Black plays d6 instead of d5, maintaining center flexibility while establishing a solid fianchettoed position against White's space."
+  },
+  {
+    "eco": "A96",
+    "name": "Dutch Defense: Classical Variation, Buenos Aires Variation",
+    "description": "Black expands queenside with a5, preventing b4 and creating specific counterplay plans in the fianchettoed position."
+  },
+  {
+    "eco": "A96",
+    "name": "Dutch Defense: Classical Variation, Huisl Variation",
+    "description": "Black centralizes the knight with Ne4, introducing immediate tactical pressure and seeking active piece coordination."
+  },
+  {
+    "eco": "A97",
+    "name": "Dutch Defense: Classical Variation, Ilyin-Zhenevsky Variation",
+    "description": "Black's queen repositions to e8, preparing flexible piece maneuvering and potential central action with e5 expansion."
+  },
+  {
+    "eco": "A97",
+    "name": "Dutch Defense: Classical Variation, Ilyin-Zhenevsky Variation, Winter Variation",
+    "description": "White's Re1 activates the rook on the e-file, preparing pressure on Black's center and supporting tactical opportunities."
+  },
+  {
+    "eco": "A98",
+    "name": "Dutch Defense: Classical Variation, Ilyin-Zhenevsky Variation, Alatortsev-Lisitsyn Line",
+    "description": "White's Qc2 centralizes the queen, supporting pawn breaks and maintaining flexibility for various tactical ideas."
+  },
+  {
+    "eco": "A99",
+    "name": "Dutch Defense: Classical Variation, Ilyin-Zhenevsky Variation, Modern Main Line",
+    "description": "White plays b3 preparing Ba3 for long-diagonal pressure; both sides maintain flexible structures for the middlegame battle."
+  },
+  {
+    "eco": "B00",
+    "name": "Borg Defense: Borg Gambit",
+    "description": "Black immediately advances the kingside flank with g5, allowing White to seize center space with d4 in this ultra-aggressive opening."
+  },
+  {
+    "eco": "B00",
+    "name": "Borg Defense: Troon Gambit",
+    "description": "Black launches a kingside pawn storm with g5-g4, creating an unorthodox attacking structure but severely weakening the king."
+  },
+  {
+    "eco": "B00",
+    "name": "Borg Defense: Zilbermints Gambit",
+    "description": "Black combines kingside aggression with e5, attempting to exploit the center despite weakening kingside defenses in an offbeat manner."
+  },
+  {
+    "eco": "B00",
+    "name": "Carr Defense: Zilbermints Gambit",
+    "description": "Black starts with the unusual h6 before striking the center with e5, creating an irregular but challenging structure."
+  },
+  {
+    "eco": "B00",
+    "name": "Goldsmith Defense: Picklepuss Defense",
+    "description": "Black plays the unusual h5 flank advance before developing the knight, creating an unconventional and dubious opening structure."
+  },
+  {
+    "eco": "B00",
+    "name": "Lion Defense: Lion's Jaw",
+    "description": "White plays f3 reinforcing the center after Black's solid d6; both sides prepare for maneuvering play and strategic battles."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Breyer Variation",
+    "description": "Black defends with Nc6, then strikes the center with e5 after Nf6, creating solid piece placement and attacking counterplay."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Colorado Countergambit",
+    "description": "Black gambits f5 immediately after Nc6, seeking rapid kingside attack and compensation for the pawn in this unusual counter-assault."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Colorado Countergambit Accepted",
+    "description": "White accepts the f5 gambit; Black must generate rapid kingside attacking compensation for the sacrificed pawn."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Declined Variation",
+    "description": "Both sides develop naturally; Black's Nc6 controls the center while White maintains flexibility with Nf3."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: El Columpio Defense",
+    "description": "Black attacks f2 with Ng4, creating immediate tactical threats and forcing White to respond with precision."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: El Columpio Defense, El Columpio Gambit",
+    "description": "White pushes e6, creating immediate threats to Black's central pieces and seeking tactical compensation for the aggressive approach."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: El Columpio Defense, Exchange Variation",
+    "description": "White captures on d6, damaging Black's pawn structure and opening lines for piece activity and tactical opportunities."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: El Columpio Defense, Pin Variation",
+    "description": "White's Bb5 pins the c6 knight, creating immediate positional pressure and concrete tactical threats."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Franco-Nimzowitsch Variation",
+    "description": "Black combines Nimzowitsch's Nc6 with a French-like e6 structure, maintaining central control and piece flexibility."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: French Connection",
+    "description": "Both sides develop naturally; Black's e6 with Nc6 creates a solid structure while White centralizes with Nc3."
+  },
+  {
+    "eco": "B00",
+    "name": "Nimzowitsch Defense: Hornung Gambit",
+    "description": "Black strikes the center with d5; White's Be3 solidifies the center and prepares flexible piece coordination."
+  }
+]

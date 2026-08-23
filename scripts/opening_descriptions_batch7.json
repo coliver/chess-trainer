@@ -1,0 +1,252 @@
+[
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Anderssen Counterattack, Orthodox Attack",
+    "description": "Black's queen to a5 develops actively, and after d4 and White's center, Black compensates with piece pressure via Nc6 and Bb4."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Blackburne Gambit",
+    "description": "Black sacrifices both d5 and c6 pawns, gaining rapid knight development to c6 with immediate tactical threats against White's center."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Blackburne-Kloosterboer Gambit",
+    "description": "Black plays c6 attacking the d5 pawn, sacrificing material to create rapid compensation through piece activity and central counterplay."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Boehnke Gambit",
+    "description": "Black sacrifices d5 and e5 pawns consecutively, rapidly developing the bishop to e6 with active piece play and tactical opportunities."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Bronstein Variation",
+    "description": "Queen retreats to d6 instead of a5, with a6 preventing Bb5+ checks while maintaining centralized queen control and flexibility."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Classical Variation",
+    "description": "After d4, Black develops methodically with Nf6 and Bf5, keeping the queen actively placed while building solid piece coordination."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Grünfeld Variation",
+    "description": "White aggressively plays g4 after Ne5, attacking Black's bishop on f5 and seizing kingside space immediately."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Gubinsky-Melts Defense",
+    "description": "Queen goes to d6 from the start, centralizing rather than the rim and supporting flexible center development options."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Icelandic-Palme Gambit",
+    "description": "Black develops Nf6 and e6 attacking the d5 pawn, while White supports it with c4, establishing a solid pawn structure."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Kádas Gambit",
+    "description": "Black creates immediate threats with Nf6, c6, and e5, mounting continuous pressure on White's central pawn structure."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Kiel Variation",
+    "description": "Black takes d5 with the knight and plays Nb4, forcing White's c4 pawn advance while displacing the knight actively."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Kloosterboer Gambit",
+    "description": "Black sacrifices d5 and c6, then plays e5, generating multiple central threats and tactical complications immediately."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Lasker Variation",
+    "description": "Black develops Bg4, and White responds h3 attacking the bishop, establishing a solid defensive foundation against piece pressure."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Main Line, Leonhardt Gambit",
+    "description": "White aggressively plays b4, attacking the queen directly and sacrificing material for sharp tactical complications and initiative."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Main Line, Mieses Variation",
+    "description": "Standard setup with d4 and Nf6, establishing White's central control while Black develops methodically with piece coordination."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Marshall Variation",
+    "description": "Black takes d5 with the knight instead of the queen, prioritizing active piece play over immediate material recovery tactics."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Mieses-Kotroc Variation",
+    "description": "Queen captures on d5 immediately, setting up the core position for the Scandinavian's main transformations and tactical play."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Modern Variation",
+    "description": "Black plays Nf6 without recapturing, and d4 establishes the center, creating dynamic piece activity and tactical flexibility."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Modern Variation, Gipslis Variation",
+    "description": "Black develops Bg4 creating immediate pin threats against the knight, generating rapid tactical pressure and tempo."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Modern Variation, Wing Gambit",
+    "description": "Black fianchettoes with g6 and challenges c4 with b5, creating tactical complications and aggressive space play."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Panov Transfer",
+    "description": "White plays c4 instead of d4, and Black responds c6, transposing toward Slav-like structures with dynamic piece play."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Portuguese Gambit",
+    "description": "Black develops the bishop to g4 immediately, pinning the knight and generating rapid tactical threats and tempo."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Portuguese Gambit, Banker Variation",
+    "description": "Black retreats Bf5 and White consolidates with c4 after f3, establishing a solid center and piece coordination."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Portuguese Gambit, Classical Variation",
+    "description": "White develops Nf3 naturally facing the immediate pin from Bg4, establishing piece activity without rash kingside advances."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Portuguese Gambit, Correspondence Refutation",
+    "description": "White aggressively pushes g4 after f3, attacking the bishop and seizing kingside space with sharp tactical intent."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Portuguese Gambit, Elbow Variation",
+    "description": "White checks with Bb5+ forcing c6, a forcing sequence that restricts Black's piece development and bishop placement."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Portuguese Gambit, Jadoul Variation",
+    "description": "Multiple sharp developments with Bb5+, f3, c4 creating a complex position requiring precise tactical defense from Black."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Portuguese Gambit, Lusophobe Variation",
+    "description": "White retreats Bb5 to e2 after the check, a passive approach that limits piece coordination and attacking pressure."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Portuguese Gambit, Melbourne Shuffle Variation",
+    "description": "White develops Nc3 after f3 and Bf5, building central support and piece coordination with moderate pressure."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Portuguese Gambit, Wuss Variation",
+    "description": "White plays Be2 instead of f3, a passive approach avoiding direct confrontation with Black's g4 bishop."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Richter Variation",
+    "description": "Black fianchettoes with g6, creating a solid kingside structure with lateral pressure and flexible piece placement."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Schiller-Pytel Variation",
+    "description": "Queen to d6 with c6 support establishes a methodical defensive structure against White's central play with d4."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Schiller-Pytel Variation, Modern Variation",
+    "description": "White plays Bc4 and Nge2, Black develops c6 and Bf5, with queen to b4 creating tactical threats and complexity."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Valencian Variation",
+    "description": "Queen retreats to d8 immediately, a conservative approach keeping the queen safe while maintaining flexible piece options."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Valencian Variation, Ilundain Variation",
+    "description": "Black develops methodically with c6 and Nf6, supporting the center and establishing a solid defensive foundation."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Valencian Variation, Main Line",
+    "description": "After Qd8, d4, Nf6, Black develops Bg4 pinning the knight and creating immediate tactical pressure."
+  },
+  {
+    "eco": "B01",
+    "name": "Scandinavian Defense: Zilbermints Gambit",
+    "description": "White plays b4 immediately as an unusual gambit, sacrificing space for rapid kingside attacking play opportunities."
+  },
+  {
+    "eco": "B01",
+    "name": "Van Geet Opening: Grünfeld Defense",
+    "description": "Black plays e5 after Nxe4, controlling the center and creating active piece play from the opening moves."
+  },
+  {
+    "eco": "B02",
+    "name": "Alekhine Defense: Brooklyn Variation",
+    "description": "Black retreats Ng8, an unusual retreat that abandons piece activity for dubious and passive defensive ideas."
+  },
+  {
+    "eco": "B02",
+    "name": "Alekhine Defense: Brooklyn Variation, Everglades Variation",
+    "description": "Black plays f5 attacking e5 from the Ng8 retreat, a counterattacking tactical idea attempting compensation."
+  },
+  {
+    "eco": "B02",
+    "name": "Alekhine Defense: Buckley Attack",
+    "description": "White plays Na3, an unusual knight placement creating awkward piece coordination and weak central pawn control."
+  },
+  {
+    "eco": "B02",
+    "name": "Alekhine Defense: Hunt Variation, Lasker Simul Gambit",
+    "description": "White pushes c4-c5, forcing the knight around repeatedly while developing Bc4 and Nc3 for attacking chances."
+  },
+  {
+    "eco": "B02",
+    "name": "Alekhine Defense: Hunt Variation, Matsukevich Gambit",
+    "description": "After trading Nxc3, White recaptures with d-pawn, Bg5 pins and develops, controlling central squares firmly."
+  },
+  {
+    "eco": "B02",
+    "name": "Alekhine Defense: Hunt Variation, Mikenas Gambit",
+    "description": "White plays Nxd5 exd5 Bxd5, maintaining strong central control with the bishop after knight trades."
+  },
+  {
+    "eco": "B02",
+    "name": "Alekhine Defense: Kmoch Variation",
+    "description": "White plays Bc4-Bb3, Black responds c5, creating central counterplay against White's moderate piece coordination."
+  },
+  {
+    "eco": "B02",
+    "name": "Alekhine Defense: Krejcik Variation",
+    "description": "White plays Bc4 immediately, an alternative developing approach creating immediate threats on the f7-e6 diagonal."
+  },
+  {
+    "eco": "B02",
+    "name": "Alekhine Defense: Krejcik Variation, Krejcik Gambit",
+    "description": "White sacrifices f7 with check after Nxe4, a tactical gambit trying to generate rapid attacking play."
+  },
+  {
+    "eco": "B02",
+    "name": "Alekhine Defense: Maróczy Variation",
+    "description": "White plays d3, a solid quiet approach avoiding sharp tactics and building a measured, methodical position."
+  },
+  {
+    "eco": "B02",
+    "name": "Alekhine Defense: Mokele Mbembe",
+    "description": "Black plays Ne4, a solid system attacking the e5 pawn and centralizing the knight aggressively."
+  },
+  {
+    "eco": "B02",
+    "name": "Alekhine Defense: Mokele Mbembe, Modern Line",
+    "description": "Black plays f6 supporting e4, attacking e5, and opening tactical lines for active piece play."
+  }
+]
