@@ -1,0 +1,502 @@
+[
+  {
+    "eco": "A52",
+    "name": "Indian Defense: Budapest Gambit Accepted, Main Line, Alekhine Variation, Tartakower Defense",
+    "description": "Black gambits e5 for rapid piece play with Ng4, and White reinforces the center with e4, maintaining a strong pawn chain."
+  },
+  {
+    "eco": "A52",
+    "name": "Indian Defense: Budapest Gambit Accepted, Main Line, Rubinstein Variation",
+    "description": "Black gambits e5 to activate pieces quickly with Ng4, while White develops a piece with Bf4 for control."
+  },
+  {
+    "eco": "A53",
+    "name": "Old Indian Defense: Aged Gibbon Gambit",
+    "description": "White launches an early kingside pawn storm with g4, claiming space while Black sets up the Old Indian structure."
+  },
+  {
+    "eco": "A53",
+    "name": "Old Indian Defense: Czech Variation, with Nc3",
+    "description": "Black establishes a solid Old Indian setup with d6 and c6, preparing controlled development and central control."
+  },
+  {
+    "eco": "A53",
+    "name": "Old Indian Defense: Czech Variation, with Nf3",
+    "description": "Black sets up the Old Indian with d6 and c6, preparing solid development and control of central squares."
+  },
+  {
+    "eco": "A53",
+    "name": "Old Indian Defense: Janowski Variation",
+    "description": "Black develops the light-squared bishop to f5 outside the pawn chain, prioritizing piece activity in the Old Indian."
+  },
+  {
+    "eco": "A53",
+    "name": "Old Indian Defense: Janowski Variation, Fianchetto Variation",
+    "description": "White fianchettoes with g3, controlling the long diagonal while Black maintains the actively placed Bf5."
+  },
+  {
+    "eco": "A53",
+    "name": "Old Indian Defense: Janowski Variation, Grinberg Gambit",
+    "description": "White challenges Black's Bf5 immediately with e4, offering to displace the bishop while solidifying the center."
+  },
+  {
+    "eco": "A53",
+    "name": "Old Indian Defense: Janowski Variation, Main Line",
+    "description": "White supports the center and kingside with f3, preparing e4 or g4 while Black maintains active Bf5."
+  },
+  {
+    "eco": "A54",
+    "name": "Old Indian Defense: Duz-Khotimirsky Variation",
+    "description": "Black strikes in the center with e5 to challenge d4; White responds flexibly with e3 and Bd3 for gradual control."
+  },
+  {
+    "eco": "A54",
+    "name": "Old Indian Defense: Tartakower-Indian",
+    "description": "Black develops Bg4 to pressure White's knight on f3, seeking piece activity in the Old Indian setup."
+  },
+  {
+    "eco": "A54",
+    "name": "Old Indian Defense: Two Knights Variation",
+    "description": "Black challenges the center with e5, and White develops Nf3 to support the position while maintaining flexibility."
+  },
+  {
+    "eco": "A54",
+    "name": "Old Indian Defense: Ukrainian Variation",
+    "description": "Black strikes at d4 with e5, seeking dynamic central counterplay while White maintains the advanced pawn."
+  },
+  {
+    "eco": "A55",
+    "name": "Old Indian Defense: Normal Variation",
+    "description": "The tabiya Old Indian where Black develops knights flexibly and challenges with e5, establishing a cramped but solid structure."
+  },
+  {
+    "eco": "A56",
+    "name": "Benoni Defense: Hrom\u00e1dka System",
+    "description": "Black avoids main Benoni complications after d5, playing d6 for a flexible pawn structure and piece activity."
+  },
+  {
+    "eco": "A56",
+    "name": "Benoni Defense: King's Indian System",
+    "description": "Black blocks the center with e5 and fianchettoes, transforming into a King's Indian setup against White's d5 pawn."
+  },
+  {
+    "eco": "A56",
+    "name": "Benoni Defense: Weenink Variation",
+    "description": "Black sacrifices c5 to open lines and develop pieces rapidly with e6, seeking activity against White's material."
+  },
+  {
+    "eco": "A56",
+    "name": "Gr\u00fcnfeld Defense: Three Knights Variation, Burille Variation, Reversed Tarrasch",
+    "description": "This hybrid structure blends Gr\u00fcnfeld fianchetto setup with Benoni c5, resolving central tension with d5 for Black's play."
+  },
+  {
+    "eco": "A57",
+    "name": "Benko Gambit Accepted: Dlugy Variation",
+    "description": "Black sacrifices the b-pawn to open the queenside and activate pieces; White reinforces with f3 before e4."
+  },
+  {
+    "eco": "A57",
+    "name": "Benko Gambit Accepted: Modern Variation",
+    "description": "Black's queenside pawn sacrifice generates long-term compensation; White develops flexibly with e3 to control the position."
+  },
+  {
+    "eco": "A57",
+    "name": "Benko Gambit Accepted: Pawn Return Variation",
+    "description": "White returns the gambit pawn to b6, controlling the sixth rank and neutralizing Black's long-term compensation."
+  },
+  {
+    "eco": "A57",
+    "name": "Benko Gambit Declined: Bishop Attack",
+    "description": "White declines the gambit and pins the knight with Bg5, maintaining central pressure on d5."
+  },
+  {
+    "eco": "A57",
+    "name": "Benko Gambit Declined: Hj\u00f8rring Countergambit",
+    "description": "White rejects the gambit and solidifies the center with e4, claiming space while avoiding queenside complications."
+  },
+  {
+    "eco": "A57",
+    "name": "Benko Gambit Declined: Main Line",
+    "description": "White declines the gambit and develops naturally with Nf3, keeping the d5 pawn while avoiding sharp play."
+  },
+  {
+    "eco": "A57",
+    "name": "Benko Gambit Declined: Pseudo-S\u00e4misch",
+    "description": "White's f3 mimics the S\u00e4misch setup while declining the b5 gambit, preparing solid central control."
+  },
+  {
+    "eco": "A57",
+    "name": "Benko Gambit Declined: Quiet Line",
+    "description": "White avoids sharp play by declining the gambit with Nd2, preparing flexible development and central maintenance."
+  },
+  {
+    "eco": "A57",
+    "name": "Benko Gambit Declined: Sosonko Variation",
+    "description": "White declines the gambit by attacking b5 with a4, keeping tension while restraining Black's queenside."
+  },
+  {
+    "eco": "A57",
+    "name": "Benko Gambit: Mutkin Countergambit",
+    "description": "White ignores the gambit and launches a kingside attack with g4, sacrificing space for attacking chances."
+  },
+  {
+    "eco": "A57",
+    "name": "Benko Gambit: Nescafe Frappe Attack",
+    "description": "After Black's queenside pawn sacrifices, White develops aggressively with Bc4, directly targeting f7 and d6."
+  },
+  {
+    "eco": "A57",
+    "name": "Benko Gambit: Zaitsev System",
+    "description": "White accepts the gambit and develops solidly with Nc3, maintaining control while Black seeks long-term compensation."
+  },
+  {
+    "eco": "A57",
+    "name": "Benko Gambit: Zaitsev Variation, Nescafe Frappe Attack",
+    "description": "White accepts the gambit and advances aggressively with e4, pushing the Nc3 to b5 after Black plays b4."
+  },
+  {
+    "eco": "A58",
+    "name": "Benko Gambit Accepted: Central Storming Variation",
+    "description": "White accepts the full gambit and launches a kingside attack with f4, claiming space for attacking chances."
+  },
+  {
+    "eco": "A58",
+    "name": "Benko Gambit Accepted: Fianchetto Variation",
+    "description": "White accepts the gambit and fianchettoes, preparing a solid setup with Bg2 and Nf3 against Black's compensation."
+  },
+  {
+    "eco": "A58",
+    "name": "Benko Gambit Accepted: Fully Accepted Variation",
+    "description": "Black sacrifices both queenside pawns to open lines and activate pieces, seeking compensation against White's material."
+  },
+  {
+    "eco": "A58",
+    "name": "Benko Gambit: Fianchetto Variation",
+    "description": "White fianchettoes while Black recaptures on a6 and develops, playing for long-term queenside compensation."
+  },
+  {
+    "eco": "A58",
+    "name": "Benko Gambit: Nd2 Variation",
+    "description": "White develops with Nd2 instead of fianchettoing, keeping options flexible while Black develops long-term queenside counterplay."
+  },
+  {
+    "eco": "A59",
+    "name": "Benko Gambit Accepted: King Walk Variation",
+    "description": "White accepts the full gambit and plays Kxf1, bearing an uncastled king for rapid piece development and compensation."
+  },
+  {
+    "eco": "A59",
+    "name": "Benko Gambit Accepted: Yugoslav",
+    "description": "White accepts the full gambit and plays e4 aggressively; after Bxf1 Kxf1, develops the knight via e2."
+  },
+  {
+    "eco": "A60",
+    "name": "Benoni Defense: Modern Variation, Snake Variation",
+    "description": "Black plays the Modern Benoni with e6, and after central exchanges on d5, develops Bd6 to dominate."
+  },
+  {
+    "eco": "A61",
+    "name": "Benoni Defense: Fianchetto Variation",
+    "description": "White fianchettoes with g3 in the Benoni, establishing control over the long diagonal while preparing Bg2."
+  },
+  {
+    "eco": "A61",
+    "name": "Benoni Defense: Knight's Tour Variation",
+    "description": "White develops the knight to d2 rather than fianchettoing, keeping flexible options for kingside and queenside play."
+  },
+  {
+    "eco": "A61",
+    "name": "Benoni Defense: Uhlmann Variation",
+    "description": "White pins the f6 knight with Bg5 while Black fianchettoes, seizing the initiative in this Benoni structure."
+  },
+  {
+    "eco": "A62",
+    "name": "Benoni Defense: Fianchetto Variation",
+    "description": "Both players fianchetto in this Benoni, establishing a double-fianchetto structure with long-term opposite-flank pawn tensions."
+  },
+  {
+    "eco": "A63",
+    "name": "Benoni Defense: Fianchetto Variation, Hastings Defense",
+    "description": "Black plays Nbd7 in the Fianchetto Benoni, preparing piece coordination and potential queenside expansion."
+  },
+  {
+    "eco": "A64",
+    "name": "Benoni Defense: Fianchetto Variation, Hastings Defense, Main Line",
+    "description": "The main Benoni tabiya where Black plays prophylactically with a6 and a4, developing with Nbd7 and Re8."
+  },
+  {
+    "eco": "A65",
+    "name": "Benoni Defense: King's Pawn Line",
+    "description": "White establishes a large pawn center with f3, e4, and d5, while Black fianchettoes for central counterplay."
+  },
+  {
+    "eco": "A65",
+    "name": "Benoni Defense: King's Pawn Line, with Be3",
+    "description": "White supports d5 with e4 and f3, maintaining a strong center while Black fianchettoes for long-term counterplay."
+  },
+  {
+    "eco": "A65",
+    "name": "Benoni Defense: King's Pawn Line, with Bg5",
+    "description": "White pins the f6 knight with Bg5, maintaining a solid pawn center while exploiting Black's cramp."
+  },
+  {
+    "eco": "A65",
+    "name": "Benoni Defense: King's Pawn Line, with Nge2",
+    "description": "White flexibly deploys the kingside knight to g3 via e2, maintaining the strong pawn center and f3 support."
+  },
+  {
+    "eco": "A66",
+    "name": "Benoni Defense: Mikenas Variation",
+    "description": "White launches a kingside pawn storm with f4 and e5, seeking attacking chances while Black fianchettoes for counterplay."
+  },
+  {
+    "eco": "A66",
+    "name": "Benoni Defense: Pawn Storm Variation",
+    "description": "White launches an aggressive pawn storm with f4, creating immediate threats while Black fianchettoes to counter White's central dominance."
+  },
+  {
+    "eco": "A67",
+    "name": "Benoni Defense: Taimanov Variation",
+    "description": "White continues the pawn storm attack and delivers check with the bishop, forcing Black to respond while maintaining a strong center."
+  },
+  {
+    "eco": "A68",
+    "name": "Benoni Defense: Four Pawns Attack",
+    "description": "White establishes a powerful pawn center with four pawns and develops the kingside knight, preparing for kingside expansion while Black castles into safety."
+  },
+  {
+    "eco": "A69",
+    "name": "Benoni Defense: Four Pawns Attack, Main Line",
+    "description": "The main line of the Four Pawns Attack where White completes piece development with Be2 while Black puts pressure on the center with the rook."
+  },
+  {
+    "eco": "A70",
+    "name": "Benoni Defense: Classical Variation",
+    "description": "The classical approach to the Benoni where White maintains a space advantage with a strong central presence while Black prepares a fianchetto counter."
+  },
+  {
+    "eco": "A70",
+    "name": "Benoni Defense: Classical Variation, New York Variation",
+    "description": "White plays h3 prophylactically to prevent Black's knight from jumping to g4, while maintaining the classical setup."
+  },
+  {
+    "eco": "A70",
+    "name": "Benoni Defense: Classical Variation, Traditional Variation",
+    "description": "The traditional continuation where White develops the light-squared bishop to e2, preparing kingside castling and solidifying the center."
+  },
+  {
+    "eco": "A71",
+    "name": "Benoni Defense: Classical Variation, Averbakh-Grivas Attack",
+    "description": "White puts immediate pressure on Black's position with Bg5, pinning the knight and preparing aggressive threats against the fianchettoed setup."
+  },
+  {
+    "eco": "A72",
+    "name": "Benoni Defense: Classical Variation",
+    "description": "A solid setup for White where both sides have castled kingside, with White's pieces well-coordinated and Black's fianchetto providing long-term compensation."
+  },
+  {
+    "eco": "A73",
+    "name": "Benoni Defense: Classical Variation, Main Line",
+    "description": "The main line continuation where both kings reach safety via castling, establishing a balanced position with White's space advantage against Black's flexible setup."
+  },
+  {
+    "eco": "A74",
+    "name": "Benoni Defense: Classical Variation, Full Line",
+    "description": "White continues with a4 to prevent Black's queenside counterplay with ...a6 and ...b5, maintaining control while Black adapts defensively."
+  },
+  {
+    "eco": "A75",
+    "name": "Benoni Defense: Classical Variation, Argentine Counterattack",
+    "description": "Black launches an active counterattack with Bg4, pinning the knight and forcing White to address tactical threats while maintaining pressure in the center."
+  },
+  {
+    "eco": "A76",
+    "name": "Benoni Defense: Classical Variation, Czerniak Defense",
+    "description": "Black's rook on e8 puts pressure on White's center and controls the e-file, while White maintains a spatial advantage with the advanced d5 pawn."
+  },
+  {
+    "eco": "A77",
+    "name": "Benoni Defense: Classical Variation, Czerniak Defense, Tal Line",
+    "description": "White retreats the knight to d2 to support the center and prepare for potential rook lift, while Black continues to apply pressure on the central files."
+  },
+  {
+    "eco": "A78",
+    "name": "Benoni Defense: Classical Variation, Czerniak Defense",
+    "description": "Black activates the knight via a6, eyeing the weak c5 square and preparing tactical ideas while White's pieces remain solidly placed."
+  },
+  {
+    "eco": "A79",
+    "name": "Benoni Defense: Classical Variation, Czerniak Defense",
+    "description": "White plays f3 to solidify the kingside and prevent tactical tricks on the long diagonal, establishing a strong pawn structure while maintaining central control."
+  },
+  {
+    "eco": "A80",
+    "name": "Dutch Defense: Alapin Variation",
+    "description": "White's queen move to d3 is an aggressive system that puts immediate pressure on Black's light squares and supports potential pawn advances."
+  },
+  {
+    "eco": "A80",
+    "name": "Dutch Defense: Barcza Variation",
+    "description": "A solid approach where White supports the d4 pawn with c3, preparing to establish a strong pawn center while maintaining flexibility."
+  },
+  {
+    "eco": "A80",
+    "name": "Dutch Defense: Hevendehl Gambit",
+    "description": "White sacrifices a pawn with an aggressive gambit setup, aiming for rapid kingside expansion and open lines for attack."
+  },
+  {
+    "eco": "A80",
+    "name": "Dutch Defense: Hopton Attack",
+    "description": "White immediately develops the bishop to g5, putting pressure on Black's pieces and controlling key central squares."
+  },
+  {
+    "eco": "A80",
+    "name": "Dutch Defense: Janzen-Korchnoi Gambit",
+    "description": "A gambit line where White prepares a kingside pawn storm with g4, accepting Black's central control in exchange for attacking chances."
+  },
+  {
+    "eco": "A80",
+    "name": "Dutch Defense: Kingfisher Gambit",
+    "description": "White launches a central breakthrough with e4, challenging Black's pawn setup and opening lines for rapid development."
+  },
+  {
+    "eco": "A80",
+    "name": "Dutch Defense: Korchnoi Attack",
+    "description": "A quiet but solid approach where White prevents Black's kingside attacking ideas while maintaining flexibility in the center."
+  },
+  {
+    "eco": "A80",
+    "name": "Dutch Defense: Krejcik Gambit",
+    "description": "An aggressive gambit sacrificing a pawn for immediate kingside expansion and attacking possibilities."
+  },
+  {
+    "eco": "A80",
+    "name": "Dutch Defense: Krejcik Gambit, Tate Gambit",
+    "description": "White sacrifices another pawn with e4, creating a strong central wedge and opening lines for aggressive piece play."
+  },
+  {
+    "eco": "A80",
+    "name": "Dutch Defense: Manhattan Gambit, Anti-Classical Line",
+    "description": "White implements a kingside pawn storm with the queen actively supporting the attack from d3."
+  },
+  {
+    "eco": "A80",
+    "name": "Dutch Defense: Manhattan Gambit, Anti-Leningrad",
+    "description": "White meets Black's fianchetto setup with aggressive kingside expansion, using the queen to support the pawn push."
+  },
+  {
+    "eco": "A80",
+    "name": "Dutch Defense: Manhattan Gambit, Anti-Modern",
+    "description": "White launches the kingside attack immediately while Black establishes central control, leading to a sharp asymmetrical position."
+  },
+  {
+    "eco": "A80",
+    "name": "Dutch Defense: Manhattan Gambit, Anti-Stonewall",
+    "description": "White prevents Black's Stonewall setup by forcing immediate play on the kingside, using the queen actively from d3."
+  },
+  {
+    "eco": "A80",
+    "name": "Dutch Defense: Omega-Isis Gambit",
+    "description": "White allows Black to open the center with e5, creating interesting tactical possibilities and imbalanced positions."
+  },
+  {
+    "eco": "A80",
+    "name": "Dutch Defense: Raphael Variation",
+    "description": "A classical approach developing the knight early while supporting the center and preparing for solid piece placement."
+  },
+  {
+    "eco": "A80",
+    "name": "Dutch Defense: Senechaud Gambit",
+    "description": "White develops actively with Bf4 and launches a kingside gambit with g4, creating immediate attacking threats."
+  },
+  {
+    "eco": "A80",
+    "name": "Dutch Defense: Spielmann Gambit",
+    "description": "White combines kingside expansion with early knight development, creating a balanced yet aggressive setup."
+  },
+  {
+    "eco": "A80",
+    "name": "Queen's Pawn Game: Veresov Attack, Dutch System",
+    "description": "White develops the knight while Black establishes central counterplay, creating a complex symmetrical position with distinct plans for each side."
+  },
+  {
+    "eco": "A81",
+    "name": "Dutch Defense: Blackburne Variation",
+    "description": "White fianchettoes with a solid setup while the knight heads to f4, creating a flexible kingside structure against Black's symmetrical defense."
+  },
+  {
+    "eco": "A81",
+    "name": "Dutch Defense: Fianchetto Attack",
+    "description": "White immediately commits to a fianchetto setup, controlling the long diagonal and creating a solid positional foundation."
+  },
+  {
+    "eco": "A81",
+    "name": "Dutch Defense: Leningrad, Basman System",
+    "description": "Both sides fianchetto, creating a highly symmetrical position where White maintains a slight space advantage with careful piece coordination."
+  },
+  {
+    "eco": "A81",
+    "name": "Dutch Defense: Leningrad Variation, Carlsbad Variation",
+    "description": "White fianchettoes and routes the knight to f4 via h3, a flexible setup against Black's Leningrad structure that eyes the e6 and g6 weaknesses."
+  },
+  {
+    "eco": "A81",
+    "name": "Dutch Defense: Semi-Leningrad Variation",
+    "description": "Black delays committing the bishop to g7, keeping options open between a Leningrad fianchetto and other setups while White develops solidly."
+  },
+  {
+    "eco": "A82",
+    "name": "Dutch Defense: Blackmar's Second Gambit",
+    "description": "White offers a second pawn with f3 after the initial e4 sacrifice, aiming to blast open the center and outpace Black's development."
+  },
+  {
+    "eco": "A82",
+    "name": "Dutch Defense: Staunton Gambit",
+    "description": "White sacrifices the e-pawn immediately for rapid development and open lines against Black's early kingside weaknesses, the Dutch Defense's sharpest reply."
+  },
+  {
+    "eco": "A82",
+    "name": "Dutch Defense: Staunton Gambit Accepted",
+    "description": "Black grabs the offered e-pawn, accepting a lead in development for White in exchange for the extra material."
+  },
+  {
+    "eco": "A82",
+    "name": "Dutch Defense: Staunton Gambit, American Attack",
+    "description": "White regains the pawn methodically with Nd2, planning to recapture on e4 while keeping a lead in development."
+  },
+  {
+    "eco": "A82",
+    "name": "Dutch Defense: Staunton Gambit, Tartakower Variation",
+    "description": "White follows up the gambit with an early g4, pressing on the kingside before Black can consolidate the extra pawn."
+  },
+  {
+    "eco": "A82",
+    "name": "Rat Defense: Balogh Defense",
+    "description": "Black meets 1.e4 with the flexible ...d6 and then strikes back with ...f5, transposing into Dutch-style central counterplay a move down."
+  },
+  {
+    "eco": "A83",
+    "name": "Dutch Defense: Staunton Gambit",
+    "description": "White develops the bishop to g5 to pin the f6-knight, adding pressure before recapturing the gambit pawn on e4."
+  },
+  {
+    "eco": "A83",
+    "name": "Dutch Defense: Staunton Gambit, Alekhine Variation",
+    "description": "White pushes h4 to support the g5-bishop and pry open the kingside after Black fianchettoes in response to the pin."
+  },
+  {
+    "eco": "A83",
+    "name": "Dutch Defense: Staunton Gambit, Chigorin Variation",
+    "description": "Black plays ...c6 to prepare ...Qa5 or ...Bb4, adding queenside pressure while the g5-bishop pins the defending knight."
+  },
+  {
+    "eco": "A83",
+    "name": "Dutch Defense: Staunton Gambit, Lasker Variation",
+    "description": "White reinforces the center with f3, preparing to meet Black's fianchetto with solid support for the e4 outpost."
+  },
+  {
+    "eco": "A83",
+    "name": "Dutch Defense: Staunton Gambit, Nimzowitsch Variation",
+    "description": "Black answers the pin with ...b6, preparing ...Bb7 to challenge White's center from the long diagonal."
+  }
+]
