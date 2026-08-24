@@ -96,3 +96,183 @@ describe("Settings page — reset to defaults", () => {
     confirmSpy.mockRestore();
   });
 });
+
+describe("Settings page — appearance section", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  const renderSettings = () =>
+    render(
+      <PreferencesProvider>
+        <Settings />
+      </PreferencesProvider>,
+    );
+
+  it("changes and persists board theme selection", async () => {
+    const user = userEvent.setup();
+    renderSettings();
+
+    const boardThemeSelect = screen.getByDisplayValue(
+      "Default",
+    ) as HTMLSelectElement;
+    expect(boardThemeSelect.value).toBe("default");
+
+    await user.selectOptions(boardThemeSelect, "green");
+
+    expect(boardThemeSelect.value).toBe("green");
+    expect(localStorage.getItem("board_theme")).toBe("green");
+  });
+
+  it("changes and persists piece set selection", async () => {
+    const user = userEvent.setup();
+    renderSettings();
+
+    const pieceSetSelect = screen.getByDisplayValue(
+      "Standard",
+    ) as HTMLSelectElement;
+    expect(pieceSetSelect.value).toBe("standard");
+
+    await user.selectOptions(pieceSetSelect, "staunty");
+
+    expect(pieceSetSelect.value).toBe("staunty");
+    expect(localStorage.getItem("piece_set")).toBe("staunty");
+  });
+
+  it("toggles show coordinates and persists state", async () => {
+    const user = userEvent.setup();
+    renderSettings();
+
+    const showCoordinatesCheckbox = screen.getByLabelText(
+      "Show board coordinates",
+    ) as HTMLInputElement;
+    expect(showCoordinatesCheckbox.checked).toBe(true);
+
+    await user.click(showCoordinatesCheckbox);
+
+    expect(showCoordinatesCheckbox.checked).toBe(false);
+    expect(localStorage.getItem("show_coordinates")).toBe("false");
+
+    await user.click(showCoordinatesCheckbox);
+
+    expect(showCoordinatesCheckbox.checked).toBe(true);
+    expect(localStorage.getItem("show_coordinates")).toBe("true");
+  });
+
+  it("toggles board animations and persists state", async () => {
+    const user = userEvent.setup();
+    renderSettings();
+
+    const boardAnimationsCheckbox = screen.getByLabelText(
+      "Animate piece moves",
+    ) as HTMLInputElement;
+    expect(boardAnimationsCheckbox.checked).toBe(true);
+
+    await user.click(boardAnimationsCheckbox);
+
+    expect(boardAnimationsCheckbox.checked).toBe(false);
+    expect(localStorage.getItem("board_animations")).toBe("false");
+
+    await user.click(boardAnimationsCheckbox);
+
+    expect(boardAnimationsCheckbox.checked).toBe(true);
+    expect(localStorage.getItem("board_animations")).toBe("true");
+  });
+
+  it("toggles sound and persists state", async () => {
+    const user = userEvent.setup();
+    renderSettings();
+
+    const soundCheckbox = screen.getByLabelText(
+      "Sound effects",
+    ) as HTMLInputElement;
+    expect(soundCheckbox.checked).toBe(false);
+
+    await user.click(soundCheckbox);
+
+    expect(soundCheckbox.checked).toBe(true);
+    expect(localStorage.getItem("sound")).toBe("true");
+
+    await user.click(soundCheckbox);
+
+    expect(soundCheckbox.checked).toBe(false);
+    expect(localStorage.getItem("sound")).toBe("false");
+  });
+});
+
+describe("Settings page — board orientation section", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  const renderSettings = () =>
+    render(
+      <PreferencesProvider>
+        <Settings />
+      </PreferencesProvider>,
+    );
+
+  it("selects auto board orientation by default", () => {
+    renderSettings();
+
+    const autoRadio = screen.getByRole("radio", {
+      name: "Auto — flip to the side to move",
+    }) as HTMLInputElement;
+    expect(autoRadio.checked).toBe(true);
+  });
+
+  it("changes to white orientation and persists state", async () => {
+    const user = userEvent.setup();
+    renderSettings();
+
+    const whiteRadio = screen.getByRole("radio", {
+      name: "Always keep White on bottom",
+    }) as HTMLInputElement;
+    await user.click(whiteRadio);
+
+    expect(whiteRadio.checked).toBe(true);
+    expect(localStorage.getItem("board_orientation_mode")).toBe("white");
+  });
+
+  it("changes to black orientation and persists state", async () => {
+    const user = userEvent.setup();
+    renderSettings();
+
+    const blackRadio = screen.getByRole("radio", {
+      name: "Always keep Black on bottom",
+    }) as HTMLInputElement;
+    await user.click(blackRadio);
+
+    expect(blackRadio.checked).toBe(true);
+    expect(localStorage.getItem("board_orientation_mode")).toBe("black");
+  });
+
+  it("allows switching between all orientation options", async () => {
+    const user = userEvent.setup();
+    renderSettings();
+
+    const autoRadio = screen.getByRole("radio", {
+      name: "Auto — flip to the side to move",
+    }) as HTMLInputElement;
+    const whiteRadio = screen.getByRole("radio", {
+      name: "Always keep White on bottom",
+    }) as HTMLInputElement;
+    const blackRadio = screen.getByRole("radio", {
+      name: "Always keep Black on bottom",
+    }) as HTMLInputElement;
+
+    expect(autoRadio.checked).toBe(true);
+
+    await user.click(whiteRadio);
+    expect(whiteRadio.checked).toBe(true);
+    expect(autoRadio.checked).toBe(false);
+
+    await user.click(blackRadio);
+    expect(blackRadio.checked).toBe(true);
+    expect(whiteRadio.checked).toBe(false);
+
+    await user.click(autoRadio);
+    expect(autoRadio.checked).toBe(true);
+    expect(blackRadio.checked).toBe(false);
+  });
+});
