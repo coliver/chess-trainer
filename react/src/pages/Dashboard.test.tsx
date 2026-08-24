@@ -1,5 +1,5 @@
 // frontend/src/pages/Dashboard.test.tsx
-import { act, render, screen, waitFor } from "@testing-library/react";
+import { act, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi, describe, it, expect, beforeEach } from "vitest";
 import { MemoryRouter } from "react-router-dom";
@@ -276,15 +276,20 @@ describe("Dashboard", () => {
     expect(screen.getByText("76%")).toBeInTheDocument();
     expect(screen.getByText(/3 🔥/)).toBeInTheDocument();
     expect(screen.getByText(/best 7/)).toBeInTheDocument();
+
+    const weakestOpeningTile = screen.getByRole("group", {
+      name: "Weakest opening",
+    });
     expect(
-      screen.getByText(/Sicilian Defense — 2\/5 correct/),
+      within(weakestOpeningTile).getByText("Sicilian Defense"),
     ).toBeInTheDocument();
+    expect(within(weakestOpeningTile).getByText("40%")).toBeInTheDocument();
 
     const reviewBtn = screen.getByRole("button", { name: /Review due \(2\)/i });
     expect(reviewBtn).toBeEnabled();
   });
 
-  it("renders trouble spots with move number and top wrong move", async () => {
+  it("renders the trickiest-move callout with move number and top wrong move, expanding to show the rest", async () => {
     (api.get as unknown as ReturnType<typeof vi.fn>).mockImplementation(
       (url: string) => {
         if (url === "/openings") return Promise.resolve({ data: openings });
@@ -302,6 +307,17 @@ describe("Dashboard", () => {
                 accuracy: 0.333,
                 commonWrongMoves: [{ moveUci: "g1f3", count: 3 }],
               },
+              {
+                openingEco: "C60",
+                openingName: "Ruy Lopez",
+                orderIndex: 6,
+                correctMoveUci: "e1g1",
+                attempts: 5,
+                correctCount: 3,
+                incorrectCount: 2,
+                accuracy: 0.6,
+                commonWrongMoves: [{ moveUci: "d2d3", count: 2 }],
+              },
             ],
           });
         return Promise.resolve({ data: null });
@@ -310,13 +326,28 @@ describe("Dashboard", () => {
 
     renderDashboard();
 
+    const trickiestMoveTile = await screen.findByRole("group", {
+      name: "Trickiest move",
+    });
     expect(
-      await screen.findByText(/Sicilian Defense — move 3/),
+      within(trickiestMoveTile).getByText("Sicilian Defense · move 3"),
     ).toBeInTheDocument();
-    expect(screen.getByText("33%")).toBeInTheDocument();
+    expect(within(trickiestMoveTile).getByText("33%")).toBeInTheDocument();
     expect(
-      screen.getByText(/Often played g1f3 instead \(3x\)/),
+      within(trickiestMoveTile).getByText("often plays g1f3"),
     ).toBeInTheDocument();
+
+    const user = userEvent.setup();
+    const seeAll = screen.getByRole("button", {
+      name: /See all 2 weak spots/,
+    });
+    await user.click(seeAll);
+
+    expect(screen.getByText("Ruy Lopez")).toBeInTheDocument();
+    expect(
+      screen.getByText("move 4 · often plays d2d3"),
+    ).toBeInTheDocument();
+    expect(screen.getByText("60%")).toBeInTheDocument();
   });
 
   it("renders puzzle progress stats when present", async () => {
@@ -475,9 +506,8 @@ describe("Dashboard", () => {
 
     renderDashboard();
 
-    expect(
-      await screen.findByText(/Opening — 1\/3 correct/),
-    ).toBeInTheDocument();
+    expect(await screen.findByText("Opening")).toBeInTheDocument();
+    expect(screen.getByText("33%")).toBeInTheDocument();
   });
 
   it("logs and swallows errors when the openings/progress requests fail", async () => {

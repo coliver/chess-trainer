@@ -96,6 +96,7 @@ export const Dashboard = () => {
   }, [username, t]);
 
   const [openings, setOpenings] = useState<Opening[]>([]);
+  const [needsWorkExpanded, setNeedsWorkExpanded] = useState(false);
   const [query, setQuery] = useState("");
   const [activeBase, setActiveBase] = useState<string | null>(null);
   const [selected, setSelected] = useState<Opening | null>(null);
@@ -350,94 +351,165 @@ export const Dashboard = () => {
                   </button>
                 </div>
               </div>
+
               {(weakSpots.length > 0 || troubleSteps.length > 0) && (
-                <div className="progress-needs-work">
-                  <span className="progress-stat-label">
-                    {t("dashboard.progress.needsWork")}
-                  </span>
-                  {weakSpots.length > 0 && (
-                    <div className="nw-row">
-                      <span className="nw-row-label">
-                        {t("dashboard.progress.needsWorkByOpening")}
-                      </span>
-                      <ul className="nw-chips">
-                        {weakSpots.map((w) => {
-                          const name =
-                            w.openingName ??
-                            t("dashboard.progress.weakSpotFallbackName");
-                          const pct =
-                            w.attempts > 0
-                              ? Math.round((w.correctCount / w.attempts) * 100)
-                              : 0;
-                          const label = t("dashboard.progress.weakSpotItem", {
-                            name,
-                            correct: w.correctCount,
-                            attempts: w.attempts,
-                          });
-                          return (
-                            <li
-                              key={`${w.openingName ?? "Opening"}-${w.fen ?? ""}-${w.correctMoveUci ?? ""}`}
-                            >
-                              <span className="nw-chip" title={label}>
-                                <span aria-hidden="true">
-                                  <span className="nw-chip-name">{name}</span>
-                                  <span className="nw-chip-pct">{pct}%</span>
-                                </span>
-                                <span className="sr-only">{label}</span>
+                <div className="ws-container">
+                  <div className="ws-grid">
+                    {weakSpots.length > 0 &&
+                      (() => {
+                        const top = weakSpots[0];
+                        const name =
+                          top.openingName ??
+                          t("dashboard.progress.weakSpotFallbackName");
+                        const pct =
+                          top.attempts > 0
+                            ? Math.round(
+                                (top.correctCount / top.attempts) * 100,
+                              )
+                            : 0;
+                        return (
+                          <div
+                            className="ws-tile"
+                            role="group"
+                            aria-label={t("dashboard.progress.weakestOpening")}
+                          >
+                            <span className="ws-label">
+                              {t("dashboard.progress.weakestOpening")}
+                            </span>
+                            <span className="ws-title" title={name}>
+                              {name}
+                            </span>
+                            <div className="ws-stat">
+                              <span className="ws-value">{pct}%</span>
+                              <span className="ws-stat-label">
+                                {t("dashboard.progress.accuracy")}
                               </span>
-                            </li>
-                          );
-                        })}
-                      </ul>
+                            </div>
+                          </div>
+                        );
+                      })()}
+
+                    {troubleSteps.length > 0 &&
+                      (() => {
+                        const top = troubleSteps[0];
+                        const name =
+                          top.openingName ??
+                          t("dashboard.progress.weakSpotFallbackName");
+                        const moveNumber = Math.floor(top.orderIndex / 2) + 1;
+                        const pct = Math.round(top.accuracy * 100);
+                        const topWrongMove = top.commonWrongMoves[0];
+                        return (
+                          <div
+                            className="ws-tile"
+                            role="group"
+                            aria-label={t("dashboard.progress.trickiestMove")}
+                          >
+                            <span className="ws-label">
+                              {t("dashboard.progress.trickiestMove")}
+                            </span>
+                            <span
+                              className="ws-title"
+                              title={`${name} · ${t("dashboard.progress.moveAbbrev", { move: moveNumber })}`}
+                            >
+                              {name} ·{" "}
+                              {t("dashboard.progress.moveAbbrev", {
+                                move: moveNumber,
+                              })}
+                            </span>
+                            <div className="ws-stat">
+                              <span className="ws-value">{pct}%</span>
+                              <span className="ws-stat-label">
+                                {topWrongMove
+                                  ? t(
+                                      "dashboard.progress.troubleSpotWrongMoveShort",
+                                      { move: topWrongMove.moveUci },
+                                    )
+                                  : t("dashboard.progress.accuracy")}
+                              </span>
+                            </div>
+                          </div>
+                        );
+                      })()}
+                  </div>
+
+                  {(weakSpots.length > 1 || troubleSteps.length > 1) && (
+                    <div className="ws-footer">
+                      <button
+                        type="button"
+                        className="ws-link"
+                        aria-expanded={needsWorkExpanded}
+                        onClick={() => setNeedsWorkExpanded((v) => !v)}
+                      >
+                        {needsWorkExpanded
+                          ? t("dashboard.progress.seeLess")
+                          : t("dashboard.progress.seeAllWeakSpots", {
+                              count: weakSpots.length + troubleSteps.length,
+                            })}
+                      </button>
                     </div>
                   )}
-                  {troubleSteps.length > 0 && (
-                    <div className="nw-row">
-                      <span className="nw-row-label">
-                        {t("dashboard.progress.needsWorkByMove")}
-                      </span>
-                      <ul className="nw-chips">
-                        {troubleSteps.map((s) => {
-                          const name =
-                            s.openingName ??
-                            t("dashboard.progress.weakSpotFallbackName");
-                          const moveNumber = Math.floor(s.orderIndex / 2) + 1;
-                          const pct = Math.round(s.accuracy * 100);
-                          const topWrongMove = s.commonWrongMoves[0];
-                          const itemLabel = t(
-                            "dashboard.progress.troubleSpotItem",
-                            { name, move: moveNumber },
-                          );
-                          const wrongMoveLabel = topWrongMove
-                            ? t("dashboard.progress.troubleSpotWrongMove", {
-                                move: topWrongMove.moveUci,
-                                count: topWrongMove.count,
-                              })
-                            : "";
-                          const label = wrongMoveLabel
-                            ? `${itemLabel} — ${wrongMoveLabel}`
-                            : itemLabel;
-                          return (
-                            <li
-                              key={`${s.openingName ?? "Opening"}-${s.openingEco ?? ""}-${s.orderIndex}`}
-                            >
-                              <span className="nw-chip" title={label}>
-                                <span aria-hidden="true">
-                                  <span className="nw-chip-name">
-                                    {itemLabel}
-                                  </span>
-                                  <span className="nw-chip-pct">{pct}%</span>
-                                </span>
-                                {wrongMoveLabel && (
-                                  <span className="sr-only">
-                                    {wrongMoveLabel}
-                                  </span>
-                                )}
+
+                  {needsWorkExpanded && (
+                    <div className="ws-expanded">
+                      {weakSpots.slice(1).map((w) => {
+                        const name =
+                          w.openingName ??
+                          t("dashboard.progress.weakSpotFallbackName");
+                        const pct =
+                          w.attempts > 0
+                            ? Math.round((w.correctCount / w.attempts) * 100)
+                            : 0;
+                        return (
+                          <div
+                            className="ws-row"
+                            key={`ws-${w.openingName ?? "Opening"}-${w.fen ?? ""}-${w.correctMoveUci ?? ""}`}
+                          >
+                            <div className="ws-row-main">
+                              <span className="ws-row-name" title={name}>
+                                {name}
                               </span>
-                            </li>
-                          );
-                        })}
-                      </ul>
+                              <span className="ws-row-sub">
+                                {t("dashboard.progress.wholeOpening")}
+                              </span>
+                            </div>
+                            <span className="ws-row-pct">{pct}%</span>
+                          </div>
+                        );
+                      })}
+                      {troubleSteps.slice(1).map((s) => {
+                        const name =
+                          s.openingName ??
+                          t("dashboard.progress.weakSpotFallbackName");
+                        const moveNumber = Math.floor(s.orderIndex / 2) + 1;
+                        const pct = Math.round(s.accuracy * 100);
+                        const topWrongMove = s.commonWrongMoves[0];
+                        return (
+                          <div
+                            className="ws-row"
+                            key={`ts-${s.openingName ?? "Opening"}-${s.openingEco ?? ""}-${s.orderIndex}`}
+                          >
+                            <div className="ws-row-main">
+                              <span className="ws-row-name" title={name}>
+                                {name}
+                              </span>
+                              <span className="ws-row-sub">
+                                {topWrongMove
+                                  ? t(
+                                      "dashboard.progress.troubleSpotItemWithWrongMove",
+                                      {
+                                        move: moveNumber,
+                                        wrongMove: topWrongMove.moveUci,
+                                      },
+                                    )
+                                  : t("dashboard.progress.moveAbbrev", {
+                                      move: moveNumber,
+                                    })}
+                              </span>
+                            </div>
+                            <span className="ws-row-pct">{pct}%</span>
+                          </div>
+                        );
+                      })}
                     </div>
                   )}
                 </div>

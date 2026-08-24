@@ -40,10 +40,36 @@ Documentation for locale strings in this directory. Organized by section and fea
 - `{{best}}` is replaced with number (e.g., "Day streak · best 15")
 - Shows current and best streak together
 
-**weakSpotItem**
-- Template: `{{name}} — {{correct}}/{{attempts}} correct`
-- `{{name}}` = opening name, `{{correct}}` = correct attempts, `{{attempts}}` = total attempts
-- Example: "French Defense — 12/20 correct"
+**weakestOpening, trickiestMove**
+- Labels for the two "Needs work" callout tiles on the dashboard
+- `weakestOpening` = the user's single worst-performing opening (by whole-opening accuracy); `trickiestMove` = their single worst-performing specific move within an opening
+- Short labels (used as a tile heading), not sentences
+
+**moveAbbrev**
+- Template: `move {{move}}`
+- `{{move}}` = a move number (integer), e.g. "move 4"
+- Used both in the trickiest-move tile and in the expanded weak-spot row list
+
+**troubleSpotWrongMoveShort**
+- Template: `often plays {{move}}`
+- `{{move}}` = a chess move in UCI notation (e.g. "e2e4") — do not translate/reformat the move itself
+- Shown under the trickiest-move tile's percentage
+
+**troubleSpotItemWithWrongMove**
+- Template: `move {{move}} · often plays {{wrongMove}}`
+- `{{move}}` = move number (integer); `{{wrongMove}}` = UCI notation move, left untranslated
+- Subtitle for a move-level row in the expanded weak-spot list
+
+**wholeOpening**
+- Subtitle for an opening-level row (as opposed to a move-level row) in the expanded weak-spot list
+
+**seeAllWeakSpots**
+- Template: `See all {{count}} weak spots →`
+- `{{count}}` = total number of weak spots (openings + moves combined)
+- Link/button that expands the full weak-spot list inline; keep the trailing arrow, translate only the words (flip direction/placement for RTL languages)
+
+**seeLess**
+- Label for the same button once expanded, to collapse the list back
 
 **reviewDue**
 - Template: `Review due ({{count}})`

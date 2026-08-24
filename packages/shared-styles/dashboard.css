@@ -124,78 +124,6 @@
 .progress-review-btn:not(:disabled):hover {
   border-color: var(--accent, #6c8cff);
 }
-.progress-needs-work {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 14px;
-  padding: 10px 14px;
-  border-radius: 12px;
-  background: var(--code-bg);
-  border: 1px solid var(--border);
-}
-.nw-row {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 6px 8px;
-}
-.nw-row-label {
-  flex: 0 0 auto;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text);
-  opacity: 0.65;
-}
-.nw-chips {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  flex: 1 1 auto;
-  min-width: 0;
-}
-.nw-chips li {
-  padding: 0;
-  display: flex;
-}
-.nw-chip {
-  display: inline-flex;
-  align-items: center;
-  max-width: 220px;
-  padding: 3px 6px 3px 9px;
-  border-radius: 999px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 1px solid var(--accent-border);
-  font-size: 12px;
-  cursor: default;
-}
-.nw-chip > span[aria-hidden] {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  min-width: 0;
-}
-.nw-chip-name {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: var(--text-h);
-  font-weight: 550;
-}
-.nw-chip-pct {
-  flex: 0 0 auto;
-  font-weight: 700;
-  color: var(--accent);
-  font-variant-numeric: tabular-nums;
-  background: var(--card-bg);
-  border-radius: 999px;
-  padding: 1px 6px;
-}
 
 /* On wide screens, put Training and Puzzles side by side as one KPI
    strip instead of two short stacked rows with dead space beside them. */
@@ -746,6 +674,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
+    margin-bottom: 12px;
   }
   .progress-group--puzzles .progress-group-row {
     grid-template-columns: repeat(3, 1fr);
@@ -784,33 +713,6 @@
     border-color: var(--border);
     opacity: 1;
   }
-  .progress-needs-work {
-    padding: 12px 14px;
-  }
-  .progress-needs-work > .progress-stat-label {
-    font-weight: 650;
-    color: var(--text-h);
-  }
-  .nw-row {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 6px;
-  }
-  .nw-chips {
-    flex-direction: column;
-    width: 100%;
-    min-width: 0;
-  }
-  .nw-chips li {
-    width: 100%;
-    min-width: 0;
-  }
-  .nw-chip {
-    width: 100%;
-    max-width: none;
-    box-sizing: border-box;
-  }
-
   .ob-toolbar {
     padding-bottom: 14px;
   }
@@ -847,5 +749,146 @@
   }
   .ob-preview.is-empty {
     display: none;
+  }
+}
+
+/* ===== Dashboard: Weak Spot Callouts ===== */
+.ws-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ws-grid {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.ws-tile {
+  flex: 0 1;
+  min-width: 10em;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: var(--social-bg);
+  border: 1px solid var(--accent-border);
+}
+
+.ws-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0.85;
+}
+
+.ws-title {
+  font-size: 15px;
+  font-weight: 650;
+  color: var(--text-h);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ws-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.ws-value {
+  font-size: 22px;
+  font-weight: 750;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+}
+
+.ws-stat-label {
+  font-size: 11.5px;
+  color: var(--text);
+  opacity: 0.7;
+}
+
+.ws-footer {
+  margin-top: 10px;
+}
+
+.ws-link {
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.ws-link:hover {
+  text-decoration: underline;
+}
+
+.ws-expanded {
+  display: flex;
+  flex-direction: column;
+  margin-top: 4px;
+  border-top: 1px solid var(--border);
+}
+
+.ws-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.ws-row-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.ws-row-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-h);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ws-row-sub {
+  font-size: 11.5px;
+  color: var(--text);
+  opacity: 0.65;
+}
+
+.ws-row-pct {
+  flex: 0 0 auto;
+  font-size: 14px;
+  font-weight: 750;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 600px) {
+  .ws-grid {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .ws-tile {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
   }
 }
