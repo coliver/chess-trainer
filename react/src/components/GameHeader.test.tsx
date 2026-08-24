@@ -35,9 +35,14 @@ function Setter({
 function renderHeader({
   status = "",
   onSettingsClick,
-}: { status?: string; onSettingsClick?: () => void } = {}) {
+  initialPath = "/",
+}: {
+  status?: string;
+  onSettingsClick?: () => void;
+  initialPath?: string;
+} = {}) {
   return render(
-    <MemoryRouter>
+    <MemoryRouter initialEntries={[initialPath]}>
       <GameHeaderProvider>
         <Setter status={status} onSettingsClick={onSettingsClick} />
         <GameHeader />
@@ -74,5 +79,27 @@ describe("GameHeader", () => {
     await user.click(screen.getByRole("button", { name: "Settings" }));
 
     expect(onSettingsClick).toHaveBeenCalled();
+  });
+
+  it("navigates to the settings page when no handler is registered", async () => {
+    const user = userEvent.setup();
+    renderHeader();
+
+    await user.click(screen.getByRole("button", { name: "Settings" }));
+
+    expect(mockNavigate).toHaveBeenCalledWith("/settings", {
+      state: { from: "/" },
+    });
+  });
+
+  it("carries the current training route so Settings can return to it", async () => {
+    const user = userEvent.setup();
+    renderHeader({ initialPath: "/training/42" });
+
+    await user.click(screen.getByRole("button", { name: "Settings" }));
+
+    expect(mockNavigate).toHaveBeenCalledWith("/settings", {
+      state: { from: "/training/42" },
+    });
   });
 });

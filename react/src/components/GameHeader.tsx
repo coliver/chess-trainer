@@ -1,16 +1,25 @@
 // react/src/components/GameHeader.tsx
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ChevronLeft, Settings } from "lucide-react";
 import { useGameHeader } from "../context/GameHeaderContext";
 
 export function GameHeader() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
   const { status, onSettingsClick } = useGameHeader();
 
   const handleBack = () => {
     navigate("/dashboard");
+  };
+
+  const handleSettings = () => {
+    if (onSettingsClick) {
+      onSettingsClick();
+    } else {
+      navigate("/settings", { state: { from: location.pathname } });
+    }
   };
 
   return (
@@ -29,7 +38,7 @@ export function GameHeader() {
 
         <button
           className="game-header-settings"
-          onClick={onSettingsClick}
+          onClick={handleSettings}
           aria-label={t("header.settings")}
           title={t("header.settings")}
         >

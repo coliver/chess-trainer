@@ -1,5 +1,7 @@
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useLocation, useNavigate } from "react-router-dom";
+import { ChevronLeft } from "lucide-react";
 import { usePreferences } from "../context/PreferencesContext";
 import { useSnowPreference } from "../hooks/useSnowPreference";
 import { useSound } from "../hooks/useSound";
@@ -37,6 +39,9 @@ const PIECE_SETS: PieceSet[] = [
 
 export default function Settings() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const backTo = (location.state as { from?: string } | null)?.from ?? "/dashboard";
   const { preferences, update, reset } = usePreferences();
   const { snowEnabled, setSnowEnabled } = useSnowPreference();
   const { play } = useSound();
@@ -68,6 +73,15 @@ export default function Settings() {
   return (
     <main className="page">
       <div className="card settings-card">
+        <button
+          type="button"
+          className="settings-back-button"
+          onClick={() => navigate(backTo)}
+          aria-label="Back"
+        >
+          <ChevronLeft size={18} aria-hidden="true" />
+          Back
+        </button>
         <h1 className="title">{t("settings.title")}</h1>
         <p className="subtitle">{t("settings.subtitle")}</p>
 

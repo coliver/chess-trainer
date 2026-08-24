@@ -3,11 +3,44 @@ import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
 import Settings from "./Settings";
 import { PreferencesProvider } from "../context/PreferencesContext";
 
 vi.mock("../components/Board", () => ({
-  default: () => <div data-testid="board" />,
+  default: (props: {
+    position: string;
+    orientation?: string;
+    getLegalMoves?: (square: string) => { to: string; promotion?: string }[];
+    onMove?: (from: string, to: string) => boolean;
+  }) => (
+    <div
+      data-testid="board"
+      data-position={props.position}
+      data-orientation={props.orientation}
+    >
+      <button
+        type="button"
+        onClick={() => props.getLegalMoves?.("e2")}
+        aria-label="probe legal moves"
+      />
+      <button
+        type="button"
+        onClick={() => props.onMove?.("e2", "e4")}
+        aria-label="play e2e4"
+      />
+      <button
+        type="button"
+        onClick={() => props.onMove?.("e2", "e2")}
+        aria-label="play same-square"
+      />
+      <button
+        type="button"
+        onClick={() => props.onMove?.("e2", "e5")}
+        aria-label="play illegal move"
+      />
+    </div>
+  ),
 }));
 
 describe("Settings page — snow toggle", () => {
@@ -17,9 +50,11 @@ describe("Settings page — snow toggle", () => {
 
   const renderSettings = () =>
     render(
-      <PreferencesProvider>
-        <Settings />
-      </PreferencesProvider>,
+      <MemoryRouter>
+        <PreferencesProvider>
+          <Settings />
+        </PreferencesProvider>
+      </MemoryRouter>,
     );
 
   it("defaults to off and persists the choice locally without touching preferences sync", async () => {
@@ -51,9 +86,11 @@ describe("Settings page — reset to defaults", () => {
 
   const renderSettings = () =>
     render(
-      <PreferencesProvider>
-        <Settings />
-      </PreferencesProvider>,
+      <MemoryRouter>
+        <PreferencesProvider>
+          <Settings />
+        </PreferencesProvider>
+      </MemoryRouter>,
     );
 
   it("asks for confirmation and does nothing if declined", async () => {
@@ -104,9 +141,11 @@ describe("Settings page — appearance section", () => {
 
   const renderSettings = () =>
     render(
-      <PreferencesProvider>
-        <Settings />
-      </PreferencesProvider>,
+      <MemoryRouter>
+        <PreferencesProvider>
+          <Settings />
+        </PreferencesProvider>
+      </MemoryRouter>,
     );
 
   it("changes and persists board theme selection", async () => {
@@ -207,9 +246,11 @@ describe("Settings page — board orientation section", () => {
 
   const renderSettings = () =>
     render(
-      <PreferencesProvider>
-        <Settings />
-      </PreferencesProvider>,
+      <MemoryRouter>
+        <PreferencesProvider>
+          <Settings />
+        </PreferencesProvider>
+      </MemoryRouter>,
     );
 
   it("selects auto board orientation by default", () => {
@@ -274,5 +315,134 @@ describe("Settings page — board orientation section", () => {
     await user.click(autoRadio);
     expect(autoRadio.checked).toBe(true);
     expect(blackRadio.checked).toBe(false);
+  });
+});
+
+describe("Settings page — back button", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  function renderWithRoute(initialPath: string) {
+    return render(
+      <MemoryRouter initialEntries={[initialPath]}>
+        <PreferencesProvider>
+          <Routes>
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/dashboard" element={<div>Dashboard page</div>} />
+            <Route
+              path="/training/:id"
+              element={<div>Training page</div>}
+            />
+          </Routes>
+        </PreferencesProvider>
+      </MemoryRouter>,
+    );
+  }
+
+  it("returns to the dashboard when there is no origin state", async () => {
+    const user = userEvent.setup();
+    renderWithRoute("/settings");
+
+    await user.click(screen.getByRole("button", { name: "Back" }));
+
+    expect(screen.getByText("Dashboard page")).toBeInTheDocument();
+  });
+
+  it("returns to the training session it was opened from", async () => {
+    const user = userEvent.setup();
+    render(
+      <MemoryRouter
+        initialEntries={[
+          { pathname: "/settings", state: { from: "/training/42" } },
+        ]}
+      >
+        <PreferencesProvider>
+          <Routes>
+            <Route path="/settings" element={<Settings />} />
+            <Route
+              path="/training/:id"
+              element={<div>Training page</div>}
+            />
+          </Routes>
+        </PreferencesProvider>
+      </MemoryRouter>,
+    );
+
+    await user.click(screen.getByRole("button", { name: "Back" }));
+
+    expect(screen.getByText("Training page")).toBeInTheDocument();
+  });
+});
+
+describe("Settings page — preview board", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  const renderSettings = () =>
+    render(
+      <MemoryRouter>
+        <PreferencesProvider>
+          <Settings />
+        </PreferencesProvider>
+      </MemoryRouter>,
+    );
+
+  it("returns legal moves for the queried square without throwing", async () => {
+    const user = userEvent.setup();
+    renderSettings();
+
+    await user.click(screen.getByRole("button", { name: "probe legal moves" }));
+
+    // No assertion beyond "didn't throw" — this exercises previewGetLegalMoves's
+    // call into the real chess-core legalMoves against the live previewFen.
+  });
+
+  it("plays a legal move and advances the preview position", async () => {
+    const user = userEvent.setup();
+    renderSettings();
+
+    const board = screen.getByTestId("board");
+    const startPosition = board.dataset.position;
+
+    await user.click(screen.getByRole("button", { name: "play e2e4" }));
+
+    expect(screen.getByTestId("board").dataset.position).not.toBe(startPosition);
+  });
+
+  it("rejects a same-square move without changing the position", async () => {
+    const user = userEvent.setup();
+    renderSettings();
+
+    const startPosition = screen.getByTestId("board").dataset.position;
+
+    await user.click(screen.getByRole("button", { name: "play same-square" }));
+
+    expect(screen.getByTestId("board").dataset.position).toBe(startPosition);
+  });
+
+  it("rejects an illegal move without changing the position", async () => {
+    const user = userEvent.setup();
+    renderSettings();
+
+    const startPosition = screen.getByTestId("board").dataset.position;
+
+    await user.click(screen.getByRole("button", { name: "play illegal move" }));
+
+    expect(screen.getByTestId("board").dataset.position).toBe(startPosition);
+  });
+
+  it("orients the preview board to black when that preference is selected", async () => {
+    const user = userEvent.setup();
+    renderSettings();
+
+    expect(screen.getByTestId("board").dataset.orientation).toBe("white");
+
+    await user.click(
+      screen.getByRole("radio", { name: "Always keep Black on bottom" }),
+    );
+
+    expect(screen.getByTestId("board").dataset.orientation).toBe("black");
   });
 });
