@@ -1,5 +1,8 @@
 ## 2026-08-23
 
+### Features
+- feat(react): redesign mobile header with two distinct states per spec — `HomeHeader` (48–56px, knight icon inline with title, greeting line, overflow menu ⋮ for settings/logout/GitHub/language/theme/version, segmented Openings/Puzzles tabs) and `GameHeader` (40–44px, minimal back button + status + settings icon, no branding, board takes full viewport below). Conditional rendering in `App.tsx` swaps headers based on route: HomeHeader for /dashboard, /puzzles, /settings, /login, /register; GameHeader for /training/:id, /puzzle/:id. GameHeaderContext allows game pages to set status text and settings handlers. Styles compiled to mobile-first media queries in `packages/shared-styles/header.css`; old `Header.tsx` preserved as fallback. Reduces home-header footprint by ~50% and eliminates mobile crowding during active play per design spec.
+
 ### Content
 - content(openings): author 46 opening descriptions (batch 4, Modern/Pterodactyl/Pirc defenses B06–B09)
 
