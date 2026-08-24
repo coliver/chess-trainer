@@ -49,6 +49,23 @@ type WeakSpot = {
   incorrectCount: number;
 };
 
+type CommonWrongMove = {
+  moveUci: string;
+  count: number;
+};
+
+type StepAccuracy = {
+  openingEco?: string | null;
+  openingName?: string | null;
+  orderIndex: number;
+  correctMoveUci: string;
+  attempts: number;
+  correctCount: number;
+  incorrectCount: number;
+  accuracy: number;
+  commonWrongMoves: CommonWrongMove[];
+};
+
 type PuzzleSummary = {
   puzzlesSeen: number;
   overallAccuracy: number;
@@ -108,6 +125,14 @@ export const Dashboard = () => {
   const dueCount = dueList.length;
   const weakSpotsAll = useApiResource<WeakSpot[]>("/progress/weak-spots", []);
   const weakSpots = useMemo(() => weakSpotsAll.slice(0, 5), [weakSpotsAll]);
+  const stepAccuracyAll = useApiResource<StepAccuracy[]>(
+    "/progress/step-accuracy",
+    [],
+  );
+  const troubleSteps = useMemo(
+    () => stepAccuracyAll.slice(0, 5),
+    [stepAccuracyAll],
+  );
   const puzzleSummary = useApiResource<PuzzleSummary | null>(
     "/puzzles/summary",
     null,
@@ -362,6 +387,52 @@ export const Dashboard = () => {
                               attempts: w.attempts,
                             })}
                           </span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              )}
+              {troubleSteps.length > 0 && (
+                <div className="progress-weak-spots">
+                  <span className="progress-stat-label">
+                    {t("dashboard.progress.troubleSpots")}
+                  </span>
+                  <ul>
+                    {troubleSteps.map((s) => {
+                      const name =
+                        s.openingName ??
+                        t("dashboard.progress.weakSpotFallbackName");
+                      const moveNumber = Math.floor(s.orderIndex / 2) + 1;
+                      const pct = Math.round(s.accuracy * 100);
+                      const topWrongMove = s.commonWrongMoves[0];
+                      return (
+                        <li
+                          key={`${s.openingName ?? "Opening"}-${s.openingEco ?? ""}-${s.orderIndex}`}
+                        >
+                          <div className="ws-row">
+                            <span className="ws-name" title={name}>
+                              {t("dashboard.progress.troubleSpotItem", {
+                                name,
+                                move: moveNumber,
+                              })}
+                            </span>
+                            <span className="ws-pct">{pct}%</span>
+                          </div>
+                          <div className="ws-bar" aria-hidden="true">
+                            <div
+                              className="ws-bar-fill"
+                              style={{ width: `${pct}%` }}
+                            />
+                          </div>
+                          {topWrongMove && (
+                            <span className="ws-wrong-move">
+                              {t("dashboard.progress.troubleSpotWrongMove", {
+                                move: topWrongMove.moveUci,
+                                count: topWrongMove.count,
+                              })}
+                            </span>
+                          )}
                         </li>
                       );
                     })}

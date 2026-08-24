@@ -179,6 +179,13 @@
   background: var(--accent);
   border-radius: 2px;
 }
+.ws-wrong-move {
+  display: block;
+  margin-top: 3px;
+  font-size: 11px;
+  color: var(--text);
+  opacity: 0.75;
+}
 
 /* On wide screens, put Training and Puzzles side by side as one KPI
    strip instead of two short stacked rows with dead space beside them. */

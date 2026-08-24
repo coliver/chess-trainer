@@ -284,6 +284,41 @@ describe("Dashboard", () => {
     expect(reviewBtn).toBeEnabled();
   });
 
+  it("renders trouble spots with move number and top wrong move", async () => {
+    (api.get as unknown as ReturnType<typeof vi.fn>).mockImplementation(
+      (url: string) => {
+        if (url === "/openings") return Promise.resolve({ data: openings });
+        if (url === "/progress/step-accuracy")
+          return Promise.resolve({
+            data: [
+              {
+                openingEco: "B20",
+                openingName: "Sicilian Defense",
+                orderIndex: 4,
+                correctMoveUci: "d2d4",
+                attempts: 6,
+                correctCount: 2,
+                incorrectCount: 4,
+                accuracy: 0.333,
+                commonWrongMoves: [{ moveUci: "g1f3", count: 3 }],
+              },
+            ],
+          });
+        return Promise.resolve({ data: null });
+      },
+    );
+
+    renderDashboard();
+
+    expect(
+      await screen.findByText(/Sicilian Defense — move 3/),
+    ).toBeInTheDocument();
+    expect(screen.getByText("33%")).toBeInTheDocument();
+    expect(
+      screen.getByText(/Often played g1f3 instead \(3x\)/),
+    ).toBeInTheDocument();
+  });
+
   it("renders puzzle progress stats when present", async () => {
     (api.get as unknown as ReturnType<typeof vi.fn>).mockImplementation(
       (url: string) => {

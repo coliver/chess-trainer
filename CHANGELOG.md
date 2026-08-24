@@ -2,6 +2,7 @@
 
 ### Features
 - feat(backend): add step-level opening accuracy analytics — `GET /progress/step-accuracy` (per-user) and `GET /progress/step-accuracy/global` (aggregated across all trainees) report accuracy per `order_index` (ply) within each opening, ranked worst-first, with the most common wrong moves played at that step. Answers "which specific move in the sequence do trainees fail at" rather than whole-opening attempt totals, which `PositionProgress`/`/progress/weak-spots` already covered.
+- feat(react): surface step-level opening accuracy on the Dashboard as a "Trouble spots" panel, consuming `GET /progress/step-accuracy` (previously unused by any frontend). Shows the user's worst-accuracy steps by opening name and move number, plus the specific wrong move they most often play there — actionable in a way the existing whole-opening "Weak spots" panel isn't.
 
 ### Fixes
 - fix(backend): exclude opponent auto-played plies from step accuracy — the frontend auto-plays and silently submits the opponent's (always book-correct) reply as a real `TrainingResponse`, so without filtering, every opponent-side `order_index` showed ~100% accuracy and corrupted the worst-first ranking. `_is_trainee_ply` now scopes step accuracy to plies the trainee actually chose, using `order_index` parity vs. `player_color` for normal sessions (review items always count, since each is an independent due position).
