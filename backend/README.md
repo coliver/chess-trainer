@@ -47,6 +47,35 @@ To populate the database with the chess openings, run:
 
     docker compose exec api python scripts/import_openings.py
 
+### 3a) Adding Opening Descriptions (Batches)
+
+Opening descriptions are added in batches, tracked in git as JSON files. Each batch file (`scripts/opening_descriptions_batch*.json`) contains 50-200 opening descriptions. 
+
+**Adding a new batch:**
+
+1. Create a JSON file with the descriptions:
+   ```json
+   [
+     {"eco": "B06", "name": "Modern Defense: Example", "description": "..."},
+     ...
+   ]
+   ```
+   Commit it as `scripts/opening_descriptions_batch{N}.json`.
+
+2. Apply all unapplied batches to the database (safe to run multiple times—uses UPDATE...WHERE):
+
+   ```bash
+   docker compose exec api python backend/scripts/apply_all_description_batches.py
+   ```
+
+   Or apply a specific batch:
+
+   ```bash
+   docker compose exec api python scripts/apply_opening_descriptions.py scripts/opening_descriptions_batch8.json
+   ```
+
+The batches are idempotent—reapplying a batch just sets the same descriptions again. In production, run `apply_all_description_batches.py` as part of your post-deploy workflow.
+
 ### 4) Accessing the API
 Once the containers are healthy:
 
