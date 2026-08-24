@@ -27,6 +27,25 @@
   color: var(--accent);
 }
 
+.puzzles-themes {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.puzzles-theme-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text);
+  text-transform: capitalize;
+}
+
 .puzzles-skip {
   font: inherit;
   font-size: 13px;

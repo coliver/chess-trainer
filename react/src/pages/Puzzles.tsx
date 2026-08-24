@@ -37,6 +37,7 @@ export const Puzzles = () => {
   const [correctMoveUci, setCorrectMoveUci] = useState("");
   const [lastMoveUci, setLastMoveUci] = useState("");
   const [rating, setRating] = useState<number | null>(null);
+  const [themes, setThemes] = useState<string | null>(null);
   const [feedback, setFeedback] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [solved, setSolved] = useState(0);
@@ -75,6 +76,7 @@ export const Puzzles = () => {
       setCorrectMoveUci(res.data.correctMoveUci);
       setLastMoveUci(res.data.lastMoveUci);
       setRating(res.data.rating);
+      setThemes(res.data.themes ?? null);
       if (preferences.board_orientation_mode === "auto") {
         setOrientation(sideToMove(res.data.fen) === "b" ? "black" : "white");
       } else {
@@ -197,6 +199,15 @@ export const Puzzles = () => {
     [],
   );
 
+  const themeList = useMemo(
+    () =>
+      (themes ?? "")
+        .split(" ")
+        .filter(Boolean)
+        .map((theme) => theme.replace(/([a-z0-9])([A-Z])/g, "$1 $2")),
+    [themes],
+  );
+
   // Highlight the enemy's setup move (from/to) that produced this puzzle position.
   const markers = useMemo((): BoardMarker[] => {
     if (!lastMoveUci || lastMoveUci.length < 4) return [];
@@ -263,6 +274,16 @@ export const Puzzles = () => {
                   : ""}
               </span>
             </div>
+
+            {themeList.length > 0 && (
+              <div className="puzzles-themes">
+                {themeList.map((theme) => (
+                  <span key={theme} className="puzzles-theme-chip">
+                    {theme}
+                  </span>
+                ))}
+              </div>
+            )}
 
             {statusMsg && (
               <div className={`train-status ${statusKind}`} role="status">

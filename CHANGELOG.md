@@ -1,6 +1,7 @@
 ## 2026-08-24
 
 ### Features
+- feat(react): show puzzle theme tags (e.g. "crushing", "fork", "mate in 2") as chips under the rating on the Puzzles page, sourced from the `themes` field `GET /puzzles/next` already returned but the frontend never rendered
 - feat(backend): add step-level opening accuracy analytics — `GET /progress/step-accuracy` (per-user) and `GET /progress/step-accuracy/global` (aggregated across all trainees) report accuracy per `order_index` (ply) within each opening, ranked worst-first, with the most common wrong moves played at that step. Answers "which specific move in the sequence do trainees fail at" rather than whole-opening attempt totals, which `PositionProgress`/`/progress/weak-spots` already covered.
 - feat(react): surface step-level opening accuracy on the Dashboard as a "Trouble spots" panel, consuming `GET /progress/step-accuracy` (previously unused by any frontend). Shows the user's worst-accuracy steps by opening name and move number, plus the specific wrong move they most often play there — actionable in a way the existing whole-opening "Weak spots" panel isn't.
 
