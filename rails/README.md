@@ -56,9 +56,14 @@ Per this repo's Docker-only convention, run everything through the
 running container, not host Ruby:
 
 ```sh
-docker compose exec rails bundle exec rspec     # request/service/helper specs (WebMock-stubbed API calls)
+docker compose exec rails bundle exec rspec     # request/service/helper specs (WebMock-stubbed API calls) + system specs (Capybara + Cuprite/headless Chrome)
 docker compose exec rails bundle exec rubocop   # style (rubocop-rails-omakase + rubocop-rspec)
 ```
+
+System specs (`spec/system/`) exist alongside the request specs for behavior
+request specs can't see at all — Turbo/Stimulus client-side effects like the
+Settings page's live theme/coordinates preview, which only run in a real
+browser.
 
 `rspec` prints a SimpleCov line-coverage summary and writes a full report
 to `coverage/index.html`. rubocop-rspec enforces the automated form of
@@ -94,6 +99,7 @@ rails/
 │   └── assets/stylesheets/    # application.css (page-flash, etc.) — most styling comes from
 │                               # packages/shared-styles/*.css instead
 ├── spec/requests/             # RSpec request specs, WebMock-stubbed FastAPI calls
+├── spec/system/                # Capybara + Cuprite specs for Turbo/Stimulus client-side behavior
 ├── config/routes.rb            # scope "/rails" do ... end
 └── PLAN.md                     # design doc + step-by-step build order this app followed
 ```
@@ -132,12 +138,13 @@ rails/
   participates in normal reload/caching and both `I18n.t` and views' `t()`
   resolve shared keys (e.g. `t("puzzles.title")`) exactly like React's
   `t()` does. `ApplicationHelper#js_translations` serializes that same
-  generated file into the layout's `<script id="i18n-strings">` tag, so a
-  Stimulus controller and its ERB view reference the literal same key —
-  there's no separate `js:` namespace. Only strings with no React
-  equivalent — because the concept doesn't exist on that side, or the flow
-  is structurally different (e.g. a full-page flash-redirect vs React's
-  inline optimistic UI) — stay local in `config/locales/en.yml`.
+  generated file plus the current locale's Rails-only `config/locales/en.yml`
+  strings into the layout's `<script id="i18n-strings">` tag, so a Stimulus
+  controller and its ERB view reference the literal same key regardless of
+  which file it's defined in. Only strings with no React equivalent —
+  because the concept doesn't exist on that side, or the flow is
+  structurally different (e.g. a full-page flash-redirect vs React's inline
+  optimistic UI) — stay local in `config/locales/en.yml`.
 - Deployed alongside React and served at `/rails/...` on
   knightschool.click — `docker-compose.prod.yml` runs it with
   `RAILS_ENV=production`, and `.github/workflows/deploy.yml` builds/starts
