@@ -86,6 +86,7 @@
     "noPuzzlesDue": "Ingen oppgaver er klare nå — prøv igjen senere.",
     "loadFailed": "Kunne ikke laste oppgaver. Sjekk tilkoblingen din.",
     "correct": "✅ Riktig!",
+    "keepGoing": "✅ Fortsett…",
     "incorrectFallback": "Ikke helt riktig — prøv igjen.",
     "submitError": "Feil ved sending av trekk.",
     "findBestMove": "Finn det beste trekket.",
@@ -95,6 +96,7 @@
     "solved": "Løst: {{count}}",
     "streak": "Rekke: {{count}}",
     "streakBest": " · best {{best}}",
+    "moveProgress": "Trekk {{current}} av {{total}}",
     "skipPuzzle": "Hopp over oppgave ›",
     "backToDashboard": "← Tilbake til oversikten"
   },

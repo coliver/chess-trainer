@@ -86,6 +86,7 @@
     "noPuzzlesDue": "Most nincs esedékes feladvány — nézz vissza később.",
     "loadFailed": "Nem sikerült betölteni a feladványt. Ellenőrizd a kapcsolatodat.",
     "correct": "✅ Helyes!",
+    "keepGoing": "✅ Folytasd…",
     "incorrectFallback": "Nem egészen — próbáld újra.",
     "submitError": "Hiba történt a lépés beküldésekor.",
     "findBestMove": "Találd meg a legjobb lépést.",
@@ -95,6 +96,7 @@
     "solved": "Megoldva: {{count}}",
     "streak": "Sorozat: {{count}}",
     "streakBest": " · legjobb {{best}}",
+    "moveProgress": "Lépés {{current}} / {{total}}",
     "skipPuzzle": "Feladvány kihagyása ›",
     "backToDashboard": "← Vissza az irányítópultra"
   },

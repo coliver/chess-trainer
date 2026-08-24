@@ -86,6 +86,7 @@
     "noPuzzlesDue": "Tiada teka-teki perlu dibuat sekarang — cuba lagi nanti.",
     "loadFailed": "Gagal memuatkan teka-teki. Semak sambungan anda.",
     "correct": "✅ Betul!",
+    "keepGoing": "✅ Teruskan…",
     "incorrectFallback": "Belum tepat — cuba lagi.",
     "submitError": "Ralat menghantar langkah.",
     "findBestMove": "Cari langkah terbaik.",
@@ -95,6 +96,7 @@
     "solved": "Diselesaikan: {{count}}",
     "streak": "Siri: {{count}}",
     "streakBest": " · terbaik {{best}}",
+    "moveProgress": "Langkah {{current}} daripada {{total}}",
     "skipPuzzle": "Langkau teka-teki ›",
     "backToDashboard": "← Kembali ke papan pemuka"
   },

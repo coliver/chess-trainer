@@ -26,6 +26,8 @@ type NextPuzzle = {
   themes?: string | null;
   correctMoveUci: string;
   lastMoveUci: string;
+  moveIndex: number;
+  solverMovesTotal: number;
 };
 
 export const Puzzles = () => {
@@ -36,6 +38,8 @@ export const Puzzles = () => {
   const [fen, setFen] = useState(START_FEN);
   const [correctMoveUci, setCorrectMoveUci] = useState("");
   const [lastMoveUci, setLastMoveUci] = useState("");
+  const [moveIndex, setMoveIndex] = useState(0);
+  const [solverMovesTotal, setSolverMovesTotal] = useState(1);
   const [rating, setRating] = useState<number | null>(null);
   const [themes, setThemes] = useState<string | null>(null);
   const [feedback, setFeedback] = useState("");
@@ -51,6 +55,11 @@ export const Puzzles = () => {
   useEffect(() => {
     fenRef.current = fen;
   }, [fen]);
+
+  const moveIndexRef = useRef(moveIndex);
+  useEffect(() => {
+    moveIndexRef.current = moveIndex;
+  }, [moveIndex]);
 
   // Tracks the "advance to next puzzle" timeout scheduled after a correct
   // answer, so it can be cancelled on unmount — otherwise it fires after the
@@ -75,6 +84,8 @@ export const Puzzles = () => {
       setFen(res.data.fen);
       setCorrectMoveUci(res.data.correctMoveUci);
       setLastMoveUci(res.data.lastMoveUci);
+      setMoveIndex(res.data.moveIndex);
+      setSolverMovesTotal(res.data.solverMovesTotal);
       setRating(res.data.rating);
       setThemes(res.data.themes ?? null);
       if (preferences.board_orientation_mode === "auto") {
@@ -117,10 +128,16 @@ export const Puzzles = () => {
           correct: boolean;
           reason: string;
           fenAfter?: string | null;
-        }>(`/puzzles/${puzzleId}/attempts`, { moveUci });
+          puzzleComplete?: boolean | null;
+          opponentReplyUci?: string | null;
+          nextCorrectMoveUci?: string | null;
+        }>(`/puzzles/${puzzleId}/attempts`, {
+          moveUci,
+          moveIndex: moveIndexRef.current,
+        });
         if (!isMountedRef.current) return;
 
-        if (res.data.correct) {
+        if (res.data.correct && res.data.puzzleComplete) {
           playSound("puzzleCorrect");
           celebratePuzzleCorrect();
           setFeedback(t("puzzles.correct"));
@@ -131,6 +148,15 @@ export const Puzzles = () => {
             return next;
           });
           advanceTimeoutRef.current = setTimeout(() => void loadNext(), 1000);
+        } else if (res.data.correct) {
+          // Correct, but more solver moves remain: apply the auto-played
+          // opponent reply and keep the puzzle interactive.
+          playSound("puzzleCorrect");
+          setFeedback(t("puzzles.keepGoing"));
+          if (res.data.fenAfter) setFen(res.data.fenAfter);
+          if (res.data.opponentReplyUci) setLastMoveUci(res.data.opponentReplyUci);
+          if (res.data.nextCorrectMoveUci) setCorrectMoveUci(res.data.nextCorrectMoveUci);
+          setMoveIndex((n) => n + 1);
         } else {
           playSound("puzzleWrong");
           setFeedback(
@@ -255,6 +281,14 @@ export const Puzzles = () => {
                 {rating != null && (
                   <span className="eco-chip">
                     {t("puzzles.rating", { rating })}
+                  </span>
+                )}
+                {solverMovesTotal > 1 && (
+                  <span className="eco-chip">
+                    {t("puzzles.moveProgress", {
+                      current: moveIndex + 1,
+                      total: solverMovesTotal,
+                    })}
                   </span>
                 )}
               </div>

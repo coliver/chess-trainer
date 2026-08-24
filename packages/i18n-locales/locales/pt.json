@@ -86,6 +86,7 @@
     "noPuzzlesDue": "Nenhum quebra-cabeça pendente agora — volte mais tarde.",
     "loadFailed": "Falha ao carregar um quebra-cabeça. Verifique sua conexão.",
     "correct": "✅ Correto!",
+    "keepGoing": "✅ Continua assim…",
     "incorrectFallback": "Não exatamente — tente novamente.",
     "submitError": "Erro ao enviar o lance.",
     "findBestMove": "Encontre o melhor lance.",
@@ -95,6 +96,7 @@
     "solved": "Resolvido: {{count}}",
     "streak": "Sequência: {{count}}",
     "streakBest": " · melhor {{best}}",
+    "moveProgress": "Lance {{current}} de {{total}}",
     "skipPuzzle": "Pular quebra-cabeça ›",
     "backToDashboard": "← Voltar ao painel"
   },

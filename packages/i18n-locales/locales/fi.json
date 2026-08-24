@@ -86,6 +86,7 @@
     "noPuzzlesDue": "Ei pulmia juuri nyt — tule myöhemmin takaisin.",
     "loadFailed": "Pulman lataus epäonnistui. Tarkista yhteytesi.",
     "correct": "✅ Oikein!",
+    "keepGoing": "✅ Jatka…",
     "incorrectFallback": "Ei aivan — yritä uudelleen.",
     "submitError": "Virhe siirron lähettämisessä.",
     "findBestMove": "Etsi paras siirto.",
@@ -95,6 +96,7 @@
     "solved": "Ratkaistu: {{count}}",
     "streak": "Putki: {{count}}",
     "streakBest": " · paras {{best}}",
+    "moveProgress": "Siirto {{current}} / {{total}}",
     "skipPuzzle": "Ohita pulma ›",
     "backToDashboard": "← Takaisin kojelautaan"
   },

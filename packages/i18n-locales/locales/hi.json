@@ -86,6 +86,7 @@
     "noPuzzlesDue": "अभी कोई पहेली due नहीं है — बाद में देखें।",
     "loadFailed": "पहेली लोड करने में विफल। अपना कनेक्शन जाँचें।",
     "correct": "✅ सही!",
+    "keepGoing": "✅ जारी रखें…",
     "incorrectFallback": "थोड़ा और प्रयास करें — फिर से कोशिश करें।",
     "submitError": "चाल जमा करने में त्रुटि।",
     "findBestMove": "सबसे अच्छी चाल खोजें।",
@@ -95,6 +96,7 @@
     "solved": "हल: {{count}}",
     "streak": "स्ट्रीक: {{count}}",
     "streakBest": " · सर्वोत्तम {{best}}",
+    "moveProgress": "चाल {{current}} / {{total}}",
     "skipPuzzle": "पहेली छोड़ें ›",
     "backToDashboard": "← डैशबोर्ड पर वापस"
   },

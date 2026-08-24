@@ -86,6 +86,7 @@
     "noPuzzlesDue": "Ingen opgaver lige nu — kom tilbage senere.",
     "loadFailed": "Kunne ikke indlæse en opgave. Tjek din forbindelse.",
     "correct": "✅ Korrekt!",
+    "keepGoing": "✅ Fortsæt…",
     "incorrectFallback": "Ikke helt — prøv igen.",
     "submitError": "Fejl ved indsendelse af træk.",
     "findBestMove": "Find det bedste træk.",
@@ -95,6 +96,7 @@
     "solved": "Løst: {{count}}",
     "streak": "Strækning: {{count}}",
     "streakBest": " · bedst {{best}}",
+    "moveProgress": "Træk {{current}} af {{total}}",
     "skipPuzzle": "Spring opgave over ›",
     "backToDashboard": "← Tilbage til dashboard"
   },

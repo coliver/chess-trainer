@@ -86,6 +86,7 @@
     "noPuzzlesDue": "Ú-dorth gorthad ú-dollen — tôl na dortha.",
     "loadFailed": "Díhena na gorthad. Tog na hammad.",
     "correct": "✅ Canath!",
+    "keepGoing": "✅ Tholo…",
     "incorrectFallback": "Ú-vel — ad toltha.",
     "submitError": "Díhena na dortha.",
     "findBestMove": "Caran na dortha.",
@@ -95,6 +96,7 @@
     "solved": "Dortha: {{count}}",
     "streak": "Mellon: {{count}}",
     "streakBest": " · gwann {{best}}",
+    "moveProgress": "dantath {{current}} / {{total}}",
     "skipPuzzle": "Dolven dantath ›",
     "backToDashboard": "← Ad tolathron"
   },

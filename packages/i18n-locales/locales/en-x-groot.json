@@ -86,6 +86,7 @@
     "noPuzzlesDue": "I am Groot",
     "loadFailed": "Failed to load a puzzle. Check your connection.",
     "correct": "✅ I am Groot!",
+    "keepGoing": "✅ I am Groot!",
     "incorrectFallback": "I am Groot? I am Groot.",
     "submitError": "Error submitting move.",
     "findBestMove": "I am Groot.",
@@ -95,6 +96,7 @@
     "solved": "I am Groot: {{count}}",
     "streak": "I am Groot: {{count}}",
     "streakBest": " · I am Groot {{best}}",
+    "moveProgress": "I am Groot {{current}} I am Groot {{total}}",
     "skipPuzzle": "I am Groot ›",
     "backToDashboard": "← I am Groot"
   },

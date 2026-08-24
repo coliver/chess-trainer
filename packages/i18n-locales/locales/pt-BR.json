@@ -86,6 +86,7 @@
     "noPuzzlesDue": "Nenhum problema pendente agora — volte mais tarde.",
     "loadFailed": "Falha ao carregar um problema. Verifique sua conexão.",
     "correct": "✅ Correto!",
+    "keepGoing": "✅ Vamos continuar…",
     "incorrectFallback": "Não foi dessa vez — tente de novo.",
     "submitError": "Erro ao enviar o lance.",
     "findBestMove": "Encontre o melhor lance.",
@@ -95,6 +96,7 @@
     "solved": "Resolvidos: {{count}}",
     "streak": "Sequência: {{count}}",
     "streakBest": " · melhor {{best}}",
+    "moveProgress": "Lance {{current}} de {{total}}",
     "skipPuzzle": "Pular problema ›",
     "backToDashboard": "← Voltar ao painel"
   },

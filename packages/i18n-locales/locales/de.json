@@ -86,6 +86,7 @@
     "noPuzzlesDue": "Aktuell sind keine Rätsel fällig — schau später wieder vorbei.",
     "loadFailed": "Rätsel konnten nicht geladen werden. Prüfe deine Verbindung.",
     "correct": "✅ Richtig!",
+    "keepGoing": "✅ Weiter so…",
     "incorrectFallback": "Nicht ganz — versuche es erneut.",
     "submitError": "Fehler beim Übermitteln des Zugs.",
     "findBestMove": "Finde den besten Zug.",
@@ -95,6 +96,7 @@
     "solved": "Gelöst: {{count}}",
     "streak": "Serie: {{count}}",
     "streakBest": " · beste {{best}}",
+    "moveProgress": "Zug {{current}} von {{total}}",
     "skipPuzzle": "Rätsel überspringen ›",
     "backToDashboard": "← Zurück zum Dashboard"
   },

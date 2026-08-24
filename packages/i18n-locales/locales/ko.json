@@ -86,6 +86,7 @@
     "noPuzzlesDue": "지금은 해결할 퍼즐이 없습니다 — 나중에 다시 확인하세요.",
     "loadFailed": "퍼즐을 불러오지 못했습니다. 연결을 확인하세요.",
     "correct": "✅ 정답!",
+    "keepGoing": "✅ 계속 진행…",
     "incorrectFallback": "아쉽네요 — 다시 시도하세요.",
     "submitError": "수 제출 중 오류가 발생했습니다.",
     "findBestMove": "최선의 수를 찾으세요.",
@@ -95,6 +96,7 @@
     "solved": "해결: {{count}}",
     "streak": "연속: {{count}}",
     "streakBest": " · 최고 {{best}}",
+    "moveProgress": "수 {{current}} / {{total}}",
     "skipPuzzle": "퍼즐 건너뛰기 ›",
     "backToDashboard": "← 대시보드로 돌아가기"
   },

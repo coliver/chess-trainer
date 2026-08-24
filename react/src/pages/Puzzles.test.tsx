@@ -69,6 +69,14 @@ const NEXT_PUZZLE = {
   themes: "fork",
   correctMoveUci: "e2e4",
   lastMoveUci: "e7e5",
+  moveIndex: 0,
+  solverMovesTotal: 1,
+};
+
+const NEXT_MULTI_MOVE_PUZZLE = {
+  ...NEXT_PUZZLE,
+  themes: "mateIn2",
+  solverMovesTotal: 2,
 };
 
 describe("Puzzles Page", () => {
@@ -110,7 +118,12 @@ describe("Puzzles Page", () => {
       data: NEXT_PUZZLE,
     });
     (api.post as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
-      data: { correct: true, reason: "", fenAfter: NEXT_PUZZLE.fen },
+      data: {
+        correct: true,
+        reason: "",
+        fenAfter: NEXT_PUZZLE.fen,
+        puzzleComplete: true,
+      },
     });
 
     renderPuzzles();
@@ -132,12 +145,69 @@ describe("Puzzles Page", () => {
     expect(mockCelebratePuzzleCorrect).toHaveBeenCalledTimes(1);
   });
 
+  it("keeps the puzzle open after a correct-but-not-final move in a multi-move puzzle", async () => {
+    (api.get as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+      data: NEXT_MULTI_MOVE_PUZZLE,
+    });
+    (api.post as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+      data: {
+        correct: true,
+        reason: "",
+        fenAfter: "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
+        puzzleComplete: false,
+        opponentReplyUci: "g1f3",
+        nextCorrectMoveUci: "b8c6",
+      },
+    });
+
+    renderPuzzles();
+    await screen.findByText("Rating ~1500");
+
+    applyMoveMock.mockReturnValueOnce({
+      nextFen: "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+      uci: "e7e5",
+    });
+
+    act(() => {
+      capturedProps.onMove?.("e7", "e5");
+    });
+
+    await screen.findByText("✅ Keep going…");
+    // Not solved yet, no celebration, and the board is left interactive for
+    // the next solver move rather than advancing to a new puzzle.
+    expect(screen.queryByText("Solved: 1")).not.toBeInTheDocument();
+    expect(mockCelebratePuzzleCorrect).not.toHaveBeenCalled();
+    expect(capturedProps.position).toBe(
+      "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
+    );
+    expect(api.get).toHaveBeenCalledTimes(1); // loadNext() was not triggered
+
+    // The second solver move is submitted with moveIndex 1.
+    applyMoveMock.mockReturnValueOnce({
+      nextFen: "r1bqkb1r/pppp1ppp/2n2n2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 4 4",
+      uci: "b8c6",
+    });
+    (api.post as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+      data: { correct: true, reason: "", fenAfter: "final-fen", puzzleComplete: true },
+    });
+
+    act(() => {
+      capturedProps.onMove?.("b8", "c6");
+    });
+
+    await screen.findByText("✅ Correct!");
+    expect(api.post).toHaveBeenLastCalledWith("/puzzles/p1/attempts", {
+      moveUci: "b8c6",
+      moveIndex: 1,
+    });
+  });
+
   it("resets streak and snaps the board back on a wrong move", async () => {
     (api.get as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
       data: NEXT_PUZZLE,
     });
     (api.post as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
-      data: { correct: false, reason: "wrong move", fenAfter: null },
+      data: { correct: false, reason: "wrong move", fenAfter: null, puzzleComplete: false },
     });
 
     renderPuzzles();

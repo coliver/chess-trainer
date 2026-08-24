@@ -86,6 +86,7 @@
     "noPuzzlesDue": "Brak zadań do tej chwili — wróć później.",
     "loadFailed": "Nie udało się wczytać zadania. Sprawdź połączenie.",
     "correct": "✅ Poprawnie!",
+    "keepGoing": "✅ Dalej tak…",
     "incorrectFallback": "Nie do końca — spróbuj jeszcze raz.",
     "submitError": "Błąd podczas wysyłania ruchu.",
     "findBestMove": "Znajdź najlepszy ruch.",
@@ -95,6 +96,7 @@
     "solved": "Rozwiązane: {{count}}",
     "streak": "Seria: {{count}}",
     "streakBest": " · najlepsza {{best}}",
+    "moveProgress": "Ruch {{current}} z {{total}}",
     "skipPuzzle": "Pomiń zadanie ›",
     "backToDashboard": "← Wróć do panelu"
   },

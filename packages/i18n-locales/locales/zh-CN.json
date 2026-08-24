@@ -86,6 +86,7 @@
     "noPuzzlesDue": "目前没有待做谜题，稍后再来吧。",
     "loadFailed": "加载谜题失败。请检查连接。",
     "correct": "✅ 正确！",
+    "keepGoing": "✅ 继续…",
     "incorrectFallback": "还不对，再试一次。",
     "submitError": "提交走子时出错。",
     "findBestMove": "找出最佳走法。",
@@ -95,6 +96,7 @@
     "solved": "已解：{{count}}",
     "streak": "连胜：{{count}}",
     "streakBest": " · 最佳 {{best}}",
+    "moveProgress": "第{{current}}步，共{{total}}步",
     "skipPuzzle": "跳过谜题 ›",
     "backToDashboard": "← 返回仪表盘"
   },

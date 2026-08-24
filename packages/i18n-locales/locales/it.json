@@ -86,6 +86,7 @@
     "noPuzzlesDue": "Nessun puzzle da fare in questo momento — torna più tardi.",
     "loadFailed": "Caricamento puzzle non riuscito. Controlla la connessione.",
     "correct": "✅ Giusto!",
+    "keepGoing": "✅ Continua così…",
     "incorrectFallback": "Non proprio — riprova.",
     "submitError": "Errore nell’invio della mossa.",
     "findBestMove": "Trova la mossa migliore.",
@@ -95,6 +96,7 @@
     "solved": "Risolti: {{count}}",
     "streak": "Serie: {{count}}",
     "streakBest": " · migliore {{best}}",
+    "moveProgress": "Mossa {{current}} di {{total}}",
     "skipPuzzle": "Salta puzzle ›",
     "backToDashboard": "← Torna alla dashboard"
   },

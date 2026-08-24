@@ -86,6 +86,7 @@
     "noPuzzlesDue": "Hiện không có bài tập nào — thử lại sau.",
     "loadFailed": "Không tải được bài tập. Kiểm tra kết nối của bạn.",
     "correct": "✅ Đúng rồi!",
+    "keepGoing": "✅ Tiếp tục…",
     "incorrectFallback": "Chưa đúng — thử lại nhé.",
     "submitError": "Lỗi khi gửi nước đi.",
     "findBestMove": "Tìm nước đi tốt nhất.",
@@ -95,6 +96,7 @@
     "solved": "Đã giải: {{count}}",
     "streak": "Chuỗi: {{count}}",
     "streakBest": " · tốt nhất {{best}}",
+    "moveProgress": "Nước đi {{current}} / {{total}}",
     "skipPuzzle": "Bỏ qua bài tập ›",
     "backToDashboard": "← Quay lại bảng điều khiển"
   },

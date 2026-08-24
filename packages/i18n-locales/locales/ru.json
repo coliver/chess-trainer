@@ -86,6 +86,7 @@
     "noPuzzlesDue": "Сейчас нет задач на повторение — зайдите позже.",
     "loadFailed": "Не удалось загрузить задачу. Проверьте подключение.",
     "correct": "✅ Верно!",
+    "keepGoing": "✅ Продолжайте…",
     "incorrectFallback": "Не совсем — попробуйте ещё раз.",
     "submitError": "Ошибка отправки хода.",
     "findBestMove": "Найдите лучший ход.",
@@ -95,6 +96,7 @@
     "solved": "Решено: {{count}}",
     "streak": "Серия: {{count}}",
     "streakBest": " · лучшее {{best}}",
+    "moveProgress": "Ход {{current}} из {{total}}",
     "skipPuzzle": "Пропустить задачу ›",
     "backToDashboard": "← Назад на панель"
   },

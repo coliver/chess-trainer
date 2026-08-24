@@ -86,6 +86,7 @@
     "noPuzzlesDue": "Právě teď nejsou žádné úlohy — zkuste to později.",
     "loadFailed": "Nepodařilo se načíst úlohu. Zkontrolujte připojení.",
     "correct": "✅ Správně!",
+    "keepGoing": "✅ Pokračuj…",
     "incorrectFallback": "Ne tak docela — zkuste to znovu.",
     "submitError": "Chyba při odesílání tahu.",
     "findBestMove": "Najděte nejlepší tah.",
@@ -95,6 +96,7 @@
     "solved": "Vyřešeno: {{count}}",
     "streak": "Série: {{count}}",
     "streakBest": " · nejlepší {{best}}",
+    "moveProgress": "Tah {{current}} z {{total}}",
     "skipPuzzle": "Přeskočit úlohu ›",
     "backToDashboard": "← Zpět na nástěnku"
   },

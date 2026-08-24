@@ -86,6 +86,7 @@
     "noPuzzlesDue": "No puzzles due right now — check back later.",
     "loadFailed": "Failed to load a puzzle. Check your connection.",
     "correct": "✅ Correct, matey!",
+    "keepGoing": "✅ Keep going, matey!",
     "incorrectFallback": "Not quite — try again, ye landlubber.",
     "submitError": "Error submitting move.",
     "findBestMove": "Find the best move.",
@@ -95,6 +96,7 @@
     "solved": "Solved: {{count}}",
     "streak": "Streak: {{count}}",
     "streakBest": " · best {{best}}",
+    "moveProgress": "Move {{current}} of {{total}}",
     "skipPuzzle": "Skip puzzle ›",
     "backToDashboard": "← Back to dashboard"
   },

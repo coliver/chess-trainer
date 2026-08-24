@@ -86,6 +86,7 @@
     "noPuzzlesDue": "Δεν υπάρχουν γρίφοι αυτή τη στιγμή — δοκιμάστε αργότερα.",
     "loadFailed": "Αποτυχία φόρτωσης γρίφου. Ελέγξτε τη σύνδεσή σας.",
     "correct": "✅ Σωστά!",
+    "keepGoing": "✅ Συνέχισε…",
     "incorrectFallback": "Όχι ακριβώς — δοκιμάστε ξανά.",
     "submitError": "Σφάλμα κατά την υποβολή της κίνησης.",
     "findBestMove": "Βρείτε την καλύτερη κίνηση.",
@@ -95,6 +96,7 @@
     "solved": "Λυμένα: {{count}}",
     "streak": "Σερί: {{count}}",
     "streakBest": " · καλύτερο {{best}}",
+    "moveProgress": "Κίνηση {{current}} από {{total}}",
     "skipPuzzle": "Παράλειψη γρίφου ›",
     "backToDashboard": "← Πίσω στον πίνακα"
   },

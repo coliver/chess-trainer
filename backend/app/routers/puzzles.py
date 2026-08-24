@@ -27,16 +27,22 @@ class PuzzleNextResponse(CamelModel):
     themes: str | None = None
     correct_move_uci: str  # used client-side for move validation (matches training/next)
     last_move_uci: str  # opponent's setup move that produced `fen`, for board highlighting
+    move_index: int  # 0-based index of this solver move within the puzzle's sequence
+    solver_moves_total: int  # total solver moves needed to finish the puzzle
 
 
 class PuzzleAttemptRequest(CamelModel):
     move_uci: str
+    move_index: int = 0
 
 
 class PuzzleAttemptResponse(CamelModel):
     correct: bool
     reason: str
     fen_after: str | None = None
+    puzzle_complete: bool | None = None
+    opponent_reply_uci: str | None = None
+    next_correct_move_uci: str | None = None
 
 
 class PuzzleSummaryResponse(CamelModel):
@@ -61,6 +67,8 @@ def get_puzzles_next(
         themes=puzzle.themes,
         correct_move_uci=puzzle.correct_move_uci,
         last_move_uci=puzzle.setup_move_uci,
+        move_index=puzzle.move_index,
+        solver_moves_total=puzzle.solver_moves_total,
     )
 
 
@@ -72,7 +80,11 @@ def post_puzzle_attempt(
     current_user=Depends(get_current_user),
 ):
     result = submit_puzzle_attempt(
-        db, user_id=current_user.id, puzzle_id=puzzle_id, move_uci=req.move_uci
+        db,
+        user_id=current_user.id,
+        puzzle_id=puzzle_id,
+        move_uci=req.move_uci,
+        move_index=req.move_index,
     )
     if result is None:
         raise HTTPException(status_code=404, detail="Puzzle not found")
@@ -83,6 +95,9 @@ def post_puzzle_attempt(
         correct=result.correct,
         reason=result.reason,
         fen_after=result.fen_after,
+        puzzle_complete=result.puzzle_complete,
+        opponent_reply_uci=result.opponent_reply_uci,
+        next_correct_move_uci=result.next_correct_move_uci,
     )
 
 

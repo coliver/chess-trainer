@@ -86,6 +86,7 @@
     "noPuzzlesDue": "bIQtIqmey pagh",
     "loadFailed": "bIQtIqmey tlheghlaHbe'",
     "correct": "Qap",
+    "keepGoing": "Qapla'…",
     "incorrectFallback": "Qapbe'",
     "submitError": "Qagh bIQ",
     "findBestMove": "choq move poQ",
@@ -95,6 +96,7 @@
     "solved": "taghta'",
     "streak": "ghurtaH",
     "streakBest": "ghurqu' taH",
+    "moveProgress": "move {{current}} / {{total}}",
     "skipPuzzle": "bIQtIq yIlan",
     "backToDashboard": "dashboardDaq chegh"
   },

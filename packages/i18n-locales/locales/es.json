@@ -86,6 +86,7 @@
     "noPuzzlesDue": "No hay puzzles pendientes ahora mismo — vuelve más tarde.",
     "loadFailed": "No se pudo cargar el puzzle. Verifica tu conexión.",
     "correct": "✅ ¡Correcto!",
+    "keepGoing": "✅ Sigue adelante…",
     "incorrectFallback": "No es eso — inténtalo de nuevo.",
     "submitError": "Error al enviar el movimiento.",
     "findBestMove": "Encuentra la mejor jugada.",
@@ -95,6 +96,7 @@
     "solved": "Resueltos: {{count}}",
     "streak": "Racha: {{count}}",
     "streakBest": " · mejor {{best}}",
+    "moveProgress": "Movimiento {{current}} de {{total}}",
     "skipPuzzle": "Saltar puzzle ›",
     "backToDashboard": "← Volver al panel"
   },

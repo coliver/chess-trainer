@@ -86,6 +86,7 @@
     "noPuzzlesDue": "אין חידות כרגע — נסו שוב מאוחר יותר.",
     "loadFailed": "טעינת החידה נכשלה. בדקו את החיבור.",
     "correct": "✅ נכון!",
+    "keepGoing": "✅ המשך…",
     "incorrectFallback": "לא בדיוק — נסו שוב.",
     "submitError": "שגיאה בשליחת המסע.",
     "findBestMove": "מצאו את המסע הטוב ביותר.",
@@ -95,6 +96,7 @@
     "solved": "נפתרו: {{count}}",
     "streak": "רצף: {{count}}",
     "streakBest": " · הכי טוב {{best}}",
+    "moveProgress": "מהלך {{current}} מתוך {{total}}",
     "skipPuzzle": "דילוג על חידה ›",
     "backToDashboard": "← חזרה ללוח הבקרה"
   },

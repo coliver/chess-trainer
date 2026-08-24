@@ -86,6 +86,7 @@
     "noPuzzlesDue": "今すぐ取り組める問題はありません。後でもう一度確認してください。",
     "loadFailed": "問題の読み込みに失敗しました。接続を確認してください。",
     "correct": "✅ 正解！",
+    "keepGoing": "✅ 続けましょう…",
     "incorrectFallback": "惜しいです。もう一度試してください。",
     "submitError": "手の送信中にエラーが発生しました。",
     "findBestMove": "最善手を見つけてください。",
@@ -95,6 +96,7 @@
     "solved": "解答済み: {{count}}",
     "streak": "連続正解: {{count}}",
     "streakBest": " · 最高 {{best}}",
+    "moveProgress": "第{{current}}手 / {{total}}",
     "skipPuzzle": "問題をスキップ ›",
     "backToDashboard": "← ダッシュボードに戻る"
   },

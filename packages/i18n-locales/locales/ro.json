@@ -86,6 +86,7 @@
     "noPuzzlesDue": "Nu ai puzzle-uri de rezolvat acum — încearcă mai târziu.",
     "loadFailed": "Nu s-au putut încărca puzzle-urile. Verifică conexiunea.",
     "correct": "✅ Corect!",
+    "keepGoing": "✅ Continuă…",
     "incorrectFallback": "Nu chiar — încearcă din nou.",
     "submitError": "Eroare la trimiterea mutării.",
     "findBestMove": "Găsește cea mai bună mutare.",
@@ -95,6 +96,7 @@
     "solved": "Rezolvate: {{count}}",
     "streak": "Serie: {{count}}",
     "streakBest": " · record {{best}}",
+    "moveProgress": "Mutarea {{current}} din {{total}}",
     "skipPuzzle": "Sari peste puzzle ›",
     "backToDashboard": "← Înapoi la panou"
   },

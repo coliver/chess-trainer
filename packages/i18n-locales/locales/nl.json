@@ -86,6 +86,7 @@
     "noPuzzlesDue": "Nu geen puzzels gepland — kom later terug.",
     "loadFailed": "Het laden van een puzzel is mislukt. Controleer je verbinding.",
     "correct": "✅ Correct!",
+    "keepGoing": "✅ Ga door…",
     "incorrectFallback": "Niet helemaal — probeer het opnieuw.",
     "submitError": "Fout bij het verzenden van de zet.",
     "findBestMove": "Vind de beste zet.",
@@ -95,6 +96,7 @@
     "solved": "Opgelost: {{count}}",
     "streak": "Reeks: {{count}}",
     "streakBest": " · beste {{best}}",
+    "moveProgress": "Zet {{current}} van {{total}}",
     "skipPuzzle": "Puzzel overslaan ›",
     "backToDashboard": "← Terug naar dashboard"
   },

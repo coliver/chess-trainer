@@ -86,6 +86,7 @@
     "noPuzzlesDue": "لا توجد ألغاز مستحقة الآن — عد لاحقًا.",
     "loadFailed": "فشل تحميل اللغز. تحقق من اتصالك.",
     "correct": "✅ صحيح!",
+    "keepGoing": "✅ استمر…",
     "incorrectFallback": "ليس تمامًا — حاول مرة أخرى.",
     "submitError": "حدث خطأ أثناء إرسال النقلة.",
     "findBestMove": "اعثر على أفضل نقلة.",
@@ -95,6 +96,7 @@
     "solved": "تم الحل: {{count}}",
     "streak": "السلسلة: {{count}}",
     "streakBest": " · الأفضل {{best}}",
+    "moveProgress": "الحركة {{current}} من {{total}}",
     "skipPuzzle": "تخطي اللغز ›",
     "backToDashboard": "← العودة إلى لوحة التحكم"
   },

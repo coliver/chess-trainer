@@ -86,6 +86,7 @@
     "noPuzzlesDue": "Momentálne nie sú žiadne úlohy — skúste neskôr.",
     "loadFailed": "Nepodarilo sa načítať úlohy. Skontrolujte pripojenie.",
     "correct": "✅ Správne!",
+    "keepGoing": "✅ Pokračujte…",
     "incorrectFallback": "Nie celkom — skúste znova.",
     "submitError": "Chyba pri odosielaní ťahu.",
     "findBestMove": "Nájdite najlepší ťah.",
@@ -95,6 +96,7 @@
     "solved": "Vyriešené: {{count}}",
     "streak": "Séria: {{count}}",
     "streakBest": " · najlepšia {{best}}",
+    "moveProgress": "Ťah {{current}} z {{total}}",
     "skipPuzzle": "Preskočiť úlohu ›",
     "backToDashboard": "← Späť na nástenku"
   },

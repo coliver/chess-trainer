@@ -86,6 +86,7 @@
     "noPuzzlesDue": "Inga pussel att göra just nu — försök igen senare.",
     "loadFailed": "Det gick inte att ladda pusslen. Kontrollera din anslutning.",
     "correct": "✅ Rätt!",
+    "keepGoing": "✅ Fortsätt…",
     "incorrectFallback": "Inte riktigt — försök igen.",
     "submitError": "Fel vid skickning av drag.",
     "findBestMove": "Hitta bästa draget.",
@@ -95,6 +96,7 @@
     "solved": "Lösta: {{count}}",
     "streak": "Svit: {{count}}",
     "streakBest": " · bäst {{best}}",
+    "moveProgress": "Drag {{current}} av {{total}}",
     "skipPuzzle": "Hoppa över pussel ›",
     "backToDashboard": "← Tillbaka till översikten"
   },

@@ -19,17 +19,38 @@ class PuzzlePosition:
     setup_move_uci: str
     rating: int
     themes: str | None
+    move_index: int
+    solver_moves_total: int
 
 
-def _solve_position(puzzle: Puzzle) -> tuple[str, str, str]:
-    """Apply the opponent's setup move and return (fen_to_solve, setup_move_uci, correct_move_uci)."""
+def _solver_moves(puzzle: Puzzle) -> list[str]:
+    """Every solver-side move in the sequence: moves[1], moves[3], moves[5], ..."""
     moves = puzzle.moves.split()
     if len(moves) < 2:
         raise ValueError(f"Puzzle {puzzle.id} has too few moves to solve")
+    return moves[1::2]
+
+
+def _solve_position(puzzle: Puzzle, move_index: int) -> tuple[str, str, str]:
+    """Replay the puzzle up to solver move `move_index` (0-based).
+
+    Returns (fen_to_solve, last_move_uci, correct_move_uci) where last_move_uci is
+    whichever move (opponent setup or opponent reply) most recently landed on the
+    board, for client-side "last move" highlighting.
+    """
+    moves = puzzle.moves.split()
+    solver_moves = _solver_moves(puzzle)
+    if move_index < 0 or move_index >= len(solver_moves):
+        raise ValueError(f"Puzzle {puzzle.id} has no solver move at index {move_index}")
 
     board = chess.Board(puzzle.fen)
+    last_move_uci = moves[0]
     board.push(chess.Move.from_uci(moves[0]))
-    return board.fen(), moves[0], moves[1]
+    for uci in moves[1 : 2 * move_index + 1]:
+        board.push(chess.Move.from_uci(uci))
+        last_move_uci = uci
+
+    return board.fen(), last_move_uci, solver_moves[move_index]
 
 
 def get_next_puzzle(db: Session, user_id: int) -> PuzzlePosition | None:
@@ -57,7 +78,8 @@ def get_next_puzzle(db: Session, user_id: int) -> PuzzlePosition | None:
     if puzzle is None:
         return None
 
-    fen, setup_move_uci, correct_move_uci = _solve_position(puzzle)
+    solver_moves = _solver_moves(puzzle)
+    fen, setup_move_uci, correct_move_uci = _solve_position(puzzle, move_index=0)
     return PuzzlePosition(
         puzzle_id=puzzle.id,
         fen=fen,
@@ -65,16 +87,38 @@ def get_next_puzzle(db: Session, user_id: int) -> PuzzlePosition | None:
         setup_move_uci=setup_move_uci,
         rating=puzzle.rating,
         themes=puzzle.themes,
+        move_index=0,
+        solver_moves_total=len(solver_moves),
     )
 
 
-def submit_puzzle_attempt(db: Session, user_id: int, puzzle_id: str, move_uci: str):
+def submit_puzzle_attempt(
+    db: Session, user_id: int, puzzle_id: str, move_uci: str, move_index: int
+):
     puzzle = db.get(Puzzle, puzzle_id)
     if puzzle is None:
         return None
 
-    fen, _setup_move_uci, correct_move_uci = _solve_position(puzzle)
+    solver_moves = _solver_moves(puzzle)
+    fen, _last_move_uci, correct_move_uci = _solve_position(puzzle, move_index=move_index)
     result = validate_and_apply(fen=fen, move_uci=move_uci, expected_correct_uci=correct_move_uci)
+
+    is_final_move = move_index == len(solver_moves) - 1
+    puzzle_complete = result.correct and is_final_move
+    result.puzzle_complete = puzzle_complete
+
+    if result.correct and not is_final_move:
+        # Auto-play the opponent's reply and hand back the resulting position;
+        # SRS/attempt bookkeeping only happens once the sequence is finished
+        # (either the puzzle is fully solved or the solver gets a move wrong).
+        moves = puzzle.moves.split()
+        opponent_reply_uci = moves[2 * move_index + 2]
+        board = chess.Board(result.fen_after)
+        board.push(chess.Move.from_uci(opponent_reply_uci))
+        result.fen_after = board.fen()
+        result.opponent_reply_uci = opponent_reply_uci
+        result.next_correct_move_uci = solver_moves[move_index + 1]
+        return result
 
     row = db.execute(
         select(PuzzleProgress).where(

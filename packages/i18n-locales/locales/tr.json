@@ -86,6 +86,7 @@
     "noPuzzlesDue": "Şu an çözülmesi gereken bulmaca yok — sonra tekrar kontrol edin.",
     "loadFailed": "Bir bulmaca yüklenemedi. Bağlantınızı kontrol edin.",
     "correct": "✅ Doğru!",
+    "keepGoing": "✅ Devam et…",
     "incorrectFallback": "Tam değil — tekrar deneyin.",
     "submitError": "Hamle gönderilirken hata oluştu.",
     "findBestMove": "En iyi hamleyi bulun.",
@@ -95,6 +96,7 @@
     "solved": "Çözülen: {{count}}",
     "streak": "Seri: {{count}}",
     "streakBest": " · en iyi {{best}}",
+    "moveProgress": "Hamle {{current}} / {{total}}",
     "skipPuzzle": "Bulmacayı atla ›",
     "backToDashboard": "← Gösterge paneline dön"
   },

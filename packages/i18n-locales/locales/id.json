@@ -86,6 +86,7 @@
     "noPuzzlesDue": "Belum ada teka-teki yang harus dikerjakan sekarang — cek lagi nanti.",
     "loadFailed": "Gagal memuat teka-teki. Periksa koneksi Anda.",
     "correct": "✅ Benar!",
+    "keepGoing": "✅ Lanjutkan…",
     "incorrectFallback": "Belum tepat — coba lagi.",
     "submitError": "Terjadi kesalahan saat mengirim langkah.",
     "findBestMove": "Temukan langkah terbaik.",
@@ -95,6 +96,7 @@
     "solved": "Selesai: {{count}}",
     "streak": "Rangkaian: {{count}}",
     "streakBest": " · terbaik {{best}}",
+    "moveProgress": "Langkah {{current}} dari {{total}}",
     "skipPuzzle": "Lewati teka-teki ›",
     "backToDashboard": "← Kembali ke dasbor"
   },

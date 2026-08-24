@@ -10,6 +10,9 @@ class ValidationResult:
     reason: str
     fen_after: str | None = None
     error_message: str | None = None
+    puzzle_complete: bool | None = None
+    opponent_reply_uci: str | None = None
+    next_correct_move_uci: str | None = None
 
 
 def parse_move_uci(move_uci: str) -> chess.Move:

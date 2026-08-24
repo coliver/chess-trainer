@@ -44,6 +44,8 @@ def test_get_puzzles_next_success_maps_fields(client, monkeypatch: pytest.Monkey
         setup_move_uci: str = "e2e4"
         rating: int = 1200
         themes: str | None = "opening"
+        move_index: int = 0
+        solver_moves_total: int = 1
 
     monkeypatch.setattr(puzzles_router, "get_next_puzzle", lambda db, user_id: FakePosition())
 
@@ -56,6 +58,8 @@ def test_get_puzzles_next_success_maps_fields(client, monkeypatch: pytest.Monkey
         "themes": "opening",
         "correctMoveUci": "e7e5",
         "lastMoveUci": "e2e4",
+        "moveIndex": 0,
+        "solverMovesTotal": 1,
     }
 
 
@@ -63,7 +67,7 @@ def test_post_puzzle_attempt_404_when_puzzle_missing(client, monkeypatch: pytest
     monkeypatch.setattr(
         puzzles_router,
         "submit_puzzle_attempt",
-        lambda db, user_id, puzzle_id, move_uci: None,
+        lambda db, user_id, puzzle_id, move_uci, move_index: None,
     )
 
     r = client.post("/puzzles/missing/attempts", json={"moveUci": "e7e5"})
@@ -77,11 +81,14 @@ def test_post_puzzle_attempt_success_maps_fields(client, monkeypatch: pytest.Mon
         reason = "correct move"
         fen_after = "after-fen"
         error_message = None
+        puzzle_complete = True
+        opponent_reply_uci = None
+        next_correct_move_uci = None
 
     monkeypatch.setattr(
         puzzles_router,
         "submit_puzzle_attempt",
-        lambda db, user_id, puzzle_id, move_uci: Result(),
+        lambda db, user_id, puzzle_id, move_uci, move_index: Result(),
     )
 
     r = client.post("/puzzles/p1/attempts", json={"moveUci": "e7e5"})
@@ -90,6 +97,43 @@ def test_post_puzzle_attempt_success_maps_fields(client, monkeypatch: pytest.Mon
         "correct": True,
         "reason": "correct move",
         "fenAfter": "after-fen",
+        "puzzleComplete": True,
+        "opponentReplyUci": None,
+        "nextCorrectMoveUci": None,
+    }
+
+
+def test_post_puzzle_attempt_intermediate_move_maps_opponent_reply(
+    client, monkeypatch: pytest.MonkeyPatch
+):
+    class Result:
+        http_status = 200
+        correct = True
+        reason = "correct move"
+        fen_after = "after-fen"
+        error_message = None
+        puzzle_complete = False
+        opponent_reply_uci = "g1f3"
+        next_correct_move_uci = "b8c6"
+
+    captured = {}
+
+    def fake_submit(db, user_id, puzzle_id, move_uci, move_index):
+        captured["move_index"] = move_index
+        return Result()
+
+    monkeypatch.setattr(puzzles_router, "submit_puzzle_attempt", fake_submit)
+
+    r = client.post("/puzzles/p1/attempts", json={"moveUci": "e7e5", "moveIndex": 0})
+    assert r.status_code == 200
+    assert captured["move_index"] == 0
+    assert r.json() == {
+        "correct": True,
+        "reason": "correct move",
+        "fenAfter": "after-fen",
+        "puzzleComplete": False,
+        "opponentReplyUci": "g1f3",
+        "nextCorrectMoveUci": "b8c6",
     }
 
 

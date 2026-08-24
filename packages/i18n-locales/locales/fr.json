@@ -86,6 +86,7 @@
     "noPuzzlesDue": "Aucun puzzle à faire pour le moment — revenez plus tard.",
     "loadFailed": "Impossible de charger un puzzle. Vérifiez votre connexion.",
     "correct": "✅ Correct !",
+    "keepGoing": "✅ Continue…",
     "incorrectFallback": "Pas tout à fait — réessayez.",
     "submitError": "Erreur lors de l’envoi du coup.",
     "findBestMove": "Trouvez le meilleur coup.",
@@ -95,6 +96,7 @@
     "solved": "Résolus : {{count}}",
     "streak": "Série : {{count}}",
     "streakBest": " · meilleure {{best}}",
+    "moveProgress": "Coup {{current}} sur {{total}}",
     "skipPuzzle": "Passer le puzzle ›",
     "backToDashboard": "← Retour au tableau de bord"
   },
