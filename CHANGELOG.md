@@ -1,6 +1,10 @@
 ## 2026-08-24
 
+### Features
+- feat(backend): add step-level opening accuracy analytics — `GET /progress/step-accuracy` (per-user) and `GET /progress/step-accuracy/global` (aggregated across all trainees) report accuracy per `order_index` (ply) within each opening, ranked worst-first, with the most common wrong moves played at that step. Answers "which specific move in the sequence do trainees fail at" rather than whole-opening attempt totals, which `PositionProgress`/`/progress/weak-spots` already covered.
+
 ### Fixes
+- fix(backend): exclude opponent auto-played plies from step accuracy — the frontend auto-plays and silently submits the opponent's (always book-correct) reply as a real `TrainingResponse`, so without filtering, every opponent-side `order_index` showed ~100% accuracy and corrupted the worst-first ranking. `_is_trainee_ply` now scopes step accuracy to plies the trainee actually chose, using `order_index` parity vs. `player_color` for normal sessions (review items always count, since each is an independent due position).
 - fix(backend): a "Review" training session (`/training-sessions/from-due`, spanning due positions from openings trained as either color) always reported `player_color` as `"w"` off the session row, since `create_session_from_due` never set it. A due position that was actually the trainee's move as Black got misjudged by the frontend's opponent-autoplay effect (`Training.tsx`) as "not the player's turn," which auto-played the trainee's own correct move for them. Fixed by deriving `player_color` per review item from `side_to_move(item.fen)` in `GET /training-sessions/{id}/next`, since each due item is by construction the trainee's own move to solve; non-review (single-opening) sessions are unaffected and keep using the session's fixed `player_color`.
 
 ### Tests

@@ -142,6 +142,8 @@ Progress routes provide spaced-repetition tracking and analysis of the user's tr
 | `GET` | `/progress/summary` | Return overall training statistics: positions seen, overall accuracy, number mastered, per-opening breakdown, current and longest streak |
 | `GET` | `/progress/due` | Return list of positions the user should review soon (spaced-repetition due items) with FEN, correct move, opening info, and due timestamp |
 | `GET` | `/progress/weak-spots` | Return list of positions the user struggles with (low accuracy) with attempt counts and success/failure breakdown |
+| `GET` | `/progress/step-accuracy` | Return per-ply accuracy within each opening's move sequence for this user (`order_index`, accuracy, most common wrong moves), worst-first — identifies which specific step trainees fail, not just whole-opening totals |
+| `GET` | `/progress/step-accuracy/global` | Same as above, aggregated across all trainees |
 
 ## Puzzles Endpoints
 
