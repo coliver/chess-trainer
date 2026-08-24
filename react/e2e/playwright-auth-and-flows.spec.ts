@@ -68,6 +68,26 @@ test.describe("Auth & flows coverage", () => {
       });
     });
 
+    await page.route("**/api/progress/step-accuracy", async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify([]),
+      });
+    });
+
+    await page.route("**/api/puzzles/summary", async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          puzzlesSeen: 0,
+          overallAccuracy: 0,
+          mastered: 0,
+        }),
+      });
+    });
+
     await page.goto(`${baseURL}/dashboard`, {
       waitUntil: "domcontentloaded",
     });
@@ -340,6 +360,13 @@ test.describe("Auth & flows coverage", () => {
       });
     });
     await page.route("**/api/progress/weak-spots", async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify([]),
+      });
+    });
+    await page.route("**/api/progress/step-accuracy", async (route) => {
       await route.fulfill({
         status: 200,
         contentType: "application/json",

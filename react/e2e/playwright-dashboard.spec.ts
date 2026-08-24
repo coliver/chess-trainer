@@ -172,6 +172,13 @@ test.describe("Dashboard screenshots (breakpoints × theme)", () => {
             }),
           });
         });
+        await page.route("**/api/progress/step-accuracy", async (route) => {
+          await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify([]),
+          });
+        });
 
         await page.goto(`${baseURL}/dashboard`, {
           waitUntil: "domcontentloaded",
