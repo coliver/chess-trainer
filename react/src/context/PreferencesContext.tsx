@@ -13,6 +13,7 @@ import { setSoundsEnabled } from "../utils/sound";
 import {
   DEFAULT_PREFERENCES,
   readLocalPreferences,
+  resolveTheme,
   writeLocalPreferences,
   type Preferences,
 } from "../preferences";
@@ -65,6 +66,12 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     setSoundsEnabled(preferences.sound);
   }, [preferences.sound]);
+
+  // Apply the resolved theme to the document root on every load, not just
+  // when the theme toggle happens to be mounted (e.g. inside a closed drawer).
+  useEffect(() => {
+    document.documentElement.dataset.theme = resolveTheme(preferences.theme);
+  }, [preferences.theme]);
 
   const update = useCallback(
     (partial: Partial<Preferences>) => {

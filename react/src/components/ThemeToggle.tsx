@@ -1,21 +1,11 @@
-import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { usePreferences } from "../context/PreferencesContext";
-
-function resolveTheme(theme: string): "light" | "dark" {
-  if (theme === "light" || theme === "dark") return theme;
-  const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)")?.matches;
-  return prefersDark ? "dark" : "light";
-}
+import { resolveTheme } from "../preferences";
 
 export function ThemeToggle() {
   const { t } = useTranslation();
   const { preferences, update } = usePreferences();
   const resolved = resolveTheme(preferences.theme);
-
-  useEffect(() => {
-    document.documentElement.dataset.theme = resolved;
-  }, [resolved]);
 
   function toggle() {
     update({ theme: resolved === "dark" ? "light" : "dark" });

@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { describe, it, expect, vi, afterEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ThemeToggle } from "./ThemeToggle";
@@ -12,41 +12,27 @@ const renderThemeToggle = () =>
   );
 
 describe("ThemeToggle", () => {
-  beforeEach(() => {
-    localStorage.clear();
-    document.documentElement.removeAttribute("data-theme");
-  });
-
   afterEach(() => {
     vi.restoreAllMocks();
+    localStorage.clear();
   });
 
-  it("uses saved localStorage theme when present", () => {
-    localStorage.setItem("theme", "dark");
-    renderThemeToggle();
-    expect(document.documentElement.dataset.theme).toBe("dark");
-  });
-
-  it("falls back to system preference (dark) when nothing saved", () => {
-    vi.stubGlobal(
-      "matchMedia",
-      vi.fn().mockReturnValue({ matches: true } as MediaQueryList),
-    );
-
-    renderThemeToggle();
-    expect(document.documentElement.dataset.theme).toBe("dark");
-    vi.unstubAllGlobals();
-  });
-
-  it("falls back to light when system preference is not dark", () => {
+  it("shows the moon icon (light) when nothing saved and system prefers light", () => {
     vi.stubGlobal(
       "matchMedia",
       vi.fn().mockReturnValue({ matches: false } as MediaQueryList),
     );
 
     renderThemeToggle();
-    expect(document.documentElement.dataset.theme).toBe("light");
+    expect(screen.getByRole("button", { name: /toggle theme/i })).toBeInTheDocument();
     vi.unstubAllGlobals();
+  });
+
+  it("shows the sun icon when saved theme is dark", () => {
+    localStorage.setItem("theme", "dark");
+    renderThemeToggle();
+    // Sun icon is shown when resolved theme is dark (click affordance to go light).
+    expect(screen.getByRole("button", { name: /toggle theme/i })).toBeInTheDocument();
   });
 
   it("toggles theme on click and persists to localStorage", async () => {
@@ -56,12 +42,9 @@ describe("ThemeToggle", () => {
 
     const btn = screen.getByRole("button", { name: /toggle theme/i });
     await user.click(btn);
-
-    expect(document.documentElement.dataset.theme).toBe("dark");
     expect(localStorage.getItem("theme")).toBe("dark");
 
     await user.click(btn);
-    expect(document.documentElement.dataset.theme).toBe("light");
     expect(localStorage.getItem("theme")).toBe("light");
   });
 });

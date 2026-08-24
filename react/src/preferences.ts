@@ -64,3 +64,10 @@ export function writeLocalPreferences(partial: Partial<Preferences>) {
     localStorage.setItem(STORAGE_KEYS[key], String(value));
   }
 }
+
+/** Resolves a theme preference to the concrete light/dark value to apply. */
+export function resolveTheme(theme: Theme | string): "light" | "dark" {
+  if (theme === "light" || theme === "dark") return theme;
+  const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)")?.matches;
+  return prefersDark ? "dark" : "light";
+}
