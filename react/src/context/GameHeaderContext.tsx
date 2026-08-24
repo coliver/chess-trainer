@@ -33,6 +33,7 @@ export function GameHeaderProvider({ children }: { children: ReactNode }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components -- context + hook colocation is the standard pattern
 export function useGameHeader() {
   return useContext(GameHeaderContext);
 }
