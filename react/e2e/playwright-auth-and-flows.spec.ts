@@ -83,7 +83,8 @@ test.describe("Auth & flows coverage", () => {
       });
     });
 
-    // Click logout button
+    // Open the mobile header's overflow drawer, then click logout
+    await page.getByRole("button", { name: "Menu" }).click();
     await page.getByRole("button", { name: /logout/i }).click();
 
     await expect(page).toHaveURL(/\/login/, { timeout: 15000 });
