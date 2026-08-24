@@ -872,6 +872,27 @@ def test_create_session_from_due_no_due_rows_raises_404(monkeypatch):
     assert exc.value.detail == "No positions due for review"
 
 
+# ---------------- side_to_move tests ----------------
+
+
+@pytest.mark.parametrize(
+    "fen, expected",
+    [
+        ("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", "w"),
+        (
+            "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1",
+            "b",
+        ),
+    ],
+)
+def test_side_to_move_reads_second_fen_field(fen: str, expected: str):
+    assert service.side_to_move(fen) == expected
+
+
+def test_side_to_move_defaults_to_white_on_malformed_fen():
+    assert service.side_to_move("not-a-fen") == "w"
+
+
 def test_create_training_session_dataset_mismatch_hits_500(monkeypatch):
     opening = SimpleNamespace(
         eco="A00",

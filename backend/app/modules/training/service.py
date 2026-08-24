@@ -23,6 +23,12 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
+def side_to_move(fen: str) -> str:
+    """ "w" or "b" — the side to move, read directly off a FEN's 2nd field."""
+    parts = fen.split()
+    return "b" if len(parts) > 1 and parts[1] == "b" else "w"
+
+
 @dataclass
 class SubmitResult:
     http_status: int

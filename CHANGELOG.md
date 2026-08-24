@@ -1,3 +1,12 @@
+## 2026-08-24
+
+### Fixes
+- fix(backend): a "Review" training session (`/training-sessions/from-due`, spanning due positions from openings trained as either color) always reported `player_color` as `"w"` off the session row, since `create_session_from_due` never set it. A due position that was actually the trainee's move as Black got misjudged by the frontend's opponent-autoplay effect (`Training.tsx`) as "not the player's turn," which auto-played the trainee's own correct move for them. Fixed by deriving `player_color` per review item from `side_to_move(item.fen)` in `GET /training-sessions/{id}/next`, since each due item is by construction the trainee's own move to solve; non-review (single-opening) sessions are unaffected and keep using the session's fixed `player_color`.
+
+### Tests
+- test(react): add `Training.autoplay.integration.test.tsx` — integration coverage using the real `useTrainingSession` hook and real chess-core move logic (not mocked, unlike `Training.test.tsx`) to lock down the review-session autoplay fix above for both a White-to-move and a Black-to-move due item
+- test(backend): cover `side_to_move` and the `/next` endpoint's per-item `player_color` derivation for review vs. non-review items
+
 ## 2026-08-23
 
 ### Features

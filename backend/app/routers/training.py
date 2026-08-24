@@ -22,6 +22,7 @@ from backend.app.modules.training.service import (
     create_training_items,
     create_training_session,
     get_current_training_item,
+    side_to_move,
     submit_training_response,
 )
 from backend.app.routers.auth import get_current_user
@@ -119,6 +120,17 @@ def get_training_next(
     if item is None:
         raise HTTPException(status_code=404, detail="No current training item")
 
+    # Review items (item.opening_eco/opening_name set — see
+    # create_session_from_due) are seeded one-per-due-position from sessions
+    # that could have been played as either color, so the session's own
+    # player_color (always "w" for a review session) doesn't reliably say
+    # whose move it is. Each due position IS the trainee's move to solve by
+    # definition, so derive player_color from the position itself instead —
+    # otherwise the frontend's opponent-autoplay logic can mistake the
+    # trainee's move for an opponent reply and play it for them.
+    is_review_item = item.opening_eco is not None or item.opening_name is not None
+    player_color = side_to_move(item.fen) if is_review_item else training_session.player_color
+
     return TrainingNextResponse(
         session_id=item.session_id,
         item_id=item.id,
@@ -128,7 +140,7 @@ def get_training_next(
         opening_eco=item.opening_eco or training_session.opening_eco,
         opening_name=item.opening_name or training_session.opening_name,
         correct_move_uci=item.correct_move_uci,
-        player_color=training_session.player_color,
+        player_color=player_color,
     )
 
 
