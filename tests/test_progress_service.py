@@ -1,5 +1,7 @@
 import datetime
 
+import pytest
+
 from backend.app.modules.progress import service
 
 
@@ -161,6 +163,116 @@ def test_create_session_from_due_404_when_nothing_due(db, test_user):
 
     with pytest.raises(HTTPException):
         training_service.create_session_from_due(db, test_user.id)
+
+
+def _seed_training_response(
+    db,
+    user_id: int,
+    order_index: int,
+    correct_move_uci: str,
+    submitted_move_uci: str,
+    is_correct: bool,
+    opening_eco: str | None = "C00",
+    opening_name: str | None = "French Defense",
+):
+    from backend.app.modules.training.models import TrainingItem, TrainingResponse, TrainingSession
+
+    session = TrainingSession(
+        status="active", user_id=user_id, opening_eco=opening_eco, opening_name=opening_name
+    )
+    db.add(session)
+    db.flush()
+
+    item = TrainingItem(
+        session_id=session.id,
+        order_index=order_index,
+        fen="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        correct_move_uci=correct_move_uci,
+    )
+    db.add(item)
+    db.flush()
+
+    db.add(
+        TrainingResponse(
+            item_id=item.id,
+            submitted_move_uci=submitted_move_uci,
+            is_correct=is_correct,
+            reason="ok" if is_correct else "wrong",
+        )
+    )
+    db.commit()
+
+
+def test_get_step_accuracy_groups_by_order_index(db, test_user):
+    # step 0 (order_index 0): mostly right; step 1: mostly wrong -> should rank worst first
+    _seed_training_response(db, test_user.id, 0, "e2e4", "e2e4", True)
+    _seed_training_response(db, test_user.id, 0, "e2e4", "e2e4", True)
+    _seed_training_response(db, test_user.id, 1, "e7e5", "e7e6", False)
+    _seed_training_response(db, test_user.id, 1, "e7e5", "e7e6", False)
+    _seed_training_response(db, test_user.id, 1, "e7e5", "e7e5", True)
+
+    steps = service.get_step_accuracy(db, test_user.id)
+
+    assert len(steps) == 2
+    worst = steps[0]
+    assert worst.order_index == 1
+    assert worst.attempts == 3
+    assert worst.correct_count == 1
+    assert worst.incorrect_count == 2
+    assert worst.accuracy == pytest.approx(1 / 3)
+    assert worst.common_wrong_moves[0].move_uci == "e7e6"
+    assert worst.common_wrong_moves[0].count == 2
+
+    best = steps[1]
+    assert best.order_index == 0
+    assert best.accuracy == 1.0
+    assert best.common_wrong_moves == []
+
+
+def test_get_step_accuracy_scoped_to_user(db, test_user):
+    from backend.app.modules.users.models import User
+    from backend.app.routers.auth import hash_password
+
+    other = User(
+        username="other2",
+        email="other2@example.com",
+        password_hash=hash_password("password123"),
+        is_active=True,
+    )
+    db.add(other)
+    db.commit()
+
+    _seed_training_response(db, other.id, 0, "e2e4", "d2d4", False)
+
+    steps = service.get_step_accuracy(db, test_user.id)
+    assert steps == []
+
+
+def test_get_global_step_accuracy_aggregates_across_users(db, test_user):
+    from backend.app.modules.users.models import User
+    from backend.app.routers.auth import hash_password
+
+    other = User(
+        username="other3",
+        email="other3@example.com",
+        password_hash=hash_password("password123"),
+        is_active=True,
+    )
+    db.add(other)
+    db.commit()
+
+    # order_index=99 is used only by this test, so it can't collide with rows
+    # left behind by other tests/dev usage sharing this DB (see
+    # project_test_db_isolation_todo memory).
+    _seed_training_response(db, test_user.id, 99, "e2e4", "d2d4", False)
+    _seed_training_response(db, other.id, 99, "e2e4", "d2d4", False)
+
+    steps = service.get_global_step_accuracy(db)
+    step99 = next(s for s in steps if s.order_index == 99)
+    assert step99.attempts == 2
+    assert step99.incorrect_count == 2
+    assert step99.common_wrong_moves[0].move_uci == "d2d4"
+    assert step99.common_wrong_moves[0].count == 2
 
 
 def test_progress_scoped_to_user(db, test_user):

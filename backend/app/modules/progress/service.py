@@ -1,12 +1,13 @@
 import dataclasses
 import datetime
 
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from backend.app.modules.progress.models import PositionProgress, UserStreak
 from backend.app.modules.progress.srs import SrsState, next_state, quality_from_correctness
 from backend.app.modules.progress.streak import next_streak
+from backend.app.modules.training.models import TrainingItem, TrainingResponse, TrainingSession
 
 
 def record_attempt(
@@ -203,3 +204,108 @@ def get_weak_spots(db: Session, user_id: int, limit: int = 20) -> list[WeakSpot]
     spots = [s for s in spots if s.correct_count < s.attempts]
     spots.sort(key=lambda s: ((s.correct_count / s.attempts), -s.attempts))
     return spots[:limit]
+
+
+@dataclasses.dataclass
+class WrongMoveCount:
+    move_uci: str
+    count: int
+
+
+@dataclasses.dataclass
+class StepAccuracy:
+    opening_eco: str | None
+    opening_name: str | None
+    order_index: int
+    correct_move_uci: str
+    attempts: int
+    correct_count: int
+    incorrect_count: int
+    accuracy: float
+    common_wrong_moves: list[WrongMoveCount]
+
+
+def _step_accuracy_query(db: Session, user_id: int | None):
+    """Row source for step accuracy: every scored response joined back to the
+    opening step (order_index) it belongs to, falling back to the parent
+    session's opening/eco when the item itself doesn't carry one (see
+    TrainingItem.opening_eco/opening_name docstring) and to the session's
+    player_color-implied opening for plain (non-review) sessions."""
+    query = (
+        select(
+            func.coalesce(TrainingItem.opening_eco, TrainingSession.opening_eco).label("eco"),
+            func.coalesce(TrainingItem.opening_name, TrainingSession.opening_name).label("name"),
+            TrainingItem.order_index,
+            TrainingItem.correct_move_uci,
+            TrainingResponse.submitted_move_uci,
+            TrainingResponse.is_correct,
+        )
+        .select_from(TrainingResponse)
+        .join(TrainingItem, TrainingResponse.item_id == TrainingItem.id)
+        .join(TrainingSession, TrainingItem.session_id == TrainingSession.id)
+    )
+    if user_id is not None:
+        query = query.where(TrainingSession.user_id == user_id)
+    return query
+
+
+def _aggregate_step_accuracy(rows, limit: int, worst_first: bool) -> list[StepAccuracy]:
+    groups: dict[tuple, dict] = {}
+    order: list[tuple] = []
+    for eco, name, order_index, correct_move_uci, submitted_move_uci, is_correct in rows:
+        key = (eco, name, order_index)
+        if key not in groups:
+            groups[key] = {
+                "correct_move_uci": correct_move_uci,
+                "attempts": 0,
+                "correct_count": 0,
+                "wrong_moves": {},
+            }
+            order.append(key)
+        bucket = groups[key]
+        bucket["attempts"] += 1
+        if is_correct:
+            bucket["correct_count"] += 1
+        else:
+            bucket["wrong_moves"][submitted_move_uci] = (
+                bucket["wrong_moves"].get(submitted_move_uci, 0) + 1
+            )
+
+    results = []
+    for eco, name, order_index in order:
+        b = groups[(eco, name, order_index)]
+        incorrect_count = b["attempts"] - b["correct_count"]
+        common_wrong = sorted(
+            (WrongMoveCount(move_uci=m, count=c) for m, c in b["wrong_moves"].items()),
+            key=lambda w: -w.count,
+        )[:5]
+        results.append(
+            StepAccuracy(
+                opening_eco=eco,
+                opening_name=name,
+                order_index=order_index,
+                correct_move_uci=b["correct_move_uci"],
+                attempts=b["attempts"],
+                correct_count=b["correct_count"],
+                incorrect_count=incorrect_count,
+                accuracy=(b["correct_count"] / b["attempts"]) if b["attempts"] else 0.0,
+                common_wrong_moves=common_wrong,
+            )
+        )
+
+    results.sort(key=lambda s: (s.accuracy, -s.attempts) if worst_first else (-s.attempts,))
+    return results[:limit]
+
+
+def get_step_accuracy(db: Session, user_id: int, limit: int = 50) -> list[StepAccuracy]:
+    """Per-user step accuracy: which ply (order_index) within each opening this
+    user fails most often, and what they tend to play instead."""
+    rows = db.execute(_step_accuracy_query(db, user_id)).all()
+    return _aggregate_step_accuracy(rows, limit=limit, worst_first=True)
+
+
+def get_global_step_accuracy(db: Session, limit: int = 50) -> list[StepAccuracy]:
+    """Cross-user step accuracy: which ply within each opening trips up
+    trainees generally, aggregated over every user's attempts."""
+    rows = db.execute(_step_accuracy_query(db, user_id=None)).all()
+    return _aggregate_step_accuracy(rows, limit=limit, worst_first=True)
