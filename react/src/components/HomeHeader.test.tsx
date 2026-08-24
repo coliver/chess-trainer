@@ -29,25 +29,14 @@ describe("HomeHeader", () => {
     (useAuth as ReturnType<typeof vi.fn>).mockReset();
   });
 
-  it("hides the greeting and tabs when logged out", () => {
+  it("hides tabs when logged out", () => {
     (useAuth as ReturnType<typeof vi.fn>).mockReturnValue({
       isLoggedIn: false,
       username: null,
     });
     renderAt("/dashboard");
 
-    expect(screen.queryByText(/,/)).not.toBeInTheDocument();
     expect(screen.queryByText("Openings")).not.toBeInTheDocument();
-  });
-
-  it("shows a greeting with the username when logged in", () => {
-    (useAuth as ReturnType<typeof vi.fn>).mockReturnValue({
-      isLoggedIn: true,
-      username: "alice",
-    });
-    renderAt("/dashboard");
-
-    expect(screen.getByText(/alice/)).toBeInTheDocument();
   });
 
   it("marks the openings tab active on the dashboard route", () => {

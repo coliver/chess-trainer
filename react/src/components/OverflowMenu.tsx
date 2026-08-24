@@ -1,7 +1,8 @@
 // react/src/components/OverflowMenu.tsx
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { logout } from "../auth";
 import { useAuth } from "../hooks/useAuth";
 import { ThemeToggle } from "./ThemeToggle";
@@ -17,7 +18,8 @@ interface OverflowMenuProps {
 export function OverflowMenu({ open, onClose }: OverflowMenuProps) {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const menuRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
+  const menuRef = useRef<HTMLElement>(null);
 
   const { isLoggedIn } = useAuth();
 
@@ -28,7 +30,7 @@ export function OverflowMenu({ open, onClose }: OverflowMenuProps) {
   };
 
   const handleSettingsClick = () => {
-    navigate("/settings");
+    navigate("/settings", { state: { from: location.pathname } });
     onClose();
   };
 
@@ -55,9 +57,9 @@ export function OverflowMenu({ open, onClose }: OverflowMenuProps) {
 
   if (!open) return null;
 
-  return (
-    <div className="overflow-menu" ref={menuRef}>
-      <nav className="overflow-menu-items">
+  return createPortal(
+    <div className="overflow-menu" data-testid="overflow-menu-backdrop">
+      <nav className="overflow-menu-items" ref={menuRef}>
         {isLoggedIn && (
           <>
             <button
@@ -97,6 +99,7 @@ export function OverflowMenu({ open, onClose }: OverflowMenuProps) {
           <span className="overflow-menu-version">{APP_VERSION}</span>
         </div>
       </nav>
-    </div>
+    </div>,
+    document.body,
   );
 }

@@ -36,7 +36,13 @@ function renderMenu({
   open = true,
   isLoggedIn = true,
   onClose = vi.fn(),
-}: { open?: boolean; isLoggedIn?: boolean; onClose?: () => void } = {}) {
+  initialPath = "/",
+}: {
+  open?: boolean;
+  isLoggedIn?: boolean;
+  onClose?: () => void;
+  initialPath?: string;
+} = {}) {
   (useAuth as ReturnType<typeof vi.fn>).mockReturnValue({
     isLoggedIn,
     username: "alice",
@@ -44,7 +50,7 @@ function renderMenu({
   return {
     onClose,
     ...render(
-      <MemoryRouter>
+      <MemoryRouter initialEntries={[initialPath]}>
         <OverflowMenu open={open} onClose={onClose} />
       </MemoryRouter>,
     ),
@@ -70,13 +76,15 @@ describe("OverflowMenu", () => {
     expect(screen.getByText("View source on GitHub")).toBeInTheDocument();
   });
 
-  it("navigates to settings and closes the menu", async () => {
+  it("navigates to settings with the current route so it can return, and closes the menu", async () => {
     const user = userEvent.setup();
-    const { onClose } = renderMenu();
+    const { onClose } = renderMenu({ initialPath: "/puzzles" });
 
     await user.click(screen.getByText("Settings"));
 
-    expect(mockNavigate).toHaveBeenCalledWith("/settings");
+    expect(mockNavigate).toHaveBeenCalledWith("/settings", {
+      state: { from: "/puzzles" },
+    });
     expect(onClose).toHaveBeenCalled();
   });
 
@@ -98,5 +106,23 @@ describe("OverflowMenu", () => {
     await user.click(document.body);
 
     expect(onClose).toHaveBeenCalled();
+  });
+
+  it("closes when clicking the backdrop outside the drawer panel", async () => {
+    const user = userEvent.setup();
+    const { onClose } = renderMenu();
+
+    await user.click(screen.getByTestId("overflow-menu-backdrop"));
+
+    expect(onClose).toHaveBeenCalled();
+  });
+
+  it("does not close when clicking inside the drawer panel", async () => {
+    const user = userEvent.setup();
+    const { onClose } = renderMenu();
+
+    await user.click(screen.getByText("dev"));
+
+    expect(onClose).not.toHaveBeenCalled();
   });
 });
