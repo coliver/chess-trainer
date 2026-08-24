@@ -11,6 +11,7 @@ sys.path.insert(0, str(ROOT))
 import pytest
 from sqlalchemy.orm import sessionmaker
 
+from backend.app.modules.openings.models import Opening
 from backend.app.modules.shared.db import engine, get_db
 
 
@@ -31,6 +32,23 @@ def db():
         session.close()
         trans.rollback()
         connection.close()
+
+
+@pytest.fixture(autouse=True)
+def seed_openings(db):
+    """Seed common openings required by tests."""
+    openings_to_seed = [
+        ("C00", "French Defense"),
+        ("D10", "Queen's Gambit"),
+        ("D30", "Queen's Gambit Declined"),
+        ("B20", "Sicilian Defense"),
+    ]
+    for eco, name in openings_to_seed:
+        existing = db.query(Opening).filter_by(eco=eco, name=name).first()
+        if not existing:
+            db.add(Opening(eco=eco, name=name))
+    db.commit()
+    yield
 
 
 @pytest.fixture(autouse=True)
