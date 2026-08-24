@@ -36,6 +36,9 @@
       "dayStreakBest": "Σειρά ημερών · καλύτερη {{best}}",
       "mastered": "Κατακτήθηκαν",
       "reviewDue": "Για επανάληψη ({{count}})",
+      "needsWork": "Χρειάζεται δουλειά",
+      "needsWorkByOpening": "Κατά άνοιγμα",
+      "needsWorkByMove": "Κατά κίνηση",
       "weakSpots": "Αδύναμα σημεία",
       "weakSpotItem": "{{name}} — σωστά {{correct}}/{{attempts}}",
       "weakSpotFallbackName": "Άνοιγμα",
@@ -135,15 +138,15 @@
       "emailDisclaimer": "Το ζητάμε μόνο για να κρατήσουμε τα μποτ ξεκάθαρα — δεν μας ενδιαφέρει τι είναι και δεν θα σε ενοχλήσουμε με spam.",
       "usernameLabel": "Όνομα χρήστη",
       "passwordLabel": "Κωδικός",
+      "passwordConfirmLabel": "Επιβεβαίωση κωδικού πρόσβασης",
+      "passwordMismatch": "Οι κωδικοί πρόσβασης δεν ταιριάζουν",
       "submit": "Εγγραφή",
       "submitting": "Εγγραφή...",
       "successMessage": "Η εγγραφή ήταν επιτυχής! Ελέγξτε τα εισερχόμενά σας στο <strong>{{email}}</strong> για τον σύνδεσμο επαλήθευσης πριν συνδεθείτε.",
       "returnToLogin": "Επιστροφή στη σύνδεση",
       "haveAccount": "Έχετε ήδη λογαριασμό;",
       "loginLink": "Σύνδεση",
-      "errorGeneric": "Η εγγραφή απέτυχε. Δοκιμάστε ξανά αργότερα.",
-      "passwordConfirmLabel": "Επιβεβαίωση κωδικού πρόσβασης",
-      "passwordMismatch": "Οι κωδικοί πρόσβασης δεν ταιριάζουν"
+      "errorGeneric": "Η εγγραφή απέτυχε. Δοκιμάστε ξανά αργότερα."
     },
     "verifyEmail": {
       "loadingTitle": "Επαλήθευση...",

@@ -36,6 +36,9 @@
       "dayStreakBest": "Seria dni · najlepsza {{best}}",
       "mastered": "Opanowane",
       "reviewDue": "Czas na powtórkę ({{count}})",
+      "needsWork": "Wymaga ćwiczeń",
+      "needsWorkByOpening": "Wg debiutu",
+      "needsWorkByMove": "Wg ruchu",
       "weakSpots": "Słabe punkty",
       "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} poprawnych",
       "weakSpotFallbackName": "Debiut",
@@ -135,15 +138,15 @@
       "emailDisclaimer": "Pytamy o to tylko aby trzymać boty z dala — nie obchodzi nas co to jest i nie wyślemy ci spamu.",
       "usernameLabel": "Nazwa użytkownika",
       "passwordLabel": "Hasło",
+      "passwordConfirmLabel": "Potwierdź hasło",
+      "passwordMismatch": "Hasła się nie zgadzają",
       "submit": "Zarejestruj się",
       "submitting": "Rejestrowanie…",
       "successMessage": "Rejestracja zakończona powodzeniem! Sprawdź swoją skrzynkę przy <strong>{{email}}</strong> w poszukiwaniu linku weryfikacyjnego przed zalogowaniem.",
       "returnToLogin": "Wróć do logowania",
       "haveAccount": "Masz już konto?",
       "loginLink": "Zaloguj się",
-      "errorGeneric": "Nie udało się zarejestrować. Spróbuj ponownie później.",
-      "passwordConfirmLabel": "Potwierdź hasło",
-      "passwordMismatch": "Hasła się nie zgadzają"
+      "errorGeneric": "Nie udało się zarejestrować. Spróbuj ponownie później."
     },
     "verifyEmail": {
       "loadingTitle": "Weryfikowanie…",

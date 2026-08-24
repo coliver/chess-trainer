@@ -36,6 +36,9 @@
       "dayStreakBest": "Daglig strækning · bedst {{best}}",
       "mastered": "Mestret",
       "reviewDue": "Til gennemgang ({{count}})",
+      "needsWork": "Behov for arbejde",
+      "needsWorkByOpening": "Efter åbning",
+      "needsWorkByMove": "Efter træk",
       "weakSpots": "Svage punkter",
       "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} korrekte",
       "weakSpotFallbackName": "Åbning",
@@ -135,15 +138,15 @@
       "emailDisclaimer": "Vi spørger kun om dette for at holde bots ude — vi er ligeglad med hvad det er og sender dig ikke spam.",
       "usernameLabel": "Brugernavn",
       "passwordLabel": "Adgangskode",
+      "passwordConfirmLabel": "Bekræft adgangskode",
+      "passwordMismatch": "Adgangskoderne stemmer ikke overens",
       "submit": "Registrer",
       "submitting": "Registrerer...",
       "successMessage": "Registrering var vellykket! Tjek din indbakke på <strong>{{email}}</strong> for et bekræftelseslink før du logger ind.",
       "returnToLogin": "Tilbage til login",
       "haveAccount": "Har du allerede en konto?",
       "loginLink": "Log ind",
-      "errorGeneric": "Kunne ikke registrere dig. Prøv igen senere.",
-      "passwordConfirmLabel": "Bekræft adgangskode",
-      "passwordMismatch": "Adgangskoderne stemmer ikke overens"
+      "errorGeneric": "Kunne ikke registrere dig. Prøv igen senere."
     },
     "verifyEmail": {
       "loadingTitle": "Bekræfter...",

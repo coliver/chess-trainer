@@ -36,6 +36,9 @@
       "dayStreakBest": "Zile consecutive · record {{best}}",
       "mastered": "Stăpânite",
       "reviewDue": "De revizuit ({{count}})",
+      "needsWork": "Necesită practică",
+      "needsWorkByOpening": "După deschidere",
+      "needsWorkByMove": "După mutare",
       "weakSpots": "Puncte slabe",
       "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} corecte",
       "weakSpotFallbackName": "Deschidere",
@@ -135,15 +138,15 @@
       "emailDisclaimer": "Cerem doar pentru a ține boții departe — nu ne pasă ce este și nu îți vom trimite spam.",
       "usernameLabel": "Nume utilizator",
       "passwordLabel": "Parolă",
+      "passwordConfirmLabel": "Confirmați parola",
+      "passwordMismatch": "Parolele nu se potrivesc",
       "submit": "Înregistrează-te",
       "submitting": "Se înregistrează...",
       "successMessage": "Înregistrare reușită! Verifică inboxul la <strong>{{email}}</strong> pentru linkul de confirmare înainte de autentificare.",
       "returnToLogin": "Înapoi la autentificare",
       "haveAccount": "Ai deja un cont?",
       "loginLink": "Autentificare",
-      "errorGeneric": "Nu s-a putut face înregistrarea. Încearcă din nou mai târziu.",
-      "passwordConfirmLabel": "Confirmați parola",
-      "passwordMismatch": "Parolele nu se potrivesc"
+      "errorGeneric": "Nu s-a putut face înregistrarea. Încearcă din nou mai târziu."
     },
     "verifyEmail": {
       "loadingTitle": "Se confirmă...",

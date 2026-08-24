@@ -36,6 +36,9 @@
       "dayStreakBest": "Daglig svit · bäst {{best}}",
       "mastered": "Bemästrade",
       "reviewDue": "Att repetera ({{count}})",
+      "needsWork": "Behöver träning",
+      "needsWorkByOpening": "Per öppning",
+      "needsWorkByMove": "Per drag",
       "weakSpots": "Svaga punkter",
       "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} rätt",
       "weakSpotFallbackName": "Öppning",
@@ -135,15 +138,15 @@
       "emailDisclaimer": "Vi frågar bara om detta för att hålla bots borta — vi bryr oss inte om vad det är och vi skickar dig inte spam.",
       "usernameLabel": "Användarnamn",
       "passwordLabel": "Lösenord",
+      "passwordConfirmLabel": "Bekräfta lösenord",
+      "passwordMismatch": "Lösenorden matchar inte",
       "submit": "Registrera",
       "submitting": "Registrerar...",
       "successMessage": "Registreringen lyckades! Kolla inkorgen för <strong>{{email}}</strong> efter en bekräftelselänk innan du loggar in.",
       "returnToLogin": "Tillbaka till inloggning",
       "haveAccount": "Har du redan ett konto?",
       "loginLink": "Logga in",
-      "errorGeneric": "Det gick inte att registrera. Försök igen senare.",
-      "passwordConfirmLabel": "Bekräfta lösenord",
-      "passwordMismatch": "Lösenorden matchar inte"
+      "errorGeneric": "Det gick inte att registrera. Försök igen senare."
     },
     "verifyEmail": {
       "loadingTitle": "Bekräftar...",

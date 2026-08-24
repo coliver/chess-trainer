@@ -36,6 +36,9 @@
       "dayStreakBest": "Chuỗi ngày · tốt nhất {{best}}",
       "mastered": "Đã thành thạo",
       "reviewDue": "Cần ôn lại ({{count}})",
+      "needsWork": "Cần luyện tập",
+      "needsWorkByOpening": "Theo khai cuộc",
+      "needsWorkByMove": "Theo nước đi",
       "weakSpots": "Điểm yếu",
       "weakSpotItem": "{{name}} — đúng {{correct}}/{{attempts}}",
       "weakSpotFallbackName": "Khai cuộc",
@@ -135,15 +138,15 @@
       "emailDisclaimer": "Chúng tôi chỉ yêu cầu điều này để giữ các bot ở ngoài — chúng tôi không quan tâm nó là gì và chúng tôi sẽ không gửi spam cho bạn.",
       "usernameLabel": "Tên người dùng",
       "passwordLabel": "Mật khẩu",
+      "passwordConfirmLabel": "Xác nhận mật khẩu",
+      "passwordMismatch": "Mật khẩu không khớp",
       "submit": "Đăng ký",
       "submitting": "Đang đăng ký...",
       "successMessage": "Đăng ký thành công! Hãy kiểm tra hộp thư đến tại <strong>{{email}}</strong> để nhận liên kết xác minh trước khi đăng nhập.",
       "returnToLogin": "Quay lại đăng nhập",
       "haveAccount": "Đã có tài khoản?",
       "loginLink": "Đăng nhập",
-      "errorGeneric": "Không thể đăng ký. Vui lòng thử lại sau.",
-      "passwordConfirmLabel": "Xác nhận mật khẩu",
-      "passwordMismatch": "Mật khẩu không khớp"
+      "errorGeneric": "Không thể đăng ký. Vui lòng thử lại sau."
     },
     "verifyEmail": {
       "loadingTitle": "Đang xác minh...",

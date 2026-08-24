@@ -36,6 +36,9 @@
       "dayStreakBest": "Daglig rekke · best {{best}}",
       "mastered": "Mestret",
       "reviewDue": "Gjennomgang påkrevd ({{count}})",
+      "needsWork": "Trenger øving",
+      "needsWorkByOpening": "Etter åpning",
+      "needsWorkByMove": "Etter trekk",
       "weakSpots": "Svake punkter",
       "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} riktig",
       "weakSpotFallbackName": "Åpning",
@@ -135,15 +138,15 @@
       "emailDisclaimer": "Vi spør bare om dette for å holde bots ute — vi bryr oss ikke om hva det er og vi sender deg ikke spam.",
       "usernameLabel": "Brukernavn",
       "passwordLabel": "Passord",
+      "passwordConfirmLabel": "Bekreft passord",
+      "passwordMismatch": "Passordene samsvarer ikke",
       "submit": "Registrer",
       "submitting": "Registrerer...",
       "successMessage": "Registreringen var vellykket! Sjekk innboksen din på <strong>{{email}}</strong> for en bekreftelseslenke før du logger inn.",
       "returnToLogin": "Tilbake til innlogging",
       "haveAccount": "Har du allerede en konto?",
       "loginLink": "Logg inn",
-      "errorGeneric": "Kunne ikke registrere. Prøv igjen senere.",
-      "passwordConfirmLabel": "Bekreft passord",
-      "passwordMismatch": "Passordene samsvarer ikke"
+      "errorGeneric": "Kunne ikke registrere. Prøv igjen senere."
     },
     "verifyEmail": {
       "loadingTitle": "Bekrefter...",

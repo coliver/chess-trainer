@@ -36,6 +36,9 @@
       "dayStreakBest": "Серия дней · лучшее {{best}}",
       "mastered": "Освоено",
       "reviewDue": "Нужно повторение ({{count}})",
+      "needsWork": "Требует работы",
+      "needsWorkByOpening": "По дебютам",
+      "needsWorkByMove": "По ходам",
       "weakSpots": "Слабые места",
       "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} правильных",
       "weakSpotFallbackName": "Дебют",
@@ -135,15 +138,15 @@
       "emailDisclaimer": "Мы просим это только для того чтобы держать ботов подальше — нам без разницы что это и мы не будем вам отправлять спам.",
       "usernameLabel": "Имя пользователя",
       "passwordLabel": "Пароль",
+      "passwordConfirmLabel": "Подтвердите пароль",
+      "passwordMismatch": "Пароли не совпадают",
       "submit": "Зарегистрироваться",
       "submitting": "Регистрация…",
       "successMessage": "Регистрация выполнена! Перед входом проверьте свою почту в <strong>{{email}}</strong> на наличие ссылки для подтверждения.",
       "returnToLogin": "Вернуться ко входу",
       "haveAccount": "Уже есть аккаунт?",
       "loginLink": "Войти",
-      "errorGeneric": "Не удалось зарегистрироваться. Попробуйте ещё раз позже.",
-      "passwordConfirmLabel": "Подтвердите пароль",
-      "passwordMismatch": "Пароли не совпадают"
+      "errorGeneric": "Не удалось зарегистрироваться. Попробуйте ещё раз позже."
     },
     "verifyEmail": {
       "loadingTitle": "Проверка…",

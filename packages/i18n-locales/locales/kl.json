@@ -36,6 +36,9 @@
       "dayStreakBest": "ghurqu' jajmey",
       "mastered": "qawta'",
       "reviewDue": "qaStaHvIS yI'el",
+      "needsWork": "Needs work",
+      "needsWorkByOpening": "By opening",
+      "needsWorkByMove": "By move",
       "weakSpots": "lughbe' je",
       "weakSpotItem": "{{name}}",
       "weakSpotFallbackName": "lughbe'",
@@ -135,15 +138,15 @@
       "emailDisclaimer": "bIQtIqmey pa'DaQ yIghol — qapla' ruch pagh — spam laH neH pagh.",
       "usernameLabel": "Haj",
       "passwordLabel": "not",
+      "passwordConfirmLabel": "qapla' password",
+      "passwordMismatch": "passwords not honor",
       "submit": "chel",
       "submitting": "cheltaH...",
       "successMessage": "cheltaH! <strong>{{email}}</strong> je, verification link yI'angmeH inboxlIj yIloS, bI'elpa'.",
       "returnToLogin": "yI'elDaq yIchegh",
       "haveAccount": "pagh yIghaj?",
       "loginLink": "yI'el",
-      "errorGeneric": "chelmeH Qagh. tugh yIloS 'ej yItlhobqa'.",
-      "passwordConfirmLabel": "qapla' password",
-      "passwordMismatch": "passwords not honor"
+      "errorGeneric": "chelmeH Qagh. tugh yIloS 'ej yItlhobqa'."
     },
     "verifyEmail": {
       "loadingTitle": "yI'angtaH...",

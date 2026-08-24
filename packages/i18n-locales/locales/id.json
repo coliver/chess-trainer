@@ -36,6 +36,9 @@
       "dayStreakBest": "Rangkaian hari · terbaik {{best}}",
       "mastered": "Dikuasai",
       "reviewDue": "Tinjau ulang ({{count}})",
+      "needsWork": "Perlu diperbaiki",
+      "needsWorkByOpening": "Berdasarkan pembukaan",
+      "needsWorkByMove": "Berdasarkan langkah",
       "weakSpots": "Bagian lemah",
       "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} benar",
       "weakSpotFallbackName": "Pembukaan",
@@ -135,15 +138,15 @@
       "emailDisclaimer": "Kami hanya meminta ini untuk menjaga agar bot tetap jauh — kami tidak peduli apa itu dan kami tidak akan mengirimkan spam kepada Anda.",
       "usernameLabel": "Nama pengguna",
       "passwordLabel": "Kata sandi",
+      "passwordConfirmLabel": "Konfirmasi sandi",
+      "passwordMismatch": "Sandi tidak cocok",
       "submit": "Daftar",
       "submitting": "Mendaftar...",
       "successMessage": "Pendaftaran berhasil! Periksa kotak masuk Anda di <strong>{{email}}</strong> untuk tautan verifikasi sebelum masuk.",
       "returnToLogin": "Kembali ke login",
       "haveAccount": "Sudah punya akun?",
       "loginLink": "Masuk",
-      "errorGeneric": "Gagal mendaftar. Silakan coba lagi nanti.",
-      "passwordConfirmLabel": "Konfirmasi sandi",
-      "passwordMismatch": "Sandi tidak cocok"
+      "errorGeneric": "Gagal mendaftar. Silakan coba lagi nanti."
     },
     "verifyEmail": {
       "loadingTitle": "Memverifikasi...",

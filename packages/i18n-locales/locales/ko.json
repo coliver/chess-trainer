@@ -36,6 +36,9 @@
       "dayStreakBest": "연속 일수 · 최고 {{best}}",
       "mastered": "숙달됨",
       "reviewDue": "복습 필요 ({{count}})",
+      "needsWork": "개선 필요",
+      "needsWorkByOpening": "오프닝별",
+      "needsWorkByMove": "수별",
       "weakSpots": "약한 부분",
       "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} 정답",
       "weakSpotFallbackName": "오프닝",
@@ -135,15 +138,15 @@
       "emailDisclaimer": "봇을 막기 위해서만 요청합니다 — 그게 뭐든 상관없고 스팸을 보내지 않습니다.",
       "usernameLabel": "사용자 이름",
       "passwordLabel": "비밀번호",
+      "passwordConfirmLabel": "비밀번호 확인",
+      "passwordMismatch": "비밀번호가 일치하지 않습니다",
       "submit": "회원가입",
       "submitting": "등록 중...",
       "successMessage": "회원가입이 완료되었습니다! 로그인하기 전에 <strong>{{email}}</strong> 받은편지함에서 인증 링크를 확인하세요.",
       "returnToLogin": "로그인으로 돌아가기",
       "haveAccount": "이미 계정이 있으신가요?",
       "loginLink": "로그인",
-      "errorGeneric": "회원가입에 실패했습니다. 나중에 다시 시도하세요.",
-      "passwordConfirmLabel": "비밀번호 확인",
-      "passwordMismatch": "비밀번호가 일치하지 않습니다"
+      "errorGeneric": "회원가입에 실패했습니다. 나중에 다시 시도하세요."
     },
     "verifyEmail": {
       "loadingTitle": "인증 중...",

@@ -36,6 +36,9 @@
       "dayStreakBest": "Série de jours · meilleure {{best}}",
       "mastered": "Maîtrisées",
       "reviewDue": "À revoir ({{count}})",
+      "needsWork": "À améliorer",
+      "needsWorkByOpening": "Par ouverture",
+      "needsWorkByMove": "Par coup",
       "weakSpots": "Points faibles",
       "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} correct",
       "weakSpotFallbackName": "Ouverture",
@@ -135,15 +138,15 @@
       "emailDisclaimer": "Nous le demandons uniquement pour tenir les bots à distance — on ne regarde pas ce que c'est et nous ne vous enverront pas de spam.",
       "usernameLabel": "Nom d’utilisateur",
       "passwordLabel": "Mot de passe",
+      "passwordConfirmLabel": "Confirmer le mot de passe",
+      "passwordMismatch": "Les mots de passe ne correspondent pas",
       "submit": "Créer un compte",
       "submitting": "Inscription…",
       "successMessage": "Inscription réussie ! Vérifiez votre boîte de réception à <strong>{{email}}</strong> pour un lien de vérification avant de vous connecter.",
       "returnToLogin": "Retour à la connexion",
       "haveAccount": "Vous avez déjà un compte ?",
       "loginLink": "Connexion",
-      "errorGeneric": "Échec de l’inscription. Veuillez réessayer plus tard.",
-      "passwordConfirmLabel": "Confirmer le mot de passe",
-      "passwordMismatch": "Les mots de passe ne correspondent pas"
+      "errorGeneric": "Échec de l’inscription. Veuillez réessayer plus tard."
     },
     "verifyEmail": {
       "loadingTitle": "Vérification…",

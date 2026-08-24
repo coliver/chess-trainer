@@ -124,67 +124,77 @@
 .progress-review-btn:not(:disabled):hover {
   border-color: var(--accent, #6c8cff);
 }
-.progress-weak-spots {
+.progress-needs-work {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
   margin-top: 14px;
   padding: 10px 14px;
   border-radius: 12px;
   background: var(--code-bg);
   border: 1px solid var(--border);
 }
-.progress-weak-spots ul {
+.nw-row {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+}
+.nw-row-label {
+  flex: 0 0 auto;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text);
+  opacity: 0.65;
+}
+.nw-chips {
   margin: 0;
   padding: 0;
   list-style: none;
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.progress-weak-spots li {
-  padding: 0;
-}
-.ws-row {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-}
-.ws-name {
+  flex-wrap: wrap;
+  gap: 6px;
   flex: 1 1 auto;
+  min-width: 0;
+}
+.nw-chips li {
+  padding: 0;
+  display: flex;
+}
+.nw-chip {
+  display: inline-flex;
+  align-items: center;
+  max-width: 220px;
+  padding: 3px 6px 3px 9px;
+  border-radius: 999px;
+  color: var(--accent);
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  font-size: 12px;
+  cursor: default;
+}
+.nw-chip > span[aria-hidden] {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+}
+.nw-chip-name {
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 13px;
   color: var(--text-h);
+  font-weight: 550;
 }
-.ws-pct {
+.nw-chip-pct {
   flex: 0 0 auto;
-  font-size: 12px;
   font-weight: 700;
   color: var(--accent);
   font-variant-numeric: tabular-nums;
-}
-.ws-bar {
-  width: 100%;
-  height: 4px;
-  border-radius: 2px;
-  background: var(--border);
-  overflow: hidden;
-  margin-top: 3px;
-}
-.ws-bar-fill {
-  height: 100%;
-  background: var(--accent);
-  border-radius: 2px;
-}
-.ws-wrong-move {
-  display: block;
-  margin-top: 3px;
-  font-size: 11px;
-  color: var(--text);
-  opacity: 0.75;
+  background: var(--card-bg);
+  border-radius: 999px;
+  padding: 1px 6px;
 }
 
 /* On wide screens, put Training and Puzzles side by side as one KPI
@@ -774,12 +784,31 @@
     border-color: var(--border);
     opacity: 1;
   }
-  .progress-weak-spots {
+  .progress-needs-work {
     padding: 12px 14px;
   }
-  .progress-weak-spots .progress-stat-label {
+  .progress-needs-work > .progress-stat-label {
     font-weight: 650;
     color: var(--text-h);
+  }
+  .nw-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+  .nw-chips {
+    flex-direction: column;
+    width: 100%;
+    min-width: 0;
+  }
+  .nw-chips li {
+    width: 100%;
+    min-width: 0;
+  }
+  .nw-chip {
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
   }
 
   .ob-toolbar {

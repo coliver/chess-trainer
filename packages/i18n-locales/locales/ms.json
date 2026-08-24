@@ -36,6 +36,9 @@
       "dayStreakBest": "Siri harian · terbaik {{best}}",
       "mastered": "Dikuasai",
       "reviewDue": "Semakan perlu dibuat ({{count}})",
+      "needsWork": "Perlu diperbaiki",
+      "needsWorkByOpening": "Mengikut pembukaan",
+      "needsWorkByMove": "Mengikut langkah",
       "weakSpots": "Bahagian lemah",
       "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} betul",
       "weakSpotFallbackName": "Pembukaan",
@@ -135,15 +138,15 @@
       "emailDisclaimer": "Kami hanya meminta ini untuk menjaga agar bot tidak masuk — kami tidak peduli apa itu dan kami tidak akan menghantar spam kepada anda.",
       "usernameLabel": "Nama pengguna",
       "passwordLabel": "Kata laluan",
+      "passwordConfirmLabel": "Sahkan kata laluan",
+      "passwordMismatch": "Kata laluan tidak sepadan",
       "submit": "Daftar",
       "submitting": "Sedang mendaftar...",
       "successMessage": "Pendaftaran berjaya! Semak peti masuk anda di <strong>{{email}}</strong> untuk pautan pengesahan sebelum log masuk.",
       "returnToLogin": "Kembali ke log masuk",
       "haveAccount": "Sudah ada akaun?",
       "loginLink": "Log masuk",
-      "errorGeneric": "Gagal mendaftar. Sila cuba lagi nanti.",
-      "passwordConfirmLabel": "Sahkan kata laluan",
-      "passwordMismatch": "Kata laluan tidak sepadan"
+      "errorGeneric": "Gagal mendaftar. Sila cuba lagi nanti."
     },
     "verifyEmail": {
       "loadingTitle": "Mengesahkan...",

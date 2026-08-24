@@ -36,6 +36,9 @@
       "dayStreakBest": "连续天数 · 最佳 {{best}}",
       "mastered": "已掌握",
       "reviewDue": "待复习（{{count}}）",
+      "needsWork": "需要练习",
+      "needsWorkByOpening": "按开局",
+      "needsWorkByMove": "按走法",
       "weakSpots": "薄弱点",
       "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} 正确",
       "weakSpotFallbackName": "开局",
@@ -135,15 +138,15 @@
       "emailDisclaimer": "我们只是为了阻止机器人而要求这个——我们不在乎它是什么，也不会向你发送垃圾邮件。",
       "usernameLabel": "用户名",
       "passwordLabel": "密码",
+      "passwordConfirmLabel": "确认密码",
+      "passwordMismatch": "密码不匹配",
       "submit": "注册",
       "submitting": "注册中...",
       "successMessage": "注册成功！请查看 <strong>{{email}}</strong> 收到的验证链接，然后再登录。",
       "returnToLogin": "返回登录",
       "haveAccount": "已有账号？",
       "loginLink": "登录",
-      "errorGeneric": "注册失败，请稍后再试。",
-      "passwordConfirmLabel": "确认密码",
-      "passwordMismatch": "密码不匹配"
+      "errorGeneric": "注册失败，请稍后再试。"
     },
     "verifyEmail": {
       "loadingTitle": "验证中...",

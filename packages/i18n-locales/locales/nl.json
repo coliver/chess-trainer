@@ -36,6 +36,9 @@
       "dayStreakBest": "Dagreeks · beste {{best}}",
       "mastered": "Beheerst",
       "reviewDue": "Herziening nodig ({{count}})",
+      "needsWork": "Aandacht nodig",
+      "needsWorkByOpening": "Per opening",
+      "needsWorkByMove": "Per zet",
       "weakSpots": "Zwakke plekken",
       "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} correct",
       "weakSpotFallbackName": "Opening",
@@ -135,15 +138,15 @@
       "emailDisclaimer": "We vragen hierom alleen om bots te houden — het maakt ons niet uit wat het is en we sturen je geen spam.",
       "usernameLabel": "Gebruikersnaam",
       "passwordLabel": "Wachtwoord",
+      "passwordConfirmLabel": "Wachtwoord bevestigen",
+      "passwordMismatch": "Wachtwoorden komen niet overeen",
       "submit": "Registreren",
       "submitting": "Bezig met registreren...",
       "successMessage": "Registratie gelukt! Controleer je inbox bij <strong>{{email}}</strong> voor een verificatielink voordat je inlogt.",
       "returnToLogin": "Terug naar inloggen",
       "haveAccount": "Heb je al een account?",
       "loginLink": "Inloggen",
-      "errorGeneric": "Registreren is mislukt. Probeer het later opnieuw.",
-      "passwordConfirmLabel": "Wachtwoord bevestigen",
-      "passwordMismatch": "Wachtwoorden komen niet overeen"
+      "errorGeneric": "Registreren is mislukt. Probeer het later opnieuw."
     },
     "verifyEmail": {
       "loadingTitle": "Bezig met verifiëren...",

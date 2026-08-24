@@ -350,93 +350,96 @@ export const Dashboard = () => {
                   </button>
                 </div>
               </div>
-              {weakSpots.length > 0 && (
-                <div className="progress-weak-spots">
+              {(weakSpots.length > 0 || troubleSteps.length > 0) && (
+                <div className="progress-needs-work">
                   <span className="progress-stat-label">
-                    {t("dashboard.progress.weakSpots")}
+                    {t("dashboard.progress.needsWork")}
                   </span>
-                  <ul>
-                    {weakSpots.map((w) => {
-                      const name =
-                        w.openingName ??
-                        t("dashboard.progress.weakSpotFallbackName");
-                      const pct =
-                        w.attempts > 0
-                          ? Math.round((w.correctCount / w.attempts) * 100)
-                          : 0;
-                      return (
-                        <li
-                          key={`${w.openingName ?? "Opening"}-${w.fen ?? ""}-${w.correctMoveUci ?? ""}`}
-                        >
-                          <div className="ws-row">
-                            <span className="ws-name" title={name}>
-                              {name}
-                            </span>
-                            <span className="ws-pct">{pct}%</span>
-                          </div>
-                          <div className="ws-bar" aria-hidden="true">
-                            <div
-                              className="ws-bar-fill"
-                              style={{ width: `${pct}%` }}
-                            />
-                          </div>
-                          <span className="sr-only">
-                            {t("dashboard.progress.weakSpotItem", {
-                              name,
-                              correct: w.correctCount,
-                              attempts: w.attempts,
-                            })}
-                          </span>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              )}
-              {troubleSteps.length > 0 && (
-                <div className="progress-weak-spots">
-                  <span className="progress-stat-label">
-                    {t("dashboard.progress.troubleSpots")}
-                  </span>
-                  <ul>
-                    {troubleSteps.map((s) => {
-                      const name =
-                        s.openingName ??
-                        t("dashboard.progress.weakSpotFallbackName");
-                      const moveNumber = Math.floor(s.orderIndex / 2) + 1;
-                      const pct = Math.round(s.accuracy * 100);
-                      const topWrongMove = s.commonWrongMoves[0];
-                      return (
-                        <li
-                          key={`${s.openingName ?? "Opening"}-${s.openingEco ?? ""}-${s.orderIndex}`}
-                        >
-                          <div className="ws-row">
-                            <span className="ws-name" title={name}>
-                              {t("dashboard.progress.troubleSpotItem", {
-                                name,
-                                move: moveNumber,
-                              })}
-                            </span>
-                            <span className="ws-pct">{pct}%</span>
-                          </div>
-                          <div className="ws-bar" aria-hidden="true">
-                            <div
-                              className="ws-bar-fill"
-                              style={{ width: `${pct}%` }}
-                            />
-                          </div>
-                          {topWrongMove && (
-                            <span className="ws-wrong-move">
-                              {t("dashboard.progress.troubleSpotWrongMove", {
+                  {weakSpots.length > 0 && (
+                    <div className="nw-row">
+                      <span className="nw-row-label">
+                        {t("dashboard.progress.needsWorkByOpening")}
+                      </span>
+                      <ul className="nw-chips">
+                        {weakSpots.map((w) => {
+                          const name =
+                            w.openingName ??
+                            t("dashboard.progress.weakSpotFallbackName");
+                          const pct =
+                            w.attempts > 0
+                              ? Math.round((w.correctCount / w.attempts) * 100)
+                              : 0;
+                          const label = t("dashboard.progress.weakSpotItem", {
+                            name,
+                            correct: w.correctCount,
+                            attempts: w.attempts,
+                          });
+                          return (
+                            <li
+                              key={`${w.openingName ?? "Opening"}-${w.fen ?? ""}-${w.correctMoveUci ?? ""}`}
+                            >
+                              <span className="nw-chip" title={label}>
+                                <span aria-hidden="true">
+                                  <span className="nw-chip-name">{name}</span>
+                                  <span className="nw-chip-pct">{pct}%</span>
+                                </span>
+                                <span className="sr-only">{label}</span>
+                              </span>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  )}
+                  {troubleSteps.length > 0 && (
+                    <div className="nw-row">
+                      <span className="nw-row-label">
+                        {t("dashboard.progress.needsWorkByMove")}
+                      </span>
+                      <ul className="nw-chips">
+                        {troubleSteps.map((s) => {
+                          const name =
+                            s.openingName ??
+                            t("dashboard.progress.weakSpotFallbackName");
+                          const moveNumber = Math.floor(s.orderIndex / 2) + 1;
+                          const pct = Math.round(s.accuracy * 100);
+                          const topWrongMove = s.commonWrongMoves[0];
+                          const itemLabel = t(
+                            "dashboard.progress.troubleSpotItem",
+                            { name, move: moveNumber },
+                          );
+                          const wrongMoveLabel = topWrongMove
+                            ? t("dashboard.progress.troubleSpotWrongMove", {
                                 move: topWrongMove.moveUci,
                                 count: topWrongMove.count,
-                              })}
-                            </span>
-                          )}
-                        </li>
-                      );
-                    })}
-                  </ul>
+                              })
+                            : "";
+                          const label = wrongMoveLabel
+                            ? `${itemLabel} — ${wrongMoveLabel}`
+                            : itemLabel;
+                          return (
+                            <li
+                              key={`${s.openingName ?? "Opening"}-${s.openingEco ?? ""}-${s.orderIndex}`}
+                            >
+                              <span className="nw-chip" title={label}>
+                                <span aria-hidden="true">
+                                  <span className="nw-chip-name">
+                                    {itemLabel}
+                                  </span>
+                                  <span className="nw-chip-pct">{pct}%</span>
+                                </span>
+                                {wrongMoveLabel && (
+                                  <span className="sr-only">
+                                    {wrongMoveLabel}
+                                  </span>
+                                )}
+                              </span>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               )}
             </div>

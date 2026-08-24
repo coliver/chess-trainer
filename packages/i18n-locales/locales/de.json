@@ -36,6 +36,9 @@
       "dayStreakBest": "Tagesserie · beste {{best}}",
       "mastered": "Beherrscht",
       "reviewDue": "Wiederholung fällig ({{count}})",
+      "needsWork": "Verbesserungswürdig",
+      "needsWorkByOpening": "Nach Eröffnung",
+      "needsWorkByMove": "Nach Zug",
       "weakSpots": "Schwächen",
       "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} richtig",
       "weakSpotFallbackName": "Eröffnung",
@@ -135,15 +138,15 @@
       "emailDisclaimer": "Wir bitten Sie um diese Information nur um Bots fernzuhalten — es ist uns egal was sie ist und wir schicken dir keinen Spam.",
       "usernameLabel": "Benutzername",
       "passwordLabel": "Passwort",
+      "passwordConfirmLabel": "Passwort bestätigen",
+      "passwordMismatch": "Passwörter stimmen nicht überein",
       "submit": "Registrieren",
       "submitting": "Wird registriert...",
       "successMessage": "Registrierung erfolgreich! Prüfe deinen Posteingang unter <strong>{{email}}</strong> auf einen Verifizierungslink, bevor du dich anmeldest.",
       "returnToLogin": "Zur Anmeldung zurück",
       "haveAccount": "Schon ein Konto?",
       "loginLink": "Anmelden",
-      "errorGeneric": "Registrierung fehlgeschlagen. Bitte versuche es später erneut.",
-      "passwordConfirmLabel": "Passwort bestätigen",
-      "passwordMismatch": "Passwörter stimmen nicht überein"
+      "errorGeneric": "Registrierung fehlgeschlagen. Bitte versuche es später erneut."
     },
     "verifyEmail": {
       "loadingTitle": "Wird überprüft...",

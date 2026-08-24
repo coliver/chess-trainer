@@ -36,6 +36,9 @@
       "dayStreakBest": "Päiväputki · paras {{best}}",
       "mastered": "Hallittu",
       "reviewDue": "Kertaukseen ({{count}})",
+      "needsWork": "Tarvitsee harjoittelua",
+      "needsWorkByOpening": "Avauksen mukaan",
+      "needsWorkByMove": "Siirron mukaan",
       "weakSpots": "Heikot kohdat",
       "weakSpotItem": "{{name}} — oikein {{correct}}/{{attempts}}",
       "weakSpotFallbackName": "Avaus",
@@ -135,15 +138,15 @@
       "emailDisclaimer": "Pyydämme sitä vain bottien pitämiseksi loitolla — meille on sama mikä se on eikä lähetä sinulle roskapostia.",
       "usernameLabel": "Käyttäjänimi",
       "passwordLabel": "Salasana",
+      "passwordConfirmLabel": "Vahvista salasana",
+      "passwordMismatch": "Salasanat eivät täsmää",
       "submit": "Rekisteröidy",
       "submitting": "Rekisteröidytään...",
       "successMessage": "Rekisteröityminen onnistui! Tarkista sähköpostisi osoitteessa <strong>{{email}}</strong> ennen kirjautumista vahvistuslinkin varalta.",
       "returnToLogin": "Takaisin kirjautumiseen",
       "haveAccount": "Onko sinulla jo tili?",
       "loginLink": "Kirjaudu sisään",
-      "errorGeneric": "Rekisteröityminen epäonnistui. Yritä myöhemmin uudelleen.",
-      "passwordConfirmLabel": "Vahvista salasana",
-      "passwordMismatch": "Salasanat eivät täsmää"
+      "errorGeneric": "Rekisteröityminen epäonnistui. Yritä myöhemmin uudelleen."
     },
     "verifyEmail": {
       "loadingTitle": "Vahvistetaan...",

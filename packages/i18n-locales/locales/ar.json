@@ -36,6 +36,9 @@
       "dayStreakBest": "سلسلة الأيام · الأفضل {{best}}",
       "mastered": "تم إتقانها",
       "reviewDue": "المراجعة المستحقة ({{count}})",
+      "needsWork": "يحتاج إلى عمل",
+      "needsWorkByOpening": "حسب الافتتاح",
+      "needsWorkByMove": "حسب الحركة",
       "weakSpots": "نقاط الضعف",
       "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} صحيح",
       "weakSpotFallbackName": "افتتاحية",
@@ -135,15 +138,15 @@
       "emailDisclaimer": "نطلبها فقط لمنع الروبوتات — لا يهمنا محتواها ولن نرسل لك رسائل غير مرغوب فيها.",
       "usernameLabel": "اسم المستخدم",
       "passwordLabel": "كلمة المرور",
+      "passwordConfirmLabel": "تأكيد كلمة المرور",
+      "passwordMismatch": "كلمات المرور غير متطابقة",
       "submit": "إنشاء حساب",
       "submitting": "جارٍ إنشاء الحساب...",
       "successMessage": "تم التسجيل بنجاح! تحقق من صندوق الوارد في <strong>{{email}}</strong> للحصول على رابط التحقق قبل تسجيل الدخول.",
       "returnToLogin": "العودة إلى تسجيل الدخول",
       "haveAccount": "لديك حساب بالفعل؟",
       "loginLink": "تسجيل الدخول",
-      "errorGeneric": "فشل إنشاء الحساب. حاول مرة أخرى لاحقًا.",
-      "passwordConfirmLabel": "تأكيد كلمة المرور",
-      "passwordMismatch": "كلمات المرور غير متطابقة"
+      "errorGeneric": "فشل إنشاء الحساب. حاول مرة أخرى لاحقًا."
     },
     "verifyEmail": {
       "loadingTitle": "جارٍ التحقق...",

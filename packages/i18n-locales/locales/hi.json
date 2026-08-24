@@ -36,6 +36,9 @@
       "dayStreakBest": "दैनिक स्ट्रीक · सर्वोत्तम {{best}}",
       "mastered": "निपुण",
       "reviewDue": "दोहराव के लिए due ({{count}})",
+      "needsWork": "सुधार की जरूरत",
+      "needsWorkByOpening": "खुली से",
+      "needsWorkByMove": "चाल से",
       "weakSpots": "कमज़ोर क्षेत्र",
       "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} सही",
       "weakSpotFallbackName": "ओपनिंग",
@@ -135,15 +138,15 @@
       "emailDisclaimer": "हम इसे केवल बॉट्स को दूर रखने के लिए पूछते हैं — हमें इसकी परवाह नहीं है और हम आपको स्पैम नहीं भेजेंगे।",
       "usernameLabel": "उपयोगकर्ता नाम",
       "passwordLabel": "पासवर्ड",
+      "passwordConfirmLabel": "पासवर्ड की पुष्टि करें",
+      "passwordMismatch": "पासवर्ड मेल नहीं खाते",
       "submit": "पंजीकरण",
       "submitting": "पंजीकरण किया जा रहा है...",
       "successMessage": "पंजीकरण सफल! लॉगिन करने से पहले सत्यापन लिंक के लिए अपना इनबॉक्स <strong>{{email}}</strong> देखें।",
       "returnToLogin": "लॉगिन पर लौटें",
       "haveAccount": "पहले से खाता है?",
       "loginLink": "लॉगिन",
-      "errorGeneric": "पंजीकरण विफल। कृपया बाद में फिर से कोशिश करें।",
-      "passwordConfirmLabel": "पासवर्ड की पुष्टि करें",
-      "passwordMismatch": "पासवर्ड मेल नहीं खाते"
+      "errorGeneric": "पंजीकरण विफल। कृपया बाद में फिर से कोशिश करें।"
     },
     "verifyEmail": {
       "loadingTitle": "सत्यापित किया जा रहा है...",

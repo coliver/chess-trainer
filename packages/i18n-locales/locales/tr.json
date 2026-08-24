@@ -36,6 +36,9 @@
       "dayStreakBest": "Günlük seri · en iyi {{best}}",
       "mastered": "Ustalık",
       "reviewDue": "Gözden geçirilecek ({{count}})",
+      "needsWork": "Çalışma gerekli",
+      "needsWorkByOpening": "Açılışa göre",
+      "needsWorkByMove": "Hamleye göre",
       "weakSpots": "Zayıf noktalar",
       "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} doğru",
       "weakSpotFallbackName": "Açılış",
@@ -135,15 +138,15 @@
       "emailDisclaimer": "Bunu sadece botları uzak tutmak için istiyoruz — ne olduğu umurumuzda değil ve sana spam göndermeyiz.",
       "usernameLabel": "Kullanıcı adı",
       "passwordLabel": "Parola",
+      "passwordConfirmLabel": "Şifreyi Onayla",
+      "passwordMismatch": "Şifreler eşleşmiyor",
       "submit": "Kaydol",
       "submitting": "Kaydediliyor...",
       "successMessage": "Kayıt başarılı! Giriş yapmadan önce doğrulama bağlantısı için e-postanızı <strong>{{email}}</strong> adresinden kontrol edin.",
       "returnToLogin": "Girişe dön",
       "haveAccount": "Zaten hesabınız var mı?",
       "loginLink": "Giriş",
-      "errorGeneric": "Kayıt yapılamadı. Lütfen daha sonra tekrar deneyin.",
-      "passwordConfirmLabel": "Şifreyi Onayla",
-      "passwordMismatch": "Şifreler eşleşmiyor"
+      "errorGeneric": "Kayıt yapılamadı. Lütfen daha sonra tekrar deneyin."
     },
     "verifyEmail": {
       "loadingTitle": "Doğrulanıyor...",

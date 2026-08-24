@@ -176,7 +176,41 @@ test.describe("Dashboard screenshots (breakpoints × theme)", () => {
           await route.fulfill({
             status: 200,
             contentType: "application/json",
-            body: JSON.stringify([]),
+            body: JSON.stringify([
+              {
+                openingEco: "B20",
+                openingName: "Sicilian Defense",
+                orderIndex: 4,
+                correctMoveUci: "d2d4",
+                attempts: 6,
+                correctCount: 2,
+                incorrectCount: 4,
+                accuracy: 0.33,
+                commonWrongMoves: [{ moveUci: "g1f3", count: 3 }],
+              },
+              {
+                openingEco: "D43",
+                openingName: "Semi-Slav Defense: Meran Variation, Lundin Variation",
+                orderIndex: 5,
+                correctMoveUci: "c1d2",
+                attempts: 4,
+                correctCount: 0,
+                incorrectCount: 4,
+                accuracy: 0,
+                commonWrongMoves: [{ moveUci: "c1g5", count: 4 }],
+              },
+              {
+                openingEco: "C60",
+                openingName: "Ruy Lopez",
+                orderIndex: 6,
+                correctMoveUci: "e1g1",
+                attempts: 5,
+                correctCount: 3,
+                incorrectCount: 2,
+                accuracy: 0.6,
+                commonWrongMoves: [{ moveUci: "d2d3", count: 2 }],
+              },
+            ]),
           });
         });
 

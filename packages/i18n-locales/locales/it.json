@@ -36,6 +36,9 @@
       "dayStreakBest": "Consistenza di giorni · migliore {{best}}",
       "mastered": "Padronanza",
       "reviewDue": "Revisione in arrivo ({{count}})",
+      "needsWork": "Necessita lavoro",
+      "needsWorkByOpening": "Per apertura",
+      "needsWorkByMove": "Per mossa",
       "weakSpots": "Punti deboli",
       "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} corrette",
       "weakSpotFallbackName": "Apertura",
@@ -135,15 +138,15 @@
       "emailDisclaimer": "Lo chiediamo solo per tenere lontani i bot — non ci importa cosa sia e non ti manderemo spam.",
       "usernameLabel": "Nome utente",
       "passwordLabel": "Password",
+      "passwordConfirmLabel": "Conferma password",
+      "passwordMismatch": "Le password non coincidono",
       "submit": "Registrati",
       "submitting": "Registrazione…",
       "successMessage": "Registrazione completata! Controlla la tua casella di posta all’indirizzo <strong>{{email}}</strong> per trovare un link di verifica prima di accedere.",
       "returnToLogin": "Torna all’accesso",
       "haveAccount": "Hai già un account?",
       "loginLink": "Accedi",
-      "errorGeneric": "Registrazione non riuscita. Riprova più tardi.",
-      "passwordConfirmLabel": "Conferma password",
-      "passwordMismatch": "Le password non coincidono"
+      "errorGeneric": "Registrazione non riuscita. Riprova più tardi."
     },
     "verifyEmail": {
       "loadingTitle": "Verifica in corso…",

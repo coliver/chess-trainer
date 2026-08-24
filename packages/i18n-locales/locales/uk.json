@@ -36,6 +36,9 @@
       "dayStreakBest": "Серія днів · найкраща {{best}}",
       "mastered": "Освоєно",
       "reviewDue": "На повторення ({{count}})",
+      "needsWork": "Потребує роботи",
+      "needsWorkByOpening": "За дебютами",
+      "needsWorkByMove": "За ходами",
       "weakSpots": "Слабкі місця",
       "weakSpotItem": "{{name}} — {{correct}}/{{attempts}} правильних",
       "weakSpotFallbackName": "Дебют",
@@ -135,15 +138,15 @@
       "emailDisclaimer": "Ми просимо це тільки для того щоб тримати ботів подалі — нам без різниці що це і ми вам не будемо надсилати спам.",
       "usernameLabel": "Ім'я користувача",
       "passwordLabel": "Пароль",
+      "passwordConfirmLabel": "Підтвердіть пароль",
+      "passwordMismatch": "Паролі не збігаються",
       "submit": "Зареєструватися",
       "submitting": "Реєстрація…",
       "successMessage": "Реєстрація успішна! Перевірте вашу поштову скриньку на адресі <strong>{{email}}</strong> для листа підтвердження перед входом.",
       "returnToLogin": "Повернутися до входу",
       "haveAccount": "Вже маєте акаунт?",
       "loginLink": "Увійти",
-      "errorGeneric": "Не вдалося зареєструватися. Спробуйте пізніше.",
-      "passwordConfirmLabel": "Підтвердіть пароль",
-      "passwordMismatch": "Паролі не збігаються"
+      "errorGeneric": "Не вдалося зареєструватися. Спробуйте пізніше."
     },
     "verifyEmail": {
       "loadingTitle": "Підтвердження…",
