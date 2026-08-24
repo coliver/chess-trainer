@@ -174,11 +174,21 @@ def _seed_training_response(
     is_correct: bool,
     opening_eco: str | None = "C00",
     opening_name: str | None = "French Defense",
+    player_color: str = "w",
+    is_review_item: bool = False,
 ):
+    """Seeds one scored TrainingResponse. For a normal (non-review) session
+    the opening lives on the TrainingSession, matching real usage
+    (create_training_session) - only review-session items carry their own
+    opening_eco/opening_name (create_session_from_due)."""
     from backend.app.modules.training.models import TrainingItem, TrainingResponse, TrainingSession
 
     session = TrainingSession(
-        status="active", user_id=user_id, opening_eco=opening_eco, opening_name=opening_name
+        status="active",
+        user_id=user_id,
+        opening_eco=None if is_review_item else opening_eco,
+        opening_name="Review" if is_review_item else opening_name,
+        player_color=player_color,
     )
     db.add(session)
     db.flush()
@@ -188,6 +198,8 @@ def _seed_training_response(
         order_index=order_index,
         fen="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
         correct_move_uci=correct_move_uci,
+        opening_eco=opening_eco if is_review_item else None,
+        opening_name=opening_name if is_review_item else None,
     )
     db.add(item)
     db.flush()
@@ -204,29 +216,65 @@ def _seed_training_response(
 
 
 def test_get_step_accuracy_groups_by_order_index(db, test_user):
-    # step 0 (order_index 0): mostly right; step 1: mostly wrong -> should rank worst first
+    # Trainee plays White: order_index 0 (White's move) is theirs, mostly
+    # right; order_index 2 (their 2nd move) is theirs too, mostly wrong ->
+    # should rank worst first. order_index 1 is Black's auto-played reply
+    # (not the trainee's), so it must never appear in the results at all.
     _seed_training_response(db, test_user.id, 0, "e2e4", "e2e4", True)
     _seed_training_response(db, test_user.id, 0, "e2e4", "e2e4", True)
-    _seed_training_response(db, test_user.id, 1, "e7e5", "e7e6", False)
-    _seed_training_response(db, test_user.id, 1, "e7e5", "e7e6", False)
     _seed_training_response(db, test_user.id, 1, "e7e5", "e7e5", True)
+    _seed_training_response(db, test_user.id, 2, "g1f3", "d1h5", False)
+    _seed_training_response(db, test_user.id, 2, "g1f3", "d1h5", False)
+    _seed_training_response(db, test_user.id, 2, "g1f3", "g1f3", True)
 
     steps = service.get_step_accuracy(db, test_user.id)
 
-    assert len(steps) == 2
+    assert [s.order_index for s in steps] == [2, 0]
+
     worst = steps[0]
-    assert worst.order_index == 1
     assert worst.attempts == 3
     assert worst.correct_count == 1
     assert worst.incorrect_count == 2
     assert worst.accuracy == pytest.approx(1 / 3)
-    assert worst.common_wrong_moves[0].move_uci == "e7e6"
+    assert worst.common_wrong_moves[0].move_uci == "d1h5"
     assert worst.common_wrong_moves[0].count == 2
 
     best = steps[1]
-    assert best.order_index == 0
     assert best.accuracy == 1.0
     assert best.common_wrong_moves == []
+
+
+def test_get_step_accuracy_excludes_opponent_auto_played_plies(db, test_user):
+    # Trainee plays Black: order_index 0 (White's move) is the opponent's
+    # auto-played reply and must be excluded even though a TrainingResponse
+    # row exists for it (the frontend silently submits it - see
+    # useTrainingSession's silent submitMove call).
+    _seed_training_response(db, test_user.id, 0, "e2e4", "e2e4", True, player_color="b")
+    _seed_training_response(db, test_user.id, 1, "e7e5", "c7c5", True, player_color="b")
+
+    steps = service.get_step_accuracy(db, test_user.id)
+    assert [s.order_index for s in steps] == [1]
+
+
+def test_get_step_accuracy_review_items_always_count_as_trainee_ply(db, test_user):
+    # Review-session items are each an independent due position the trainee
+    # must solve, regardless of order_index parity or the session's nominal
+    # player_color (see create_session_from_due).
+    _seed_training_response(
+        db,
+        test_user.id,
+        0,
+        "e2e4",
+        "d2d4",
+        False,
+        opening_eco="C00",
+        opening_name="French Defense",
+        is_review_item=True,
+    )
+
+    steps = service.get_step_accuracy(db, test_user.id)
+    assert len(steps) == 1
+    assert steps[0].incorrect_count == 1
 
 
 def test_get_step_accuracy_scoped_to_user(db, test_user):
@@ -261,14 +309,15 @@ def test_get_global_step_accuracy_aggregates_across_users(db, test_user):
     db.add(other)
     db.commit()
 
-    # order_index=99 is used only by this test, so it can't collide with rows
-    # left behind by other tests/dev usage sharing this DB (see
-    # project_test_db_isolation_todo memory).
-    _seed_training_response(db, test_user.id, 99, "e2e4", "d2d4", False)
-    _seed_training_response(db, other.id, 99, "e2e4", "d2d4", False)
+    # order_index=98 (even -> White's move, matching the default player_color
+    # "w" so it counts as the trainee's ply) is used only by this test, so it
+    # can't collide with rows left behind by other tests/dev usage sharing
+    # this DB (see project_test_db_isolation_todo memory).
+    _seed_training_response(db, test_user.id, 98, "e2e4", "d2d4", False)
+    _seed_training_response(db, other.id, 98, "e2e4", "d2d4", False)
 
     steps = service.get_global_step_accuracy(db)
-    step99 = next(s for s in steps if s.order_index == 99)
+    step99 = next(s for s in steps if s.order_index == 98)
     assert step99.attempts == 2
     assert step99.incorrect_count == 2
     assert step99.common_wrong_moves[0].move_uci == "d2d4"

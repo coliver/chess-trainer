@@ -230,7 +230,13 @@ def _step_accuracy_query(db: Session, user_id: int | None):
     opening step (order_index) it belongs to, falling back to the parent
     session's opening/eco when the item itself doesn't carry one (see
     TrainingItem.opening_eco/opening_name docstring) and to the session's
-    player_color-implied opening for plain (non-review) sessions."""
+    player_color-implied opening for plain (non-review) sessions.
+
+    Also returns enough to identify trainee-authored plies vs. the opponent's
+    auto-played replies (see _is_trainee_ply) — a session alternates trainee
+    and opponent moves, and the frontend silently submits the opponent's
+    (always book-correct) reply as a real TrainingResponse too, so those must
+    be excluded or every "opponent" order_index would show ~100% accuracy."""
     query = (
         select(
             func.coalesce(TrainingItem.opening_eco, TrainingSession.opening_eco).label("eco"),
@@ -239,6 +245,8 @@ def _step_accuracy_query(db: Session, user_id: int | None):
             TrainingItem.correct_move_uci,
             TrainingResponse.submitted_move_uci,
             TrainingResponse.is_correct,
+            TrainingItem.opening_eco.is_not(None).label("is_review_item"),
+            TrainingSession.player_color,
         )
         .select_from(TrainingResponse)
         .join(TrainingItem, TrainingResponse.item_id == TrainingItem.id)
@@ -249,10 +257,34 @@ def _step_accuracy_query(db: Session, user_id: int | None):
     return query
 
 
+def _is_trainee_ply(order_index: int, is_review_item: bool, player_color: str) -> bool:
+    """True if this order_index within its session is a move the trainee had
+    to choose, not the opponent's auto-played reply. Review items are always
+    trainee-only (each is seeded as one due position - see
+    create_session_from_due); a normal session alternates white/black moves
+    starting with White at order_index 0."""
+    if is_review_item:
+        return True
+    trainee_is_white = player_color == "w"
+    ply_is_white = order_index % 2 == 0
+    return ply_is_white == trainee_is_white
+
+
 def _aggregate_step_accuracy(rows, limit: int, worst_first: bool) -> list[StepAccuracy]:
     groups: dict[tuple, dict] = {}
     order: list[tuple] = []
-    for eco, name, order_index, correct_move_uci, submitted_move_uci, is_correct in rows:
+    for (
+        eco,
+        name,
+        order_index,
+        correct_move_uci,
+        submitted_move_uci,
+        is_correct,
+        is_review_item,
+        player_color,
+    ) in rows:
+        if not _is_trainee_ply(order_index, is_review_item, player_color):
+            continue
         key = (eco, name, order_index)
         if key not in groups:
             groups[key] = {
