@@ -98,6 +98,7 @@
     "streakBest": " · migliore {{best}}",
     "moveProgress": "Mossa {{current}} di {{total}}",
     "skipPuzzle": "Salta puzzle ›",
+    "nextPuzzle": "Puzzle successivo ›",
     "backToDashboard": "← Torna alla dashboard",
     "browseThemes": "Browse themes ›",
     "practicing": "Practicing: {{theme}}",

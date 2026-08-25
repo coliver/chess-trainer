@@ -53,21 +53,27 @@ def _solve_position(puzzle: Puzzle, move_index: int) -> tuple[str, str, str]:
     return board.fen(), last_move_uci, solver_moves[move_index]
 
 
-def get_next_puzzle(db: Session, user_id: int, theme: str | None = None) -> PuzzlePosition | None:
+def get_next_puzzle(
+    db: Session, user_id: int, theme: str | None = None, exclude_id: str | None = None
+) -> PuzzlePosition | None:
     """Pick a due review puzzle first, otherwise an unseen one (highest popularity).
 
     When `theme` is given, switch to free-practice mode: ignore due-dates and
     just pick a random puzzle carrying that theme tag. Attempts still flow
     through the normal SRS/progress bookkeeping.
+
+    `exclude_id` skips a specific puzzle (the one just shown), so that
+    "skip"/"next" can't hand back the same due puzzle it was just given.
     """
     if theme is not None:
-        puzzle = db.execute(
+        query = (
             select(Puzzle)
             .where(text("string_to_array(themes, ' ') @> ARRAY[:theme]"))
             .params(theme=theme)
-            .order_by(func.random())
-            .limit(1)
-        ).scalar_one_or_none()
+        )
+        if exclude_id is not None:
+            query = query.where(Puzzle.id != exclude_id)
+        puzzle = db.execute(query.order_by(func.random()).limit(1)).scalar_one_or_none()
 
         if puzzle is None:
             return None
@@ -76,22 +82,23 @@ def get_next_puzzle(db: Session, user_id: int, theme: str | None = None) -> Puzz
 
     now = datetime.datetime.now(datetime.timezone.utc)
 
-    due = db.execute(
+    due_query = (
         select(Puzzle)
         .join(PuzzleProgress, PuzzleProgress.puzzle_id == Puzzle.id)
         .where(PuzzleProgress.user_id == user_id, PuzzleProgress.due_at <= now)
-        .order_by(PuzzleProgress.due_at.asc())
-        .limit(1)
-    ).scalar_one_or_none()
+    )
+    if exclude_id is not None:
+        due_query = due_query.where(Puzzle.id != exclude_id)
+    due = db.execute(due_query.order_by(PuzzleProgress.due_at.asc()).limit(1)).scalar_one_or_none()
 
     puzzle = due
     if puzzle is None:
         seen_ids = select(PuzzleProgress.puzzle_id).where(PuzzleProgress.user_id == user_id)
+        unseen_query = select(Puzzle).where(Puzzle.id.not_in(seen_ids))
+        if exclude_id is not None:
+            unseen_query = unseen_query.where(Puzzle.id != exclude_id)
         puzzle = db.execute(
-            select(Puzzle)
-            .where(Puzzle.id.not_in(seen_ids))
-            .order_by(Puzzle.popularity.desc(), func.random())
-            .limit(1)
+            unseen_query.order_by(Puzzle.popularity.desc(), func.random()).limit(1)
         ).scalar_one_or_none()
 
     if puzzle is None:

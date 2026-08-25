@@ -98,6 +98,7 @@
     "streakBest": " · best {{best}}",
     "moveProgress": "Trekk {{current}} av {{total}}",
     "skipPuzzle": "Hopp over oppgave ›",
+    "nextPuzzle": "Neste oppgave ›",
     "backToDashboard": "← Tilbake til oversikten",
     "browseThemes": "Browse themes ›",
     "practicing": "Practicing: {{theme}}",

@@ -65,6 +65,22 @@
   cursor: not-allowed;
 }
 
+.puzzles-next {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent-contrast, #fff);
+  background: var(--accent);
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 10px 16px;
+  text-align: center;
+}
+.puzzles-next:hover {
+  filter: brightness(1.08);
+}
+
 .puzzles-back-link {
   font-size: 13px;
   font-weight: 600;

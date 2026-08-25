@@ -98,6 +98,7 @@
     "streakBest": " · najlepsza {{best}}",
     "moveProgress": "Ruch {{current}} z {{total}}",
     "skipPuzzle": "Pomiń zadanie ›",
+    "nextPuzzle": "Następne zadanie ›",
     "backToDashboard": "← Wróć do panelu",
     "browseThemes": "Browse themes ›",
     "practicing": "Practicing: {{theme}}",

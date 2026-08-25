@@ -98,6 +98,7 @@
     "streakBest": " · הכי טוב {{best}}",
     "moveProgress": "מהלך {{current}} מתוך {{total}}",
     "skipPuzzle": "דילוג על חידה ›",
+    "nextPuzzle": "החידה הבאה ›",
     "backToDashboard": "← חזרה ללוח הבקרה",
     "browseThemes": "Browse themes ›",
     "practicing": "Practicing: {{theme}}",

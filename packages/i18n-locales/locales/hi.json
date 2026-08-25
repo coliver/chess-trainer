@@ -98,6 +98,7 @@
     "streakBest": " · सर्वोत्तम {{best}}",
     "moveProgress": "चाल {{current}} / {{total}}",
     "skipPuzzle": "पहेली छोड़ें ›",
+    "nextPuzzle": "अगली पहेली ›",
     "backToDashboard": "← डैशबोर्ड पर वापस",
     "browseThemes": "Browse themes ›",
     "practicing": "Practicing: {{theme}}",

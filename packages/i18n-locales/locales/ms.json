@@ -98,6 +98,7 @@
     "streakBest": " · terbaik {{best}}",
     "moveProgress": "Langkah {{current}} daripada {{total}}",
     "skipPuzzle": "Langkau teka-teki ›",
+    "nextPuzzle": "Teka-teki seterusnya ›",
     "backToDashboard": "← Kembali ke papan pemuka",
     "browseThemes": "Browse themes ›",
     "practicing": "Practicing: {{theme}}",

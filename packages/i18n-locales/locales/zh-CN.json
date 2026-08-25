@@ -98,6 +98,7 @@
     "streakBest": " · 最佳 {{best}}",
     "moveProgress": "第{{current}}步，共{{total}}步",
     "skipPuzzle": "跳过谜题 ›",
+    "nextPuzzle": "下一道谜题 ›",
     "backToDashboard": "← 返回仪表盘",
     "browseThemes": "Browse themes ›",
     "practicing": "Practicing: {{theme}}",

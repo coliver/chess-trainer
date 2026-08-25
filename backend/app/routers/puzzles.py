@@ -64,10 +64,11 @@ class PuzzleThemeCount(CamelModel):
 @router.get("/puzzles/next", response_model=PuzzleNextResponse)
 def get_puzzles_next(
     theme: str | None = Query(None),
+    exclude_id: str | None = Query(None, alias="excludeId"),
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user),
 ):
-    puzzle = get_next_puzzle(db, current_user.id, theme=theme)
+    puzzle = get_next_puzzle(db, current_user.id, theme=theme, exclude_id=exclude_id)
     if puzzle is None:
         raise HTTPException(status_code=404, detail="No puzzles available")
 
@@ -115,13 +116,14 @@ def post_puzzle_attempt(
 @router.get("/puzzles/next.text", response_class=PlainTextResponse)
 def get_puzzles_next_text(
     theme: str | None = Query(None),
+    exclude_id: str | None = Query(None, alias="excludeId"),
     ansi: bool = Query(True),
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user_or_none),
 ):
     if current_user is None:
         return text_response(LOGIN_INSTRUCTIONS, ansi, status_code=401)
-    puzzle = get_next_puzzle(db, current_user.id, theme=theme)
+    puzzle = get_next_puzzle(db, current_user.id, theme=theme, exclude_id=exclude_id)
     if puzzle is None:
         raise HTTPException(status_code=404, detail="No puzzles available")
     return text_response(render_puzzle_next(puzzle, ansi) + "\n", ansi)

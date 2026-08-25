@@ -38,6 +38,10 @@ export const Puzzles = () => {
   const theme = searchParams.get("theme");
 
   const [puzzleId, setPuzzleId] = useState<string | null>(null);
+  const puzzleIdRef = useRef(puzzleId);
+  useEffect(() => {
+    puzzleIdRef.current = puzzleId;
+  }, [puzzleId]);
   const [fen, setFen] = useState(START_FEN);
   const [correctMoveUci, setCorrectMoveUci] = useState("");
   const [lastMoveUci, setLastMoveUci] = useState("");
@@ -51,6 +55,7 @@ export const Puzzles = () => {
   const [streak, setStreak] = useState(0);
   const [bestStreak, setBestStreak] = useState(0);
   const [noPuzzlesDue, setNoPuzzlesDue] = useState(false);
+  const [puzzleComplete, setPuzzleComplete] = useState(false);
   const { preferences } = usePreferences();
   const { orientation, flip, setOrientation } = useBoardOrientation();
 
@@ -64,25 +69,24 @@ export const Puzzles = () => {
     moveIndexRef.current = moveIndex;
   }, [moveIndex]);
 
-  // Tracks the "advance to next puzzle" timeout scheduled after a correct
-  // answer, so it can be cancelled on unmount — otherwise it fires after the
-  // user navigates away and calls loadNext() against a dead component.
-  const advanceTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isMountedRef = useRef(true);
   useEffect(() => {
     isMountedRef.current = true;
     return () => {
       isMountedRef.current = false;
-      if (advanceTimeoutRef.current) clearTimeout(advanceTimeoutRef.current);
     };
   }, []);
 
   const loadNext = useCallback(async () => {
     setFeedback("");
     setNoPuzzlesDue(false);
+    setPuzzleComplete(false);
     try {
       const res = await api.get<NextPuzzle>("/puzzles/next", {
-        params: theme ? { theme } : undefined,
+        params: {
+          ...(theme ? { theme } : undefined),
+          ...(puzzleIdRef.current ? { excludeId: puzzleIdRef.current } : undefined),
+        },
       });
       if (!isMountedRef.current) return;
       setPuzzleId(res.data.puzzleId);
@@ -154,7 +158,7 @@ export const Puzzles = () => {
             setBestStreak((best) => Math.max(best, next));
             return next;
           });
-          advanceTimeoutRef.current = setTimeout(() => void loadNext(), 1000);
+          setPuzzleComplete(true);
         } else if (res.data.correct) {
           // Correct, but more solver moves remain: apply the auto-played
           // opponent reply and keep the puzzle interactive.
@@ -181,7 +185,7 @@ export const Puzzles = () => {
         if (isMountedRef.current) setIsSubmitting(false);
       }
     },
-    [puzzleId, isSubmitting, loadNext, navigate, t],
+    [puzzleId, isSubmitting, navigate, t],
   );
 
   const skip = useCallback(() => {
@@ -189,6 +193,10 @@ export const Puzzles = () => {
     setStreak(0);
     void loadNext();
   }, [puzzleId, isSubmitting, loadNext]);
+
+  const next = useCallback(() => {
+    void loadNext();
+  }, [loadNext]);
 
   const solverColor = sideToMove(fen);
 
@@ -259,7 +267,7 @@ export const Puzzles = () => {
               <Board
                 position={fen}
                 orientation={orientation}
-                interactive={!!puzzleId && !isSubmitting}
+                interactive={!!puzzleId && !isSubmitting && !puzzleComplete}
                 moveColor={solverColor === "b" ? "black" : "white"}
                 markers={markers}
                 onMoveStart={canPickUp}
@@ -343,7 +351,18 @@ export const Puzzles = () => {
               </div>
             )}
 
-            {puzzleId && (
+            {puzzleId && puzzleComplete && (
+              <button
+                type="button"
+                className="puzzles-next"
+                onClick={next}
+                autoFocus
+              >
+                {t("puzzles.nextPuzzle")}
+              </button>
+            )}
+
+            {puzzleId && !puzzleComplete && (
               <button
                 type="button"
                 className="puzzles-skip"

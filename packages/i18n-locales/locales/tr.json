@@ -98,6 +98,7 @@
     "streakBest": " · en iyi {{best}}",
     "moveProgress": "Hamle {{current}} / {{total}}",
     "skipPuzzle": "Bulmacayı atla ›",
+    "nextPuzzle": "Sonraki bulmaca ›",
     "backToDashboard": "← Gösterge paneline dön",
     "browseThemes": "Browse themes ›",
     "practicing": "Practicing: {{theme}}",

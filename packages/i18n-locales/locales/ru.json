@@ -98,6 +98,7 @@
     "streakBest": " · лучшее {{best}}",
     "moveProgress": "Ход {{current}} из {{total}}",
     "skipPuzzle": "Пропустить задачу ›",
+    "nextPuzzle": "Следующая задача ›",
     "backToDashboard": "← Назад на панель",
     "browseThemes": "Browse themes ›",
     "practicing": "Practicing: {{theme}}",

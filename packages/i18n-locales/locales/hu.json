@@ -98,6 +98,7 @@
     "streakBest": " · legjobb {{best}}",
     "moveProgress": "Lépés {{current}} / {{total}}",
     "skipPuzzle": "Feladvány kihagyása ›",
+    "nextPuzzle": "Következő feladvány ›",
     "backToDashboard": "← Vissza az irányítópultra",
     "browseThemes": "Browse themes ›",
     "practicing": "Practicing: {{theme}}",

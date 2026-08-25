@@ -143,6 +143,57 @@ describe("Puzzles Page", () => {
     expect(screen.getByText(/Streak: 1/)).toBeInTheDocument();
     expect(screen.getByText(/best 1/)).toBeInTheDocument();
     expect(mockCelebratePuzzleCorrect).toHaveBeenCalledTimes(1);
+
+    // Puzzle completion is manual: no second load happens until the user
+    // clicks "Next puzzle", and Skip is hidden while complete.
+    expect(api.get).toHaveBeenCalledTimes(1);
+    expect(
+      screen.queryByRole("button", { name: /Skip puzzle/ }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /Next puzzle/ }),
+    ).toBeInTheDocument();
+  });
+
+  it("advances to the next puzzle only when the Next puzzle button is clicked", async () => {
+    (api.get as ReturnType<typeof vi.fn>)
+      .mockResolvedValueOnce({ data: NEXT_PUZZLE })
+      .mockResolvedValueOnce({ data: { ...NEXT_PUZZLE, puzzleId: "p2" } });
+    (api.post as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+      data: {
+        correct: true,
+        reason: "",
+        fenAfter: NEXT_PUZZLE.fen,
+        puzzleComplete: true,
+      },
+    });
+
+    renderPuzzles();
+    await screen.findByText("Rating ~1500");
+
+    applyMoveMock.mockReturnValueOnce({
+      nextFen: NEXT_PUZZLE.fen,
+      uci: "e2e4",
+    });
+
+    act(() => {
+      capturedProps.onMove?.("e2", "e4");
+    });
+
+    const nextButton = await screen.findByRole("button", {
+      name: /Next puzzle/,
+    });
+    expect(api.get).toHaveBeenCalledTimes(1);
+
+    await user.click(nextButton);
+
+    await waitFor(() => expect(api.get).toHaveBeenCalledTimes(2));
+    expect(
+      screen.queryByRole("button", { name: /Next puzzle/ }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /Skip puzzle/ }),
+    ).toBeInTheDocument();
   });
 
   it("keeps the puzzle open after a correct-but-not-final move in a multi-move puzzle", async () => {
@@ -254,6 +305,10 @@ describe("Puzzles Page", () => {
 
     await waitFor(() => expect(api.get).toHaveBeenCalledTimes(2));
     expect(screen.getByText(/Streak: 0/)).toBeInTheDocument();
+    // Excludes the just-shown puzzle so skip can't hand back the same one.
+    expect(api.get).toHaveBeenNthCalledWith(2, "/puzzles/next", {
+      params: { excludeId: "p1" },
+    });
   });
 
   it("shows an empty state and hides Skip when no puzzles are due", async () => {

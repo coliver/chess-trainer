@@ -98,6 +98,7 @@
     "streakBest": " · 最高 {{best}}",
     "moveProgress": "第{{current}}手 / {{total}}",
     "skipPuzzle": "問題をスキップ ›",
+    "nextPuzzle": "次の問題 ›",
     "backToDashboard": "← ダッシュボードに戻る",
     "browseThemes": "Browse themes ›",
     "practicing": "Practicing: {{theme}}",

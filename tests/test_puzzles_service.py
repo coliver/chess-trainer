@@ -203,6 +203,61 @@ def test_get_next_puzzle_prefers_due_review_over_unseen(db, test_user):
     assert result.puzzle_id == "p1"
 
 
+def test_get_next_puzzle_exclude_id_skips_the_only_due_puzzle(db, test_user):
+    make_puzzle(db, id="p1")
+
+    service.submit_puzzle_attempt(
+        db, user_id=test_user.id, puzzle_id="p1", move_uci="e7e5", move_index=0
+    )
+    row = (
+        db.query(PuzzleProgress)
+        .filter(PuzzleProgress.user_id == test_user.id, PuzzleProgress.puzzle_id == "p1")
+        .first()
+    )
+    row.due_at = datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=1)
+    db.commit()
+
+    # Without exclusion, skip would keep handing back the same due puzzle.
+    result = service.get_next_puzzle(db, test_user.id, exclude_id="p1")
+    assert result is None
+
+
+def test_get_next_puzzle_exclude_id_falls_back_to_next_due_puzzle(db, test_user):
+    make_puzzle(db, id="p1")
+    make_puzzle(db, id="p2")
+
+    for pid in ("p1", "p2"):
+        service.submit_puzzle_attempt(
+            db, user_id=test_user.id, puzzle_id=pid, move_uci="e7e5", move_index=0
+        )
+    now = datetime.datetime.now(datetime.timezone.utc)
+    for pid, offset in (("p1", 2), ("p2", 1)):
+        row = (
+            db.query(PuzzleProgress)
+            .filter(PuzzleProgress.user_id == test_user.id, PuzzleProgress.puzzle_id == pid)
+            .first()
+        )
+        row.due_at = now - datetime.timedelta(days=offset)
+    db.commit()
+
+    result = service.get_next_puzzle(db, test_user.id, exclude_id="p1")
+    assert result.puzzle_id == "p2"
+
+
+def test_get_next_puzzle_exclude_id_skips_the_only_unseen_puzzle(db, test_user):
+    make_puzzle(db, id="p1")
+
+    result = service.get_next_puzzle(db, test_user.id, exclude_id="p1")
+    assert result is None
+
+
+def test_get_next_puzzle_with_theme_exclude_id_skips_the_only_match(db, test_user):
+    make_puzzle(db, id="p1", themes="fork")
+
+    result = service.get_next_puzzle(db, test_user.id, theme="fork", exclude_id="p1")
+    assert result is None
+
+
 def test_get_puzzle_summary_no_puzzles_is_all_zero(db, test_user):
     summary = service.get_puzzle_summary(db, test_user.id)
     assert summary == {"puzzles_seen": 0, "overall_accuracy": 0.0, "mastered": 0}

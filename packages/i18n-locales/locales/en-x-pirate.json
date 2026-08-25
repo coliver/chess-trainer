@@ -98,6 +98,7 @@
     "streakBest": " · best {{best}}",
     "moveProgress": "Move {{current}} of {{total}}",
     "skipPuzzle": "Skip puzzle ›",
+    "nextPuzzle": "Next plunder ›",
     "backToDashboard": "← Back to dashboard",
     "browseThemes": "Browse themes ›",
     "practicing": "Practicing: {{theme}}",

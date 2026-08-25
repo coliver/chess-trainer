@@ -98,6 +98,7 @@
     "streakBest": " · tốt nhất {{best}}",
     "moveProgress": "Nước đi {{current}} / {{total}}",
     "skipPuzzle": "Bỏ qua bài tập ›",
+    "nextPuzzle": "Bài tập tiếp theo ›",
     "backToDashboard": "← Quay lại bảng điều khiển",
     "browseThemes": "Browse themes ›",
     "practicing": "Practicing: {{theme}}",

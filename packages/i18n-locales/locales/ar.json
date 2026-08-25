@@ -98,6 +98,7 @@
     "streakBest": " · الأفضل {{best}}",
     "moveProgress": "الحركة {{current}} من {{total}}",
     "skipPuzzle": "تخطي اللغز ›",
+    "nextPuzzle": "اللغز التالي ›",
     "backToDashboard": "← العودة إلى لوحة التحكم",
     "browseThemes": "Browse themes ›",
     "practicing": "Practicing: {{theme}}",

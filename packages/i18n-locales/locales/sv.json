@@ -98,6 +98,7 @@
     "streakBest": " · bäst {{best}}",
     "moveProgress": "Drag {{current}} av {{total}}",
     "skipPuzzle": "Hoppa över pussel ›",
+    "nextPuzzle": "Nästa pussel ›",
     "backToDashboard": "← Tillbaka till översikten",
     "browseThemes": "Browse themes ›",
     "practicing": "Practicing: {{theme}}",
