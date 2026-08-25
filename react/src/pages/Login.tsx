@@ -111,7 +111,9 @@ export default function Login() {
 
         {emailNotVerified && (
           <div style={{ marginTop: 14 }}>
-            <div className="auth-error">{t("auth.login.emailNotVerified")}</div>
+            <div className="auth-error" role="alert">
+              {t("auth.login.emailNotVerified")}
+            </div>
             <button
               className="btn"
               type="button"
@@ -128,7 +130,11 @@ export default function Login() {
           </div>
         )}
 
-        {error && <div className="auth-error">{error}</div>}
+        {error && (
+          <div className="auth-error" role="alert">
+            {error}
+          </div>
+        )}
       </form>
 
       <p className="auth-alt">

@@ -56,6 +56,15 @@ export const Puzzles = () => {
   const [bestStreak, setBestStreak] = useState(0);
   const [noPuzzlesDue, setNoPuzzlesDue] = useState(false);
   const [puzzleComplete, setPuzzleComplete] = useState(false);
+  const nextButtonRef = useRef<HTMLButtonElement>(null);
+
+  // Move focus to the "Next puzzle" button when it appears, so keyboard
+  // users can advance without hunting for it. useEffect (not autoFocus,
+  // which fires unconditionally on mount) keeps this scoped to the moment
+  // the button is actually revealed.
+  useEffect(() => {
+    if (puzzleComplete) nextButtonRef.current?.focus();
+  }, [puzzleComplete]);
   const { preferences } = usePreferences();
   const { orientation, flip, setOrientation } = useBoardOrientation();
 
@@ -353,10 +362,10 @@ export const Puzzles = () => {
 
             {puzzleId && puzzleComplete && (
               <button
+                ref={nextButtonRef}
                 type="button"
                 className="puzzles-next"
                 onClick={next}
-                autoFocus
               >
                 {t("puzzles.nextPuzzle")}
               </button>

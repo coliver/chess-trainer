@@ -1,5 +1,5 @@
 // react/src/components/HomeHeader.tsx
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 import { Menu } from "lucide-react";
@@ -12,6 +12,7 @@ export function HomeHeader() {
   const location = useLocation();
   const { isLoggedIn } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   const isOpeningsActive = location.pathname.startsWith("/dashboard");
   const isPuzzlesActive = location.pathname.startsWith("/puzzles");
@@ -22,6 +23,7 @@ export function HomeHeader() {
         <div className="home-header-top">
           <div className="home-header-brand-group">
             <button
+              ref={menuButtonRef}
               className="home-header-menu-button"
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label="Menu"
@@ -56,7 +58,11 @@ export function HomeHeader() {
             </nav>
           )}
 
-          <OverflowMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
+          <OverflowMenu
+            open={menuOpen}
+            onClose={() => setMenuOpen(false)}
+            triggerRef={menuButtonRef}
+          />
         </div>
       </div>
     </header>

@@ -29,4 +29,11 @@ i18n.use(initReactI18next).init({
   },
 });
 
+// Keep the <html lang> attribute in sync so assistive tech announces the
+// correct language, both on init and whenever the language changes later.
+document.documentElement.lang = initialLanguage;
+i18n.on("languageChanged", (language) => {
+  document.documentElement.lang = language;
+});
+
 export default i18n;

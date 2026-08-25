@@ -792,7 +792,6 @@ function SearchResults({
           <button
             key={openingKey(o)}
             type="button"
-            role="listitem"
             className={`variation-row${selectedKey === openingKey(o) ? " selected" : ""}`}
             onClick={() => onPick(o)}
             aria-pressed={selectedKey === openingKey(o)}

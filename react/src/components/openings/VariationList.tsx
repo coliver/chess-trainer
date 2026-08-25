@@ -21,7 +21,6 @@ function Row({
   return (
     <button
       type="button"
-      role="listitem"
       className={`variation-row${selected ? " selected" : ""}`}
       onClick={() => onPick(o)}
       aria-pressed={selected}
