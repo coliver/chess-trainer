@@ -74,6 +74,34 @@ Knight School uses a decoupled architecture to separate the chess engine from th
 2. **Backend:** A modular FastAPI server that validates moves against the `python-chess` library and manages user sessions in PostgreSQL.
 3. **Reverse Proxy:** Nginx handles routing and serves the production frontend build. SSL is configured in the Nginx container (the repo’s default config points to self-signed certificate files).
 
+### ♿ Accessibility
+
+- **Board interaction:** `Board.tsx` uses cm-chessboard's [`Accessibility` extension](https://github.com/shaack/cm-chessboard/blob/master/src/extensions/accessibility/Accessibility.js) — screen readers get a hidden move-form/table/piece-list description of the position plus braille notation, and keyboard move input (arrow keys, Enter/Space, Escape) is available on interactive boards.
+- **Automated scanning:** `@axe-core/playwright` runs WCAG 2 A/AA scans against `/login` and `/dashboard` as part of the e2e suite, which has already caught and fixed real issues (color-contrast and `aria-required-attr` violations). Coverage isn't complete yet — `/training/:id`, `/puzzles`, `/settings`, `/register`, and `/verify-email` aren't scanned — and automated scans are no substitute for manual screen-reader/keyboard testing. See [react/e2e/README.md](./react/e2e/README.md) for the full picture, including one known, unfixed contrast violation (`.site-header-version`) currently excluded from the scan.
+- **Internationalization:** 35+ locale translations ([packages/i18n-locales](./packages/i18n-locales)) so the UI isn't English-only.
+
+### 📟 Text mode
+
+Most API routes have a `.text` sibling (e.g. `GET /progress/summary.text`) that renders a BBS-style plain-text view instead of JSON — colored ANSI output with a Unicode chess board, for playing from `curl`, `wget`, `httpie`, or any terminal instead of the React app. `GET /dashboard.text` is the landing screen, with an ASCII "KNIGHT SCHOOL" banner and a menu of the other `.text` routes; hitting the bare domain with a CLI client (no path) redirects straight there.
+
+**Connecting with curl:**
+
+```bash
+# Log in and grab a token
+TOKEN=$(curl -s -X POST https://knightschool.click/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"username":"<you>","password":"<yours>"}' \
+  | python3 -c "import sys,json; print(json.load(sys.stdin)['access_token'])")
+
+# Hit any .text route with it as a Bearer token
+curl -H "Authorization: Bearer $TOKEN" https://knightschool.click/api/dashboard.text
+
+# Bare domain, no path, no login needed — redirects straight to the dashboard
+curl https://knightschool.click/
+```
+
+Add `?ansi=0` to any route for plain ASCII (no color/Unicode) if your terminal doesn't support it. See [backend/README.md](./backend/README.md#text-mode) for the full endpoint list and `wget`/`httpie` examples.
+
 ### 🔁 Swappable frontends
 
 The frontend talks to the backend via the **root-absolute `/api`**
