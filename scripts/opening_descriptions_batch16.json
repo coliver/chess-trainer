@@ -1,0 +1,752 @@
+[
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: French Attack",
+    "description": "White attacks the center with f4 immediately, aiming for kingside expansion without the typical d4 consolidation. Black must decide whether to accept the pawn tension or counterattack in the center."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Italian Variation",
+    "description": "White develops with Bc4, shifting toward an Italian Game structure while maintaining Petrov's defensive setup. This hybrid approach combines the solidity of Petrov with the aggressive potential of the Italian."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Karklins-Martinovsky Variation",
+    "description": "A rare sideline featuring unusual piece placement and pawn structures, named after its practitioners. Often leads to positions where White sacrifices material for unclear compensation."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Kaufmann Attack",
+    "description": "White pursues an aggressive but unconventional setup against Petrov, seeking imbalance through atypical move orders. The resulting positions are often sharp and demand precise play from both sides."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Millennium Attack",
+    "description": "A modern attacking approach where White delays d4 in favor of immediate piece activity and central control. This system prioritizes dynamic play and initiative over classical development."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Moody Gambit",
+    "description": "White sacrifices a pawn early in the opening, accepting complications in exchange for rapid piece development and attacking chances. Black must defend accurately to avoid tactical mishaps."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Nimzowitsch Attack",
+    "description": "White adopts Nimzowitsch's principle of prophylaxis, preparing central breaks while controlling key squares. This patient approach emphasizes positional understanding over tactical fireworks."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Paulsen Attack",
+    "description": "A solid attacking system named after the strong 19th-century player, featuring methodical piece coordination. White aims to build pressure through careful positional maneuvering."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Stafford Gambit",
+    "description": "White offers a pawn with an aggressive setup, creating tactical complications. This gambit is sharp and tactical, requiring accurate calculation from the defender."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Stafford Gambit Accepted",
+    "description": "Black accepts White's pawn offer in the Stafford, leading to sharp tactical positions with mutual attacking chances. Precise analysis is crucial as errors can be immediately punished."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Three Knights Game",
+    "description": "White develops with Nc3 in addition to the typical piece setup, creating a three-knight configuration (Nf3 and Nc3 for White, plus Black's Nf6). This solid setup aims for positional advantage."
+  },
+  {
+    "eco": "C43",
+    "name": "Bishop's Opening: Urusov Gambit",
+    "description": "White sacrifices a pawn with d4, immediately challenging Black's central presence. Named after the Russian master Urusov, this aggressive gambit seeks rapid development compensation."
+  },
+  {
+    "eco": "C43",
+    "name": "Bishop's Opening: Urusov Gambit, Keidansky Gambit",
+    "description": "A rare variation within the Urusov Gambit featuring an additional pawn sacrifice for accelerated attacking play. This ultra-sharp line is suitable only for players willing to embrace chaos."
+  },
+  {
+    "eco": "C43",
+    "name": "Petrov's Defense: Modern Attack",
+    "description": "White implements a contemporary approach to fighting Petrov's Defense with flexible piece placement and central strategy. This system avoids known theoretical battlegrounds in favor of originality."
+  },
+  {
+    "eco": "C43",
+    "name": "Petrov's Defense: Modern Attack, Bardeleben Variation",
+    "description": "Named after the German master, this variation emphasizes White's kingside attacking potential within the Modern Attack structure. Black must balance defense with counterplay to avoid a disadvantage."
+  },
+  {
+    "eco": "C43",
+    "name": "Petrov's Defense: Modern Attack, Center Attack",
+    "description": "White focuses on central control and pawn tension, building a strong position through careful maneuvering. This straightforward approach aims to outposition Black over the long term."
+  },
+  {
+    "eco": "C43",
+    "name": "Petrov's Defense: Modern Attack, Center Variation",
+    "description": "A straightforward continuation where both sides compete for central dominance, often resulting in closed positions with long-term strategic plans. Endgame technique becomes increasingly important."
+  },
+  {
+    "eco": "C43",
+    "name": "Petrov's Defense: Modern Attack, Murrey Variation",
+    "description": "A lesser-known sideline within the Modern Attack framework, characterized by subtle piece maneuvering. This variation suits players seeking positions off the main theoretical highways."
+  },
+  {
+    "eco": "C43",
+    "name": "Petrov's Defense: Modern Attack, Symmetrical Variation",
+    "description": "Both sides maintain symmetric pawn structures for an extended period, creating balanced positions with potential for sharp tactics. Play often revolves around who can break symmetry advantageously."
+  },
+  {
+    "eco": "C43",
+    "name": "Petrov's Defense: Modern Attack, Tal Gambit",
+    "description": "A sharp pawn sacrifice attributed to the legendary Tal, seeking tactical complications and initiative. Black's accurate defense is paramount to avoid being overwhelmed by White's piece activity."
+  },
+  {
+    "eco": "C43",
+    "name": "Petrov's Defense: Modern Attack, Trifunovic Variation",
+    "description": "Named after the Yugoslav master, this variation introduces concrete tactical ideas into the Modern Attack. The resulting positions often feature imbalanced material and attacking chances."
+  },
+  {
+    "eco": "C44",
+    "name": "Dresden Opening: The Goblin",
+    "description": "A whimsical modern-day invention, this opening combines elements of the Dresden Opening with unusual tactics. It remains largely unexplored at high levels but offers interesting practical chances."
+  },
+  {
+    "eco": "C44",
+    "name": "King's Knight Opening: Konstantinopolsky",
+    "description": "A rare system where White prioritizes solid piece development over classical central pawns. Named after the Soviet master, this setup emphasizes patience and positional maneuvering."
+  },
+  {
+    "eco": "C44",
+    "name": "King's Knight Opening: Normal Variation",
+    "description": "The standard continuation of the King's Knight Opening following classical development principles. White builds a solid position with balanced piece coordination and central control."
+  },
+  {
+    "eco": "C44",
+    "name": "King's Pawn Game: Dresden Opening",
+    "description": "An obscure first-move variation featuring unique pawn structures and unusual piece coordination. This opening remains largely theoretical but occasionally appears in unconventional play."
+  },
+  {
+    "eco": "C44",
+    "name": "King's Pawn Game: Pachman Wing Gambit",
+    "description": "A gambit attributed to the Czechoslovak master Pachman, sacrificing a flank pawn for initiative. White seeks rapid development and attacking chances despite the material investment."
+  },
+  {
+    "eco": "C44",
+    "name": "King's Pawn Game: Schulze-Müller Gambit",
+    "description": "A pawn sacrifice designed to create tactical complications and break Black's harmonious development. This aggressive gambit requires precise follow-up play to justify the material loss."
+  },
+  {
+    "eco": "C44",
+    "name": "King's Pawn Game: Tayler Opening",
+    "description": "A flexible opening system with multiple continuation possibilities, allowing White to adapt to Black's setup. The resulting positions remain dynamic and offer practical winning chances."
+  },
+  {
+    "eco": "C44",
+    "name": "King's Pawn Game: Tayler Opening, Basman Gambit",
+    "description": "A pawn sacrifice within the Tayler framework, named after the British master. White sacrifices material to obtain attacking play and central outposts."
+  },
+  {
+    "eco": "C44",
+    "name": "King's Pawn Game: Tayler Opening, Inverted Hanham",
+    "description": "A transposition-heavy variation featuring reversed move orders of the classical Hanham Defense. The resulting structures offer fresh practical opportunities for both players."
+  },
+  {
+    "eco": "C44",
+    "name": "Latvian Gambit: Clam Gambit",
+    "description": "A rare sideline of the Latvian Gambit with an unusual defensive setup. Black sacrifices material early for piece activity and counterplay, requiring brave and accurate defensive technique."
+  },
+  {
+    "eco": "C44",
+    "name": "Ponziani Opening: Caro Gambit",
+    "description": "A pawn sacrifice variation within the Ponziani, attributed to the player Caro. White accepts complications in pursuit of rapid piece development and positional pressure."
+  },
+  {
+    "eco": "C44",
+    "name": "Ponziani Opening: Jaenisch Counterattack",
+    "description": "Black adopts an aggressive counterattacking stance against the Ponziani, challenging White's center immediately. This combative approach often leads to sharp tactical positions."
+  },
+  {
+    "eco": "C44",
+    "name": "Ponziani Opening: Leonhardt Variation",
+    "description": "A solid continuation named after the master Leonhardt, emphasizing careful piece coordination and modest positional advantage. White's position is steady but not immediately winning."
+  },
+  {
+    "eco": "C44",
+    "name": "Ponziani Opening: Neumann Gambit",
+    "description": "A pawn sacrifice seeking aggressive piece play and attacking potential against Black's kingside. The resulting positions are tactically rich and reward accurate calculation."
+  },
+  {
+    "eco": "C44",
+    "name": "Ponziani Opening: Ponziani Countergambit",
+    "description": "A counter-gambit where White immediately returns a pawn to obtain active piece play and tactical advantages. This paradoxical approach often confuses opponents unfamiliar with the resulting positions."
+  },
+  {
+    "eco": "C44",
+    "name": "Ponziani Opening: Ponziani Countergambit, Schmidt Attack",
+    "description": "An aggressive continuation within the Ponziani Countergambit, featuring attacking ideas attributed to Schmidt. White combines material return with concrete attacking threats."
+  },
+  {
+    "eco": "C44",
+    "name": "Ponziani Opening: Réti Variation",
+    "description": "Named after the celebrated hypermodern master Réti, this variation prioritizes flexible piece placement and central control. White gradually builds pressure through patient maneuvering."
+  },
+  {
+    "eco": "C44",
+    "name": "Ponziani Opening: Romanishin Variation",
+    "description": "A modern continuation introduced by the Ukrainian grandmaster Romanishin, featuring unusual piece coordination. This setup often leads to positions with hidden tactical resources."
+  },
+  {
+    "eco": "C44",
+    "name": "Ponziani Opening: Spanish Variation",
+    "description": "A thematic continuation combining Ponziani structures with Spanish Game ideas. White aims to build a powerful center while maintaining active piece placement and attacking potential."
+  },
+  {
+    "eco": "C44",
+    "name": "Ponziani Opening: Spanish Variation, Harrwitz Attack, Nikitin Gambit",
+    "description": "A complex sub-variation featuring multiple pawn sacrifices and tactical complications. Both players must navigate carefully to avoid tactical catastrophes in these sharp positions."
+  },
+  {
+    "eco": "C44",
+    "name": "Ponziani Opening: Steinitz Variation",
+    "description": "Named after the first world champion Wilhelm Steinitz, this solid approach emphasizes positional understanding and careful piece coordination. White's advantage is typically modest but stable."
+  },
+  {
+    "eco": "C44",
+    "name": "Ponziani Opening: Vukovic Gambit",
+    "description": "A pawn sacrifice creating immediate tactical complications and attacking chances against Black's king. White compensates for the material loss through rapid piece development."
+  },
+  {
+    "eco": "C44",
+    "name": "Scotch Game: Benima Defense",
+    "description": "A defensive resource for Black featuring an unusual knight retreat and solid central presence. This variation seeks to neutralize White's attack while maintaining counterplay possibilities."
+  },
+  {
+    "eco": "C44",
+    "name": "Scotch Game: Cochrane-Shumov Defense",
+    "description": "A rare defensive setup combining ideas from both Cochrane and Shumov, creating asymmetrical pawn structures. Black prioritizes piece activity and central control over rapid development."
+  },
+  {
+    "eco": "C44",
+    "name": "Scotch Game: Cochrane Variation",
+    "description": "Named after the Scottish master Cochrane, this variation features aggressive piece placement and central pressure. White's rook activity compensates for any slight structural disadvantages."
+  },
+  {
+    "eco": "C44",
+    "name": "Scotch Game: Göring Gambit",
+    "description": "White sacrifices a pawn aggressively, pursuing rapid development and kingside attacking chances. Black's accurate defense is critical to avoid being overrun by White's powerful initiative."
+  },
+  {
+    "eco": "C44",
+    "name": "Scotch Game: Göring Gambit, Bardeleben Variation",
+    "description": "A subtle continuation within the Göring Gambit, named after the German master, featuring refined attacking ideas. White's compensation for the pawn involves active piece play and positional pressure."
+  },
+  {
+    "eco": "C44",
+    "name": "Scotch Game: Göring Gambit, Double Pawn Sacrifice",
+    "description": "An ultra-aggressive continuation where White sacrifices two pawns for overwhelming piece activity. This risky approach is only sound if White achieves sufficient attacking momentum."
+  },
+  {
+    "eco": "C44",
+    "name": "Scotch Game: Göring Gambit, Main Line",
+    "description": "The principal continuation of the Göring Gambit, featuring thematic attacks and defensive resources for both sides. Accurate play is essential as both players walk a tactical tightrope."
+  },
+  {
+    "eco": "C44",
+    "name": "Scotch Game: Hanneken Variation",
+    "description": "A lesser-known defensive try for Black, featuring unusual piece coordination and pawn structure. This variation offers practical opportunities for players seeking positions off well-trodden paths."
+  },
+  {
+    "eco": "C44",
+    "name": "Scotch Game: Haxo Gambit",
+    "description": "A pawn sacrifice creating immediate tactical imbalance and attacking opportunities. White compensates through rapid development and centralized piece placement."
+  },
+  {
+    "eco": "C44",
+    "name": "Scotch Game: Lolli Variation",
+    "description": "Named after the 18th-century master, this solid continuation emphasizes classical development and positional advantage. White's pieces work harmoniously toward long-term pressure."
+  },
+  {
+    "eco": "C44",
+    "name": "Scotch Game: Napoleon Gambit",
+    "description": "A romantic-era pawn sacrifice supposedly played by Napoleon himself, featuring tactical complications. Modern analysis suggests Black can defend with accurate play."
+  },
+  {
+    "eco": "C44",
+    "name": "Scotch Game: Relfsson Gambit",
+    "description": "A gambit variation featuring a pawn sacrifice and rapid piece development for attacking chances. White seeks compensation through immediate threats against Black's king."
+  },
+  {
+    "eco": "C44",
+    "name": "Scotch Game: Scotch Gambit, Advance Variation",
+    "description": "White pushes pawns aggressively to gain space and attacking potential, temporarily sacrificing material for initiative. The resulting positions favor players with sharp tactical vision."
+  },
+  {
+    "eco": "C44",
+    "name": "Scotch Game: Scotch Gambit, Cochrane-Anderssen Variation",
+    "description": "A classic continuation combining ideas from both Cochrane and Anderssen, featuring dynamic piece play. White's attack often requires accurate follow-up to break through Black's defenses."
+  },
+  {
+    "eco": "C44",
+    "name": "Scotch Game: Scotch Gambit, Dubois Réti Defense",
+    "description": "Black employs hypermodern defensive ideas in response to the Scotch Gambit, controlling the center from a distance. This flexible setup offers practical resilience against White's attack."
+  },
+  {
+    "eco": "C44",
+    "name": "Scotch Game: Scotch Gambit, Göring Gambit Declined",
+    "description": "Black declines the gambit pawn, seeking to neutralize White's attack through solid central control. This principled defense often leads to balanced positions with mutual chances."
+  },
+  {
+    "eco": "C44",
+    "name": "Scotch Game: Scotch Gambit, Kingside Variation",
+    "description": "White concentrates attacking efforts on the kingside, building up threats against Black's king position. Black must balance defensive requirements with counterplay in the center."
+  },
+  {
+    "eco": "C44",
+    "name": "Scotch Game: Scotch Gambit, London Defense",
+    "description": "Black adopts the London Defense system against the Scotch Gambit, featuring solid pawn structures and piece coordination. This reliable setup neutralizes White's attacking ambitions."
+  },
+  {
+    "eco": "C44",
+    "name": "Scotch Game: Scotch Gambit, Sarratt Variation",
+    "description": "Named after the 18th-century master Sarratt, this continuation features solid piece development and modest positional pressure. White's advantage remains steady throughout the middlegame."
+  },
+  {
+    "eco": "C44",
+    "name": "Scotch Game: Sea-Cadet Mate",
+    "description": "A tactical pattern featuring a mating net construction, though in modern practice these ideas are well-known. Players must exercise caution to avoid falling into this theoretical trap."
+  },
+  {
+    "eco": "C44",
+    "name": "Scotch Game: Vitzthum Attack",
+    "description": "An aggressive continuation featuring attacking ideas and sharp tactical play. White pursues rapid development and kingside pressure, seeking to overwhelm Black's defenses."
+  },
+  {
+    "eco": "C45",
+    "name": "Scotch Game: Alekhine Gambit",
+    "description": "A pawn sacrifice attributed to the world champion Alekhine, creating tactical complications and rapid piece activity. This sharp gambit rewards players with strong tactical vision."
+  },
+  {
+    "eco": "C45",
+    "name": "Scotch Game: Blumenfeld Attack",
+    "description": "Named after the brilliant Russian master, this variation features aggressive attacking plans and piece sacrifice ideas. White's compensation relies on rapid piece activity and king safety threats."
+  },
+  {
+    "eco": "C45",
+    "name": "Scotch Game: Braune Variation",
+    "description": "A lesser-known sideline featuring defensive resources and careful piece coordination. Black seeks to neutralize White's attack while maintaining chances for counterplay."
+  },
+  {
+    "eco": "C45",
+    "name": "Scotch Game: Classical Variation, Blackburne Attack",
+    "description": "Named after the 19th-century British master Blackburne, this aggressive approach emphasizes rapid piece development and kingside pressure. White's initiative often compensates for positional weaknesses."
+  },
+  {
+    "eco": "C45",
+    "name": "Scotch Game: Classical Variation, Intermezzo Variation",
+    "description": "A sophisticated continuation featuring intermediate moves and tactical nuances, often surprising unprepared opponents. The resulting positions require precise calculation from both players."
+  },
+  {
+    "eco": "C45",
+    "name": "Scotch Game: Classical Variation, Millennium Variation",
+    "description": "A modern take on classical systems, incorporating contemporary computer-assisted analysis and piece coordination. White seeks balanced positions with subtle long-term advantages."
+  },
+  {
+    "eco": "C45",
+    "name": "Scotch Game: Fraser Variation",
+    "description": "A defensive resource for Black emphasizing solid central control and careful piece placement. This variation seeks to neutralize White's attacking potential while maintaining flexibility."
+  },
+  {
+    "eco": "C45",
+    "name": "Scotch Game: Ghulam-Kassim Variation",
+    "description": "A rare sideline named after obscure masters, featuring unconventional piece placement and tactical ideas. This variation offers practical opportunities for players seeking unexplored positions."
+  },
+  {
+    "eco": "C45",
+    "name": "Scotch Game: Gottschall Variation",
+    "description": "A lesser-known continuation emphasizing solid piece coordination and modest positional advantage. White's superiority is typically small but offers winning chances in the middlegame."
+  },
+  {
+    "eco": "C45",
+    "name": "Scotch Game: Horwitz Attack",
+    "description": "An aggressive continuation named after the 19th-century master, featuring kingside attacking potential. White develops pieces rapidly while maintaining threats against Black's king."
+  },
+  {
+    "eco": "C45",
+    "name": "Scotch Game: Horwitz Attack, Blackburne Variation",
+    "description": "A refinement of the Horwitz Attack incorporating Blackburne's ideas, featuring nuanced attacking plans. White's compensation relies on concrete tactical advantages and piece activity."
+  },
+  {
+    "eco": "C45",
+    "name": "Scotch Game: Malaniuk Variation",
+    "description": "Named after the Ukrainian grandmaster, this modern continuation features flexible piece coordination. Black seeks to equalize through solid defense and counterplay opportunities."
+  },
+  {
+    "eco": "C45",
+    "name": "Scotch Game: Meitner Variation",
+    "description": "A defensive sideline emphasizing piece coordination and careful central control. Black aims to neutralize White's initiative while preparing counterattacking opportunities."
+  },
+  {
+    "eco": "C45",
+    "name": "Scotch Game: Modern Defense",
+    "description": "Black employs hypermodern principles to combat the Scotch, controlling the center from afar. This flexible defense offers practical resilience against White's classical attacking ideas."
+  },
+  {
+    "eco": "C45",
+    "name": "Scotch Game: Paulsen Attack",
+    "description": "Named after the strong 19th-century player, this methodical approach emphasizes solid piece coordination. White builds a steady positional advantage through careful maneuvering."
+  },
+  {
+    "eco": "C45",
+    "name": "Scotch Game: Paulsen, Gunsberg Defense",
+    "description": "A defensive variation within the Paulsen Attack, featuring ideas from the master Gunsberg. Black prioritizes solid piece placement and central control over rapid counterplay."
+  },
+  {
+    "eco": "C45",
+    "name": "Scotch Game: Paulsen Variation",
+    "description": "The standard continuation of the Paulsen approach, featuring classical development and positional understanding. White's advantage is modest but reliable through careful maneuvering."
+  },
+  {
+    "eco": "C45",
+    "name": "Scotch Game: Potter Variation",
+    "description": "A lesser-known sideline featuring unusual piece placement and pawn structures. This variation offers practical opportunities for players seeking positions away from main-line theory."
+  },
+  {
+    "eco": "C45",
+    "name": "Scotch Game: Romanishin Variation",
+    "description": "Named after the Ukrainian grandmaster, this modern approach features flexible piece coordination and subtle tactical ideas. White seeks gradual positional pressure through careful maneuvering."
+  },
+  {
+    "eco": "C45",
+    "name": "Scotch Game: Rosenthal Variation",
+    "description": "A solid defensive setup for Black, emphasizing central control and piece coordination. This variation neutralizes White's attacking potential while offering counterplay opportunities."
+  },
+  {
+    "eco": "C45",
+    "name": "Scotch Game: Schmidt Variation",
+    "description": "A lesser-known continuation featuring unusual piece placement and tactical nuances. Both players navigate carefully through positions with hidden complications."
+  },
+  {
+    "eco": "C45",
+    "name": "Scotch Game: Steinitz Variation",
+    "description": "Named after the first world champion, this solid continuation emphasizes positional understanding and piece coordination. White builds a reliable advantage through patient maneuvering."
+  },
+  {
+    "eco": "C45",
+    "name": "Scotch Game: Tartakower Variation",
+    "description": "Named after the brilliant strategist Tartakower, this variation features refined piece placement and subtle positional ideas. White's advantage emerges gradually through careful planning."
+  },
+  {
+    "eco": "C46",
+    "name": "Three Knights Opening: Schlechter Variation",
+    "description": "Named after the Austrian world championship candidate, this solid variation emphasizes classical piece development. White's position is steady and offers winning chances through positional pressure."
+  },
+  {
+    "eco": "C46",
+    "name": "Three Knights Opening: Steinitz Defense",
+    "description": "Black adopts a defensive setup attributed to world champion Steinitz, featuring solid central control. This reliable defense neutralizes White's attacking potential while maintaining flexibility."
+  },
+  {
+    "eco": "C46",
+    "name": "Three Knights Opening: Steinitz-Rosenthal Variation",
+    "description": "A refinement of the Steinitz Defense incorporating ideas from the master Rosenthal. Black's defense remains solid while offering practical resources for counterplay."
+  },
+  {
+    "eco": "C46",
+    "name": "Three Knights Opening: Winawer Defense",
+    "description": "Named after the great Polish master, this defensive variation features flexible piece coordination. Black seeks to equalize through solid central control and counterattacking chances."
+  },
+  {
+    "eco": "C47",
+    "name": "Four Knights Game: Glek System",
+    "description": "A modern system named after the Ukrainian grandmaster, featuring flexible piece placement and contemporary ideas. White combines positional pressure with tactical alertness."
+  },
+  {
+    "eco": "C47",
+    "name": "Four Knights Game: Gunsberg Variation",
+    "description": "Named after the Hungarian master, this variation emphasizes solid piece coordination and modest positional pressure. White's advantage is steady but requires accurate maneuvering."
+  },
+  {
+    "eco": "C47",
+    "name": "Four Knights Game: Gunsberg Variation, Provincial Opening",
+    "description": "A sub-variation within the Gunsberg framework, featuring unique piece placement and pawn structures. This opening offers practical opportunities for players seeking unexplored positions."
+  },
+  {
+    "eco": "C47",
+    "name": "Four Knights Game: Halloween Gambit",
+    "description": "A colorfully-named gambit featuring an aggressive pawn sacrifice and rapid piece development. White sacrifices material for attacking chances against Black's king position."
+  },
+  {
+    "eco": "C47",
+    "name": "Four Knights Game: Halloween Gambit, Oldtimer Variation",
+    "description": "A classical variation of the Halloween Gambit, featuring well-known attacking patterns and defensive resources. Both players navigate established theoretical positions."
+  },
+  {
+    "eco": "C47",
+    "name": "Four Knights Game: Halloween Gambit, Plasma Variation",
+    "description": "A modern take on the Halloween Gambit incorporating contemporary attacking ideas. White's compensation relies on rapid piece activity and concrete tactical threats."
+  },
+  {
+    "eco": "C47",
+    "name": "Four Knights Game: Italian Variation",
+    "description": "A variation combining Four Knights structures with Italian Game ideas, featuring aggressive piece placement. White seeks to build a powerful center while maintaining attacking potential."
+  },
+  {
+    "eco": "C47",
+    "name": "Four Knights Game: Italian Variation, Noa Gambit",
+    "description": "A pawn sacrifice within the Italian Variation, seeking aggressive piece activity and attacking compensation. White must achieve rapid development to justify the material investment."
+  },
+  {
+    "eco": "C47",
+    "name": "Four Knights Game: Naroditsky Variation",
+    "description": "Named after the American grandmaster, this modern variation features flexible piece coordination and subtle tactical ideas. White seeks gradual pressure through careful maneuvering."
+  },
+  {
+    "eco": "C47",
+    "name": "Four Knights Game: Scotch Variation",
+    "description": "A variation combining Four Knights and Scotch Game structures, featuring aggressive piece development. White maintains central pressure while seeking attacking opportunities."
+  },
+  {
+    "eco": "C47",
+    "name": "Four Knights Game: Scotch Variation Accepted",
+    "description": "Black accepts White's aggressive setup within the Scotch Variation, leading to sharp tactical positions. Both players must navigate carefully through these critical positions."
+  },
+  {
+    "eco": "C47",
+    "name": "Four Knights Game: Scotch Variation Accepted, Main Line",
+    "description": "The principal continuation after Black accepts the Scotch Variation, featuring well-analyzed tactical sequences. Accurate play is essential as both players walk established theoretical paths."
+  },
+  {
+    "eco": "C47",
+    "name": "Four Knights Game: Scotch Variation, Belgrade Gambit",
+    "description": "A pawn sacrifice within the Scotch Variation, originating from Belgrade chess circles. White's compensation involves rapid piece development and attacking chances."
+  },
+  {
+    "eco": "C47",
+    "name": "Four Knights Game: Scotch Variation, Belgrade Gambit, Modern Defense",
+    "description": "A hypermodern defense to the Belgrade Gambit, controlling the center from afar. Black prioritizes solid piece coordination over immediate counterplay."
+  },
+  {
+    "eco": "C47",
+    "name": "Four Knights Game: Scotch Variation, Krause Gambit",
+    "description": "A pawn sacrifice introducing additional tactical complications into the Scotch Variation. White seeks aggressive attacking chances despite the material loss."
+  },
+  {
+    "eco": "C47",
+    "name": "Four Knights Game: Scotch Variation, Krause Gambit, Leonhardt Defense",
+    "description": "A defensive resource within the Krause Gambit, featuring solid piece coordination and careful central control. Black seeks to neutralize White's attack while maintaining defensive resilience."
+  },
+  {
+    "eco": "C47",
+    "name": "Four Knights Game: Scotch Variation, Oxford Gambit",
+    "description": "A pawn sacrifice with origins in Oxford chess circles, featuring aggressive attacking ideas. White compensates for material through rapid development and threats."
+  },
+  {
+    "eco": "C47",
+    "name": "Four Knights Game: Scotch Variation, Schmid Defense",
+    "description": "A solid defensive setup for Black, emphasizing piece coordination and central control. This reliable defense neutralizes White's attacking potential while offering counterplay."
+  },
+  {
+    "eco": "C48",
+    "name": "Four Knights Game: Spanish Variation",
+    "description": "A variation combining Four Knights and Spanish Game structures, featuring Bb5 pressure on Black's pieces. White develops actively while maintaining central control."
+  },
+  {
+    "eco": "C48",
+    "name": "Four Knights Game: Spanish Variation, Bardeleben Variation",
+    "description": "Named after the German master, this variation features aggressive attacking ideas within the Spanish framework. White seeks to build lasting pressure through careful piece coordination."
+  },
+  {
+    "eco": "C48",
+    "name": "Four Knights Game: Spanish Variation, Classical Variation",
+    "description": "The main line of the Spanish Variation, featuring classical development and positional understanding. White maintains a steady advantage through methodical maneuvering."
+  },
+  {
+    "eco": "C48",
+    "name": "Four Knights Game: Spanish Variation, Ranken Variation",
+    "description": "A lesser-known sideline featuring unusual piece placement and pawn structures. This variation offers practical opportunities for players seeking positions away from main theory."
+  },
+  {
+    "eco": "C48",
+    "name": "Four Knights Game: Spanish Variation, Rubinstein Variation",
+    "description": "Named after the great player Rubinstein, this variation emphasizes solid piece coordination and positional advantage. White's superiority emerges gradually through careful planning."
+  },
+  {
+    "eco": "C48",
+    "name": "Four Knights Game: Spanish Variation, Rubinstein Variation Accepted",
+    "description": "Black accepts the implications of the Rubinstein system, leading to tactical complications and mutual chances. Both players must navigate carefully through these sharp positions."
+  },
+  {
+    "eco": "C48",
+    "name": "Four Knights Game: Spanish Variation, Rubinstein Variation, Henneberger Variation",
+    "description": "A sub-variation within Rubinstein featuring ideas from the master Henneberger. White's attack often requires precise follow-up to break through Black's defenses."
+  },
+  {
+    "eco": "C48",
+    "name": "Four Knights Game: Spanish Variation, Rubinstein Variation, Maróczy Variation",
+    "description": "Named after the Hungarian grandmaster Maróczy, this variation features refined piece coordination. White builds gradual positional pressure through careful maneuvering."
+  },
+  {
+    "eco": "C48",
+    "name": "Four Knights Game: Spanish Variation, Rubinstein Variation, Marshall Gambit",
+    "description": "A pawn sacrifice attributed to the legendary Marshall, creating tactical complications. White's compensation involves piece activity and attacking potential."
+  },
+  {
+    "eco": "C48",
+    "name": "Four Knights Game: Spanish Variation, Rubinstein Variation, Marshall Variation",
+    "description": "Another variation within Rubinstein named after Marshall, featuring dynamic piece play. White seeks attacking chances through rapid piece development and threats."
+  },
+  {
+    "eco": "C48",
+    "name": "Four Knights Game: Spanish Variation, Spielmann Variation",
+    "description": "Named after the romantic attacking player Spielmann, this variation emphasizes aggressive piece placement. White's initiative often compensates for positional weaknesses."
+  },
+  {
+    "eco": "C49",
+    "name": "Four Knights Game: Spanish Variation",
+    "description": "The main line continuation of the Four Knights Spanish, featuring classical development and positional maneuvering. White maintains central control while seeking long-term advantage."
+  },
+  {
+    "eco": "C49",
+    "name": "Four Knights Game: Spanish Variation, Alatortsev Variation",
+    "description": "Named after the Soviet master, this variation features flexible piece coordination and subtle tactical ideas. White's advantage emerges through patient positioning."
+  },
+  {
+    "eco": "C49",
+    "name": "Four Knights Game: Spanish Variation, Double Spanish",
+    "description": "A remarkable transposition where both players achieve Spanish Game structures, creating symmetrical positions. Play often revolves around who can break symmetry advantageously."
+  },
+  {
+    "eco": "C49",
+    "name": "Four Knights Game: Spanish Variation, Gunsberg Counterattack",
+    "description": "Black adopts an aggressive counterattacking stance against White's setup, challenging central control. This dynamic approach offers practical chances for both players."
+  },
+  {
+    "eco": "C49",
+    "name": "Four Knights Game: Spanish Variation, Janowski Variation",
+    "description": "Named after the Polish master, this variation emphasizes solid piece development and modest positional pressure. White's advantage is steady but requires accurate follow-up."
+  },
+  {
+    "eco": "C49",
+    "name": "Four Knights Game: Spanish Variation, Nimzowitsch Variation",
+    "description": "Named after the legendary strategist, this variation features refined piece coordination and prophylactic ideas. White builds positional pressure through patient maneuvering."
+  },
+  {
+    "eco": "C49",
+    "name": "Four Knights Game: Spanish Variation, Svenonius Variation",
+    "description": "A lesser-known sideline featuring unusual piece placement and pawn structures. This variation offers practical opportunities for players seeking unexplored positions."
+  },
+  {
+    "eco": "C49",
+    "name": "Four Knights Game: Spanish Variation, Symmetrical Variation",
+    "description": "A continuation emphasizing symmetrical pawn structures and piece coordination between both players. The resulting balanced positions reward accurate maneuvering and deep understanding."
+  },
+  {
+    "eco": "C49",
+    "name": "Four Knights Game: Spanish Variation, Symmetrical Variation, Blake Variation",
+    "description": "A sub-variation named after Blake, featuring symmetrical structures with subtle tactical ideas. White seeks to break symmetry advantageously through careful planning."
+  },
+  {
+    "eco": "C49",
+    "name": "Four Knights Game: Spanish Variation, Symmetrical Variation, Metger Unpin",
+    "description": "A tactical idea named after Metger, designed to unpin pieces from apparent constraints. This creative approach offers practical opportunities in symmetrical positions."
+  },
+  {
+    "eco": "C49",
+    "name": "Four Knights Game: Spanish Variation, Symmetrical Variation, Tarrasch Variation",
+    "description": "Named after the legendary world championship candidate, this variation features refined piece coordination. White's advantage emerges through patient positional maneuvering."
+  },
+  {
+    "eco": "C50",
+    "name": "Four Knights Game: Italian Variation",
+    "description": "A hybrid opening combining Four Knights and Italian Game elements, featuring Bc4 development. White seeks to build active piece coordination while maintaining central control."
+  },
+  {
+    "eco": "C50",
+    "name": "Italian Game: Anti-Fried Liver Defense",
+    "description": "A defensive resource against White's aggressive Fried Liver attacks, emphasizing solid central control. Black prioritizes piece coordination and defense over rapid counterplay."
+  },
+  {
+    "eco": "C50",
+    "name": "Italian Game: Blackburne-Kostić Gambit",
+    "description": "A pawn sacrifice attributed to both Blackburne and Kostić, seeking attacking compensation. White sacrifices material for rapid piece development and kingside threats."
+  },
+  {
+    "eco": "C50",
+    "name": "Italian Game: Classical Variation, Albin Gambit",
+    "description": "A gambit within the Classical Italian, featuring a pawn sacrifice for rapid development. White seeks attacking compensation through piece activity and threats."
+  },
+  {
+    "eco": "C50",
+    "name": "Italian Game: Deutz Gambit",
+    "description": "A pawn sacrifice creating immediate tactical complications and attacking opportunities. White compensates for material through rapid piece development and threats."
+  },
+  {
+    "eco": "C50",
+    "name": "Italian Game: Giuoco Pianissimo",
+    "description": "The 'Quiet Game' continuation of the Italian, emphasizing patient positional maneuvering over sharp tactics. Both players build gradual advantages through careful piece coordination."
+  },
+  {
+    "eco": "C50",
+    "name": "Italian Game: Giuoco Pianissimo, Canal Variation",
+    "description": "Named after the Italian master, this variation features refined piece coordination and subtle positional ideas. White builds gradual pressure through patient maneuvering."
+  },
+  {
+    "eco": "C50",
+    "name": "Italian Game: Giuoco Pianissimo, Dubois Variation",
+    "description": "A variation named after Dubois, featuring solid piece development and modest positional pressure. White's advantage remains steady through careful maneuvering."
+  },
+  {
+    "eco": "C50",
+    "name": "Italian Game: Giuoco Pianissimo, Italian Four Knights Variation",
+    "description": "A transposition to Four Knights structures within the Giuoco Pianissimo framework. Both players navigate positions combining Italian and Four Knights ideas."
+  },
+  {
+    "eco": "C50",
+    "name": "Italian Game: Giuoco Pianissimo, Lucchini Gambit",
+    "description": "A pawn sacrifice within the Giuoco Pianissimo, seeking rapid piece activity. White compensates for material through attacking chances and positional pressure."
+  },
+  {
+    "eco": "C50",
+    "name": "Italian Game: Giuoco Pianissimo, Normal",
+    "description": "The standard continuation of the Giuoco Pianissimo, featuring classical development and positional understanding. White's advantage is modest but reliable through careful maneuvering."
+  },
+  {
+    "eco": "C50",
+    "name": "Italian Game: Hungarian Defense, Tartakower Variation",
+    "description": "A refined defensive setup named after Tartakower, emphasizing solid piece coordination and central control. Black prioritizes defense while maintaining flexibility for counterplay."
+  },
+  {
+    "eco": "C50",
+    "name": "Italian Game: Jerome Gambit",
+    "description": "A dubious gambit sacrificing two pieces for insufficient compensation, named after Jerome. Modern analysis suggests Black can refute this aggressive attempt."
+  },
+  {
+    "eco": "C50",
+    "name": "Italian Game: Paris Defense",
+    "description": "A defensive variation emphasizing solid central control and piece coordination. Black seeks to neutralize White's attacking potential while maintaining flexibility."
+  },
+  {
+    "eco": "C50",
+    "name": "Italian Game: Rosentreter Gambit",
+    "description": "A pawn sacrifice creating tactical complications and attacking chances. White compensates for material through rapid piece development and threats."
+  },
+  {
+    "eco": "C50",
+    "name": "Italian Game: Rousseau Gambit",
+    "description": "A pawn sacrifice attributed to Rousseau, seeking aggressive piece activity and attacking compensation. White's initiative often overwhelms Black if defense is inaccurate."
+  },
+  {
+    "eco": "C51",
+    "name": "Italian Game: Evans Gambit Accepted",
+    "description": "Black accepts White's aggressive pawn sacrifice in the Evans Gambit, leading to sharp tactical positions. Both players must navigate carefully through critical complications."
+  },
+  {
+    "eco": "C51",
+    "name": "Italian Game: Evans Gambit, Anderssen Variation",
+    "description": "Named after the great romantic player Anderssen, this variation features aggressive attacking ideas. White's compensation relies on rapid piece development and threats."
+  },
+  {
+    "eco": "C51",
+    "name": "Italian Game: Evans Gambit, Anderssen Variation, Cordel Line",
+    "description": "A sub-variation within Anderssen featuring precise attacking sequences named after Cordel. White must achieve rapid development to justify the gambit material sacrifice."
+  }
+]

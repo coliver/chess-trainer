@@ -1,0 +1,752 @@
+[
+  {
+    "eco": "C26",
+    "name": "Vienna Game: Mieses Variation",
+    "description": "White supports the center with Nc3 and avoids the sharp Gambit. Black gains space with d5 early, leading to a strategic middlegame where White seeks piece coordination and control over central squares."
+  },
+  {
+    "eco": "C26",
+    "name": "Vienna Game: Mieses Variation, Erben Gambit",
+    "description": "White sacrifices a pawn with f4 to seize rapid kingside space and center control. Black faces practical challenges defending against White's swift piece mobilization while recovering the pawn material."
+  },
+  {
+    "eco": "C26",
+    "name": "Vienna Game: Paulsen Variation, Pollock Gambit",
+    "description": "White employs an offbeat pawn sacrifice to disrupt Black's development and seize the initiative. The gambit creates tactical complications favoring White if Black mishandles the resulting piece activity."
+  },
+  {
+    "eco": "C26",
+    "name": "Vienna Game: Stanley Variation",
+    "description": "White plays Bc4 with aggressive intent on the kingside, targeting f7. The position becomes sharp if Black attempts counterplay, with White aiming for a powerful central and kingside bind."
+  },
+  {
+    "eco": "C26",
+    "name": "Vienna Game: Stanley Variation, Eifel Gambit",
+    "description": "White sacrifices a pawn to accelerate kingside attack and piece development. The resulting position is double-edged, requiring Black to defend accurately while seeking counterplay in the center or queenside."
+  },
+  {
+    "eco": "C26",
+    "name": "Vienna Game: Stanley Variation, Reversed Spanish",
+    "description": "White transposes to a Spanish-like structure but with tempo advantages from the opening move order. Black must adapt to the shifted dynamics and find appropriate piece placement and pawn breaks."
+  },
+  {
+    "eco": "C27",
+    "name": "Bishop's Opening: Boden-Kieseritzky Gambit",
+    "description": "White sacrifices the f-pawn to open lines and accelerate attacks. The gambit is thematic in 19th-century style, with White seeking rapid deployment and Black defending resourcefully."
+  },
+  {
+    "eco": "C27",
+    "name": "Bishop's Opening: Boden-Kieseritzky Gambit, Lichtenhein Defense",
+    "description": "Black counters White's aggressive gambit with a flexible defense, maintaining central control. The position remains tactical, requiring accurate play from both sides to manage complications."
+  },
+  {
+    "eco": "C27",
+    "name": "Vienna Game: Adams' Gambit",
+    "description": "White launches a pawn sacrifice with 3.f4 to dominate the center and kingside. Black typically accepts to relieve central pressure, entering a sharp middlegame with mutual attacking chances."
+  },
+  {
+    "eco": "C27",
+    "name": "Vienna Game: Frankenstein-Dracula Variation",
+    "description": "This colorfully-named line features aggressive development by both sides. White pressures f7 and the center while Black strives for counterplay; piece activity and tactics determine the outcome."
+  },
+  {
+    "eco": "C27",
+    "name": "Vienna Game: Stanley Variation, Alekhine Variation",
+    "description": "Black plays a nimble defense against White's kingside threats. Alekhine's approach emphasizes flexibility and piece maneuverability, preparing to contest White's space advantage."
+  },
+  {
+    "eco": "C27",
+    "name": "Vienna Game: Stanley Variation, Frankenstein-Dracula Variation",
+    "description": "A sharp position emerges where White pursues f7 and central domination while Black courts complications. Accurate move-finding is critical; both sides can generate dangerous threats."
+  },
+  {
+    "eco": "C27",
+    "name": "Vienna Game: Stanley Variation, Monster Declined",
+    "description": "Black declines the sharp attack and opts for solid development. The position becomes more strategic, with White enjoying space but Black gaining time to consolidate and launch counterplay."
+  },
+  {
+    "eco": "C28",
+    "name": "Bishop's Opening: Vienna Hybrid, Hromádka Variation",
+    "description": "Hromádka's solid defense blends elements from different opening systems. Black prioritizes piece coordination and center stability, making White work for any advantage from the opening."
+  },
+  {
+    "eco": "C28",
+    "name": "Vienna Game: Stanley Variation, Bronstein Gambit",
+    "description": "White sacrifices a pawn aggressively, following Bronstein's style of dynamic compensation. The resulting complications favor creative players seeking to exploit White's piece activity."
+  },
+  {
+    "eco": "C28",
+    "name": "Vienna Game: Stanley Variation, Three Knights Variation",
+    "description": "White develops all three minor pieces rapidly, building pressure and control. Black must coordinate defense carefully, as White's multiple threats can overwhelm if Black falls behind in development."
+  },
+  {
+    "eco": "C29",
+    "name": "Vienna Game: Heyde Variation",
+    "description": "This quiet approach sidesteps the sharp main lines of the Vienna Gambit. White maintains flexibility with solid piece placement, allowing Black to choose between aggression or consolidation."
+  },
+  {
+    "eco": "C29",
+    "name": "Vienna Game: Vienna Gambit, Bardeleben Variation",
+    "description": "Bardeleben's sideline offers White attacking chances without forcing a gambit. White targets f7 and the center while Black seeks counterplay, creating a rich middlegame battleground."
+  },
+  {
+    "eco": "C29",
+    "name": "Vienna Game: Vienna Gambit, Breyer Variation",
+    "description": "Breyer's flexible defense delays commitments while maintaining central tension. Black prepares counterplay against White's kingside attack, valuing piece coordination over immediate pawn recovery."
+  },
+  {
+    "eco": "C29",
+    "name": "Vienna Game: Vienna Gambit, Kaufmann Variation",
+    "description": "This variation offers White a balanced position with some spatial advantage. Black's defense is workable, leading to strategic middlegames where both sides pursue long-term plans."
+  },
+  {
+    "eco": "C29",
+    "name": "Vienna Game: Vienna Gambit, Main Line",
+    "description": "After pawn sacrifices and piece play, White dominates the center with active pieces. Black must defend accurately and find counterplay quickly, as White's initiative can be dangerous if unopposed."
+  },
+  {
+    "eco": "C29",
+    "name": "Vienna Game: Vienna Gambit, Modern Variation",
+    "description": "Modern technique emphasizes piece activity and board control over material count. White sacrifices pawns for rapid development and central command; Black defends dynamically."
+  },
+  {
+    "eco": "C29",
+    "name": "Vienna Game: Vienna Gambit, Paulsen Attack",
+    "description": "Paulsen's aggressive continuation pressures Black immediately. White combines pawn sacrifices with kingside attack threats, requiring Black to balance defense with counterattack."
+  },
+  {
+    "eco": "C29",
+    "name": "Vienna Game: Vienna Gambit, Steinitz Variation",
+    "description": "Steinitz' solid approach builds central control before launching kingside threats. The resulting position favors players comfortable with maneuvering and gradual pressure accumulation."
+  },
+  {
+    "eco": "C29",
+    "name": "Vienna Game: Vienna Gambit, Wurzburger Trap",
+    "description": "This line contains tactical motifs and potential traps that punish inaccurate defense. White's active piece play combined with central threats creates practical winning chances."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Classical, Hanham Variation",
+    "description": "Hanham's solid decline offers Black stable development and central control. White maintains modest space advantages, leading to positional middlegames favoring accurate maneuvering."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Classical, Réti Variation",
+    "description": "Réti's flexible approach avoids sharp tactics in favor of piece coordination and central tension. Black's solid setup allows counterplay against White's space, creating rich strategic battles."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Classical, Soldatenkov Variation",
+    "description": "This rare variation features unusual piece placement from both sides. The position remains unbalanced, offering winning chances to either player with precise play."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Classical, Svenonius Variation",
+    "description": "Svenonius contributes a defensive resource maintaining Black's flexibility. White's kingside ambitions are blunted by solid Black development and prophylactic piece placement."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Classical Variation",
+    "description": "Black's classical d5 response contests the center immediately and avoids gambit complications. White seeks positional pressure through piece activity, while Black prepares counterattacking plans."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Classical Variation, Euwe Attack",
+    "description": "Euwe's aggressive continuation pursues attacking chances despite Black declining the gambit. White combines space control with tactical threats, pressuring Black's position."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Classical Variation, Rotlewi Countergambit",
+    "description": "Black counters White's space with an aggressive pawn break. The resulting complications favor players who handle tactics well; mutual attacking chances emerge."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Classical Variation, Rubinstein Countergambit",
+    "description": "Rubinstein's counterattack generates central and queenside threats against White's kingside ambitions. The position becomes double-edged, rewarding sharp tactical play."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Classical Variation, Walthoffen Attack",
+    "description": "White aggressively pursues kingside threats with piece sacrifices. Black must defend carefully while seeking counterplay, making this variation tactically demanding."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Hobbs-Zilbermints Gambit",
+    "description": "This unusual gambit offers White rapid piece activity for a pawn. Black's solid position allows counterplay despite accepting the gambit material."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Keene Defense",
+    "description": "Keene's flexible setup avoids mainline complications while maintaining defensive resources. Black's patient maneuvering creates a difficult position for White to crack."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Keene's Defense",
+    "description": "A variant spelling of Keene's approach, emphasizing Black's solid piece coordination and central control. The defense withstands White's initial pressure effectively."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Mafia Defense",
+    "description": "This colloquially-named defense offers an unconventional approach to declining the gambit. Black's unusual placement creates practical problems for White despite apparent space advantage."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Miles Defense",
+    "description": "Miles' solid setup prioritizes piece coordination and board control over immediate counterattack. The resulting position offers Black good defensive chances and queenside play."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Norwalde Variation",
+    "description": "Norwalde's approach combines solid defense with queenside counterplay prospects. Black avoids sharp tactics while maintaining practical winning chances through maneuvering."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Norwalde Variation, Bücker Gambit",
+    "description": "White sacrifices another pawn within the Norwalde framework, seeking rapid opening of lines. Black's compensation involves dynamic piece play despite material deficit."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Norwalde Variation, Schubert Variation",
+    "description": "Schubert's continuation within Norwalde adds complexity through unusual piece placement. Both sides must navigate a unique position demanding creative problem-solving."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Panteldakis Countergambit",
+    "description": "Black counters White's gambit with an aggressive e5 break, creating mutual pawn sacrifices. The resulting positions offer both sides tactical opportunities and sharp play."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Panteldakis Countergambit, Greco Variation",
+    "description": "Greco's approach within the Panteldakis system emphasizes piece coordination after the pawn exchanges. Both sides navigate complications toward a balanced middlegame."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Panteldakis Countergambit, Pawn Sacrifice Line",
+    "description": "Additional pawn sacrifices follow as both players push their attacking agendas. The resulting chaos favors tactically sharp players seeking rapid initiative."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Panteldakis Countergambit, Schiller's Defense",
+    "description": "Schiller's defensive resource provides Black practical chances despite accepting multiple pawn sacrifices. Piece coordination and counterattack timing determine the outcome."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Panteldakis Countergambit, Shirazi Line",
+    "description": "Shirazi's contribution adds another dimension to the Panteldakis dynamics. The resulting position offers both sides practical attacking chances if they exploit their pieces actively."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Panteldakis Countergambit, Symmetrical Variation",
+    "description": "Both sides mirror each other's pawn breaks, creating a unique dynamic. The symmetrical structure offers Black defensive stability alongside counterplay opportunities."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Petrov's Defense",
+    "description": "Black mirrors White's kingside moves, maintaining balance and avoiding sharp complications. The resulting symmetric positions offer Black solid defensive chances and positional counterplay."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Queen's Knight Defense",
+    "description": "Nc6 provides both defense and piece activity without committing to concrete pawn breaks. Black maintains flexibility to meet White's plans with accurate piece placement."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Senechaud Countergambit",
+    "description": "Black's countergambit offers practical complications against White's opening initiative. Material imbalances create sharp tactical positions favoring aggressive play."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Soller-Zilbermints Gambit",
+    "description": "This rare gambit by White creates unexpected complications in the center and kingside. Black's compensation involves rapid piece activity despite material deficit."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Zilbermints Double Countergambit",
+    "description": "Black counters with multiple pawn sacrifices, creating aggressive complications. The position demands tactical accuracy from both sides as material and space constantly shift."
+  },
+  {
+    "eco": "C30",
+    "name": "King's Gambit Declined: Zilbermints Double Gambit",
+    "description": "White offers two pawns to generate overwhelming central and kingside pressure. Black must handle the complexity carefully; accurate defense offers counterplay despite deficits."
+  },
+  {
+    "eco": "C31",
+    "name": "King's Gambit Declined: Falkbeer Countergambit",
+    "description": "Black launches the f4 pawn break, seizing central space and counterattacking immediately. The resulting imbalance creates dynamic positions where both sides possess tactical chances."
+  },
+  {
+    "eco": "C31",
+    "name": "King's Gambit Declined: Falkbeer Countergambit Accepted",
+    "description": "White accepts Black's gambit, leading to sharp complications with mutual attacks. White pursues kingside threats while Black activates pieces and seeks queenside play."
+  },
+  {
+    "eco": "C31",
+    "name": "King's Gambit Declined: Falkbeer Countergambit, Anderssen Attack",
+    "description": "Anderssen's aggressive response maintains White's initiative despite accepting the countergambit. White combines piece activity with central control, pressuring Black continuously."
+  },
+  {
+    "eco": "C31",
+    "name": "King's Gambit Declined: Falkbeer Countergambit, Blackburne Attack",
+    "description": "Blackburne's continuation emphasizes aggressive piece development against Black's advanced pawns. White seeks rapid piece coordination to overwhelm Black's defenses."
+  },
+  {
+    "eco": "C31",
+    "name": "King's Gambit Declined: Falkbeer Countergambit, Charousek Gambit",
+    "description": "Charousek contributes another pawn sacrifice within the Falkbeer, adding complications. Black faces choices between accepting more material or accepting White's spatial domination."
+  },
+  {
+    "eco": "C31",
+    "name": "King's Gambit Declined: Falkbeer Countergambit, Charousek Gambit, Morphy Defense",
+    "description": "Morphy's defensive approach against Charousek's complications prioritizes piece security over material recovery. Black maintains counterplay prospects despite White's aggressive setup."
+  },
+  {
+    "eco": "C31",
+    "name": "King's Gambit Declined: Falkbeer Countergambit, Hinrichsen Gambit",
+    "description": "Hinrichsen's gambit variation adds further complications to the Falkbeer. Both sides sacrifice material for piece activity and board control in the resulting tactical melee."
+  },
+  {
+    "eco": "C31",
+    "name": "King's Gambit Declined: Falkbeer Countergambit, Miles Gambit",
+    "description": "Miles' contribution introduces another pawn sacrifice option for White. The position becomes extremely sharp, requiring precise calculation from both players."
+  },
+  {
+    "eco": "C31",
+    "name": "King's Gambit Declined: Falkbeer Countergambit, Milner-Barry Variation",
+    "description": "Milner-Barry's approach within the Falkbeer emphasizes solid piece development. White avoids forcing tactics in favor of gradual pressure accumulation."
+  },
+  {
+    "eco": "C31",
+    "name": "King's Gambit Declined: Falkbeer Countergambit, Modern Transfer",
+    "description": "Modern understanding allows White to transfer from the Falkbeer to more favorable positions. White maintains flexibility while preserving the gambit's attacking potential."
+  },
+  {
+    "eco": "C31",
+    "name": "King's Gambit Declined: Falkbeer Countergambit, Nimzowitsch-Marshall Countergambit",
+    "description": "Nimzowitsch and Marshall add their counterattacking resources against White's kingside assault. Black's counterplay becomes dangerous if White overextends in pursuit of attack."
+  },
+  {
+    "eco": "C31",
+    "name": "King's Gambit Declined: Falkbeer Countergambit, Pickler Gambit",
+    "description": "Pickler's variation offers another pawn sacrifice option within the Falkbeer complex. The resulting tactical positions favor players comfortable navigating unsettled positions."
+  },
+  {
+    "eco": "C31",
+    "name": "King's Gambit Declined: Falkbeer Countergambit, Rubinstein Variation",
+    "description": "Rubinstein's solid defense against the Falkbeer prioritizes piece coordination and central control. Black's patient maneuvering creates practical defensive resources."
+  },
+  {
+    "eco": "C31",
+    "name": "King's Gambit Declined: Falkbeer Countergambit, Staunton Line",
+    "description": "Staunton's classical continuation within the Falkbeer emphasizes traditional chess principles. White combines solid piece development with kingside attacking ideas."
+  },
+  {
+    "eco": "C31",
+    "name": "Van Geet Opening: Grünfeld Defense, Steiner Gambit",
+    "description": "Steiner's gambit in the Van Geet structure offers White sharp attacking chances. Black's Grünfeld-inspired defense seeks counterplay through piece activity and board control."
+  },
+  {
+    "eco": "C32",
+    "name": "King's Gambit Declined: Falkbeer Countergambit, Alapin Variation",
+    "description": "Alapin's refinement within the Falkbeer maintains White's attacking chances with sound technique. Black faces practical defensive challenges requiring accurate piece placement."
+  },
+  {
+    "eco": "C32",
+    "name": "King's Gambit Declined: Falkbeer Countergambit, Charousek Gambit",
+    "description": "A repeated line from C31 scope, now classified higher—Charousek's complexity intensifies with additional Black development. The position remains extremely tactical."
+  },
+  {
+    "eco": "C32",
+    "name": "King's Gambit Declined: Falkbeer Countergambit, Charousek Gambit Accepted",
+    "description": "Black accepts deeper complications by taking the gambit pawn. Both sides juggle material and piece activity; White pursues kingside attacks while Black seeks counterplay."
+  },
+  {
+    "eco": "C32",
+    "name": "King's Gambit Declined: Falkbeer Countergambit, Charousek Gambit, Keres Variation",
+    "description": "Keres' defensive approach within Charousek emphasizes piece security and board coordination. Black maintains practical chances despite White's aggressive pawn sacrifices."
+  },
+  {
+    "eco": "C32",
+    "name": "King's Gambit Declined: Falkbeer Countergambit, Charousek Gambit, Main Line",
+    "description": "The mainline continuation features intense tactical play and mutual piece sacrifices. Both players must calculate carefully as the position's evaluation shifts rapidly."
+  },
+  {
+    "eco": "C32",
+    "name": "King's Gambit Declined: Falkbeer Countergambit, Charousek Gambit, Old Line",
+    "description": "The older treatment of Charousek provides historical context for modern developments. White seeks piece activity and central domination through classical maneuvering."
+  },
+  {
+    "eco": "C32",
+    "name": "King's Gambit Declined: Falkbeer Countergambit, Charousek Variation",
+    "description": "A non-gambit approach by White within the Charousek framework. Solid piece development replaces pawn sacrifices, creating positional struggles rather than tactical chaos."
+  },
+  {
+    "eco": "C32",
+    "name": "King's Gambit Declined: Falkbeer Countergambit, Tarrasch Variation",
+    "description": "Tarrasch's solid continuation emphasizes piece coordination over forcing tactics. White builds gradual pressure while Black maintains defensive stability and counterplay chances."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Basman Gambit",
+    "description": "Basman's rare variation offers White an alternative to main lines. The unusual setup creates practical problems for Black despite sound defensive resources."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Bishop's Gambit",
+    "description": "White develops the bishop aggressively to target central squares and the long diagonal. Black must decide whether to defend solidly or seek immediate counterplay."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Bishop's Gambit, Anderssen Defense",
+    "description": "Anderssen's solid approach within the Bishop's Gambit emphasizes piece coordination and central control. Black's patient development generates practical defensive chances."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Bishop's Gambit, Anderssen Variation",
+    "description": "An alternative Anderssen treatment offering flexibility in defense against White's bishop activity. Black maintains piece coordination while preparing counterattacking resources."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Bishop's Gambit, Bledow Countergambit",
+    "description": "Black launches a countergambit, offering material to disrupt White's piece coordination. The position becomes tactical with mutual attacking opportunities."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Bishop's Gambit, Bledow Variation",
+    "description": "Bledow's defensive approach avoids sharp complications while maintaining central influence. Black's solid position generates practical defensive chances against White's threats."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Bishop's Gambit, Boden Variation",
+    "description": "Boden's contribution adds a defensive nuance to the Bishop's Gambit. Black's piece placement creates practical complications that White must navigate carefully."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Bishop's Gambit, Bogoljubow Defense",
+    "description": "Bogoljubow's solid defense prioritizes piece coordination and board control over immediate counterattack. Black's setup offers practical defensive resources."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Bishop's Gambit, Bogoljubow Variation",
+    "description": "An alternative Bogoljubow treatment maintaining flexibility against White's aggressive setup. Black's patient maneuvering creates practical winning chances through accurate play."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Bishop's Gambit, Boren-Svenonius Variation",
+    "description": "This rare variation combines Boren and Svenonius approaches to defending the Bishop's Gambit. Black's unusual piece placement creates practical defensive complications."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Bishop's Gambit, Bryan Countergambit",
+    "description": "Bryan's countergambit offers Black aggressive complications despite material deficit. The position features mutual attacking chances favoring tactical players."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Bishop's Gambit, Chigorin's Attack",
+    "description": "Chigorin's aggressive continuation pursues kingside and central threats with forcing moves. White's active piece play pressures Black continuously throughout the middlegame."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Bishop's Gambit, Classical Defense",
+    "description": "Black's classical approach emphasizes piece coordination and central control against White's bishop activity. Solid development generates practical defensive chances."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Bishop's Gambit, Classical Defense, Cozio Attack",
+    "description": "Cozio's aggressive continuation within the Classical Defense sharpens the position significantly. White pursues kingside threats while Black seeks counterplay opportunities."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Bishop's Gambit, Cozio Defense",
+    "description": "Cozio's approach offers an alternative to classical main lines, emphasizing piece flexibility. Black's setup creates practical complications despite White's spatial advantage."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Bishop's Gambit, Cozio Variation",
+    "description": "A variation of Cozio's defense with subtle differences in piece placement and move order. Black maintains solid defensive prospects through flexible maneuvering."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Bishop's Gambit, First Jaenisch Variation",
+    "description": "Jaenisch's early contribution to the Bishop's Gambit emphasizes piece development and kingside control. Black must defend carefully against the accumulated pressure."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Bishop's Gambit, Fraser Variation",
+    "description": "Fraser's rare variation offers Black unconventional defensive resources. The unusual piece placement creates practical complications favoring resourceful defense."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Bishop's Gambit, Gianutio Gambit",
+    "description": "Gianutio's gambit offer generates additional tactical complications within the Bishop's Gambit framework. Black must calculate carefully to manage multiple threats."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Bishop's Gambit, Greco Variation",
+    "description": "Greco's contribution emphasizes solid piece development and board control. Black's setup offers practical defensive resources against White's aggressive threats."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Bishop's Gambit, Grimm Attack",
+    "description": "Grimm's aggressive continuation pursues central and kingside dominance with forcing tactics. White's piece activity pressures Black's position continuously."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Bishop's Gambit, Kieseritzky Gambit",
+    "description": "Kieseritzky's famous gambit offers another pawn to accelerate White's attack. The resulting positions are extremely sharp with mutual tactical opportunities."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Bishop's Gambit, Lopez Defense",
+    "description": "Lopez's solid approach emphasizes piece coordination and central control against White's bishop activity. Black's stable setup generates practical defensive chances."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Bishop's Gambit, Lopez Variation",
+    "description": "An alternative Lopez treatment offering flexibility in meeting White's threats. Black's solid piece placement creates practical complications for White to overcome."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Bishop's Gambit, Maurian Defense",
+    "description": "Maurian's defensive approach prioritizes piece security and board coordination. Black's patient maneuvering generates practical defensive chances against White's spatial advantage."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Bishop's Gambit, McDonnell Attack",
+    "description": "McDonnell's forcing continuation pursues kingside threats with aggressive piece placement. White's immediate pressure tests Black's defensive resources severely."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Bishop's Gambit, Paulsen Attack",
+    "description": "Paulsen's aggressive continuation emphasizes rapid piece development and central domination. White's pressure mounts quickly if Black falls behind in coordination."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Bishop's Gambit, Steinitz Defense",
+    "description": "Steinitz' solid defense maintains piece coordination and board control against White's aggression. Black's setup generates practical defensive chances through accurate maneuvering."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Breyer Gambit",
+    "description": "Breyer's contribution offers another pawn sacrifice to accelerate White's attack. The gambit creates sharp complications favoring players comfortable with tactical complications."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Carrera Gambit",
+    "description": "Carrera's gambit sacrifices additional material for rapid piece activity and central control. Black's compensation relies on defensive accuracy and counterattacking opportunities."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Dodo Variation",
+    "description": "This colorfully-named variation offers Black unconventional defensive resources. The unusual piece placement creates practical complications against White's aggressive setup."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Eisenberg Variation",
+    "description": "Eisenberg's rare approach offers Black flexibility in defense despite White's spatial advantage. The resulting positions create practical defensive chances through careful maneuvering."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Gaga Gambit",
+    "description": "This playfully-named gambit sacrifices pawns to generate piece activity and board pressure. Black must handle the complications carefully while seeking counterplay."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Lopez-Gianutio Countergambit, Hein Variation",
+    "description": "Hein's refinement of the Lopez-Gianutio countergambit offers Black aggressive complications. The position features mutual attacking chances if both players pursue their threats actively."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Mason-Keres Gambit",
+    "description": "Mason and Keres contribute a forcing gambit generating rapid tactical complications. The resulting positions favor players comfortable calculating sharp variations."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Orsini Gambit",
+    "description": "Orsini's gambit offers White additional pawn sacrifices for piece activity and board control. Black's compensation relies on defensive accuracy and tactical alertness."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Paris Gambit",
+    "description": "The Paris Gambit sacrifices material to accelerate piece development and central pressure. White seeks rapid coordination; Black must defend accurately or face overwhelming threats."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Schurig Gambit, with Bb5",
+    "description": "Schurig's gambit with Bb5 creates additional complications through piece placement. White's active setup pressures Black's position, requiring accurate defensive play."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Schurig Gambit, with Bd3",
+    "description": "Schurig's alternative with Bd3 offers different piece activity than the Bb5 line. White maintains similar attacking themes through flexible maneuvering."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Stamma Gambit",
+    "description": "Stamma's historical contribution offers pawn sacrifices for piece activity. The resulting positions maintain aggressive character favoring attacking players."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Tartakower Gambit",
+    "description": "Tartakower's gambit sacrifices material with flexible piece placement in mind. The resulting complications offer both sides practical winning chances."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Tartakower Gambit, Weiss Defense",
+    "description": "Weiss' defensive approach within Tartakower emphasizes piece security and board coordination. Black's solid setup generates practical defensive chances."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Tumbleweed",
+    "description": "This whimsically-named variation offers Black unconventional defensive resources. The unusual piece placement creates practical complications favoring resourceful defense."
+  },
+  {
+    "eco": "C33",
+    "name": "King's Gambit Accepted: Villemson Gambit",
+    "description": "Villemson's contribution offers another pawn sacrifice to accelerate White's piece activity. Black's compensation relies on tactical alertness and defensive accuracy."
+  },
+  {
+    "eco": "C34",
+    "name": "King's Gambit Accepted: Becker Defense",
+    "description": "Becker's defensive approach emphasizes piece coordination against White's kingside threats. Black's solid development generates practical chances despite White's spatial advantage."
+  },
+  {
+    "eco": "C34",
+    "name": "King's Gambit Accepted: Bonsch-Osmolovsky Variation",
+    "description": "This rare variation offers Black unconventional defensive setup and piece placement. The resulting position creates practical complications favoring accurate play from both sides."
+  },
+  {
+    "eco": "C34",
+    "name": "King's Gambit Accepted: Fischer Defense",
+    "description": "Fischer's solid approach emphasizes piece coordination and board control. Black's flexible development generates practical defensive chances against White's aggressive setup."
+  },
+  {
+    "eco": "C34",
+    "name": "King's Gambit Accepted: Fischer Defense, Schulder Gambit",
+    "description": "Schulder's gambit within Fischer adds tactical complications through another pawn sacrifice. The resulting position favors calculating players on both sides."
+  },
+  {
+    "eco": "C34",
+    "name": "King's Gambit Accepted: Fischer Defense, Spanish Variation",
+    "description": "The Spanish element adds complications through specific piece placement. Black maintains solid defensive chances while pursuing counterattacking opportunities."
+  },
+  {
+    "eco": "C34",
+    "name": "King's Gambit Accepted: Gianutio Countergambit",
+    "description": "Black's countergambit generates mutual pawn sacrifices and tactical complications. Both players must calculate carefully as the material and positional imbalance shifts."
+  },
+  {
+    "eco": "C34",
+    "name": "King's Gambit Accepted: Greco Gambit",
+    "description": "Greco's gambit offers White aggressive piece activity for pawn material. Black must defend accurately or face overwhelming central and kingside pressure."
+  },
+  {
+    "eco": "C34",
+    "name": "King's Gambit Accepted: King's Knight's Gambit",
+    "description": "The King's Knight's Gambit emphasizes piece activity and central control through Nf3 placement. Both sides pursue active play; accurate maneuvering determines the outcome."
+  },
+  {
+    "eco": "C34",
+    "name": "King's Gambit Accepted: MacLeod Defense",
+    "description": "MacLeod's defensive approach prioritizes piece security and board coordination. Black's solid setup generates practical defensive chances through careful positioning."
+  },
+  {
+    "eco": "C34",
+    "name": "King's Gambit Accepted: Schallopp Defense",
+    "description": "Schallopp's solid approach emphasizes piece coordination and central control. Black's flexible development maintains practical defensive chances against White's aggression."
+  },
+  {
+    "eco": "C34",
+    "name": "King's Gambit Accepted: Schallopp Defense, Tashkent Attack",
+    "description": "The Tashkent Attack sharpens Schallopp's defense significantly. White pursues kingside and central threats while Black seeks counterplay opportunities."
+  },
+  {
+    "eco": "C34",
+    "name": "King's Gambit Accepted: Wagenbach Defense",
+    "description": "Wagenbach's defensive approach maintains flexibility against White's aggressive setup. Black's piece placement creates practical complications requiring precise handling."
+  },
+  {
+    "eco": "C35",
+    "name": "King's Gambit Accepted: Cunningham Defense",
+    "description": "Cunningham's defense emphasizes piece activity and board control despite accepting the gambit. Black pursues practical winning chances through tactical alertness."
+  },
+  {
+    "eco": "C35",
+    "name": "King's Gambit Accepted: Cunningham Defense, Bertin Gambit",
+    "description": "Bertin's gambit adds complications through another pawn sacrifice within Cunningham. The resulting position features mutual attacking opportunities."
+  },
+  {
+    "eco": "C35",
+    "name": "King's Gambit Accepted: Cunningham Defense, McCormick Defense",
+    "description": "McCormick's defensive approach within Cunningham emphasizes piece coordination. Black maintains solid defensive chances through careful maneuvering."
+  },
+  {
+    "eco": "C36",
+    "name": "King's Gambit Accepted: Abbazia Defense",
+    "description": "The Abbazia Defense offers Black solid piece coordination and defensive resources. Black's setup creates practical complications against White's aggressive kingside threats."
+  },
+  {
+    "eco": "C36",
+    "name": "King's Gambit Accepted: Abbazia Defense, Main Line",
+    "description": "The mainline Abbazia emphasizes central control and piece coordination for Black. White must navigate accurate defense from Black's solid setup and counterplay chances."
+  },
+  {
+    "eco": "C36",
+    "name": "King's Gambit Accepted: Modern Defense",
+    "description": "Modern defensive principles guide Black's setup, emphasizing flexibility and piece coordination. Black's solid position generates practical defensive chances against White's themes."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Australian Gambit",
+    "description": "The Australian Gambit offers White rare gambit complications through unusual piece placement. The resulting position creates practical challenges for both players."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Blachly Gambit",
+    "description": "Blachly's gambit generates rapid piece activity and central pressure for White. Black must defend accurately or face overwhelming kingside and center threats."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Double Muzio Gambit",
+    "description": "The Double Muzio offers multiple pawn sacrifices to accelerate White's attack violently. The resulting positions are extremely sharp, favoring tactically sharp players."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Double Muzio Gambit, Baldwin Gambit",
+    "description": "Baldwin's contribution adds further complications to the Double Muzio framework. White's aggressive piece play creates overwhelming threats if Black errs defensively."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Double Muzio Gambit, Bello Gambit",
+    "description": "Bello's gambit variation maintains the Double Muzio's aggressive character. The resulting complications favor players comfortable calculating forcing variations."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Double Muzio Gambit, Paulsen Defense",
+    "description": "Paulsen's defensive approach within the Double Muzio emphasizes piece security over immediate counterattack. Black maintains practical defensive chances through accurate play."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Double Muzio Gambit, Young Gambit",
+    "description": "Young's gambit adds another dimension to the Double Muzio complexities. White pursues overwhelming piece activity; Black must defend with precision."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Ghulam-Kassim Gambit",
+    "description": "This rare gambit offers White unusual piece placement and tactical opportunities. Black must navigate the resulting complications with defensive accuracy."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: King's Knight's Gambit",
+    "description": "The classical King's Knight's Gambit emphasizes piece activity and kingside attacks. Both sides pursue active play with practical winning chances for both."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Kotov Gambit",
+    "description": "Kotov's gambit sacrifices material to generate rapid piece activity and board pressure. Black's compensation relies on defensive accuracy and counterattacking opportunities."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Lolli Gambit",
+    "description": "Lolli's historical gambit offers pawn sacrifices for aggressive piece development and kingside threats. White seeks rapid coordination; Black must defend carefully."
+  }
+]

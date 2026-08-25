@@ -1,0 +1,752 @@
+[
+  {
+    "eco": "D84",
+    "name": "Grünfeld Defense: Brinckmann Attack, Grünfeld Gambit Accepted",
+    "description": "White launches a kingside pawn assault with f4, accepting Black's central counterplay in exchange for rapid piece activity. This sharp gambit line demands precise calculation from both sides as White aims for kingside breakthroughs while Black coordinates counterattacking ideas."
+  },
+  {
+    "eco": "D85",
+    "name": "Grünfeld Defense: Exchange Variation, Modern Exchange Variation",
+    "description": "White trades light-squared bishops early and pursues central control with c4, establishing a solid but potentially slow position. Black responds flexibly with fianchetto development, creating a complex middlegame where both sides compete for space and piece coordination."
+  },
+  {
+    "eco": "D85",
+    "name": "Grünfeld Defense: Exchange Variation, Modern Exchange Variation, Kramnik's Line",
+    "description": "Kramnik's sophisticated approach emphasizes precise move orders and prophylactic planning after the early bishop trade. White maintains flexibility in the center while Black seeks active piece play, resulting in a strategically rich struggle."
+  },
+  {
+    "eco": "D85",
+    "name": "Grünfeld Defense: Exchange Variation, Modern Exchange Variation, Pawn Grab Line",
+    "description": "White greedily captures material in the center with Nxe6, accepting positional compensation and active piece play from Black. This aggressive try requires White to justify the material grab through forcing tactics and spatial advantages."
+  },
+  {
+    "eco": "D85",
+    "name": "Grünfeld Defense: Exchange Variation, Nadanian Attack",
+    "description": "White pursues a sharp, forcing setup aimed at exploiting Black's pieces after the e-file opening. The Nadanian Attack combines piece pressure with central control, creating practical winning chances through concrete threats."
+  },
+  {
+    "eco": "D86",
+    "name": "Grünfeld Defense: Exchange Variation, Classical Variation",
+    "description": "White follows orthodox development with Nf3 and Bg5, maintaining traditional superiority in space and time. Black must coordinate fianchetto development with accurate counterplay to avoid a passive position."
+  },
+  {
+    "eco": "D86",
+    "name": "Grünfeld Defense: Exchange Variation, Larsen Variation",
+    "description": "Larsen's flexible approach keeps White's pieces flexible while maintaining central control and kingside prospects. White's light-squared bishop aims at h7, pressuring Black's kingside stability while Black counters with dynamic piece play."
+  },
+  {
+    "eco": "D86",
+    "name": "Grünfeld Defense: Exchange Variation, Simagin's Improved Variation",
+    "description": "This variation refines White's setup with carefully chosen move orders to maximize piece coordination and central control. White achieves solid pressure on d5 and the e-file while Black seeks piece activity and queenside expansion."
+  },
+  {
+    "eco": "D86",
+    "name": "Grünfeld Defense: Exchange Variation, Simagin's Lesser Variation",
+    "description": "A less ambitious sibling to Simagin's Improved, this variation maintains White's positional edge without forcing immediate complications. Both sides engage in strategic maneuvering centered on piece activity and pawn structure."
+  },
+  {
+    "eco": "D87",
+    "name": "Grünfeld Defense: Exchange Variation, Seville Variation",
+    "description": "White organizes pieces with careful prophylaxis, often playing h3 to prevent tactical annoyances on g4. This methodical approach allows White to build pressure gradually while Black maneuvers for piece activity and central breaks."
+  },
+  {
+    "eco": "D87",
+    "name": "Grünfeld Defense: Exchange Variation, Spassky Variation",
+    "description": "Spassky's flexible setup avoids committal pawn moves, maintaining adaptability while preserving kingside attacking chances. White coordinates piece placement with tempo gains, creating practical winning opportunities against imprecise Black play."
+  },
+  {
+    "eco": "D88",
+    "name": "Grünfeld Defense: Exchange Variation, Spassky Variation",
+    "description": "A deeper exploration of Spassky's ideas with refined move orders and understanding of resulting positions. White combines sound positional play with sharp tactical possibilities, requiring Black to demonstrate excellent piece coordination."
+  },
+  {
+    "eco": "D89",
+    "name": "Grünfeld Defense: Exchange Variation, Sokolsky Variation",
+    "description": "Sokolsky's contribution emphasizes piece development and tactical sharpness over structural simplification. White maintains central tension and attacking possibilities while Black seeks counterplay through e-file pressure and piece activity."
+  },
+  {
+    "eco": "D89",
+    "name": "Grünfeld Defense: Exchange Variation, Spassky Variation",
+    "description": "This continuation of Spassky's approach reaches the main theoretical battlegrounds where both sides employ sharp, forcing continuations. White's piece coordination meets Black's tactical resources in a dynamically balanced position."
+  },
+  {
+    "eco": "D90",
+    "name": "Grünfeld Defense: Flohr Variation",
+    "description": "Flohr's solid approach avoids early tactical complications through conservative piece placement and restrained pawn moves. White builds methodical pressure on the center while Black develops fianchetto and seeks to challenge White's space advantage."
+  },
+  {
+    "eco": "D90",
+    "name": "Grünfeld Defense: Three Knights Variation",
+    "description": "White deploys three knights aggressively, creating a piece-heavy setup aimed at tactical opportunities. Black counters with fianchetto development and central breaks, resulting in a sharp, tactically-charged middlegame."
+  },
+  {
+    "eco": "D91",
+    "name": "Grünfeld Defense: Three Knights Variation, Petrosian System",
+    "description": "Petrosian's refined approach emphasizes positional understanding and preventative planning rather than immediate tactical sharpness. White methodically improves piece placement while Black seeks active counterplay through accurate sequencing."
+  },
+  {
+    "eco": "D92",
+    "name": "Grünfeld Defense: Three Knights Variation, Hungarian Attack",
+    "description": "White launches a direct assault with pawn and piece advances aimed at kingside and central breakthroughs. Black must defend resourcefully while maintaining counterattacking chances in this aggressive, forcing continuation."
+  },
+  {
+    "eco": "D93",
+    "name": "Grünfeld Defense: Three Knights Variation, Hungarian Variation",
+    "description": "A classical approach combining central control with kingside attacking prospects through careful piece coordination. White maintains spatial advantage while Black activates pieces and seeks to undermine White's pawn center through tactical means."
+  },
+  {
+    "eco": "D94",
+    "name": "Grünfeld Defense: Flohr Defense",
+    "description": "Flohr's defensive innovation provides Black with solid counterplay against White's aggressive setup through accurate move selection. White pursues space advantage while Black maintains flexibility for central and queenside counterattacking ideas."
+  },
+  {
+    "eco": "D94",
+    "name": "Grünfeld Defense: Makogonov Variation",
+    "description": "Makogonov's contribution features a refined central strategy with piece placement emphasizing control over d5 and central squares. Both sides battle for initiative through accurate tactical and positional maneuvering."
+  },
+  {
+    "eco": "D94",
+    "name": "Grünfeld Defense: Opocensky Variation",
+    "description": "Opocensky's approach introduces flexibility in White's setup, maintaining multiple strategic ideas while avoiding rigid structures. Black responds with dynamic piece play, resulting in a rich middlegame with opportunities for both sides."
+  },
+  {
+    "eco": "D94",
+    "name": "Grünfeld Defense: Smyslov Defense",
+    "description": "Smyslov's defensive resourcefulness provides Black with solid play through precise piece coordination and tactical alertness. White maintains central and kingside pressure while Black seeks to exploit piece activity and weak squares."
+  },
+  {
+    "eco": "D94",
+    "name": "Grünfeld Defense: Three Knights Variation, Burille Variation",
+    "description": "Burille's specific variation within the Three Knights system adds nuance to the strategic struggle between central control and piece activity. White continues methodically while Black maneuvers for tactical opportunities and positional improvements."
+  },
+  {
+    "eco": "D94",
+    "name": "Grünfeld Defense: Three Knights Variation, Paris Variation",
+    "description": "The Paris Variation emphasizes tactical sharpness and piece coordination within the Three Knights framework. White aims for kingside and central domination while Black seeks tactical counterplay through piece activation."
+  },
+  {
+    "eco": "D95",
+    "name": "Grünfeld Defense: Botvinnik Variation",
+    "description": "Botvinnik's sophisticated approach combines positional understanding with tactical alertness, creating complex middlegames. White maintains central control and piece activity while Black pursues dynamic counterplay through the fianchetto structure."
+  },
+  {
+    "eco": "D95",
+    "name": "Grünfeld Defense: Pachman Variation",
+    "description": "Pachman's contribution refines White's setup with careful move orders and flexible piece placement. This balanced approach allows White to maintain winning chances while Black develops active play through piece coordination."
+  },
+  {
+    "eco": "D95",
+    "name": "Grünfeld Defense: Three Knights Variation, Vienna Variation",
+    "description": "Vienna's perspective on the Three Knights system introduces subtle strategic ideas and piece coordination themes. Both sides engage in positional maneuvering while maintaining tactical alertness throughout the middlegame."
+  },
+  {
+    "eco": "D97",
+    "name": "Grünfeld Defense: Russian Variation, Byrne Variation",
+    "description": "Byrne's sharp continuation in the Russian line features aggressive kingside play and forcing variations. White combines spatial advantages with tactical opportunities while Black must defend precisely to maintain balance."
+  },
+  {
+    "eco": "D97",
+    "name": "Grünfeld Defense: Russian Variation, Hungarian Variation",
+    "description": "The Hungarian approach within the Russian system emphasizes piece activity and central tension. White maintains attacking chances while Black coordinates defensive resources and counterattacking ideas."
+  },
+  {
+    "eco": "D97",
+    "name": "Grünfeld Defense: Russian Variation, Levenfish Variation",
+    "description": "Levenfish's classical approach features sound positional play and careful piece coordination in the Russian framework. White builds methodical pressure while Black seeks tactical opportunities through accurate piece placement."
+  },
+  {
+    "eco": "D97",
+    "name": "Grünfeld Defense: Russian Variation, Prins Variation",
+    "description": "Prins's contribution to the Russian system introduces flexible strategic ideas and refined move orders. White maintains central control while Black activates pieces and seeks to exploit dynamic possibilities."
+  },
+  {
+    "eco": "D97",
+    "name": "Grünfeld Defense: Russian Variation, Szabo Variation",
+    "description": "Szabo's approach emphasizes piece coordination and tactical sharpness within the Russian framework. Both sides pursue active play with White maintaining space advantage and Black seeking counterattacking opportunities."
+  },
+  {
+    "eco": "D98",
+    "name": "Grünfeld Defense: Russian Variation, Keres Variation",
+    "description": "Keres's sharp continuation combines aggressive piece play with central control in the Russian system. White pushes for direct winning attempts while Black must respond accurately to maintain material and position balance."
+  },
+  {
+    "eco": "D98",
+    "name": "Grünfeld Defense: Russian Variation, Smyslov Variation",
+    "description": "Smyslov's refined approach in the Russian framework features solid positional play with tactical alertness. White maintains initiative through careful piece placement while Black seeks active counterplay and positional improvements."
+  },
+  {
+    "eco": "D99",
+    "name": "Grünfeld Defense: Russian Variation, Smyslov Variation",
+    "description": "This deeper continuation of Smyslov's Russian system reaches the main theoretical battleground where both sides employ sophisticated strategic and tactical ideas. White pursues space advantage while Black coordinates defensive resources with counterattacking prospects."
+  },
+  {
+    "eco": "D99",
+    "name": "Grünfeld Defense: Russian Variation, Yugoslav Variation",
+    "description": "The Yugoslav system represents the most aggressive and sharp continuation of the Russian Defense framework. White combines central control with kingside attacking chances while Black employs precise counterattacking ideas."
+  },
+  {
+    "eco": "E00",
+    "name": "Catalan Opening: Hungarian Gambit",
+    "description": "White offers a pawn sacrifice on c4, seeking rapid piece development and kingside attacking chances. Black may accept the gambit or pursue solid positional play, resulting in either sharp tactics or a strategic maneuvering game."
+  },
+  {
+    "eco": "E00",
+    "name": "Indian Defense: Devin Gambit",
+    "description": "Devin's aggressive pawn sacrifice creates immediate tactical complications and piece activity for White. Black must evaluate whether accepting the gambit or declining provides better practical winning chances."
+  },
+  {
+    "eco": "E00",
+    "name": "Indian Defense: Seirawan Attack",
+    "description": "Seirawan's modern attacking approach features aggressive piece placement and tactical sharpness against Black's fianchetto development. White aims for central domination and kingside attacking prospects through forcing variations."
+  },
+  {
+    "eco": "E01",
+    "name": "Catalan Opening: Tarrasch Defense",
+    "description": "Black counters White's c4 expansion with the central e6 and d5 advance, establishing a solid pawn structure. White must navigate between flexible maneuvering and tactical opportunities to maintain the opening advantage."
+  },
+  {
+    "eco": "E03",
+    "name": "Catalan Opening: Open Defense, Alekhine Variation",
+    "description": "Alekhine's sharp approach in the Open Catalan features forcing moves and tactical complications. White's bishop on g2 aims at the center while Black seeks piece activity and pawn breaks to ease the position."
+  },
+  {
+    "eco": "E04",
+    "name": "Catalan Opening: Open Defense, Modern Sharp Variation",
+    "description": "The Modern Sharp Variation emphasizes tactical complications and dynamic piece play over quiet positional maneuvering. White maintains central control and bishop pressure while Black activates pieces and seeks dynamic counterplay."
+  },
+  {
+    "eco": "E05",
+    "name": "Catalan Opening: Open Defense, Classical Line",
+    "description": "The Classical approach to the Open Catalan features sound positional play and traditional piece development. White builds methodical pressure with the long diagonal while Black coordinates defensive resources and counterattacking ideas."
+  },
+  {
+    "eco": "E07",
+    "name": "Catalan Opening: Closed, Botvinnik Variation",
+    "description": "Botvinnik's sophisticated approach in the Closed Catalan combines precise move orders with positional understanding. White maintains long-term space advantage while Black develops active piece coordination and counter-play."
+  },
+  {
+    "eco": "E08",
+    "name": "Catalan Opening: Closed, Spassky Gambit",
+    "description": "Spassky's pawn sacrifice creates dynamic complications and piece activity at the cost of material. White pursues aggressive piece placement and central breakthroughs while Black defends accurately for counterattacking chances."
+  },
+  {
+    "eco": "E08",
+    "name": "Catalan Opening: Closed, Zagoryansky Variation",
+    "description": "Zagoryansky's flexible approach maintains traditional Catalan features while introducing subtle strategic refinements. White orchestrates piece placement to maximize pressure on the center and long diagonal while Black seeks positional stability."
+  },
+  {
+    "eco": "E09",
+    "name": "Catalan Opening: Closed, Main Line",
+    "description": "The main line of the Closed Catalan represents the classical battleground where both sides employ refined strategic play. White establishes subtle positional pressure while Black coordinates fianchetto development with central and queenside counterplay."
+  },
+  {
+    "eco": "E09",
+    "name": "Catalan Opening: Closed, Sokolsky Variation",
+    "description": "Sokolsky's contribution to the Closed Catalan features flexible piece placement and refined strategic ideas. White maintains space advantage while Black develops active counterplay through precise piece coordination and pawn breaks."
+  },
+  {
+    "eco": "E09",
+    "name": "Catalan Opening: Closed Variation, Rabinovich Variation",
+    "description": "Rabinovich's approach emphasizes subtle positional themes and piece maneuvering within the Closed Catalan structure. Both sides pursue long-term strategic plans with White maintaining slight initiative through space and time advantages."
+  },
+  {
+    "eco": "E09",
+    "name": "Catalan Opening: Closed Variation, Traditional Variation",
+    "description": "The Traditional Variation represents orthodox play in the Closed Catalan with classical piece development and strategic themes. White exploits the long diagonal and space advantage while Black seeks dynamic counterplay through active piece placement."
+  },
+  {
+    "eco": "E10",
+    "name": "Blumenfeld Countergambit: Duz-Khotimirsky Variation",
+    "description": "Duz-Khotimirsky's approach to the Blumenfeld Countergambit features flexible counterplay and accurate move sequencing. Black sacrifices material for piece activity and central breaks while White must demonstrate concrete compensation."
+  },
+  {
+    "eco": "E10",
+    "name": "Blumenfeld Countergambit: Spielmann Variation",
+    "description": "Spielmann's sharp contribution to the Blumenfeld emphasizes tactical complications and piece activity for Black. Black accepts material deficit for dynamic counterattacking chances and central control possibilities."
+  },
+  {
+    "eco": "E10",
+    "name": "Indian Defense: Anti-Nimzo-Indian",
+    "description": "White's direct approach avoids Nimzo systems through careful early move selection and pawn placement. This solid setup maintains central control while preventing Black's typical pieces placement in the Nimzo framework."
+  },
+  {
+    "eco": "E10",
+    "name": "Indian Defense: Döry Indian",
+    "description": "Döry's solid approach features flexible development and sound positional play within the Indian Defense framework. White maintains space advantage while Black coordinates fianchetto development with central counterattacking resources."
+  },
+  {
+    "eco": "E10",
+    "name": "Indian Defense: Dzindzi-Indian Defense",
+    "description": "The Dzindzi-Indian represents an offbeat but solid approach combining fianchetto with central ideas. Both sides engage in positional maneuvering with White maintaining slight initiative through space and piece coordination."
+  },
+  {
+    "eco": "E11",
+    "name": "Bogo-Indian Defense: Exchange Variation",
+    "description": "White simplifies with an early bishop exchange, reducing Black's tactical resources while maintaining positional pressure. Black must create active play through piece coordination and central breaks in a somewhat simplified position."
+  },
+  {
+    "eco": "E11",
+    "name": "Bogo-Indian Defense: Grünfeld Variation",
+    "description": "The Grünfeld approach within the Bogo system features dynamic piece play and central control ideas. Black combines the bishop pair with fianchetto possibilities while White maintains solid positional advantages."
+  },
+  {
+    "eco": "E11",
+    "name": "Bogo-Indian Defense: Haiti Variation",
+    "description": "Haiti's specific variation introduces nuanced strategic ideas within the Bogo-Indian framework. Both sides maneuver for piece activity and positional advantage in a balanced, strategically-rich middlegame."
+  },
+  {
+    "eco": "E11",
+    "name": "Bogo-Indian Defense: Monticelli Trap",
+    "description": "This tactical trap within the Bogo system features a specific sequence that can catch unwary White players. Black sacrifices material for rapid piece development and attacking chances against the White king."
+  },
+  {
+    "eco": "E11",
+    "name": "Bogo-Indian Defense: New England Variation",
+    "description": "The New England approach brings modern strategic insights to the Bogo-Indian, emphasizing piece coordination and flexible development. White maintains space advantage while Black seeks dynamic counterplay through accurate piece placement."
+  },
+  {
+    "eco": "E11",
+    "name": "Bogo-Indian Defense: Nimzowitsch Variation",
+    "description": "Nimzowitsch's contribution features prophylactic ideas and flexible piece placement within the Bogo framework. White maintains central control while Black develops active counterplay through precise move sequencing."
+  },
+  {
+    "eco": "E11",
+    "name": "Bogo-Indian Defense: Retreat Variation",
+    "description": "White's flexible retreat with the bishop allows preservation of piece activity while avoiding early simplification. Black counters with active development while White maintains strategic options for future maneuvering."
+  },
+  {
+    "eco": "E11",
+    "name": "Bogo-Indian Defense: Vitolins Variation",
+    "description": "Vitolins's approach emphasizes sound positional play and refined move orders within the Bogo system. Both sides pursue balanced play with White maintaining subtle space advantage while Black coordinates piece activity."
+  },
+  {
+    "eco": "E11",
+    "name": "Bogo-Indian Defense: Wade-Smyslov Variation",
+    "description": "Wade and Smyslov's ideas combine classical understanding with flexible strategic planning in the Bogo-Indian. White and Black engage in positional maneuvering with both sides maintaining realistic winning chances."
+  },
+  {
+    "eco": "E12",
+    "name": "Queen's Indian Defense: Kasparov-Petrosian Variation",
+    "description": "This major variation combines Kasparov's aggressive ideas with Petrosian's positional refinement in the Queen's Indian. White pursues kingside attacking chances while Black maintains solid defensive structure with tactical counterplay."
+  },
+  {
+    "eco": "E12",
+    "name": "Queen's Indian Defense: Kasparov-Petrosian Variation, Andersson Variation",
+    "description": "Andersson's flexible approach within the Kasparov-Petrosian system features dynamic piece placement and accurate move ordering. White maintains pressure while Black seeks to equalize through active piece coordination."
+  },
+  {
+    "eco": "E12",
+    "name": "Queen's Indian Defense: Kasparov-Petrosian Variation, Classical Variation",
+    "description": "The Classical sub-variation represents orthodox play within the Kasparov-Petrosian framework. Both sides employ traditional strategies with White maintaining slight initiative through space and piece coordination advantages."
+  },
+  {
+    "eco": "E12",
+    "name": "Queen's Indian Defense: Kasparov-Petrosian Variation, Hedgehog Variation",
+    "description": "The Hedgehog structure characterizes Black's solid but passive setup, preparing for later strategic counter-breaks. White builds methodical pressure while Black maintains defensive resources and latent counterattacking possibilities."
+  },
+  {
+    "eco": "E12",
+    "name": "Queen's Indian Defense: Kasparov-Petrosian Variation, Kasparov Attack",
+    "description": "Kasparov's signature aggressive approach features direct piece play and kingside attacking chances in this variation. White combines spatial advantages with tactical opportunities while Black defends with precision and defensive ingenuity."
+  },
+  {
+    "eco": "E12",
+    "name": "Queen's Indian Defense: Kasparov-Petrosian Variation, Main Line",
+    "description": "The main line represents the most thoroughly analyzed continuation of the Kasparov-Petrosian system. Both sides employ refined theoretical understanding with balanced winning chances and complex middlegame play."
+  },
+  {
+    "eco": "E12",
+    "name": "Queen's Indian Defense: Kasparov-Petrosian Variation, Marco Defense",
+    "description": "Marco's defensive resource provides Black with solid counterplay against White's aggressive setup. Black maintains positional stability while seeking tactical opportunities through piece coordination and central breaks."
+  },
+  {
+    "eco": "E12",
+    "name": "Queen's Indian Defense: Kasparov-Petrosian Variation, Modern Variation",
+    "description": "The Modern approach brings contemporary strategic insights to the Kasparov-Petrosian, emphasizing dynamic play over solid positional structures. Both sides seek active piece coordination and tactical opportunities."
+  },
+  {
+    "eco": "E12",
+    "name": "Queen's Indian Defense: Kasparov-Petrosian Variation, Petrosian Attack",
+    "description": "Petrosian's tactical shot creates immediate complications and piece activity within the Kasparov-Petrosian framework. White pursues forcing variations while Black must defend accurately to maintain dynamic counterplay."
+  },
+  {
+    "eco": "E12",
+    "name": "Queen's Indian Defense: Kasparov-Petrosian Variation, Polovodin Gambit",
+    "description": "Polovodin's pawn sacrifice introduces tactical complications and piece activity for White in this variation. Black may accept the gambit for material advantage or decline for solid positional play."
+  },
+  {
+    "eco": "E12",
+    "name": "Queen's Indian Defense: Kasparov-Petrosian Variation, Rashkovsky Attack",
+    "description": "Rashkovsky's forcing continuation features sharp piece play and central breakthroughs within the Kasparov-Petrosian. White combines spatial advantages with tactical opportunities while Black seeks defensive resources."
+  },
+  {
+    "eco": "E12",
+    "name": "Queen's Indian Defense: Kasparov-Petrosian Variation, Romanishin Attack",
+    "description": "Romanishin's aggressive approach emphasizes dynamic piece play and kingside attacking ideas in this variation. White pursues forcing continuations with tactical complications while Black defends with precision."
+  },
+  {
+    "eco": "E12",
+    "name": "Queen's Indian Defense: Kasparov Variation",
+    "description": "Kasparov's main systems in the Queen's Indian feature aggressive piece play and attacking chances against Black's fianchetto. White combines spatial advantages with tactical sharpness while Black seeks active counterplay."
+  },
+  {
+    "eco": "E12",
+    "name": "Queen's Indian Defense: Kasparov Variation, Botvinnik Attack",
+    "description": "Botvinnik's tactical contribution within Kasparov's framework features forcing sequences and piece activity. White pursues direct attacking chances while Black must respond with accurate defensive and counterattacking resources."
+  },
+  {
+    "eco": "E12",
+    "name": "Queen's Indian Defense: Miles Variation",
+    "description": "Miles's flexible approach emphasizes dynamic piece placement and modern strategic ideas in the Queen's Indian. White maintains subtle pressure while Black develops active counterplay through accurate piece coordination."
+  },
+  {
+    "eco": "E12",
+    "name": "Queen's Indian Defense: Petrosian Variation",
+    "description": "Petrosian's systematic approach features careful move orders and prophylactic planning in the Queen's Indian. White maintains subtle but persistent pressure while Black seeks to equalize through balanced piece coordination."
+  },
+  {
+    "eco": "E12",
+    "name": "Queen's Indian Defense: Petrosian Variation, Farago Defense",
+    "description": "Farago's defensive refinement within Petrosian's system provides Black with solid resources. Black maintains positional stability while seeking tactical opportunities through precise piece placement and pawn breaks."
+  },
+  {
+    "eco": "E13",
+    "name": "Queen's Indian Defense: Kasparov Variation",
+    "description": "This continuation of Kasparov's ideas in the Queen's Indian reaches more complex theoretical positions. Both sides employ sharp tactical ideas combined with positional understanding."
+  },
+  {
+    "eco": "E14",
+    "name": "Queen's Indian Defense: Averbakh Variation",
+    "description": "Averbakh's flexible setup emphasizes piece coordination and central control within the Queen's Indian framework. White maintains solid positional advantages while Black seeks dynamic counterplay through active piece placement."
+  },
+  {
+    "eco": "E14",
+    "name": "Queen's Indian Defense: Spassky System",
+    "description": "Spassky's systematic approach features refined move orders and strategic planning in the Queen's Indian. White builds methodical pressure while Black coordinates defensive resources with strategic counter-plans."
+  },
+  {
+    "eco": "E14",
+    "name": "Queen's Indian Defense: Spassky System3",
+    "description": "This continuation of Spassky's system reaches deeper strategic positions with refined theoretical understanding. Both sides employ sophisticated maneuvering with White maintaining space advantage."
+  },
+  {
+    "eco": "E15",
+    "name": "Queen's Indian Defense: Buerger Variation",
+    "description": "Buerger's solid approach combines classical positional play with modern strategic ideas in the Queen's Indian. White maintains central control while Black develops active piece coordination and counterattacking resources."
+  },
+  {
+    "eco": "E15",
+    "name": "Queen's Indian Defense: Fianchetto Variation",
+    "description": "White's fianchetto setup establishes long-diagonal pressure and flexible piece development in the Queen's Indian. Both sides engage in refined positional maneuvering with White maintaining subtle spatial advantages."
+  },
+  {
+    "eco": "E15",
+    "name": "Queen's Indian Defense: Fianchetto Variation, Check Variation",
+    "description": "The Check Variation introduces tactical complications through early checks and forcing sequences. Both sides must navigate sharp tactical sequences while maintaining strategic understanding of the position."
+  },
+  {
+    "eco": "E15",
+    "name": "Queen's Indian Defense: Fianchetto Variation, Check Variation, Intermezzo Line",
+    "description": "The Intermezzo approach features tactical subtleties and forcing intermediate moves within the Check Variation. White and Black employ accurate move sequences to maintain balanced positions."
+  },
+  {
+    "eco": "E15",
+    "name": "Queen's Indian Defense: Fianchetto Variation, Check Variation, Modern Line",
+    "description": "The Modern continuation of the Check Variation emphasizes dynamic piece play and contemporary strategic ideas. Both sides pursue active play with White maintaining flexible strategic options."
+  },
+  {
+    "eco": "E15",
+    "name": "Queen's Indian Defense: Fianchetto Variation, Nimzowitsch Variation",
+    "description": "Nimzowitsch's prophylactic approach within the Fianchetto system features refined move orders and flexibility. White maintains space advantage while Black develops active counterplay through careful piece coordination."
+  },
+  {
+    "eco": "E15",
+    "name": "Queen's Indian Defense: Fianchetto Variation, Nimzowitsch Variation, Nimzowitsch Attack",
+    "description": "Nimzowitsch's tactical attack introduces forcing sequences and piece activity within his main framework. White pursues direct attacking chances while Black must defend with precision and tactical alertness."
+  },
+  {
+    "eco": "E15",
+    "name": "Queen's Indian Defense: Fianchetto Variation, Nimzowitsch Variation, Quiet Line",
+    "description": "The Quiet approach contrasts with tactical sharpness, emphasizing positional understanding and gradual pressure buildup. White maintains strategic flexibility while Black seeks balanced counterplay through accurate piece placement."
+  },
+  {
+    "eco": "E15",
+    "name": "Queen's Indian Defense: Fianchetto Variation, Nimzowitsch Variation, Timman's Line",
+    "description": "Timman's contribution features refined strategic ideas and dynamic piece coordination within Nimzowitsch's framework. Both sides employ sophisticated maneuvering with balanced winning chances."
+  },
+  {
+    "eco": "E15",
+    "name": "Queen's Indian Defense: Fianchetto Variation, Rubinstein Variation",
+    "description": "Rubinstein's flexible approach emphasizes dynamic piece play and modern strategic themes in the Fianchetto system. White maintains subtle pressure while Black develops active counterplay through precise piece coordination."
+  },
+  {
+    "eco": "E15",
+    "name": "Queen's Indian Defense: Fianchetto Variation, Sämisch Variation",
+    "description": "Sämisch's aggressive setup challenges Black's fianchetto structure with direct central pressure. White pursues piece activity and kingside attacking chances while Black seeks dynamic counterplay."
+  },
+  {
+    "eco": "E15",
+    "name": "Queen's Indian Defense: Fianchetto Variation, Traditional Line",
+    "description": "The Traditional approach represents classical play in the Fianchetto system with orthodox piece development. White builds methodical pressure while Black coordinates fianchetto development with counterattacking ideas."
+  },
+  {
+    "eco": "E16",
+    "name": "Queen's Indian Defense: Capablanca Variation",
+    "description": "Capablanca's classical approach combines sound positional play with flexible piece placement in the Queen's Indian. White maintains strategic pressure while Black develops active counterplay through accurate piece coordination."
+  },
+  {
+    "eco": "E16",
+    "name": "Queen's Indian Defense: Riumin Variation",
+    "description": "Riumin's solid approach features refined strategic ideas and careful move ordering in the Queen's Indian. Both sides engage in positional maneuvering with White maintaining subtle space advantages."
+  },
+  {
+    "eco": "E16",
+    "name": "Queen's Indian Defense: Yates Variation",
+    "description": "Yates's flexible setup emphasizes modern strategic understanding and dynamic piece placement in the Queen's Indian. White pursues gradual pressure while Black seeks active counterplay through piece coordination."
+  },
+  {
+    "eco": "E17",
+    "name": "Queen's Indian Defense: Anti-Queen's Indian System",
+    "description": "White's direct approach avoids main Queen's Indian systems through careful early move selection. This variation maintains central control while preventing Black's typical active piece placement."
+  },
+  {
+    "eco": "E17",
+    "name": "Queen's Indian Defense: Classical Variation",
+    "description": "The Classical system represents orthodox play in the Queen's Indian with traditional piece development. White builds methodical pressure while Black coordinates fianchetto development with central counterplay."
+  },
+  {
+    "eco": "E17",
+    "name": "Queen's Indian Defense: Classical Variation, Polugaevsky Gambit",
+    "description": "Polugaevsky's pawn sacrifice creates tactical complications and piece activity within the Classical system. White pursues forcing variations while Black may accept the gambit for material advantage or decline for safety."
+  },
+  {
+    "eco": "E17",
+    "name": "Queen's Indian Defense: Classical Variation, Taimanov Gambit",
+    "description": "Taimanov's aggressive pawn sacrifice introduces sharp tactical complications in the Classical system. White combines spatial advantages with forcing attack while Black must defend accurately for counterplay."
+  },
+  {
+    "eco": "E17",
+    "name": "Queen's Indian Defense: Euwe Variation",
+    "description": "Euwe's contribution features flexible move ordering and strategic planning within the Queen's Indian framework. White maintains subtle pressure while Black develops counterplay through accurate piece coordination."
+  },
+  {
+    "eco": "E17",
+    "name": "Queen's Indian Defense: Fianchetto Variation, Kramnik Variation",
+    "description": "Kramnik's modern refinement of the Fianchetto system emphasizes sophisticated piece placement and move ordering. Both sides employ refined understanding with balanced winning chances and complex strategic play."
+  },
+  {
+    "eco": "E17",
+    "name": "Queen's Indian Defense: Opocensky Variation",
+    "description": "Opocensky's flexible approach introduces modern strategic ideas to the Queen's Indian framework. White maintains strategic options while Black seeks active counterplay through dynamic piece coordination."
+  },
+  {
+    "eco": "E17",
+    "name": "Queen's Indian Defense: Traditional Variation",
+    "description": "The Traditional approach emphasizes classical positional play and orthodox development in the Queen's Indian. White builds methodical pressure while Black maintains defensive resources with tactical counterplay."
+  },
+  {
+    "eco": "E18",
+    "name": "Queen's Indian Defense: Classical Variation, Tiviakov Defense",
+    "description": "Tiviakov's solid defensive approach provides Black with reliable resources against White's central pressure. Black maintains positional stability while seeking tactical opportunities through precise piece placement."
+  },
+  {
+    "eco": "E18",
+    "name": "Queen's Indian Defense: Classical Variation, Traditional Variation",
+    "description": "The Traditional continuation emphasizes classical positional play and sound piece development in the Classical system. Both sides employ refined understanding with White maintaining space advantages."
+  },
+  {
+    "eco": "E18",
+    "name": "Queen's Indian Defense: Classical Variation, Traditional Variation, Nimzowitsch Line",
+    "description": "Nimzowitsch's specific approach within the Traditional Variation features prophylactic planning and flexible piece placement. White maintains gradual pressure while Black develops counterplay through accurate move sequencing."
+  },
+  {
+    "eco": "E19",
+    "name": "Queen's Indian Defense: Classical Variation, Traditional Variation, Main Line",
+    "description": "The main line of the Traditional Variation represents the most thoroughly analyzed continuation in this system. Both sides employ refined theoretical understanding with complex strategic and tactical play throughout."
+  },
+  {
+    "eco": "E20",
+    "name": "Nimzo-Indian Defense: Dilworth Gambit",
+    "description": "Dilworth's aggressive pawn sacrifice creates immediate tactical complications in the Nimzo-Indian. White seeks rapid piece activity and kingside attacking chances while Black must evaluate material compensation."
+  },
+  {
+    "eco": "E20",
+    "name": "Nimzo-Indian Defense: Kmoch Variation",
+    "description": "Kmoch's flexible approach emphasizes piece coordination and central control within the Nimzo framework. White maintains solid positional advantages while Black seeks active counterplay through precise piece placement."
+  },
+  {
+    "eco": "E20",
+    "name": "Nimzo-Indian Defense: Mikenas Attack",
+    "description": "Mikenas's aggressive setup features direct piece play and kingside attacking prospects in the Nimzo-Indian. White pursues forcing variations with tactical complications while Black defends with precision."
+  },
+  {
+    "eco": "E20",
+    "name": "Nimzo-Indian Defense: Romanishin Variation",
+    "description": "Romanishin's modern approach introduces dynamic strategic ideas to the Nimzo-Indian framework. White maintains flexible piece placement while Black develops active counterplay through tactical alertness."
+  },
+  {
+    "eco": "E20",
+    "name": "Nimzo-Indian Defense: Romanishin Variation, English Hybrid",
+    "description": "The English Hybrid merges Nimzo and English Opening ideas, creating a unique positional framework. Both sides navigate hybrid strategic themes with balanced winning chances and sophisticated maneuvering."
+  },
+  {
+    "eco": "E21",
+    "name": "Nimzo-Indian Defense: Three Knights Variation",
+    "description": "White deploys three knights aggressively, creating a piece-heavy setup with tactical opportunities. Black coordinates defense with fianchetto development while seeking tactical counterplay opportunities."
+  },
+  {
+    "eco": "E21",
+    "name": "Nimzo-Indian Defense: Three Knights Variation, Euwe Variation",
+    "description": "Euwe's flexible approach within the Three Knights system emphasizes sound positional play and accurate move ordering. White maintains pressure while Black develops counterplay through active piece coordination."
+  },
+  {
+    "eco": "E21",
+    "name": "Nimzo-Indian Defense: Three Knights Variation, Korchnoi Variation",
+    "description": "Korchnoi's aggressive contribution features sharp tactical play and piece activity within the Three Knights framework. White pursues forcing variations with attacking chances while Black must defend accurately."
+  },
+  {
+    "eco": "E21",
+    "name": "Nimzo-Indian Defense: Three Knights Variation, Shocron Gambit",
+    "description": "Shocron's pawn sacrifice introduces tactical complications and piece activity for White in this variation. Black may accept the gambit for material advantage or decline for solid positional play."
+  },
+  {
+    "eco": "E22",
+    "name": "Nimzo-Indian Defense: Spielmann Variation",
+    "description": "Spielmann's aggressive setup features direct attack ideas and piece activity in the Nimzo-Indian. White combines central control with kingside attacking chances while Black seeks dynamic counterplay."
+  },
+  {
+    "eco": "E23",
+    "name": "Nimzo-Indian Defense: Spielmann Variation, Carlsbad Variation",
+    "description": "The Carlsbad continuation emphasizes pawn structure and piece coordination within Spielmann's framework. Both sides battle for initiative through accurate tactical and positional maneuvering."
+  },
+  {
+    "eco": "E23",
+    "name": "Nimzo-Indian Defense: Spielmann Variation, Romanovsky Gambit",
+    "description": "Romanovsky's pawn sacrifice creates immediate complications and piece activity within Spielmann's system. White pursues forcing variations while Black must respond accurately to maintain dynamic counterplay."
+  },
+  {
+    "eco": "E23",
+    "name": "Nimzo-Indian Defense: Spielmann Variation, Stahlberg Variation",
+    "description": "Stahlberg's solid approach features refined strategic ideas and flexible piece placement in Spielmann's framework. White maintains pressure while Black develops counterplay through accurate piece coordination."
+  },
+  {
+    "eco": "E24",
+    "name": "Nimzo-Indian Defense: Sämisch Variation, Botvinnik Variation",
+    "description": "Botvinnik's sophisticated contribution combines aggressive pawn play with precise piece coordination in the Sämisch system. White seeks kingside breakthroughs while Black maintains defensive resources with tactical alertness."
+  },
+  {
+    "eco": "E25",
+    "name": "Nimzo-Indian Defense: Sämisch Variation, Keres Variation",
+    "description": "Keres's flexible approach within the Sämisch emphasizes piece activity and dynamic counterplay opportunities. Black maintains solid defensive structure while seeking tactical opportunities through accurate move sequencing."
+  },
+  {
+    "eco": "E25",
+    "name": "Nimzo-Indian Defense: Sämisch Variation, Romanovsky Variation",
+    "description": "Romanovsky's specific approach features refined strategic ideas and precise move ordering in the Sämisch system. Both sides employ sophisticated maneuvering with balanced winning chances throughout the middlegame."
+  },
+  {
+    "eco": "E26",
+    "name": "Nimzo-Indian Defense: Sämisch Variation, O'Kelly Variation",
+    "description": "O'Kelly's flexible defense provides Black with solid resources against White's aggressive Sämisch setup. Black maintains positional stability while seeking tactical opportunities through accurate piece coordination."
+  },
+  {
+    "eco": "E29",
+    "name": "Nimzo-Indian Defense: Sämisch Variation, Capablanca Variation",
+    "description": "Capablanca's classical approach combines sound positional understanding with flexible piece placement in the Sämisch. White maintains central pressure while Black develops active counterplay through precise maneuvering."
+  },
+  {
+    "eco": "E30",
+    "name": "Nimzo-Indian Defense: Leningrad Variation, Averbakh Gambit",
+    "description": "Averbakh's aggressive pawn sacrifice creates tactical complications and piece activity in the Leningrad system. White pursues forcing variations with attacking chances while Black may accept the gambit for material compensation."
+  },
+  {
+    "eco": "E31",
+    "name": "Nimzo-Indian Defense: Leningrad Variation, Benoni Defense",
+    "description": "The Benoni approach brings dynamic counterattacking ideas to the Leningrad framework. Black seeks active piece play and central breaks while White maintains spatial advantages through flexible piece coordination."
+  },
+  {
+    "eco": "E32",
+    "name": "Nimzo-Indian Defense: Classical Variation, Keres Defense",
+    "description": "Keres's solid defensive approach provides Black with reliable resources in the Classical Nimzo system. Black maintains positional stability while seeking tactical opportunities through accurate piece placement and pawn breaks."
+  },
+  {
+    "eco": "E32",
+    "name": "Nimzo-Indian Defense: Classical Variation, Vitolins-Adorjan Gambit",
+    "description": "Vitolins and Adorjan's pawn sacrifice creates immediate tactical complications within the Classical system. White combines spatial advantages with forcing attack while Black must defend accurately for counterplay."
+  },
+  {
+    "eco": "E33",
+    "name": "Nimzo-Indian Defense: Classical Variation, Milner-Barry Variation",
+    "description": "Milner-Barry's aggressive approach features sharp piece play and tactical complications in the Classical system. White pursues direct attacking chances while Black coordinates defensive resources with tactical alertness."
+  },
+  {
+    "eco": "E33",
+    "name": "Nimzo-Indian Defense: Classical Variation, Zurich Variation",
+    "description": "The Zurich approach emphasizes solid positional play and flexible strategic planning in the Classical Nimzo. Both sides pursue balanced play with White maintaining space advantage and Black coordinating counterplay."
+  },
+  {
+    "eco": "E34",
+    "name": "Nimzo-Indian Defense: Classical Variation, Belyavsky Gambit",
+    "description": "Belyavsky's pawn sacrifice introduces tactical complications and piece activity in the Classical system. White seeks rapid piece development and attacking chances while Black must evaluate material compensation carefully."
+  },
+  {
+    "eco": "E34",
+    "name": "Nimzo-Indian Defense: Classical Variation, Noa Variation",
+    "description": "Noa's flexible approach within the Classical framework combines solid positional play with tactical resources. White maintains pressure while Black develops counterplay through accurate piece coordination and strategic planning."
+  },
+  {
+    "eco": "E35",
+    "name": "Nimzo-Indian Defense: Classical Variation, Noa Variation",
+    "description": "This continuation of Noa's approach reaches deeper positions with refined theoretical understanding. Both sides employ sophisticated strategic ideas with balanced winning chances and complex tactical play."
+  },
+  {
+    "eco": "E36",
+    "name": "Nimzo-Indian Defense: Classical Variation, Noa Variation",
+    "description": "The main line of Noa's Variation represents the most thoroughly analyzed continuation in this system. White maintains subtle pressure while Black coordinates defense with active tactical resources."
+  },
+  {
+    "eco": "E36",
+    "name": "Nimzo-Indian Defense: Classical Variation, Noa Variation, Botvinnik Variation",
+    "description": "Botvinnik's refined approach within Noa's system features sophisticated piece coordination and tactical alertness. Both sides employ refined understanding with White maintaining initiative through space and piece activity."
+  },
+  {
+    "eco": "E36",
+    "name": "Nimzo-Indian Defense: Classical Variation, Noa Variation, Main Line",
+    "description": "The main theoretical battleground in Noa's Classical system features complex strategic and tactical play. Both sides employ refined understanding with balanced winning chances throughout the middlegame."
+  },
+  {
+    "eco": "E36",
+    "name": "Nimzo-Indian Defense: Classical Variation, Romanishin Gambit",
+    "description": "Romanishin's pawn sacrifice creates immediate tactical complications within the Classical framework. White combines spatial advantages with forcing attack while Black must respond with accurate defense and counterplay."
+  },
+  {
+    "eco": "E37",
+    "name": "Nimzo-Indian Defense: Classical Variation, Modern Variation",
+    "description": "The Modern continuation brings contemporary strategic insights to the Classical Nimzo system. White maintains flexible strategic options while Black develops active counterplay through dynamic piece coordination."
+  },
+  {
+    "eco": "E37",
+    "name": "Nimzo-Indian Defense: Classical Variation, Noa Variation",
+    "description": "This specific exploration of Noa's Classical approach features refined move orders and flexible piece placement. Both sides maneuver for advantage through accurate tactical and positional maneuvering."
+  },
+  {
+    "eco": "E37",
+    "name": "Nimzo-Indian Defense: Classical Variation, Noa Variation, San Remo Variation",
+    "description": "The San Remo system represents a sophisticated continuation within Noa's Classical framework. Both sides pursue refined strategic ideas with White maintaining space advantage and Black coordinating active counterplay."
+  },
+  {
+    "eco": "E38",
+    "name": "Nimzo-Indian Defense: Classical Variation, Berlin Variation",
+    "description": "The Berlin approach introduces specific strategic ideas and move orders to the Classical Nimzo framework. White maintains central control while Black develops active counterplay through precise piece coordination."
+  },
+  {
+    "eco": "E38",
+    "name": "Nimzo-Indian Defense: Classical Variation, Berlin Variation, Steiner Variation",
+    "description": "Steiner's specific approach within the Berlin system emphasizes flexible piece placement and tactical alertness. Both sides engage in balanced play with White maintaining subtle spatial advantages."
+  },
+  {
+    "eco": "E39",
+    "name": "Nimzo-Indian Defense: Classical Variation, Berlin Variation, Macieja System",
+    "description": "Macieja's modern refinement of the Berlin system features sophisticated piece coordination and strategic planning. Both sides employ refined theoretical understanding with complex tactical and positional opportunities throughout."
+  }
+]

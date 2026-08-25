@@ -1,0 +1,752 @@
+[
+  {
+    "eco": "B02",
+    "name": "Alekhine Defense: Mokele Mbembe, Vavra Defense",
+    "description": "A rare sideline against the Alekhine Defense where White declines rapid pawn advances, instead developing piece activity against Black's flexible setup. Black seeks solid positional play, using kingside pawn breaks and piece coordination to counter White's spatial pressure."
+  },
+  {
+    "eco": "B02",
+    "name": "Alekhine Defense: Normal Variation",
+    "description": "The main-line continuation of the Alekhine Defense after 3.d4, where White opens the center while Black's knight remains on its active square. White builds a central advantage and piece pressure, while Black aims for counterplay via piece mobility and pawn tension."
+  },
+  {
+    "eco": "B02",
+    "name": "Alekhine Defense: Sämisch Attack",
+    "description": "White launches an aggressive setup with f3, preparing e4 and kingside pawn expansion. This solid variation prioritizes rapid pawn center development and long-term spatial advantage over spectacular tactical ideas, typical of Sämisch's methodical style."
+  },
+  {
+    "eco": "B02",
+    "name": "Alekhine Defense: Scandinavian Variation",
+    "description": "White develops with d4 and a modest setup while Black plays a flexible defensive scheme. The resulting position emphasizes space management and piece centralization, with White seeking gradual positional pressure and Black looking for tactical relief."
+  },
+  {
+    "eco": "B02",
+    "name": "Alekhine Defense: Scandinavian Variation, Geschev Gambit",
+    "description": "White sacrifices a central pawn to accelerate piece development and open lines for attack. Black must carefully evaluate whether the compensation for material justifies accepting the gambit, as White seeks rapid initiative on the kingside."
+  },
+  {
+    "eco": "B02",
+    "name": "Alekhine Defense: Scandinavian Variation, Myers Gambit",
+    "description": "An offbeat pawn sacrifice in the Alekhine Defense where White opens lines prematurely to generate attacking chances. This gambit appeals to players seeking sharp, unbalanced positions, though the theoretical evaluation remains unclear."
+  },
+  {
+    "eco": "B02",
+    "name": "Alekhine Defense: Spielmann Gambit",
+    "description": "Spielmann's aggressive contribution to the Alekhine Defense where White sacrifices material for rapid piece coordination and kingside attack. The gambit suits aggressive players prioritizing dynamic compensation and practical winning chances over objective assessment."
+  },
+  {
+    "eco": "B02",
+    "name": "Alekhine Defense: Steiner Variation",
+    "description": "A controlled approach where White develops methodically with modest pawn advances and solid piece placement. This variation avoids sharp theoretical battles, allowing White to capitalize on Black's slight space disadvantage through patient maneuvering."
+  },
+  {
+    "eco": "B02",
+    "name": "Alekhine Defense: The Squirrel",
+    "description": "A quirky and unconventional defensive setup in the Alekhine where Black adopts an unusual pawn structure or piece arrangement. The name reflects its unorthodox nature, appealing to creative players who relish surprising opponents and derailing preparation."
+  },
+  {
+    "eco": "B02",
+    "name": "Alekhine Defense: Two Pawns Attack",
+    "description": "White aggressively pushes e4 and d4, establishing a strong central space advantage while Black's knight must navigate carefully. Black typically challenges the center immediately, seeking piece activity and tactical opportunities to offset White's overwhelming pawn presence."
+  },
+  {
+    "eco": "B02",
+    "name": "Alekhine Defense: Two Pawns Attack, Lasker Variation",
+    "description": "An accurate defensive setup in the Two Pawns Attack where Black carefully prepares counterplay against White's central dominance. Lasker's method emphasizes solid piece development and waiting moves, reducing White's attacking potential through precise prophylaxis."
+  },
+  {
+    "eco": "B02",
+    "name": "Alekhine Defense: Two Pawns Attack, Mikenas Variation",
+    "description": "Black employs a distinctive counterattacking scheme within the Two Pawns Attack framework, often involving rapid piece deployment and central probes. This sharp variation appeals to resourceful defenders seeking practical chances despite White's space advantage."
+  },
+  {
+    "eco": "B02",
+    "name": "Alekhine Defense: Two Pawns Attack, Tate Variation",
+    "description": "A specialized defensive continuation in the Two Pawns Attack where Black prioritizes piece activity over rigid pawn structure. Tate's approach seeks dynamic tactical opportunities, accepting compromised pawn placement in exchange for coordinated piece power."
+  },
+  {
+    "eco": "B02",
+    "name": "Alekhine Defense: Welling Variation",
+    "description": "A lesser-known sideline against the Alekhine where White employs a non-standard setup, perhaps delaying central commitments. Black maintains flexibility while awaiting White's plan, then responds with appropriate piece placement and central challenges."
+  },
+  {
+    "eco": "B03",
+    "name": "Alekhine Defense: Balogh Variation",
+    "description": "A rare continuation in the Alekhine complex where White or Black introduces an unusual move or piece formation. The variation often features delayed central operations and strategic maneuvering, appealing to players seeking offbeat, non-theoretical territory."
+  },
+  {
+    "eco": "B03",
+    "name": "Alekhine Defense: Exchange Variation, Karpov Variation",
+    "description": "Karpov's refined approach to the Alekhine Exchange where White calmly recaptures and seeks positional squeezing. This variation prioritizes endgame technique and prophylactic play, minimizing Black's piece activity while accumulating small advantages."
+  },
+  {
+    "eco": "B03",
+    "name": "Alekhine Defense: Exchange Variation, Voronezh Variation",
+    "description": "A specialized continuation after the Exchange Variation featuring an unusual pawn structure or piece placement associated with Voronezh masters. This line remains relatively unexplored, offering practical opportunities for prepared players."
+  },
+  {
+    "eco": "B03",
+    "name": "Alekhine Defense: Four Pawns Attack, Cambridge Gambit",
+    "description": "White sacrifices a pawn in the Four Pawns Attack to accelerate piece development and launch a kingside assault. Black must defend resourcefully, as the gambit offers White genuine attacking potential despite the material investment."
+  },
+  {
+    "eco": "B03",
+    "name": "Alekhine Defense: Four Pawns Attack, Fianchetto Variation",
+    "description": "White develops the kingside bishop via fianchetto in the Four Pawns Attack, creating long-diagonal pressure and flexible pawn control. This solid setup suits players preferring strategic pressure to immediate tactical complications."
+  },
+  {
+    "eco": "B03",
+    "name": "Alekhine Defense: Four Pawns Attack, Ilyin-Zhenevsky Variation",
+    "description": "A classical response to the Four Pawns Attack where Black develops methodically, preparing counter-strikes against White's kingside-oriented setup. This solid defensive scheme suits players with strong positional understanding and patient endgame technique."
+  },
+  {
+    "eco": "B03",
+    "name": "Alekhine Defense: Four Pawns Attack, Korchnoi Variation",
+    "description": "Korchnoi's fighting approach to defending the Four Pawns Attack involves active piece placement and immediate counterplay. This variation suits aggressive defenders who refuse passive consolidation, seeking dynamic counterchances against White's spatial advantage."
+  },
+  {
+    "eco": "B03",
+    "name": "Alekhine Defense: Four Pawns Attack, Main Line",
+    "description": "The principled continuation where White maintains a strong pawn center while Black develops piece activity and central challenges. White's space advantage must overcome Black's piece coordination and tactical opportunities in this fundamental struggle."
+  },
+  {
+    "eco": "B03",
+    "name": "Alekhine Defense: Four Pawns Attack, Tartakower Variation",
+    "description": "Tartakower's strategic defense in the Four Pawns Attack emphasizes gradual piece coordination and prophylactic maneuvering. This refined approach reduces White's attacking potential while maintaining flexibility for both central breaks and piece maneuvers."
+  },
+  {
+    "eco": "B03",
+    "name": "Alekhine Defense: Four Pawns Attack, Trifunovic Variation",
+    "description": "Trifunovic's specialized defensive setup in the Four Pawns Attack features an unusual piece arrangement or pawn structure. This rare continuation offers practical players a non-theoretical path, though its evaluation remains subject to modern engines."
+  },
+  {
+    "eco": "B03",
+    "name": "Alekhine Defense: Hunt Variation",
+    "description": "A provocative setup where White attacks Black's position directly with piece moves rather than standard pawn advances. Hunt's approach prioritizes piece activity and tactical threats, appealing to players who enjoy sharp, unbalanced positions."
+  },
+  {
+    "eco": "B03",
+    "name": "Alekhine Defense: Modern Variation, Alekhine Gambit",
+    "description": "Alekhine himself developed this gambit continuation within his named defense, sacrificing material for rapid piece activity. The gambit suit players trusting their tactical skill and piece coordination over strict material balance."
+  },
+  {
+    "eco": "B03",
+    "name": "Alekhine Defense: O'Sullivan Gambit",
+    "description": "O'Sullivan offers a pawn sacrifice to generate immediate attacking chances in the Alekhine. White seeks compensation through piece pressure and open lines, appealing to aggressive players comfortable with sharp, unclear positions."
+  },
+  {
+    "eco": "B04",
+    "name": "Alekhine Defense: Modern Variation, Alburt Variation",
+    "description": "Alburt's refined defensive setup in the Alekhine Modern Variation features careful piece coordination and solid pawn structure. This approach minimizes White's attacking opportunities while maintaining flexibility for counterplay."
+  },
+  {
+    "eco": "B04",
+    "name": "Alekhine Defense: Modern Variation, Keres Variation",
+    "description": "Keres' fighting approach in the Modern Variation emphasizes active piece placement and immediate counterplay. This sharp defensive scheme suits players seeking dynamic chances rather than passive consolidation against White's spatial advantage."
+  },
+  {
+    "eco": "B04",
+    "name": "Alekhine Defense: Modern Variation, Larsen-Haakert Variation",
+    "description": "This specialized continuation combines ideas from Larsen and Haakert, featuring an unconventional piece arrangement or pawn structure. The variation offers practical players a creative path that avoids standard theoretical main lines."
+  },
+  {
+    "eco": "B04",
+    "name": "Alekhine Defense: Modern Variation, Larsen Variation",
+    "description": "Larsen's imaginative approach to the Modern Variation emphasizes piece flexibility and unusual pawn structures. This offbeat defensive scheme suits creative players who enjoy derailing standard preparation and playing unconventional positions."
+  },
+  {
+    "eco": "B04",
+    "name": "Alekhine Defense: Modern Variation, Schmid Variation",
+    "description": "A solid defensive setup where Black develops methodically while awaiting White's attacking plans. Schmid's approach prioritizes piece coordination and prophylactic maneuvering, gradually improving Black's position through patient play."
+  },
+  {
+    "eco": "B05",
+    "name": "Alekhine Defense: Modern Variation, Alekhine Variation",
+    "description": "The founder's own defensive approach in his Modern Variation, featuring a characteristic piece placement and pawn structure. This setup maintains Black's classical flexibility while preparing for both central breaks and kingside expansion."
+  },
+  {
+    "eco": "B05",
+    "name": "Alekhine Defense: Modern Variation, Flohr Variation",
+    "description": "Flohr's precise defensive setup in the Modern Variation emphasizes solid pawn structure and piece coordination. This classical approach gradually improves Black's position through accurate prophylaxis and strategic maneuvers."
+  },
+  {
+    "eco": "B05",
+    "name": "Alekhine Defense: Modern Variation, Main Line",
+    "description": "The principal continuation where Black develops a complete defensive setup after White's strong center. White seeks to consolidate the advantage through kingside expansion, while Black prepares counterplay via piece activity and central challenges."
+  },
+  {
+    "eco": "B05",
+    "name": "Alekhine Defense: Modern Variation, Panov Variation",
+    "description": "Panov's aggressive approach in the Modern Variation features sharp attacking ideas and tactical opportunities. This variation suits players preferring direct attacks over solid defensive squeeze, though it requires precise calculation."
+  },
+  {
+    "eco": "B05",
+    "name": "Alekhine Defense: Modern Variation, Vitolins Attack",
+    "description": "Vitolins contributes an aggressive attacking setup within the Modern Variation framework, featuring non-standard piece placement and pawn advances. This sharp continuation offers practical players creative chances in less-explored territory."
+  },
+  {
+    "eco": "B06",
+    "name": "Modern Defense: Anti-Modern",
+    "description": "White employs an unusual approach against the Modern Defense, perhaps delaying central commitments or using an unexpected piece setup. This unconventional strategy aims to disrupt Black's flexible setup and force unfamiliar positions."
+  },
+  {
+    "eco": "B06",
+    "name": "Modern Defense: Bishop Attack",
+    "description": "White develops the light-squared bishop actively against the Modern Defense, placing it on a central or kingside square. This direct approach seeks to control key squares and create tactical opportunities while Black develops gradually."
+  },
+  {
+    "eco": "B06",
+    "name": "Modern Defense: Bishop Attack, Bücker Gambit",
+    "description": "A pawn sacrifice in the Bishop Attack where White accelerates piece development and spatial expansion. Black must evaluate whether the material compensation justifies accepting the gambit as White seeks rapid tactical opportunities."
+  },
+  {
+    "eco": "B06",
+    "name": "Modern Defense: Bishop Attack, Monkey's Bum",
+    "description": "A colorfully-named variant of the Bishop Attack featuring an unusual defensive setup or piece formation. The playful name reflects its unconventional nature, appealing to creative players who enjoy unorthodox, nonstandard positions."
+  },
+  {
+    "eco": "B06",
+    "name": "Modern Defense: Dunworthy Variation",
+    "description": "A lesser-known sideline of the Modern Defense featuring Dunworthy's specific approach to either Black's setup or White's attacking scheme. This rare variation offers practical players opportunities in underexplored territory with room for creative ideas."
+  },
+  {
+    "eco": "B06",
+    "name": "Modern Defense: Fianchetto Gambit",
+    "description": "White sacrifices material to establish a fianchettoed bishop and rapid central control. Black accepts tactical complications for material advantage, leading to sharp, unbalanced play where both sides pursue concrete plans."
+  },
+  {
+    "eco": "B06",
+    "name": "Modern Defense: Gurgenidze Defense",
+    "description": "A specialized defensive setup within the Modern Defense framework, featuring Gurgenidze's characteristic piece arrangement. This solid approach maintains flexibility while gradually improving Black's position through patient maneuvering."
+  },
+  {
+    "eco": "B06",
+    "name": "Modern Defense: Lizard Defense, Mittenberger Gambit",
+    "description": "The Lizard Defense (a rare Modern sideline) combined with Mittenberger's gambit pawn sacrifice seeking rapid compensation. This offbeat gambit offers sharp, unpredictable play suitable for players comfortable with non-standard positions."
+  },
+  {
+    "eco": "B06",
+    "name": "Modern Defense: Masur Gambit",
+    "description": "Masur's aggressive gambit in the Modern Defense framework sacrifices a pawn for piece activity and central pressure. White seeks tactical compensation through coordinated piece play while Black aims to consolidate material advantage safely."
+  },
+  {
+    "eco": "B06",
+    "name": "Modern Defense: Modern Pterodactyl",
+    "description": "A fantastically-named sideline of the Modern Defense featuring unusual pawn structures and piece arrangements. This offbeat variation appeals to creative players seeking non-theoretical play and practical winning chances."
+  },
+  {
+    "eco": "B06",
+    "name": "Modern Defense: Mongredien Defense, with Nc3",
+    "description": "The Mongredien Defense (a flexible Modern setup) where White supports the center with knight development on c3. This solid approach prioritizes space and piece coordination while Black gradually improves through flexible maneuvering."
+  },
+  {
+    "eco": "B06",
+    "name": "Modern Defense: Mongredien Defense, with Nf3",
+    "description": "The Mongredien Defense where White develops the knight to f3 instead, emphasizing quick piece coordination. This flexible setup allows White to adapt based on Black's defensive approach and piece placement."
+  },
+  {
+    "eco": "B06",
+    "name": "Modern Defense: Norwegian Defense",
+    "description": "A Scandinavian contribution to the Modern Defense framework, featuring Norwegian players' characteristic approach. This solid defensive scheme maintains flexibility while gradually improving Black's position through patient strategic play."
+  },
+  {
+    "eco": "B07",
+    "name": "King's Pawn Game: Maróczy Defense",
+    "description": "After 1.e4, Black employs the Maróczy defensive setup, a flexible response that can transpose to various openings. This flexible approach allows Black to reach favorable structures while keeping White guessing about the specific variation ahead."
+  },
+  {
+    "eco": "B09",
+    "name": "Pirc Defense: Austrian Attack, Kurajica Variation",
+    "description": "Kurajica's specialized defensive setup within the Austrian Attack framework features an unusual piece arrangement. This solid approach seeks to neutralize White's kingside pressure while maintaining resources for counterplay."
+  },
+  {
+    "eco": "B09",
+    "name": "Pirc Defense: Austrian Attack, Ljubojevic Variation",
+    "description": "Ljubojevic's refined defensive approach in the Austrian Attack emphasizes accurate piece placement and prophylactic maneuvering. This solid defensive scheme gradually improves Black's position while containing White's attacking potential."
+  },
+  {
+    "eco": "B09",
+    "name": "Pirc Defense: Austrian Attack, Unzicker Attack",
+    "description": "Unzicker's aggressive continuation in the Austrian Attack features direct attacking ideas and kingside pressure. This sharp variation suits aggressive players seeking immediate tactical opportunities rather than long-term positional pressure."
+  },
+  {
+    "eco": "B09",
+    "name": "Pirc Defense: Austrian Attack, Unzicker Attack, Bronstein Variation",
+    "description": "Bronstein's fighting approach within Unzicker's attack emphasizes piece activity and counterplay. This sharp defensive scheme suits resourceful players seeking dynamic chances while maintaining defensive resources."
+  },
+  {
+    "eco": "B09",
+    "name": "Pirc Defense: Austrian Attack, Weiss Variation",
+    "description": "Weiss contributes a specialized defensive setup in the Austrian Attack, featuring a non-standard piece arrangement. This rare continuation offers practical players creative opportunities in less-explored theoretical territory."
+  },
+  {
+    "eco": "B10",
+    "name": "Caro-Kann Defense: Accelerated Panov Attack",
+    "description": "White launches the Panov Attack (d4 and c4) at an accelerated tempo against the Caro-Kann, seeking rapid central control. Black must manage the tension between defending the center and developing piece activity for counterplay."
+  },
+  {
+    "eco": "B10",
+    "name": "Caro-Kann Defense: Accelerated Panov Attack, Modern Variation",
+    "description": "A contemporary defensive approach in the Accelerated Panov featuring modern strategic ideas and flexible piece placement. Black seeks to gradually improve position while maintaining resources for central and kingside counterplay."
+  },
+  {
+    "eco": "B10",
+    "name": "Caro-Kann Defense: Accelerated Panov Attack, Open Variation",
+    "description": "Black accepts rapid central opening in the Accelerated Panov, leading to sharp tactical play. White gains space and attacking chances while Black compensates through piece activity and tactical opportunities."
+  },
+  {
+    "eco": "B10",
+    "name": "Caro-Kann Defense: Accelerated Panov Attack, Pseudo-Scandinavian",
+    "description": "A deceptive continuation in the Accelerated Panov where Black's setup resembles the Scandinavian while maintaining Caro-Kann flexibility. This unconventional approach can surprise White while offering practical defensive resources."
+  },
+  {
+    "eco": "B10",
+    "name": "Caro-Kann Defense: Accelerated Panov Attack, Van Weersel Attack",
+    "description": "Van Weersel's aggressive attacking setup in the Accelerated Panov features sharp tactical ideas and rapid piece development. White seeks immediate attacking chances while Black defends resourcefully, accepting tactical complications."
+  },
+  {
+    "eco": "B10",
+    "name": "Caro-Kann Defense: Apocalypse Attack",
+    "description": "A dramatically-named aggressive continuation where White pursues sharp attacking chances against the Caro-Kann. This offbeat attack suits aggressive players seeking unbalanced positions and practical winning chances."
+  },
+  {
+    "eco": "B10",
+    "name": "Caro-Kann Defense: Breyer Variation",
+    "description": "Breyer's solid defensive approach in the Caro-Kann emphasizes steady piece development and prophylactic maneuvering. This classical defensive scheme gradually improves Black's position through accurate, patient play."
+  },
+  {
+    "eco": "B10",
+    "name": "Caro-Kann Defense: Breyer Variation, Stein Attack",
+    "description": "Stein's aggressive continuation against Breyer's setup features sharp attacking ideas and tactical opportunities. White seeks immediate complications while Black defends methodically, maintaining structural integrity."
+  },
+  {
+    "eco": "B10",
+    "name": "Caro-Kann Defense: Dinic Gambit",
+    "description": "Dinic sacrifices a pawn to accelerate piece development and open lines for attack. Black accepts the material for positional consolidation and defensive resources, leading to sharp but structurally sound play."
+  },
+  {
+    "eco": "B10",
+    "name": "Caro-Kann Defense: Endgame Offer",
+    "description": "White deliberately simplifies toward an endgame where the Caro-Kann's pawn structure provides positional advantages. This strategic approach suits players with superior endgame technique willing to accept reduced winning chances for solid positions."
+  },
+  {
+    "eco": "B10",
+    "name": "Caro-Kann Defense: Endgame Variation",
+    "description": "A specific defensive setup aimed at reaching favorable endgames where Black's pawn structure offers defensive resources. This solid approach emphasizes piece coordination and prophylaxis over immediate tactical opportunities."
+  },
+  {
+    "eco": "B10",
+    "name": "Caro-Kann Defense: Euwe Attack",
+    "description": "Euwe's aggressive attacking setup against the Caro-Kann features sharp tactical ideas and rapid piece development. This offensive approach suits aggressive players seeking immediate complications rather than long-term positional advantage."
+  },
+  {
+    "eco": "B10",
+    "name": "Caro-Kann Defense: Goldman Variation",
+    "description": "A specialized defensive setup within the Caro-Kann framework featuring Goldman's unique approach. This rare continuation offers practical players creative opportunities to avoid main-line theoretical battles."
+  },
+  {
+    "eco": "B10",
+    "name": "Caro-Kann Defense: Hector Gambit",
+    "description": "Hector sacrifices a pawn seeking rapid piece development and attacking chances against the Caro-Kann. Black accepts the material for defensive resources, leading to sharp, unbalanced play favoring each side's plans."
+  },
+  {
+    "eco": "B10",
+    "name": "Caro-Kann Defense: Hillbilly Attack",
+    "description": "A colloquially-named aggressive setup where White pursues sharp tactical play against the Caro-Kann. Despite its folksy name, this variation features legitimate attacking ideas appealing to aggressive players."
+  },
+  {
+    "eco": "B10",
+    "name": "Caro-Kann Defense: Hillbilly Attack, Schaeffer Gambit",
+    "description": "Schaeffer's gambit contribution within the Hillbilly Attack features a pawn sacrifice for rapid piece development. White seeks compensation through tactical opportunities while Black consolidates material advantage defensively."
+  },
+  {
+    "eco": "B10",
+    "name": "Caro-Kann Defense: Labahn Attack",
+    "description": "Labahn's aggressive attacking setup against the Caro-Kann features direct attacking ideas and tactical opportunities. This sharp variation suits aggressive players comfortable with sharp, unbalanced positions."
+  },
+  {
+    "eco": "B10",
+    "name": "Caro-Kann Defense: Labahn Attack, Double Gambit",
+    "description": "An aggressive continuation where White sacrifices TWO pawns for rapid piece development and attacking chances. Black accepts the material advantage but must defend carefully against White's coordinated attacking ideas."
+  },
+  {
+    "eco": "B10",
+    "name": "Caro-Kann Defense: Labahn Attack, Polish Variation",
+    "description": "A Polish contribution to the Labahn Attack, featuring a specialized defensive or attacking setup. This variation offers practical players creative opportunities in less-explored theoretical territory."
+  },
+  {
+    "eco": "B10",
+    "name": "Caro-Kann Defense: Scorpion-Horus Gambit",
+    "description": "An offbeat gambit with a fantastic name where White sacrifices a pawn for rapid piece development. Black accepts the material but must defend against White's coordinated piece activity and tactical threats."
+  },
+  {
+    "eco": "B10",
+    "name": "Caro-Kann Defense: Spike Variation",
+    "description": "A specialized defensive setup within the Caro-Kann where Black employs the Spike approach. This flexible defensive scheme gradually improves Black's position while maintaining resources for central and kingside counterplay."
+  },
+  {
+    "eco": "B10",
+    "name": "Caro-Kann Defense: Spike Variation, Scorpion-Grob Gambit",
+    "description": "A gambit continuation within the Spike Variation featuring a pawn sacrifice for rapid piece development. White seeks compensation through tactical opportunities while Black consolidates material advantage safely."
+  },
+  {
+    "eco": "B10",
+    "name": "Caro-Kann Defense: St. Patrick's Attack",
+    "description": "A festively-named aggressive setup where White pursues sharp tactical play against the Caro-Kann. This offbeat attack suits aggressive players comfortable with unusual positions and practical winning chances."
+  },
+  {
+    "eco": "B10",
+    "name": "Caro-Kann Defense: Toikkanen Gambit",
+    "description": "Toikkanen's gambit sacrifice in the Caro-Kann offers rapid piece development and tactical opportunities. Black accepts the material for defensive resources and positional consolidation in this sharp variation."
+  },
+  {
+    "eco": "B11",
+    "name": "Caro-Kann Defense: Two Knights Attack, Mindeno Variation",
+    "description": "The Two Knights Attack with Mindeno's specialized defensive setup features careful piece coordination. Black seeks to neutralize White's knight pressure while maintaining flexibility for both central and kingside expansion."
+  },
+  {
+    "eco": "B11",
+    "name": "Caro-Kann Defense: Two Knights Attack, Mindeno Variation, Exchange Line",
+    "description": "Within Mindeno's setup, the Exchange Line features simplified pawn structures. This variation suits players seeking reduced tactical complications with strategic maneuvering and prophylactic play."
+  },
+  {
+    "eco": "B11",
+    "name": "Caro-Kann Defense: Two Knights Attack, Mindeno Variation, Retreat Line",
+    "description": "Mindeno's Retreat Line features flexible piece placement with retreat options, maintaining maximum flexibility. Black gradually improves position while preserving resources for tactical counterplay."
+  },
+  {
+    "eco": "B12",
+    "name": "Caro-Kann Defense: Advance, Short Variation",
+    "description": "A rapid pawn advance variation in the Advance Caro-Kann where White establishes strong central control. Black develops piece activity to challenge White's spatial advantage while maintaining defensive resources."
+  },
+  {
+    "eco": "B12",
+    "name": "Caro-Kann Defense: Advance Variation, Bayonet Attack",
+    "description": "White launches a sharp kingside pawn attack in the Advance Caro-Kann with g4 and related pawn advances. Black must defend accurately while counterattacking centrally and on the queenside."
+  },
+  {
+    "eco": "B12",
+    "name": "Caro-Kann Defense: Advance Variation, Botvinnik-Carls Defense",
+    "description": "Botvinnik and Carls developed this solid defensive approach in the Advance Caro-Kann featuring accurate piece placement. This classical defensive scheme gradually improves Black's position through patient strategic play."
+  },
+  {
+    "eco": "B12",
+    "name": "Caro-Kann Defense: Advance Variation, Bronstein Variation",
+    "description": "Bronstein's fighting defensive approach in the Advance Caro-Kann emphasizes immediate counterplay and tactical opportunities. This sharp variation suits resourceful defenders seeking active play despite White's spatial advantage."
+  },
+  {
+    "eco": "B12",
+    "name": "Caro-Kann Defense: Advance Variation, Prins Attack",
+    "description": "Prins contributes an aggressive attacking setup in the Advance Caro-Kann with sharp tactical ideas. White seeks rapid winning chances while Black defends methodically, maintaining structural integrity."
+  },
+  {
+    "eco": "B12",
+    "name": "Caro-Kann Defense: Advance Variation, Short Variation",
+    "description": "A rapid continuation in the Advance Caro-Kann emphasizing quick piece development for both sides. White maintains central advantage while Black seeks piece activity and counterplay opportunities."
+  },
+  {
+    "eco": "B12",
+    "name": "Caro-Kann Defense: Advance Variation, Tal Variation",
+    "description": "Tal's aggressive defensive approach in the Advance Caro-Kann features dynamic counterplay and tactical opportunities. This sharp variation suits resourceful players comfortable with sharp, unbalanced positions."
+  },
+  {
+    "eco": "B12",
+    "name": "Caro-Kann Defense: Advance Variation, Van der Wiel Attack",
+    "description": "Van der Wiel's aggressive continuation in the Advance Caro-Kann features direct attacking ideas and tactical complications. White seeks immediate winning chances while Black defends soundly, maintaining resources for counterplay."
+  },
+  {
+    "eco": "B12",
+    "name": "Caro-Kann Defense: Advance Variation, Van der Wiel Attack, Dreyev Defense",
+    "description": "Dreyev's defensive response to Van der Wiel's attack features careful piece coordination and prophylactic play. Black gradually improves position while neutralizing White's attacking potential."
+  },
+  {
+    "eco": "B12",
+    "name": "Caro-Kann Defense: De Bruycker Defense",
+    "description": "A specialized defensive approach in the Caro-Kann framework featuring De Bruycker's unique strategic setup. This rare variation offers practical players creative opportunities while avoiding main-line theoretical battles."
+  },
+  {
+    "eco": "B12",
+    "name": "Caro-Kann Defense: Edinburgh Variation",
+    "description": "A Scottish contribution to the Caro-Kann featuring Edinburgh players' characteristic defensive approach. This solid setup maintains flexibility while gradually improving Black's position through patient strategic play."
+  },
+  {
+    "eco": "B12",
+    "name": "Caro-Kann Defense: Maróczy Variation",
+    "description": "Maróczy's strategic defensive approach in the Caro-Kann emphasizes solid piece development and prophylactic play. This classical defense gradually improves Black's position while maintaining resources for central counterplay."
+  },
+  {
+    "eco": "B12",
+    "name": "Caro-Kann Defense: Maróczy Variation, Maróczy Gambit",
+    "description": "Within Maróczy's variation, a pawn sacrifice offering rapid piece development and tactical opportunities. Black accepts the material for defensive resources, accepting sharp play from a solid defensive foundation."
+  },
+  {
+    "eco": "B12",
+    "name": "Caro-Kann Defense: Masi Variation",
+    "description": "A lesser-known sideline of the Caro-Kann featuring Masi's specialized approach. This rare variation offers practical players creative opportunities to avoid well-studied main lines."
+  },
+  {
+    "eco": "B12",
+    "name": "Caro-Kann Defense: Massachusetts Defense",
+    "description": "An American contribution to the Caro-Kann framework featuring Massachusetts players' characteristic approach. This unusual defensive setup offers creative players unorthodox territory with practical winning chances."
+  },
+  {
+    "eco": "B12",
+    "name": "Caro-Kann Defense: Mieses Attack, Landau Gambit",
+    "description": "Landau's gambit within Mieses' attacking setup features a pawn sacrifice for rapid piece development. Black accepts the material but must defend carefully against White's coordinated attacking ideas."
+  },
+  {
+    "eco": "B12",
+    "name": "Caro-Kann Defense: Mieses Gambit",
+    "description": "Mieses sacrifices a pawn seeking rapid piece development and tactical compensation in this aggressive Caro-Kann variation. Black accepts the material advantage but must defend against White's piece activity and tactical threats."
+  },
+  {
+    "eco": "B12",
+    "name": "Caro-Kann Defense: Modern Variation",
+    "description": "A contemporary defensive approach in the Caro-Kann featuring modern strategic ideas and flexible piece placement. Black seeks gradual improvement while maintaining resources for central and kingside counterplay."
+  },
+  {
+    "eco": "B12",
+    "name": "Caro-Kann Defense: Ulysses Gambit",
+    "description": "An offbeat gambit with a classical name where White sacrifices a pawn for rapid piece development. Black accepts the material but must defend against White's coordinated attacking ideas and tactical opportunities."
+  },
+  {
+    "eco": "B13",
+    "name": "Caro-Kann Defense: Exchange Variation, Bulla Attack",
+    "description": "Bulla's aggressive attacking approach after the Exchange Variation features direct tactical ideas. White seeks immediate complications while Black defends methodically, maintaining structural advantages from the Exchange."
+  },
+  {
+    "eco": "B13",
+    "name": "Caro-Kann Defense: Exchange Variation, Rubinstein Variation",
+    "description": "Rubinstein's refined approach in the Exchange Variation emphasizes accurate piece placement and endgame technique. This classical method gradually improves Black's position through patient strategic maneuvering."
+  },
+  {
+    "eco": "B13",
+    "name": "Caro-Kann Defense: Panov Attack, Gunderam Attack",
+    "description": "Gunderam contributes an aggressive attacking setup within the Panov Attack framework. White seeks rapid tactical opportunities while Black defends soundly, maintaining positional resources."
+  },
+  {
+    "eco": "B13",
+    "name": "Caro-Kann Defense: Panov Attack, Modern Defense",
+    "description": "A modern defensive approach to the Panov Attack featuring contemporary strategic ideas and flexible piece placement. Black gradually improves position while maintaining tactical resources for counterplay."
+  },
+  {
+    "eco": "B13",
+    "name": "Caro-Kann Defense: Panov Attack, Modern Defense, Carlsbad Line",
+    "description": "The Carlsbad Line within Modern Defense to the Panov features a specific pawn structure and piece arrangement. This variation offers practical players solid defensive resources with clear strategic ideas."
+  },
+  {
+    "eco": "B13",
+    "name": "Caro-Kann Defense: Panov Attack, Modern Defense, Czerniak Line",
+    "description": "Czerniak's contribution to the Modern Defense against the Panov features specialized defensive setup. This line offers practical players creative opportunities while maintaining solid structural resources."
+  },
+  {
+    "eco": "B13",
+    "name": "Caro-Kann Defense: Panov Attack, Modern Defense, Mieses Line",
+    "description": "Mieses' defensive approach within the Modern Defense against the Panov emphasizes solid piece coordination. Black gradually improves position through careful maneuvering and prophylactic play."
+  },
+  {
+    "eco": "B13",
+    "name": "Caro-Kann Defense: Panov Attack, Modern Defense, Reifir-Spielmann Line",
+    "description": "A specialized defensive line combining ideas from Reifir and Spielmann within Modern Defense to the Panov. This variation offers practical players solid defensive resources with clear strategic plans."
+  },
+  {
+    "eco": "B13",
+    "name": "Caro-Kann Defense: Panov-Botvinnik, Herzog Defense",
+    "description": "Herzog's specialized defensive approach in the Panov-Botvinnik features an unusual piece arrangement. This rare continuation offers creative players unconventional territory away from main-line theory."
+  },
+  {
+    "eco": "B14",
+    "name": "Caro-Kann Defense: Panov Attack, Fianchetto Defense",
+    "description": "Black employs a fianchettoed setup against the Panov Attack, controlling long diagonals while developing quietly. This solid defensive scheme gradually improves Black's position through patient strategic play and piece coordination."
+  },
+  {
+    "eco": "B14",
+    "name": "Caro-Kann Defense: Panov Attack, Fianchetto Defense, Fianchetto Gambit",
+    "description": "A gambit continuation within the Fianchetto Defense where White sacrifices a pawn to accelerate development. Black accepts the material for defensive resources, accepting sharp play from a controlled defensive setup."
+  },
+  {
+    "eco": "B14",
+    "name": "Caro-Kann Defense: Panov Attack, Main Line",
+    "description": "The principal continuation in the Panov Attack where both sides develop energetically with strategic tensions. White seeks positional advantage through space control while Black maintains dynamic counterplay resources."
+  },
+  {
+    "eco": "B15",
+    "name": "Caro-Kann Defense: Alekhine Gambit",
+    "description": "Alekhine sacrifices a pawn in this aggressive Caro-Kann sideline, seeking rapid piece development and tactical opportunities. Black accepts the material advantage but must defend carefully against White's coordinated attacking ideas."
+  },
+  {
+    "eco": "B15",
+    "name": "Caro-Kann Defense: Alien Gambit",
+    "description": "An unusually-named aggressive gambit where White sacrifices a pawn seeking compensation through piece activity. Black accepts the material but must defend against White's tactical threats and attacking potential."
+  },
+  {
+    "eco": "B15",
+    "name": "Caro-Kann Defense: Campomanes Attack",
+    "description": "Campomanes contributes an aggressive attacking setup in the Caro-Kann, seeking direct tactical opportunities. White pursues immediate complications while Black defends solidly, maintaining structural integrity."
+  },
+  {
+    "eco": "B15",
+    "name": "Caro-Kann Defense: Forgacs Variation",
+    "description": "A specialized defensive approach within the Caro-Kann framework featuring Forgacs' unique setup. This rare variation offers practical players creative opportunities to avoid main-line theoretical battles."
+  },
+  {
+    "eco": "B15",
+    "name": "Caro-Kann Defense: Gurgenidze Counterattack",
+    "description": "Gurgenidze develops an aggressive defensive counterattack in the Caro-Kann framework, actively seeking play. This dynamic defensive approach suits resourceful players comfortable with sharp, unbalanced positions."
+  },
+  {
+    "eco": "B15",
+    "name": "Caro-Kann Defense: Gurgenidze System",
+    "description": "Gurgenidze's systematic defensive approach in the Caro-Kann emphasizes solid piece development and strategic flexibility. This solid setup gradually improves Black's position while maintaining defensive resources."
+  },
+  {
+    "eco": "B15",
+    "name": "Caro-Kann Defense: Rasa-Studier Gambit",
+    "description": "A gambit with an unusual name where White sacrifices a pawn seeking rapid piece development. Black accepts the material advantage but must defend against White's coordinated attacking ideas and tactical threats."
+  },
+  {
+    "eco": "B15",
+    "name": "Caro-Kann Defense: Tartakower Variation",
+    "description": "Tartakower's strategic defensive approach in the Caro-Kann emphasizes prophylactic maneuvering and gradual improvement. This classical method suits patients players preferring long-term advantage accumulation."
+  },
+  {
+    "eco": "B15",
+    "name": "Caro-Kann Defense: Tartakower Variation, Perlis Line",
+    "description": "Perlis' specialized line within Tartakower's variation features a specific piece arrangement and pawn structure. This solid defensive scheme offers practical players clear strategic ideas with solid defensive resources."
+  },
+  {
+    "eco": "B15",
+    "name": "Caro-Kann Defense: von Hennig Gambit",
+    "description": "Von Hennig sacrifices a pawn seeking rapid piece development and tactical compensation in the Caro-Kann. Black accepts the material but must defend against White's coordinated attacking ideas and tactical opportunities."
+  },
+  {
+    "eco": "B16",
+    "name": "Caro-Kann Defense: Bronstein-Larsen Variation",
+    "description": "A strategic defensive collaboration featuring Bronstein and Larsen's ideas in the Caro-Kann. This solid approach emphasizes piece coordination and prophylactic play, gradually improving Black's position."
+  },
+  {
+    "eco": "B16",
+    "name": "Caro-Kann Defense: Finnish Variation",
+    "description": "A Scandinavian contribution to the Caro-Kann featuring Finnish players' characteristic defensive approach. This solid setup maintains flexibility while gradually improving Black's position through careful maneuvering."
+  },
+  {
+    "eco": "B17",
+    "name": "Caro-Kann Defense: Karpov Variation",
+    "description": "Karpov's refined strategic approach in the Caro-Kann emphasizes accurate piece placement and prophylactic play. This classical method gradually improves Black's position while maintaining defensive resources and endgame technique."
+  },
+  {
+    "eco": "B17",
+    "name": "Caro-Kann Defense: Karpov Variation, Modern Main Line",
+    "description": "The contemporary main line of Karpov's variation featuring modern strategic ideas and piece coordination. Both sides develop energetically, with White seeking positional advantage while Black maintains counterplay resources."
+  },
+  {
+    "eco": "B17",
+    "name": "Caro-Kann Defense: Karpov Variation, Modern Variation",
+    "description": "A modern defensive approach within Karpov's variation featuring contemporary strategic ideas. Black gradually improves position through flexible maneuvering while maintaining resources for tactical counterplay."
+  },
+  {
+    "eco": "B17",
+    "name": "Caro-Kann Defense: Karpov Variation, Modern Variation, Ivanchuk Defense",
+    "description": "Ivanchuk's defensive approach within the Modern Variation features dynamic counterplay and tactical resources. This sharp defensive scheme suits resourceful players seeking active play while maintaining structural integrity."
+  },
+  {
+    "eco": "B17",
+    "name": "Caro-Kann Defense: Karpov Variation, Modern Variation, Kasparov Attack",
+    "description": "Kasparov contributes an aggressive attacking approach in the Modern Variation, seeking rapid winning chances. White pursues immediate complications while Black defends accurately, maintaining positional resources."
+  },
+  {
+    "eco": "B17",
+    "name": "Caro-Kann Defense: Karpov Variation, Smyslov Variation",
+    "description": "Smyslov's refined strategic approach within Karpov's variation emphasizes accurate piece placement and endgame technique. This classical method suits players with superior endgame skill willing to accept reduced tactical complexity."
+  },
+  {
+    "eco": "B17",
+    "name": "Caro-Kann Defense: Karpov Variation, Smyslov Variation, Main Line",
+    "description": "The principal continuation in Smyslov's variation with both sides developing solidly toward strategic battle. White seeks positional advantage through space control while Black maintains defensive resources and counterplay."
+  },
+  {
+    "eco": "B17",
+    "name": "Caro-Kann Defense: Karpov Variation, Tiviakov-Fischer Attack",
+    "description": "A modern attacking approach combining ideas from Tiviakov and Fischer within Karpov's variation. White seeks direct tactical opportunities while Black defends soundly, maintaining structural advantages and counterplay resources."
+  },
+  {
+    "eco": "B18",
+    "name": "Caro-Kann Defense: Classical Variation, Flohr Variation",
+    "description": "Flohr's precise approach in the Classical Variation emphasizes solid piece coordination and prophylactic play. This classical method gradually improves Black's position while maintaining defensive resources and endgame advantages."
+  },
+  {
+    "eco": "B18",
+    "name": "Caro-Kann Defense: Classical Variation, Main Line",
+    "description": "The principal continuation in the Classical Variation with solid piece development for both sides. White seeks positional advantage through space control while Black maintains counterplay resources and defensive solidity."
+  },
+  {
+    "eco": "B18",
+    "name": "Caro-Kann Defense: Classical Variation, Maróczy Attack",
+    "description": "Maróczy's aggressive attacking approach in the Classical Variation features direct tactical ideas and piece pressure. White seeks immediate complications while Black defends soundly, maintaining structural integrity."
+  },
+  {
+    "eco": "B18",
+    "name": "Caro-Kann Defense: Martian Gambit",
+    "description": "An unusually-named aggressive gambit where White sacrifices material seeking rapid piece development. Black accepts the advantage but must defend against White's coordinated attacking ideas and tactical opportunities."
+  },
+  {
+    "eco": "B19",
+    "name": "Caro-Kann Defense: Classical Variation, Lobron System",
+    "description": "Lobron's systematic defensive approach in the Classical Variation features refined piece placement and strategic ideas. This modern method offers Black solid defensive resources with clear plans for gradual improvement."
+  },
+  {
+    "eco": "B19",
+    "name": "Caro-Kann Defense: Classical Variation, Seirawan Variation",
+    "description": "Seirawan contributes a specialized defensive setup in the Classical Variation featuring unique piece coordination. This modern approach offers Black flexible defensive resources with practical winning chances."
+  },
+  {
+    "eco": "B19",
+    "name": "Caro-Kann Defense: Classical Variation, Spassky Variation",
+    "description": "Spassky's refined strategic approach in the Classical Variation emphasizes accurate piece placement and prophylactic play. This classical method suits players preferring positional maneuvering over tactical complications."
+  },
+  {
+    "eco": "B20",
+    "name": "Sicilian Defense: Amazon Attack",
+    "description": "An aggressively-named attacking setup where White pursues sharp tactical play in the Sicilian. This offbeat approach suits aggressive players seeking unusual positions and practical winning chances away from theory."
+  },
+  {
+    "eco": "B20",
+    "name": "Sicilian Defense: Big Clamp Formation",
+    "description": "A colorfully-named setup where White establishes solid pawn structure and piece coordination against the Sicilian. This positional approach emphasizes space control and gradual pressure rather than immediate tactical complications."
+  },
+  {
+    "eco": "B20",
+    "name": "Sicilian Defense: Bowdler Attack",
+    "description": "Bowdler's aggressive attacking setup in the Sicilian features direct tactical ideas and piece pressure. White seeks immediate complications while Black responds with flexible defense and counterplay resources."
+  },
+  {
+    "eco": "B20",
+    "name": "Sicilian Defense: Brick Variation",
+    "description": "A solidly-named defensive setup where Black builds a strong positional foundation against White's Sicilian aggression. This stable approach gradually improves Black's position through careful maneuvering."
+  },
+  {
+    "eco": "B20",
+    "name": "Sicilian Defense: Czerniak Attack",
+    "description": "Czerniak's aggressive attacking setup in the Sicilian features direct tactical ideas and piece coordination. White pursues immediate winning chances while Black responds with flexible defense and counterplay."
+  },
+  {
+    "eco": "B20",
+    "name": "Sicilian Defense: Czerniak Attack, Queen Fianchetto Variation",
+    "description": "Within Czerniak's attack, Black fianchettoes the queen-bishop, controlling long diagonals. This defensive adaptation offers Black flexible resources to counter White's aggressive attacking setup."
+  },
+  {
+    "eco": "B20",
+    "name": "Sicilian Defense: Euwe Attack, Prins Gambit",
+    "description": "Prins sacrifices a pawn within Euwe's aggressive setup seeking rapid piece development and tactical compensation. Black accepts the material advantage but must defend against White's coordinated attacking ideas."
+  },
+  {
+    "eco": "B20",
+    "name": "Sicilian Defense: Gloria Variation",
+    "description": "A rarely-played variation in the Sicilian featuring a specific defensive approach and piece arrangement. This obscure line offers practical players creative opportunities away from well-studied main lines."
+  },
+  {
+    "eco": "B20",
+    "name": "Sicilian Defense: Grob Variation",
+    "description": "An unusual defensive setup in the Sicilian associated with the Grob player's unconventional approach. This offbeat variation appeals to creative players seeking non-standard positions and practical winning chances."
+  }
+]

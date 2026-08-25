@@ -1,0 +1,752 @@
+[
+  {
+    "eco": "B90",
+    "name": "Sicilian Defense: Najdorf Variation, Adams Attack",
+    "description": "White plays 6.Be3, developing the bishop outside the pawn chain while maintaining central control. This solid setup avoids sharp theoretical battles and emphasizes piece coordination and positional pressure."
+  },
+  {
+    "eco": "B90",
+    "name": "Sicilian Defense: Najdorf Variation, Dekker Gambit",
+    "description": "A rare attacking try where White sacrifices material for rapid piece activity and kingside attacking chances. Black must carefully defend to neutralize White's compensation for the pawn."
+  },
+  {
+    "eco": "B90",
+    "name": "Sicilian Defense: Najdorf Variation, English Attack",
+    "description": "White plays f3 and g4, preparing a kingside pawn storm while maintaining structural solidity. This ambitious plan seeks rapid queenside expansion with spatial advantage, though Black gains counterplay on the c and d files."
+  },
+  {
+    "eco": "B90",
+    "name": "Sicilian Defense: Najdorf Variation, English Attack, Anti-English",
+    "description": "Black counters the English Attack setup with a specific defensive plan, typically challenging White's e4 pawn or exploiting the weakened kingside after f3 and g4. This variation requires precise understanding of tactical nuances."
+  },
+  {
+    "eco": "B90",
+    "name": "Sicilian Defense: Najdorf Variation, Lipnitsky Attack",
+    "description": "White's setup with Be3 and potentially f4 aims for central control and kingside expansion. This flexible formation allows White to target both Black's weak squares and pursue attacking opportunities on both flanks."
+  },
+  {
+    "eco": "B90",
+    "name": "Sicilian Defense: Najdorf Variation, Petronić Attack",
+    "description": "A specific attacking line where White combines piece development with aggressive pawn breaks. Black receives dynamic counterplay if White overextends, making accurate calculation essential for both sides."
+  },
+  {
+    "eco": "B90",
+    "name": "Sicilian Defense: Najdorf Variation, Yates Variation",
+    "description": "White employs a classical solid setup with modest aims, typically developing pieces harmoniously without committing to aggressive breaks. This approach emphasizes gradual positional improvement over tactical fireworks."
+  },
+  {
+    "eco": "B90",
+    "name": "Sicilian Defense: Scheveningen Variation, Delayed Keres Attack",
+    "description": "Named after Paul Keres, this aggressive f4 setup combines space gain with tactical energy. White establishes a strong pawn center and seeks kingside expansion, requiring Black to generate immediate counterplay."
+  },
+  {
+    "eco": "B90",
+    "name": "Sicilian Defense: Scheveningen Variation, Delayed Keres Attack, Perenyi Gambit",
+    "description": "White sacrifices material for open lines and attacking chances against Black's king in this sharp offbeat continuation. Precise tactics determine the outcome in this double-edged struggle."
+  },
+  {
+    "eco": "B90",
+    "name": "Sicilian Defense: Scheveningen Variation, English Attack, with f3",
+    "description": "Combining English Attack principles with f3 support, White prepares kingside expansion while maintaining a solid structure. This flexible system allows multiple attacking plans depending on Black's setup."
+  },
+  {
+    "eco": "B91",
+    "name": "Sicilian Defense: Najdorf Variation, Zagreb Variation",
+    "description": "A sideline where Black plays 6...e5, seizing central space while accepting structural concessions. White's flexible setup can pivot between positional pressure and tactical strikes on the weakened squares."
+  },
+  {
+    "eco": "B92",
+    "name": "Sicilian Defense: Najdorf Variation, Opocensky Variation",
+    "description": "White deploys g3 and Bg2, constructing a fianchettoed kingside fortress combined with central influence. This patient system accumulates small advantages through maneuvering and restricts Black's piece mobility."
+  },
+  {
+    "eco": "B92",
+    "name": "Sicilian Defense: Najdorf Variation, Opocensky Variation, Modern Line",
+    "description": "An updated approach to the fianchetto system incorporating contemporary ideas about piece placement and prophylactic moves. White balances solid defense with subtle attacking opportunities arising from superior coordination."
+  },
+  {
+    "eco": "B92",
+    "name": "Sicilian Defense: Najdorf Variation, Opocensky Variation, Traditional Line",
+    "description": "The classical execution of the fianchettoed setup with familiar plans of slow maneuvering and gradual improvement. Black typically counters with queenside counterplay or central breaks seeking dynamic opportunities."
+  },
+  {
+    "eco": "B93",
+    "name": "Sicilian Defense: Najdorf Variation, Amsterdam Variation",
+    "description": "A rare continuation where Black adopts an unconventional setup against White's main-line approach. This sideline can catch opponents by surprise but demands solid theoretical knowledge for practical success."
+  },
+  {
+    "eco": "B94",
+    "name": "Sicilian Defense: Najdorf Variation, Ivkov Variation",
+    "description": "Named after Borislav Ivkov, this line features a specific maneuvering plan aimed at controlling key squares. White combines patient development with tactical motifs, creating long-term positional pressure."
+  },
+  {
+    "eco": "B96",
+    "name": "Sicilian Defense: Najdorf Variation, Neo-Classical Defense",
+    "description": "Black employs a solid, flexible approach with quick piece development and central support via e6. This patient setup enables counterplay on multiple fronts while minimizing immediate tactical threats."
+  },
+  {
+    "eco": "B96",
+    "name": "Sicilian Defense: Najdorf Variation, Polugaevsky Variation",
+    "description": "Named after Lev Polugaevsky, this sharp line emphasizes Black's active piece play and tactical opportunities. White must maintain accuracy to justify the spatial advantage gained by earlier aggressive moves."
+  },
+  {
+    "eco": "B96",
+    "name": "Sicilian Defense: Najdorf Variation, Polugaevsky Variation, Simagin Line",
+    "description": "A specific tactical sequence within the Polugaevsky where precise move orders and pawn breaks determine the outcome. Both sides must calculate concretely as passive play quickly leads to disadvantage."
+  },
+  {
+    "eco": "B97",
+    "name": "Sicilian Defense: Najdorf Variation, Poisoned Pawn Accepted",
+    "description": "Black captures White's b2 pawn, accepting significant risks for material gain and counterplay. White launches a devastating kingside attack with rapid development, requiring Black to generate perpetual checking or tactical salvation."
+  },
+  {
+    "eco": "B97",
+    "name": "Sicilian Defense: Najdorf Variation, Poisoned Pawn Variation",
+    "description": "White offers the b2 pawn as bait, luring Black into a double-edged position where rapid kingside assault compensates for material. Tactical fireworks and precise calculation dominate this sharp theoretical battleground."
+  },
+  {
+    "eco": "B98",
+    "name": "Sicilian Defense: Najdorf Variation, Browne Variation",
+    "description": "Named after David Browne, this line features specific piece placement and pawn moves creating a unique middlegame structure. White pursues kingside expansion while Black seeks central or queenside counterplay in this flexible setup."
+  },
+  {
+    "eco": "B98",
+    "name": "Sicilian Defense: Najdorf Variation, Goteborg Variation",
+    "description": "A Swedish contribution to Najdorf theory featuring a particular defensive setup emphasizing solidity. Black accepts a slightly passive position to eliminate White's most dangerous attacking ideas and maintain queenside chances."
+  },
+  {
+    "eco": "B98",
+    "name": "Sicilian Defense: Najdorf Variation, Traditional Line",
+    "description": "Following classical principles of piece development and central control, this mainstream approach maintains flexibility. White accumulates small positional advantages while avoiding excessive complications."
+  },
+  {
+    "eco": "B99",
+    "name": "Sicilian Defense: Najdorf Variation, Main Line",
+    "description": "The theoretical battleground of the Najdorf where both sides employ their most aggressive plans. White typically mounts a kingside pawn storm while Black counters with active piece play and queenside tactics."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Alapin Gambit",
+    "description": "White sacrifices the d4 pawn with f4, seeking rapid kingside expansion and open lines toward Black's king. Black accepts temporary material concession but must handle White's accelerated piece development and spatial advantage."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Baeuerle Gambit",
+    "description": "An early pawn sacrifice where White advances aggressively on the kingside, opening lines for rapid attack. Black gains material but must defend accurately against White's piece activity and coordinated assault."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Banzai-Leong Gambit",
+    "description": "A modern, aggressive sideline featuring early pawn breaks and piece sacrifices for attacking compensation. This offbeat setup can surprise unprepared opponents but requires White to generate concrete attacking chances quickly."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Banzai-Leong Gambit, Pinova Gambit",
+    "description": "A secondary sacrifice within the Banzai-Leong framework, adding complexity and tactical depth. White accepts temporary material loss aiming for devastating king attack and piece coordination."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Bird Invitation",
+    "description": "Named after the famous bird's-eye positional vision, this setup invites Black into specific pawn structures. White maintains flexible piece placement, adjusting strategy based on Black's response to early moves."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Carlson Gambit",
+    "description": "White sacrifices on f4 immediately, aiming to open lines before Black completes development. Material disadvantage requires White to generate persistent attacking threats and forcing tactical sequences."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Chigorin Variation",
+    "description": "Named after the legendary Siegbert Tarrasch's great rival Mikhail Chigorin, this line emphasizes unusual piece placement. Black obtains dynamic counterchances while White experiments with unconventional strategic ideas."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Diemer-Duhm Gambit",
+    "description": "One of the gambit lines where White sacrifices central pawns for attacking chances. Black must evaluate whether the material gain sufficiently compensates for White's piece activity and open lines."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Diemer-Duhm Gambit Accepted",
+    "description": "Black accepts White's pawn sacrifice, gaining material advantage while facing accelerated White piece development. The resulting positions require precise defense to neutralize White's compensation."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Franco-Hiva Gambit",
+    "description": "A hybrid gambit combining French structure with kingside attacking ideas. White sacrifices material for open files and piece activity, requiring Black to consolidate material advantage while under tactical pressure."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Franco-Hiva Gambit Accepted",
+    "description": "Black accepts the pawn offer, acquiring extra material but allowing White rapid piece coordination. The gambiteer must maintain attacking momentum to justify the sacrifice in this sharp continuation."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Franco-Sicilian Defense",
+    "description": "A hybrid structure where Black combines French defensive ideas with semi-Sicilian features. This unconventional setup confuses traditional plans, requiring White to adapt strategically to unique pawn formations."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Hoffmann Gambit",
+    "description": "White sacrifices on f4, aiming to exploit the e-file and generate rapid threats against Black's development. Quick compensation through piece activity and central control determines success in this gambit."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Horwitz Attack",
+    "description": "Named after Bernard Horwitz, this aggressive setup with e5 aims to cramp Black's position immediately. White's pawn advance restricts Black's pieces and creates weaknesses for tactical exploitation."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Horwitz Attack, Papa-Ticulat Gambit",
+    "description": "An aggressive sacrificial variation within the Horwitz Attack where White offers material for rapid kingside expansion. Black must defend precisely to consolidate the extra pawn against White's forcing threats."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: King's Indian Attack",
+    "description": "White employs the flexible fianchetto setup with g3 and Bg2, maintaining central control via advanced pawns. This system delays committing the center, allowing White to respond dynamically to Black's piece placement."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: King's Indian Attack, Franco-Hiva Gambit",
+    "description": "Combining fianchetto ideas with aggressive kingside gambit sacrifice, White mixes solid structure with tactical fireworks. Black gains material but faces immediate coordination problems under White's attacking pressure."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Knight Variation",
+    "description": "White develops the knight to f3 first before committing the center, maintaining maximum flexibility. This move-order emphasizes piece coordination over pawn mass, allowing adjustments to Black's responses."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Knight Variation, Franco-Hiva Gambit",
+    "description": "Combining the flexible knight setup with kingside pawn sacrifice and attacking ideas. White generates tactical fireworks and attacking chances despite material concession in this sharp, offbeat approach."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: La Bourdonnais Variation",
+    "description": "Named after the great 19th-century player Louis-Charles Mahé de La Bourdonnais, this classical approach emphasizes steady development. White seeks a small positional edge through patient maneuvering and piece coordination."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: La Bourdonnais Variation, Reuter Gambit",
+    "description": "A secondary gambit attempt within La Bourdonnais where White sacrifices for attacking compensation. The resulting positions favor concrete calculation as both sides pursue aggressive objectives."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Mediterranean Defense",
+    "description": "A creative transpose or sideline emphasizing unusual pawn structures and piece placement. White experiments with unconventional ideas, potentially catching Black unprepared for non-theoretical approaches."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Morphy Gambit",
+    "description": "Named after the legendary Paul Morphy, this gambit features early pawn sacrifice for rapid piece development. White pursues kingside attack and central control, requiring Black to defend accurately under tactical pressure."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Normal Variation",
+    "description": "A quiet, non-committal approach where White maintains flexibility and avoids sharp theoretical battles. Piece development and maneuvering take precedence over immediate pawn structure transformations."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Orthoschnapp Gambit",
+    "description": "An obscure, offbeat gambit where White sacrifices material for unusual attacking compensation. This rare try aims to catch opponents off-guard, though theoretical justification remains questionable."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Pelikan Variation",
+    "description": "Named after Karel Pelikan, this sideline features specific piece placement and pawn moves creating unique structures. White pursues flexible plans adapting to Black's choices in this less-theoretical approach."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Perseus Gambit",
+    "description": "An aggressive gambit where White sacrifices pawns for rapid piece activity and kingside threats. Black accepts extra material but must handle White's forcing tactics and coordinated attacking ideas."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Queen's Knight",
+    "description": "White develops the queen's knight to c3 or a3, creating specific tactical and strategic themes. This flexible move-order allows White to respond to Black's setup while maintaining attacking potential."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Réti-Spielmann Attack",
+    "description": "Combining ideas from the great Réti and Spielmann, White employs flexible piece placement and prophylactic moves. This patient approach accumulates small advantages through superior coordination and long-term positioning."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Reversed Philidor Formation",
+    "description": "Black adopts the solid Philidor structure in reversed colors, creating a defensive fortress. White must find concrete plans to break through, as Black's setup emphasizes solidity and centralized pieces."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Schlechter Variation",
+    "description": "Named after Carl Schlechter, this classical approach emphasizes steady development and positional gain. White maintains flexibility, avoiding excessive commitments while seeking gradual improvement."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Steiner Variation",
+    "description": "Named after Endre Steiner, this line features specific tactical and strategic themes in the opening. White experiments with piece placement and pawn moves creating opportunities for both-sided play."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Steinitz Attack",
+    "description": "Named after world champion Wilhelm Steinitz, this aggressive setup with e5 aims for rapid space gain. White's pawn advance cramps Black's position and creates targets for tactical exploitation."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: St. George Defense",
+    "description": "An offbeat defensive setup where Black employs unusual pawn structures and piece placement. This unconventional approach seeks to confuse White's preparation and avoid mainstream theoretical battles."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: St. George Defense, Sanky-George Gambit",
+    "description": "A secondary gambit within the St. George framework where White sacrifices material. Black gains extra pieces but faces White's tactical compensation and attacking threats in this sharp sideline."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: St. George Defense, St. George Gambit",
+    "description": "The main gambit attempt in this offbeat system where White pursues rapid piece activity. Black accepts material but must navigate White's coordinated attacking threats and open-line assaults."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: St. George Defense, Three Pawn Attack",
+    "description": "White pursues aggressive kingside expansion with multiple pawn advances, seeking spatial dominance. Black's counterplay emerges from central breaks and piece coordination against White's extended position."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: St. George Defense, Traditional Line",
+    "description": "The classical approach to this offbeat setup following established strategic principles. White combines solid piece development with flexible plans, adapting to Black's responses in this non-theoretical variation."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Two Knights Variation",
+    "description": "White develops both knights before committing the center, creating flexible attacking and defensive possibilities. This move-order allows White to respond dynamically to Black's piece placement and pawn structures."
+  },
+  {
+    "eco": "C00",
+    "name": "French Defense: Wing Gambit",
+    "description": "White sacrifices the c-pawn with a4, seeking compensation through spatial advantage and piece activity. Black captures on a4 but must coordinate against White's flexible plans and attacking opportunities."
+  },
+  {
+    "eco": "C00",
+    "name": "Rat Defense: Small Center Defense",
+    "description": "An unconventional setup where Black minimizes center commitment, relying on counterplay and piece coordination. This flexible defense defies traditional strategic plans, requiring White to create concrete threats."
+  },
+  {
+    "eco": "C01",
+    "name": "French Defense: Exchange Variation, Bogoljubow Variation",
+    "description": "Named after Efim Bogoljubow, this conservative continuation in the Exchange emphasizes slow maneuvering. White maintains a modest advantage through superior piece coordination and preventing Black's counterplay."
+  },
+  {
+    "eco": "C01",
+    "name": "French Defense: Exchange Variation, Monte Carlo Variation",
+    "description": "A specific setup in the quiet Exchange Variation featuring particular piece placement and strategic ideas. White pursues gradual improvement through small positional advantages and controlled piece play."
+  },
+  {
+    "eco": "C01",
+    "name": "French Defense: Exchange Variation, Svenonius Variation",
+    "description": "Named after the Scandinavian player this line emphasizes alternative strategic plans within the Exchange structure. White explores specific piece placement nuances to generate practical winning attempts."
+  },
+  {
+    "eco": "C02",
+    "name": "French Defense: Advance Variation, Euwe Variation",
+    "description": "Named after world champion Max Euwe, this continuation in the Advance seeks precise central control. White maintains structural advantage while preventing Black's counterbreaking plans through careful maneuver."
+  },
+  {
+    "eco": "C02",
+    "name": "French Defense: Advance Variation, Extended Bishop Swap",
+    "description": "A specific line where bishops are exchanged early, creating unique pawn structures. White pursues long-term advantages from superior piece placement and Black's reduced tactical resources."
+  },
+  {
+    "eco": "C02",
+    "name": "French Defense: Advance Variation, Frenkel Gambit",
+    "description": "White sacrifices the e-pawn for rapid piece development and attacking compensation. Black accepts extra material but faces coordinated White threats and open-line assaults in this sharp gambit."
+  },
+  {
+    "eco": "C02",
+    "name": "French Defense: Advance Variation, Kupreichik Variation",
+    "description": "Named after Viktor Kupreichik, this line features specific piece placement and pawn moves within the Advance. White creates flexibility through multiple strategic plans and tactical opportunities."
+  },
+  {
+    "eco": "C02",
+    "name": "French Defense: Advance Variation, Lputian Variation",
+    "description": "Named after Smbat Lputian, this continuation emphasizes specific strategic ideas in the Advance structure. White combines solid piece placement with potential tactical breaks creating practical advantages."
+  },
+  {
+    "eco": "C02",
+    "name": "French Defense: Advance Variation, Main Line",
+    "description": "The theoretical battleground of the Advance Variation where both sides deploy their most fighting ideas. White maintains central space advantage while Black seeks dynamic counterplay and piece activity."
+  },
+  {
+    "eco": "C02",
+    "name": "French Defense: Advance Variation, Milner-Barry Gambit",
+    "description": "Named after world-class player Sir Arthur Milner-Barry, this aggressive gambit sacrifices the e-pawn for attacking chances. White generates immediate threats against Black's position requiring precise defense."
+  },
+  {
+    "eco": "C02",
+    "name": "French Defense: Advance Variation, Milner-Barry Gambit, Hector Variation",
+    "description": "A specific defense named after its innovator within the Milner-Barry framework. Black counters White's attacking ideas with precise defensive setup and tactical opportunities in this sharp continuation."
+  },
+  {
+    "eco": "C02",
+    "name": "French Defense: Advance Variation, Milner-Barry Gambit, Main Line",
+    "description": "The primary attacking setup in this gambit where both sides deploy their sharpest ideas. White pursues kingside assault while Black generates counterplay seeking either simplification or counterattack."
+  },
+  {
+    "eco": "C02",
+    "name": "French Defense: Advance Variation, Milner-Barry Gambit, Sørensen Variation",
+    "description": "A Scandinavian contribution to Milner-Barry theory featuring specific defensive ideas against White's attack. Black maintains solid structure while seeking tactical opportunities and counterattacking possibilities."
+  },
+  {
+    "eco": "C02",
+    "name": "French Defense: Advance Variation, Nimzowitsch Attack",
+    "description": "Named after the profound strategist Aron Nimzowitsch, this line employs flexible piece placement and prophylactic moves. White combines solid structure with subtle advantages gained through superior coordination."
+  },
+  {
+    "eco": "C02",
+    "name": "French Defense: Advance Variation, Nimzowitsch Gambit",
+    "description": "A gambit attempt within Nimzowitsch's strategic framework where White sacrifices for attacking compensation. Black gains material but faces White's coordinated piece activity and forcing sequences."
+  },
+  {
+    "eco": "C02",
+    "name": "French Defense: Advance Variation, Nimzowitsch System",
+    "description": "The systematic approach from Nimzowitsch emphasizing strategic flexibility and piece coordination. White maintains multiple plans, adjusting to Black's setup while pursuing long-term positional advantages."
+  },
+  {
+    "eco": "C02",
+    "name": "French Defense: Advance Variation, Paulsen Attack",
+    "description": "Named after Wilfried Paulsen, this aggressive approach combines pawn breaks with piece activity. White pursues both kingside and queenside opportunities while maintaining central space advantage."
+  },
+  {
+    "eco": "C02",
+    "name": "French Defense: Advance Variation, Ruisdonk Gambit",
+    "description": "A secondary gambit in the Advance where White sacrifices material for rapid piece development. Black accepts extra pawns but must handle White's forcing threats and coordinated attacking setup."
+  },
+  {
+    "eco": "C02",
+    "name": "French Defense: Advance Variation, Steinitz Variation",
+    "description": "Named after Wilhelm Steinitz, this classical approach in the Advance emphasizes solid structural control. White accumulates small positional advantages through careful piece placement and strategic maneuvering."
+  },
+  {
+    "eco": "C02",
+    "name": "French Defense: Advance Variation, Wade Variation",
+    "description": "Named after grandmaster Norman Wade, this continuation features specific piece placement and strategic ideas. White maintains flexibility through multiple plans while pursuing long-term positional advantage."
+  },
+  {
+    "eco": "C03",
+    "name": "French Defense: Tarrasch Variation, Guimard Defense",
+    "description": "Named after François Guimard, this solid defensive approach emphasizes piece coordination and central counterplay. Black accepts a passive position to eliminate White's most dangerous attacking ideas."
+  },
+  {
+    "eco": "C03",
+    "name": "French Defense: Tarrasch Variation, Guimard Defense, Thunderbunny Variation",
+    "description": "A modern defensive variation with an unconventional name featuring specific tactical and strategic themes. Black maintains solid structure while seeking tactical opportunities against White's piece placement."
+  },
+  {
+    "eco": "C03",
+    "name": "French Defense: Tarrasch Variation, Haberditz Variation",
+    "description": "A sideline featuring specific piece placement and strategic ideas within the Tarrasch structure. White creates flexibility through multiple plans while Black seeks solid defensive setup and counterplay."
+  },
+  {
+    "eco": "C03",
+    "name": "French Defense: Tarrasch Variation, Modern System",
+    "description": "Contemporary ideas in the Tarrasch emphasizing flexible piece placement and dynamic counterplay. Both sides employ modern theoretical understanding, creating sharp middlegame positions with mutual opportunities."
+  },
+  {
+    "eco": "C03",
+    "name": "French Defense: Tarrasch Variation, Morozevich Variation",
+    "description": "Named after Alexander Morozevich, this modern approach features unconventional piece placement and strategic flexibility. Black experiments with dynamic ideas generating practical complications and counterattacking chances."
+  },
+  {
+    "eco": "C04",
+    "name": "French Defense: Tarrasch Variation, Guimard Defense, Main Line",
+    "description": "The theoretical battleground of the Guimard setup where both sides employ established plans. White pursues positional advantage through piece coordination while Black seeks solid defense and central counterplay."
+  },
+  {
+    "eco": "C05",
+    "name": "French Defense: Tarrasch Variation, Botvinnik Variation",
+    "description": "Named after world champion Mikhail Botvinnik, this solid continuation features specific piece placement strategies. White maintains long-term advantages through superior coordination while Black defends accurately."
+  },
+  {
+    "eco": "C05",
+    "name": "French Defense: Tarrasch Variation, Closed Variation",
+    "description": "A conservative approach where White maintains tension in the center without immediate simplification. Gradual maneuvering and piece coordination create long-term positional advantages for White."
+  },
+  {
+    "eco": "C05",
+    "name": "French Defense: Tarrasch Variation, Pawn Center Variation",
+    "description": "White maintains a strong pawn center with e5 and d4, restricting Black's piece activity. Black seeks central breaks or queenside counterplay to generate practical opportunities against White's space advantage."
+  },
+  {
+    "eco": "C06",
+    "name": "French Defense: Tarrasch Variation, Closed Variation, Main Line",
+    "description": "The primary setup in the closed system where both sides follow established strategic plans. White pursues positional pressure through careful maneuvering while Black maintains solid defensive structure."
+  },
+  {
+    "eco": "C06",
+    "name": "French Defense: Tarrasch Variation, Leningrad Variation",
+    "description": "Named after the Soviet school, this solid defensive approach emphasizes piece coordination and central control. Black accepts slightly passive setup to achieve solid defensive fortress and counterplay opportunities."
+  },
+  {
+    "eco": "C07",
+    "name": "French Defense: Tarrasch Variation, Chistyakov Defense",
+    "description": "Named after Alexei Chistyakov, this defensive setup features specific piece placement against White's Tarrasch. Black maintains solid structure seeking central breaks and counterattacking possibilities."
+  },
+  {
+    "eco": "C07",
+    "name": "French Defense: Tarrasch Variation, Chistyakov Defense, Modern Line",
+    "description": "Contemporary refinement to the Chistyakov defense employing modern tactical and strategic ideas. Black generates dynamic counterplay while maintaining solid defensive setup against White's pressure."
+  },
+  {
+    "eco": "C07",
+    "name": "French Defense: Tarrasch Variation, Eliskases Variation",
+    "description": "Named after Erich Eliskases, this line features specific strategic ideas and piece placement within the Tarrasch. White creates flexibility through multiple plans while Black seeks solid counterplay."
+  },
+  {
+    "eco": "C07",
+    "name": "French Defense: Tarrasch Variation, Open System",
+    "description": "White forgoes the closed setup, opening the center immediately to create dynamic positions. Both sides pursue active piece play with reduced pawn tension and tactical opportunities at premium."
+  },
+  {
+    "eco": "C07",
+    "name": "French Defense: Tarrasch Variation, Open System, Euwe-Keres Line",
+    "description": "Named after these legendary players, this specific sequence features particular pawn moves and piece placement. Both sides employ dynamic plans with concrete tactical themes determining practical advantages."
+  },
+  {
+    "eco": "C07",
+    "name": "French Defense: Tarrasch Variation, Open System, Shaposhnikov Gambit",
+    "description": "A gambit attempt in the Open system where White sacrifices material for rapid piece activity. Black accepts extra pawns but must handle White's coordinated threats and forcing tactical sequences."
+  },
+  {
+    "eco": "C07",
+    "name": "French Defense: Tarrasch Variation, Open System, Süchting Line",
+    "description": "A specific tactical sequence within the Open system featuring particular piece placement and pawn breaks. Both sides must calculate precisely as numerous forcing tactics determine practical outcomes."
+  },
+  {
+    "eco": "C08",
+    "name": "French Defense: Tarrasch Variation, Open System",
+    "description": "White maintains open center with dynamic piece play, avoiding closed structures. Both sides pursue aggressive plans with tactical opportunities abundant in the resulting middlegame positions."
+  },
+  {
+    "eco": "C08",
+    "name": "French Defense: Tarrasch Variation, Open System, Advance Line",
+    "description": "A specific continuation where White maintains central pawns while pursuing attacking chances. Black seeks counterplay through piece activity and central breaks against White's space advantage."
+  },
+  {
+    "eco": "C09",
+    "name": "French Defense: Tarrasch Variation, Open System, Main Line",
+    "description": "The primary theoretical battleground in the Open system where both sides deploy their sharpest ideas. White pursues positional advantages while Black generates dynamic counterplay and tactical opportunities."
+  },
+  {
+    "eco": "C10",
+    "name": "French Defense: Hecht-Reefschläger Variation",
+    "description": "A rare sideline featuring specific piece placement and strategic ideas against the French. Both sides experiment with unconventional plans, creating positions with unique characteristics and tactical themes."
+  },
+  {
+    "eco": "C10",
+    "name": "French Defense: Marshall Gambit",
+    "description": "Named after Frank Marshall, this gambit sacrifices material for rapid piece development and attacking chances. Black accepts extra pawns but faces White's coordinated threats and forcing sequences."
+  },
+  {
+    "eco": "C10",
+    "name": "French Defense: Paulsen Variation",
+    "description": "Named after Wilfried Paulsen, this solid approach emphasizes flexible piece placement and strategic ideas. White maintains multiple plans while Black seeks solid defensive setup with counterattacking opportunities."
+  },
+  {
+    "eco": "C10",
+    "name": "French Defense: Rubinstein Variation, Blackburne Defense",
+    "description": "Named after Joseph Blackburne, this defensive setup within the Rubinstein emphasizes solid piece coordination. Black maintains defensive structure while seeking central breaks and queenside counterplay."
+  },
+  {
+    "eco": "C10",
+    "name": "French Defense: Rubinstein Variation, Capablanca Line",
+    "description": "Named after world champion José Raúl Capablanca, this line features strategic ideas emphasizing positional control. White pursues long-term advantages through superior piece coordination and prophylactic moves."
+  },
+  {
+    "eco": "C10",
+    "name": "French Defense: Rubinstein Variation, Ellis Gambit",
+    "description": "A gambit within the Rubinstein where White sacrifices material for attacking compensation. Black gains extra pawns but must navigate White's forcing threats and coordinated piece activity."
+  },
+  {
+    "eco": "C10",
+    "name": "French Defense: Rubinstein Variation, Fort Knox Variation",
+    "description": "A solid defensive setup earning its name from fortress-like solidity against White's pressure. Black maintains passive but solid structure, waiting for opportunities to generate counterplay."
+  },
+  {
+    "eco": "C10",
+    "name": "French Defense: Rubinstein Variation, Kasparov Attack",
+    "description": "Named after world champion Garry Kasparov, this aggressive approach employs kingside-oriented plans. White pursues rapid piece activity and attacking threats while Black defends accurately seeking counterplay."
+  },
+  {
+    "eco": "C10",
+    "name": "French Defense: Rubinstein Variation, Maric Variation",
+    "description": "Named after its innovator, this line features specific strategic and tactical themes within the Rubinstein. Black maintains flexibility through alternative piece placement creating mutual chances."
+  },
+  {
+    "eco": "C11",
+    "name": "French Defense: Classical Variation, Burn Variation",
+    "description": "Named after Amos Burn, this solid classical approach emphasizes piece coordination and central control. White accumulates small advantages through careful maneuvering and prophylactic positioning."
+  },
+  {
+    "eco": "C11",
+    "name": "French Defense: Classical Variation, Burn Variation, Main Line",
+    "description": "The theoretical battleground of Burn's setup where both sides employ established strategic plans. White pursues positional pressure while Black maintains solid defensive structure and counterplay options."
+  },
+  {
+    "eco": "C11",
+    "name": "French Defense: Classical Variation, Burn Variation, Morozevich Line",
+    "description": "Named after Alexander Morozevich, this modern approach within Burn's framework emphasizes dynamic ideas. Black generates active counterplay while maintaining solid defensive setup against White's pressure."
+  },
+  {
+    "eco": "C11",
+    "name": "French Defense: Classical Variation, Delayed Exchange Variation",
+    "description": "A strategy where the exchange of bishops occurs later than typical, creating specific pawn structures. White maintains flexibility through multiple plans while Black seeks counterplay and piece activity."
+  },
+  {
+    "eco": "C11",
+    "name": "French Defense: Classical Variation, Shirov-Anand Variation",
+    "description": "Named after Alexei Shirov and Viswanathan Anand, this modern line features dynamic ideas and sharp play. Both sides employ aggressive plans with tactical opportunities and practical complications."
+  },
+  {
+    "eco": "C11",
+    "name": "French Defense: Classical Variation, Steinitz Variation",
+    "description": "Named after Wilhelm Steinitz, this classical approach emphasizes solid structural control and gradual improvement. White maintains long-term advantages through superior piece coordination."
+  },
+  {
+    "eco": "C11",
+    "name": "French Defense: Classical Variation, Swiss Variation",
+    "description": "A sideline featuring specific piece placement and strategic ideas within the Classical. Both sides employ flexible plans with opportunities for both positional maneuvering and tactical strikes."
+  },
+  {
+    "eco": "C11",
+    "name": "French Defense: Henneberger Variation",
+    "description": "A rare sideline with unconventional piece placement and strategic ideas against the Classical. White experiments with alternative plans seeking to confuse Black's preparation and theoretical knowledge."
+  },
+  {
+    "eco": "C11",
+    "name": "French Defense: Steinitz Variation, Boleslavsky Variation",
+    "description": "Named after the brilliant Isaac Boleslavsky, this defensive setup emphasizes active piece play and counterattacking chances. Black accepts slightly passive position to generate practical complications."
+  },
+  {
+    "eco": "C11",
+    "name": "French Defense: Steinitz Variation, Bradford Attack Variation",
+    "description": "An aggressive attacking setup featuring specific pawn breaks and piece activity. White pursues kingside expansion seeking tactical opportunities while Black defends accurately seeking counterplay."
+  },
+  {
+    "eco": "C11",
+    "name": "French Defense: Steinitz Variation, Brodsky-Jones Variation",
+    "description": "A specific defensive approach featuring unconventional piece placement and strategic flexibility. Black maintains solid structure while seeking central breaks and counterattacking opportunities."
+  },
+  {
+    "eco": "C11",
+    "name": "French Defense: Steinitz Variation, Gledhill Attack",
+    "description": "An aggressive attacking approach featuring kingside-oriented plans and forcing tactics. White pursues rapid piece activity while Black defends carefully seeking opportunities for counterplay."
+  },
+  {
+    "eco": "C12",
+    "name": "French Defense: McCutcheon Variation",
+    "description": "Named after John McCutcheon, this sharp line features the bishop pin on g4 creating tactical complications. Both sides pursue forcing sequences with mutual attacking opportunities and sharp tactical themes."
+  },
+  {
+    "eco": "C12",
+    "name": "French Defense: McCutcheon Variation, Advance Variation",
+    "description": "White advances in the center combining structural strength with attacking plans. Black generates counterplay through piece activity and central breaks against White's space advantage."
+  },
+  {
+    "eco": "C12",
+    "name": "French Defense: McCutcheon Variation, Bernstein Variation",
+    "description": "Named after Ossip Bernstein, this defensive setup emphasizes solid piece coordination. Black maintains defensive structure while seeking tactical opportunities and central counterplay."
+  },
+  {
+    "eco": "C12",
+    "name": "French Defense: McCutcheon Variation, Bogoljubow Variation",
+    "description": "Named after Efim Bogoljubow, this approach features specific piece placement and strategic flexibility. White maintains multiple plans while Black seeks active defense with counterattacking possibilities."
+  },
+  {
+    "eco": "C12",
+    "name": "French Defense: McCutcheon Variation, Chigorin Variation",
+    "description": "Named after Mikhail Chigorin, this line features unconventional strategic ideas and piece placement. Both sides pursue dynamic plans with tactical opportunities in this sharp continuation."
+  },
+  {
+    "eco": "C12",
+    "name": "French Defense: McCutcheon Variation, Dr. Olland Variation",
+    "description": "A specific defensive approach featuring particular piece placement and pawn moves. Black maintains solid structure while seeking tactical opportunities and counterplay against White's attacks."
+  },
+  {
+    "eco": "C12",
+    "name": "French Defense: McCutcheon Variation, Duras Variation",
+    "description": "Named after Oldrich Duras, this line emphasizes specific tactical and strategic themes. Both sides employ forcing sequences with multiple attacking and defensive opportunities."
+  },
+  {
+    "eco": "C12",
+    "name": "French Defense: McCutcheon Variation, Exchange Variation",
+    "description": "White exchanges bishops early, creating specific pawn structures and reducing tactical complications. Both sides pursue long-term advantages through piece coordination and strategic maneuvering."
+  },
+  {
+    "eco": "C12",
+    "name": "French Defense: McCutcheon Variation, Grigoriev Variation",
+    "description": "Named after Aleksandr Grigoriev, this defensive setup features solid piece coordination and central control. Black maintains defensive structure while seeking practical opportunities and counterplay."
+  },
+  {
+    "eco": "C12",
+    "name": "French Defense: McCutcheon Variation, Janowski Variation",
+    "description": "Named after David Janowski, this approach features specific strategic ideas within the McCutcheon. Both sides employ forcing sequences with mutual attacking and defensive possibilities."
+  },
+  {
+    "eco": "C12",
+    "name": "French Defense: McCutcheon Variation, Lasker Variation",
+    "description": "Named after world champion Emanuel Lasker, this solid approach emphasizes piece coordination and defensive setup. Black maintains defensive structure while seeking tactical opportunities and central breaks."
+  },
+  {
+    "eco": "C12",
+    "name": "French Defense: McCutcheon Variation, Tartakower Variation",
+    "description": "Named after Savielly Tartakower, this defensive setup features specific piece placement and strategic ideas. Black generates active counterplay while maintaining solid structure against White's attacks."
+  },
+  {
+    "eco": "C13",
+    "name": "French Defense: Alekhine-Chatard Attack",
+    "description": "Named after world champions Alexander Alekhine and Sergei Chatard, this aggressive approach features Bg5 and h4 with kingside expansion. White pursues rapid attacking chances while Black seeks solid defense and counterplay."
+  },
+  {
+    "eco": "C13",
+    "name": "French Defense: Alekhine-Chatard Attack, Albin-Chatard Gambit",
+    "description": "A gambit within the Alekhine-Chatard where White sacrifices material for attacking compensation. Black accepts extra pawns but faces White's coordinated threats and forcing tactical sequences."
+  },
+  {
+    "eco": "C13",
+    "name": "French Defense: Alekhine-Chatard Attack, Breyer Variation",
+    "description": "Named after Gyula Breyer, this defensive setup features specific piece placement and solid structure. Black maintains defensive fortress while seeking tactical opportunities and counterplay against White's assault."
+  },
+  {
+    "eco": "C13",
+    "name": "French Defense: Alekhine-Chatard Attack, Maróczy Variation",
+    "description": "Named after Géza Maróczy, this approach features specific strategic and tactical ideas. Both sides pursue forcing sequences with mutual attacking and defensive opportunities in this sharp continuation."
+  },
+  {
+    "eco": "C13",
+    "name": "French Defense: Alekhine-Chatard Attack, Spielmann Variation",
+    "description": "Named after Rudolf Spielmann, this aggressive line features dynamic attacking ideas and forcing tactics. White pursues rapid kingside expansion while Black defends accurately seeking counterplay."
+  },
+  {
+    "eco": "C13",
+    "name": "French Defense: Alekhine-Chatard Attack, Teichmann Variation",
+    "description": "Named after Richard Teichmann, this defensive approach emphasizes solid piece coordination. Black maintains passive but solid structure while seeking tactical opportunities and central counterplay."
+  },
+  {
+    "eco": "C13",
+    "name": "French Defense: Classical Variation, Frankfurt Variation",
+    "description": "A specific setup within the Classical featuring particular piece placement and strategic ideas. Both sides employ flexible plans with opportunities for positional maneuvering and tactical strikes."
+  },
+  {
+    "eco": "C13",
+    "name": "French Defense: Classical Variation, Normal Variation",
+    "description": "The classical mainstream approach emphasizing steady piece development and solid structure. White pursues gradual positional improvement while Black maintains flexible defensive setup with counterplay options."
+  },
+  {
+    "eco": "C13",
+    "name": "French Defense: Classical Variation, Richter Attack",
+    "description": "Named after Berthold Richter, this aggressive approach features specific pawn breaks and piece activity. White pursues both kingside and queenside opportunities while Black seeks solid defense and counterplay."
+  },
+  {
+    "eco": "C13",
+    "name": "French Defense: Classical Variation, Tartakower Variation",
+    "description": "Named after Savielly Tartakower, this solid approach emphasizes piece coordination and prophylactic ideas. White maintains flexible plans while Black seeks defensive solidity with practical counterplay opportunities."
+  }
+]

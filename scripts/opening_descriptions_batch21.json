@@ -1,0 +1,752 @@
+[
+  {
+    "eco": "D34",
+    "name": "Tarrasch Defense: Classical Variation, Main Line",
+    "description": "Black challenges White's center early with c5, then develops naturally with Nc6 and other pieces. White maintains central control while Black seeks counterplay through pressure on d4 and space equality."
+  },
+  {
+    "eco": "D34",
+    "name": "Tarrasch Defense: Classical Variation, Petursson Variation",
+    "description": "A specific interpretation of the Classical Tarrasch emphasizing solid development and central tension. White preserves flexibility while Black maintains piece activity and central influence in a balanced position."
+  },
+  {
+    "eco": "D34",
+    "name": "Tarrasch Defense: Classical Variation, Réti Variation",
+    "description": "White adopts a strategic setup avoiding immediate central confrontation, often with ideas of Bg5 and f4 later. Black completes development smoothly while maintaining central control and counterplay."
+  },
+  {
+    "eco": "D34",
+    "name": "Tarrasch Defense: Classical Variation, Spassky Variation",
+    "description": "Named after Spassky's refined approach, this variation combines solid central structure with flexible piece placement. Black enjoys reliable defensive resources while remaining active in the center."
+  },
+  {
+    "eco": "D34",
+    "name": "Tarrasch Defense: Prague Variation, Main Line",
+    "description": "The Prague Variation features Black's early ...dxc4 capture, shifting piece activity and pawn structure. White pursues compensation through piece play while Black consolidates the extra pawn with careful defense."
+  },
+  {
+    "eco": "D35",
+    "name": "Queen's Gambit Declined: Exchange Variation, Carlsen Variation",
+    "description": "Carlsen's modern treatment of the Exchange favors precise maneuvering and small strategic advantages. This solid approach avoids sharp tactics while maintaining long-term winning chances through positional pressure."
+  },
+  {
+    "eco": "D35",
+    "name": "Queen's Gambit Declined: Exchange Variation, Chameleon Variation",
+    "description": "The Chameleon sidesteps theoretical main lines with flexible move orders and surprising strategic ideas. White retains flexibility while Black must navigate less well-charted territory, requiring accurate defense."
+  },
+  {
+    "eco": "D35",
+    "name": "Queen's Gambit Declined: Exchange Variation, Positional Variation",
+    "description": "White emphasizes long-term positional factors over immediate tactics, building pressure gradually. Black constructs a solid defensive fortress with counterchances through piece activity and space control."
+  },
+  {
+    "eco": "D35",
+    "name": "Queen's Gambit Declined: Exchange Variation, Sämisch Variation",
+    "description": "Sämisch's approach features kingside control and central command through careful pawn placement. Black obtains structural compensation and piece activity in an intellectually demanding middlegame struggle."
+  },
+  {
+    "eco": "D35",
+    "name": "Queen's Gambit Declined: Harrwitz Attack",
+    "description": "White aggressively pursues kingside and center expansion with f4 or similar ideas, rejecting mere positional grinding. Black must carefully defend while finding counterplay, keeping tension throughout the middlegame."
+  },
+  {
+    "eco": "D35",
+    "name": "Queen's Gambit Declined: Normal Defense",
+    "description": "A flexible, principled defense where Black controls the center without committing to specific pawn structures too early. This solid approach offers both passive defensive resources and chances for tactical opportunities."
+  },
+  {
+    "eco": "D36",
+    "name": "Queen's Gambit Declined: Exchange Variation, Reshevsky Variation",
+    "description": "Reshevsky's refined treatment introduces subtle strategic nuances into the Exchange structure. White balances control with activity while Black counters through flexible piece placement and central pressure."
+  },
+  {
+    "eco": "D37",
+    "name": "Queen's Gambit Declined: Barmen Variation",
+    "description": "The Barmen features White's flexible setup avoiding early pawn trading, maintaining tension and strategic options. Black develops naturally while anticipating White's long-term plans and preparing adequate counterplay."
+  },
+  {
+    "eco": "D37",
+    "name": "Queen's Gambit Declined: Harrwitz Attack",
+    "description": "White launches aggressive expansion starting with c4 and supporting moves, seeking kingside pressure and central dominance. Black must defend solidly while locating tactical or positional compensation."
+  },
+  {
+    "eco": "D37",
+    "name": "Queen's Gambit Declined: Harrwitz Attack, Fianchetto Defense",
+    "description": "Black counters White's Harrwitz aggression with a fianchetto, controlling key squares and promoting piece activity. This setup offers both defensive stability and opportunities for counterattack on the long diagonal."
+  },
+  {
+    "eco": "D37",
+    "name": "Queen's Gambit Declined: Harrwitz Attack, Main Line",
+    "description": "The mainline Harrwitz features forcing play and sharp middlegame positions after Black's best defensive tries. Both sides pursue concrete plans with tactical opportunities defining the game's critical phases."
+  },
+  {
+    "eco": "D37",
+    "name": "Queen's Gambit Declined: Harrwitz Attack, Orthodox Defense",
+    "description": "Black defends with classical piece placement and pawn structure, refusing committal moves and maintaining flexibility. This solid approach requires precise defense while preserving adequate counterchances."
+  },
+  {
+    "eco": "D37",
+    "name": "Queen's Gambit Declined: Harrwitz Attack, Two Knights Defense",
+    "description": "Black develops both knights actively to resist White's aggressive setup while maintaining central influence. This counteractive approach balances defense with active piece play in complex middlegame situations."
+  },
+  {
+    "eco": "D37",
+    "name": "Queen's Gambit Declined: Harrwitz Attack, Two Knights Defense, Blockade Line",
+    "description": "This specialized variation features Black's central blockade strategy with knights dominating key squares. White compensates through piece activity while Black's setup demands technical precision and accurate coordination."
+  },
+  {
+    "eco": "D37",
+    "name": "Queen's Gambit Declined: Knight Defense, Alekhine Gambit",
+    "description": "Alekhine's gambit offers dynamic piece compensation for pawn sacrifices, creating sharp middlegame complications. Black accepts tactical complications while counting on sound defensive technique and counterplay."
+  },
+  {
+    "eco": "D37",
+    "name": "Queen's Gambit Declined: Miles Variation",
+    "description": "Miles introduces flexible, maneuverable piece placement avoiding theoretical mainlines while maintaining space advantage. Black must navigate less-studied territory with accurate defense and timely counterplay."
+  },
+  {
+    "eco": "D37",
+    "name": "Queen's Gambit Declined: Three Knights Variation",
+    "description": "White develops three pieces on the kingside and center before committing to a clear plan, maximizing flexibility. Black constructs solid defense while awaiting White's strategic intentions."
+  },
+  {
+    "eco": "D37",
+    "name": "Queen's Gambit Declined: Three Knights, Vienna Variation",
+    "description": "The Vienna arrangement emphasizes control of critical squares through three-piece coordination, building long-term advantages. Black maintains adequate defense through careful piece positioning and central activity."
+  },
+  {
+    "eco": "D37",
+    "name": "Queen's Gambit Declined: Vienna Variation, Quiet Variation",
+    "description": "White pursues quiet, strategic improvement over forcing play, steadily enhancing piece coordination and space. Black adopts a patient defensive approach while waiting for tactical opportunities."
+  },
+  {
+    "eco": "D38",
+    "name": "Queen's Gambit Declined: Ragozin Defense",
+    "description": "Black's Ragozin features aggressive piece placement with bishops targeting c4 and controlling key squares. This active defense allows tactical counterplay while maintaining structural soundness."
+  },
+  {
+    "eco": "D38",
+    "name": "Queen's Gambit Declined: Ragozin Defense, Alekhine Variation",
+    "description": "Alekhine's approach within the Ragozin introduces strategic nuances and avoids heavily-analyzed main lines. Both sides pursue flexible plans with piece activity and positional factors determining play."
+  },
+  {
+    "eco": "D38",
+    "name": "Queen's Gambit Declined: Westphalian Variation",
+    "description": "The Westphalian employs an unusual strategic approach with creative piece arrangements and pawn ideas. Black must adapt to unfamiliar positions while relying on sound defensive principles."
+  },
+  {
+    "eco": "D39",
+    "name": "Queen's Gambit Declined: Ragozin Defense, Vienna Variation",
+    "description": "Vienna's treatment of the Ragozin emphasizes subtle positional factors and strategic maneuvering over forcing tactics. Black maintains aggressive piece placement while defending solidly against White's slow improvements."
+  },
+  {
+    "eco": "D40",
+    "name": "Queen's Gambit Declined: Semi-Tarrasch Defense",
+    "description": "Black delays c5 after playing ...e6, allowing flexible development and adaptation to White's setup. This approach balances central control with piece flexibility and countertactical opportunities."
+  },
+  {
+    "eco": "D40",
+    "name": "Queen's Gambit Declined: Semi-Tarrasch Defense, Levenfish Variation",
+    "description": "Levenfish's refinement emphasizes careful piece coordination and strategic piece placement in the Semi-Tarrasch structure. White maintains gradual pressure while Black achieves solid defensive coordination."
+  },
+  {
+    "eco": "D40",
+    "name": "Queen's Gambit Declined: Semi-Tarrasch Defense, Pillsbury Variation",
+    "description": "Pillsbury's approach adds aggressive central play and piece activity to the Semi-Tarrasch framework. Black must defend accurately while maintaining counterchances through active piece placement."
+  },
+  {
+    "eco": "D40",
+    "name": "Queen's Gambit Declined: Semi-Tarrasch Defense, Symmetrical Variation",
+    "description": "Both sides mirror each other's piece placement, creating balanced structures requiring subtle maneuvering. Play often shifts to positional factors with long-term planning becoming crucial."
+  },
+  {
+    "eco": "D40",
+    "name": "Queen's Gambit Declined: Semi-Tarrasch Defense, with e3",
+    "description": "White reinforces the center with e3 before developing kingside pieces, prioritizing structure over activity. Black constructs counterplay through piece activity and central pressure."
+  },
+  {
+    "eco": "D41",
+    "name": "Queen's Gambit Declined: Semi-Tarrasch Defense",
+    "description": "Black maintains central flexibility with e6 while avoiding immediate c5 committal, adapting to White's setup. This prudent approach preserves piece activity and defensive resources."
+  },
+  {
+    "eco": "D41",
+    "name": "Queen's Gambit Declined: Semi-Tarrasch Defense, Endgame Variation",
+    "description": "White simplifies into favorable endgames through piece exchanges, leveraging superior pawn structure. Black must defend precisely while finding practical drawing chances or breakthrough possibilities."
+  },
+  {
+    "eco": "D41",
+    "name": "Queen's Gambit Declined: Semi-Tarrasch Defense, Exchange Variation",
+    "description": "White exchanges central pawns, shifting play to positional maneuvering and piece coordination. Black consolidates structure while creating counterplay through piece activity and central control."
+  },
+  {
+    "eco": "D41",
+    "name": "Queen's Gambit Declined: Semi-Tarrasch Defense, Kmoch Variation",
+    "description": "Kmoch's approach combines strategic understanding with precise piece placement and pawn ideas. Black must navigate technical positions while maintaining defensive coordination."
+  },
+  {
+    "eco": "D41",
+    "name": "Queen's Gambit Declined: Semi-Tarrasch Defense, Pillsbury Variation",
+    "description": "Pillsbury adds aggressive central action to the Semi-Tarrasch structure, creating middlegame complications. Black defends actively while exploiting tactical opportunities and positional imbalances."
+  },
+  {
+    "eco": "D41",
+    "name": "Queen's Gambit Declined: Semi-Tarrasch Defense, San Sebastian Variation",
+    "description": "San Sebastian's treatment introduces subtle strategic nuances and flexible piece arrangements into the Semi-Tarrasch. Both sides pursue long-term plans with positional factors guiding play."
+  },
+  {
+    "eco": "D42",
+    "name": "Queen's Gambit Declined: Semi-Tarrasch Defense, Main Line",
+    "description": "The mainline Semi-Tarrasch features balanced play with both sides pursuing active plans in complex positions. White maintains central control while Black creates counterplay through tactical opportunities."
+  },
+  {
+    "eco": "D43",
+    "name": "Semi-Slav Defense: Anti-Moscow Gambit",
+    "description": "White sacrifices a pawn aggressively to disrupt Black's coordination and seize kingside initiative. Black accepts the gambit but must handle White's sharp attacking chances and piece activity."
+  },
+  {
+    "eco": "D43",
+    "name": "Semi-Slav Defense: Hastings Variation",
+    "description": "The Hastings system emphasizes flexible piece placement and strategic maneuvering in the Semi-Slav structure. Both sides pursue balanced plans with positional factors and piece activity."
+  },
+  {
+    "eco": "D44",
+    "name": "Semi-Slav Defense: Botvinnik Variation, Alatortsev System",
+    "description": "Alatortsev's treatment of the Botvinnik adds sophisticated strategic ideas and refined piece coordination. Black maintains solid defense while awaiting opportunities for counterplay."
+  },
+  {
+    "eco": "D44",
+    "name": "Semi-Slav Defense: Botvinnik Variation, Ekstrom Variation",
+    "description": "Ekstrom's approach introduces unique positional nuances to the Botvinnik framework with careful piece placement. Black must navigate these nuances while maintaining adequate defensive resources."
+  },
+  {
+    "eco": "D44",
+    "name": "Semi-Slav Defense: Botvinnik Variation, Lilienthal Variation",
+    "description": "Lilienthal's variation combines solid structural defense with active piece play and counterchances. White pursues gradual improvement while Black maintains tactical alertness."
+  },
+  {
+    "eco": "D44",
+    "name": "Semi-Slav Defense: Botvinnik Variation, Szabo Variation",
+    "description": "Szabo's refinement adds flexibility and practical considerations to the Botvinnik framework. Black achieves balanced positions with both defensive and counterattacking resources."
+  },
+  {
+    "eco": "D45",
+    "name": "Semi-Slav Defense: Accelerated Meran Variation",
+    "description": "Black accelerates counterplay with timely c5 advancement, creating immediate central tension and piece activity. This aggressive approach offers tactical opportunities and dynamic compensation."
+  },
+  {
+    "eco": "D45",
+    "name": "Semi-Slav Defense: Main Line",
+    "description": "The mainline Semi-Slav features balanced positions where both sides pursue active plans in complex situations. White maintains space while Black creates counterplay through precise maneuvering."
+  },
+  {
+    "eco": "D45",
+    "name": "Semi-Slav Defense: Normal Variation",
+    "description": "Black develops naturally and flexibly without committing to specific pawn structures too early. This approach balances defense with counterplay through sound positional principles."
+  },
+  {
+    "eco": "D45",
+    "name": "Semi-Slav Defense: Rubinstein System",
+    "description": "Rubinstein's approach emphasizes strategic piece coordination and central control through precise maneuvering. Black maintains solid defense while finding subtle counterchances through flexible positioning."
+  },
+  {
+    "eco": "D45",
+    "name": "Semi-Slav Defense: Stoltz Variation",
+    "description": "Stoltz's variation offers flexible central play and strategic piece arrangements avoiding theoretical main lines. Black achieves positions requiring careful technique and accurate defense."
+  },
+  {
+    "eco": "D45",
+    "name": "Semi-Slav Defense: Stoltz Variation, Center Variation",
+    "description": "The Center Variation emphasizes immediate central action and pawn tension through precise maneuvering. Both sides pursue active plans with tactical opportunities shaping the middlegame."
+  },
+  {
+    "eco": "D45",
+    "name": "Semi-Slav Defense: Stoltz Variation, Center Variation, Mikhalchishin Line",
+    "description": "Mikhalchishin's contribution adds modern strategic understanding to the Center Variation with refined ideas. Black must navigate these sophisticated plans while maintaining defensive soundness."
+  },
+  {
+    "eco": "D45",
+    "name": "Semi-Slav Defense: Stoltz Variation, Shabalov Attack",
+    "description": "Shabalov's aggressive approach pursues sharp attacking chances with dynamic piece play and pawn advances. Black must defend actively while exploiting tactical opportunities in complex positions."
+  },
+  {
+    "eco": "D45",
+    "name": "Semi-Slav Defense: Stonewall Defense",
+    "description": "Black builds a fortress with pawns on d5 and e6, controlling central squares while promoting piece activity. This solid structure offers defensive reliability and tactical counterchances."
+  },
+  {
+    "eco": "D46",
+    "name": "Semi-Slav Defense: Bogoljubow Variation",
+    "description": "Bogoljubow's approach emphasizes flexible piece placement and strategic maneuvering within the Semi-Slav structure. Black maintains balanced positions with both defensive and attacking resources."
+  },
+  {
+    "eco": "D46",
+    "name": "Semi-Slav Defense: Chigorin Defense",
+    "description": "The Chigorin features Black's active piece placement and counterplay against White's center through precise tactics. This fighting approach requires excellent defensive technique and tactical alertness."
+  },
+  {
+    "eco": "D46",
+    "name": "Semi-Slav Defense: Main Line",
+    "description": "The mainline Semi-Slav offers balanced middlegame positions where both sides pursue active plans. White maintains central control while Black creates counterplay through piece activity."
+  },
+  {
+    "eco": "D46",
+    "name": "Semi-Slav Defense: Romih Variation",
+    "description": "Romih's treatment adds strategic nuances and flexible ideas to the Semi-Slav framework. Black achieves solid defensive coordination while maintaining tactical opportunities."
+  },
+  {
+    "eco": "D47",
+    "name": "Semi-Slav Defense: Meran Variation, Lundin Variation",
+    "description": "Lundin's approach to the Meran emphasizes gradual improvement and strategic maneuvering over forcing play. Black maintains solid defense while seeking opportunities for counterplay."
+  },
+  {
+    "eco": "D47",
+    "name": "Semi-Slav Defense: Meran Variation, Wade Variation",
+    "description": "Wade's variation adds practical strategic ideas to the Meran structure with flexible piece arrangements. Black must navigate these nuances while maintaining adequate defensive resources."
+  },
+  {
+    "eco": "D47",
+    "name": "Semi-Slav Defense: Meran Variation, Wade Variation, Kaidanov Gambit",
+    "description": "Kaidanov's gambit sacrifices a pawn aggressively within the Wade framework, seeking rapid piece activity. Black accepts complications while counting on sound defense and tactical alertness."
+  },
+  {
+    "eco": "D47",
+    "name": "Semi-Slav Defense: Meran Variation, Wade Variation, Larsen Variation",
+    "description": "Larsen's refinement within Wade adds creative strategic ideas and flexible maneuvering to the Meran. Black maintains balanced positions requiring precise technique and accurate defense."
+  },
+  {
+    "eco": "D47",
+    "name": "Semi-Slav Defense: Semi-Meran Variation",
+    "description": "The Semi-Meran bridges the Classical and Meran approaches with flexible central play and piece activity. Black achieves balanced positions with both defensive and counterattacking resources."
+  },
+  {
+    "eco": "D48",
+    "name": "Semi-Slav Defense: Meran Variation, Old Variation",
+    "description": "The Old Variation represents the classical interpretation of the Meran structure with traditional piece placement. Black maintains solid defense through careful coordination and tactical alertness."
+  },
+  {
+    "eco": "D48",
+    "name": "Semi-Slav Defense: Meran Variation, Pirc Variation",
+    "description": "Pirc's approach introduces dynamic ideas and strategic nuances to the Meran framework. Black must handle these ideas while maintaining defensive soundness and counterplay."
+  },
+  {
+    "eco": "D48",
+    "name": "Semi-Slav Defense: Meran Variation, Reynolds' Variation",
+    "description": "Reynolds' variation adds subtle strategic elements and flexible maneuvering to the Meran structure. Both sides pursue balanced plans with positional factors and piece activity."
+  },
+  {
+    "eco": "D49",
+    "name": "Semi-Slav Defense: Meran Variation, Blumenfeld Variation",
+    "description": "Blumenfeld's approach offers creative piece placement and strategic ideas within the Meran framework. Black must adapt to these nuances while maintaining adequate defensive resources."
+  },
+  {
+    "eco": "D49",
+    "name": "Semi-Slav Defense: Meran Variation, Rabinovich Variation",
+    "description": "Rabinovich's treatment adds precise strategic understanding and refined maneuvering to the Meran structure. Black maintains solid positions requiring careful technique and defensive accuracy."
+  },
+  {
+    "eco": "D49",
+    "name": "Semi-Slav Defense: Meran Variation, Rellstab Attack",
+    "description": "Rellstab pursues aggressive attacking chances with piece activity and kingside expansion within the Meran. Black defends actively while finding tactical opportunities and counterplay."
+  },
+  {
+    "eco": "D49",
+    "name": "Semi-Slav Defense: Meran Variation, Sozin Variation",
+    "description": "Sozin's variation combines solid structural defense with active piece play and strategic flexibility. White pursues gradual improvement while Black maintains tactical alertness."
+  },
+  {
+    "eco": "D49",
+    "name": "Semi-Slav Defense: Meran Variation, Stahlberg Variation",
+    "description": "Stahlberg's refinement emphasizes careful piece coordination and strategic maneuvering in the Meran structure. Black achieves balanced positions with both defensive and counterattacking chances."
+  },
+  {
+    "eco": "D50",
+    "name": "Queen's Gambit Declined: Been-Koomen Variation",
+    "description": "The Been-Koomen variation features unusual piece arrangements and strategic flexibility avoiding standard structures. Black must adapt to unfamiliar positions while relying on sound principles."
+  },
+  {
+    "eco": "D50",
+    "name": "Queen's Gambit Declined: Modern Variation",
+    "description": "The Modern treatment emphasizes contemporary strategic understanding with flexible piece placement and ideas. Black maintains active defense while pursuing counterplay through precise maneuvering."
+  },
+  {
+    "eco": "D50",
+    "name": "Queen's Gambit Declined: Pseudo-Tarrasch Variation",
+    "description": "Black structures like the Tarrasch without committing c5 early, maintaining maximum flexibility and options. This prudent approach balances defense with counterplay and piece activity."
+  },
+  {
+    "eco": "D50",
+    "name": "Queen's Gambit Declined: Pseudo-Tarrasch Variation, Canal Variation",
+    "description": "Canal's approach within the Pseudo-Tarrasch adds strategic nuances and creative piece placement ideas. Black must navigate these nuances while maintaining defensive coordination."
+  },
+  {
+    "eco": "D50",
+    "name": "Queen's Gambit Declined: Pseudo-Tarrasch Variation, Primitive Pillsbury Variation",
+    "description": "Pillsbury's early interpretation emphasizes aggressive central play and piece activity in the Pseudo-Tarrasch. Black defends accurately while maintaining counterchances through active positioning."
+  },
+  {
+    "eco": "D50",
+    "name": "Queen's Gambit Declined: Semi-Tarrasch Defense, Krause Variation",
+    "description": "Krause's variation adds unique strategic ideas and flexible maneuvering to the Semi-Tarrasch structure. Black achieves balanced positions requiring careful technique and tactical awareness."
+  },
+  {
+    "eco": "D51",
+    "name": "Queen's Gambit Declined: Alekhine Variation",
+    "description": "Alekhine's approach features flexible piece placement and strategic maneuvering avoiding theoretical main lines. Black must navigate these positions while maintaining defensive soundness."
+  },
+  {
+    "eco": "D51",
+    "name": "Queen's Gambit Declined: Capablanca Variation, Anti-Cambridge Springs Variation",
+    "description": "Capablanca's anti-Cambridge setup avoids sharp tactical complications while maintaining long-term advantages. Black defends solidly while seeking practical opportunities through careful maneuvering."
+  },
+  {
+    "eco": "D51",
+    "name": "Queen's Gambit Declined: Manhattan Variation",
+    "description": "The Manhattan variation features dynamic piece play and flexible central control with modern strategic ideas. Both sides pursue active plans in intellectually demanding positions."
+  },
+  {
+    "eco": "D51",
+    "name": "Queen's Gambit Declined: Modern Variation, Knight Defense",
+    "description": "Black defends the center with pieces rather than pawns, creating flexibility and counterplay opportunities. White must navigate these active defenses while maintaining pressure."
+  },
+  {
+    "eco": "D51",
+    "name": "Queen's Gambit Declined: Rochlin Variation",
+    "description": "Rochlin's approach adds subtle strategic elements and refined maneuvering to the Queen's Gambit structure. Black maintains solid defense through careful coordination and piece activity."
+  },
+  {
+    "eco": "D52",
+    "name": "Queen's Gambit Declined: Cambridge Springs Defense, Argentine Variation",
+    "description": "The Argentine variant emphasizes creative piece placement and strategic ideas within the Cambridge Springs. Black must adapt to these nuances while maintaining defensive resources."
+  },
+  {
+    "eco": "D52",
+    "name": "Queen's Gambit Declined: Cambridge Springs Defense, Bogoljubow Variation",
+    "description": "Bogoljubow's treatment adds flexible ideas and strategic refinement to the Cambridge Springs structure. Both sides pursue balanced plans with positional factors guiding play."
+  },
+  {
+    "eco": "D52",
+    "name": "Queen's Gambit Declined: Cambridge Springs Defense, Capablanca Variation",
+    "description": "Capablanca's approach emphasizes strategic clarity and long-term advantages in the Cambridge Springs. Black maintains adequate defense while seeking practical drawing chances."
+  },
+  {
+    "eco": "D52",
+    "name": "Queen's Gambit Declined: Cambridge Springs Defense, Rubinstein Variation",
+    "description": "Rubinstein's refinement features precise strategic understanding and active piece play in the Cambridge Springs. Black must defend accurately while maintaining tactical alertness."
+  },
+  {
+    "eco": "D52",
+    "name": "Queen's Gambit Declined: Cambridge Springs Defense, Yugoslav Variation",
+    "description": "The Yugoslav treatment adds modern strategic ideas and creative piece arrangements to the Cambridge Springs. Black achieves active defensive positions with counterplay opportunities."
+  },
+  {
+    "eco": "D53",
+    "name": "Queen's Gambit Declined: Modern Variation, Heral Variation",
+    "description": "Heral's approach within the Modern adds strategic nuances and flexible ideas to the Queen's Gambit. Black must navigate these positions while maintaining solid defense."
+  },
+  {
+    "eco": "D53",
+    "name": "Queen's Gambit Declined: Uhlmann Variation",
+    "description": "Uhlmann's variation emphasizes flexible piece placement and strategic maneuvering in the Queen's Gambit. Black achieves balanced positions through careful coordination and tactical alertness."
+  },
+  {
+    "eco": "D54",
+    "name": "Queen's Gambit Declined: Neo-Orthodox Variation",
+    "description": "The Neo-Orthodox combines traditional Orthodox principles with modern piece placement and strategic ideas. Black maintains solid defense while creating counterplay through active piece coordination."
+  },
+  {
+    "eco": "D55",
+    "name": "Queen's Gambit Declined: Anti-Tartakower Variation",
+    "description": "White actively counters Black's Tartakower setup with aggressive central and kingside play. Black must defend accurately while exploiting tactical opportunities and maintaining structural integrity."
+  },
+  {
+    "eco": "D55",
+    "name": "Queen's Gambit Declined: Anti-Tartakower Variation, Petrosian Variation",
+    "description": "Petrosian's approach combines solid structure with strategic nuances and piece activity in the Anti-Tartakower. Black maintains balanced positions with both defensive and attacking resources."
+  },
+  {
+    "eco": "D55",
+    "name": "Queen's Gambit Declined: Modern Variation, Normal Line",
+    "description": "The Normal line of the Modern features balanced play with flexible piece placement and strategic maneuvering. Both sides pursue active plans with positional factors determining outcomes."
+  },
+  {
+    "eco": "D55",
+    "name": "Queen's Gambit Declined: Neo-Orthodox Variation",
+    "description": "The Neo-Orthodox structure emphasizes balanced central control and flexible piece development for both sides. White maintains advantages through gradual improvement while Black defends actively."
+  },
+  {
+    "eco": "D55",
+    "name": "Queen's Gambit Declined: Neo-Orthodox Variation, Main Line",
+    "description": "The mainline Neo-Orthodox features complex maneuvering with both sides pursuing active plans and piece play. White maintains long-term pressure while Black seeks tactical opportunities."
+  },
+  {
+    "eco": "D55",
+    "name": "Queen's Gambit Declined: Pillsbury Attack",
+    "description": "Pillsbury pursues aggressive kingside expansion and central control through precise piece placement and pawn advances. Black must defend accurately while finding counterplay through active defense."
+  },
+  {
+    "eco": "D56",
+    "name": "Queen's Gambit Declined: Lasker Defense, Russian Variation",
+    "description": "The Russian interpretation emphasizes solid structural defense and piece coordination in the Lasker framework. Black maintains reliable defensive resources while seeking tactical opportunities."
+  },
+  {
+    "eco": "D56",
+    "name": "Queen's Gambit Declined: Lasker Defense, Teichmann Variation",
+    "description": "Teichmann's treatment adds strategic nuances and flexible maneuvering to the Lasker structure. White maintains central control while Black creates counterplay through careful positioning."
+  },
+  {
+    "eco": "D57",
+    "name": "Queen's Gambit Declined: Lasker Defense, Bernstein Variation",
+    "description": "Bernstein's approach features flexible piece placement and strategic ideas within the Lasker framework. Black must navigate these nuances while maintaining solid defensive coordination."
+  },
+  {
+    "eco": "D57",
+    "name": "Queen's Gambit Declined: Lasker Defense, Bernstein Variation, Mar del Plata Gambit",
+    "description": "The gambit sacrifices a pawn aggressively for piece activity and spatial advantage within the Bernstein. Black accepts complications while relying on sound defensive technique."
+  },
+  {
+    "eco": "D57",
+    "name": "Queen's Gambit Declined: Lasker Defense, Main Line",
+    "description": "The mainline Lasker features balanced positions where both sides pursue active plans and piece coordination. White maintains advantages through precise maneuvering and strategic pressure."
+  },
+  {
+    "eco": "D58",
+    "name": "Queen's Gambit Declined: Tartakower Defense, Exchange Variation",
+    "description": "The Exchange simplifies into balanced positions favoring accurate technique and strategic understanding. Both sides pursue long-term plans through careful piece coordination and positional play."
+  },
+  {
+    "eco": "D59",
+    "name": "Queen's Gambit Declined: Tartakower Defense, Makogonov Exchange Variation",
+    "description": "Makogonov's Exchange interpretation adds refined strategic ideas and nuanced piece placement to the Tartakower. Black must defend precisely while maintaining adequate counterplay."
+  },
+  {
+    "eco": "D60",
+    "name": "Queen's Gambit Declined: Orthodox Defense, Botvinnik Variation",
+    "description": "Botvinnik's approach emphasizes central control and piece activity through precise maneuvering in the Orthodox. Black maintains solid defense while seeking tactical opportunities."
+  },
+  {
+    "eco": "D60",
+    "name": "Queen's Gambit Declined: Orthodox Defense, Rauzer Variation",
+    "description": "Rauzer's treatment features strategic nuances and flexible ideas within the Orthodox Defense structure. White pursues gradual improvement while Black maintains active defense."
+  },
+  {
+    "eco": "D61",
+    "name": "Queen's Gambit Declined: Orthodox Defense, Rubinstein Variation",
+    "description": "Rubinstein emphasizes sound strategic principles and precise piece coordination in the Orthodox structure. Both sides pursue balanced plans requiring careful technique and positional understanding."
+  },
+  {
+    "eco": "D62",
+    "name": "Queen's Gambit Declined: Orthodox Defense, Rubinstein Variation, Flohr Line",
+    "description": "Flohr's refinement adds subtle strategic elements and refined maneuvering to the Rubinstein variation. Black maintains solid positions through accurate defense and tactical alertness."
+  },
+  {
+    "eco": "D63",
+    "name": "Queen's Gambit Declined: Orthodox Defense, Capablanca Variation",
+    "description": "Capablanca's approach features strategic clarity and long-term planning in the Orthodox structure. Black must defend accurately while seeking opportunities for counterplay."
+  },
+  {
+    "eco": "D63",
+    "name": "Queen's Gambit Declined: Orthodox Defense, Henneberger Variation",
+    "description": "Henneberger adds unique strategic ideas and flexible piece arrangements to the Orthodox Defense. Black must navigate these nuances while maintaining defensive soundness."
+  },
+  {
+    "eco": "D63",
+    "name": "Queen's Gambit Declined: Orthodox Defense, Main Line",
+    "description": "The mainline Orthodox features balanced positions where both sides pursue active plans through precise maneuvering. White maintains central control while Black creates counterplay."
+  },
+  {
+    "eco": "D63",
+    "name": "Queen's Gambit Declined: Orthodox Defense, Pillsbury Variation",
+    "description": "Pillsbury pursues aggressive play with kingside expansion and active piece coordination in the Orthodox. Black defends carefully while exploiting tactical opportunities."
+  },
+  {
+    "eco": "D63",
+    "name": "Queen's Gambit Declined: Orthodox Defense, Swiss, Carlsbad Variation",
+    "description": "The Carlsbad structure features advanced pawns and complex maneuvering in the Swiss treatment. Both sides pursue active plans with positional factors and tactical opportunities."
+  },
+  {
+    "eco": "D64",
+    "name": "Queen's Gambit Declined: Orthodox Defense, Rubinstein Attack",
+    "description": "Rubinstein's attack aggressively pursues piece activity and spatial advantage in the Orthodox structure. Black must defend soundly while finding counterplay through tactical alertness."
+  },
+  {
+    "eco": "D65",
+    "name": "Queen's Gambit Declined: Orthodox Defense, Rubinstein Attack",
+    "description": "The continuation of Rubinstein's attack features complex middlegame positions with both sides pursuing active plans. Black must defend precisely while exploiting tactical opportunities."
+  },
+  {
+    "eco": "D66",
+    "name": "Queen's Gambit Declined: Orthodox Defense, Bd3 Line",
+    "description": "White develops the bishop to d3 early, creating flexible plans and piece activity in the Orthodox. Black maintains solid defense through careful coordination."
+  },
+  {
+    "eco": "D66",
+    "name": "Queen's Gambit Declined: Orthodox Defense, Fianchetto Variation",
+    "description": "The Fianchetto setup controls long diagonals and central squares through precise piece placement. Black must adapt to this setup while maintaining defensive resources."
+  },
+  {
+    "eco": "D67",
+    "name": "Queen's Gambit Declined: Orthodox Defense, Alekhine Variation",
+    "description": "Alekhine adds flexible strategic ideas and nuanced maneuvering to the Orthodox structure. Both sides pursue balanced plans requiring careful technique and positional understanding."
+  },
+  {
+    "eco": "D67",
+    "name": "Queen's Gambit Declined: Orthodox Defense, Bd3 Line",
+    "description": "The Bd3 setup creates flexible piece coordination and multiple strategic ideas in the Orthodox. Black must navigate these plans while maintaining solid defensive structure."
+  },
+  {
+    "eco": "D67",
+    "name": "Queen's Gambit Declined: Orthodox Defense, Capablanca System",
+    "description": "Capablanca's systematic approach emphasizes strategic clarity and positional pressure in the Orthodox. Black maintains adequate defense through careful coordination and tactical readiness."
+  },
+  {
+    "eco": "D67",
+    "name": "Queen's Gambit Declined: Orthodox Defense, Janowski Variation",
+    "description": "Janowski's treatment introduces unique strategic ideas and flexible piece placement in the Orthodox. Black must adapt while maintaining sound defensive principles."
+  },
+  {
+    "eco": "D67",
+    "name": "Queen's Gambit Declined: Orthodox Defense, Main Line",
+    "description": "The mainline Orthodox features complex maneuvering with both sides pursuing active plans and piece coordination. White maintains advantages through gradual improvement and strategic precision."
+  },
+  {
+    "eco": "D68",
+    "name": "Queen's Gambit Declined: Orthodox Defense, Classical Variation",
+    "description": "The Classical interpretation emphasizes traditional piece placement and solid structural defense in the Orthodox. Black achieves reliable positions through careful coordination and sound principles."
+  },
+  {
+    "eco": "D69",
+    "name": "Queen's Gambit Declined: Orthodox Defense, Classical Variation",
+    "description": "The continuation of the Classical approach features refined piece placement and strategic maneuvering. Both sides pursue balanced plans with positional factors and tactical opportunities."
+  },
+  {
+    "eco": "D70",
+    "name": "Neo-Grünfeld Defense: Goglidze Attack",
+    "description": "White aggressively pursues central dominance with f4 and related ideas, seeking rapid piece activity. Black must defend accurately while finding counterplay through tactical alertness."
+  },
+  {
+    "eco": "D70",
+    "name": "Neo-Grünfeld Defense: with g3",
+    "description": "The g3 setup creates a flexible fianchetto structure with kingside control and piece coordination. Black must navigate this strategic framework while maintaining active defense."
+  },
+  {
+    "eco": "D70",
+    "name": "Neo-Grünfeld Defense: with Nf3",
+    "description": "Nf3 development prioritizes piece activity and flexible plans in the Neo-Grünfeld structure. Black pursues counterplay through precise maneuvering and tactical opportunities."
+  },
+  {
+    "eco": "D71",
+    "name": "Neo-Grünfeld Defense: Exchange Variation",
+    "description": "The Exchange simplifies into balanced positions requiring precise technique and strategic understanding. Both sides pursue long-term plans through careful piece coordination."
+  },
+  {
+    "eco": "D72",
+    "name": "Neo-Grünfeld Defense: with g3",
+    "description": "The g3 treatment creates flexible fianchetto structures with multiple strategic ideas and piece placements. Black must adapt while maintaining active defense and counterplay."
+  },
+  {
+    "eco": "D73",
+    "name": "Neo-Grünfeld Defense: with g3",
+    "description": "This continuation emphasizes fianchetto setup with refined piece coordination and long-term planning. Black pursues counterplay through precise maneuvering and tactical awareness."
+  },
+  {
+    "eco": "D74",
+    "name": "Neo-Grünfeld Defense: Delayed Exchange Variation",
+    "description": "White delays the exchange while building central control and piece activity in the Neo-Grünfeld. Black must navigate these complexities while maintaining defensive soundness."
+  },
+  {
+    "eco": "D75",
+    "name": "Neo-Grünfeld Defense: Delayed Exchange Variation",
+    "description": "The continuation features complex positions with both sides pursuing active plans and strategic maneuvering. White maintains advantages through precise piece coordination."
+  },
+  {
+    "eco": "D76",
+    "name": "Neo-Grünfeld Defense: Delayed Exchange Variation",
+    "description": "This advanced stage features refined positional play and strategic nuances in the Delayed Exchange. Black must defend precisely while seeking tactical opportunities."
+  },
+  {
+    "eco": "D77",
+    "name": "Neo-Grünfeld Defense: Classical Variation",
+    "description": "The Classical interpretation emphasizes traditional development and solid structural defense in the Neo-Grünfeld. Both sides pursue balanced plans through careful maneuvering."
+  },
+  {
+    "eco": "D77",
+    "name": "Neo-Grünfeld Defense: Classical Variation, Modern Defense",
+    "description": "The Modern treatment adds contemporary strategic ideas to the Classical Variation framework. Black achieves active defensive positions with counterplay opportunities."
+  },
+  {
+    "eco": "D77",
+    "name": "Neo-Grünfeld Defense: Classical Variation, Polgar Variation",
+    "description": "Polgar's approach features flexible strategic ideas and refined piece placement in the Classical Variation. Black must navigate these nuances while maintaining defensive resources."
+  },
+  {
+    "eco": "D78",
+    "name": "Neo-Grünfeld Defense: Classical Variation, Original Defense",
+    "description": "The Original interpretation emphasizes classical principles and solid structural defense in the Neo-Grünfeld. Black achieves reliable positions through careful coordination."
+  },
+  {
+    "eco": "D79",
+    "name": "Neo-Grünfeld Defense: Ultra-Delayed Exchange Variation",
+    "description": "The ultra-delayed approach maximizes flexibility while maintaining central control and piece coordination. Black must adapt to these nuances while pursuing active counterplay."
+  },
+  {
+    "eco": "D80",
+    "name": "Grünfeld Defense: Gibbon Gambit",
+    "description": "White sacrifices a pawn aggressively for piece activity and spatial advantage in the Grünfeld. Black accepts the gambit but must handle White's attacking chances."
+  },
+  {
+    "eco": "D80",
+    "name": "Grünfeld Defense: Lundin Variation",
+    "description": "Lundin's approach emphasizes gradual improvement and strategic maneuvering in the Grünfeld structure. Black maintains solid defense through careful coordination."
+  },
+  {
+    "eco": "D80",
+    "name": "Grünfeld Defense: Lutikov Variation",
+    "description": "Lutikov introduces unique strategic ideas and flexible piece arrangements in the Grünfeld. Black must navigate these nuances while maintaining defensive soundness."
+  },
+  {
+    "eco": "D80",
+    "name": "Grünfeld Defense: Lutikov Variation, Murrey Attack",
+    "description": "Murrey's aggressive continuation pursues kingside expansion and piece activity in the Lutikov Variation. Black must defend accurately while finding counterplay."
+  },
+  {
+    "eco": "D80",
+    "name": "Grünfeld Defense: Stockholm Variation",
+    "description": "The Stockholm features unique strategic ideas and flexible piece placement avoiding standard structures. Black must adapt while maintaining solid defensive principles."
+  },
+  {
+    "eco": "D80",
+    "name": "Grünfeld Defense: Zaitsev Gambit",
+    "description": "Zaitsev sacrifices a pawn aggressively for piece activity and central dominance in the Grünfeld. Black accepts complications while relying on sound defensive technique."
+  },
+  {
+    "eco": "D81",
+    "name": "Grünfeld Defense: Russian Variation, Accelerated Variation",
+    "description": "The Accelerated approach features rapid piece development and flexible strategic ideas in the Russian Variation. Black must navigate these plans while maintaining counterplay."
+  },
+  {
+    "eco": "D82",
+    "name": "Grünfeld Defense: Brinckmann Attack",
+    "description": "White aggressively pursues central control and kingside expansion through precise piece placement. Black must defend carefully while finding tactical opportunities."
+  },
+  {
+    "eco": "D83",
+    "name": "Grünfeld Defense: Brinckmann Attack, Grünfeld Gambit",
+    "description": "Black accepts the gambit and counterattacks aggressively with piece activity and central play. Both sides pursue sharp tactics with practical winning chances."
+  },
+  {
+    "eco": "D83",
+    "name": "Grünfeld Defense: Brinckmann Attack, Grünfeld Gambit, Botvinnik Variation",
+    "description": "Botvinnik's approach emphasizes sound technique and precise piece coordination within the Grünfeld Gambit. Black must defend accurately while maintaining tactical alertness."
+  },
+  {
+    "eco": "D83",
+    "name": "Grünfeld Defense: Brinckmann Attack, Grünfeld Gambit, Capablanca Variation",
+    "description": "Capablanca's treatment features strategic clarity and long-term planning in the Grünfeld Gambit. Black must navigate this approach while seeking tactical opportunities."
+  },
+  {
+    "eco": "D83",
+    "name": "Grünfeld Defense: Brinckmann Attack, Reshevsky Gambit",
+    "description": "Reshevsky's gambit sacrifices material aggressively for rapid piece activity and attacking chances. Black accepts complications while relying on solid defensive coordination."
+  }
+]

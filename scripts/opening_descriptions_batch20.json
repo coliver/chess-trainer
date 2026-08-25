@@ -1,0 +1,752 @@
+[
+  {
+    "eco": "D08",
+    "name": "Queen's Gambit Declined: Albin Countergambit, Krenosz Variation",
+    "description": "Black counters 1.d4 with the sharp 1...e5, seeking tactical counterplay in the center. This variation develops pieces flexibly before committing to pawn structure, allowing Black adaptive responses to White's setup."
+  },
+  {
+    "eco": "D08",
+    "name": "Queen's Gambit Declined: Albin Countergambit, Lasker Trap",
+    "description": "A tactical snare named after Emanuel Lasker, this line offers Black an opportunity to exploit White's careless play with forcing sequences. Black plays actively in the center and kingside to create practical winning chances."
+  },
+  {
+    "eco": "D08",
+    "name": "Queen's Gambit Declined: Albin Countergambit, Modern Line",
+    "description": "This contemporary approach to the Albin combines central tension with flexible piece placement, avoiding rigid structures. Black maintains dynamic equilibrium by controlling the center without over-commitment."
+  },
+  {
+    "eco": "D08",
+    "name": "Queen's Gambit Declined: Albin Countergambit, Normal Line",
+    "description": "The main line of the Albin Countergambit, where Black aggressively counters White's d4 with e5 and follows with tactical development. Black obtains compensation through central activity and piece coordination despite the pawn structure."
+  },
+  {
+    "eco": "D08",
+    "name": "Queen's Gambit Declined: Albin Countergambit, Spassky Variation",
+    "description": "Named after Anatoly Spassky, this variation emphasizes controlled White pressure combined with flexible defense. The position favors White's spatial advantage while Black seeks counterplay through careful consolidation."
+  },
+  {
+    "eco": "D08",
+    "name": "Queen's Gambit Declined: Albin Countergambit, Tartakower Defense",
+    "description": "Tartakower's defensive setup prioritizes piece coordination and prophylactic moves over aggressive central play. This solid approach reduces White's attacking potential while maintaining flexibility in middlegame plans."
+  },
+  {
+    "eco": "D09",
+    "name": "Queen's Gambit Declined: Albin Countergambit, Fianchetto Variation",
+    "description": "White's fianchetto setup targets the long diagonal with g3 and Bg2, creating pressure on the queenside and center. This positional approach complements the Albin's dynamic nature while maintaining strategic coherence."
+  },
+  {
+    "eco": "D09",
+    "name": "Queen's Gambit Declined: Albin Countergambit, Fianchetto Variation, Be6 Line",
+    "description": "Black develops the bishop to e6, supporting central control and preparing coordinated piece play. This setup emphasizes solidity and piece harmony while keeping tactical options against White's fianchetto system."
+  },
+  {
+    "eco": "D09",
+    "name": "Queen's Gambit Declined: Albin Countergambit, Fianchetto Variation, Bf5 Line",
+    "description": "Black's bishop to f5 develops actively outside the pawn chain, controlling key central squares and supporting aggressive piece placement. This line generates immediate tactical threats that compensate for Black's pawn structure."
+  },
+  {
+    "eco": "D09",
+    "name": "Queen's Gambit Declined: Albin Countergambit, Fianchetto Variation, Bg4 Line",
+    "description": "The aggressive Bg4 setup creates immediate pressure on White's center and queen, forcing tactical decisions early. Black's piece activity provides practical compensation despite White's long-diagonal control."
+  },
+  {
+    "eco": "D10",
+    "name": "Slav Defense: Diemer Gambit",
+    "description": "A romantic gambit where White sacrifices a pawn with e4, seeking rapid development and kingside attack. This offbeat gambit appeals to aggressive players willing to play for initiative over material equality."
+  },
+  {
+    "eco": "D10",
+    "name": "Slav Defense: Exchange Variation",
+    "description": "White simplifies with cxd5, leading to a position where Black has solid structure and piece coordination. This drawish line suits players seeking solid midgames without sharp complications."
+  },
+  {
+    "eco": "D10",
+    "name": "Slav Defense: Exchange Variation, Boor Attack",
+    "description": "White aggressively continues with Bf4 and Nbd2, pressuring Black's center and queenside. This attacking setup seeks advantage through space and piece coordination rather than forcing tactics."
+  },
+  {
+    "eco": "D10",
+    "name": "Slav Defense: Slav Gambit, Alekhine Attack",
+    "description": "Alekhine's aggressive setup combines central control with rapid piece deployment, prioritizing practical advantage. White uses pawn breaks and piece pressure to generate attacking chances despite material investment."
+  },
+  {
+    "eco": "D10",
+    "name": "Slav Defense: Winawer Countergambit",
+    "description": "Black counters White's queenside pressure with the sharp c5 break, seeking central counterplay and piece activity. This tactical response generates complications that favor Black's dynamic piece play."
+  },
+  {
+    "eco": "D10",
+    "name": "Slav Defense: Winawer Countergambit, Anti-Winawer Gambit",
+    "description": "White meets Black's countergambit with aggressive central play and piece coordination, accepting complications for attacking chances. This continuation emphasizes tactical play over positional consolidation."
+  },
+  {
+    "eco": "D11",
+    "name": "Slav Defense: Bonet Gambit",
+    "description": "Bonet's gambit involves an early pawn sacrifice to accelerate White's development and piece activity. This sharp try offers White practical compensation through spatial advantage and attacking possibilities."
+  },
+  {
+    "eco": "D11",
+    "name": "Slav Defense: Breyer Variation",
+    "description": "The Breyer emphasizes piece coordination and prophylactic planning over immediate central occupation. This setup allows flexible rearrangement of pieces while maintaining Black's solid defensive structure."
+  },
+  {
+    "eco": "D11",
+    "name": "Slav Defense: Modern Line",
+    "description": "The contemporary Slav approach combines early queen development with flexible piece placement and center control. This modern system balances strategic ideas with practical piece coordination."
+  },
+  {
+    "eco": "D11",
+    "name": "Slav Defense: Quiet Variation",
+    "description": "Black adopts a restrained setup with controlled development and limited immediate piece pressure on White. This solid approach emphasizes piece harmony and gradual queenside expansion."
+  },
+  {
+    "eco": "D11",
+    "name": "Slav Defense: Quiet Variation, Pin Defense",
+    "description": "Black's defensive setup addresses White's piece pressure through careful piece coordination and central control. The Pin Defense emphasizes solid structure while maintaining flexibility for kingside counterplay."
+  },
+  {
+    "eco": "D12",
+    "name": "Slav Defense: Quiet Variation, Amsterdam Variation",
+    "description": "Amsterdam's approach features specific piece placement and pawn breaks to generate counterplay against White's center. This variation maintains Black's solidity while creating tactical opportunities."
+  },
+  {
+    "eco": "D12",
+    "name": "Slav Defense: Quiet Variation, Landau Variation",
+    "description": "Landau's setup emphasizes piece coordination and prophylactic moves before committing to central breaks. This solid approach appeals to players seeking rich middlegame positions with balanced structures."
+  },
+  {
+    "eco": "D12",
+    "name": "Slav Defense: Quiet Variation, Schallopp Defense",
+    "description": "Schallopp's defensive system prioritizes piece harmony and central control without immediate aggressive counterplay. This setup suits players preferring solid positions where tactical opportunities emerge gradually."
+  },
+  {
+    "eco": "D13",
+    "name": "Slav Defense: Exchange Variation",
+    "description": "White's exchange of the c-pawn leads to symmetrical pawn structures and drawish tendencies. Black gains solid positioning and can pursue active piece play or accept simplified endgames."
+  },
+  {
+    "eco": "D13",
+    "name": "Slav Defense: Exchange Variation, Schallopp Variation",
+    "description": "Schallopp's continuation after the exchange maintains precise piece placement and central control. This solid setup gives Black comfortable play with chances for active middlegame operations."
+  },
+  {
+    "eco": "D14",
+    "name": "Slav Defense: Exchange Variation, Symmetrical Line",
+    "description": "Both sides mirror structures to achieve balanced positions with few forcing sequences. This symmetrical setup emphasizes piece activity and maneuver over sharp tactical play."
+  },
+  {
+    "eco": "D14",
+    "name": "Slav Defense: Exchange Variation, Trifunovic Variation",
+    "description": "Trifunovic's approach uses precise piece placement and flexible pawn breaks to generate active middlegame play. This variation balances Black's defensive solidity with offensive piece coordination."
+  },
+  {
+    "eco": "D15",
+    "name": "Slav Defense: Alekhine Variation",
+    "description": "Alekhine's system prioritizes piece development and central control with flexible pawn structures. This approach allows Black to adapt to White's setup while maintaining defensive resilience."
+  },
+  {
+    "eco": "D15",
+    "name": "Slav Defense: Chebanenko Variation, Advance System",
+    "description": "The Chebanenko's Advance System features early pawn breaks and piece coordination to generate central and queenside pressure. Black's flexible setup permits active piece play and tactical opportunities."
+  },
+  {
+    "eco": "D15",
+    "name": "Slav Defense: Geller Gambit",
+    "description": "Geller's gambit sacrifices a pawn to accelerate piece development and kingside attack. This sharp try offers White practical compensation through spatial advantage and attacking potential."
+  },
+  {
+    "eco": "D15",
+    "name": "Slav Defense: Schlechter Variation",
+    "description": "Schlechter's defensive setup emphasizes piece coordination and prophylactic planning without aggressive central pressure. This solid approach suits players seeking balanced middlegames with flexible structures."
+  },
+  {
+    "eco": "D15",
+    "name": "Slav Defense: Süchting Variation",
+    "description": "Süchting's variation features specific piece placement and pawn breaks to generate counterplay against White. This setup maintains Black's structural solidity while creating practical winning chances."
+  },
+  {
+    "eco": "D15",
+    "name": "Slav Defense: Three Knights Variation",
+    "description": "White develops all knights to active squares, creating coordinated pressure on Black's center and queenside. This setup emphasizes piece harmony and tactical opportunities over positional strategies."
+  },
+  {
+    "eco": "D15",
+    "name": "Slav Defense: Two Knights Attack",
+    "description": "White's aggressive placement of knights on b3 and d4 creates immediate central and queenside pressure. This tactical setup seeks rapid advantage through piece coordination and forcing sequences."
+  },
+  {
+    "eco": "D16",
+    "name": "Slav Defense: Alapin Variation",
+    "description": "Alapin's continuation emphasizes White's space advantage and piece pressure combined with careful central control. This solid setup maintains White's positional edge while avoiding sharp complications."
+  },
+  {
+    "eco": "D16",
+    "name": "Slav Defense: Smyslov Variation",
+    "description": "Smyslov's flexible approach balances piece coordination with central occupation and kingside safety. This variation provides Black comfortable play with balanced middlegame structures and active piece placement."
+  },
+  {
+    "eco": "D16",
+    "name": "Slav Defense: Soultanbeieff Variation",
+    "description": "Soultanbeieff's system features specific piece placement and pawn breaks to generate counterplay. This solid variation maintains Black's defensive reliability while creating tactical opportunities."
+  },
+  {
+    "eco": "D16",
+    "name": "Slav Defense: Steiner Variation",
+    "description": "Steiner's continuation emphasizes piece harmony and prophylactic planning before committing to central strategies. This solid approach suits players seeking balanced positions with flexible piece placement."
+  },
+  {
+    "eco": "D17",
+    "name": "Slav Defense: Czech Variation, Bled Attack",
+    "description": "White's aggressive attack on e5 forces tactical decisions while maintaining central control. The Bled Attack creates sharp positions favoring aggressive players with tactical acumen."
+  },
+  {
+    "eco": "D17",
+    "name": "Slav Defense: Czech Variation, Carlsbad Variation",
+    "description": "The Carlsbad structure features pawn exchanges that create long-term imbalances and piece activity. This variation offers both sides strategic compensation through different piece placements and pawn structures."
+  },
+  {
+    "eco": "D17",
+    "name": "Slav Defense: Czech Variation, Carlsbad Variation, Morozevich Variation",
+    "description": "Morozevich's modern approach combines Carlsbad structures with flexible piece development and central control. This continuation maintains Black's dynamic resources while adapting to White's strategic plans."
+  },
+  {
+    "eco": "D17",
+    "name": "Slav Defense: Czech Variation, Krause Attack",
+    "description": "The Krause Attack employs aggressive piece placement and pawn breaks to generate spatial advantage. White's tactical setup seeks rapid compensation through active piece coordination."
+  },
+  {
+    "eco": "D17",
+    "name": "Slav Defense: Czech Variation, Krause Attack, Fazekas Gambit",
+    "description": "Fazekas sacrifices material to accelerate White's attack and piece activity after the Krause setup. This sharp gambit offers practical compensation through spatial advantage and tactical opportunities."
+  },
+  {
+    "eco": "D17",
+    "name": "Slav Defense: Czech Variation, Wiesbaden Variation",
+    "description": "The Wiesbaden combines central pawn breaks with piece coordination to generate complex middlegames. This variation offers both sides rich strategic and tactical opportunities."
+  },
+  {
+    "eco": "D17",
+    "name": "Slav Defense: Czech Variation, Wiesbaden Variation, Sharp Line",
+    "description": "The Sharp Line escalates tactical play and piece pressure in the Wiesbaden structure. This aggressive continuation favors players comfortable with sharp positions and forcing sequences."
+  },
+  {
+    "eco": "D18",
+    "name": "Slav Defense: Czech Variation, Classical System",
+    "description": "The Classical System emphasizes solid piece development and balanced structures over sharp tactics. This setup suits players seeking stable middlegames with clear strategic plans."
+  },
+  {
+    "eco": "D18",
+    "name": "Slav Defense: Czech Variation, Lasker Variation",
+    "description": "Lasker's solid defensive system prioritizes piece coordination and prophylactic planning without immediate aggressive play. This approach provides Black reliable counterplay and balanced middlegame chances."
+  },
+  {
+    "eco": "D19",
+    "name": "Slav Defense: Czech Variation, Classical System, Main Line",
+    "description": "The main line maintains the Classical System's emphasis on piece harmony and central control. Both sides pursue strategic plans through careful maneuver and piece coordination."
+  },
+  {
+    "eco": "D19",
+    "name": "Slav Defense: Czech Variation, Dutch Variation",
+    "description": "The Dutch Variation features specific piece placement inspired by Dutch Defense ideas to generate kingside counterplay. This setup combines structural solidity with attacking resources on the flanks."
+  },
+  {
+    "eco": "D19",
+    "name": "Slav Defense: Czech Variation, Dutch Variation, Sämisch Variation",
+    "description": "Sämisch's addition to the Dutch structure emphasizes kingside space control and piece pressure. This aggressive continuation creates sharp positions with tactical opportunities for active players."
+  },
+  {
+    "eco": "D20",
+    "name": "Queen's Gambit Accepted: Accelerated Mannheim Variation",
+    "description": "The Accelerated Mannheim features faster pawn breaks and piece development than the traditional line. This modern approach seeks immediate central control through coordinated piece placement."
+  },
+  {
+    "eco": "D20",
+    "name": "Queen's Gambit Accepted: Central Variation, Alekhine System",
+    "description": "Alekhine's system prioritizes piece coordination and central pressure over pawn captures. White seeks spatial advantage and tactical opportunities through flexible development and piece placement."
+  },
+  {
+    "eco": "D20",
+    "name": "Queen's Gambit Accepted: Central Variation, Greco Variation",
+    "description": "Greco's approach emphasizes central control and piece coordination after Black accepts the gambit. This solid continuation provides White comfortable play with balanced piece activity."
+  },
+  {
+    "eco": "D20",
+    "name": "Queen's Gambit Accepted: Central Variation, McDonnell Defense",
+    "description": "McDonnell's defensive setup focuses on piece coordination and solid pawn structures to neutralize White's pressure. This reliable defense provides Black comfortable equality with flexible middlegame plans."
+  },
+  {
+    "eco": "D20",
+    "name": "Queen's Gambit Accepted: Central Variation, McDonnell Defense, Somov Gambit",
+    "description": "Somov's gambit adds tactical spice by sacrificing material for accelerated White attack and piece activity. This sharp continuation offers practical compensation through spatial advantage."
+  },
+  {
+    "eco": "D20",
+    "name": "Queen's Gambit Accepted: Central Variation, Modern Defense",
+    "description": "The Modern Defense balances piece coordination with flexible pawn structures and central control. This contemporary approach provides Black solid positions with adaptive middlegame resources."
+  },
+  {
+    "eco": "D20",
+    "name": "Queen's Gambit Accepted: Central Variation, Rubinstein Defense",
+    "description": "Rubinstein's solid setup emphasizes piece harmony and prophylactic planning while maintaining central resilience. This approach provides Black reliable defense with chances for active piece coordination."
+  },
+  {
+    "eco": "D20",
+    "name": "Queen's Gambit Accepted: Central Variation, Rubinstein Defense, Yefimov Gambit",
+    "description": "Yefimov's gambit features material sacrifice to generate White's spatial advantage and attacking chances. This tactical continuation offers practical compensation through piece coordination and central pressure."
+  },
+  {
+    "eco": "D20",
+    "name": "Queen's Gambit Accepted: Linares Variation",
+    "description": "The Linares balances central control with piece development and flexible pawn structures. This variation provides both sides strategic and tactical opportunities through careful maneuvering."
+  },
+  {
+    "eco": "D20",
+    "name": "Queen's Gambit Accepted: Old Variation",
+    "description": "The Old Variation emphasizes traditional piece development and central control after gambit acceptance. This solid approach provides stable positions with clear strategic plans for both sides."
+  },
+  {
+    "eco": "D20",
+    "name": "Queen's Gambit Accepted: Old Variation, Billinger Gambit",
+    "description": "Billinger sacrifices material to accelerate piece development and create tactical opportunities. This gambit offers practical compensation through White's spatial advantage and piece coordination."
+  },
+  {
+    "eco": "D20",
+    "name": "Queen's Gambit Accepted: Old Variation, Christensen Gambit",
+    "description": "Christensen's aggressive continuation sacrifices material for rapid piece development and central control. This sharp gambit provides White attacking chances and spatial advantage."
+  },
+  {
+    "eco": "D20",
+    "name": "Queen's Gambit Accepted: Old Variation, Korchnoi Gambit",
+    "description": "Korchnoi's gambit features pawn sacrifice to accelerate White's piece activity and kingside attack. This tactical continuation offers practical compensation through aggressive piece placement."
+  },
+  {
+    "eco": "D20",
+    "name": "Queen's Gambit Accepted: Old Variation, Novikov Gambit",
+    "description": "Novikov's gambit accelerates White's attack through material sacrifice and rapid piece development. This sharp approach creates attacking chances for aggressive White players."
+  },
+  {
+    "eco": "D20",
+    "name": "Queen's Gambit Accepted: Saduleto Variation",
+    "description": "The Saduleto emphasizes central pawn control and piece coordination after Black accepts the gambit. This solid continuation provides White comfortable play with balanced piece activity."
+  },
+  {
+    "eco": "D20",
+    "name": "Queen's Gambit Accepted: Schwartz Defense",
+    "description": "Schwartz's defensive approach prioritizes piece harmony and solid pawn structures to neutralize White's pressure. This reliable defense provides Black comfortable positions with flexible middlegame resources."
+  },
+  {
+    "eco": "D21",
+    "name": "Queen's Gambit Accepted: Alekhine Defense, Borisenko-Furman Variation",
+    "description": "Borisenko and Furman's continuation emphasizes piece coordination and tactical opportunities within Alekhine's system. This variation provides Black solid defense with practical counterplay."
+  },
+  {
+    "eco": "D21",
+    "name": "Queen's Gambit Accepted: Godes Variation",
+    "description": "Godes' approach focuses on central control and piece development in the Queen's Gambit Accepted. This solid continuation suits players seeking balanced middlegames with clear strategic ideas."
+  },
+  {
+    "eco": "D21",
+    "name": "Queen's Gambit Accepted: Gunsberg Defense",
+    "description": "Gunsberg's defensive setup emphasizes solid pawn structures and piece coordination to counter White's pressure. This reliable approach provides Black comfortable play with active piece placement."
+  },
+  {
+    "eco": "D21",
+    "name": "Queen's Gambit Accepted: Normal Variation",
+    "description": "The Normal Variation follows traditional piece development and central strategies after gambit acceptance. This standard approach provides stable positions with clear plans for both sides."
+  },
+  {
+    "eco": "D21",
+    "name": "Queen's Gambit Accepted: Rosenthal Variation",
+    "description": "Rosenthal's continuation features flexible piece placement and central control adapted to accepted gambit positions. This variation provides both sides balanced play with active piece coordination."
+  },
+  {
+    "eco": "D21",
+    "name": "Queen's Gambit Accepted: Slav Gambit",
+    "description": "The Slav Gambit combines Queen's Gambit Accepted structures with Slav-inspired piece coordination and pawn breaks. This hybrid approach creates rich middlegames with balanced opportunities."
+  },
+  {
+    "eco": "D22",
+    "name": "Queen's Gambit Accepted: Alekhine Defense",
+    "description": "Alekhine's defense in the Queen's Gambit Accepted emphasizes piece coordination and flexible pawn structures. This setup provides Black reliable counterplay and balanced middlegame resources."
+  },
+  {
+    "eco": "D22",
+    "name": "Queen's Gambit Accepted: Alekhine Defense, Alatortsev Variation",
+    "description": "Alatortsev's addition to Alekhine's defense features specific piece placement and pawn breaks for Black's counterplay. This variation maintains solid defense while creating tactical opportunities."
+  },
+  {
+    "eco": "D22",
+    "name": "Queen's Gambit Accepted: Alekhine Defense, Haberditz Variation",
+    "description": "Haberditz's approach combines Alekhine's piece coordination with aggressive pawn breaks and central pressure. This variation provides Black active play and practical middlegame chances."
+  },
+  {
+    "eco": "D23",
+    "name": "Queen's Gambit Accepted: Mannheim Variation",
+    "description": "The Mannheim features specific pawn breaks and piece coordination within the Queen's Gambit Accepted framework. This variation provides both sides strategic and tactical opportunities."
+  },
+  {
+    "eco": "D24",
+    "name": "Queen's Gambit Accepted: Bogoljubow Defense",
+    "description": "Bogoljubow's defense emphasizes solid pawn structures and piece coordination to neutralize White's pressure. This reliable setup provides Black comfortable play with flexible middlegame resources."
+  },
+  {
+    "eco": "D24",
+    "name": "Queen's Gambit Accepted: Gunsberg Defense, Prianishenmo Gambit",
+    "description": "Prianishenmo's gambit within Gunsberg's defense offers tactical complications through pawn sacrifices. This sharp continuation creates practical winning chances for aggressive Black players."
+  },
+  {
+    "eco": "D24",
+    "name": "Queen's Gambit Accepted: Showalter Variation",
+    "description": "Showalter's continuation emphasizes central control and piece development within the Queen's Gambit Accepted. This solid approach provides White comfortable play with balanced piece activity."
+  },
+  {
+    "eco": "D25",
+    "name": "Queen's Gambit Accepted: Janowski-Larsen Variation",
+    "description": "Janowski and Larsen's approach combines central pawn control with flexible piece development and coordination. This variation offers both sides balanced play with strategic opportunities."
+  },
+  {
+    "eco": "D25",
+    "name": "Queen's Gambit Accepted: Normal Variation",
+    "description": "The Normal Variation in this code range follows standard piece development and central strategies. This stable approach provides clear plans and balanced play for both sides."
+  },
+  {
+    "eco": "D25",
+    "name": "Queen's Gambit Accepted: Smyslov Variation",
+    "description": "Smyslov's flexible approach balances piece coordination with central control and strategic adaptability. This variation provides both sides comfortable play with rich middlegame possibilities."
+  },
+  {
+    "eco": "D25",
+    "name": "Queen's Gambit Accepted: Winawer Defense",
+    "description": "Winawer's defense emphasizes piece harmony and prophylactic planning while maintaining central resilience. This solid setup provides Black reliable play with flexible middlegame options."
+  },
+  {
+    "eco": "D26",
+    "name": "Queen's Gambit Accepted: Classical Defense",
+    "description": "The Classical Defense prioritizes solid piece development and balanced structures after gambit acceptance. This reliable approach provides both sides clear strategic plans and stable positions."
+  },
+  {
+    "eco": "D26",
+    "name": "Queen's Gambit Accepted: Classical Defense, Normal Line",
+    "description": "The Normal Line maintains the Classical Defense's emphasis on piece coordination and central control. Both sides pursue balanced play through careful maneuvering and piece placement."
+  },
+  {
+    "eco": "D26",
+    "name": "Queen's Gambit Accepted: Classical Defense, Steinitz Variation, Development Variation",
+    "description": "Steinitz's Development Variation emphasizes rapid piece coordination and kingside safety over immediate central pressure. This flexible approach provides both sides comfortable play with active piece placement."
+  },
+  {
+    "eco": "D26",
+    "name": "Queen's Gambit Accepted: Classical Defense, Steinitz Variation, Exchange Variation",
+    "description": "Steinitz's Exchange Variation simplifies positions through pawn trades while maintaining piece coordination. This approach suits players seeking stable middlegames with clear strategic continuations."
+  },
+  {
+    "eco": "D26",
+    "name": "Queen's Gambit Accepted: Classical, Furman Variation",
+    "description": "Furman's addition to the Classical Defense features specific piece placement and pawn breaks for dynamic play. This variation maintains solidity while creating tactical opportunities and middlegame activity."
+  },
+  {
+    "eco": "D26",
+    "name": "Queen's Gambit Accepted: Normal Variation, Traditional System",
+    "description": "The Traditional System emphasizes conventional piece development and pawn structures within the Queen's Gambit Accepted. This solid approach provides stable positions with clear strategic plans."
+  },
+  {
+    "eco": "D27",
+    "name": "Queen's Gambit Accepted: Classical Defense, Main Line",
+    "description": "The main line features the Classical Defense's emphasis on solid piece development and balanced play. Both sides pursue strategic plans through careful piece coordination and central control."
+  },
+  {
+    "eco": "D27",
+    "name": "Queen's Gambit Accepted: Classical Defense, Rubinstein Variation",
+    "description": "Rubinstein's solid approach combines Classical Defense principles with flexible pawn structures and piece coordination. This variation provides Black reliable defense with practical middlegame resources."
+  },
+  {
+    "eco": "D27",
+    "name": "Queen's Gambit Accepted: Classical Defense, Russian Gambit",
+    "description": "The Russian Gambit adds tactical spice by sacrificing material for accelerated White attack within the Classical framework. This sharp continuation offers practical compensation through piece coordination."
+  },
+  {
+    "eco": "D27",
+    "name": "Queen's Gambit Accepted: Furman Variation",
+    "description": "Furman's variation emphasizes dynamic piece placement and pawn breaks to generate active middlegame play. This flexible approach provides both sides rich strategic and tactical opportunities."
+  },
+  {
+    "eco": "D28",
+    "name": "Queen's Gambit Accepted: Classical Defense, Alekhine System",
+    "description": "Alekhine's system within the Classical Defense emphasizes piece coordination and spatial pressure. White pursues advantage through active piece placement and tactical opportunities."
+  },
+  {
+    "eco": "D28",
+    "name": "Queen's Gambit Accepted: Classical, Flohr Variation",
+    "description": "Flohr's solid approach combines Classical principles with flexible piece development and prophylactic planning. This variation provides White comfortable play with balanced middlegame structures."
+  },
+  {
+    "eco": "D29",
+    "name": "Queen's Gambit Accepted: Classical Defense, Alekhine System, Main Line",
+    "description": "The main line of Alekhine's system emphasizes White's spatial control and piece coordination. Both sides pursue strategic plans with clear middlegame objectives."
+  },
+  {
+    "eco": "D29",
+    "name": "Queen's Gambit Accepted: Classical Defense, Alekhine System, Smyslov Variation",
+    "description": "Smyslov's flexible approach within Alekhine's system adapts piece development to create dynamic middlegames. This variation offers both sides balanced play with active piece coordination."
+  },
+  {
+    "eco": "D30",
+    "name": "Queen's Gambit Declined: Capablanca Variation",
+    "description": "Capablanca's solid defense emphasizes piece coordination and central control without sharp complications. This reliable setup provides Black comfortable play with flexible middlegame options."
+  },
+  {
+    "eco": "D30",
+    "name": "Queen's Gambit Declined: Semmering Variation",
+    "description": "The Semmering features specific piece placement and pawn structures to generate Black's counterplay. This variation maintains solidity while creating practical opportunities for active play."
+  },
+  {
+    "eco": "D30",
+    "name": "Queen's Gambit Declined: Spielmann Variation",
+    "description": "Spielmann's dynamic approach emphasizes piece activity and central control over passive defense. This aggressive variation creates tactical opportunities and practical winning chances for Black."
+  },
+  {
+    "eco": "D30",
+    "name": "Queen's Gambit Declined: Stonewall Variation",
+    "description": "The Stonewall features the characteristic pawn structure with pawns on d5, e6, and f5, creating space and piece activity. This solid setup provides Black reliable defense with counterplay on the kingside."
+  },
+  {
+    "eco": "D30",
+    "name": "Queen's Gambit Declined: Tarrasch Defense, Pseudo-Tarrasch",
+    "description": "The Pseudo-Tarrasch adopts Tarrasch-inspired ideas without committing to the aggressive central pawns. This flexible approach provides Black comfortable play with adaptive middlegame strategies."
+  },
+  {
+    "eco": "D30",
+    "name": "Queen's Gambit Declined: Tarrasch Defense, Pseudo-Tarrasch Bishop Attack",
+    "description": "The Bishop Attack within the Pseudo-Tarrasch creates immediate piece pressure on Black's center. White seeks advantage through spatial control and tactical opportunities."
+  },
+  {
+    "eco": "D30",
+    "name": "Queen's Gambit Declined: Traditional Variation",
+    "description": "The Traditional Variation follows conventional defensive strategies and solid piece development. This standard approach provides Black reliable play with balanced middlegame structures."
+  },
+  {
+    "eco": "D30",
+    "name": "Queen's Gambit Declined: Vienna Variation",
+    "description": "The Vienna features specific piece placement and pawn structures adapted from Vienna Defense ideas. This variation provides Black solid defense with flexible piece coordination."
+  },
+  {
+    "eco": "D30",
+    "name": "Semi-Slav Defense: Quiet Variation",
+    "description": "The Quiet Variation emphasizes controlled piece development and prophylactic planning without immediate aggression. This solid approach provides Black comfortable play with reliable defensive structures."
+  },
+  {
+    "eco": "D31",
+    "name": "Queen's Gambit Declined: Alapin Variation",
+    "description": "Alapin's system prioritizes central control and piece coordination to generate White's space advantage. This solid continuation provides White comfortable play with clear strategic objectives."
+  },
+  {
+    "eco": "D31",
+    "name": "Queen's Gambit Declined: Charousek Variation",
+    "description": "Charousek's flexible approach combines solid piece development with adaptive pawn structures. This variation provides Black reliable defense with practical middlegame resources."
+  },
+  {
+    "eco": "D31",
+    "name": "Queen's Gambit Declined: Charousek Variation, Miladinovic Gambit",
+    "description": "Miladinovic's gambit adds tactical complications through pawn sacrifice for accelerated piece activity. This sharp continuation offers practical compensation through White's attacking chances."
+  },
+  {
+    "eco": "D31",
+    "name": "Queen's Gambit Declined: Janowski Variation",
+    "description": "Janowski's continuation emphasizes piece coordination and flexible pawn structures within the Semi-Slav. This approach provides Black solid defense with adaptive middlegame plans."
+  },
+  {
+    "eco": "D31",
+    "name": "Queen's Gambit Declined: Queen's Knight Variation",
+    "description": "This variation features the queen's knight moving to create piece pressure and central control. White emphasizes tactical opportunities through piece coordination and spatial advantage."
+  },
+  {
+    "eco": "D31",
+    "name": "Queen's Gambit Declined: Semi-Slav, Abrahams Variation",
+    "description": "Abrahams' solid setup prioritizes piece harmony and prophylactic planning within the Semi-Slav. This reliable defense provides Black comfortable play with flexible middlegame options."
+  },
+  {
+    "eco": "D31",
+    "name": "Queen's Gambit Declined: Semi-Slav, Junge Variation",
+    "description": "Junge's approach combines Semi-Slav principles with flexible piece development and central control. This variation provides both sides balanced play with strategic opportunities."
+  },
+  {
+    "eco": "D31",
+    "name": "Queen's Gambit Declined: Semi-Slav, Koomen Variation",
+    "description": "Koomen's variation features specific piece placement and pawn breaks to generate Black's counterplay. This setup maintains solidity while creating tactical opportunities for active play."
+  },
+  {
+    "eco": "D31",
+    "name": "Semi-Slav Defense: Accelerated Move Order",
+    "description": "This move order variation achieves Semi-Slav positions through faster sequences, avoiding certain White systems. The flexible approach provides Black adaptive defensive resources and middlegame activity."
+  },
+  {
+    "eco": "D31",
+    "name": "Semi-Slav Defense: Anti-Noteboom, Stonewall Variation",
+    "description": "The Anti-Noteboom Stonewall avoids Noteboom complications while maintaining aggressive Stonewall structures. This approach provides Black solid defense with clear counterattacking plans."
+  },
+  {
+    "eco": "D31",
+    "name": "Semi-Slav Defense: Anti-Noteboom, Stonewall Variation, Portisch Gambit",
+    "description": "Portisch's gambit sacrifices material within the Anti-Noteboom Stonewall for tactical compensation. This sharp continuation creates practical winning chances for aggressive Black players."
+  },
+  {
+    "eco": "D31",
+    "name": "Semi-Slav Defense: Gunderam Gambit",
+    "description": "Gunderam's gambit offers pawn sacrifice within the Semi-Slav framework for accelerated piece activity. This tactical continuation provides practical compensation through White's attacking chances."
+  },
+  {
+    "eco": "D31",
+    "name": "Semi-Slav Defense: Marshall Gambit",
+    "description": "Marshall's gambit sacrifices material to generate immediate tactical complications and piece activity. This sharp approach creates practical winning chances for aggressive White players."
+  },
+  {
+    "eco": "D31",
+    "name": "Semi-Slav Defense: Marshall Gambit, Forgotten Variation",
+    "description": "The Forgotten Variation represents a lesser-known approach within Marshall's gambit framework. This variation offers both sides tactical complications with interesting middlegame possibilities."
+  },
+  {
+    "eco": "D31",
+    "name": "Semi-Slav Defense: Marshall Gambit, Main Line",
+    "description": "The main line of Marshall's gambit features aggressive White play after material sacrifice. Both sides pursue tactical opportunities with sharp middlegame complications."
+  },
+  {
+    "eco": "D31",
+    "name": "Semi-Slav Defense: Marshall Gambit, Tolush Variation",
+    "description": "Tolush's approach within Marshall's gambit emphasizes piece coordination and tactical opportunities. This variation provides practical compensation through White's attacking resources."
+  },
+  {
+    "eco": "D31",
+    "name": "Semi-Slav Defense: Noteboom Variation",
+    "description": "The Noteboom is Black's aggressive counter to White's central pressure, featuring tactical complications. This sharp variation creates practical winning chances through piece activity and central control."
+  },
+  {
+    "eco": "D31",
+    "name": "Semi-Slav Defense: Noteboom Variation, Abrahams Variation",
+    "description": "Abrahams' addition to Noteboom features specific piece placement for Black's tactical opportunities. This variation maintains aggressive play while ensuring solid defensive structures."
+  },
+  {
+    "eco": "D31",
+    "name": "Semi-Slav Defense: Noteboom Variation, Anti-Noteboom Gambit",
+    "description": "White's gambit within Noteboom sacrifices material to gain tactical and spatial compensation. This aggressive continuation creates sharp positions favoring tactically prepared White players."
+  },
+  {
+    "eco": "D31",
+    "name": "Semi-Slav Defense: Noteboom Variation, Anti-Noteboom Variation",
+    "description": "This anti-Noteboom setup avoids the sharpest lines while maintaining pressure on Black's center. White seeks positional advantage through careful piece coordination and central control."
+  },
+  {
+    "eco": "D31",
+    "name": "Semi-Slav Defense: Noteboom Variation, Anti-Noteboom Variation, Belyavsky Line",
+    "description": "Belyavsky's continuation within Anti-Noteboom emphasizes tactical precision and piece coordination. This variation provides White practical compensation through sharp middlegame play."
+  },
+  {
+    "eco": "D32",
+    "name": "Queen's Gambit Declined: Tarrasch Defense",
+    "description": "Black's aggressive Tarrasch features the immediate e6 and c5 breaks for central control and piece activity. This combative defense creates sharp positions with practical winning chances."
+  },
+  {
+    "eco": "D32",
+    "name": "Tarrasch Defense: Grünfeld Gambit",
+    "description": "The Grünfeld Gambit combines Tarrasch principles with Grünfeld-inspired piece coordination and fianchetto ideas. This hybrid approach creates rich middlegames with both sides' tactical opportunities."
+  },
+  {
+    "eco": "D32",
+    "name": "Tarrasch Defense: Marshall Gambit",
+    "description": "Marshall's gambit within Tarrasch sacrifices material for accelerated piece activity and tactical complications. This sharp continuation offers practical compensation through White's attacking chances."
+  },
+  {
+    "eco": "D32",
+    "name": "Tarrasch Defense: Schara Gambit",
+    "description": "Schara's gambit adds tactical spice by sacrificing material within the Tarrasch framework. This aggressive approach creates practical winning chances for tactically prepared players."
+  },
+  {
+    "eco": "D32",
+    "name": "Tarrasch Defense: Symmetrical Variation",
+    "description": "This variation features symmetrical pawn structures that create balanced positions with flexible play. Both sides pursue strategic plans through careful piece coordination and maneuvering."
+  },
+  {
+    "eco": "D32",
+    "name": "Tarrasch Defense: Tarrasch Gambit",
+    "description": "The Tarrasch Gambit features Black's aggressive central counter with tactical complications. Black sacrifices material to generate piece activity and practical winning chances."
+  },
+  {
+    "eco": "D32",
+    "name": "Tarrasch Defense: Two Knights Variation",
+    "description": "This variation employs two knights to create central pressure and tactical opportunities against Black. White emphasizes piece coordination and spatial control in the opening."
+  },
+  {
+    "eco": "D32",
+    "name": "Tarrasch Defense: von Hennig Gambit",
+    "description": "Von Hennig's gambit offers pawn sacrifice within the Tarrasch structure for accelerated tactical play. This sharp continuation provides practical compensation through piece activity."
+  },
+  {
+    "eco": "D33",
+    "name": "Tarrasch Defense: Dubov Tarrasch",
+    "description": "Dubov's modern approach combines Tarrasch principles with contemporary piece development and flexibility. This variation provides Black rich middlegames with adaptive strategic resources."
+  },
+  {
+    "eco": "D33",
+    "name": "Tarrasch Defense: Prague Variation",
+    "description": "The Prague features specific piece placement and pawn structures for Black's counterplay. This solid variation maintains Tarrasch principles while offering practical defensive resources."
+  },
+  {
+    "eco": "D33",
+    "name": "Tarrasch Defense: Rubinstein System",
+    "description": "Rubinstein's solid approach combines Tarrasch ideas with careful piece coordination and prophylactic planning. This flexible system provides Black reliable defense with balanced middlegame structures."
+  },
+  {
+    "eco": "D33",
+    "name": "Tarrasch Defense: Swedish Variation",
+    "description": "The Swedish combines Tarrasch principles with Nordic-inspired piece development and pawn structures. This variation provides Black solid defense with practical middlegame opportunities."
+  },
+  {
+    "eco": "D33",
+    "name": "Tarrasch Defense: Swedish Variation, Central Break",
+    "description": "This continuation features Black's aggressive central pawn breaks to generate piece activity and counterplay. The tactical pressure creates practical winning chances for active Black players."
+  },
+  {
+    "eco": "D33",
+    "name": "Tarrasch Defense: Wagner Variation",
+    "description": "Wagner's approach emphasizes piece coordination and flexible pawn structures within the Tarrasch. This variation provides Black solid defense with adaptive middlegame strategies."
+  },
+  {
+    "eco": "D34",
+    "name": "Queen's Gambit Declined: Tarrasch Defense, Stoltz Variation",
+    "description": "Stoltz's continuation features careful piece coordination and central control within the Tarrasch framework. This solid approach provides both sides balanced play with clear strategic plans."
+  },
+  {
+    "eco": "D34",
+    "name": "Tarrasch Defense: Classical Variation",
+    "description": "The Classical emphasizes solid piece development and balanced structures within the Tarrasch framework. This reliable approach provides both sides comfortable play with clear middlegame objectives."
+  },
+  {
+    "eco": "D34",
+    "name": "Tarrasch Defense: Classical Variation, Advance Variation",
+    "description": "The Advance Variation features White's aggressive e4 push to generate spatial advantage and piece pressure. White seeks initiative through rapid piece coordination and central control."
+  },
+  {
+    "eco": "D34",
+    "name": "Tarrasch Defense: Classical Variation, Bogoljubow Variation",
+    "description": "Bogoljubow's solid approach combines Classical principles with flexible piece development and strategic adaptability. This variation provides White comfortable play with balanced positional structures."
+  },
+  {
+    "eco": "D34",
+    "name": "Tarrasch Defense: Classical Variation, Carlsbad Variation",
+    "description": "The Carlsbad structure within Classical Tarrasch creates long-term imbalances through pawn exchanges. Both sides pursue strategic compensation through piece placement and tactical opportunities."
+  },
+  {
+    "eco": "D34",
+    "name": "Tarrasch Defense: Classical Variation, Chandler Variation",
+    "description": "Chandler's approach emphasizes piece coordination and tactical opportunities within Classical Tarrasch. This variation provides both sides dynamic middlegames with practical winning chances."
+  },
+  {
+    "eco": "D34",
+    "name": "Tarrasch Defense: Classical Variation, Classical Tarrasch Gambit",
+    "description": "This gambit sacrifices material to accelerate White's piece activity and tactical compensation. The aggressive continuation creates sharp positions favoring tactically prepared White players."
+  },
+  {
+    "eco": "D34",
+    "name": "Tarrasch Defense: Classical Variation, Endgame Variation",
+    "description": "The Endgame Variation aims for early simplification leading to favorable endgame structures for White. This positional approach suits players seeking stable positions with manageable endgame plans."
+  }
+]

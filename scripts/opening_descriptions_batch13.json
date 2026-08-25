@@ -1,0 +1,752 @@
+[
+  {
+    "eco": "C13",
+    "name": "French Defense: Classical Variation, Vistaneckis Variation",
+    "description": "This rare Classical sideline branches after White plays Nf3 and Bc4. White focuses on kingside pressure and central control while avoiding the main theoretical battlegrounds, leading to a quieter middlegame with chances for both sides."
+  },
+  {
+    "eco": "C14",
+    "name": "French Defense: Classical Variation, Alapin Variation",
+    "description": "White plays Nf3 and Bd3, followed by a quick plan of Nc3 and e5, seeking to dominate the center early. Black's setup with Nbd7 and e6 creates a solid but slightly cramped position, requiring precise play to equalize."
+  },
+  {
+    "eco": "C14",
+    "name": "French Defense: Classical Variation, Pollock Variation",
+    "description": "An unusual Classical approach where White avoids d4 immediately, instead developing naturally with Nf3, Bd3, and c3. This flexible setup allows White to maintain options while Black must navigate unfamiliar territory."
+  },
+  {
+    "eco": "C14",
+    "name": "French Defense: Classical Variation, Rubinstein Variation",
+    "description": "White builds a kingside attack with Nf3, Bd3, and often Be3, planning moves like h4 and g4 to launch an assault on Black's king. Black counters with central play via dxe4 and e5, resulting in sharp tactical melees."
+  },
+  {
+    "eco": "C14",
+    "name": "French Defense: Classical Variation, Stahlberg Variation",
+    "description": "A modest Classical line where White develops with Nf3, Bd3, and c3 but postpones e5, keeping the position flexible. This suits players seeking to avoid deep theory while maintaining a spatial advantage."
+  },
+  {
+    "eco": "C14",
+    "name": "French Defense: Classical Variation, Steinitz Variation",
+    "description": "White plays Nf3, Bd3, and Be2 followed by O-O, adopting a restrained approach focused on solid position rather than immediate kingside attack. This conservative setup has fallen out of favor due to Black's ease in achieving equality."
+  },
+  {
+    "eco": "C14",
+    "name": "French Defense: Classical Variation, Tarrasch Variation",
+    "description": "A flexible Classical continuation where White plays Nf3 and Bd3, often preparing c3 and g3 for a small-center strategy. This positional approach appeals to players aiming for strategic battles rather than sharp tactical play."
+  },
+  {
+    "eco": "C15",
+    "name": "French Defense: McCutcheon Variation, Wolf Gambit",
+    "description": "An obscure gambit attempt within the McCutcheon where White sacrifices material to open lines. This aggressive but dubious pawn sacrifice rarely appears in master play, relegated mostly to surprise weapon status."
+  },
+  {
+    "eco": "C15",
+    "name": "French Defense: Winawer Variation, Alekhine Gambit Accepted",
+    "description": "White meets ...Bf5 with Qh5, launching the famous Alekhine Gambit where Black accepts the h-pawn sacrifice. Black's passed h-pawn creates sharp complications, though White's piece activity and open king often provides practical compensation."
+  },
+  {
+    "eco": "C15",
+    "name": "French Defense: Winawer Variation, Alekhine Gambit, Alatortsev Variation",
+    "description": "A specific Alekhine Gambit line where White develops with Bc4 and Ne2, refining the attack after Black takes on h2. The resulting positions are tactically dense, demanding precise calculation from both players."
+  },
+  {
+    "eco": "C15",
+    "name": "French Defense: Winawer Variation, Alekhine Gambit, Kan Variation",
+    "description": "In this Alekhine Gambit treatment, White plays Bc4 and later moves the f-pawn to bolster the center and kingside attack. Black's defensive task remains arduous despite material gain, and inaccuracies quickly lead to checkmate threats."
+  },
+  {
+    "eco": "C15",
+    "name": "French Defense: Winawer Variation, Alekhine-Maróczy Gambit",
+    "description": "A hybrid Alekhine approach where White includes moves like c3 and prepares long-term kingside pressure. This quieter gambit retains the essential compensation idea while offering slightly less forcing attack than the main Alekhine."
+  },
+  {
+    "eco": "C15",
+    "name": "French Defense: Winawer Variation, Delayed Exchange Variation",
+    "description": "White delays the central exchange, instead completing development with moves like Be2 and preparing c4 to control the center. Black can then choose when to close the center with ...dxe4, gaining some flexibility in the resulting positions."
+  },
+  {
+    "eco": "C15",
+    "name": "French Defense: Winawer Variation, Exchange Variation, Canal Attack",
+    "description": "After dxe6, White launches a direct kingside assault with moves like Qh5 and g4, leveraging the open lines created by pawn exchanges. Black's king safety becomes the critical factor in these sharp, tactical positions."
+  },
+  {
+    "eco": "C15",
+    "name": "French Defense: Winawer Variation, Fingerslip Variation",
+    "description": "A tricky Winawer sideline where White deviates early with moves like a4 or unconventional piece placement. Named informally, it leads to unfamiliar positions that can catch opponents unprepared despite often being theoretically worse."
+  },
+  {
+    "eco": "C15",
+    "name": "French Defense: Winawer Variation, Fingerslip Variation, Kunin Double Gambit",
+    "description": "A rare Fingerslip sub-variation involving multiple pawn sacrifices from White in exchange for rapid development and attacking chances. This ultra-sharp line is seldom seen at high levels due to its risky nature."
+  },
+  {
+    "eco": "C15",
+    "name": "French Defense: Winawer Variation, Fingerslip Variation, Main Line",
+    "description": "The primary Fingerslip continuation features White deviating with semi-offbeat moves while maintaining central control. Both sides must adapt to non-theoretical positions, making practical play and intuition paramount."
+  },
+  {
+    "eco": "C15",
+    "name": "French Defense: Winawer Variation, Fingerslip Variation, Schwarz's Line",
+    "description": "A specific Fingerslip response by Black focusing on counterattack and rapid central play. Schwarz's approach aims to turn White's unconventional moves against them through accurate piece placement and tempo gains."
+  },
+  {
+    "eco": "C15",
+    "name": "French Defense: Winawer Variation, Kondratiyev Variation",
+    "description": "An offbeat Winawer line where White plays c3 and often aims for a long pawn center with f4. The resulting positions favor players seeking rich middlegame complications over forcing tactical sequences."
+  },
+  {
+    "eco": "C15",
+    "name": "French Defense: Winawer Variation, Winckelmann-Reimer Gambit",
+    "description": "White sacrifices a pawn with Qa4 and often follows with attacks on the kingside or center. This gambit is highly irregular and rarely encountered in modern practice, representing a dubious try for complications."
+  },
+  {
+    "eco": "C16",
+    "name": "French Defense: Winawer Variation, Advance Variation",
+    "description": "With e5 played early, White advances the pawn center and restricts Black's pieces. The d4-e5 pawn duo creates a dominating setup, though Black's counterplay on the queenside offers reasonable drawing chances."
+  },
+  {
+    "eco": "C16",
+    "name": "French Defense: Winawer Variation, Petrosian Variation",
+    "description": "Named for Tigran Petrosian, this Advance line features Be2 and g3, adopting a solid, space-conscious approach rather than aggressive kingside attacks. White prepares long-term pressure with f4 while maintaining a flexible pawn structure."
+  },
+  {
+    "eco": "C17",
+    "name": "French Defense: Winawer Variation, Advance Variation",
+    "description": "This C17 continuation of the Advance features Dxe6, opening lines immediately and sharpening play. White gains spatial advantage after e5, and Black must create swift counterplay to avoid a grinding endgame."
+  },
+  {
+    "eco": "C17",
+    "name": "French Defense: Winawer Variation, Advance Variation, Moscow Variation",
+    "description": "A strategic Advance line where White plays carefully to avoid sharp tactics, focusing on slow pressure via f4 and space advantage. Black seeks counterplay with ...c5 and queenside activity, resulting in long-term maneuvering battles."
+  },
+  {
+    "eco": "C17",
+    "name": "French Defense: Winawer Variation, Bogoljubow Variation",
+    "description": "After Be2 and O-O, White avoids immediate e5, instead preparing f4 or c4 for a more flexible approach. This variation reduces Black's tactical opportunities while maintaining White's natural space and development advantage."
+  },
+  {
+    "eco": "C17",
+    "name": "French Defense: Winawer Variation, Bogoljubow Variation, Icelandic Defense",
+    "description": "Within the Bogoljubow system, Black plays an unconventional defensive scheme aimed at neutralizing White's play. This rare defense prioritizes king safety and material retention over immediate counterplay."
+  },
+  {
+    "eco": "C17",
+    "name": "French Defense: Winawer Variation, Maróczy-Wallis Variation",
+    "description": "A flexible Winawer continuation where White combines central control with queenside expansion via c4. The plan involves restraint followed by methodical progress, often leading to strategic struggles in the middlegame."
+  },
+  {
+    "eco": "C17",
+    "name": "French Defense: Winawer Variation, Retreat Variation",
+    "description": "White plays Bd3-e2, a patient retreat that maintains flexibility and avoids sharper continuations. This solid approach appeals to positional players, though it cedes some of White's natural initiative."
+  },
+  {
+    "eco": "C17",
+    "name": "French Defense: Winawer Variation, Retreat Variation, Armenian Line",
+    "description": "A specific Retreat continuation emphasizing Black's counterplay with ...c5 and active piece placement. This defensive system offers Black reasonable practical chances despite White's space advantage."
+  },
+  {
+    "eco": "C18",
+    "name": "French Defense: Winawer Variation, Advance Variation",
+    "description": "The main C18 continuation where White has played Dxe6, creating sharp positions with opposite-side play. Black's queen-side expansion via ...c5 or ...b6 races against White's kingside attacks in tactical battles."
+  },
+  {
+    "eco": "C18",
+    "name": "French Defense: Winawer Variation, Advance Variation, with Bd3",
+    "description": "White develops with Bd3 after dxe6, emphasizing kingside attack over immediate e5. This setup allows flexible responses to Black's plans while preparing to support potential queenside counterplay."
+  },
+  {
+    "eco": "C18",
+    "name": "French Defense: Winawer Variation, Advance Variation, with h4",
+    "description": "A distinctly aggressive Advance approach where White plays h4 immediately, launching a direct kingside assault before Black can mount sufficient counterplay. Black must balance creating threats with defending against white's avalanche of pawns."
+  },
+  {
+    "eco": "C18",
+    "name": "French Defense: Winawer Variation, Classical Variation",
+    "description": "White plays Be2 and O-O, transitioning to a positional game emphasizing piece activity and space control rather than sharp tactics. Black can achieve equality with accurate play, leading to complex but balanced middlegames."
+  },
+  {
+    "eco": "C18",
+    "name": "French Defense: Winawer Variation, Eingorn Variation",
+    "description": "A modern defensive try for Black within the Winawer, named for Ukrainian grandmaster Eingorn. This approach emphasizes flexibility and piece activity, avoiding rigid pawn formations that might restrict Black's counterplay."
+  },
+  {
+    "eco": "C18",
+    "name": "French Defense: Winawer Variation, Poisoned Pawn Variation",
+    "description": "Black greedily captures the b2 pawn with Nxb2, accepting White's gambit for material gain but allowing a fierce attack. The resulting positions are notoriously sharp and favor White's attacking piece play over Black's extra pawn."
+  },
+  {
+    "eco": "C18",
+    "name": "French Defense: Winawer Variation, Poisoned Pawn Variation Declined",
+    "description": "Black declines the b2 pawn sacrifice, preferring to consolidate and develop normally. This sidestep avoids the ferocious complications of accepting, though White retains some initiative with an extra tempo."
+  },
+  {
+    "eco": "C18",
+    "name": "French Defense: Winawer Variation, Poisoned Pawn Variation, Main Line",
+    "description": "After Nxb2, White continues with Qh5 and aggressive piece deployment, launching a powerful kingside assault. Black's safest path to defending involves precise calculation, as one inaccuracy often leads to a quick checkmate."
+  },
+  {
+    "eco": "C18",
+    "name": "French Defense: Winawer Variation, Poisoned Pawn Variation, Paoli Variation",
+    "description": "A specific Poisoned Pawn response where Black uses the captured b2 pawn as a decoy while organizing a solid defense. Paoli's approach emphasizes piece coordination and central breaks to generate counterplay."
+  },
+  {
+    "eco": "C18",
+    "name": "French Defense: Winawer Variation, Portisch-Hook Variation",
+    "description": "A flexible Winawer system where White combines Be2 with g3, creating a solid setup that avoids the sharpest tactical lines. This modern treatment prioritizes long-term positional pressure over early attacks."
+  },
+  {
+    "eco": "C18",
+    "name": "French Defense: Winawer Variation, Warsaw Variation",
+    "description": "In this variation, White plays Ra1-b1 or similar moves to support queenside pressure after b3 or a4. The plan involves slow expansion combined with central stability, leading to positional grinding games."
+  },
+  {
+    "eco": "C19",
+    "name": "French Defense: Winawer Variation, Advance Variation, Smyslov Variation",
+    "description": "Named for world champion Vassily Smyslov, this Advance continuation features precise play by White, with Be2 and often f4 to support a methodical kingside expansion. Black's compensation through ...c5 and piece activity determines the outcome."
+  },
+  {
+    "eco": "C19",
+    "name": "French Defense: Winawer Variation, Positional Variation",
+    "description": "White avoids sharp tactics, instead playing Be2, O-O, and preparing g3 for a solid, space-conscious setup. Black can equalize but must navigate patient maneuvering as White exerts steady pressure."
+  },
+  {
+    "eco": "C20",
+    "name": "Barnes Opening: Walkerling",
+    "description": "A quirky f3 sideline named after chess players James Barnes and Walker. This unusual move order avoids main-line theory, creating irregular positions where piece activity and tactical alertness matter more than opening knowledge."
+  },
+  {
+    "eco": "C20",
+    "name": "English Opening: The Whale",
+    "description": "An offbeat opening where White plays moves like e4 and c4 in an unusual order, creating a hybrid position. This whimsically-named line appeals to creative players seeking to avoid prepared variations."
+  },
+  {
+    "eco": "C20",
+    "name": "King's Pawn Game: Alapin Opening",
+    "description": "White opens with e4 followed by c3, establishing a strong pawn center and preparing d4. This solid setup aims for central control and can transpose to various positions, avoiding extreme theoretical battles."
+  },
+  {
+    "eco": "C20",
+    "name": "King's Pawn Game: Bavarian Gambit",
+    "description": "White plays 1.e4 c5 2.f4, offering a pawn sacrifice to open lines and seize central initiative. Black can accept or decline, leading to tactical melees or quieter positions depending on Black's response."
+  },
+  {
+    "eco": "C20",
+    "name": "King's Pawn Game: Beyer Gambit",
+    "description": "An aggressive gambit where White sacrifices material early to generate attacking chances in the center and kingside. This dubious but tricky gambit relies on compensation through piece activity and tactical shots."
+  },
+  {
+    "eco": "C20",
+    "name": "King's Pawn Game: Clam Variation, King's Gambit Reversed",
+    "description": "A rare and irregular position where the move order creates an unusual pawn structure. This offbeat variation appeals to players seeking surprise value, though Black retains good drawing chances with sound defense."
+  },
+  {
+    "eco": "C20",
+    "name": "King's Pawn Game: Clam Variation, Radisch Gambit",
+    "description": "Within the Clam complex, White offers an additional pawn sacrifice for rapid piece development and attacking ideas. The resulting positions are chaotic and demand tactical alertness from both sides."
+  },
+  {
+    "eco": "C20",
+    "name": "King's Pawn Game: King's Head Opening",
+    "description": "An unconventional early move by White, this opening avoids main-line theory entirely. The resulting positions depend heavily on both players' tactical skill rather than theoretical understanding."
+  },
+  {
+    "eco": "C20",
+    "name": "King's Pawn Game: Leonardis Variation",
+    "description": "A sideline of irregular pawn structures where White seeks to create imbalances early. This off-the-beaten-path variation appeals to players who prefer practical complications over theoretical preparation."
+  },
+  {
+    "eco": "C20",
+    "name": "King's Pawn Game: MacLeod Attack",
+    "description": "White combines central control with unusual piece deployment, often aiming for quick attacks on the kingside. This aggressive but unorthodox approach can catch unprepared opponents though sound defense equalizes."
+  },
+  {
+    "eco": "C20",
+    "name": "King's Pawn Game: MacLeod Attack, Lasa Gambit",
+    "description": "A sharp gambit continuation within the MacLeod system where White sacrifices material for rapid piece coordination and attacking potential. Black's material advantage must be defended carefully against White's initiative."
+  },
+  {
+    "eco": "C20",
+    "name": "King's Pawn Game: MacLeod Attack, Norwalde Gambit",
+    "description": "Another gambit attempt in the MacLeod framework, emphasizing kingside pressure over material balance. The attacking player must maintain concrete threats or face the consequences of being down material."
+  },
+  {
+    "eco": "C20",
+    "name": "King's Pawn Game: Mengarini's Opening",
+    "description": "An obscure opening featuring an unusual development scheme by White. This rare variation has minimal theoretical study, relying instead on practical understanding and tactical awareness."
+  },
+  {
+    "eco": "C20",
+    "name": "King's Pawn Game: Napoleon Attack",
+    "description": "White mounts an aggressive attack with moves like Nc3 and Bc4, mimicking the historical style of military chess. This direct approach emphasizes tactical threats over positional foundation, leading to sharp tactical play."
+  },
+  {
+    "eco": "C20",
+    "name": "King's Pawn Game: Philidor Gambit",
+    "description": "A gambit named after the great François-André Danican Philidor, where White offers pawns for rapid development and central control. The resulting complications often favor White's piece activity despite material disadvantage."
+  },
+  {
+    "eco": "C20",
+    "name": "King's Pawn Game: Tortoise Opening",
+    "description": "A paradoxically named ultra-solid opening by White, avoiding all dynamic pawn pushes for passive defensive setup. This unusual approach appeals to solid positional players seeking to avoid complications."
+  },
+  {
+    "eco": "C20",
+    "name": "King's Pawn Game: Wayward Queen Attack",
+    "description": "White develops the queen early with Qh5 or Qe2, creating threats around the center and kingside. Black can exploit the queen's vulnerability through tactical strikes if not careful with development."
+  },
+  {
+    "eco": "C20",
+    "name": "King's Pawn Game: Wayward Queen Attack, Kiddie Countergambit",
+    "description": "Black responds to the Wayward Queen with a cheeky countergambit, sacrificing material to seize the initiative. This aggressive defensive approach can lead to sharp tactical battles where both sides must calculate precisely."
+  },
+  {
+    "eco": "C20",
+    "name": "King's Pawn Game: Wayward Queen Attack, Mellon Gambit",
+    "description": "Another gambit response within the Wayward Queen framework, where Black countersacrifices to create practical attacking chances. The resulting complications often nullify White's early initiative through rapid piece activity."
+  },
+  {
+    "eco": "C20",
+    "name": "King's Pawn Game: Weber Gambit",
+    "description": "An aggressive gambit where White sacrifices material for central control and rapid piece development. The sharp tactical nature favors players comfortable with complications and forcing play."
+  },
+  {
+    "eco": "C20",
+    "name": "King's Pawn Opening: Speers",
+    "description": "An obscure opening named after a minor historical player, featuring unusual move orders and pawn structures. This rare line offers surprise value but lacks significant theoretical foundation or master-level practice."
+  },
+  {
+    "eco": "C20",
+    "name": "King's Pawn Opening: Van Hooydoon Gambit",
+    "description": "A gambit continuation with an unusual name, where White offers pawns to accelerate development and create attacking chances. Black's best defense involves accurate calculation to neutralize White's initiative."
+  },
+  {
+    "eco": "C20",
+    "name": "Portuguese Opening: Miguel Gambit",
+    "description": "A regional opening variant featuring an aggressive gambit by White, seeking compensation through rapid piece development and kingside threats. This offbeat line has minimal tournament practice among elite players."
+  },
+  {
+    "eco": "C20",
+    "name": "Portuguese Opening: Portuguese Gambit",
+    "description": "A gambit native to Portuguese chess tradition, where White sacrifices material early for central influence and attacking potential. The resulting positions depend on both players' tactical awareness and piece coordination."
+  },
+  {
+    "eco": "C21",
+    "name": "Center Game: Halasz-McDonnell Gambit",
+    "description": "White opens with the Center Game and offers a gambit, named after 19th-century players. Black's acceptance leads to sharp tactical complications favoring White's piece activity and central pressure."
+  },
+  {
+    "eco": "C21",
+    "name": "Center Game: Halasz-McDonnell Gambit, Crocodile Variation",
+    "description": "A specific Halasz-McDonnell response where Black mounts unusual counterattack, nicknamed for its aggressive crocodile-like fighting spirit. This rare defensive try offers practical chances despite White's theoretical advantage."
+  },
+  {
+    "eco": "C21",
+    "name": "Center Game: Kieseritzky Variation",
+    "description": "Named for Lionel Kieseritzky, this Center Game variation emphasizes White's central control and piece coordination. The resulting positions offer rich middlegame play with chances for both sides."
+  },
+  {
+    "eco": "C21",
+    "name": "Center Game: Lanc-Arnold Gambit",
+    "description": "A gambit continuation within the Center Game where White sacrifices material for rapid development and attacking chances. Black must navigate the tactical complexities carefully to convert the material advantage."
+  },
+  {
+    "eco": "C21",
+    "name": "Center Game: Lanc-Arnold Gambit, Schippler Gambit",
+    "description": "A sub-gambit variation where White offers additional material for a kingside assault. This ultra-sharp line demands precise calculation from both players to determine the correct assessment."
+  },
+  {
+    "eco": "C21",
+    "name": "Center Game: Ross Gambit",
+    "description": "Named after a player named Ross, this gambit offers material for central control and piece activity in the Center Game. The compensation depends on accurate tactical follow-up by the attacking player."
+  },
+  {
+    "eco": "C21",
+    "name": "Center Game: von der Lasa Gambit",
+    "description": "A sophisticated gambit named for Ernst Reichhardt, Baron von der Lasa, emphasizing positional compensation over forcing attacks. White's initiative often lasts beyond the opening into the middlegame."
+  },
+  {
+    "eco": "C21",
+    "name": "Danish Gambit Accepted: Chigorin Defense",
+    "description": "After accepting the Danish Gambit, Black employs Mikhail Chigorin's defensive setup focusing on counterplay and central breaks. This solid defense has proven relatively sound against White's gambit compensation."
+  },
+  {
+    "eco": "C21",
+    "name": "Danish Gambit Accepted: Classical Defense",
+    "description": "The traditional defense to the accepted Danish Gambit, where Black develops naturally with Be7 and focuses on stability. This classical approach leads to positional games where White's compensation must be proven through patient play."
+  },
+  {
+    "eco": "C21",
+    "name": "Danish Gambit Accepted: Copenhagen Defense",
+    "description": "A regional defensive variation where Black organizes pieces carefully around the center. This defense emphasizes piece activity and tactical precision to neutralize White's gambit compensation."
+  },
+  {
+    "eco": "C21",
+    "name": "Danish Gambit Accepted: Schlechter Defense",
+    "description": "Named for Carl Schlechter, this defense involves Black playing Nf6 and Be7 after accepting the gambit. The resulting positions favor players who understand long-term strategic maneuvering."
+  },
+  {
+    "eco": "C21",
+    "name": "Danish Gambit Accepted: Svenonius Defense",
+    "description": "A Scandinavian defensive approach to the accepted Danish Gambit, featuring solid piece placement and central control. Black aims for gradual consolidation to neutralize White's initiative."
+  },
+  {
+    "eco": "C21",
+    "name": "Danish Gambit Declined: Sörensen Defense",
+    "description": "Black declines the Danish Gambit's c3 pawn and defends actively, preferring to keep material intact. This solid approach limits White's attacking chances while maintaining practical drawing possibilities."
+  },
+  {
+    "eco": "C22",
+    "name": "Center Game: Berger Variation",
+    "description": "Named for Johann Berger, this Center Game continuation features White's careful piece development and central control. Black can achieve equality through accurate defensive play and counterattacking ideas."
+  },
+  {
+    "eco": "C22",
+    "name": "Center Game: Charousek Variation",
+    "description": "A named variation after Rudolf Charousek, featuring unusual piece placement and tactical opportunities. This deviation from main-line play appeals to creative players seeking rich middlegame complexity."
+  },
+  {
+    "eco": "C22",
+    "name": "Center Game: Hall Variation",
+    "description": "A relatively unknown variation within the Center Game, offering White practical winning chances through piece activity. Black must defend accurately to avoid succumbing to White's tactical themes."
+  },
+  {
+    "eco": "C22",
+    "name": "Center Game: Kupreichik Variation",
+    "description": "Named for Viktorija Kupreichik, a prominent female player, this variation emphasizes flexible piece development. The resulting positions offer balanced chances for both sides with rich strategic ideas."
+  },
+  {
+    "eco": "C22",
+    "name": "Center Game: l'Hermet Variation",
+    "description": "A rare Center Game sideline named for a historical French player. This unusual setup leads to positions where practical understanding matters more than theoretical preparation."
+  },
+  {
+    "eco": "C22",
+    "name": "Center Game: Normal Variation",
+    "description": "The main-line continuation of the Center Game, featuring natural development and central pressure from White. Black typically responds with d5, leading to classical positions with balanced winning chances."
+  },
+  {
+    "eco": "C22",
+    "name": "Center Game: Paulsen Attack Variation",
+    "description": "Named for Louis Paulsen, this aggressive continuation emphasizes White's kingside attacking potential and central control. The resulting play often favors players who understand tactical complications."
+  },
+  {
+    "eco": "C23",
+    "name": "Bishop's Opening: Anderssen Gambit",
+    "description": "Named for Adolf Anderssen, a legendary player, this gambit offers material for rapid development and attacking chances. White's compensation often proves sufficient in sharp middlegame positions."
+  },
+  {
+    "eco": "C23",
+    "name": "Bishop's Opening: Boi Variation",
+    "description": "A rare Bishop's Opening sideline, featuring White's solid piece development without extreme attacking measures. This modest continuation appeals to positional players seeking steady progress."
+  },
+  {
+    "eco": "C23",
+    "name": "Bishop's Opening: Calabrese Countergambit",
+    "description": "Black meets the Bishop's Opening with an immediate countergambit, seeking active piece play and central breaks. This aggressive defensive try can lead to tactical complications favorable to the prepared player."
+  },
+  {
+    "eco": "C23",
+    "name": "Bishop's Opening: Calabrese Countergambit, Jaenisch Variation",
+    "description": "A specific Calabrese response combining active piece development with tactical threats. Black's compensation through central control and piece activity often outweighs the pawn material."
+  },
+  {
+    "eco": "C23",
+    "name": "Bishop's Opening: del Rio Variation",
+    "description": "Named for a player called del Rio, this Bishop's Opening continuation features White's natural development without early gambling. The positions offer strategic complexity with balanced drawing chances."
+  },
+  {
+    "eco": "C23",
+    "name": "Bishop's Opening: Four Pawns Gambit",
+    "description": "An aggressive gambit where White sacrifices multiple pawns to launch a kingside avalanche. Black's defensive task proves formidable as White aims for a quick attack rather than material compensation."
+  },
+  {
+    "eco": "C23",
+    "name": "Bishop's Opening: Khan Gambit",
+    "description": "A lesser-known gambit attempt, offering material for rapid piece development and attacking potential. White's compensation must be proven through concrete tactical threats and positional pressure."
+  },
+  {
+    "eco": "C23",
+    "name": "Bishop's Opening: Lewis Countergambit",
+    "description": "Black responds to the Bishop's Opening with an immediate countergambit, created by David Lewis. This aggressive defense aims to disrupt White's piece coordination and seize the initiative early."
+  },
+  {
+    "eco": "C23",
+    "name": "Bishop's Opening: Lewis Countergambit, Walker Variation",
+    "description": "A specific Lewis Countergambit response emphasizing Black's central breaks and tactical opportunities. Walker's approach prioritizes active piece play over material conservation."
+  },
+  {
+    "eco": "C23",
+    "name": "Bishop's Opening: Lewis Gambit",
+    "description": "Named for David Lewis, this gambit offers material for White's rapid piece development and center control. The resulting tactical complications often provide practical winning chances."
+  },
+  {
+    "eco": "C23",
+    "name": "Bishop's Opening: Lisitsyn Variation",
+    "description": "Named for Soviet grandmaster Sergei Lisitsyn, this variation features flexible piece development by White. Black can achieve reasonable equality through careful play and counterattacking ideas."
+  },
+  {
+    "eco": "C23",
+    "name": "Bishop's Opening: Lopez Gambit",
+    "description": "Named after Luis López de Segura, an early grandmaster, this gambit offers sacrificial material for kingside attacking chances. White's compensation often manifests in the form of rapid piece coordination."
+  },
+  {
+    "eco": "C23",
+    "name": "Bishop's Opening: Lopez Variation",
+    "description": "A Lopez sideline featuring more conservative piece development than the main Lopez Gambit. This solid approach appeals to players seeking strategic play over forcing tactical sequences."
+  },
+  {
+    "eco": "C23",
+    "name": "Bishop's Opening: Lopez Variation, Lopez Gambit",
+    "description": "A gambit within the Lopez Variation, offering material for accelerated development and attacking chances. The resulting positions often favor White's piece activity over Black's material advantage."
+  },
+  {
+    "eco": "C23",
+    "name": "Bishop's Opening: McDonnell Gambit",
+    "description": "Named for Alexander McDonnell, a 19th-century master, this gambit sacrifices pawns for rapid piece coordination. The sharp tactical play demands precise calculation from both opponents."
+  },
+  {
+    "eco": "C23",
+    "name": "Bishop's Opening: McDonnell Gambit, La Bourdonnais-Denker Gambit",
+    "description": "A sub-gambit variation combining La Bourdonnais' and Denker's ideas, offering multiple pawns for kingside attack. This ultra-aggressive line appeals to players seeking decisive attacking chances."
+  },
+  {
+    "eco": "C23",
+    "name": "Bishop's Opening: McDonnell Gambit, McDonnell Double Gambit",
+    "description": "An extreme continuation where White sacrifices two pawns early for attacking compensation. Black's defensive task becomes critical as White aims for a rapid kingside breakthrough."
+  },
+  {
+    "eco": "C23",
+    "name": "Bishop's Opening: Philidor Counterattack",
+    "description": "Named for François-André Danican Philidor, this defense features Black's active counterattacking ideas against White's Bishop's Opening. The resulting positions offer rich strategic possibilities."
+  },
+  {
+    "eco": "C23",
+    "name": "Bishop's Opening: Philidor Variation",
+    "description": "Philidor's solid defensive approach to the Bishop's Opening, emphasizing central control and piece stability. This classical defense has provided Black with reliable drawing chances across centuries."
+  },
+  {
+    "eco": "C23",
+    "name": "Bishop's Opening: Pratt Variation",
+    "description": "A Bishop's Opening sideline named for a minor historical player. This unusual continuation leads to positions with unique pawn structures and tactical themes."
+  },
+  {
+    "eco": "C23",
+    "name": "Bishop's Opening: Stein Gambit",
+    "description": "Named for Anatoly Stein, this gambit offers material for rapid piece development and tactical complications. White's compensation manifests through active piece play and centralization."
+  },
+  {
+    "eco": "C23",
+    "name": "Bishop's Opening: Thorold Gambit",
+    "description": "A gambit variation named after Thorold, featuring White's aggressive sacrifice for kingside attacking chances. The resulting positions demand accurate calculation to assess the compensation value."
+  },
+  {
+    "eco": "C24",
+    "name": "Bishop's Opening: Berlin Defense",
+    "description": "Black defends against the Bishop's Opening with moves like d5 and Nc6, establishing central control and piece coordination. This solid defense offers Black reasonable drawing chances with accurate play."
+  },
+  {
+    "eco": "C24",
+    "name": "Bishop's Opening: Berlin Defense, Greco Gambit",
+    "description": "A gambit continuation within the Berlin Defense, where White sacrifices material to maintain the initiative. Named for Gioachino Greco, this line offers sharp tactical play."
+  },
+  {
+    "eco": "C24",
+    "name": "Bishop's Opening: Kitchener Folly",
+    "description": "A dubious but playable sideline named for Kitchener, featuring unconventional piece placement by White. This offbeat continuation appeals to creative players seeking surprise value."
+  },
+  {
+    "eco": "C24",
+    "name": "Bishop's Opening: Krejcik Gambit",
+    "description": "Named for a Central European player, this gambit offers material for rapid piece development and attacking potential. The sharp complications often provide practical winning chances for the attacking player."
+  },
+  {
+    "eco": "C24",
+    "name": "Bishop's Opening: Pachman Gambit",
+    "description": "Named for Ludek Pachman, a Czechoslovak grandmaster, this gambit sacrifices material for kingside attacking compensation. White's piece activity must justify the pawn sacrifice through concrete threats."
+  },
+  {
+    "eco": "C24",
+    "name": "Bishop's Opening: Paulsen Defense",
+    "description": "Louis Paulsen's defensive approach to the Bishop's Opening, featuring solid piece placement and central control. This reliable defense has provided Black with practical drawing chances."
+  },
+  {
+    "eco": "C24",
+    "name": "Bishop's Opening: Ponziani Gambit",
+    "description": "Named for Giulio Polerio or Ponziani, this gambit offers sacrificial material for rapid development and central control. The resulting tactical complications often favor the well-prepared attacking player."
+  },
+  {
+    "eco": "C24",
+    "name": "Bishop's Opening: Urusov Gambit, Panov Variation",
+    "description": "The Urusov Gambit is a famous f3 sacrifice; Panov's variation adds strategic refinement and deep analysis. This sharp line has attracted world-class players seeking attacking chances."
+  },
+  {
+    "eco": "C24",
+    "name": "Bishop's Opening: Vienna Hybrid",
+    "description": "A hybrid position combining Bishop's Opening and Vienna Game ideas, featuring flexible move orders. The resulting positions offer rich strategic and tactical opportunities for both sides."
+  },
+  {
+    "eco": "C24",
+    "name": "Bishop's Opening: Warsaw Gambit",
+    "description": "A gambit from the Warsaw chess tradition, where White sacrifices material for rapid piece development and attacking chances. The compensation depends on accurate tactical follow-up and piece coordination."
+  },
+  {
+    "eco": "C25",
+    "name": "Vienna Gambit, with Max Lange Defense: Cunningham Defense",
+    "description": "Within the Vienna Gambit structure, Black employs Cunningham's defensive scheme focusing on piece activity and central breaks. This aggressive defense turns the tables by creating threats against White's king."
+  },
+  {
+    "eco": "C25",
+    "name": "Vienna Gambit, with Max Lange Defense: Hamppe-Allgaier Gambit",
+    "description": "A famous double gambit combination in the Vienna, where both sides sacrifice material for rapid piece development. The resulting sharp positions demand tactical accuracy and careful calculation."
+  },
+  {
+    "eco": "C25",
+    "name": "Vienna Gambit, with Max Lange Defense: Hamppe-Allgaier Gambit, Alapin Variation",
+    "description": "Alapin's specific approach within the Hamppe-Allgaier, adding subtle refinements to White's attacking plan. This variation represents modern understanding of the complex tactical positions."
+  },
+  {
+    "eco": "C25",
+    "name": "Vienna Gambit, with Max Lange Defense: Hamppe-Allgaier Gambit, Thorold Variation",
+    "description": "Thorold's defensive contribution to the Hamppe-Allgaier, creating practical defensive resources for Black. This approach balances the need to defend while maintaining counterattacking possibilities."
+  },
+  {
+    "eco": "C25",
+    "name": "Vienna Gambit, with Max Lange Defense: Hamppe-Muzio Gambit",
+    "description": "A double gambit variation where White sacrifices the bishop, seeking rapid piece development and kingside attack. Black's best defense requires precise calculation to convert the material advantage."
+  },
+  {
+    "eco": "C25",
+    "name": "Vienna Gambit, with Max Lange Defense: Knight Variation",
+    "description": "A Vienna Gambit continuation emphasizing piece development over rapid pawn structures. This flexible approach offers White strategic compensation for any pawn sacrifices through piece activity."
+  },
+  {
+    "eco": "C25",
+    "name": "Vienna Gambit, with Max Lange Defense: Pierce Gambit",
+    "description": "Pierce's contribution to Vienna Gambit theory, featuring a pawn sacrifice for rapid piece coordination. The resulting positions offer rich attacking chances for the player who achieves better piece placement."
+  },
+  {
+    "eco": "C25",
+    "name": "Vienna Gambit, with Max Lange Defense: Quelle Gambit",
+    "description": "A rare gambit variation named Quelle, offering material for rapid development and attacking opportunities. This unusual continuation appeals to creative players seeking surprise value."
+  },
+  {
+    "eco": "C25",
+    "name": "Vienna Gambit, with Max Lange Defense: Steinitz Gambit",
+    "description": "Named for world champion Wilhelm Steinitz, this gambit emphasizes solid compensation through piece activity. The resulting positions often favor White's understanding of piece coordination and tactical themes."
+  },
+  {
+    "eco": "C25",
+    "name": "Vienna Gambit, with Max Lange Defense: Steinitz Gambit, Fraser-Minckwitz Defense",
+    "description": "A specific Steinitz Gambit defense combining Fraser's and Minckwitz's ideas, creating practical defensive resources. This approach allows Black to absorb White's attack while maintaining counterplay."
+  },
+  {
+    "eco": "C25",
+    "name": "Vienna Gambit, with Max Lange Defense: Steinitz Gambit, Main Line",
+    "description": "The primary continuation of Steinitz's gambit, featuring sharp tactical play and mutual attacking chances. Both players must navigate complex positions accurately to achieve their objectives."
+  },
+  {
+    "eco": "C25",
+    "name": "Vienna Gambit, with Max Lange Defense: Steinitz Gambit, Paulsen Defense",
+    "description": "Paulsen's defensive approach within the Steinitz Gambit, featuring solid piece placement and central breaks. This reliable defense has provided Black with practical drawing chances."
+  },
+  {
+    "eco": "C25",
+    "name": "Vienna Gambit, with Max Lange Defense: Steinitz Gambit, Sörensen Defense",
+    "description": "A Scandinavian defensive variation within the Steinitz Gambit, emphasizing piece activity and counterattack. Black aims for gradual consolidation while creating threats against White's position."
+  },
+  {
+    "eco": "C25",
+    "name": "Vienna Gambit, with Max Lange Defense: Steinitz Gambit, Zukertort Defense",
+    "description": "Named for Johannes Zukertort, a 19th-century champion, this defense features active piece deployment within the Steinitz structure. Zukertort's approach prioritizes piece coordination and central control."
+  },
+  {
+    "eco": "C25",
+    "name": "Vienna Game: Anderssen Defense",
+    "description": "Named for Adolf Anderssen, this defense to the Vienna Game features Black's solid piece placement and central breaks. The resulting positions offer balanced winning chances with rich strategic possibilities."
+  },
+  {
+    "eco": "C25",
+    "name": "Vienna Game: Fyfe Gambit",
+    "description": "A gambit variation named for a player called Fyfe, where White sacrifices material for rapid attacking chances. The compensation depends on precise tactical follow-up and piece coordination."
+  },
+  {
+    "eco": "C25",
+    "name": "Vienna Game: Giraffe Attack",
+    "description": "A whimsically named Vienna variation, featuring White's unusual and seemingly awkward piece placement. This creative approach can confuse unprepared opponents through non-obvious attacking ideas."
+  },
+  {
+    "eco": "C25",
+    "name": "Vienna Game: Hamppe-Meitner Variation",
+    "description": "A specific Vienna continuation combining Hamppe's and Meitner's contributions to opening theory. This variation emphasizes flexible piece development and positional maneuvering."
+  },
+  {
+    "eco": "C25",
+    "name": "Vienna Game: Hamppe-Muzio, Dubois Variation",
+    "description": "Dubois' refinement of the Hamppe-Muzio double gambit, adding practical defensive resources for Black. This approach balances material retention with adequate piece activity."
+  },
+  {
+    "eco": "C25",
+    "name": "Vienna Game: Hamppe-Muzio Gambit",
+    "description": "A famous double gambit where both sides sacrifice material early for rapid piece development. The sharp tactical nature creates immediate practical threats for both players."
+  },
+  {
+    "eco": "C25",
+    "name": "Vienna Game: Max Lange Defense",
+    "description": "Named for the legendary Max Lange, this defense features Black's active piece play and central breaks against the Vienna. The resulting positions offer rich strategic complexity."
+  },
+  {
+    "eco": "C25",
+    "name": "Vienna Game: Omaha Gambit",
+    "description": "A regional gambit variant from Omaha, where White sacrifices material for attacking chances. This unusual continuation appeals to creative players seeking surprise value in tournament play."
+  },
+  {
+    "eco": "C25",
+    "name": "Vienna Game: Paulsen Variation",
+    "description": "Louis Paulsen's strategic approach to the Vienna Game, emphasizing solid piece placement and gradual progress. This reliable continuation has provided White with practical winning chances."
+  },
+  {
+    "eco": "C25",
+    "name": "Vienna Game: Paulsen Variation, Mariotti Gambit",
+    "description": "Within Paulsen's system, Mariotti contributes a gambit idea for rapid piece development and attacking potential. This sharp sub-variation offers practical complications."
+  },
+  {
+    "eco": "C25",
+    "name": "Vienna Game: Philidor Countergambit",
+    "description": "Philidor's aggressive response to the Vienna Game, featuring an immediate countergambit and central breaks. This combative defense aims to seize the initiative from White early."
+  },
+  {
+    "eco": "C25",
+    "name": "Vienna Game: Pierce Gambit, Rushmere Attack",
+    "description": "Pierce's gambit combined with Rushmere's attacking ideas, creating multiple threats in the center and on the kingside. White's compensation often proves substantial in sharp tactical play."
+  },
+  {
+    "eco": "C25",
+    "name": "Vienna Game: Stanley Variation, Meitner-Mieses Gambit",
+    "description": "A complex Vienna variation combining Stanley's, Meitner's, and Mieses' contributions, featuring sharp tactical play. The resulting positions demand excellent tactical judgment from both players."
+  },
+  {
+    "eco": "C25",
+    "name": "Vienna Game: Zhuravlev Countergambit",
+    "description": "A Soviet defensive contribution to Vienna theory, where Black countersacrifices material to seize the initiative. Zhuravlev's approach creates practical complications that can unsettle prepared attackers."
+  },
+  {
+    "eco": "C26",
+    "name": "Bishop's Opening: Horwitz Gambit",
+    "description": "Named for Bernhard Horwitz, this gambit offers material for rapid piece development and kingside attacking chances. The compensation manifests through piece activity and tactical threats."
+  },
+  {
+    "eco": "C26",
+    "name": "Bishop's Opening: Vienna Hybrid, Spielmann Attack",
+    "description": "Named for Rudolf Spielmann, this attacking continuation combines Bishop's Opening and Vienna ideas. Spielmann's aggressive approach emphasizes rapid piece coordination and tactical complications."
+  },
+  {
+    "eco": "C26",
+    "name": "Vienna Game: Falkbeer Variation",
+    "description": "Ernst Falkbeer's defensive contribution to Vienna theory, featuring solid piece placement and central control. This reliable defense has provided Black with practical drawing chances at all levels."
+  },
+  {
+    "eco": "C26",
+    "name": "Vienna Game: Mengarini Variation",
+    "description": "A Vienna continuation named after a historical player, featuring flexible piece development by both sides. The resulting positions offer balanced winning chances with rich strategic possibilities."
+  }
+]

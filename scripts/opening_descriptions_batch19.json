@@ -1,0 +1,752 @@
+[
+  {
+    "eco": "C89",
+    "name": "Ruy Lopez: Marshall Attack, Modern Variation",
+    "description": "A forcing continuation where White deviates from the main line after Black's aggressive d4 sacrifice. White maintains pressure while avoiding Black's traditional tactical complications in this ultra-sharp endgame-oriented system."
+  },
+  {
+    "eco": "C89",
+    "name": "Ruy Lopez: Marshall Attack, Original Marshall Attack",
+    "description": "Black sacrifices a pawn with 9...d4 to seize rapid counterplay and piece activity against White's exposed king. This classical gambit demands precise play from both sides as Black seeks to overwhelm White's center and kingside."
+  },
+  {
+    "eco": "C89",
+    "name": "Ruy Lopez: Marshall Attack, Re3 Variation",
+    "description": "White redirects the rook to e3 instead of following conventional lines, offering a flexible setup to contain Black's aggressive counterplay from the Marshall sacrifice. This modest maneuver keeps options flexible while maintaining solid central control."
+  },
+  {
+    "eco": "C89",
+    "name": "Ruy Lopez: Marshall Attack, Steiner Variation",
+    "description": "A sideline responding to Black's d4 pawn sacrifice that steers toward quieter positions compared to the main Marshall lines. White seeks a defensible arrangement while respecting Black's dynamic compensation for the pawn."
+  },
+  {
+    "eco": "C90",
+    "name": "Ruy Lopez: Closed, Lutikov Variation",
+    "description": "A subtle continuation in the Closed Ruy Lopez where White builds positional pressure through careful piece placement and pawn structure. This system emphasizes long-term spatial advantage and strategic maneuvering rather than tactical fireworks."
+  },
+  {
+    "eco": "C90",
+    "name": "Ruy Lopez: Closed, Pilnik Variation",
+    "description": "Black adopts a solid setup after White's standard Closed system, seeking a balanced position with flexibility for later breaks. Pilnik's approach prioritizes piece coordination and structural integrity over aggressive counterplay."
+  },
+  {
+    "eco": "C90",
+    "name": "Ruy Lopez: Closed, Suetin Variation",
+    "description": "White employs Suetin's methods to strengthen the center and coordinate pieces in the Closed Ruy Lopez framework. This variation emphasizes pawn levers and strategic piecework to achieve gradual pressure without committing prematurely."
+  },
+  {
+    "eco": "C91",
+    "name": "Ruy Lopez: Closed, Bogoljubow Variation",
+    "description": "Black plays solidly in the Closed Ruy Lopez by consolidating the position and preparing counterplay on the queenside. This steady approach avoids sharp tactics while gradually improving piece placement and pawn structure."
+  },
+  {
+    "eco": "C91",
+    "name": "Ruy Lopez: Closed, Yates Variation",
+    "description": "Yates' system in the Closed Ruy Lopez balances defensive solidity with strategic flexibility. Black arranges pieces to meet White's central and kingside operations while maintaining latent resources for queenside expansion."
+  },
+  {
+    "eco": "C91",
+    "name": "Ruy Lopez: Closed, Yates Variation, Short Attack",
+    "description": "White adopts a direct attacking approach against the Yates setup, marshaling forces on the kingside and exploiting weaknesses. Short's method creates immediate tactical threats that Black must address carefully to avoid breakthrough breaches."
+  },
+  {
+    "eco": "C92",
+    "name": "Ruy Lopez: Closed, Flohr System",
+    "description": "Flohr's systematic approach in the Closed Ruy Lopez employs careful prophylactic moves and piece maneuvering to establish a bind. This methodical framework seeks enduring positional advantage through incremental improvements and prophylactic thinking."
+  },
+  {
+    "eco": "C92",
+    "name": "Ruy Lopez: Closed, Karpov Variation",
+    "description": "Karpov's refined treatment of the Closed Ruy Lopez emphasizes precise piece placement and prophylactic strategy. White crafts subtle advantages through careful move ordering and piece coordination, creating long-term pressure without overcommitting."
+  },
+  {
+    "eco": "C92",
+    "name": "Ruy Lopez: Closed, Kholmov Variation",
+    "description": "Kholmov develops a resilient Black setup in the Closed Ruy Lopez that balances central and kingside concerns. This pragmatic defense permits White some advantage but ensures Black's position remains solid and difficult to penetrate tactically."
+  },
+  {
+    "eco": "C92",
+    "name": "Ruy Lopez: Closed, Smyslov-Breyer-Zaitsev Hybrid",
+    "description": "This flexible synthesis combines motifs from multiple Closed Ruy Lopez systems, allowing Black to adapt to White's setup dynamically. The hybrid approach yields solid piece coordination and flexible pawn breaks depending on White's continuation."
+  },
+  {
+    "eco": "C92",
+    "name": "Ruy Lopez: Closed, Zaitsev System",
+    "description": "Zaitsev's sophisticated system in the Closed Ruy Lopez employs coordinated piece placement and kingside flexibility to offset White's central control. Black waits for the opportune moment to launch queenside counterplay or central breaks."
+  },
+  {
+    "eco": "C93",
+    "name": "Ruy Lopez: Closed, Smyslov Defense",
+    "description": "Smyslov's solid defensive approach in the Closed Ruy Lopez maintains central stability while preserving flexibility for future maneuvering. This elastic setup allows Black to meet White's positional plans with well-coordinated counterplay."
+  },
+  {
+    "eco": "C94",
+    "name": "Ruy Lopez: Closed, Breyer Defense",
+    "description": "The Breyer Defense employs a flexible middlegame strategy with the knight retreat to d7, preparing rook transfers and central breaks. Black sacrifices some space for piece activity and dynamic counterplay against White's fixed pawn structure."
+  },
+  {
+    "eco": "C94",
+    "name": "Ruy Lopez: Closed, Breyer Defense, Quiet Variation",
+    "description": "This quieter continuation after the Breyer Defense avoids sharp tactical sequences, allowing both sides to maneuver toward favorable piece placements. White seeks gradual positional pressure while Black maintains flexibility and defensive resources."
+  },
+  {
+    "eco": "C95",
+    "name": "Ruy Lopez: Closed, Breyer",
+    "description": "The Breyer system represents Black's main defensive setup in the Closed Ruy Lopez, balancing solid structure with piece activity through d7 placements. White's advantage lies in space and potential kingside pressure, while Black maintains defensive resources."
+  },
+  {
+    "eco": "C95",
+    "name": "Ruy Lopez: Closed, Breyer Defense",
+    "description": "This established variation features Black's strategic retreat to d7 and subsequent rook activity to counter White's positional buildup. The Breyer remains one of Black's most reliable defenses against the Closed Ruy Lopez, offering solid chances for both sides."
+  },
+  {
+    "eco": "C95",
+    "name": "Ruy Lopez: Closed, Breyer Defense, Zaitsev Hybrid",
+    "description": "A flexible combination merging Breyer's knight retreat to d7 with Zaitsev's prophylactic themes and piece coordination strategies. This hybrid allows Black to adjust piece placement dynamically while maintaining solid defensive structure."
+  },
+  {
+    "eco": "C96",
+    "name": "Ruy Lopez: Closed, Borisenko Variation",
+    "description": "Borisenko's defensive setup in the Closed Ruy Lopez aims to stabilize Black's position through careful piece coordination and pawn structure. This approach yields solid chances for Black while avoiding the sharp tactical complications of mainstream lines."
+  },
+  {
+    "eco": "C96",
+    "name": "Ruy Lopez: Closed, Chigorin Defense",
+    "description": "The Chigorin Defense brings direct counterplay with pieces, particularly through knight hops and rook activity. Black's aggressive approach in the Closed structure creates tactical opportunities and piece play to offset White's spatial advantage."
+  },
+  {
+    "eco": "C96",
+    "name": "Ruy Lopez: Closed, Chigorin Defense, Gajewski Gambit",
+    "description": "Gajewski introduces a sharp pawn sacrifice in the Chigorin setup, seeking immediate tactical compensation through piece activity and attacking chances. This aggressive variation tests White's defensive accuracy while giving Black real practical winning chances."
+  },
+  {
+    "eco": "C96",
+    "name": "Ruy Lopez: Closed, Keres Defense",
+    "description": "Keres' defense in the Closed Ruy Lopez employs solid piece placement and prophylactic maneuvering to withstand White's pressure. This reliable setup prioritizes long-term resilience and counterplay over confrontational tactics."
+  },
+  {
+    "eco": "C96",
+    "name": "Ruy Lopez: Closed, Rossolimo Defense",
+    "description": "Rossolimo's solid approach in the Closed Ruy Lopez balances defensive sufficiency with emerging counterplay, particularly targeting weak squares. This measured defense allows Black to maintain equilibrium while preparing potential tactical strikes."
+  },
+  {
+    "eco": "C97",
+    "name": "Ruy Lopez: Closed, Chigorin Defense",
+    "description": "A main-line Chigorin continuation in the Closed structure, where Black generates active piece play and central pressure to compensate for spatial disadvantage. This fighting system remains theoretically sound and practically challenging for White."
+  },
+  {
+    "eco": "C97",
+    "name": "Ruy Lopez: Closed, Chigorin, Yugoslav System",
+    "description": "The Yugoslav approach to the Chigorin Defense employs aggressive piece maneuvers and pawn breaks to create immediate threats. White must navigate accurate defensive moves or face overwhelming tactical pressure from Black's coordinated counterplay."
+  },
+  {
+    "eco": "C98",
+    "name": "Ruy Lopez: Closed, Chigorin Defense",
+    "description": "An important variation of the Chigorin Defense featuring sharper tactical content and more forcing continuations. Black's aggressive setup generates practical complications that reward precise play and tactical alertness."
+  },
+  {
+    "eco": "C99",
+    "name": "Ruy Lopez: Closed, Chigorin Defense, Panov System",
+    "description": "Panov's systematic approach against the Chigorin Defense employs strategic piece placement and pawn maneuvering to consolidate White's advantage. This methodical setup controls key squares while preventing Black's counterplay from achieving critical breakthroughs."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Accepted: Bogoljubow Defense",
+    "description": "The Bogoljubow Defense accepts White's pawn sacrifice while maintaining solid central structure and piece development. Black seeks to consolidate material advantage while carefully defending against White's attacking initiative."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Accepted: Bogoljubow Defense, Kloss Attack",
+    "description": "Kloss introduces a sharp attacking setup against the Bogoljubow Defense, generating rapid piece pressure and central threats. White sacrifices additional material for explosive initiative, requiring Black to defend accurately."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Accepted: Bogoljubow Defense, Mad Dog Attack",
+    "description": "The Mad Dog Attack unleashes aggressive kingside pawning and piece activity in the Bogoljubow framework. White launches a direct assault aiming for a quick knockout, while Black must parry tactics and consolidate the extra pawn."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Accepted: Bogoljubow Defense, Nimzowitsch Attack",
+    "description": "Nimzowitsch's attacking method against the Bogoljubow Defense emphasizes piece activity and central control rather than brute force. White's coordinated piece play creates strategic and tactical threats despite the pawn sacrifice."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Accepted: Bogoljubow Defense, Studier Attack",
+    "description": "Studier's aggressive approach combines rapid piece development with central and kingside pawn pressure. White generates concrete threats that Black must respect carefully to avoid tactical disaster."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Accepted: Euwe Defense",
+    "description": "The Euwe Defense accepts the Blackmar-Diemer Gambit while maintaining solid pawn structure and defensive resources. Black aims to consolidate the extra pawn while neutralizing White's initiative through careful piece placement."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Accepted: Euwe Defense, Duthilleul Gambit",
+    "description": "Duthilleul introduces another pawn sacrifice within the Euwe Defense framework, seeking explosive tactics and compensation. White creates sharp complications that demand precise defense from Black."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Accepted: Euwe Defense, Zilbermints Gambit",
+    "description": "Zilbermints adds yet another tactical layer through a sharp pawn-sacrificing continuation in the Euwe setup. White generates multiple threats and attacking chances that reward bold and accurate play."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Accepted: Gunderam Defense",
+    "description": "The Gunderam Defense accepts the gambit pawn while developing solidly and maintaining flexible piece placement. Black consolidates material while remaining alert to White's tactical and positional threats."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Accepted: Gunderam Defense, Stader Variation",
+    "description": "Stader's variation within the Gunderam Defense adds specific attacking ideas and piece placement strategies. White pursues aggressive continuations while Black maintains defensive coordination and material advantage."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Accepted: Holwell Defense",
+    "description": "The Holwell Defense offers a solid pawn-accepting structure with emphasis on central control and piece coordination. Black maintains flexibility for various counterplay ideas while protecting the extra pawn."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Accepted: Kaulich Defense",
+    "description": "The Kaulich Defense represents another solid Black option accepting the gambit pawn with proper defensive setup. Black's careful piece placement ensures material retention while preparing counterplay."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Accepted: Pietrowsky Defense",
+    "description": "Pietrowsky's defense accepts the Blackmar-Diemer gambit while maintaining a solid pawn structure and piece activity. Black consolidates the material gain while remaining vigilant against White's attacking possibilities."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Accepted: Ritter Defense",
+    "description": "The Ritter Defense accepts the pawn while establishing solid central control and defensive coordination. Black seeks to retain the material advantage while neutralizing White's initiative through accurate piece placement."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Accepted: Ryder Gambit",
+    "description": "Ryder's approach introduces White's counter-sacrifice against Black's accepted gambit, creating sharp tactical complications. This aggressive response seeks compensation through piece activity and kingside threats."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Accepted: Schlutter Defense",
+    "description": "The Schlutter Defense maintains solid pawn structure while accepting the gambit and developing flexibly. Black consolidates material while remaining prepared for White's tactical and positional continuations."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Accepted: Teichmann Defense",
+    "description": "The Teichmann Defense accepts the gambit pawn while establishing strong central control and piece coordination. Black's solid setup prioritizes material retention and defensive sufficiency over immediate counterattacking."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Accepted: Teichmann Defense, Ciesielski Variation",
+    "description": "Ciesielski's variation within the Teichmann Defense adds specific piece placement and tactical ideas for both sides. This nuanced approach offers Black flexibility while maintaining solid defensive foundations."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Accepted: Teichmann Defense, Classical Variation",
+    "description": "The classical treatment of the Teichmann Defense employs traditional piece development and central control strategies. Both sides pursue solid play, with White seeking compensation and Black consolidating the material advantage."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Accepted: Teichmann Defense, Seidel-Hall Attack",
+    "description": "Seidel and Hall's aggressive approach against the Teichmann Defense pursues sharp tactics and kingside assault. White generates concrete threats demanding precise defense despite Black's material surplus."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Accepted: Ziegler Defense",
+    "description": "The Ziegler Defense accepts the gambit while maintaining flexibility and solid piece placement for Black. Black consolidates the extra pawn while preparing potential counterplay on various fronts."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit: Blackmar Gambit",
+    "description": "Blackmar's original conception features a pawn sacrifice on d4 seeking rapid piece development and central control. White pursues aggressive compensation through forcing moves and attacking chances in the opening."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Declined: Brombacher Countergambit",
+    "description": "Black declines the gambit and counters with a pawn sacrifice of their own, creating sharp tactical complications. This fighting approach yields mutual pawn sacrifices and tactical opportunities for both sides."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Declined: Elbert Countergambit",
+    "description": "The Elbert Countergambit declines White's sacrifice while offering Black's own pawn break for counterplay. This tactical struggle creates complications favoring fighters with sharp tactical awareness."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Declined: Gedult Defense",
+    "description": "The Gedult Defense declines the gambit pawn while establishing solid central control and piece coordination. Black prioritizes safety and material retention over pursuing immediate counterplay."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Declined: Lamb Defense",
+    "description": "Lamb's defense declines the gambit sacrifice while maintaining flexible piece placement and strategic options. Black avoids sharp tactics while preparing solid counterplay and central pressure."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Declined: Langeheinicke Defense",
+    "description": "The Langeheinicke Defense soundly refuses the gambit pawn while establishing Black's control of critical central squares. Black's solid structure permits flexible maneuvering while avoiding tactical complications."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Declined: O'Kelly Defense",
+    "description": "O'Kelly's approach declines the gambit while developing naturally and maintaining central stability. Black's pragmatic setup avoids unnecessary complications while preserving sound defensive resources."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Declined: Vienna Defense",
+    "description": "The Vienna Defense declines the gambit and employs a counterattacking setup centered on piece activity and central pressure. Black's flexible approach generates practical complications despite the solid position."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Declined: Weinsbach Defense",
+    "description": "The Weinsbach Defense solidly declines the gambit while maintaining flexible piece development and defensive solidity. Black's careful setup prioritizes safety and structural integrity."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit Declined: Weinsbach Defense, Pfrang Gambit",
+    "description": "Pfrang's gambit within the Weinsbach setup introduces tactical complications and additional pawn sacrifices. White seeks immediate compensation through forcing moves and concentrated piece activity."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit: Diemer-Rosenberg Attack",
+    "description": "This aggressive continuation pursues a different approach to compensation, emphasizing piece activity and central control over immediate tactics. Diemer and Rosenberg's system seeks lasting pressure rather than quick knockout."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit: Fritz Attack",
+    "description": "The Fritz Attack launches a kingside assault featuring rapid piece development and pawn advances. White sacrifices material for attacking chances with tactical and positional compensation."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit: Lemberger Countergambit",
+    "description": "The Lemberger Countergambit features Black's counter-sacrifice of material for rapid counterplay and piece activity. This sharp system creates mutual complications rewarding players who execute accurately."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit: Lemberger Countergambit, Endgame Variation",
+    "description": "This variation emphasizes endgame structures and simplification opportunities within the Lemberger framework. Both sides navigate reduced material with strategic play determining the outcome."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit: Lemberger Countergambit, Lange Gambit",
+    "description": "Lange's further sacrifice within the Lemberger system creates additional tactical complications and attacking chances. White pursues aggressive play while Black seeks defensive accuracy and material consolidation."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit: Lemberger Countergambit, Rasmussen Attack",
+    "description": "Rasmussen's attacking approach against the Lemberger Countergambit emphasizes piece coordination and kingside threats. White generates forcing moves despite the pawn sacrifices."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit: Lemberger Countergambit, Sneiders Attack",
+    "description": "Sneiders introduces an alternative attacking setup against the Lemberger Countergambit with different piece placements and pawn structures. White pursues compensation through tactical and positional means."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit: Lemberger Countergambit, Soller Attack",
+    "description": "Soller's method in the Lemberger framework adds specific attacking ideas and piece activity emphasis. White generates sharp threats requiring Black's precise defense."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit: Netherlands Variation",
+    "description": "The Netherlands Variation represents an offbeat approach to the Blackmar-Diemer featuring unusual move orders and strategic ideas. This unconventional setup creates complications that unsettle unprepared opponents."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit: Rasa-Studier Gambit",
+    "description": "Rasa and Studier's gambit introduces a sharp sacrificing continuation with multiple pawn offers for compensation. White generates tactical threats and attacking chances in this double-gambit structure."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit: Reversed Albin Countergambit",
+    "description": "This unusual reversal of the Albin Countergambit structure creates asymmetrical pawn formations and tactical opportunities. The gambit nature ensures sharp, forcing play from the opening."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit: von Popiel Gambit",
+    "description": "Von Popiel's gambit introduces an additional sacrifice and aggressive attacking setup within the Blackmar-Diemer framework. White pursues multiple threats through forcing continuation and piece coordination."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit: von Popiel Gambit, Zilbermints Variation",
+    "description": "Zilbermints adds tactical complications within the von Popiel setup through precise piece placement and pawn breaks. This sharp variation favors accurate tactical play over strategic understanding."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit: Zeller Defense",
+    "description": "The Zeller Defense within the Blackmar-Diemer framework provides Black with a solid, methodical setup against White's initiative. Black consolidates material while carefully managing White's attacking chances."
+  },
+  {
+    "eco": "D00",
+    "name": "Blackmar-Diemer Gambit: Zeller Defense, Soller Attack",
+    "description": "Soller's aggressive method against the Zeller Defense pursues sharp tactics and kingside assault despite Black's solid setup. White generates concrete threats demanding accurate defense."
+  },
+  {
+    "eco": "D00",
+    "name": "Queen's Pawn Game: Accelerated London System",
+    "description": "This system combines the London setup with an earlier acceleration of White's pawn structure and piece placement. White achieves rapid coordination while maintaining the strategic foundations of the solid London framework."
+  },
+  {
+    "eco": "D00",
+    "name": "Queen's Pawn Game: Accelerated London System, Steinitz Countergambit",
+    "description": "Steinitz introduces a pawn sacrifice within the Accelerated London framework, creating tactical complications and sharp play. Black's counterattack generates mutual threats requiring precise navigation."
+  },
+  {
+    "eco": "D00",
+    "name": "Queen's Pawn Game: Accelerated London System, Steinitz Countergambit Accepted",
+    "description": "Black accepts Steinitz's countergambit pawn, leading to sharp tactical complications and mutual attacking chances. Both sides pursue forcing continuations with concrete threats throughout the opening."
+  },
+  {
+    "eco": "D00",
+    "name": "Queen's Pawn Game: Accelerated London System, Steinitz Countergambit, Morris Countergambit",
+    "description": "Morris adds another layer of counter-sacrifice within the Steinitz framework, creating double-gambit complications. This sharp variation generates tactical chaos rewarding accurate play."
+  },
+  {
+    "eco": "D00",
+    "name": "Queen's Pawn Game: Accelerated London System, Steinitz Countergambit, Morris Countergambit Accepted",
+    "description": "Black accepts Morris's countergambit, yielding a sharp tactical melange with multiple pawn sacrifices and attacking chances. The resulting position demands tactical alertness and precise calculation."
+  },
+  {
+    "eco": "D00",
+    "name": "Queen's Pawn Game: Chigorin Variation",
+    "description": "The Chigorin Variation employs a flexible Black setup with central challenges and piece activity to oppose White's pawn-centering strategy. Black generates counterplay through accurate maneuvering and tactical awareness."
+  },
+  {
+    "eco": "D00",
+    "name": "Queen's Pawn Game: Chigorin Variation, Alburt Defense",
+    "description": "Alburt's solid defensive approach within the Chigorin framework maintains central stability while preparing flexible piece coordination. Black's careful setup yields resilient resistance to White's initiatives."
+  },
+  {
+    "eco": "D00",
+    "name": "Queen's Pawn Game: Chigorin Variation, Anti-Veresov",
+    "description": "This defensive setup specifically counters the Veresov's aggressive setup, employing strategic piece placement and pawn structures to neutralize threats. Black maintains flexibility while avoiding White's dangerous tactical ideas."
+  },
+  {
+    "eco": "D00",
+    "name": "Queen's Pawn Game: Chigorin Variation, Fianchetto Defense",
+    "description": "Black employs a fianchetto structure to control long diagonals and maintain flexible piece placement within the Chigorin framework. This setup provides solid defense while preserving counterattacking opportunities."
+  },
+  {
+    "eco": "D00",
+    "name": "Queen's Pawn Game: Chigorin Variation, Irish Gambit",
+    "description": "The Irish Gambit introduces a sharp pawn sacrifice within the Chigorin structure, creating tactical complications and attacking chances. White seeks compensation through piece activity and positional pressure."
+  },
+  {
+    "eco": "D00",
+    "name": "Queen's Pawn Game: Chigorin Variation, Shaviliuk Gambit",
+    "description": "Shaviliuk's gambit adds another tactical dimension to the Chigorin variation through creative pawn sacrificing. White generates attacking possibilities while Black seeks accurate defense and material consolidation."
+  },
+  {
+    "eco": "D00",
+    "name": "Queen's Pawn Game: Chigorin Variation, Shropshire Defense",
+    "description": "The Shropshire Defense within the Chigorin framework provides Black with a solid, flexible setup against White's aggression. Black maintains defensive integrity while preparing potential counterplay on the flanks."
+  },
+  {
+    "eco": "D00",
+    "name": "Queen's Pawn Game: Hübsch Gambit",
+    "description": "Hübsch's gambit features a pawn sacrifice seeking rapid piece development and attacking compensation. White pursues aggressive initiatives while Black must defend accurately to consolidate material gain."
+  },
+  {
+    "eco": "D00",
+    "name": "Queen's Pawn Game: Levitsky Attack",
+    "description": "The Levitsky Attack pursues aggressive kingside pawn play and piece coordination after 1.d4. White generates early threats and tactical opportunities through forcing continuations."
+  },
+  {
+    "eco": "D00",
+    "name": "Queen's Pawn Game: Levitsky Attack, Welling Variation",
+    "description": "Welling's approach within the Levitsky Attack adds specific tactical ideas and piece placement strategies. Both sides pursue sharp play with mutual attacking chances throughout the middlegame."
+  },
+  {
+    "eco": "D00",
+    "name": "Queen's Pawn Game: Mason Attack",
+    "description": "Mason's attacking system emphasizes rapid piece development and kingside pawn advances after 1.d4. White generates early initiative through forcing moves and concrete threats."
+  },
+  {
+    "eco": "D00",
+    "name": "Queen's Pawn Game: Stonewall Attack",
+    "description": "The Stonewall Attack establishes a solid pawn foundation with f4-e3-d4-c3, creating a strategic fortress. White builds positional pressure incrementally while maintaining defensive solidity."
+  },
+  {
+    "eco": "D00",
+    "name": "Queen's Pawn Game: Zurich Gambit",
+    "description": "The Zurich Gambit features a central pawn sacrifice seeking rapid piece development and attacking compensation. White pursues forcing initiatives while Black must defend precisely to retain material."
+  },
+  {
+    "eco": "D01",
+    "name": "Richter-Veresov Attack: Boyce Defense",
+    "description": "Boyce's solid defense against the Richter-Veresov maintains central stability and defensive flexibility. Black consolidates piece coordination while preparing potential central and queenside breaks."
+  },
+  {
+    "eco": "D01",
+    "name": "Richter-Veresov Attack: Malich Gambit",
+    "description": "Malich introduces a sharp pawn sacrifice within the Richter-Veresov framework, creating tactical complications. White seeks compensation through piece activity and attacking chances."
+  },
+  {
+    "eco": "D01",
+    "name": "Richter-Veresov Attack: Richter Variation",
+    "description": "Richter's original approach to the Richter-Veresov emphasizes aggressive piece placement and tactical threats. White pursues immediate initiatives through forcing moves and spatial control."
+  },
+  {
+    "eco": "D01",
+    "name": "Richter-Veresov Attack: Two Knights System",
+    "description": "This system employs the placement of both knights to support White's aggressive plans in the Richter-Veresov framework. White generates tactical and positional threats through coordinated piece activity."
+  },
+  {
+    "eco": "D01",
+    "name": "Richter-Veresov Attack: Two Knights System, Grünfeld Defense",
+    "description": "The Grünfeld Defense within the Two Knights setup provides Black with a flexible, hypermodern-style approach. Black controls key long-diagonal squares while preparing central counterplay."
+  },
+  {
+    "eco": "D01",
+    "name": "Richter-Veresov Attack: Veresov Variation",
+    "description": "Veresov's original approach emphasizes aggressive bishop placement on g5 and rapid piece development. White generates immediate tactical threats and kingside attacking chances."
+  },
+  {
+    "eco": "D02",
+    "name": "London System: Poisoned Pawn Variation",
+    "description": "Black ventures after the bishop d2 and pawn takes on b2, creating sharp tactical complications within the solid London framework. This risky approach generates mutual threats and tactical opportunities."
+  },
+  {
+    "eco": "D02",
+    "name": "Queen's Gambit Declined: Baltic Defense, Pseudo-Slav",
+    "description": "This variation combines Baltic Defense ideas with Pseudo-Slav characteristics, offering Black a flexible hybrid approach. Black maintains multiple piece placement options while preparing potential counterplay."
+  },
+  {
+    "eco": "D02",
+    "name": "Queen's Pawn Game: Anti-Torre",
+    "description": "This setup specifically counters White's Torre Attack by avoiding the bishop placement on g5 and preventing typical Torre themes. Black's flexible defense maintains solid piece coordination."
+  },
+  {
+    "eco": "D02",
+    "name": "Queen's Pawn Game: Chandler Gambit",
+    "description": "Chandler's gambit introduces a pawn sacrifice within the queen's pawn framework, seeking attacking compensation. White generates forcing initiatives while Black seeks accurate defensive play."
+  },
+  {
+    "eco": "D02",
+    "name": "Queen's Pawn Game: Chigorin Variation",
+    "description": "This Chigorin setup in the broader queen's pawn context maintains Black's characteristic active counterplay and piece activity. Black challenges White's positional foundations through tactical and strategic means."
+  },
+  {
+    "eco": "D02",
+    "name": "Queen's Pawn Game: Krause Variation",
+    "description": "Krause's approach employs specific piece placement and pawn structures to establish White's spatial advantage. This methodical system builds gradual positional pressure over multiple moves."
+  },
+  {
+    "eco": "D02",
+    "name": "Queen's Pawn Game: Levitsky Attack, Euwe Variation, Modern Line",
+    "description": "This modern treatment of the Levitsky-Euwe variation incorporates contemporary ideas and flexibility. White maintains attacking potential while Black employs solid defensive setup with counterplay resources."
+  },
+  {
+    "eco": "D02",
+    "name": "Queen's Pawn Game: London System",
+    "description": "The London System represents White's solid positional framework with the bishop-pawn-knight setup. White builds enduring pressure through careful piece coordination and prophylactic thinking."
+  },
+  {
+    "eco": "D02",
+    "name": "Queen's Pawn Game: London System, Pterodactyl Variation",
+    "description": "The whimsically-named Pterodactyl Variation within the London employs an unusual Black setup and piece arrangement. This offbeat defense creates complications and avoids well-trodden theoretical lines."
+  },
+  {
+    "eco": "D02",
+    "name": "Queen's Pawn Game: London System, with e6",
+    "description": "Black's solid e6 pawn placement within the London System maintains flexible piece coordination and defensive safety. This setup balances solidity with potential for strategic counterplay."
+  },
+  {
+    "eco": "D02",
+    "name": "Queen's Pawn Game: Symmetrical Variation",
+    "description": "Both sides mirror pawn structures and piece placements in this symmetrical system, creating a balanced position. Strategic maneuvering and precise piece placement determine the outcome."
+  },
+  {
+    "eco": "D02",
+    "name": "Queen's Pawn Game: Symmetrical Variation, Pseudo-Catalan",
+    "description": "This pseudo-Catalan approach within the symmetrical framework combines solid structure with fianchetto-style flexibility. Black maintains dynamic counterplay while preserving solid defensive resources."
+  },
+  {
+    "eco": "D02",
+    "name": "Queen's Pawn Game: Zilbermints Countergambit",
+    "description": "Zilbermints introduces a pawn sacrifice within the queen's pawn framework, creating tactical complications and attacking chances. Both sides pursue forcing continuations with mutual threats."
+  },
+  {
+    "eco": "D02",
+    "name": "Queen's Pawn Game: Zukertort Variation",
+    "description": "Zukertort's flexible approach employs varied piece placement and strategic maneuvering within the queen's pawn setup. White builds positional pressure through careful preparation and long-term planning."
+  },
+  {
+    "eco": "D03",
+    "name": "Queen's Pawn Game: Torre Attack",
+    "description": "The Torre Attack features the aggressive bishop placement on g5, creating tactical and positional threats. White generates pressure through piece coordination while maintaining a solid pawn foundation."
+  },
+  {
+    "eco": "D03",
+    "name": "Queen's Pawn Game: Torre Attack, Gossip Variation",
+    "description": "The Gossip Variation within the Torre Attack employs specific defensive and counterattacking ideas for Black. Black maintains flexibility while preparing tactical and strategic resources."
+  },
+  {
+    "eco": "D03",
+    "name": "Queen's Pawn Game: Torre Attack, Grünfeld Variation",
+    "description": "Black's Grünfeld setup within the Torre framework provides a hypermodern defense with long-diagonal control. This flexible approach allows Black to challenge White's center from afar."
+  },
+  {
+    "eco": "D04",
+    "name": "Queen's Pawn Game: Colle System",
+    "description": "The Colle System emphasizes methodical piece development and solid pawn structures with f4-e3-d4-c3. White builds gradually while maintaining flexibility for positional and tactical opportunities."
+  },
+  {
+    "eco": "D04",
+    "name": "Queen's Pawn Game: Colle System, Anti-Colle",
+    "description": "This defensive setup specifically targets the Colle's positional foundations through aggressive counterplay and central pressure. Black disrupts White's methodical plans through forcing initiatives."
+  },
+  {
+    "eco": "D04",
+    "name": "Queen's Pawn Game: Colle System, Grünfeld Formation",
+    "description": "Black employs a Grünfeld pawn structure within the Colle framework, controlling long diagonals and maintaining flexibility. This hypermodern approach balances solid structure with dynamic resources."
+  },
+  {
+    "eco": "D05",
+    "name": "Queen's Pawn Game: Colle System",
+    "description": "A flexible Colle setup where White maintains methodical piece development and strategic maneuvering. White's solid framework yields enduring positional advantage through careful planning."
+  },
+  {
+    "eco": "D05",
+    "name": "Queen's Pawn Game: Colle System, Traditional Colle",
+    "description": "The traditional Colle approach emphasizes the classic f4-e3-d4-c3 framework with methodical piece placement. White's predictable yet solid setup remains effective against unprepared opposition."
+  },
+  {
+    "eco": "D05",
+    "name": "Queen's Pawn Game: Zukertort Variation",
+    "description": "Zukertort's flexible approach within the queen's pawn game employs varied piece placement and strategic options. White builds pressure through accurate maneuvering and positional understanding."
+  },
+  {
+    "eco": "D05",
+    "name": "Rubinstein Opening: Bogoljubow Defense",
+    "description": "Bogoljubow's solid defense against Rubinstein's 1.d4 setup maintains central stability and piece flexibility. Black consolidates position while preparing potential counterplay on various fronts."
+  },
+  {
+    "eco": "D05",
+    "name": "Rubinstein Opening: Classical Defense",
+    "description": "The classical approach offers Black a solid, well-established defense with traditional piece development and structure. Black maintains balanced piece coordination while preparing strategic counterplay."
+  },
+  {
+    "eco": "D05",
+    "name": "Rubinstein Opening: Semi-Slav Defense",
+    "description": "Black employs semi-Slav ideas including the c6 and e6 pawn structure against Rubinstein's setup. This flexible defense maintains central control while preparing potential pawn breaks."
+  },
+  {
+    "eco": "D06",
+    "name": "Queen's Gambit Declined: Austrian Attack, Salvio Countergambit",
+    "description": "Salvio introduces a pawn sacrifice within the Austrian Attack framework, creating tactical complications. Both sides pursue forcing continuations with mutual attacking and defensive themes."
+  },
+  {
+    "eco": "D06",
+    "name": "Queen's Gambit Declined: Austrian Defense",
+    "description": "The Austrian Defense maintains central stability and piece flexibility within the Queen's Gambit framework. Black's solid setup preserves counterplay options while defending carefully."
+  },
+  {
+    "eco": "D06",
+    "name": "Queen's Gambit Declined: Austrian Defense, Gusev Countergambit",
+    "description": "Gusev's countergambit within the Austrian framework introduces a sharp pawn sacrifice and tactical complications. Black seeks compensation through piece activity and attacking chances."
+  },
+  {
+    "eco": "D06",
+    "name": "Queen's Gambit Declined: Austrian Defense, Haberditz Variation",
+    "description": "Haberditz's approach within the Austrian Defense adds specific piece placement and strategic ideas. Both sides maintain solid structure while pursuing positional and tactical opportunities."
+  },
+  {
+    "eco": "D06",
+    "name": "Queen's Gambit Declined: Baltic Defense",
+    "description": "The Baltic Defense employs a flexible setup with central and kingside piece coordination against the Queen's Gambit. Black maintains multiple strategic options while preserving defensive resources."
+  },
+  {
+    "eco": "D06",
+    "name": "Queen's Gambit Declined: Baltic Defense, Argentinian Gambit",
+    "description": "The Argentinian Gambit introduces a sharp pawn sacrifice within the Baltic framework, creating tactical complications. White pursues compensation through piece activity and attacking chances."
+  },
+  {
+    "eco": "D06",
+    "name": "Queen's Gambit Declined: Baltic Defense, Pseudo-Chigorin",
+    "description": "This pseudo-Chigorin approach within the Baltic Defense combines Baltic flexibility with Chigorin-like counterplay ideas. Black generates tactical and strategic threats against White's setup."
+  },
+  {
+    "eco": "D06",
+    "name": "Queen's Gambit Declined: Baltic Defense, Queen Attack",
+    "description": "White's direct queen attack within the Baltic framework pursues immediate tactical threats and positional pressure. Black must defend accurately while consolidating piece coordination."
+  },
+  {
+    "eco": "D06",
+    "name": "Queen's Gambit Declined: Baltic Defense, Queen Attack Deferred",
+    "description": "This deferred queen attack approach maintains flexibility while building positional pressure in the Baltic structure. White develops gradually while preparing various continuations."
+  },
+  {
+    "eco": "D06",
+    "name": "Queen's Gambit Declined: Marshall Defense",
+    "description": "Marshall's solid defense against the Queen's Gambit maintains flexible piece placement and central control. Black consolidates position while preparing potential breaks and counterplay."
+  },
+  {
+    "eco": "D06",
+    "name": "Queen's Gambit Declined: Marshall Defense, Tan Gambit",
+    "description": "Tan's gambit within the Marshall Defense introduces a sharp pawn sacrifice and tactical complications. White seeks compensation through piece activity and attacking possibilities."
+  },
+  {
+    "eco": "D06",
+    "name": "Queen's Gambit Declined: Zilbermints Gambit",
+    "description": "Zilbermints introduces a tactical pawn sacrifice within the Queen's Gambit Declined framework. White pursues forcing continuations and attacking chances despite the pawn sacrifice."
+  },
+  {
+    "eco": "D07",
+    "name": "Queen's Gambit Declined: Chigorin Defense",
+    "description": "The Chigorin Defense maintains Black's characteristic active counterplay through piece activity and central pressure. Black challenges White's center through tactical and positional means."
+  },
+  {
+    "eco": "D07",
+    "name": "Queen's Gambit Declined: Chigorin Defense, Exchange Variation",
+    "description": "White exchanges on c6, leading to doubled pawns and specific pawn structures within the Chigorin framework. This variation yields strategic play with emphasis on piece coordination."
+  },
+  {
+    "eco": "D07",
+    "name": "Queen's Gambit Declined: Chigorin Defense, Exchange Variation, Costa's Line",
+    "description": "Costa's specific approach within the Chigorin Exchange variation adds tactical nuances and strategic ideas. Both sides pursue precise play with emphasis on piece placement and pawn breaks."
+  },
+  {
+    "eco": "D07",
+    "name": "Queen's Gambit Declined: Chigorin Defense, Janowski Variation",
+    "description": "Janowski's approach within the Chigorin Defense employs specific piece placement and tactical ideas. Black maintains active counterplay while preserving defensive resources."
+  },
+  {
+    "eco": "D07",
+    "name": "Queen's Gambit Declined: Chigorin Defense, Lazard Gambit",
+    "description": "Lazard's gambit introduces a sharp pawn sacrifice within the Chigorin framework, creating tactical complications. White generates attacking chances while Black seeks accurate defense."
+  },
+  {
+    "eco": "D07",
+    "name": "Queen's Gambit Declined: Chigorin Defense, Main Line",
+    "description": "The main line Chigorin Defense features Black's active counterplay and tactical opportunities against White's center. Black's aggressive piece placement generates practical complications for White."
+  },
+  {
+    "eco": "D07",
+    "name": "Queen's Gambit Declined: Chigorin Defense, Main Line, Alekhine Variation",
+    "description": "Alekhine's approach within the main line Chigorin adds specific tactical themes and piece placement strategies. Both sides pursue sharp play with mutual attacking and defensive resources."
+  },
+  {
+    "eco": "D07",
+    "name": "Queen's Gambit Declined: Chigorin Defense, Modern Gambit",
+    "description": "The modern gambit approach within the Chigorin framework introduces a pawn sacrifice for tactical compensation. White pursues forcing initiatives while Black seeks accurate defensive play."
+  },
+  {
+    "eco": "D07",
+    "name": "Queen's Gambit Declined: Chigorin Defense, Tartakower Gambit",
+    "description": "Tartakower's gambit within the Chigorin Defense features a sharp pawn sacrifice and tactical complications. White generates attacking chances through forcing moves and piece activity."
+  },
+  {
+    "eco": "D08",
+    "name": "Queen's Gambit Declined: Albin Countergambit",
+    "description": "Black's aggressive counter-sacrifice with ...e5 creates immediate tactical complications and mutual threats. This sharp system generates practical chances for both sides through forcing play."
+  },
+  {
+    "eco": "D08",
+    "name": "Queen's Gambit Declined: Albin Countergambit, Balogh Variation",
+    "description": "Balogh's approach within the Albin Countergambit employs specific defensive and attacking ideas. Black maintains active counterplay while carefully managing White's tactical threats."
+  },
+  {
+    "eco": "D08",
+    "name": "Queen's Gambit Declined: Albin Countergambit, Janowski Variation",
+    "description": "Janowski's method within the Albin Countergambit adds tactical nuances and piece placement strategies. Both sides pursue sharp play with emphasis on accurate calculation and move precision."
+  }
+]

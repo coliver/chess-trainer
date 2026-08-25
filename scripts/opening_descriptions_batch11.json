@@ -1,0 +1,752 @@
+[
+  {
+    "eco": "B36",
+    "name": "Sicilian Defense: Accelerated Dragon, Maróczy Bind, Gurgenidze Variation",
+    "description": "A sophisticated sideline of the Accelerated Dragon where White's Maróczy Bind is met by Black's flexible setup. White controls the center while Black aims for queenside pressure, leading to positional maneuvering and a solid but somewhat passive structure for Black."
+  },
+  {
+    "eco": "B37",
+    "name": "Sicilian Defense: Accelerated Dragon, Maróczy Bind",
+    "description": "White establishes a pawn on c4 after 2...Nc6, preventing Black's typical d5 break and keeping the center fluid. A strategically tense position where White pursues space control and Black seeks counterplay on the queenside or via piece activity."
+  },
+  {
+    "eco": "B37",
+    "name": "Sicilian Defense: Accelerated Dragon, Simagin Variation",
+    "description": "Black challenges the Maróczy setup with an early deployment that aims to generate piece activity and central play. This variation requires precise timing from both sides, with Black striving for dynamic counterplay against White's spatial advantage."
+  },
+  {
+    "eco": "B38",
+    "name": "Sicilian Defense: Accelerated Dragon, Maróczy Bind",
+    "description": "A continuation of the Maróczy Bind strategy where White maintains central control while Black develops flexibility in piece placement. Typical plans include White's d4 advance and Black's piece rearrangement to challenge the center."
+  },
+  {
+    "eco": "B39",
+    "name": "Sicilian Defense: Accelerated Dragon, Maróczy Bind, Breyer Variation",
+    "description": "A nuanced position arising from the Maróczy Bind where both sides have committed major pieces to their development. Black often achieves a solid, flexible pawn structure despite White's spatial control, seeking piece activity and counterplay."
+  },
+  {
+    "eco": "B40",
+    "name": "Sicilian Defense: Alapin Variation, Sherzer Variation",
+    "description": "A rare sideline of the Alapin structure (c3) where Black sidesteps main-line theory with specific move orders. This variation explores alternative piece placements and pawn breaks, offering less-analyzed but potentially sharp middlegames."
+  },
+  {
+    "eco": "B40",
+    "name": "Sicilian Defense: Delayed Alapin Variation, with e6",
+    "description": "Black adapts to the Alapin by playing e6, mirroring a French Defense structure while retaining Sicilian flexibility. White often pursues d4 to establish a strong center, leading to positional play with potential tactical shots."
+  },
+  {
+    "eco": "B40",
+    "name": "Sicilian Defense: Drazic Variation",
+    "description": "An uncommon Black sideline characterized by flexible development and non-standard piece placement. This offbeat choice avoids main-line theory while accepting White's spatial advantage, relying on piece activity and tactical opportunities."
+  },
+  {
+    "eco": "B40",
+    "name": "Sicilian Defense: French Variation",
+    "description": "Black adopts a pawn structure resembling the French Defense (e6 setup) in the Sicilian context. White controls the center while Black develops solid position with potential for queenside expansion and piece coordination."
+  },
+  {
+    "eco": "B40",
+    "name": "Sicilian Defense: French Variation, Normal",
+    "description": "The standard continuation of the French Variation setup where both sides develop naturally toward typical midgame plans. White seeks central pressure and kingside expansion, while Black maintains defensive solidity and prepares counterplay."
+  },
+  {
+    "eco": "B40",
+    "name": "Sicilian Defense: French Variation, Open",
+    "description": "A more aggressive interpretation of the French-type Sicilian where piece trades occur early, simplifying the position. White maintains a slight edge due to space, and tactics play an important role in determining advantage."
+  },
+  {
+    "eco": "B40",
+    "name": "Sicilian Defense: French Variation, Westerinen Attack",
+    "description": "White pursues immediate kingside expansion with an aggressive piece setup against the French-type structure. Black must defend carefully, as White's attacking chances can become dangerous if Black's counterplay falters."
+  },
+  {
+    "eco": "B40",
+    "name": "Sicilian Defense: Gaw-Paw Variation",
+    "description": "An eccentric and rare Black sideline with unusual piece placement and pawn structure. This low-theory choice relies on Black's fighting spirit and opponent preparation rather than established plans, offering practical chances despite objective weakness."
+  },
+  {
+    "eco": "B40",
+    "name": "Sicilian Defense: Kan Variation, Wing Attack, Fianchetto Variation",
+    "description": "White fianchettoes the kingside bishop against the Kan Variation, creating a long diagonal and preventing Black's typical counterplay. This systematic approach emphasizes piece activity and positional maneuvering rather than sharp tactics."
+  },
+  {
+    "eco": "B40",
+    "name": "Sicilian Defense: Kramnik Variation",
+    "description": "A flexible sideline employing specific move orders favored by strong players seeking to avoid theoretical heaviness. Black develops naturally while maintaining piece mobility, with play revolving around central control and piece coordination."
+  },
+  {
+    "eco": "B40",
+    "name": "Sicilian Defense: Kveinis Variation",
+    "description": "An uncommon and offbeat approach featuring unusual pawn structure and piece placement in the early middlegame. This variation is rarely seen at top levels, offering practical play for players comfortable outside mainstream theory."
+  },
+  {
+    "eco": "B40",
+    "name": "Sicilian Defense: Marshall Counterattack",
+    "description": "Black launches an aggressive counterattack in the center or on the kingside, sacrificing material temporarily for rapid piece activity. This combative approach offers Black genuine practical chances despite theoretical uncertainty."
+  },
+  {
+    "eco": "B40",
+    "name": "Sicilian Defense: Paulsen-Basman Defense",
+    "description": "A solid and conservative Black setup emphasizing pawn structure and defensive solidity over immediate counterplay. White maintains spatial pressure, with the battle focused on piece coordination and breakthrough attacks against Black's entrenched position."
+  },
+  {
+    "eco": "B40",
+    "name": "Sicilian Defense: Pin Variation",
+    "description": "White pins the knight or develops with tactical ideas involving pieces on the central files or kingside. Black must navigate the pin carefully while maintaining piece activity and preventing decisive breakthroughs in White's favor."
+  },
+  {
+    "eco": "B40",
+    "name": "Sicilian Defense: Pin Variation, Jaffe Variation",
+    "description": "A specific interpretation of the Pin Variation with particular emphasis on knight placement and pawn breaks. Black seeks opportunities to challenge the pin or exploit weaknesses in White's setup through tactical shot or positional pressure."
+  },
+  {
+    "eco": "B40",
+    "name": "Sicilian Defense: Pin Variation, Koch Variation",
+    "description": "Another sideline of the Pin Variation with alternative piece development and strategic goals. Play typically revolves around handling White's central pressure and finding dynamic counterplay for Black."
+  },
+  {
+    "eco": "B40",
+    "name": "Sicilian Defense: Smith-Morra Gambit Deferred",
+    "description": "White delays the Smith-Morra sacrifice or employs an alternative gambit strategy, maintaining a flexible approach to the Sicilian. This offers practical chances for White's attack while avoiding main-line complications."
+  },
+  {
+    "eco": "B40",
+    "name": "Sicilian Defense: Wing Gambit Deferred",
+    "description": "White postpones the b4 advance of the Wing Gambit, building up position gradually with controlled piece development. Black maintains solid defenses while seeking to capitalize on White's slower approach through counterplay."
+  },
+  {
+    "eco": "B41",
+    "name": "Sicilian Defense: Kan Variation, Maróczy Bind, Bronstein Variation",
+    "description": "A theoretically important line combining the Kan structure with Maróczy Bind concepts, featuring particular knight placement favored by Bronstein. Play emphasizes White's space advantage and strategic control versus Black's flexibility and counterplay potential."
+  },
+  {
+    "eco": "B41",
+    "name": "Sicilian Defense: Kan Variation, Maróczy Bind, Hedgehog Variation",
+    "description": "Black adopts the classic Hedgehog pawn structure (a6, b6, e6 setup) against White's Maróczy Bind. While passive, this setup offers great flexibility for piece placement and counterplay, with Black relying on tactical opportunities and positional ideas."
+  },
+  {
+    "eco": "B41",
+    "name": "Sicilian Defense: Kan Variation, Maróczy Bind, Réti Variation",
+    "description": "A refined approach combining Kan and Maróczy themes with strategic ideas emphasizing piece activity over pawn mass. Both sides pursue subtle maneuvering, with White trying to break through while Black seeks defensive and counterattacking resources."
+  },
+  {
+    "eco": "B42",
+    "name": "Sicilian Defense: Kan Variation, Gipslis Variation",
+    "description": "A lesser-known sideline of the Kan featuring unique piece placement and strategic concepts explored by Gipslis. The position remains dynamically balanced with both sides having concrete plans and tactical resources."
+  },
+  {
+    "eco": "B42",
+    "name": "Sicilian Defense: Kan Variation, Modern Variation",
+    "description": "Contemporary handling of the Kan defense emphasizing flexible piece placement and strategic themes. White pursues traditional advantages of space and development, while Black builds a solid defensive foundation with counterattacking ideas."
+  },
+  {
+    "eco": "B42",
+    "name": "Sicilian Defense: Kan Variation, Polugaevsky Variation",
+    "description": "A sharp and strategically complex line named after the great Soviet master, featuring specific piece placements and tactical undertones. Black accepts some positional compromises to activate pieces and create dynamic play."
+  },
+  {
+    "eco": "B42",
+    "name": "Sicilian Defense: Kan Variation, Swiss Cheese Variation",
+    "description": "An offbeat and rare sideline with an amusing name reflecting its unusual pawn structure and piece placement. This unconventional setup offers practical play for players seeking to avoid preparation and surprise opponents."
+  },
+  {
+    "eco": "B43",
+    "name": "Sicilian Defense: Kan Variation, Knight Variation",
+    "description": "A specific Kan interpretation where knight placement and activation take priority in White's strategy. Black typically develops with solid structure while seeking piece counterplay and tactical opportunities to neutralize White's initiative."
+  },
+  {
+    "eco": "B43",
+    "name": "Sicilian Defense: Kan Variation, Wing Attack",
+    "description": "White pursues kingside expansion with f4 or similar aggressive pawn advances, creating tactical threats against Black's kingside. Black must balance defensive requirements with creating queenside and central counterplay."
+  },
+  {
+    "eco": "B43",
+    "name": "Sicilian Defense: Kan Variation, Wing Attack, Christiansen's Dream",
+    "description": "An ambitious attacking variation where White plays aggressively for a quick kingside breakthrough. Black faces significant defensive pressure but retains piece activity and tactical resources to generate counterplay and complications."
+  },
+  {
+    "eco": "B43",
+    "name": "Sicilian Defense: Kan Variation, Wing Attack, Spraggett Attack",
+    "description": "A modern aggressive interpretation of the Wing Attack featuring specific piece placement and tactical ideas explored by strong contemporary players. White aims for immediate kingside threats, while Black seeks dynamic defensive and counterattacking resources."
+  },
+  {
+    "eco": "B44",
+    "name": "Sicilian Defense: Taimanov Variation, Gary Gambit",
+    "description": "White sacrifices material in the Taimanov structure for rapid piece activity and attacking chances. This principled but double-edged gambit offers practical winning chances if Black mishandles the complications."
+  },
+  {
+    "eco": "B44",
+    "name": "Sicilian Defense: Taimanov Variation, Modern Line",
+    "description": "Contemporary handling of the Taimanov structure with flexible piece placement and modern strategic ideas. Both sides pursue balanced play with White's slight space advantage offset by Black's solid structure and piece mobility."
+  },
+  {
+    "eco": "B44",
+    "name": "Sicilian Defense: Taimanov Variation, Szén Variation",
+    "description": "A classical sideline of the Taimanov with specific historical pedigree and established strategic themes. White seeks positional pressure while Black develops systematically, leading to strategically rich middlegames."
+  },
+  {
+    "eco": "B45",
+    "name": "Sicilian Defense: Four Knights Variation, American Attack",
+    "description": "White employs aggressive piece placement and attacking ideas against the solid Four Knights structure. This approach generates early tactical threats and kingside pressure, requiring accurate defense from Black."
+  },
+  {
+    "eco": "B45",
+    "name": "Sicilian Defense: Four Knights Variation, Cobra Variation",
+    "description": "An unconventional and somewhat risky Black deviation featuring unusual piece placement and pawn structure. Black accepts strategic compromises to generate practical play and unexpected tactical opportunities."
+  },
+  {
+    "eco": "B45",
+    "name": "Sicilian Defense: Four Knights Variation, Exchange Variation",
+    "description": "White simplifies the position with piece exchanges, leading to a structured endgame or simplified middlegame. This methodical approach reduces complications while maintaining a slight advantage for White."
+  },
+  {
+    "eco": "B45",
+    "name": "Sicilian Defense: Four Knights Variation, Sveshnikov Transfer",
+    "description": "A flexible move order device allowing Black to transpose to the Sveshnikov structure while avoiding White's specific preparations. This strategic maneuvering emphasizes piece activity and counterplay in the resulting positions."
+  },
+  {
+    "eco": "B47",
+    "name": "Sicilian Defense: Taimanov Variation, Bastrikov Variation",
+    "description": "The main line of the Bastrikov setup in the Taimanov, featuring specific piece coordination and attacking plans for White. Black develops solidly, seeking to neutralize White's initiative through flexible piece play and counterattacking ideas."
+  },
+  {
+    "eco": "B47",
+    "name": "Sicilian Defense: Taimanov Variation, Bastrikov Variation, Ponomariov Gambit",
+    "description": "An aggressive gambit continuation where White sacrifices material for rapid piece activity and attacking potential. Black must defend precisely, as accurate defense can parry White's threats and turn the tables with extra material."
+  },
+  {
+    "eco": "B48",
+    "name": "Sicilian Defense: Taimanov Variation, Bastrikov Variation, English Attack",
+    "description": "A modern aggressive setup featuring English Attack concepts (kingside pawn storms and piece pressure) applied to the Bastrikov structure. White pursues concrete attacking chances while Black defends carefully and seeks counterplay."
+  },
+  {
+    "eco": "B49",
+    "name": "Sicilian Defense: Taimanov Variation, Bastrikov Variation",
+    "description": "A further development of the Bastrikov structure where both sides have clarified piece placement and pawn formation. Strategic play focuses on White's kingside attack potential versus Black's queenside counterplay and central defense."
+  },
+  {
+    "eco": "B50",
+    "name": "Sicilian Defense: Delayed Alapin Variation, Basman-Palatnik Double Gambit",
+    "description": "An audacious sacrifice of two pawns in the Delayed Alapin, creating massive complications and tactical chaos. White pursues rapid piece coordination and attack, while Black must demonstrate that the extra material provides sufficient defensive resources."
+  },
+  {
+    "eco": "B50",
+    "name": "Sicilian Defense: Delayed Alapin Variation, Basman-Palatnik Gambit",
+    "description": "A pawn sacrifice in the Delayed Alapin structure generating acute tactical play and attacking chances. White seeks rapid piece coordination and kingside threats, with Black requiring precise defense to parry the attack and consolidate the extra pawn."
+  },
+  {
+    "eco": "B50",
+    "name": "Sicilian Defense: Delayed Alapin Variation, with d6",
+    "description": "Black adopts a solid setup with d6, maintaining central flexibility and defensive solidity in the Delayed Alapin. White pursues positional pressure and space control, with the middlegame typically featuring strategic maneuvering and piece play."
+  },
+  {
+    "eco": "B50",
+    "name": "Sicilian Defense: Kopec System",
+    "description": "A flexible positional system emphasizing long-term strategic ideas over sharp tactical complications. White builds slowly with piece coordination and pawn structure, while Black develops flexibly and seeks piece activity in response to White's build-up."
+  },
+  {
+    "eco": "B50",
+    "name": "Sicilian Defense: Kotov Gambit",
+    "description": "A dynamic pawn sacrifice offering White rapid piece development and attacking potential in the center. Black gains material but faces strong piece activity and tactical threats, requiring careful defense and counterattacking accuracy."
+  },
+  {
+    "eco": "B50",
+    "name": "Sicilian Defense: Modern Variations, Anti-Qxd4 Move Order",
+    "description": "A move order device preventing White from capturing on d4 with the queen in typical fashion. This flexibility allows Black to maintain options while keeping the position fluid and avoiding certain standard continuations."
+  },
+  {
+    "eco": "B50",
+    "name": "Sicilian Defense: Modern Variations, Anti-Qxd4 Move Order Accepted",
+    "description": "Black accepts the consequences of White avoiding d4 capture with the queen, leading to positional play. Both sides pursue flexible plans with White maintaining space and Black seeking piece activity and counterplay."
+  },
+  {
+    "eco": "B50",
+    "name": "Sicilian Defense: Modern Variations, Tartakower",
+    "description": "A refined and strategically rich approach featuring classical positional ideas from the great Tartakower. White seeks space and piece coordination while Black develops flexibly, leading to rich middlegame play with multiple strategic themes."
+  },
+  {
+    "eco": "B50",
+    "name": "Sicilian Defense: Wing Gambit, Deferred Variation",
+    "description": "White delays the Wing Gambit b4 advance, building position with careful maneuvering before committing to the pawn sacrifice. Black develops flexibly while monitoring White's intentions, leading to positions where counterplay options remain fluid."
+  },
+  {
+    "eco": "B51",
+    "name": "Sicilian Defense: Moscow Variation",
+    "description": "White employs the aggressive Moscow Variation setup, typically featuring Nf3 and kingside piece development with tactical ideas. Black develops flexibly while maintaining defensive solidity and seeking piece coordination for counterattacking play."
+  },
+  {
+    "eco": "B51",
+    "name": "Sicilian Defense: Moscow Variation, Dorfman Gambit",
+    "description": "An aggressive pawn sacrifice in the Moscow Variation generating sharp tactical play and attacking chances. White seeks rapid piece coordination and kingside threats, while Black must defend accurately and exploit the extra material."
+  },
+  {
+    "eco": "B51",
+    "name": "Sicilian Defense: Moscow Variation, Moscow Gambit",
+    "description": "A pawn sacrifice designed to open lines and create attacking potential in the Moscow setup. White pursues tactical complications and piece activity, with Black accepting the material deficit while seeking defensive resources and counterplay."
+  },
+  {
+    "eco": "B52",
+    "name": "Sicilian Defense: Moscow Variation, Haag Gambit",
+    "description": "Another gambit attempt in the Moscow Variation featuring tactical sacrifices and attacking ideas. White seeks rapid piece coordination and initiative, while Black's accurate defense can parry threats and convert extra material into advantage."
+  },
+  {
+    "eco": "B52",
+    "name": "Sicilian Defense: Moscow Variation, Main Line",
+    "description": "The principal continuation of the Moscow Variation, featuring main-line theory and established plans for both sides. White pursues central pressure and piece activity while Black maintains solid defense with counterattacking resources."
+  },
+  {
+    "eco": "B52",
+    "name": "Sicilian Defense: Moscow Variation, Sokolsky Variation",
+    "description": "A classical approach to the Moscow Variation with historically important games and established strategic ideas. White develops methodically while Black seeks piece coordination and defensive flexibility, leading to balanced middle-game play."
+  },
+  {
+    "eco": "B53",
+    "name": "Sicilian Defense: Chekhover Variation, Zaitsev Defense",
+    "description": "A solid and conservative Black defense featuring careful piece placement and structural solidity. White maintains a slight spatial advantage, with the middlegame typically characterized by maneuvering play and positional jockeying."
+  },
+  {
+    "eco": "B54",
+    "name": "Sicilian Defense: Dragon Variation, Accelerated Dragon",
+    "description": "Black plays the flexible Accelerated Dragon move order, avoiding White's most aggressive Sicilian Dragon setups. This flexible approach maintains Black's typical Dragon counterplay while offering additional transpositional options and flexibility."
+  },
+  {
+    "eco": "B54",
+    "name": "Sicilian Defense: Modern Variations, Ginsberg Gambit",
+    "description": "A pawn sacrifice in the Modern Variations offering White tactical complications and attacking potential. Black accepts the material but faces strong piece coordination and tactical threats, requiring precise defensive play."
+  },
+  {
+    "eco": "B54",
+    "name": "Sicilian Defense: Modern Variations, Main Line",
+    "description": "The principal continuation of the Modern Variations, featuring balanced play and strategic complexity. Both sides develop naturally with White seeking central control and Black maintaining flexible piece placement and counterattacking resources."
+  },
+  {
+    "eco": "B54",
+    "name": "Sicilian Defense: Prins Variation",
+    "description": "An aggressive White setup featuring specific kingside piece placement and attacking ideas. Black develops flexibly while maintaining defensive resilience and seeking piece coordination for counterattacking chances."
+  },
+  {
+    "eco": "B55",
+    "name": "Sicilian Defense: Prins Variation, Venice Attack",
+    "description": "An aggressive attacking attempt in the Prins Variation with kingside pawn storms and tactical complications. Black must defend carefully while seeking counterplay, as White's attack can become devastating with inaccurate defense."
+  },
+  {
+    "eco": "B56",
+    "name": "Sicilian Defense: Classical Variation",
+    "description": "The solid Classical setup featuring early kingside piece development and classical positional ideas. White develops methodically while Black maintains flexibility, leading to rich middlegame positions with multiple strategic themes."
+  },
+  {
+    "eco": "B56",
+    "name": "Sicilian Defense: Classical Variation, Fianchetto Variation",
+    "description": "White employs a fianchetto setup in the Classical Variation, creating a long diagonal and positional pressure. Black develops flexibly while seeking piece coordination and counterplay against White's strategic ideas."
+  },
+  {
+    "eco": "B56",
+    "name": "Sicilian Defense: Kupreichik Variation",
+    "description": "A modern sideline featuring flexible piece placement and contemporary strategic ideas explored by strong players. Play remains fluid with both sides pursuing flexible plans and maintaining tactical awareness throughout the middlegame."
+  },
+  {
+    "eco": "B56",
+    "name": "Sicilian Defense: Spielmann Variation",
+    "description": "An aggressive setup attributed to the famous Spielmann, featuring tactical threats and piece activity ideas. Black develops defensively while seeking tactical opportunities and piece coordination to parry White's attacking intentions."
+  },
+  {
+    "eco": "B56",
+    "name": "Sicilian Defense: Venice Attack",
+    "description": "A sharp attacking system featuring aggressive kingside expansion and tactical complications. White pursues rapid attack development, while Black must defend precisely and seek counterplay to handle the tactical pressure."
+  },
+  {
+    "eco": "B57",
+    "name": "Sicilian Defense: Classical Variation, Anti-Sozin Variation",
+    "description": "Black sidesteps the Sozin Attack setup with specific move orders and piece placement to avoid the sharpest White ideas. This flexible approach maintains solid defense while preserving counterattacking resources and piece flexibility."
+  },
+  {
+    "eco": "B57",
+    "name": "Sicilian Defense: Classical Variation, Sozin Attack",
+    "description": "White attacks the e5 knight with the bishop on b5, creating tactical tensions and forcing Black to make critical decisions. The resulting positions feature sharp tactical play and strategic complexity."
+  },
+  {
+    "eco": "B57",
+    "name": "Sicilian Defense: Magnus Smith Trap",
+    "description": "A trap or unusual continuation named after a historical player, featuring specific tactical ideas and surprising resources. This line offers practical play for players comfortable with unusual positions and tactical complications."
+  },
+  {
+    "eco": "B58",
+    "name": "Sicilian Defense: Boleslavsky Variation",
+    "description": "Black's aggressive setup featuring central pressure and piece activity in the Classical structure. White develops methodically while Black seeks dynamic counterplay and tactical opportunities through precise piece coordination."
+  },
+  {
+    "eco": "B58",
+    "name": "Sicilian Defense: Boleslavsky Variation, Louma Variation",
+    "description": "A specific sideline of the Boleslavsky structure with particular piece placement and tactical undertones. Both sides pursue flexible plans with White maintaining initiative and Black seeking dynamic counterplay through piece activity."
+  },
+  {
+    "eco": "B58",
+    "name": "Sicilian Defense: Classical Variation",
+    "description": "The main Classical setup with typical piece coordination and strategic themes for both sides. White pursues central pressure and piece development while Black maintains solid defense with counterattacking potential."
+  },
+  {
+    "eco": "B58",
+    "name": "Sicilian Defense: Classical Variation, Dragon Transfer",
+    "description": "A move order allowing flexible transposition to Dragon-type structures while maintaining Classical ideas. Black benefits from the flexibility while avoiding White's most prepared variations against the pure Dragon."
+  },
+  {
+    "eco": "B59",
+    "name": "Sicilian Defense: Boleslavsky Variation",
+    "description": "A continuation of the Boleslavsky setup where both sides have clarified their strategic objectives. White maintains central control and piece coordination while Black seeks dynamic counterplay and piece activity."
+  },
+  {
+    "eco": "B60",
+    "name": "Sicilian Defense: Richter-Rauzer Variation",
+    "description": "A flexible opening setup in the Richter-Rauzer featuring piece development and central control strategies. Both sides develop methodically with White seeking central pressure and Black maintaining tactical flexibility and counterplay."
+  },
+  {
+    "eco": "B60",
+    "name": "Sicilian Defense: Richter-Rauzer Variation, Dragon Variation",
+    "description": "A Dragon-type setup within the Richter-Rauzer structure, combining fianchetto ideas with central defense. Black obtains the Dragon counterattacking potential while avoiding the sharpest anti-Dragon systems."
+  },
+  {
+    "eco": "B60",
+    "name": "Sicilian Defense: Richter-Rauzer Variation, Modern Variation",
+    "description": "A contemporary approach to the Richter-Rauzer emphasizing flexible piece placement and modern strategic ideas. Both sides pursue balanced play with White maintaining slight space and Black seeking piece coordination and counterplay."
+  },
+  {
+    "eco": "B61",
+    "name": "Sicilian Defense: Richter-Rauzer Variation, Modern Variation",
+    "description": "A continuation of the Modern Variation in the Richter-Rauzer with advanced piece coordination and strategic complexity. White develops pressure while Black maintains solid defense and tactical alertness."
+  },
+  {
+    "eco": "B62",
+    "name": "Sicilian Defense: Richter-Rauzer Variation",
+    "description": "Another variation of the Richter-Rauzer system featuring different piece development and strategic emphasis. White maintains initiative while Black develops flexibly with counterattacking resources and piece coordination."
+  },
+  {
+    "eco": "B62",
+    "name": "Sicilian Defense: Richter-Rauzer Variation, Exchange Variation",
+    "description": "White simplifies with piece exchanges in the Richter-Rauzer, reducing complications while maintaining an advantage. The resulting positions feature strategic maneuvering and positional pressure rather than sharp tactics."
+  },
+  {
+    "eco": "B62",
+    "name": "Sicilian Defense: Richter-Rauzer Variation, Podebrady Variation",
+    "description": "A historical sideline of the Richter-Rauzer with classical ideas and established strategic themes. White pursues positional pressure while Black develops defensively, leading to rich middlegame play."
+  },
+  {
+    "eco": "B62",
+    "name": "Sicilian Defense: Richter-Rauzer Variation, Vitolins Variation",
+    "description": "A lesser-known sideline featuring unique piece placement and strategic concepts explored by Vitolins. Play remains balanced with both sides pursuing concrete plans and maintaining tactical awareness."
+  },
+  {
+    "eco": "B63",
+    "name": "Sicilian Defense: Richter-Rauzer Variation, Classical Variation",
+    "description": "The Classical approach to the Richter-Rauzer emphasizing piece development and central control strategies. Both sides develop methodically with White seeking central pressure and Black maintaining defensive flexibility."
+  },
+  {
+    "eco": "B63",
+    "name": "Sicilian Defense: Richter-Rauzer Variation, Classical Variation, Kantscher Line",
+    "description": "A specific Classical line within the Richter-Rauzer featuring particular piece placement and strategic emphasis. White maintains initiative while Black seeks piece coordination and counterattacking resources."
+  },
+  {
+    "eco": "B63",
+    "name": "Sicilian Defense: Richter-Rauzer Variation, Ivanov Variation",
+    "description": "A sideline of the Richter-Rauzer Classical structure with particular historical significance and strategic ideas. White develops pressure while Black seeks defensive resources and counterplay opportunities."
+  },
+  {
+    "eco": "B63",
+    "name": "Sicilian Defense: Richter-Rauzer Variation, Traditional Variation",
+    "description": "The established traditional continuation of the Richter-Rauzer Classical featuring main-line strategies. White pursues central control and piece coordination while Black maintains solid defense with tactical flexibility."
+  },
+  {
+    "eco": "B64",
+    "name": "Sicilian Defense: Richter-Rauzer Variation, Classical Variation",
+    "description": "A further development of the Classical Richter-Rauzer with clarified piece placement and strategic objectives. White maintains central pressure and initiative while Black seeks counterplay and piece coordination."
+  },
+  {
+    "eco": "B65",
+    "name": "Sicilian Defense: Richter-Rauzer Variation, Classical Variation",
+    "description": "Another continuation of the Classical Richter-Rauzer line with advanced strategic themes and positional understanding. Both sides demonstrate refined piece coordination and strategic planning in the resulting middlegame."
+  },
+  {
+    "eco": "B65",
+    "name": "Sicilian Defense: Richter-Rauzer Variation, Rauzer Attack",
+    "description": "White launches a direct attack with the Rauzer Attack ideas, featuring aggressive piece development and tactical threats. Black must defend carefully while seeking counterplay and piece activity against the attack."
+  },
+  {
+    "eco": "B66",
+    "name": "Sicilian Defense: Richter-Rauzer Variation, Neo-Modern Variation, Early Deviations",
+    "description": "Early divergences in the Neo-Modern Richter-Rauzer approach, offering both sides flexible development and strategic options. Play remains fluid with numerous possibilities for both sides depending on piece coordination and tactical alertness."
+  },
+  {
+    "eco": "B67",
+    "name": "Sicilian Defense: Richter-Rauzer Variation, Neo-Modern Variation",
+    "description": "A modern handling of the Richter-Rauzer emphasizing flexible piece placement and contemporary strategic concepts. Both sides pursue balanced play with White maintaining slight advantages while Black maintains tactical resources."
+  },
+  {
+    "eco": "B68",
+    "name": "Sicilian Defense: Richter-Rauzer Variation, Neo-Modern Variation",
+    "description": "A continuation of the Neo-Modern approach with further piece development and strategic complexity. White maintains initiative while Black seeks piece coordination and counterattacking opportunities."
+  },
+  {
+    "eco": "B69",
+    "name": "Sicilian Defense: Richter-Rauzer Variation, Neo-Modern Variation, Nyezhmetdinov Attack",
+    "description": "An aggressive continuation of the Neo-Modern Richter-Rauzer featuring attacking ideas and tactical complications. White pursues kingside pressure while Black defends carefully and seeks counterplay resources."
+  },
+  {
+    "eco": "B70",
+    "name": "Sicilian Defense: Dragon Variation, Classical Variation",
+    "description": "The solid Classical approach to the Dragon, avoiding the sharpest Yugoslav Attack systems. White develops methodically while Black maintains the typical Dragon counterattacking potential with fianchettoed bishop."
+  },
+  {
+    "eco": "B70",
+    "name": "Sicilian Defense: Dragon Variation, Fianchetto Variation",
+    "description": "White fianchettoes against the Dragon, creating a long diagonal and flexible piece coordination. Black develops the Dragon setup, leading to balanced middlegame play with rich strategic and tactical possibilities."
+  },
+  {
+    "eco": "B71",
+    "name": "Sicilian Defense: Dragon Variation, Levenfish Variation",
+    "description": "White adopts an aggressive setup against the Dragon with h3 and subsequent kingside pawn advances. Black maintains Dragon counterattacking potential while defending carefully against White's attacking buildup."
+  },
+  {
+    "eco": "B71",
+    "name": "Sicilian Defense: Dragon Variation, Levenfish Variation, Main Line",
+    "description": "The principal continuation of the Levenfish attack, featuring established strategic themes and main-line theory. White pursues kingside attack potential while Black seeks defensive resources and tactical counterplay."
+  },
+  {
+    "eco": "B72",
+    "name": "Sicilian Defense: Dragon Variation, Classical Variation",
+    "description": "A Classical approach to the Dragon with flexible piece development and non-aggressive strategies. White maintains positional control while Black builds the Dragon structure with counterattacking potential."
+  },
+  {
+    "eco": "B72",
+    "name": "Sicilian Defense: Dragon Variation, Classical Variation, Amsterdam Variation",
+    "description": "A specific Classical Dragon line featuring particular piece placement and strategic emphasis for both sides. White develops methodically while Black seeks piece coordination and Dragon-typical counterplay."
+  },
+  {
+    "eco": "B72",
+    "name": "Sicilian Defense: Dragon Variation, Classical Variation, Grigoriev Variation",
+    "description": "Another Classical Dragon variation with specific historical significance and strategic ideas explored by strong players. Play features balanced development with White maintaining slight initiative and Black pursuing active defense."
+  },
+  {
+    "eco": "B73",
+    "name": "Sicilian Defense: Dragon Variation, Classical Variation",
+    "description": "A continued Classical approach with clarified strategic plans and piece coordination for both sides. White pursues controlled development while Black maintains Dragon-typical defensive structure and counterattacking ideas."
+  },
+  {
+    "eco": "B73",
+    "name": "Sicilian Defense: Dragon Variation, Classical Variation, Battery Variation",
+    "description": "A Dragon line emphasizing battery formation and piece coordination, offering tactical and strategic richness. White develops with pressure while Black maintains solid defense backed by piece activity and tactical resources."
+  },
+  {
+    "eco": "B73",
+    "name": "Sicilian Defense: Dragon Variation, Classical Variation, Zollner Gambit",
+    "description": "A pawn sacrifice in the Classical Dragon offering White tactical complications and attacking potential. Black accepts the material but must defend accurately, as White's compensation can become dangerous with imprecise defense."
+  },
+  {
+    "eco": "B74",
+    "name": "Sicilian Defense: Dragon Variation, Classical Variation, Alekhine Line",
+    "description": "A Dragon line featuring strategic ideas from the legendary Alekhine, emphasizing piece activity and central control. White maintains positional pressure while Black defends and seeks counterplay through Dragon-typical tactics."
+  },
+  {
+    "eco": "B74",
+    "name": "Sicilian Defense: Dragon Variation, Classical Variation, Bernard Defense",
+    "description": "A Classical Dragon variation with specific defensive ideas and strategic emphasis for Black. White pursues pressure while Black maintains solid structure and seeks piece coordination for counterattacking play."
+  },
+  {
+    "eco": "B74",
+    "name": "Sicilian Defense: Dragon Variation, Classical Variation, Maróczy Line",
+    "description": "A Dragon line combining Classical ideas with Maróczy control concepts, creating a hybrid strategic framework. Both sides pursue flexible plans with White maintaining spatial advantages and Black seeking counterplay."
+  },
+  {
+    "eco": "B74",
+    "name": "Sicilian Defense: Dragon Variation, Classical Variation, Normal Line",
+    "description": "The standard Classical Dragon continuation featuring typical strategic themes and main-line piece development. White develops methodically while Black maintains Dragon counterattacking potential and tactical flexibility."
+  },
+  {
+    "eco": "B74",
+    "name": "Sicilian Defense: Dragon Variation, Classical Variation, Spielmann Variation",
+    "description": "A classical Dragon line featuring aggressive ideas and piece activity emphasized by Spielmann. White pursues active play while Black defends and seeks tactical opportunities through Dragon counterattacking resources."
+  },
+  {
+    "eco": "B74",
+    "name": "Sicilian Defense: Dragon Variation, Classical Variation, Stockholm Attack",
+    "description": "An aggressive attacking approach against the Dragon featuring kingside expansion and tactical threats. Black must defend carefully while maintaining Dragon-typical counterplay and piece coordination."
+  },
+  {
+    "eco": "B74",
+    "name": "Sicilian Defense: Dragon Variation, Classical Variation, Tartakower Line",
+    "description": "A Dragon line emphasizing positional ideas and strategic themes from the legendary Tartakower. White develops flexibly with pressure while Black maintains solid Dragon structure and tactical resources."
+  },
+  {
+    "eco": "B75",
+    "name": "Sicilian Defense: Dragon Variation, Yugoslav Attack, Belezky Line",
+    "description": "An early deviation in the Yugoslav Attack Dragon, avoiding the sharpest main-line continuations. This sideline offers practical play for both sides with reduced theoretical knowledge requirements."
+  },
+  {
+    "eco": "B75",
+    "name": "Sicilian Defense: Dragon Variation, Yugoslav Attack, Early Deviations",
+    "description": "Various early divergences in the Yugoslav Attack structure, offering flexible options for both sides. These sidelines preserve the strategic tension of the Yugoslav system while avoiding certain sharp continuations."
+  },
+  {
+    "eco": "B75",
+    "name": "Sicilian Defense: Dragon Variation, Yugoslav Attack, Hungarian Dragon",
+    "description": "A Dragon sideline featuring specific piece placement and strategic ideas from Hungarian players. The position offers practical play with both sides pursuing distinct plans and maintaining tactical awareness."
+  },
+  {
+    "eco": "B76",
+    "name": "Sicilian Defense: Dragon Variation, Yugoslav Attack",
+    "description": "The sharper Yugoslav Attack against the Dragon, featuring aggressive piece development and tactical complications. White pursues kingside attack potential while Black seeks tactical counterplay and defensive resources."
+  },
+  {
+    "eco": "B76",
+    "name": "Sicilian Defense: Dragon Variation, Yugoslav Attack, Modern Line",
+    "description": "Contemporary handling of the Yugoslav Attack emphasizing modern strategic ideas and piece coordination. Both sides demonstrate refined understanding with White pursuing central control and Black seeking dynamic counterplay."
+  },
+  {
+    "eco": "B76",
+    "name": "Sicilian Defense: Dragon Variation, Yugoslav Attack, Panov Variation",
+    "description": "A Yugoslav Attack line featuring specific piece placement and strategic emphasis explored by Panov. White maintains attacking potential while Black defends and seeks counterattacking resources."
+  },
+  {
+    "eco": "B77",
+    "name": "Sicilian Defense: Dragon Variation, Yugoslav Attack, Byrne Variation",
+    "description": "A Yugoslav Dragon line with attacking ideas emphasized by American grandmaster Byrne. White pursues kingside threats while Black maintains Dragon-typical defensive structure and counterattacking potential."
+  },
+  {
+    "eco": "B77",
+    "name": "Sicilian Defense: Dragon Variation, Yugoslav Attack, Czerniak Variation",
+    "description": "A Yugoslav Attack Dragon line with specific strategic emphasis and piece placement from Czerniak's play. White develops with attacking intent while Black seeks tactical opportunities and solid defense."
+  },
+  {
+    "eco": "B77",
+    "name": "Sicilian Defense: Dragon Variation, Yugoslav Attack, Main Line",
+    "description": "The principal continuation of the Yugoslav Attack, featuring the sharpest and most heavily analyzed positions. White pursues direct kingside assault while Black seeks precise defensive timing and tactical counterplay."
+  },
+  {
+    "eco": "B77",
+    "name": "Sicilian Defense: Dragon Variation, Yugoslav Attack, Sosonko Variation",
+    "description": "A Yugoslav Dragon line with specific piece placement and strategic ideas from strong player Sosonko. Play remains sharp with White pressing for attack and Black defending accurately with counterattacking resources."
+  },
+  {
+    "eco": "B78",
+    "name": "Sicilian Defense: Dragon Variation, Yugoslav Attack",
+    "description": "Another Yugoslav Attack variation with clarified strategic plans and piece coordination for both sides. White maintains attacking pressure while Black seeks defensive resources and tactical counterplay opportunities."
+  },
+  {
+    "eco": "B78",
+    "name": "Sicilian Defense: Dragon Variation, Yugoslav Attack, Chinese Dragon",
+    "description": "A Yugoslav Dragon line featuring specific ideas from Chinese players, emphasizing flexibility and practical play. Both sides pursue concrete plans with White attacking and Black defending with tactical awareness."
+  },
+  {
+    "eco": "B78",
+    "name": "Sicilian Defense: Dragon Variation, Yugoslav Attack, Old Line",
+    "description": "A classical Yugoslav Attack continuation representing historically important strategic themes. White pursues kingside pressure while Black maintains solid Dragon defense with counterattacking resources."
+  },
+  {
+    "eco": "B78",
+    "name": "Sicilian Defense: Dragon Variation, Yugoslav Attack, Topalov Variation",
+    "description": "A Yugoslav Dragon line with modern strategic ideas and attacking plans emphasized by the great Topalov. White pursues concrete attacking chances while Black defends dynamically with active piece play."
+  },
+  {
+    "eco": "B79",
+    "name": "Sicilian Defense: Dragon Variation, Yugoslav Attack",
+    "description": "A further development of the Yugoslav Attack with advanced tactical and strategic complexity. White maintains attacking initiative while Black seeks to parry threats and generate counterplay through careful defense."
+  },
+  {
+    "eco": "B79",
+    "name": "Sicilian Defense: Dragon Variation, Yugoslav Attack, Soltis Variation",
+    "description": "A Yugoslav Dragon line featuring specific ideas and strategic emphasis from American grandmaster Soltis. Play offers rich possibilities with White attacking and Black seeking defensive solutions and counterattacking tactics."
+  },
+  {
+    "eco": "B80",
+    "name": "Sicilian Defense: Scheveningen Variation, English Attack, with Qd2",
+    "description": "An English Attack approach to the Scheveningen featuring queen placement on d2 for kingside attack coordination. White pursues kingside expansion while Black maintains flexible Scheveningen structure and counterattacking resources."
+  },
+  {
+    "eco": "B80",
+    "name": "Sicilian Defense: Scheveningen Variation, Fianchetto Variation",
+    "description": "White fianchettoes the kingside bishop in the Scheveningen, creating a long diagonal and flexible piece coordination. Black develops with e5 or e6 structure, leading to balanced play with strategic richness."
+  },
+  {
+    "eco": "B80",
+    "name": "Sicilian Defense: Scheveningen Variation, Vitolins Variation",
+    "description": "A Scheveningen sideline with specific piece placement and strategic ideas explored by Vitolins. White maintains positional control while Black develops flexibly with multiple strategic and tactical options."
+  },
+  {
+    "eco": "B81",
+    "name": "Sicilian Defense: Scheveningen Variation, Keres Attack",
+    "description": "A sharp Scheveningen line featuring aggressive kingside expansion and tactical complications from Keres' play. White pursues attacking potential while Black defends carefully and seeks tactical counterplay resources."
+  },
+  {
+    "eco": "B82",
+    "name": "Sicilian Defense: Scheveningen Variation, Matanovic Attack",
+    "description": "An aggressive Scheveningen setup with attacking ideas emphasized by grandmaster Matanovic. White develops with kingside pressure while Black seeks defensive solutions and counterattacking opportunities."
+  },
+  {
+    "eco": "B82",
+    "name": "Sicilian Defense: Scheveningen Variation, Tal Variation",
+    "description": "A sharp Scheveningen line featuring aggressive piece development and tactical ideas from the legendary Tal. White pursues direct attacking chances while Black defends and seeks tactical counterplay."
+  },
+  {
+    "eco": "B83",
+    "name": "Sicilian Defense: Scheveningen Variation, Classical Variation",
+    "description": "The solid Classical approach to the Scheveningen emphasizing piece development and central control. Both sides develop methodically with White maintaining slight initiative and Black seeking piece coordination and counterplay."
+  },
+  {
+    "eco": "B83",
+    "name": "Sicilian Defense: Scheveningen Variation, Modern Variation",
+    "description": "A contemporary Scheveningen approach emphasizing flexible piece placement and modern strategic ideas. Both sides pursue balanced play with White maintaining positional advantages while Black maintains tactical resources."
+  },
+  {
+    "eco": "B84",
+    "name": "Sicilian Defense: Najdorf Variation, Scheveningen Variation",
+    "description": "A Najdorf-related Scheveningen setup featuring transpositions and flexible move orders between systems. Both sides maintain flexibility with White pursuing control and Black seeking counterattacking opportunities."
+  },
+  {
+    "eco": "B84",
+    "name": "Sicilian Defense: Scheveningen Variation, Classical Variation",
+    "description": "The Classical Scheveningen with typical piece coordination and strategic themes for both sides. White maintains central pressure while Black develops solidly with counterattacking potential."
+  },
+  {
+    "eco": "B85",
+    "name": "Sicilian Defense: Scheveningen Variation, Classical Main Line",
+    "description": "The principal continuation of the Classical Scheveningen, featuring main-line theory and established plans. White pursues central control and kingside attack potential while Black seeks defensive resources and counterplay."
+  },
+  {
+    "eco": "B85",
+    "name": "Sicilian Defense: Scheveningen Variation, Classical Variation, Paulsen Variation",
+    "description": "A Classical Scheveningen line emphasizing positional ideas and strategic themes from the classical master Paulsen. Both sides demonstrate refined understanding with balanced development and mutual piece coordination."
+  },
+  {
+    "eco": "B86",
+    "name": "Sicilian Defense: Sozin Attack",
+    "description": "White's aggressive attack on the knight with Bc4 and rapid kingside development, creating tactical complications. Black must respond precisely, as inaccurate defense can lead to devastating attacks or material loss."
+  },
+  {
+    "eco": "B87",
+    "name": "Sicilian Defense: Sozin Attack, Flank Variation",
+    "description": "A sideline of the Sozin featuring flexible piece placement and alternative attacking ideas for White. Black develops defensively while seeking counterplay and tactical opportunities against White's attack."
+  },
+  {
+    "eco": "B88",
+    "name": "Sicilian Defense: Sozin Attack, Fischer Variation",
+    "description": "A sharp Sozin line with attacking ideas emphasized by the legendary Fischer, featuring precise tactical play. White pursues direct attacking chances while Black defends accurately and seeks counterplay resources."
+  },
+  {
+    "eco": "B88",
+    "name": "Sicilian Defense: Sozin Attack, Leonhardt Variation",
+    "description": "A Sozin Attack sideline with specific defensive ideas and strategic emphasis from Leonhardt's play. White maintains attacking potential while Black seeks defensive resources and tactical opportunities."
+  },
+  {
+    "eco": "B89",
+    "name": "Sicilian Defense: Sozin Attack, Main Line",
+    "description": "The principal continuation of the Sozin Attack, featuring the sharpest positions and heaviest analysis. White pursues coordinated kingside attack with knight and bishop placement, while Black seeks precise defense and tactical counterplay."
+  },
+  {
+    "eco": "B89",
+    "name": "Sicilian Defense: Sozin Attack, Main Line, Sherbakov Variation",
+    "description": "A modern main-line Sozin with specific ideas and strategic emphasis from contemporary players. White maintains attacking initiative while Black seeks defensive accuracy and tactical resources to parry the threats."
+  },
+  {
+    "eco": "B89",
+    "name": "Sicilian Defense: Velimirovic Attack",
+    "description": "An aggressive attacking system against the Sicilian featuring kingside pawn advances and rapid piece coordination. White pursues direct attacking potential with tactical complications, while Black must defend carefully and seek counterplay."
+  }
+]

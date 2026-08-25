@@ -1,0 +1,752 @@
+[
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Lolli Gambit, Young Variation",
+    "description": "After 1.e4 e5 2.f4 exf4, White plays 3.Nf3 and 4.Bc4 before committing to piece development, maintaining central influence. This approach keeps Black guessing while preparing the classical assault on the e5 square that defines many King's Gambit lines."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: McDonnell Gambit",
+    "description": "White sacrifices the f-pawn with 2.f4 and then develops aggressively, often with Bc4 and Nc3, seeking rapid piece activity and threats around Black's king. The resulting positions feature sharp tactical play where White's compensation rests on open lines and centralized knights."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Middleton Countergambit",
+    "description": "Black responds to the King's Gambit with a counter-sacrifice, using the captured f-pawn to create immediate threats. This aggressive defense aims to undermine White's initiative by launching a counterattack before White's pieces coordinate."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Muzio Gambit Accepted, From's Defense",
+    "description": "In this double-gambit position, both sides sacrifice material to generate piece play and attacking chances. From's Defense specifically counters White's setup with tactical nuances designed to exploit the loose coordination of White's pieces early on."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Muzio Gambit, Brentano Defense",
+    "description": "The Muzio Gambit (3.Bc4) involves sacrificing a piece for rapid development and kingside threats. Brentano's Defense represents one of Black's solid attempts to consolidate, typically centralizing the knight and preparing to meet White's attack with defensive resources."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Muzio Gambit, Holloway Defense",
+    "description": "Holloway Defense is a pragmatic Black setup in the Muzio structure, emphasizing piece coordination and control of key central squares. Black develops cautiously while respecting White's piece sacrifice compensation, aiming for a solid middlegame."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Muzio Gambit, Kling and Horwitz Counterattack",
+    "description": "This variation features a sharp counterattack where Black activates the queen and pieces to generate threats against White's king. Kling and Horwitz found tactical resources that temporarily redirect White's initiative, creating dynamic imbalance."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Muzio Gambit, Sarratt Defense",
+    "description": "Sarratt's defensive setup prioritizes piece stability and avoiding tactical traps inherent in the Muzio structure. Black develops methodically while keeping the king protected, banking on superior piece coordination to neutralize White's attacking compensation."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Muzio Gambit, Wild Muzio Gambit",
+    "description": "The Wild Muzio escalates the complications with even more aggressive piece sacrifice and unclear compensation. Both sides engage in sharp tactical play where calculation depth and piece activity determine the outcome."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Quaade Gambit",
+    "description": "This lesser-known gambit variation features an additional sacrifice or unusual piece maneuver to generate attacking chances. White aims for rapid kingside expansion and exploiting weaknesses around Black's king before consolidation."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Rosentreter Gambit",
+    "description": "The Rosentreter family of gambits involves multiple pawn and piece sacrifices in pursuit of open lines and king safety. White compensates through rapid development and threats, creating complex positions where accuracy matters greatly."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Rosentreter Gambit, Bird Gambit",
+    "description": "This sub-variation continues the aggressive Rosentreter theme with additional tactical complications. The Bird line often features f-file and h-file opening opportunities that White exploits with coordinated piece play."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Rosentreter Gambit, Sörensen Gambit",
+    "description": "Sörensen's variation adds another layer of complexity to the Rosentreter attack through unexpected piece maneuvers. White generates multiple threats simultaneously, forcing Black to make precise defensive choices in sharp tactical positions."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Rosentreter Gambit, Testa Variation",
+    "description": "Testa's line within Rosentreter features characteristic preparation and thematic attacking ideas. White often plays for central control combined with kingside threats, seeking to coordinate pieces while maintaining compensation for the invested material."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Salvio Gambit",
+    "description": "The Salvio Gambit (3.Nf3 and 4.Bc4) builds a classical attacking setup with swift piece development. White sacrifices the pawn for open lines and rapid attacks, particularly targeting squares around Black's king."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Salvio Gambit, Anderssen Counterattack",
+    "description": "Anderssen found tactical ideas to counterattack immediately in the Salvio setup, creating mutual threats. Black generates threats along the center and queenside while White pursues a kingside assault, leading to critical tactical skirmishes."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Salvio Gambit, Cochrane Gambit",
+    "description": "Cochrane's contribution escalates the complications by introducing an additional sacrifice or piece maneuver. Both sides engage in extremely sharp tactics where one tempo or accurate move order can determine the game's outcome."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Salvio Gambit, Santa Maria Defense",
+    "description": "Santa Maria's defense provides a solid but flexible response within the Salvio structure, often involving retreat of the king's knight and careful piece placement. Black balances defensive solidity with counterplay potential."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Salvio Gambit, Silberschmidt Defense",
+    "description": "Silberschmidt's approach emphasizes piece consolidation and avoiding weaknesses in the Salvio positions. Black develops harmoniously while preparing to meet White's inevitable kingside pressure with defensive resources."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Salvio Gambit, Viennese Variation",
+    "description": "The Viennese variation represents a classical continuation of the Salvio, often with Nxe4 ideas or specific piece placements that European players favored. White maintains strong central and kingside initiatives in sound attacking structures."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Silberschmidt Gambit",
+    "description": "Silberschmidt's gambit stands apart as a distinct sacrificial theme within King's Gambit Accepted structures. White generates sharp attacking chances through piece sacrifice while Black must navigate defensive complications carefully."
+  },
+  {
+    "eco": "C37",
+    "name": "King's Gambit Accepted: Sörensen Gambit",
+    "description": "Sörensen's line introduces attacking nuances particular to deep King's Gambit theory, often involving unusual piece placements. White seeks rapid development and exploitation of open lines before Black achieves full coordination."
+  },
+  {
+    "eco": "C38",
+    "name": "King's Gambit Accepted: Greco Gambit",
+    "description": "The Greco Gambit features 3.Nf3 development followed by aggressive piece play on the kingside. White sacrifices material to open lines toward the black king and create immediate tactical threats."
+  },
+  {
+    "eco": "C38",
+    "name": "King's Gambit Accepted: Hanstein Gambit",
+    "description": "Hanstein's contribution to King's Gambit theory involves piece sacrifices aimed at opening the kingside. The resulting positions feature sharp tactical play where White's initiative compensates for material."
+  },
+  {
+    "eco": "C38",
+    "name": "King's Gambit Accepted: Mayet Gambit",
+    "description": "Mayet's gambit adds fresh complications to accepted King's Gambit positions through sacrificial ideas. White generates multiple threats while Black must find precise defensive resources to neutralize the assault."
+  },
+  {
+    "eco": "C38",
+    "name": "King's Gambit Accepted: Philidor Gambit",
+    "description": "This variation branches toward less common systems with specific defensive ideas. The Philidor influence typically involves solid piece placement and control of key squares rather than immediate tactical complications."
+  },
+  {
+    "eco": "C38",
+    "name": "King's Gambit Accepted: Philidor Gambit, Schultz Variation",
+    "description": "Schultz's line refines Philidor's defensive setup with particular attention to coordination and piece placement. Black develops systematically while maintaining flexibility to address White's planned kingside initiatives."
+  },
+  {
+    "eco": "C38",
+    "name": "King's Gambit Accepted: Traditional Variation",
+    "description": "The Traditional Variation represents the mainline approach to King's Gambit Accepted, emphasizing sound development and classical attacking plans. White develops the knight and bishop before committing to final attacking strategies."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: Allgaier, Blackburne Gambit",
+    "description": "Blackburne's gambit within the Allgaier structure introduces a counter-sacrifice that generates counterplay. Black sacrifices material to create threats, transforming the position into a mutual tactical slugfest."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: Allgaier, Cook Variation",
+    "description": "Cook's variation offers practical defensive resources within the sharp Allgaier setup. Black develops specific pieces in particular orders to neutralize White's attacking chances while maintaining adequate piece coordination."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: Allgaier Gambit",
+    "description": "The Allgaier Gambit (3.Nf3 with g4) sacrifices a second pawn to open the kingside immediately. White generates extremely dangerous kingside attacks that often overcome Black's defensive resources."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: Allgaier Gambit, Thorold Attack",
+    "description": "Thorold's continuation strengthens White's kingside attack through careful move order and piece placement. White maintains aggressive momentum while Black must navigate very sharp defensive requirements."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: Allgaier Gambit, Urusov Attack",
+    "description": "Urusov's attacking line adds fresh ideas to the Allgaier setup with specific piece maneuvers targeting the kingside. White generates multiple threats that demand precise Black responses."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: Allgaier, Horny Defense",
+    "description": "Horny's defense provides practical drawing chances within the dangerous Allgaier attack. Black consolidates the position and restricts White's active pieces while preparing potential counterplay on the queenside."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: Allgaier, Schlechter Defense",
+    "description": "Schlechter's solid approach to the Allgaier emphasizes piece coordination and central control. Black develops harmoniously while respecting White's kingside initiative, seeking to equalize through methodical play."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: Allgaier, Urusov Attack",
+    "description": "This Urusov attack line within Allgaier represents one of White's sharpest attacking attempts. White coordinates pieces for a devastating kingside assault while Black must defend with precision and tactical awareness."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: Kieseritzky Gambit",
+    "description": "The Kieseritzky Gambit (3.Be4) involves the light-squared bishop actively participating in White's kingside attack. White sacrifices the pawn but maintains central control and rapid piece coordination toward Black's king."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: Kieseritzky Gambit, Anderssen-Cordel Gambit",
+    "description": "This sub-variation features additional sacrificial ideas that escalate complications within the Kieseritzky structure. Both sides generate sharp tactics where precise calculation determines the outcome."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: Kieseritzky Gambit, Anderssen Defense",
+    "description": "Anderssen's defense provides one of Black's most resilient approaches within the Kieseritzky, emphasizing piece activity and central control. Black generates counterplay while defending against White's direct threats."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: Kieseritzky Gambit, Berlin Defense",
+    "description": "The Berlin Defense features a methodical Black approach that develops pieces systematically while maintaining flexibility. Black often plays for central control and queen centralization to counterbalance White's kingside activity."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: Kieseritzky Gambit, Berlin Defense, de Riviere Variation",
+    "description": "De Riviere's continuation within the Berlin Defense adds specific refinements to Black's piece placement. This line features particular emphasis on central piece coordination while preparing flexible defense strategies."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: Kieseritzky Gambit, Berlin Defense, Rubinstein Variation",
+    "description": "Rubinstein's version of the Berlin Defense incorporates high-level principles of piece coordination and pawn structure. Black develops with purpose, emphasizing central control and preventing White's most dangerous attacking ideas."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: Kieseritzky Gambit, Brentano Defense",
+    "description": "Brentano's defense within the Kieseritzky offers practical defensive resources without sacrificing piece activity. Black develops methodically while maintaining flexibility to meet White's various attacking plans."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: Kieseritzky Gambit, Brentano Defense, Caro Variation",
+    "description": "Caro's contribution refines Brentano's approach with specific piece placements that improve Black's defensive coordination. This line balances solid structure with adequate counterplay possibilities."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: Kieseritzky Gambit, Cotter Gambit",
+    "description": "Cotter's gambit introduces a counter-sacrifice within the Kieseritzky structure, generating mutual threats. The resulting positions feature sharp tactical play where both sides must navigate complex complications."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: Kieseritzky Gambit, Kolisch Defense",
+    "description": "Kolisch's defense emphasizes solid piece coordination and central control within the Kieseritzky. Black develops with purpose while preparing specific defensive resources against White's attacking continuations."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: Kieseritzky Gambit, Long Whip",
+    "description": "The Long Whip represents an aggressive Black setup featuring extended piece maneuvers and counterattacking ideas. Black activates pieces along extended files to generate threats against White's king position."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: Kieseritzky Gambit, Neumann Defense",
+    "description": "Neumann's defense provides a practical approach within the Kieseritzky, prioritizing piece consolidation. Black develops strategically while maintaining flexibility to address White's planned attacking continuations."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: Kieseritzky Gambit, Paulsen Defense",
+    "description": "Paulsen's approach to the Kieseritzky emphasizes solid piece placement and careful central control. Black develops harmoniously while preparing defensive resources to neutralize White's attacks."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: Kieseritzky Gambit, Paulsen Defense Deferred",
+    "description": "This variation defers key defensive commitments in Paulsen's defense, offering flexibility for Black. The delayed move order allows Black to respond more precisely to White's specific setup choices."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: Kieseritzky Gambit, Rice Gambit",
+    "description": "The Rice Gambit escalates complications within Kieseritzky through additional material sacrifice. White generates multiple threats while Black must find precise defensive resources to equalize in sharp positions."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: Kieseritzky Gambit, Rosenthal Defense",
+    "description": "Rosenthal's defense offers a solid and pragmatic approach within the Kieseritzky structure. Black develops systematically while maintaining central control and adequate defensive resources."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: Kieseritzky, Long Whip Defense, Jaenisch Variation",
+    "description": "Jaenisch's variation within Long Whip provides refined defensive ideas for Black through specific move orders. This line features particular emphasis on counterplay and piece coordination."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: Kieseritzky, Polerio Defense",
+    "description": "Polerio's defense represents one of the oldest systematic defenses within the Kieseritzky. Black develops methodically with emphasis on central control and piece coordination."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: Kieseritzky, Rice Gambit",
+    "description": "Rice's gambit variant within the Kieseritzky framework involves tactical complications arising from additional piece play. White maintains compensation through rapid development and kingside threats."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: Kieseritzky, Salvio Defense, Cozio Variation",
+    "description": "Cozio's variation within the Salvio Defense provides refined defensive setup through specific piece placement. Black consolidates the position while preparing flexible responses to White's tactical themes."
+  },
+  {
+    "eco": "C39",
+    "name": "King's Gambit Accepted: King's Knight's Gambit",
+    "description": "This nomenclature refers to classical King's Gambit structures emphasizing Nf3 development before immediate pawn sacrifices. White generates rapid piece activity and kingside threats through sound developmental principles."
+  },
+  {
+    "eco": "C40",
+    "name": "Elephant Gambit: Maróczy Gambit",
+    "description": "Maróczy's gambit within the Elephant structure involves specific piece sacrifices and tactical ideas. White aims for rapid piece coordination and central control despite material investment."
+  },
+  {
+    "eco": "C40",
+    "name": "Elephant Gambit: Paulsen Countergambit",
+    "description": "Paulsen's countergambit introduces a counter-sacrifice within the Elephant setup. Black generates mutual threats and tactical complications, creating dynamic imbalance in the position."
+  },
+  {
+    "eco": "C40",
+    "name": "Elephant Gambit: Wasp Variation",
+    "description": "The Wasp Variation features aggressive piece play and positional ideas within the Elephant Gambit. Black maintains central presence while preparing both defensive and counterattacking resources."
+  },
+  {
+    "eco": "C40",
+    "name": "King's Pawn Game: Busch-Gass Gambit",
+    "description": "The Busch-Gass Gambit sacrifices material for rapid piece development and kingside attacking chances. White generates threats that typically provide adequate compensation for the invested pawn."
+  },
+  {
+    "eco": "C40",
+    "name": "King's Pawn Game: Busch-Gass Gambit, Chiodini Gambit",
+    "description": "Chiodini's sub-variation escalates the complications within Busch-Gass through additional tactical ideas. Both sides engage in sharp play where calculation and piece activity determine the outcome."
+  },
+  {
+    "eco": "C40",
+    "name": "King's Pawn Game: Damiano Defense",
+    "description": "The Damiano Defense (1.e4 e5 2.Nf3 f6) is historically interesting as Black sacrifices kingside control for central play. While rarely played at high levels, it offers practical complications for the well-prepared."
+  },
+  {
+    "eco": "C40",
+    "name": "King's Pawn Game: Damiano Defense, Damiano Gambit",
+    "description": "The Damiano Gambit features Black sacrificing the e-pawn to generate central counterplay. Black accepts further material investment to create active piece play against White's king position."
+  },
+  {
+    "eco": "C40",
+    "name": "King's Pawn Game: Damiano Defense, Damiano Gambit, Chigorin Gambit",
+    "description": "Chigorin's gambit within the Damiano structure adds further complications through specific tactical ideas. White and Black both pursue aggressive attacking plans in these rare, sharp positions."
+  },
+  {
+    "eco": "C40",
+    "name": "King's Pawn Game: Gunderam Defense, Gunderam Gambit",
+    "description": "Gunderam's gambit features early pawn sacrifices aimed at generating piece activity and tactical threats. White maintains compensation through active piece placement and central control."
+  },
+  {
+    "eco": "C40",
+    "name": "King's Pawn Game: Gunderam Gambit",
+    "description": "This gambit variant sacrifices material for rapid development and attacking chances. White generates kingside threats and maintains piece coordination to compensate for the invested pawn."
+  },
+  {
+    "eco": "C40",
+    "name": "King's Pawn Game: La Bourdonnais Gambit",
+    "description": "La Bourdonnais's gambit involves sacrificing central or kingside pawns to generate piece activity. White aims for rapid development and exploitation of open lines in sharp positions."
+  },
+  {
+    "eco": "C40",
+    "name": "King's Pawn Game: McConnell Defense",
+    "description": "McConnell's defense provides a solid if unusual approach to king's pawn openings. Black develops with purpose while maintaining central control and adequate defensive resources."
+  },
+  {
+    "eco": "C40",
+    "name": "Latvian Gambit Accepted: Bilguer Variation",
+    "description": "Bilguer's variation within the Latvian Gambit emphasizes specific piece placements after Black's 2...f5 sacrifice. White typically accepts the pawn and develops with attacking intentions on the kingside."
+  },
+  {
+    "eco": "C40",
+    "name": "Latvian Gambit Accepted: Bronstein Attack",
+    "description": "Bronstein's aggressive handling of the Latvian features attacking piece play and central control. White maintains the initiative through rapid development and threats to Black's exposed position."
+  },
+  {
+    "eco": "C40",
+    "name": "Latvian Gambit Accepted: Bronstein Gambit",
+    "description": "This gambit escalates complications within the Latvian structure through additional material sacrifice. Both sides engage in sharp tactical play where accurate calculation is paramount."
+  },
+  {
+    "eco": "C40",
+    "name": "Latvian Gambit Accepted: Foltys-Leonhardt Variation",
+    "description": "This variation combines ideas from Foltys and Leonhardt within the accepted Latvian. Black develops with specific emphasis on central control and piece coordination in complex positions."
+  },
+  {
+    "eco": "C40",
+    "name": "Latvian Gambit Accepted: Foltys Variation",
+    "description": "Foltys's variation provides refined defensive and counterattacking ideas within the Latvian Gambit. Black develops systematically while maintaining flexibility to address White's attacking plans."
+  },
+  {
+    "eco": "C40",
+    "name": "Latvian Gambit Accepted: Leonhardt Variation",
+    "description": "Leonhardt's approach emphasizes piece coordination and central control within the accepted Latvian. Black develops harmoniously while preparing flexible responses to White's threats."
+  },
+  {
+    "eco": "C40",
+    "name": "Latvian Gambit Accepted: Main Line",
+    "description": "The mainline Latvian Gambit Accepted features sharp central play after Black's pawn sacrifice. White typically develops rapidly with kingside attacking intentions while Black seeks central compensation."
+  },
+  {
+    "eco": "C40",
+    "name": "Latvian Gambit Accepted: Nimzowitsch Attack",
+    "description": "Nimzowitsch's attacking continuation within the Latvian features aggressive piece play and central domination. White generates multiple threats that provide compensation for the accepted pawn."
+  },
+  {
+    "eco": "C40",
+    "name": "Latvian Gambit: Behting Variation",
+    "description": "Behting's variation represents a solid declined line within the Latvian Gambit structure. Black avoids immediate complications while maintaining central control and piece coordination."
+  },
+  {
+    "eco": "C40",
+    "name": "Latvian Gambit: Corkscrew Countergambit",
+    "description": "This countergambit introduces a counter-sacrifice within the Latvian framework. Black sacrifices material to generate counterplay and complications in dynamic positions."
+  },
+  {
+    "eco": "C40",
+    "name": "Latvian Gambit: Corkscrew Gambit",
+    "description": "The Corkscrew Gambit features White's aggressive response to the Latvian with additional pawn sacrifices. White generates multiple threats and maintaining attacking momentum."
+  },
+  {
+    "eco": "C40",
+    "name": "Latvian Gambit: Diepstraten Countergambit",
+    "description": "Diepstraten's countergambit creates mutual threats within the Latvian structure. Black and White both pursue attacking chances in positions of sharp tactical complications."
+  },
+  {
+    "eco": "C40",
+    "name": "Latvian Gambit: Fraser Defense",
+    "description": "Fraser's defense provides a solid approach within the Latvian Gambit framework. Black develops methodically while avoiding unnecessary complications and maintaining adequate piece coordination."
+  },
+  {
+    "eco": "C40",
+    "name": "Latvian Gambit: Greco Variation",
+    "description": "Greco's classical variation features specific piece placements within the Latvian defense. Black develops systematically while preparing flexible responses to White's attacking intentions."
+  },
+  {
+    "eco": "C40",
+    "name": "Latvian Gambit: Lobster Gambit",
+    "description": "The Lobster Gambit features a counter-sacrifice within the Latvian structure creating tactical complications. Both sides must navigate sharp positions with mutual attacking chances."
+  },
+  {
+    "eco": "C40",
+    "name": "Latvian Gambit: Mason Countergambit",
+    "description": "Mason's countergambit introduces counter-sacrificial ideas within the Latvian framework. Black generates immediate counterplay and threats that create dynamic complications."
+  },
+  {
+    "eco": "C40",
+    "name": "Latvian Gambit: Mayet Attack",
+    "description": "Mayet's aggressive attacking continuation within the Latvian features central and kingside threats. White maintains the initiative through rapid piece development and active placement."
+  },
+  {
+    "eco": "C40",
+    "name": "Latvian Gambit: Mayet Attack, Morgado Defense",
+    "description": "Morgado's defense provides specific refinements within the Mayet Attack structure. Black develops with particular emphasis on central control and defensive piece coordination."
+  },
+  {
+    "eco": "C40",
+    "name": "Latvian Gambit: Mayet Attack, Poisoned Pawn Variation",
+    "description": "This variation features tactical complications arising from Black accepting additional material. Black must navigate sharp positions carefully while managing threats to the king position."
+  },
+  {
+    "eco": "C40",
+    "name": "Latvian Gambit: Mayet Attack, Polerio-Svedenborg Variation",
+    "description": "This variation combines classical and refined defensive ideas within the Mayet structure. Black develops strategically while preparing multiple defensive and counterattacking resources."
+  },
+  {
+    "eco": "C40",
+    "name": "Latvian Gambit: Mayet Attack, Strautins Gambit",
+    "description": "Strautins's gambit escalates the complications within the Mayet Attack through additional material sacrifice. White generates multiple threats that typically provide adequate compensation."
+  },
+  {
+    "eco": "C40",
+    "name": "Latvian Gambit: Mlotkowski Variation",
+    "description": "Mlotkowski's variation provides specific refinements to the Latvian Gambit framework. Black develops with particular emphasis on piece coordination and central control in complex positions."
+  },
+  {
+    "eco": "C40",
+    "name": "Latvian Gambit: Senechaud Gambit",
+    "description": "Senechaud's gambit features White's aggressive handling of the Latvian through additional pawn sacrifice. White generates multiple threats and maintains attacking momentum in sharp positions."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Albin-Blackburne Gambit",
+    "description": "This gambit within the Philidor features a pawn sacrifice for rapid piece activity. White generates threats and exploits open lines while Black must provide precise defense."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Berger Variation",
+    "description": "Berger's variation emphasizes solid piece coordination within the Philidor structure. Black develops methodically with focus on central control and adequate defensive resources."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Bird Gambit",
+    "description": "Bird's gambit within the Philidor involves a pawn sacrifice for piece activity and attacking chances. White maintains compensation through rapid development and threats."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Boden Variation",
+    "description": "Boden's approach to the Philidor emphasizes piece coordination and central control. Black develops strategically while maintaining flexibility in response to White's attacking plans."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Exchange Variation",
+    "description": "The Exchange Variation features simplification through piece trades within the Philidor. This solid approach reduces tactical complications while maintaining adequate piece coordination."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Hanham, Kmoch Variation",
+    "description": "Kmoch's refinement within the Hanham system emphasizes strategic piece coordination. Black develops with purpose while maintaining flexibility to address White's positional or tactical plans."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Hanham Variation",
+    "description": "The Hanham Variation represents a major system within the Philidor Defense featuring solid pawn structures. Black develops methodically with emphasis on central control and piece coordination."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Hanham Variation, Delmar Variation",
+    "description": "Delmar's continuation adds specific refinements to the Hanham structure. Black develops strategically with particular emphasis on piece placement and defensive resources."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Hanham Variation, Krause Variation",
+    "description": "Krause's variation provides specific move orders within the Hanham framework. Black develops with flexibility while maintaining solid piece coordination and central control."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Hanham Variation, Schlechter Variation",
+    "description": "Schlechter's approach to the Hanham emphasizes strategic piece coordination and central control. Black develops methodically while maintaining flexibility against White's attacking or positional plans."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Hanham Variation, Sharp Variation",
+    "description": "This sharp variation features tactical complications within the Hanham structure. Both sides must navigate carefully in positions featuring mutual attacking possibilities."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Hanham Variation, Steiner Variation",
+    "description": "Steiner's contribution refines the Hanham system with specific piece placements and strategic ideas. Black develops strategically while preparing flexible responses to White's plans."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Larsen Variation",
+    "description": "Larsen's variation within the Philidor emphasizes flexible piece placement and central control. Black develops with purpose while maintaining multiple defensive and counterattacking options."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Lion Variation",
+    "description": "The Lion Variation features a sharp system within the Philidor with aggressive tactics and piece play. Black demonstrates resilience through tactical resources and active piece coordination."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Lion Variation, Bishop Sacrifice",
+    "description": "This line features White's bishop sacrifice within the Lion framework. White generates attacking chances and complications that demand precise Black defense."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Lion Variation, Delayed Bishop Sacrifice",
+    "description": "The delayed version of the bishop sacrifice provides White with flexible attacking options. White maintains the threat while Black must address multiple possibilities."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Lion Variation, Forcing Line",
+    "description": "This forcing continuation within the Lion structure leads to sharp tactical play. White maintains the initiative through concrete threats and active piece coordination."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Lion Variation, Lion's Claw, with Bc4 and h6",
+    "description": "This specific Lion's Claw setup features particular emphasis on kingside play with Bc4. White maintains attacking pressure while Black manages defensive complications."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Lion Variation, Lion's Claw, with Be2 and c6",
+    "description": "This Lion's Claw variant features a more cautious bishop placement with Be2. Black controls the center while White prepares flexible attacking plans based on specific position requirements."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Lion Variation, Shirov Gambit",
+    "description": "Shirov's modern gambit within the Lion Variation features a pawn sacrifice for piece activity. White maintains compensation through rapid piece coordination and attacking threats."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Lion Variation, Sozin Variation",
+    "description": "Sozin's contribution within the Lion emphasizes strategic piece coordination and central control. Black develops with purpose while maintaining tactical resources for counterplay."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Lopez Countergambit",
+    "description": "This countergambit introduces counter-sacrificial ideas within the Philidor. Black sacrifices material to generate immediate counterplay and complications."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Lopez Countergambit, Jaenisch Variation",
+    "description": "Jaenisch's variation within the Lopez Countergambit provides specific refinements. Black develops with particular emphasis on central counterplay and piece activity."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Morphy Gambit",
+    "description": "Morphy's gambit within the Philidor features a pawn sacrifice for rapid attacking chances. White generates kingside threats and exploits open lines while Black defends carefully."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Nimzowitsch, Larobok Variation",
+    "description": "Larobok's variation adds refinements to Nimzowitsch's system within the Philidor. Black develops strategically with emphasis on piece coordination and flexible defensive resources."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Nimzowitsch, Locock Variation",
+    "description": "Locock's contribution provides specific move orders and piece placements within the Nimzowitsch system. Black develops methodically while maintaining flexibility in response to White's plans."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Nimzowitsch Variation",
+    "description": "The Nimzowitsch Variation represents a major system within the Philidor featuring solid piece coordination. Black develops strategically while maintaining central control and defensive resources."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Nimzowitsch Variation, Klein Variation",
+    "description": "Klein's refinement within the Nimzowitsch system emphasizes specific piece placements and strategic ideas. Black develops with purpose while maintaining flexibility against various White plans."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Nimzowitsch Variation, Rellstab Variation",
+    "description": "Rellstab's variation provides specific continuations within the Nimzowitsch framework. Black develops methodically with emphasis on central control and piece coordination."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Nimzowitsch Variation, Sokolsky Variation",
+    "description": "Sokolsky's contribution adds refinements to the Nimzowitsch system through specific move orders. Black develops strategically while maintaining adequate defensive and counterattacking resources."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Paulsen Attack",
+    "description": "Paulsen's aggressive approach within the Philidor features specific attacking plans and piece placement. White maintains the initiative while Black must provide precise defense."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Philidor Countergambit",
+    "description": "This countergambit features Black's counter-sacrifice within the Philidor framework. Black generates immediate counterplay and complications while accepting material investment."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Philidor Countergambit, Berger Variation",
+    "description": "Berger's variation refines the countergambit approach with specific piece placements. Black develops strategically while maintaining active piece play and counterattacking chances."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Philidor Countergambit, del Rio Attack",
+    "description": "Del Rio's aggressive continuation within the countergambit features specific attacking plans. White maintains the initiative through active piece coordination and threats."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Philidor Countergambit, Zukertort Variation",
+    "description": "Zukertort's refinement within the countergambit emphasizes strategic piece coordination. Black develops methodically while maintaining adequate defensive and counterattacking resources."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Philidor Gambit",
+    "description": "The Philidor Gambit features White's pawn sacrifice within the Philidor structure. White maintains compensation through rapid piece development and attacking threats."
+  },
+  {
+    "eco": "C41",
+    "name": "Philidor Defense: Steinitz Variation",
+    "description": "Steinitz's approach to the Philidor emphasizes solid pawn structures and strategic piece coordination. Black develops methodically with focus on central control and defensive solidity."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Classical Attack, Berger Variation",
+    "description": "Berger's variation within the Classical Attack features specific piece placements and strategic ideas. White maintains attacking pressure while Black develops with emphasis on piece coordination."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Classical Attack, Chigorin Variation",
+    "description": "The Chigorin Variation represents a major system within the Classical Attack of Petrov's. White maintains central control while Black develops with flexibility and adequate piece coordination."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Classical Attack, Chigorin Variation, Browne Attack",
+    "description": "Browne's aggressive continuation within the Chigorin features specific attacking plans. White maintains the initiative through active piece coordination and kingside threats."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Classical Attack, Chigorin Variation, Main Line",
+    "description": "The mainline continuation of the Chigorin Variation features sharp positional and tactical play. Both sides must navigate carefully in positions of mutual opportunities and complications."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Classical Attack, Closed Variation",
+    "description": "The Closed Variation features a solid continuation within the Classical Attack avoiding immediate complications. White maintains the initiative through methodical piece development."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Classical Attack, Jaenisch Variation",
+    "description": "Jaenisch's variation provides specific refinements to the Classical Attack structure. White maintains attacking pressure while Black develops with focus on piece coordination and central control."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Classical Attack, Krause Variation",
+    "description": "Krause's variation adds specific move orders within the Classical Attack framework. White maintains strategic pressure while Black develops methodically with adequate defensive resources."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Classical Attack, Maróczy Variation",
+    "description": "Maróczy's approach emphasizes strategic piece coordination and central control. White maintains balanced play while Black develops with flexibility in response to White's specific setup."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Classical Attack, Marshall Trap",
+    "description": "The Marshall Trap features a tactical complication where Black can gain advantage through precise moves. Black exploits weaknesses in White's position after the Classical Attack setup."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Classical Attack, Marshall Variation",
+    "description": "Marshall's variation within the Classical Attack features aggressive piece play and central threats. White maintains the initiative while Black develops with active piece coordination."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Classical Attack, Marshall Variation, Chinese Gambit",
+    "description": "The Chinese Gambit within Marshall's variation features a pawn sacrifice for piece activity. White generates attacking chances while Black must provide precise defense."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Classical Attack, Mason-Showalter Variation",
+    "description": "This variation combines Mason and Showalter ideas within the Classical Attack. White maintains strategic pressure while Black develops methodically with focus on piece coordination."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Classical Attack, Mason Variation",
+    "description": "Mason's variation emphasizes strategic continuation within the Classical Attack framework. White maintains the initiative through careful piece development and central control."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Classical Attack, Staunton Variation",
+    "description": "Staunton's classical continuation features specific attacking plans within the Classical Attack. White maintains pressure while Black develops methodically with adequate defensive resources."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Classical Attack, Tarrasch Variation",
+    "description": "Tarrasch's refinement within the Classical Attack emphasizes strategic piece coordination. White maintains balanced play while Black develops with flexibility in complex positions."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Cochrane Gambit",
+    "description": "The Cochrane Gambit (3.Nxe5 d6 4.Nf3 and f4) features a spectacular pawn sacrifice for piece activity. White generates multiple threats and exploits open lines while Black defends carefully."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Cochrane Gambit, Bishop Check Line",
+    "description": "This variation features tactical complications arising from the bishop check within the Cochrane structure. White maintains attacking chances while Black must navigate sharp defensive requirements."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Cochrane Gambit, Center Variation",
+    "description": "The Center Variation emphasizes central play and strategic control within the Cochrane Gambit. White maintains balanced attacking chances while Black develops with focus on piece coordination."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Cozio Attack",
+    "description": "Cozio's aggressive continuation within Petrov's features specific attacking ideas. White maintains the initiative through active piece coordination and threats to Black's position."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Damiano Variation",
+    "description": "The Damiano Variation features a specific continuation within Petrov's Defense. White maintains central control while Black develops with flexibility and adequate piece coordination."
+  },
+  {
+    "eco": "C42",
+    "name": "Petrov's Defense: Damiano Variation, Kholmov Gambit",
+    "description": "Kholmov's gambit within the Damiano features a pawn sacrifice for piece activity. White generates attacking chances while Black must navigate tactical complications carefully."
+  }
+]

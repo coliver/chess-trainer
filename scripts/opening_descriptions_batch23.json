@@ -1,0 +1,727 @@
+[
+  {
+    "eco": "E39",
+    "name": "Nimzo-Indian Defense: Classical Variation, Berlin Variation, Pirc Variation",
+    "description": "A rare sixth-move sideline in the Classical where Black plays Nf6 as an unusual developing move. White typically maintains a slight space advantage after proper setup, though Black's pieces are efficiently placed and the position remains balanced."
+  },
+  {
+    "eco": "E40",
+    "name": "Nimzo-Indian Defense: Rubinstein System, Taimanov Variation",
+    "description": "Taimanov's approach within the Rubinstein System avoids the main theoretical battles while seeking positions with rich middlegame play. Black prioritizes piece activity and strategic counterplay over immediate resolution of the center."
+  },
+  {
+    "eco": "E41",
+    "name": "Nimzo-Indian Defense: Rubinstein System, Hübner Variation",
+    "description": "Hübner's precise handling of the Rubinstein emphasizes Black's control of the light squares and piece coordination. The resulting positions often feature long strategic battles where Black gradually generates queenside and central pressure."
+  },
+  {
+    "eco": "E42",
+    "name": "Nimzo-Indian Defense: Rubinstein System, Rubinstein Variation",
+    "description": "The main line of this system where White develops naturally and Black counters with solid piece placement. Pawn breaks on either flank are key strategic ideas as both sides seek to crystallize their advantages."
+  },
+  {
+    "eco": "E42",
+    "name": "Nimzo-Indian Defense: Rubinstein System, Rubinstein Variation, Main Line",
+    "description": "The theoretically most critical continuation where White aims for a kingside pawn advance (f4 or h4). Black must balance piece activity with pawn tension relief to maintain dynamic equality."
+  },
+  {
+    "eco": "E42",
+    "name": "Nimzo-Indian Defense: Rubinstein System, Rubinstein Variation, Sherbakov Attack",
+    "description": "Sherbakov's aggressive approach features a quick kingside pawn thrust and coordinated piece play against Black's kingside. This sharp variation tests Black's tactical resources and requires precise defensive timing."
+  },
+  {
+    "eco": "E43",
+    "name": "Nimzo-Indian Defense: St. Petersburg Variation",
+    "description": "This sideline features White playing Bg5, pinning the knight immediately and forcing Black to make an early decision about the knight's future. The resulting positions typically involve complex maneuvering with chances for both sides."
+  },
+  {
+    "eco": "E43",
+    "name": "Nimzo-Indian Defense: St. Petersburg Variation, with Ne4",
+    "description": "Black's Ne4 counterattack represents an aggressive response to the pin, aiming for rapid piece activation and central control. White must respond precisely to maintain the initiative while Black generates counterthreats."
+  },
+  {
+    "eco": "E44",
+    "name": "Nimzo-Indian Defense: St. Petersburg Variation",
+    "description": "The standard continuation of this variation where White maintains the pin and develops gradually. Black typically responds with solid maneuvering, accepting a slightly cramped but balanced position."
+  },
+  {
+    "eco": "E44",
+    "name": "Nimzo-Indian Defense: St. Petersburg Variation, American Variation",
+    "description": "An American interpretation featuring different move orders and strategic priorities than European approaches. The resulting positions offer Black chances for queenside counterplay alongside solid defensive resources."
+  },
+  {
+    "eco": "E44",
+    "name": "Nimzo-Indian Defense: St. Petersburg Variation, Romanishin-Psakhis Variation",
+    "description": "Romanishin and Psakhis developed this nuanced approach that combines modest development with tactical alertness. Both players must navigate complex positional subtleties and avoid oversimplification."
+  },
+  {
+    "eco": "E45",
+    "name": "Nimzo-Indian Defense: St. Petersburg Variation, Fischer Variation",
+    "description": "Fischer's contribution to the St. Petersburg emphasizes practical play over theoretical purity, seeking positions where White's space advantage provides winning chances. Black requires precise prophylaxis to equalize."
+  },
+  {
+    "eco": "E46",
+    "name": "Nimzo-Indian Defense: Normal Variation",
+    "description": "The Normal Variation represents the classical approach where White plays Nf3 and develops systematically without forcing immediate tactical complications. Black's solid setup offers defensive reliability with moderate winning chances."
+  },
+  {
+    "eco": "E46",
+    "name": "Nimzo-Indian Defense: Reshevsky Variation",
+    "description": "Reshevsky's systematic approach within the Normal Variation prioritizes piece coordination and long-term strategic factors. White maintains central control while Black seeks queenside expansion and piece activity."
+  },
+  {
+    "eco": "E46",
+    "name": "Nimzo-Indian Defense: Simagin Variation",
+    "description": "Simagin's creative setup features unusual piece placement and strategic ideas that deviate from conventional theory. The resulting middlegames often present both players with rich possibilities and practical winning chances."
+  },
+  {
+    "eco": "E47",
+    "name": "Nimzo-Indian Defense: Normal Variation",
+    "description": "A continuation of the Normal Variation where White's development proceeds predictably with tactical motifs lurking beneath the surface. Black must maintain piece coordination to counter White's space advantage effectively."
+  },
+  {
+    "eco": "E48",
+    "name": "Nimzo-Indian Defense: Normal Variation, Classical Defense",
+    "description": "Black adopts a classical setup with Be7 and O-O, emphasizing piece solidity and pawn structure over aggressive counterplay. White's space advantage requires careful handling as Black generates strategic pressure gradually."
+  },
+  {
+    "eco": "E48",
+    "name": "Nimzo-Indian Defense: Ragozin Defense",
+    "description": "The Ragozin Defense pins White's c3 knight and forces White to make concessions, often trading pieces or accepting a doubled pawn structure. Black obtains dynamic equality through piece activity and initiative."
+  },
+  {
+    "eco": "E49",
+    "name": "Nimzo-Indian Defense: Normal Variation, Botvinnik System",
+    "description": "Botvinnik's system features aggressive piece placement and pawn tension that creates imbalanced middlegames. Both sides must calculate precisely as the position offers concrete tactical opportunities beyond positional maneuvering."
+  },
+  {
+    "eco": "E51",
+    "name": "Nimzo-Indian Defense: Normal Variation, Ragozin Variation",
+    "description": "The Ragozin idea appears again here with c3 knight pinned and Black capitalizing on this structural advantage. White compensates through central control and piece placement, creating rich middlegame battles."
+  },
+  {
+    "eco": "E51",
+    "name": "Nimzo-Indian Defense: Normal Variation, Sämisch Deferred",
+    "description": "White delays the c3 knight's placement while pursuing other setup goals, deferring the typical Sämisch structure. Black obtains flexibility in responding to White's plan while maintaining solid piece coordination."
+  },
+  {
+    "eco": "E51",
+    "name": "Nimzo-Indian Defense: Ragozin Variation",
+    "description": "A critical position where the Ragozin setup has fully crystallized with Black's pieces ideally placed to exploit the pinned knight. White requires precision in maintaining compensation through aggressive piece play."
+  },
+  {
+    "eco": "E52",
+    "name": "Nimzo-Indian Defense: Normal Variation, Schlechter Defense",
+    "description": "Schlechter's solid approach emphasizes piece safety and pawn structure over tactical complications. Black's defensive resources prove more than adequate as both sides seek slow maneuvering with chances for later breakthrough."
+  },
+  {
+    "eco": "E53",
+    "name": "Nimzo-Indian Defense: Normal Variation, Gligoric System",
+    "description": "Gligoric's systematic approach features methodical development and clear strategic plans for White. Black typically responds with reliable piece placement, accepting a slightly passive role while waiting for White to overextend."
+  },
+  {
+    "eco": "E53",
+    "name": "Nimzo-Indian Defense: Normal Variation, Gligoric System, Keres Variation",
+    "description": "Keres refined Gligoric's system with subtle move order nuances and strategic adjustments. The resulting positions showcase the depth of positional understanding required to maintain the balance in this complex structure."
+  },
+  {
+    "eco": "E54",
+    "name": "Nimzo-Indian Defense: Normal Variation, Gligoric System, Exchange Variation",
+    "description": "White trades the c3 knight for Black's knight, accepting a doubled pawn structure in exchange for piece activity. This exchange often leads to positions where White's spatial advantage compensates for the structural concession."
+  },
+  {
+    "eco": "E54",
+    "name": "Nimzo-Indian Defense: Normal Variation, Gligoric System, Smyslov Variation",
+    "description": "Smyslov's approach within the Gligoric emphasizes piece flexibility and prophylactic thinking rather than forcing tactical sequences. The resulting positions require deep understanding of pawn structures and piece placement principles."
+  },
+  {
+    "eco": "E55",
+    "name": "Nimzo-Indian Defense: Normal Variation, Gligoric System, Bronstein Variation",
+    "description": "Bronstein's dynamic interpretation features aggressive piece placement and tactical alertness within the Gligoric framework. White obtains practical winning chances through this more forcing approach compared to slower alternatives."
+  },
+  {
+    "eco": "E56",
+    "name": "Nimzo-Indian Defense: Normal Variation, Gligoric System, Bernstein Defense",
+    "description": "Bernstein's defensive setup prioritizes piece solidity and strategic restraint while maintaining counterplay resources. The position remains balanced as both sides pursue their respective plans with tactical possibilities lurking beneath the surface."
+  },
+  {
+    "eco": "E57",
+    "name": "Nimzo-Indian Defense: Normal Variation, Gligoric System, Bernstein Defense",
+    "description": "A deeper exploration of Bernstein's ideas with refined move order and strategic understanding. White's space advantage remains intact while Black demonstrates adequate defensive resources through precise piece placement."
+  },
+  {
+    "eco": "E58",
+    "name": "Nimzo-Indian Defense: Normal Variation, Bernstein Defense, Exchange Line",
+    "description": "White opts for the exchange, trading the c3 knight to clarify the position. Black must compensate for the temporary piece advantage through activity and pawn tension relief opportunities."
+  },
+  {
+    "eco": "E59",
+    "name": "Nimzo-Indian Defense: Normal Variation, Bernstein Defense",
+    "description": "The main line of Bernstein's solid defense where Black achieves a dependable setup and piece coordination. White maintains a small initiative but Black's defensive structure proves resilient against direct assault."
+  },
+  {
+    "eco": "E60",
+    "name": "Grünfeld Defense: Counterthrust Variation",
+    "description": "Black's aggressive setup with c5 creates immediate central tension and limits White's space. This dynamic approach generates tactical complications where Black's piece activity compensates for White's initial development advantage."
+  },
+  {
+    "eco": "E60",
+    "name": "Indian Defense: Anti-Grünfeld, Adorjan Gambit",
+    "description": "Adorjan's gambit sacrifices a pawn with e4 and f4 to seize the initiative and achieve aggressive kingside play. Black must decide whether to accept the material or pursue positional compensation through piece activity."
+  },
+  {
+    "eco": "E60",
+    "name": "Indian Defense: Anti-Grünfeld, Advance Variation",
+    "description": "White's advance variation features an aggressive pawn push to e4 and f4, seeking spatial dominance and kingside attacking chances. Black's solid setup provides defensive resources although White maintains the initiative."
+  },
+  {
+    "eco": "E60",
+    "name": "Indian Defense: Anti-Grünfeld, Alekhine Variation",
+    "description": "Alekhine's approach within the Anti-Grünfeld emphasizes piece placement and strategic depth rather than immediate tactical complications. The resulting positions offer both players practical winning chances through superior understanding."
+  },
+  {
+    "eco": "E60",
+    "name": "Indian Defense: Anti-Grünfeld, Alekhine Variation, Leko Gambit",
+    "description": "Leko's gambit within Alekhine's line sacrifices material to generate active piece play and attacking chances. Black must evaluate whether the compensation justifies accepting the pawn sacrifice in this sharp variation."
+  },
+  {
+    "eco": "E60",
+    "name": "Indian Defense: Anti-Grünfeld, Basman-Williams Attack",
+    "description": "An offbeat approach featuring unusual piece setup and strategic ideas that create practical complications. The resulting positions often baffle opponents familiar with standard theory as unconventional plans guide both sides' play."
+  },
+  {
+    "eco": "E60",
+    "name": "Indian Defense: West Indian Defense",
+    "description": "Black's West Indian setup emphasizes kingside fianchetto and unusual piece placement creating original positions. White must adapt to the unconventional setup while Black seeks dynamic piece activity to overcome the opening disadvantage."
+  },
+  {
+    "eco": "E60",
+    "name": "King's Indian Defense: Fianchetto Variation, Immediate Fianchetto",
+    "description": "White immediately fianchettoes the kingside bishop, aiming for long diagonal control and kingside stability. Black typically responds with central play or queen-side expansion to generate counterplay against the fianchetto setup."
+  },
+  {
+    "eco": "E60",
+    "name": "King's Indian Defense: Normal Variation, King's Knight Variation",
+    "description": "The classical setup where White develops the king's knight naturally after establishing central presence. Black maintains flexible piece placement allowing various defensive setups depending on White's specific plan."
+  },
+  {
+    "eco": "E60",
+    "name": "King's Indian Defense: Santasiere Variation",
+    "description": "Santasiere's unusual approach features offbeat piece placement and strategic ideas outside mainstream theory. The resulting positions challenge both players to understand unfamiliar structures and find appropriate plans."
+  },
+  {
+    "eco": "E60",
+    "name": "King's Indian Defense: Semi-Classical Variation, Benoni Variation",
+    "description": "This hybrid setup combines semi-classical and Benoni ideas, creating original pawn structures and piece placements. White's spatial advantage combines with Black's flexible counterplay options for balanced middlegame prospects."
+  },
+  {
+    "eco": "E60",
+    "name": "King's Indian Defense: Semi-Classical Variation, Hollywood Variation",
+    "description": "The Hollywood Variation features an unusual approach to the semi-classical setup with distinctive piece placement. Both players must navigate original positions requiring creative understanding beyond standard theoretical knowledge."
+  },
+  {
+    "eco": "E61",
+    "name": "King's Indian Defense: Fianchetto Variation, Benjamin Defense",
+    "description": "Benjamin's defensive setup within the fianchetto emphasizes piece solidity and strategic restraint. Black obtains adequate counterplay resources while accepting a slightly passive initial position requiring patient maneuvering."
+  },
+  {
+    "eco": "E61",
+    "name": "King's Indian Defense: Semi-Classical Variation",
+    "description": "The semi-classical setup avoids early kingside fianchetto while maintaining classical piece placement principles. This flexible approach allows Black to adapt to White's specific plan while preserving dynamic potential."
+  },
+  {
+    "eco": "E61",
+    "name": "King's Indian Defense: Semi-Classical Variation, Exchange Variation",
+    "description": "White trades the e4 pawn for Black's c6 pawn (if applicable) or exchanges pieces to clarify positions. The simplified structures often favor White's space advantage although Black's defensive resources remain solid."
+  },
+  {
+    "eco": "E61",
+    "name": "King's Indian Defense: Semi-Classical Variation, Queenside Storm Line",
+    "description": "Black pursues queenside expansion with c5 and b5 movements while White launches kingside operations. This double-sided attack creates sharp positions with tactical opportunities and strategic complexity for both sides."
+  },
+  {
+    "eco": "E61",
+    "name": "King's Indian Defense: Smyslov Variation",
+    "description": "Smyslov's refined approach features flexible piece placement and strategic depth within the semi-classical framework. White's central control combines with Black's piece activity for balanced positions requiring precise play."
+  },
+  {
+    "eco": "E62",
+    "name": "King's Indian Defense: Fianchetto Variation, Carlsbad Variation",
+    "description": "The Carlsbad structure emerges with White's pawn configuration creating fixed centers and clear strategic plans. Black must generate counterplay through piece activity or pawn breaks while managing White's spatial pressure."
+  },
+  {
+    "eco": "E62",
+    "name": "King's Indian Defense: Fianchetto Variation, Delayed Fianchetto",
+    "description": "White postpones the kingside fianchetto while developing other pieces, maintaining flexibility in establishing the fianchetto setup. Black adapts with piece placement that responds to White's developing plans."
+  },
+  {
+    "eco": "E62",
+    "name": "King's Indian Defense: Fianchetto Variation, Kavalek Defense",
+    "description": "Kavalek's solid defensive setup within the fianchetto emphasizes piece coordination and pawn structure integrity. Black accepts White's spatial advantage while maintaining strategic resources for long-term counterplay."
+  },
+  {
+    "eco": "E62",
+    "name": "King's Indian Defense: Fianchetto Variation, Larsen Defense",
+    "description": "Larsen's approach features unconventional piece placement creating original positions that challenge standard theory. The resulting setups require creative understanding as both players navigate unfamiliar strategic landscape."
+  },
+  {
+    "eco": "E62",
+    "name": "King's Indian Defense: Fianchetto Variation, Lesser Simagin (Spassky)",
+    "description": "Spassky's refinement of the lesser Simagin variation emphasizes practical understanding over theoretical perfection. Black obtains adequate counterplay resources through dynamic piece placement and strategic flexibility."
+  },
+  {
+    "eco": "E62",
+    "name": "King's Indian Defense: Fianchetto Variation, Simagin Variation",
+    "description": "Simagin's innovative approach within the fianchetto features flexible piece placement and strategic depth. Both players pursue original plans creating positions where superior calculation and understanding prove decisive."
+  },
+  {
+    "eco": "E62",
+    "name": "King's Indian Defense: Fianchetto Variation, Uhlmann-Szabo System",
+    "description": "Uhlmann and Szabo developed this systematic approach combining fianchetto principles with strategic flexibility. The resulting positions offer both players practical winning chances through precise maneuvering and tactical alertness."
+  },
+  {
+    "eco": "E63",
+    "name": "King's Indian Defense: Fianchetto Variation, Panno Variation",
+    "description": "Panno's setup emphasizes the c7-pawn and queenside piece placement while the kingside fianchetto controls the long diagonal. Black's solid structure provides defensive reliability while maintaining strategic counterplay options."
+  },
+  {
+    "eco": "E63",
+    "name": "King's Indian Defense: Fianchetto Variation, Panno Variation, Blockade Line",
+    "description": "White's blockade strategy aims to restrict Black's pieces while building pressure on key squares. Black must break through the blockade through tactical opportunities or strategic maneuvering to generate counterplay."
+  },
+  {
+    "eco": "E63",
+    "name": "King's Indian Defense: Fianchetto Variation, Panno Variation, Donner Line",
+    "description": "Donner's contribution features aggressive piece play and tactical motifs within the Panno structure. The resulting positions showcase the depth of concrete calculation required to maintain the balance."
+  },
+  {
+    "eco": "E63",
+    "name": "King's Indian Defense: Fianchetto Variation, Panno Variation, Korchnoi Line",
+    "description": "Korchnoi's approach within the Panno emphasizes precise piece placement and prophylactic thinking. White pursues systematic expansion while Black generates counterplay through accurate defense and tactical awareness."
+  },
+  {
+    "eco": "E64",
+    "name": "King's Indian Defense: Fianchetto Variation, Double Fianchetto Attack",
+    "description": "White's double fianchetto setup aims to dominate both long diagonals and restrict Black's piece activity severely. Black must find tactical opportunities or break through strategically to achieve counterplay against the fianchetto configuration."
+  },
+  {
+    "eco": "E64",
+    "name": "King's Indian Defense: Fianchetto Variation, Hungarian Variation",
+    "description": "The Hungarian setup features unusual piece placement and strategic ideas creating original positions. Both players navigate unfamiliar structures requiring creative understanding and practical evaluation of compensation."
+  },
+  {
+    "eco": "E64",
+    "name": "King's Indian Defense: Fianchetto Variation, Pterodactyl Variation",
+    "description": "An offbeat and unusual variation featuring quirky piece placement and unconventional strategic themes. The resulting positions often perplex opponents as both sides must adapt to the eccentric structure and find appropriate plans."
+  },
+  {
+    "eco": "E64",
+    "name": "King's Indian Defense: Fianchetto Variation, Yugoslav System",
+    "description": "The Yugoslav approach combines aggressive play with fianchetto principles, creating sharp positions with tactical complexity. Both sides obtain practical winning chances through precise calculation and strategic understanding."
+  },
+  {
+    "eco": "E64",
+    "name": "King's Indian Defense: Fianchetto Variation, Yugoslav Variation, Rare Line",
+    "description": "This rare continuation within the Yugoslav system features unusual move orders and strategic ideas. Players require preparation in this sideline as standard theory provides limited guidance for these uncommon positions."
+  },
+  {
+    "eco": "E65",
+    "name": "King's Indian Defense: Fianchetto Variation, Yugoslav Variation",
+    "description": "The Yugoslav Variation features aggressive White play combined with fianchetto principles creating sharp middlegames. Black's solid structure provides defensive reliability while maintaining tactical opportunities for counterattack."
+  },
+  {
+    "eco": "E65",
+    "name": "King's Indian Defense: Fianchetto Variation, Yugoslav Variation, Exchange Line",
+    "description": "White trades pieces to clarify positions while maintaining the fianchetto setup's advantages. The simplified structures often favor White although Black's defensive resilience ensures adequate holding possibilities."
+  },
+  {
+    "eco": "E66",
+    "name": "King's Indian Defense: Fianchetto Variation, Yugoslav Variation, Advance Line",
+    "description": "White pursues aggressive pawn advances and piece activity within the Yugoslav fianchetto framework. Black's counterplay resources must develop quickly to prevent White from achieving overwhelming spatial pressure."
+  },
+  {
+    "eco": "E67",
+    "name": "King's Indian Defense: Fianchetto Variation, Classical Fianchetto",
+    "description": "The classical approach to the fianchetto emphasizes systematic development and long-term strategic superiority. Black obtains adequate defensive resources through piece coordination and strategic flexibility managing White's space advantage."
+  },
+  {
+    "eco": "E67",
+    "name": "King's Indian Defense: Fianchetto Variation, Debrecen Defense",
+    "description": "The Debrecen Defense features an unusual pawn structure and piece placement creating original positions. Black's solid setup generates adequate counterplay while avoiding the theoretical battles of main line fianchetto variations."
+  },
+  {
+    "eco": "E68",
+    "name": "King's Indian Defense: Fianchetto Variation, Classical Variation",
+    "description": "The classical fianchetto variation emphasizes piece coordination and strategic understanding over tactical complications. Both sides pursue long-term plans with White maintaining spatial control and Black seeking strategic breakthrough."
+  },
+  {
+    "eco": "E68",
+    "name": "King's Indian Defense: Fianchetto Variation, Long Variation",
+    "description": "The long variation features extended maneuvering and strategic play requiring deep understanding of fianchetto positions. White's gradual improvement combines with Black's patient defensive resources for strategic middlegame battles."
+  },
+  {
+    "eco": "E69",
+    "name": "King's Indian Defense: Fianchetto Variation, Classical Main Line",
+    "description": "The main line of the classical fianchetto variation represents the theoretical mainline where both players follow established principles. White's controlled expansion meets Black's solid defense creating balanced positions with chances for both sides."
+  },
+  {
+    "eco": "E70",
+    "name": "King's Indian Defense: Accelerated Averbakh Variation",
+    "description": "White aims for the Averbakh setup more rapidly with e4, Nf3, d4, and Bg5 move order. Black's flexible approach allows various defensive setups while maintaining counterplay possibilities against the accelerated formation."
+  },
+  {
+    "eco": "E70",
+    "name": "King's Indian Defense: Kramer Variation",
+    "description": "Kramer's unorthodox approach features unusual piece placement creating original positions that deviate from mainstream theory. The resulting structures challenge both players to find appropriate plans without standard theoretical guidance."
+  },
+  {
+    "eco": "E70",
+    "name": "King's Indian Defense: Normal Variation",
+    "description": "The normal variation represents the flexible approach where both players develop systematically while awaiting opponent's specific plan. White maintains slight space advantage while Black preserves dynamic counterplay options through piece activity."
+  },
+  {
+    "eco": "E71",
+    "name": "King's Indian Defense: Karpov System",
+    "description": "Karpov's systematic approach features refined piece placement and strategic depth seeking positional advantages. Black's solid setup provides defensive reliability while White pursues gradual improvement through maneuvering."
+  },
+  {
+    "eco": "E71",
+    "name": "King's Indian Defense: Makogonov Variation",
+    "description": "Makogonov's creative approach introduces unusual strategic ideas within the king's Indian framework. The resulting positions feature original pawn structures and piece placements requiring flexible understanding."
+  },
+  {
+    "eco": "E72",
+    "name": "King's Indian Defense: Normal Variation, Deferred Fianchetto",
+    "description": "White develops without the immediate fianchetto, creating flexibility in establishing the bishop on the long diagonal later. Black adapts with solid piece placement allowing rapid fianchetto if White pursues that setup."
+  },
+  {
+    "eco": "E72",
+    "name": "King's Indian Defense: Pomar System",
+    "description": "Pomar's systematic approach features unusual piece arrangement and strategic plans creating original positions. Both players navigate unfamiliar structures as standard theory provides limited guidance for these creative setups."
+  },
+  {
+    "eco": "E73",
+    "name": "King's Indian Defense: Averbakh Variation, Flexible Defense",
+    "description": "Black's flexible defensive setup within the Averbakh provides piece safety and strategic resources. The resulting positions offer both players practical winning chances through superior maneuvering and tactical alertness."
+  },
+  {
+    "eco": "E73",
+    "name": "King's Indian Defense: Averbakh Variation, Geller Defense",
+    "description": "Geller's solid approach within the Averbakh emphasizes piece coordination and pawn structure integrity. White's spatial advantage combines with Black's defensive resilience creating balanced positions with long-term complexity."
+  },
+  {
+    "eco": "E73",
+    "name": "King's Indian Defense: Averbakh Variation, Modern Defense",
+    "description": "Black's modern approach within the Averbakh features flexible piece placement and contemporary strategic ideas. The resulting positions showcase the evolution of defensive understanding against White's classical attacking setup."
+  },
+  {
+    "eco": "E73",
+    "name": "King's Indian Defense: Averbakh Variation, Modern Defense, Burgess Line",
+    "description": "Burgess's contribution to the modern Averbakh defense introduces refined strategic understanding and tactical nuances. White maintains the initiative while Black's dynamic resources ensure adequate defensive possibilities."
+  },
+  {
+    "eco": "E73",
+    "name": "King's Indian Defense: Averbakh Variation, Nc6 Defense",
+    "description": "Black's Nc6 defense within the Averbakh emphasizes piece activity and central control alongside solid structure. White's attacking chances combine with Black's defensive solidity creating positions of balanced complexity."
+  },
+  {
+    "eco": "E73",
+    "name": "King's Indian Defense: Averbakh Variation, Spanish Defense",
+    "description": "The Spanish defensive setup within the Averbakh features unusual strategic ideas and piece placement. Black's solid structure generates adequate counterplay while avoiding the main theoretical battlegrounds."
+  },
+  {
+    "eco": "E73",
+    "name": "King's Indian Defense: Normal Variation, Standard Development",
+    "description": "Black's standard development within the normal variation provides reliable piece coordination and defensive structure. White's slight advantage requires precise play to convert positional benefits into concrete winning chances."
+  },
+  {
+    "eco": "E73",
+    "name": "King's Indian Defense: Semi-Averbakh System",
+    "description": "The semi-Averbakh combines aspects of multiple systems creating flexible positions with original strategic ideas. Both players navigate positions requiring creative understanding and practical evaluation of compensation balance."
+  },
+  {
+    "eco": "E74",
+    "name": "King's Indian Defense: Averbakh Variation, Benoni Defense",
+    "description": "Black's Benoni defensive setup within the Averbakh features dynamic piece activity and pawn tension. The resulting positions showcase the interplay between White's attacking potential and Black's defensive counterplay resources."
+  },
+  {
+    "eco": "E74",
+    "name": "King's Indian Defense: Averbakh Variation, Benoni Defense, Advance Variation",
+    "description": "White's advance variation features aggressive pawn moves seeking spatial dominance against Black's Benoni defense. Black must generate tactical opportunities or strategic counterplay to overcome White's spatial pressure."
+  },
+  {
+    "eco": "E74",
+    "name": "King's Indian Defense: Averbakh Variation, Benoni Defense, Exchange Variation",
+    "description": "White trades pieces to clarify positions while maintaining attacking chances against Black's Benoni structure. The simplified positions often favor White's space advantage although Black retains defensive resilience."
+  },
+  {
+    "eco": "E75",
+    "name": "King's Indian Defense: Averbakh Variation, Main Line",
+    "description": "The main line of the Averbakh variation represents the theoretical mainline featuring sharp tactical play and strategic complexity. Both players obtain practical winning chances through precise calculation and deep positional understanding."
+  },
+  {
+    "eco": "E76",
+    "name": "King's Indian Defense: Four Pawns Attack, Dynamic Attack",
+    "description": "White's dynamic approach within the Four Pawns Attack features aggressive piece play and attacking chances alongside pawn advances. Black's solid structure provides defensive reliability while counterplay options remain viable."
+  },
+  {
+    "eco": "E76",
+    "name": "King's Indian Defense: Four Pawns Attack, Modern Defense",
+    "description": "Black's modern defensive approach against the Four Pawns Attack emphasizes piece activity and tactical alertness. The resulting positions feature sharp tactical play with balanced winning chances for both sides."
+  },
+  {
+    "eco": "E77",
+    "name": "King's Indian Defense: Four Pawns Attack, Florentine Gambit",
+    "description": "White sacrifices a pawn with h4 seeking aggressive kingside attacking chances and rapid piece activity. Black must evaluate whether the pawn compensation justifies accepting the sacrifice or pursuing positional advantages."
+  },
+  {
+    "eco": "E77",
+    "name": "King's Indian Defense: Four Pawns Attack, Normal Attack",
+    "description": "White's methodical approach features steady pawn advances and piece coordination seeking positional dominance. Black's defensive resources must be combined with tactical alertness to prevent White from achieving overwhelming advantage."
+  },
+  {
+    "eco": "E77",
+    "name": "King's Indian Defense: Six Pawns Attack",
+    "description": "An extreme variation featuring White's aggressive pawn advances on multiple fronts creating overwhelming pressure. Black must counter with precision and tactical opportunities while defending the kingside under severe attack."
+  },
+  {
+    "eco": "E78",
+    "name": "King's Indian Defense: Four Pawns Attack, Fluid Attack",
+    "description": "White's fluid attacking approach allows flexibility in piece placement and strategic plans within the Four Pawns framework. Black's counterplay must develop rapidly to prevent White from achieving decisive attacking advantage."
+  },
+  {
+    "eco": "E79",
+    "name": "King's Indian Defense: Four Pawns Attack, Exchange Variation",
+    "description": "White trades pieces to simplify while maintaining spatial advantage from the Four Pawns Attack setup. Black's defensive resources prove adequate although White retains persistent positional pressure in the endgame."
+  },
+  {
+    "eco": "E81",
+    "name": "King's Indian Defense: Sämisch Variation, Bobotsov-Korchnoi-Petrosian Variation",
+    "description": "This refined defensive approach combines the ideas of Bobotsov, Korchnoi, and Petrosian creating a sophisticated setup against the Sämisch. Black's solid structure and piece coordination provide adequate defensive resources."
+  },
+  {
+    "eco": "E81",
+    "name": "King's Indian Defense: Sämisch Variation, Byrne Defense",
+    "description": "Byrne's solid defensive setup within the Sämisch emphasizes piece solidity and pawn structure integrity. White's aggressive setup combines with Black's reliable defense creating balanced positions requiring precise play."
+  },
+  {
+    "eco": "E81",
+    "name": "King's Indian Defense: Sämisch Variation, Normal Defense",
+    "description": "Black's straightforward defensive approach within the Sämisch provides reliable piece coordination and pawn structure. White maintains attacking potential while Black's solid defense ensures adequate holding possibilities."
+  },
+  {
+    "eco": "E81",
+    "name": "King's Indian Defense: Sämisch Variation, Sämisch Gambit",
+    "description": "White sacrifices a pawn with f4 seeking rapid piece activity and attacking chances. Black must evaluate whether accepting the gambit provides adequate compensation or declining generates better defensive prospects."
+  },
+  {
+    "eco": "E81",
+    "name": "King's Indian Defense: Sämisch Variation, Sämisch Gambit Accepted",
+    "description": "Black accepts White's f4 gambit attempting to exploit the resulting pawn structure and piece activity imbalance. White compensates through rapid piece development and attacking chances against Black's exposed king."
+  },
+  {
+    "eco": "E81",
+    "name": "King's Indian Defense: Steiner Attack",
+    "description": "Steiner's aggressive approach features unusual piece placement and strategic ideas creating tactical complications. The resulting positions challenge standard theoretical understanding as both players navigate original structures."
+  },
+  {
+    "eco": "E82",
+    "name": "King's Indian Defense: Sämisch Variation, Double Fianchetto",
+    "description": "Black fianchettoes both bishops creating a solid setup against White's Sämisch attack. The resulting positions feature long-range piece activity and strategic complexity where both players pursue their respective plans."
+  },
+  {
+    "eco": "E83",
+    "name": "King's Indian Defense: Sämisch Variation, Panno Formation",
+    "description": "Black's Panno-inspired setup within the Sämisch emphasizes the c7-pawn and queenside piece placement. The resulting positions offer both players practical winning chances through maneuvering and tactical alertness."
+  },
+  {
+    "eco": "E83",
+    "name": "King's Indian Defense: Sämisch Variation, Ruban Variation",
+    "description": "Ruban's contribution to the Sämisch defense introduces refined strategic understanding and piece placement nuances. White's attacking potential combines with Black's defensive solidity creating positions of balanced complexity."
+  },
+  {
+    "eco": "E83",
+    "name": "King's Indian Defense: Sämisch Variation, Yates Defense",
+    "description": "Yates's solid defensive approach within the Sämisch emphasizes piece safety and strategic positioning. Black's reliable structure provides adequate defensive resources while maintaining counterplay options."
+  },
+  {
+    "eco": "E84",
+    "name": "King's Indian Defense: Sämisch Variation, Panno Main Line",
+    "description": "The main line of the Panno defense within the Sämisch features sophisticated strategic play and piece coordination. White maintains attacking chances while Black's solid structure ensures adequate defensive reliability."
+  },
+  {
+    "eco": "E85",
+    "name": "King's Indian Defense: Sämisch Variation, Orthodox Variation",
+    "description": "Black's orthodox defensive setup within the Sämisch emphasizes classical piece development and solid pawn structure. White's aggressive plan combines with Black's patient defense creating strategic middlegame battles."
+  },
+  {
+    "eco": "E87",
+    "name": "King's Indian Defense: Sämisch Variation, Bronstein Defense",
+    "description": "Bronstein's dynamic defensive approach within the Sämisch features creative piece placement and tactical resourcefulness. The resulting positions showcase the evolution of defensive understanding against White's powerful setup."
+  },
+  {
+    "eco": "E87",
+    "name": "King's Indian Defense: Sämisch Variation, Closed Variation",
+    "description": "Black's closed defensive structure within the Sämisch provides solid piece coordination and positional resilience. White's attack must overcome Black's patient defensive resources through precise play."
+  },
+  {
+    "eco": "E87",
+    "name": "King's Indian Defense: Sämisch Variation, Orthodox Variation, Bronstein Variation",
+    "description": "Bronstein's refinement of the orthodox approach combines solid structure with dynamic piece activity. The resulting positions feature balanced complexity where both players pursue their strategic objectives."
+  },
+  {
+    "eco": "E88",
+    "name": "King's Indian Defense: Sämisch Variation, Closed Variation",
+    "description": "A continuation of Black's closed defensive structure emphasizing piece solidity and long-term strategic resistance. White pursues gradual improvement while Black generates counterplay through maneuvering."
+  },
+  {
+    "eco": "E89",
+    "name": "King's Indian Defense: Sämisch Variation, Closed Variation, Main Line",
+    "description": "The main line of the closed Sämisch defense represents the theoretical mainline featuring established defensive principles. White's attack requires precise execution while Black's solid structure ensures adequate holding capabilities."
+  },
+  {
+    "eco": "E90",
+    "name": "King's Indian Defense: Larsen Variation",
+    "description": "Larsen's unconventional approach features unusual move orders and piece placement creating original positions. The resulting structures challenge opponents requiring creative understanding beyond standard theoretical knowledge."
+  },
+  {
+    "eco": "E90",
+    "name": "King's Indian Defense: Normal Variation, Rare Defenses",
+    "description": "Black's rare defensive approaches within the normal variation provide flexibility and avoid mainstream theoretical battles. White maintains slight advantage while Black's creative setup generates practical winning chances."
+  },
+  {
+    "eco": "E90",
+    "name": "King's Indian Defense: Zinnowitz Variation",
+    "description": "The Zinnowitz variation features an unusual pawn structure and piece placement creating original positions. Both players navigate structures requiring creative understanding as standard theory provides limited guidance."
+  },
+  {
+    "eco": "E91",
+    "name": "King's Indian Defense: Kazakh Variation",
+    "description": "An interesting defensive setup emphasizing piece activity and strategic flexibility within the king's Indian framework. Black's dynamic resources provide practical winning chances while maintaining solid defensive structure."
+  },
+  {
+    "eco": "E91",
+    "name": "King's Indian Defense: Orthodox Variation",
+    "description": "Black's classical defensive setup emphasizes solid piece development and strategic positioning. White's slight spatial advantage combines with Black's reliable defense creating balanced positions requiring precise play."
+  },
+  {
+    "eco": "E92",
+    "name": "King's Indian Defense: Exchange Variation",
+    "description": "White trades the d4 pawn for Black's f6 knight, accepting doubled g-pawns to clarify positions. Black compensates through piece activity and the long-term bishop pair creating strategic complexity."
+  },
+  {
+    "eco": "E92",
+    "name": "King's Indian Defense: Orthodox Variation",
+    "description": "Black's solid orthodox setup provides reliable piece coordination and defensive structure. White maintains positional advantage while Black's strategic resources ensure adequate holding capabilities."
+  },
+  {
+    "eco": "E92",
+    "name": "King's Indian Defense: Orthodox Variation, Gligoric-Taimanov System",
+    "description": "Gligoric and Taimanov refined the orthodox approach introducing systematic strategic ideas and refined piece placement. The resulting positions feature balanced complexity where both players pursue coordinated plans."
+  },
+  {
+    "eco": "E92",
+    "name": "King's Indian Defense: Petrosian Variation, Stein Defense",
+    "description": "Stein's defensive contribution within the Petrosian variation emphasizes solid piece coordination and prophylactic thinking. White's gradual improvement meets Black's patient defense creating strategic middlegame battles."
+  },
+  {
+    "eco": "E93",
+    "name": "King's Indian Defense: Petrosian Variation, Keres Defense",
+    "description": "Keres's refined defensive approach within the Petrosian features creative piece placement and tactical resourcefulness. The resulting positions showcase the depth of defensive understanding required against White's methodical play."
+  },
+  {
+    "eco": "E93",
+    "name": "King's Indian Defense: Petrosian Variation, Normal Defense",
+    "description": "Black's normal defensive setup within the Petrosian provides solid piece coordination and strategic resilience. White maintains positional pressure while Black's reliable structure ensures adequate defensive capabilities."
+  },
+  {
+    "eco": "E94",
+    "name": "King's Indian Defense: Orthodox Variation",
+    "description": "The orthodox approach provides Black with solid piece placement and flexible strategic options. White's space advantage combines with Black's defensive solidity creating balanced positions requiring precise play."
+  },
+  {
+    "eco": "E94",
+    "name": "King's Indian Defense: Orthodox Variation, Donner Defense",
+    "description": "Donner's solid defensive setup emphasizes piece safety and pawn structure integrity within the orthodox framework. White's positional advantage requires precise play to convert into concrete winning chances."
+  },
+  {
+    "eco": "E94",
+    "name": "King's Indian Defense: Orthodox Variation, Glek Defense",
+    "description": "Glek's creative defensive approach introduces refined strategic ideas and unusual piece placement. The resulting positions feature original complexity where both players navigate positions requiring flexible understanding."
+  },
+  {
+    "eco": "E94",
+    "name": "King's Indian Defense: Orthodox Variation, Positional Defense",
+    "description": "Black's positional defensive approach emphasizes long-term strategic factors over tactical complications. White maintains moderate advantage while Black's solid structure provides adequate holding capabilities."
+  },
+  {
+    "eco": "E94",
+    "name": "King's Indian Defense: Orthodox Variation, Positional Defense, Closed Line",
+    "description": "A more closed continuation of Black's positional defense featuring restricted pawn advances and maneuvering. Both players pursue slow strategic plans where superior understanding determines the outcome."
+  },
+  {
+    "eco": "E94",
+    "name": "King's Indian Defense: Orthodox Variation, Ukrainian Defense",
+    "description": "The Ukrainian defensive approach features unique piece placement and strategic ideas within the orthodox framework. Black's creative setup generates practical winning chances while maintaining adequate defensive resources."
+  },
+  {
+    "eco": "E95",
+    "name": "King's Indian Defense: Orthodox Variation",
+    "description": "A continuation of the orthodox defense with refined move orders and strategic understanding. White's positional advantage combines with Black's solid structure creating balanced positions requiring precise execution."
+  },
+  {
+    "eco": "E96",
+    "name": "King's Indian Defense: Orthodox Variation, Positional Defense, Main Line",
+    "description": "The main line of the positional defense showcases established defensive principles and sophisticated strategic play. White's methodical improvement meets Black's patient defense creating positions of rich complexity."
+  },
+  {
+    "eco": "E97",
+    "name": "King's Indian Defense: Orthodox Variation, Aronin-Taimanov Defense",
+    "description": "Aronin and Taimanov's refined defensive approach combines solid structure with dynamic piece activity. The resulting positions feature balanced complexity where both players maintain practical winning chances."
+  },
+  {
+    "eco": "E97",
+    "name": "King's Indian Defense: Orthodox Variation, Bayonet Attack",
+    "description": "White's aggressive bayonet attack with b4 seeks to bypass Black's defenses through pawn advances and piece activity. Black's counterplay must develop precisely to prevent White from achieving overwhelming spatial dominance."
+  },
+  {
+    "eco": "E97",
+    "name": "King's Indian Defense: Orthodox Variation, Bayonet Attack, Sokolov's Line",
+    "description": "Sokolov's contribution to the Bayonet attack introduces refined attacking ideas and precise tactical sequences. Black's defensive resources must combine solid structure with tactical alertness to maintain balance."
+  },
+  {
+    "eco": "E97",
+    "name": "King's Indian Defense: Orthodox Variation, Bayonet Attack, Yepishin's Line",
+    "description": "Yepishin's defensive approach against the Bayonet attack emphasizes precise piece placement and tactical preparation. White's aggressive chances combine with Black's well-coordinated defense creating sharp positions."
+  },
+  {
+    "eco": "E97",
+    "name": "King's Indian Defense: Orthodox Variation, Korchnoi Attack",
+    "description": "Korchnoi's aggressive approach features refined attacking ideas and concrete tactical opportunities. Black's defense must be precise and flexible to counter White's persistent pressure and attacking chances."
+  },
+  {
+    "eco": "E97",
+    "name": "King's Indian Defense: Orthodox Variation, Modern System",
+    "description": "Black's modern defensive system combines classical principles with contemporary strategic understanding. White's positional advantage requires precise play while Black's solid structure ensures adequate defensive capabilities."
+  },
+  {
+    "eco": "E98",
+    "name": "King's Indian Defense: Orthodox Variation, Classical System, Kozul Gambit",
+    "description": "Kozul's gambit sacrifices material to generate aggressive attacking chances within the classical system. Black must evaluate whether the pawn compensation justifies accepting the gambit or declining for positional advantages."
+  },
+  {
+    "eco": "E98",
+    "name": "King's Indian Defense: Orthodox Variation, Classical System, Neo-Classical Line",
+    "description": "The neo-classical approach within the classical system introduces refined strategic ideas and refined piece placement. Both players pursue coordinated plans creating positions of balanced complexity requiring deep understanding."
+  },
+  {
+    "eco": "E99",
+    "name": "King's Indian Defense: Orthodox Variation, Classical System, Benko Attack",
+    "description": "Benko's aggressive approach features the f4 advance seeking kingside attacking chances within the classical framework. Black's counterplay must develop rapidly to prevent White from achieving decisive attacking advantage."
+  },
+  {
+    "eco": "E99",
+    "name": "King's Indian Defense: Orthodox Variation, Classical System, Traditional Line",
+    "description": "The traditional line of the classical system represents the theoretical mainline featuring established strategic principles. Both players pursue familiar plans creating positions of rich complexity and balanced winning chances."
+  }
+]

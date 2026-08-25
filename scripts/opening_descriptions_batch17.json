@@ -1,0 +1,752 @@
+[
+  {
+    "eco": "C51",
+    "name": "Italian Game: Evans Gambit Declined",
+    "description": "Black declines White's pawn sacrifice on b4, maintaining a solid setup without playing b4xc3. This conservative approach lets Black avoid sharp complications while keeping a safe, slightly cramped position."
+  },
+  {
+    "eco": "C51",
+    "name": "Italian Game: Evans Gambit Declined, Cordel Variation",
+    "description": "A rare sideline within the declined Evans where Black employs a specific move order to sidestep White's main attacking ideas. Black maintains material equality while limiting White's spatial advantage."
+  },
+  {
+    "eco": "C51",
+    "name": "Italian Game: Evans Gambit Declined, Hicken Variation",
+    "description": "An offbeat approach to declining the Evans, featuring uncommon move sequences that deviate from popular theory. This line suits players seeking to avoid heavy preparation on either side."
+  },
+  {
+    "eco": "C51",
+    "name": "Italian Game: Evans Gambit Declined, Hirschbach Variation",
+    "description": "A solid defensive resource in the declined Evans, allowing Black to consolidate the center while White maintains moderate pressure. The position remains relatively balanced with careful play from both sides."
+  },
+  {
+    "eco": "C51",
+    "name": "Italian Game: Evans Gambit Declined, Lange Variation",
+    "description": "Named after the 19th-century master, this variation offers Black a reliable defensive structure without accepting White's gambit. Black achieves counterplay through steady piece placement and central control."
+  },
+  {
+    "eco": "C51",
+    "name": "Italian Game: Evans Gambit Declined, Pavlov Variation",
+    "description": "A minor variation in the declined Evans emphasizing patient piece coordination for Black. The setup gives Black a playable position, though White retains a small initiative from the opening."
+  },
+  {
+    "eco": "C51",
+    "name": "Italian Game: Evans Gambit Declined, Showalter Variation",
+    "description": "Named after the American master, this approach within the declined Evans focuses on solid positional setup. Black avoids tactical complications while aiming for a sound, if passive, middlegame."
+  },
+  {
+    "eco": "C51",
+    "name": "Italian Game: Evans Gambit Declined, Vasquez Variation",
+    "description": "An obscure sideline of the declined Evans featuring unconventional move sequences. Both sides navigate less-explored territory, making theoretical knowledge less crucial than practical understanding."
+  },
+  {
+    "eco": "C51",
+    "name": "Italian Game: Evans Gambit, Fontaine Countergambit",
+    "description": "Black counters White's Evans pawn sacrifice with a pawn sacrifice of their own, creating sharp tactical play. This aggressive response leads to complicated positions with chances for both sides."
+  },
+  {
+    "eco": "C51",
+    "name": "Italian Game: Evans Gambit, Fraser Attack",
+    "description": "A tactical variation where White employs aggressive development after the Evans sacrifice. White aims for rapid piece coordination and kingside attacking chances, seeking compensation for the pawn."
+  },
+  {
+    "eco": "C51",
+    "name": "Italian Game: Evans Gambit, Fraser-Mortimer Attack",
+    "description": "Combining ideas from the Fraser and Mortimer, this attack seeks swift development and center control. White's compensation centers on rapid piece coordination and potential mating threats."
+  },
+  {
+    "eco": "C51",
+    "name": "Italian Game: Evans Gambit, Göring Attack",
+    "description": "A sharp attacking variation where White combines the Evans sacrifice with forceful piece placement. White aims for aggressive kingside play and tactical complications rather than pure positional advantage."
+  },
+  {
+    "eco": "C51",
+    "name": "Italian Game: Evans Gambit, Harding Variation",
+    "description": "An attacking line emphasizing White's development tempo and central pressure after the gambit sacrifice. White seeks rapid mobilization and kingside attacking chances against Black's position."
+  },
+  {
+    "eco": "C51",
+    "name": "Italian Game: Evans Gambit, Hein Countergambit",
+    "description": "Black responds to the Evans gambit with a counterattack, sacrificing material to generate immediate threats. This tactical approach creates complications where both sides must calculate precisely."
+  },
+  {
+    "eco": "C51",
+    "name": "Italian Game: Evans Gambit, Mayet Defense",
+    "description": "A rare defensive setup against the Evans where Black constructs a solid wall without counterattacking immediately. Black prioritizes piece coordination and central stability over immediate counterplay."
+  },
+  {
+    "eco": "C51",
+    "name": "Italian Game: Evans Gambit, McDonnell Defense",
+    "description": "A classical defense to the Evans gambit emphasizing safe, solid piece placement for Black. Black maintains material but accepts some passive positioning, relying on defensive resources and eventual counterplay."
+  },
+  {
+    "eco": "C51",
+    "name": "Italian Game: Evans Gambit, McDonnell Defense, Main Line",
+    "description": "The primary continuation of the McDonnell Defense with established move sequences. Both players follow well-known theory, leading to positions where White has mild compensation for the pawn."
+  },
+  {
+    "eco": "C51",
+    "name": "Italian Game: Evans Gambit, Morphy Attack",
+    "description": "Named after the legendary Paul Morphy, this attacking approach combines rapid development with direct threats. White sacrifices the b4 pawn to launch a kingside assault with superior piece placement."
+  },
+  {
+    "eco": "C51",
+    "name": "Italian Game: Evans Gambit, Mortimer-Evans Gambit",
+    "description": "An alternative handling of the Evans where White employs the Mortimer approach for additional flexibility. The setup allows White to adjust attacking plans based on Black's defensive resources."
+  },
+  {
+    "eco": "C51",
+    "name": "Italian Game: Evans Gambit, Paulsen Variation",
+    "description": "A methodical defensive approach against the Evans emphasizing consolidation over immediate counterplay. Black's setup prioritizes piece harmony and avoiding weaknesses over generating threats."
+  },
+  {
+    "eco": "C51",
+    "name": "Italian Game: Evans Gambit, Steinitz Variation",
+    "description": "Steinitz's pragmatic approach to facing the Evans involves solid development and positional maneuvering. Black accepts modest concessions in exchange for a fundamentally sound defensive structure."
+  },
+  {
+    "eco": "C51",
+    "name": "Italian Game: Evans Gambit, Stone-Ware Variation",
+    "description": "An obscure defensive sideline focusing on unconventional piece placement for Black. The setup avoids main-line theory, suiting players who prefer non-standard positions and practical play."
+  },
+  {
+    "eco": "C51",
+    "name": "Italian Game: Evans Gambit, Ulvestad Variation",
+    "description": "A rare variation of the Evans gambit named after Norwegian master Ulvestad. Black employs unusual defensive resources, creating off-beat positions with interesting strategic possibilities for both players."
+  },
+  {
+    "eco": "C52",
+    "name": "Italian Game: Evans Gambit, Alapin-Steinitz Variation",
+    "description": "Combining Alapin's sharp ideas with Steinitz's solid approach, this variation offers rich middlegame play. White maintains pressure while Black holds defensive resources, creating balanced positions with mutual chances."
+  },
+  {
+    "eco": "C52",
+    "name": "Italian Game: Evans Gambit, Anderssen Defense",
+    "description": "Named after the 19th-century pioneer, this defense employs practical, solid piece placement against the Evans. Black avoids sharp theory, relying on positional understanding and practical defensive skills."
+  },
+  {
+    "eco": "C52",
+    "name": "Italian Game: Evans Gambit, Bronstein Defense",
+    "description": "Bronstein's resourceful approach to the Evans combines solid setup with active piece play. Black creates counterchances while maintaining structural integrity, leading to dynamic, balanced middlegames."
+  },
+  {
+    "eco": "C52",
+    "name": "Italian Game: Evans Gambit, Compromised Defense",
+    "description": "Black's setup compromises on pawn structure for piece activity and central influence. The asymmetrical pawn configuration creates unique middlegame imbalances with chances for both player-types."
+  },
+  {
+    "eco": "C52",
+    "name": "Italian Game: Evans Gambit, Compromised Defense, Main Line",
+    "description": "The primary continuation of the Compromised Defense with thoroughly analyzed sequences. White presses for advantage while Black seeks counterplay, creating dynamic positions rich with tactical possibilities."
+  },
+  {
+    "eco": "C52",
+    "name": "Italian Game: Evans Gambit, Compromised Defense, Potter Variation",
+    "description": "A sideline of the Compromised Defense offering Black alternative defensive resources. Potter's approach adds practical flexibility while maintaining the fundamental ideas of the defense."
+  },
+  {
+    "eco": "C52",
+    "name": "Italian Game: Evans Gambit, Dufresne Defense",
+    "description": "Named after Dufresne, this solid defense combines reliable piece placement with modest counterplay. Black's setup emphasizes stability and long-term holding chances over immediate tactical complications."
+  },
+  {
+    "eco": "C52",
+    "name": "Italian Game: Evans Gambit, Johner Defense",
+    "description": "Johner's practical approach to the Evans emphasizes flexibility and piece coordination. The defense avoids sharp theory, allowing Black to maneuver gradually and create practical defensive chances."
+  },
+  {
+    "eco": "C52",
+    "name": "Italian Game: Evans Gambit, Laroche Variation",
+    "description": "An unusual defensive setup in the Evans gambit with rare, independent move orders. The variation suits explorers seeking positions away from main-line theory and established patterns."
+  },
+  {
+    "eco": "C52",
+    "name": "Italian Game: Evans Gambit, Lasker Defense",
+    "description": "Lasker's solid defensive method combines careful piece placement with strategic understanding. Black accepts modest spatial disadvantage while maintaining structural soundness and practical defensive resources."
+  },
+  {
+    "eco": "C52",
+    "name": "Italian Game: Evans Gambit, Leonhardt Countergambit",
+    "description": "Leonhardt's tactical counterpunch to the Evans involves Black's own pawn sacrifice and aggressive development. This sharp continuation creates complications where calculation and tactical vision are crucial."
+  },
+  {
+    "eco": "C52",
+    "name": "Italian Game: Evans Gambit, Levenfish Variation",
+    "description": "Levenfish's sharp attacking approach seeks maximum compensation for the gambit pawn through rapid development. White achieves potent piece placement and attacking chances in the resulting positions."
+  },
+  {
+    "eco": "C52",
+    "name": "Italian Game: Evans Gambit, Main Line",
+    "description": "The primary, most thoroughly analyzed continuation of the Evans gambit with established move sequences. White sacrifices the b4 pawn for rapid development, seeking kingside attacking chances."
+  },
+  {
+    "eco": "C52",
+    "name": "Italian Game: Evans Gambit, Mieses Defense",
+    "description": "A solid defensive approach where Black prioritizes piece safety and central control over creating immediate counterplay. The methodical setup provides reliable defensive resources and slow counterattacking opportunities."
+  },
+  {
+    "eco": "C52",
+    "name": "Italian Game: Evans Gambit, Pierce Defense",
+    "description": "Pierce's defensive variation emphasizes stable piece coordination within the Evans gambit structure. Black maintains solid defensive foundations while gradually building practical chances in the middlegame."
+  },
+  {
+    "eco": "C52",
+    "name": "Italian Game: Evans Gambit, Richardson Attack",
+    "description": "An aggressive White continuation combining the Evans sacrifice with sharp attacking ideas. White aims for rapid piece coordination and concrete threats, exploiting Black's defensive setup."
+  },
+  {
+    "eco": "C52",
+    "name": "Italian Game: Evans Gambit, Sanders-Alapin Variation",
+    "description": "Combining insights from Sanders and Alapin, this sharp variation offers White attacking possibilities. The continuation seeks optimal compensation through aggressive piece placement and central control."
+  },
+  {
+    "eco": "C52",
+    "name": "Italian Game: Evans Gambit, Slow Variation",
+    "description": "A measured, methodical approach to the Evans where both sides avoid forcing tactics. The position develops gradually, with White maintaining slight pressure while Black quietly improves piece placement."
+  },
+  {
+    "eco": "C52",
+    "name": "Italian Game: Evans Gambit, Sokolsky Variation",
+    "description": "Sokolsky's positional approach to the Evans emphasizes piece placement over immediate tactics. White compensates for the pawn through superior positioning and long-term strategic pressure."
+  },
+  {
+    "eco": "C52",
+    "name": "Italian Game: Evans Gambit, Tartakower Attack",
+    "description": "Tartakower's refined attacking approach combines principles of soundness with sharp play. White targets Black's position strategically while maintaining practical attacking chances in the middlegame."
+  },
+  {
+    "eco": "C52",
+    "name": "Italian Game: Evans Gambit, Waller Attack",
+    "description": "An aggressive White continuation seeking rapid development and kingside attacking potential. The attack combines tactical elements with positional ideas, exploiting Black's often-passive defensive setup."
+  },
+  {
+    "eco": "C53",
+    "name": "Italian Game: Bird's Attack",
+    "description": "Bird's aggressive attacking method combines d4 push with f4 expansion in the Italian Game setup. White seeks rapid central control and kingside attacking chances at the cost of some positional concessions."
+  },
+  {
+    "eco": "C53",
+    "name": "Italian Game: Classical Variation",
+    "description": "Black plays the solid ...Nf6 response, developing the knight naturally without the complications of the Two Knights Defense. The position offers Black reliable defense with equal chances for both sides."
+  },
+  {
+    "eco": "C53",
+    "name": "Italian Game: Classical Variation, Center Holding Variation",
+    "description": "Black emphasizes central pawn control in the Classical setup, maintaining d5/e6 or d6 structure. This careful approach prioritizes central stability and piece coordination over immediate counterplay."
+  },
+  {
+    "eco": "C53",
+    "name": "Italian Game: Classical Variation, Closed Variation",
+    "description": "A closed-structure approach where Black avoids opening the position and maintains a compact setup. The modest position gives Black practical defensive chances and opportunities for slow improvement."
+  },
+  {
+    "eco": "C53",
+    "name": "Italian Game: Classical Variation, Eisinger Variation",
+    "description": "An unusual defensive approach within the Classical, employing rare move orders for Black. The setup offers practical chances while avoiding heavily-analyzed main-line theory."
+  },
+  {
+    "eco": "C53",
+    "name": "Italian Game: Classical Variation, La Bourdonnais Variation",
+    "description": "Named after the 19th-century master, this variation features classical developing schemes emphasizing piece coordination. Black's solid setup provides reliable defensive foundations and gradual counterattacking chances."
+  },
+  {
+    "eco": "C53",
+    "name": "Italian Game: Classical Variation, Mestel Variation",
+    "description": "Mestel's refined approach to the Classical combines practical flexibility with solid piece placement. Black maintains dynamic defensive resources while avoiding the sharpest theoretical battles."
+  },
+  {
+    "eco": "C53",
+    "name": "Italian Game: Classical Variation, Tarrasch Variation",
+    "description": "Tarrasch's methodical approach to the Classical emphasizes solid piece placement and central stability. Black's setup provides reliable defense with sufficient counterplay for practical winning chances."
+  },
+  {
+    "eco": "C54",
+    "name": "Italian Game: Classical Variation",
+    "description": "The main line of the Classical Italian with 5.d4 in the center. White establishes central presence while Black maintains solid defense, leading to strategically rich middlegames."
+  },
+  {
+    "eco": "C54",
+    "name": "Italian Game: Classical Variation, Center Attack",
+    "description": "White aggressively pushes the center with d4-e5 ideas, seeking spatial advantage and kingside attacking chances. Black must defend carefully while looking for queenside counterplay opportunities."
+  },
+  {
+    "eco": "C54",
+    "name": "Italian Game: Classical Variation, Ghulam-Kassim Variation",
+    "description": "A rare sideline of the Classical offering both sides independent move-order flexibility. The offbeat continuation suits players seeking positions away from main-line preparation and established theory."
+  },
+  {
+    "eco": "C54",
+    "name": "Italian Game: Classical Variation, Giuoco Pianissimo",
+    "description": "The ultra-solid quiet approach to the Classical Italian, avoiding sharp tactical complications. Both sides maintain balanced positions with modest piece activity, emphasizing positional understanding over forcing play."
+  },
+  {
+    "eco": "C54",
+    "name": "Italian Game: Classical Variation, Giuoco Pianissimo, Albin Variation",
+    "description": "Albin's approach within the Giuoco Pianissimo adds independent flexibility through specific move orders. Black's variation provides defensive soundness with practical chances in complex middlegame positions."
+  },
+  {
+    "eco": "C54",
+    "name": "Italian Game: Classical Variation, Giuoco Pianissimo, Main Line",
+    "description": "The primary continuation of the Giuoco Pianissimo with most thoroughly analyzed sequences. Players follow established theory, with White maintaining slight pressure while Black holds solid defensive resources."
+  },
+  {
+    "eco": "C54",
+    "name": "Italian Game: Classical Variation, Giuoco Pianissimo, with a4 a5",
+    "description": "A sideline of the Giuoco Pianissimo featuring early queenside pawn play where both sides advance a-pawns. The move sequence alters the pawn structure dynamics and affects piece placement strategies."
+  },
+  {
+    "eco": "C54",
+    "name": "Italian Game: Classical Variation, Giuoco Pianissimo, with a5",
+    "description": "Black's early a5 push in the Giuoco Pianissimo restricts White's queenside expansion options. This move-order variation creates unique pawn structures with implications for piece placement and strategy."
+  },
+  {
+    "eco": "C54",
+    "name": "Italian Game: Classical Variation, Giuoco Pianissimo, with a6",
+    "description": "A solid move-order variation where Black plays a6 early in the Giuoco Pianissimo. The setup provides additional flexibility for Black's queenside pieces while maintaining a compact defensive structure."
+  },
+  {
+    "eco": "C54",
+    "name": "Italian Game: Classical Variation, Giuoco Pianissimo, with h6",
+    "description": "Black's early h6 prepares kingside breathing room in the Giuoco Pianissimo structure. The prophylactic move prevents White's knight jumps and provides flexibility for Black's kingside piece coordination."
+  },
+  {
+    "eco": "C54",
+    "name": "Italian Game: Classical Variation, Greco Gambit, Anderssen Variation",
+    "description": "Anderssen's approach to the Greco Gambit combines tactical and positional ideas effectively. White sacrifices material for active piece play and kingside attacking chances against Black's defensive setup."
+  },
+  {
+    "eco": "C54",
+    "name": "Italian Game: Classical Variation, Greco Gambit, Dubov Italian",
+    "description": "A modern continuation of the Greco Gambit featuring moves popularized by Dubov. The sharp setup combines classical gambit ideas with contemporary attacking patterns and tactical resources."
+  },
+  {
+    "eco": "C54",
+    "name": "Italian Game: Classical Variation, Greco Gambit, Greco Variation",
+    "description": "The classical form of the Greco Gambit with 5.d4 e5xd4 6.e5 sacrifice. White compensates with rapid development, central control, and aggressive piece placement against Black's material advantage."
+  },
+  {
+    "eco": "C54",
+    "name": "Italian Game: Classical Variation, Greco Gambit, Main Line",
+    "description": "The most thoroughly analyzed continuation of the Greco Gambit with established sequences. White's compensation revolves around rapid piece activity and kingside attacking chances."
+  },
+  {
+    "eco": "C54",
+    "name": "Italian Game: Classical Variation, Greco Gambit, Modern Line",
+    "description": "A contemporary approach to the Greco Gambit incorporating modern tactical and strategic understanding. The line seeks to maximize White's compensation through efficient piece placement and centralization."
+  },
+  {
+    "eco": "C54",
+    "name": "Italian Game: Classical Variation, Greco Gambit, Moeller-Bayonet Attack",
+    "description": "The Moeller-Bayonet combines Greco Gambit ideas with aggressive king-side expansion. White's compensation focuses on rapid piece coordination and direct mating threats against Black's king."
+  },
+  {
+    "eco": "C54",
+    "name": "Italian Game: Classical Variation, Greco Gambit, Moeller-Therkatz Attack",
+    "description": "Moeller and Therkatz' sharp attacking approach within the Greco Gambit emphasizes aggressive piece play. White sacrifices material for maximum practical complications and attacking possibilities."
+  },
+  {
+    "eco": "C54",
+    "name": "Italian Game: Classical Variation, Greco Gambit, Traditional Line",
+    "description": "The classical form of the Greco Gambit with traditional attacking ideas. White seeks rapid mobilization and kingside threats as compensation for the sacrificed pawn."
+  },
+  {
+    "eco": "C54",
+    "name": "Italian Game: Classical Variation, with d5",
+    "description": "Black's central breakthrough with d5 creates immediate tactical complications in the Classical. Both sides must navigate sharp complications, with mutual attacking chances and tactical alertness required."
+  },
+  {
+    "eco": "C54",
+    "name": "Italian Game: Giuoco Piano, Aitken Variation",
+    "description": "A rare sideline of the Giuoco Piano offering independent piece-placement ideas for both players. The variation suits explorers seeking positions outside heavily-analyzed main-line theory."
+  },
+  {
+    "eco": "C54",
+    "name": "Italian Game: Giuoco Piano, Bernstein Variation",
+    "description": "Bernstein's flexible approach to the Giuoco Piano provides practical defensive and counterattacking resources. Black maintains solid structure while creating opportunities for gradual improvement and midgame activity."
+  },
+  {
+    "eco": "C54",
+    "name": "Italian Game: Giuoco Piano, Cracow Variation",
+    "description": "An unusual defensive setup in the Giuoco Piano featuring independent move orders. The variation creates offbeat positions with unique strategic characteristics and practical possibilities."
+  },
+  {
+    "eco": "C54",
+    "name": "Italian Game: Giuoco Piano, Greco's Attack",
+    "description": "Greco's aggressive attacking method in the Giuoco Piano combines rapid development with direct threats. White seeks early kingside attacking chances and mating possibilities against Black's position."
+  },
+  {
+    "eco": "C54",
+    "name": "Italian Game: Giuoco Piano, Holzhausen Attack",
+    "description": "Holzhausen's sharp attacking approach in the Giuoco Piano emphasizes aggressive piece coordination. White presses for immediate attacking chances and practical complications."
+  },
+  {
+    "eco": "C54",
+    "name": "Italian Game: Giuoco Piano, Krause Variation",
+    "description": "Krause's systematic approach to the Giuoco Piano offers Black flexible defensive resources. The setup provides solid structure with practical counterattacking chances in the middlegame."
+  },
+  {
+    "eco": "C54",
+    "name": "Italian Game: Giuoco Piano, Rosentreter Variation",
+    "description": "An unusual defensive line in the Giuoco Piano creating independent strategic possibilities. Black avoids main-line tactics while maintaining practical defensive and counterattacking resources."
+  },
+  {
+    "eco": "C54",
+    "name": "Italian Game: Giuoco Piano, Steinitz Variation",
+    "description": "Steinitz's methodical approach to the Giuoco Piano emphasizes solid piece coordination and central control. Black's setup provides reliable defense with gradual counterattacking potential."
+  },
+  {
+    "eco": "C54",
+    "name": "Italian Game: Giuoco Piano, Therkatz-Herzog Variation",
+    "description": "A rare sideline combining Therkatz and Herzog ideas in the Giuoco Piano. The variation offers both sides interesting strategic possibilities away from most-analyzed main-line patterns."
+  },
+  {
+    "eco": "C55",
+    "name": "Italian Game: Two Knights Defense, Modern Bishop's Opening",
+    "description": "A contemporary blend of Two Knights Defense ideas with modern bishop-opening principles. The setup creates flexible positions where both sides employ contemporary understanding of piece placement and strategy."
+  },
+  {
+    "eco": "C56",
+    "name": "Italian Game: Scotch Gambit, Anderssen Attack",
+    "description": "Anderssen's sharp attacking approach to the Scotch Gambit combines d4 sacrifice with aggressive piece deployment. White achieves rapid development and attacking chances as compensation."
+  },
+  {
+    "eco": "C56",
+    "name": "Italian Game: Scotch Gambit, Anderssen Attack, Main Line",
+    "description": "The primary continuation of the Anderssen Attack with thoroughly analyzed move sequences. White presses for maximum attacking potential while Black defends carefully with solid resources."
+  },
+  {
+    "eco": "C56",
+    "name": "Italian Game: Scotch Gambit, Canal Variation",
+    "description": "Canal's flexible approach within the Scotch Gambit allows both players independent strategies. The variation creates rich middlegame positions with mutual attacking and defensive possibilities."
+  },
+  {
+    "eco": "C56",
+    "name": "Italian Game: Scotch Gambit, de Riviere Defense",
+    "description": "De Riviere's solid defensive method against the Scotch Gambit emphasizes piece safety and central control. Black avoids sharp complications while maintaining practical defensive resources."
+  },
+  {
+    "eco": "C56",
+    "name": "Italian Game: Scotch Gambit, Double Gambit Accepted",
+    "description": "A sharp continuation where Black accepts multiple pawn sacrifices for piece activity. Both sides must calculate precisely as tactical complications dominate the resulting positions."
+  },
+  {
+    "eco": "C56",
+    "name": "Italian Game: Scotch Gambit, Janowski Defense",
+    "description": "Janowski's practical defensive approach to the Scotch Gambit combines solidity with counterattacking ideas. Black maintains structural integrity while creating gradual counterchances."
+  },
+  {
+    "eco": "C56",
+    "name": "Italian Game: Scotch Gambit, Max Lange Attack",
+    "description": "Max Lange's powerful attacking continuation sacrifices the d4 pawn for rapid piece activity and kingside threats. White's compensation revolves around superior piece coordination and attacking chances."
+  },
+  {
+    "eco": "C56",
+    "name": "Italian Game: Scotch Gambit, Max Lange Attack Accepted",
+    "description": "Black accepts Max Lange's pawn sacrifice, leading to sharp tactical play and complications. Both sides must navigate precise calculations with mutual attacking and defensive resources."
+  },
+  {
+    "eco": "C56",
+    "name": "Italian Game: Scotch Gambit, Max Lange Attack, Long Variation",
+    "description": "A lengthy continuation of the Max Lange Attack with extended move sequences. White maintains aggressive attacking chances throughout, while Black seeks defensive resources and counterplay opportunities."
+  },
+  {
+    "eco": "C56",
+    "name": "Italian Game: Scotch Gambit, Max Lange Attack, Spielmann Defense",
+    "description": "Spielmann's resourceful defensive approach to the Max Lange Attack combines solid setup with tactical alertness. Black maintains practical defensive chances despite White's aggressive compensation."
+  },
+  {
+    "eco": "C56",
+    "name": "Italian Game: Scotch Gambit, Nakhmanson Gambit",
+    "description": "Nakhmanson's sharp countergambit features Black's own pawn sacrifice for counterattacking play. Both sides achieve active piece placement with mutual tactical possibilities and complications."
+  },
+  {
+    "eco": "C56",
+    "name": "Italian Game: Scotch Gambit, Walbrodt-Baird Gambit",
+    "description": "A rare gambit continuation combining Walbrodt and Baird ideas for aggressive White play. The setup creates unique tactical complications where accurate calculation determines practical success."
+  },
+  {
+    "eco": "C56",
+    "name": "Italian Game: Scotch Invitation Declined",
+    "description": "Black declines the Scotch's typical e5 capture, maintaining center control with alternative moves. The conservative approach avoids sharp tactics while keeping Black's position sound and flexible."
+  },
+  {
+    "eco": "C56",
+    "name": "Italian Game: Two Knights Defense, Keidansky Variation",
+    "description": "A rare sideline of the Two Knights featuring Keidansky's unconventional approach. The variation offers practical complexity for both players outside heavily-prepared main-line theory."
+  },
+  {
+    "eco": "C56",
+    "name": "Italian Game: Two Knights Defense, Max Lange Attack",
+    "description": "The Max Lange Attack sacrifices the bishop for rapid piece activity and attacking chances. White compensates with superior development and tactical possibilities."
+  },
+  {
+    "eco": "C56",
+    "name": "Italian Game: Two Knights Defense, Max Lange Attack, Berger Variation",
+    "description": "Berger's defensive approach within the Max Lange focuses on solid piece placement and counterplay. Black maintains practical defensive resources despite White's active piece coordination."
+  },
+  {
+    "eco": "C56",
+    "name": "Italian Game: Two Knights Defense, Max Lange Attack, Krause Variation",
+    "description": "Krause's variation of the Max Lange adds defensive flexibility through alternative move orders. Black creates unexpected counterattacking possibilities while maintaining structural soundness."
+  },
+  {
+    "eco": "C56",
+    "name": "Italian Game: Two Knights Defense, Max Lange Attack, Loman Defense",
+    "description": "Loman's solid defensive setup against the Max Lange emphasizes central control and piece safety. Black avoids sharp complications while maintaining practical defensive and counterattacking resources."
+  },
+  {
+    "eco": "C56",
+    "name": "Italian Game: Two Knights Defense, Max Lange Attack, Rubinstein Variation",
+    "description": "Rubinstein's refined defensive approach to the Max Lange combines solid piece placement with strategic understanding. Black's setup provides reliable defense with practical winning chances."
+  },
+  {
+    "eco": "C56",
+    "name": "Italian Game: Two Knights Defense, Open Variation",
+    "description": "The open, non-gambit approach to the Two Knights maintains central tension with careful piece coordination. Both sides develop naturally with balanced positions offering practical chances."
+  },
+  {
+    "eco": "C56",
+    "name": "Italian Game: Two Knights Defense, Perreux Variation",
+    "description": "Perreux's defensive variation offers Black unusual piece-placement ideas within the Two Knights structure. The offbeat approach suits players seeking positions away from most-analyzed theory."
+  },
+  {
+    "eco": "C56",
+    "name": "Italian Game: Two Knights Defense, Yurdansky Attack",
+    "description": "Yurdansky's aggressive attacking approach in the Two Knights emphasizes rapid development and kingside threats. White creates immediate attacking complications requiring precise defense from Black."
+  },
+  {
+    "eco": "C57",
+    "name": "Italian Game: Two Knights Defense, Fegatello Attack, Leonhardt Variation",
+    "description": "Leonhardt's defensive approach to the sharp Fegatello Attack balances practical defense with counterattacking chances. Black maintains structural integrity while seeking gradual improvement."
+  },
+  {
+    "eco": "C57",
+    "name": "Italian Game: Two Knights Defense, Fried Liver Attack",
+    "description": "White's famous attacking continuation sacrifices the knight on e5 for a powerful attack. This sharp line creates immediate tactical complications where White seeks mating attacks and piece activity."
+  },
+  {
+    "eco": "C57",
+    "name": "Italian Game: Two Knights Defense, Fritz, Gruber Variation",
+    "description": "A rare defensive sideline combining Fritz and Gruber ideas against sharp attacks. The variation offers practical complexity and offbeat positions for both players."
+  },
+  {
+    "eco": "C57",
+    "name": "Italian Game: Two Knights Defense, Fritz Variation",
+    "description": "Fritz's defensive approach provides solid resources against White's attacking compensation. Black's setup balances defensive requirements with practical counterattacking possibilities."
+  },
+  {
+    "eco": "C57",
+    "name": "Italian Game: Two Knights Defense, Kloss Gambit",
+    "description": "A rare counter-gambit where Black sacrifices material for immediate counterplay. Both sides navigate tactical complications with mutual attacking chances."
+  },
+  {
+    "eco": "C57",
+    "name": "Italian Game: Two Knights Defense, Knight Attack",
+    "description": "A powerful attacking continuation where White coordinates knights for rapid kingside threats. The setup creates immediate tactical complications favoring White's active piece coordination."
+  },
+  {
+    "eco": "C57",
+    "name": "Italian Game: Two Knights Defense, Knight Attack, Normal Variation",
+    "description": "The standard continuation of the Knight Attack with thoroughly analyzed sequences. White maintains aggressive attacking chances while Black defends with solid resources."
+  },
+  {
+    "eco": "C57",
+    "name": "Italian Game: Two Knights Defense, Lolli Attack",
+    "description": "Lolli's classical attacking approach combines central control with kingside threats. White's rapid piece coordination creates attacking complications where precise calculation determines practical success."
+  },
+  {
+    "eco": "C57",
+    "name": "Italian Game: Two Knights Defense, Pincus Variation",
+    "description": "An unusual defensive setup within the Two Knights emphasizing solid piece placement. The variation offers practical defensive resources and gradual counterattacking chances."
+  },
+  {
+    "eco": "C57",
+    "name": "Italian Game: Two Knights Defense, Ponziani-Steinitz Gambit",
+    "description": "A rare gambit continuation combining Ponziani and Steinitz ideas for aggressive compensation. White sacrifices material for rapid piece activity and attacking possibilities."
+  },
+  {
+    "eco": "C57",
+    "name": "Italian Game: Two Knights Defense, Traxler Counterattack",
+    "description": "Black's bold counterattacking gambit sacrifices the bishop for immediate threats and complications. This sharp continuation creates mutual attacking chances with tactical complexity favoring tactical players."
+  },
+  {
+    "eco": "C57",
+    "name": "Italian Game: Two Knights Defense, Traxler Counterattack, Bishop Sacrifice Line",
+    "description": "The forcing main line of the Traxler with immediate bishop sacrifice leading to sharp complications. Both sides must calculate precisely with tactical precision determining practical outcomes."
+  },
+  {
+    "eco": "C57",
+    "name": "Italian Game: Two Knights Defense, Traxler Counterattack, King March Line",
+    "description": "An alternative Traxler continuation featuring dramatic king movement and tactical complications. Both sides achieve active piece coordination with mutual attacking possibilities."
+  },
+  {
+    "eco": "C57",
+    "name": "Italian Game: Two Knights Defense, Traxler Counterattack, Knight Sacrifice Line",
+    "description": "A sharp Traxler variation involving knight sacrifices and forcing sequences. The tactical complications create mutual attacking chances with precise calculation required."
+  },
+  {
+    "eco": "C57",
+    "name": "Italian Game: Two Knights Defense, Traxler Variation, Trencianske-Teplice Gambit",
+    "description": "An obscure Traxler sideline featuring unique pawn sacrifices and tactical ideas. Both sides navigate rare positions with limited theoretical preparation available."
+  },
+  {
+    "eco": "C57",
+    "name": "Italian Game: Two Knights Defense, Ulvestad Variation",
+    "description": "Ulvestad's flexible defensive approach within the Two Knights offers practical defensive resources. Black's setup maintains structural integrity while creating gradual counterattacking chances."
+  },
+  {
+    "eco": "C57",
+    "name": "Italian Game: Two Knights Defense, Ulvestad Variation, Kurkin Gambit",
+    "description": "A rare gambit sideline within Ulvestad's variation featuring Black's unusual pawn sacrifice. The sharp continuation creates tactical complications with mutual attacking possibilities."
+  },
+  {
+    "eco": "C58",
+    "name": "Italian Game: Two Knights Defense, Blackburne Variation",
+    "description": "Blackburne's solid defensive approach to the Two Knights emphasizes practical resources and piece coordination. Black's setup maintains structural integrity while seeking gradual counterattacking chances."
+  },
+  {
+    "eco": "C58",
+    "name": "Italian Game: Two Knights Defense, Colman Variation",
+    "description": "An unusual defensive sideline within the Two Knights featuring Colman's independent approach. The variation offers practical complexity away from most-analyzed main-line theory."
+  },
+  {
+    "eco": "C58",
+    "name": "Italian Game: Two Knights Defense, Maróczy Variation",
+    "description": "Maróczy's flexible defensive method combines solid structure with practical counterattacking ideas. Black's setup provides reliable defense with gradual improving chances in complex positions."
+  },
+  {
+    "eco": "C58",
+    "name": "Italian Game: Two Knights Defense, Paoli Variation",
+    "description": "Paoli's defensive approach within the Two Knights offers practical resources and piece flexibility. Black maintains solid structure while creating opportunities for gradual improvement."
+  },
+  {
+    "eco": "C58",
+    "name": "Italian Game: Two Knights Defense, Polerio Defense",
+    "description": "The classical defensive approach to the Two Knights with solid piece placement and central control. Black achieves reliable defense through careful coordination and strategic maneuvering."
+  },
+  {
+    "eco": "C58",
+    "name": "Italian Game: Two Knights Defense, Polerio Defense, Bishop Check Line",
+    "description": "A forcing continuation of the Polerio Defense featuring immediate bishop checks. Both sides navigate tactical complications with mutual attacking and defensive resources."
+  },
+  {
+    "eco": "C58",
+    "name": "Italian Game: Two Knights Defense, Polerio Defense, Bogoljubow Variation",
+    "description": "Bogoljubow's flexible approach within the Polerio Defense offers practical defensive resources. Black's setup combines solid structure with counterattacking possibilities."
+  },
+  {
+    "eco": "C58",
+    "name": "Italian Game: Two Knights Defense, Polerio Defense, Kieseritzky Variation",
+    "description": "Kieseritzky's alternative approach to the Polerio provides defensive flexibility through independent move orders. Black achieves practical defensive resources and gradual counterplay."
+  },
+  {
+    "eco": "C58",
+    "name": "Italian Game: Two Knights Defense, Polerio Defense, Yankovich Variation",
+    "description": "Yankovich's rare variation within the Polerio Defense features unusual defensive ideas. The offbeat approach suits players seeking positions away from standard theoretical preparation."
+  },
+  {
+    "eco": "C59",
+    "name": "Italian Game: Two Knights Defense, Knorre Variation",
+    "description": "Knorre's flexible defensive approach within the Two Knights offers practical resources against White's attacking play. Black maintains solid structure with gradual counterattacking possibilities."
+  },
+  {
+    "eco": "C59",
+    "name": "Italian Game: Two Knights Defense, Polerio Defense, Göring Variation",
+    "description": "Göring's sharp approach within the Polerio Defense creates immediate tactical complications. Both sides must navigate precise calculations with mutual attacking possibilities."
+  },
+  {
+    "eco": "C59",
+    "name": "Italian Game: Two Knights Defense, Polerio Defense, Suhle Defense",
+    "description": "Suhle's practical defensive method within the Polerio emphasizes piece safety and central control. Black avoids sharp complications while maintaining solid defensive foundations."
+  },
+  {
+    "eco": "C59",
+    "name": "Italian Game: Two Knights Defense, Steinitz Variation",
+    "description": "Steinitz's methodical defensive approach combines solid piece placement with strategic understanding. Black maintains reliable defense while seeking practical counterattacking chances in the middlegame."
+  },
+  {
+    "eco": "C60",
+    "name": "Ruy Lopez: Alapin Defense",
+    "description": "A solid defensive approach featuring early piece development for Black without establishing central pawns. Black maintains flexibility while avoiding the main tactical battles of the Ruy Lopez."
+  },
+  {
+    "eco": "C60",
+    "name": "Ruy Lopez: Alapin Defense, Alapin Gambit",
+    "description": "Alapin's sharp counter-gambit sacrifices material for immediate counterattacking play. Both sides achieve active piece coordination with mutual attacking chances."
+  },
+  {
+    "eco": "C60",
+    "name": "Ruy Lopez: Brentano Gambit",
+    "description": "A rare aggressive continuation where White sacrifices a pawn for rapid development and attacking chances. The unusual approach creates tactical complications favoring aggressive play."
+  },
+  {
+    "eco": "C60",
+    "name": "Ruy Lopez: Bulgarian Variation",
+    "description": "An unconventional defensive setup featuring unusual piece-placement ideas for Black. The offbeat variation offers practical complexity away from main-line theoretical preparation."
+  },
+  {
+    "eco": "C60",
+    "name": "Ruy Lopez: Cozio Defense, Paulsen Variation",
+    "description": "Paulsen's refined approach to the Cozio Defense combines solid setup with practical flexibility. Black maintains defensive soundness while creating counterattacking opportunities."
+  },
+  {
+    "eco": "C60",
+    "name": "Ruy Lopez: Cozio Defense, Tartakower Gambit",
+    "description": "Tartakower's aggressive gambit sacrifice in the Cozio creates immediate tactical complications. White compensates with rapid piece activity and attacking chances."
+  },
+  {
+    "eco": "C60",
+    "name": "Ruy Lopez: Fianchetto Defense",
+    "description": "Black establishes a bishop fianchetto structure against the Ruy Lopez, creating a flexible defensive setup. The approach avoids sharp tactical play while maintaining solid positional foundations."
+  },
+  {
+    "eco": "C60",
+    "name": "Ruy Lopez: Fianchetto Defense, Kevitz Gambit",
+    "description": "Kevitz's aggressive gambit within the Fianchetto creates immediate tactical complications. White sacrifices material for rapid piece activity and attacking possibilities."
+  },
+  {
+    "eco": "C60",
+    "name": "Ruy Lopez: Lucena Variation",
+    "description": "Named after the historical master, this variation features classical defensive principles and careful piece coordination. Black maintains solid structure while seeking gradual improvement."
+  },
+  {
+    "eco": "C60",
+    "name": "Ruy Lopez: Nürnberg Variation",
+    "description": "A rare defensive approach featuring unusual move orders for Black in the Ruy Lopez. The offbeat setup offers practical complexity and reduced theoretical preparation requirements."
+  },
+  {
+    "eco": "C60",
+    "name": "Ruy Lopez: Pollock Defense",
+    "description": "Pollock's solid defensive method emphasizes piece safety and central control. Black maintains reliable defense while creating practical counterattacking possibilities."
+  },
+  {
+    "eco": "C60",
+    "name": "Ruy Lopez: Retreat Variation",
+    "description": "A conservative defensive approach where Black retreats pieces to avoid sharp tactical complications. The position remains balanced with White maintaining modest pressure."
+  },
+  {
+    "eco": "C60",
+    "name": "Ruy Lopez: Rotary-Albany Gambit",
+    "description": "A rare gambit combination featuring aggressive pawn sacrifices for rapid White compensation. The sharp approach creates immediate tactical complications."
+  },
+  {
+    "eco": "C60",
+    "name": "Ruy Lopez: Spanish Countergambit",
+    "description": "Black's counter-gambit features d5 push and pawn sacrifice for immediate counterattacking play. Both sides achieve active piece coordination with mutual attacking possibilities."
+  },
+  {
+    "eco": "C60",
+    "name": "Ruy Lopez: Spanish Countergambit, Harding Countergambit, Fricke Gambit",
+    "description": "A rare multi-gambit continuation combining Harding and Fricke ideas with sharp complications. Both sides navigate tactical complexities with mutual attacking chances."
+  },
+  {
+    "eco": "C60",
+    "name": "Ruy Lopez: Spanish Countergambit, Harding Gambit",
+    "description": "Harding's counter-gambit features aggressive pawn sacrifices for Black's counterattacking play. The sharp approach creates immediate tactical complications and mutual attacking chances."
+  },
+  {
+    "eco": "C60",
+    "name": "Ruy Lopez: Vinogradov Variation",
+    "description": "Vinogradov's unconventional defensive approach features rare move orders in the Ruy Lopez. The offbeat variation offers practical complexity and reduced main-line preparation requirements."
+  }
+]

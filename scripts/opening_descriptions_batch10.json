@@ -1,0 +1,752 @@
+[
+  {
+    "eco": "B20",
+    "name": "Sicilian Defense: Keres Variation",
+    "description": "White plays 2.Nf3 instead of pursuing the main lines, developing quietly while maintaining flexibility. Black gets a solid, flexible position but White avoids the sharpest theoretical battles."
+  },
+  {
+    "eco": "B20",
+    "name": "Sicilian Defense: King David's Opening",
+    "description": "A rare sideline in the B20 complex where White plays an offbeat second move, allowing Black to dictate the game's character. This opening prioritizes avoiding established theory over seeking a concrete edge."
+  },
+  {
+    "eco": "B20",
+    "name": "Sicilian Defense: Kronberger Variation",
+    "description": "A minor system where White develops with unusual move orders in the early Sicilian. Black can pursue standard defensive setups while White experiments with unconventional piece placement."
+  },
+  {
+    "eco": "B20",
+    "name": "Sicilian Defense: Kronberger Variation, Nemeth Gambit",
+    "description": "White sacrifices material early in the Kronberger, seeking rapid initiative and piece activity. Black must carefully evaluate whether the compensation justifies accepting the gambit pawn."
+  },
+  {
+    "eco": "B20",
+    "name": "Sicilian Defense: Lasker-Dunne Attack",
+    "description": "White pursues an aggressive attacking setup in the early Sicilian with unconventional moves, prioritizing piece play over pawn structure. The opening can lead to sharp, tactical positions where White seeks attacking chances."
+  },
+  {
+    "eco": "B20",
+    "name": "Sicilian Defense: Mengarini Variation",
+    "description": "A sideline where White employs an unusual setup in response to 1...c5, allowing Black standard defensive resources. The position tends toward quiet maneuvering rather than forcing tactical sequences."
+  },
+  {
+    "eco": "B20",
+    "name": "Sicilian Defense: Myers Attack, with a4",
+    "description": "White launches a kingside and queenside assault with pawns, preparing to expand on both flanks. This unorthodox attacking scheme can confuse Black but lacks coherent central compensation."
+  },
+  {
+    "eco": "B20",
+    "name": "Sicilian Defense: Myers Attack, with h4",
+    "description": "A flank-attacking system where White pushes pawns on the kingside to weaken Black's king safety. White's attack can be dangerous if Black is unprepared, though the center remains uncontested."
+  },
+  {
+    "eco": "B20",
+    "name": "Sicilian Defense: Staunton-Cochrane Variation",
+    "description": "An historical sideline where White adopts a classical, solid approach to the Sicilian rather than pursuing sharp, modern theory. Black achieves comfortable equality with standard defensive moves."
+  },
+  {
+    "eco": "B20",
+    "name": "Sicilian Defense: Wing Gambit, Abrahams Variation",
+    "description": "White sacrifices the b4 pawn to accelerate queenside play and open lines for piece activity. Black accepts or declines, leading to either tactical complications or solid positions depending on the continuation."
+  },
+  {
+    "eco": "B20",
+    "name": "Sicilian Defense: Wing Gambit, Carlsbad Variation",
+    "description": "A variation of White's 2.b4 gambit leading to specific pawn structures and piece placements. Play often features tactical opportunities for both sides as lines open and pieces compete for key squares."
+  },
+  {
+    "eco": "B20",
+    "name": "Sicilian Defense: Wing Gambit, Marienbad Variation",
+    "description": "White's 2.b4 gambit pursued with specific tactical ideas targeting Black's center and development. The resulting positions feature sharp play where both sides must calculate accurately."
+  },
+  {
+    "eco": "B20",
+    "name": "Sicilian Defense: Wing Gambit, Marshall Variation",
+    "description": "A Marshall-influenced approach to the Wing Gambit with active piece placement and tactical threats. White seeks dynamic compensation through rapid development and open lines after the initial pawn sacrifice."
+  },
+  {
+    "eco": "B20",
+    "name": "Sicilian Defense: Wing Gambit, Nanu Gambit",
+    "description": "An obscure gambit where White sacrifices queenside pawns for attacking chances and piece activity. The position requires Black to find precise defensive moves to justify declining the material sacrifice."
+  },
+  {
+    "eco": "B20",
+    "name": "Sicilian Defense: Wing Gambit, Romanian Defense",
+    "description": "Black counters White's 2.b4 gambit with a solid Romanian-influenced setup, prioritizing central control over accepting the pawn sacrifice. The resulting position tends toward Black's solid defensive advantage."
+  },
+  {
+    "eco": "B20",
+    "name": "Sicilian Defense: Wing Gambit, Santasiere Variation",
+    "description": "A Santasiere-influenced continuation in the Wing Gambit with specific move orders and piece placements. White maintains attacking prospects while Black seeks to consolidate material and neutralize White's initiative."
+  },
+  {
+    "eco": "B21",
+    "name": "Bird Opening: Dutch Variation, Batavo Gambit",
+    "description": "White's Bird Opening met with a Dutch-style setup, followed by White's gambit attempt. The position features unusual pawn structures and offers both sides counterplay based on tactical opportunities."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: Coles Sicilian Gambit",
+    "description": "White sacrifices material early in the Sicilian for attacking chances and rapid development. Black must evaluate whether the resulting position offers sufficient compensation or defensive resources."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: Halasz Gambit",
+    "description": "An offbeat gambit approach where White sacrifices a pawn to open lines and activate pieces quickly. The resulting complications favor players seeking tactical play over solid positional maneuvering."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: McDonnell Attack",
+    "description": "A classical attacking system where White pursues a direct kingside assault with f4 and piece play. Black's defense requires careful piece placement to both blunt White's attack and create counterplay."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: McDonnell Attack, Tal Gambit",
+    "description": "Tal's contribution to the McDonnell Attack: White sacrifices material for dramatic kingside attacking chances. The resulting position is sharp and tactical, rewarding accurate calculation over positional judgment."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: McDonnell Attack, Toilet Variation",
+    "description": "An unusual defensive try for Black within the McDonnell Attack framework, named colorfully in opening history. The position tends toward Black's defensive consolidation if Black navigates accurately."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: Morphy Gambit",
+    "description": "Morphy's classical approach involving an early pawn sacrifice in the Sicilian for attacking initiative. White seeks rapid piece development and threats against Black's king while Black aims to consolidate material advantage."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: Morphy Gambit, Andreaschek Gambit",
+    "description": "An extreme attempt within the Morphy Gambit where White sacrifices additional material for overwhelming kingside attacking chances. The resulting positions are highly tactical and require accurate defensive play from Black."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: Smith-Morra Gambit Accepted",
+    "description": "White sacrifices the c3 pawn to accelerate development and rapid central occupation; Black accepts the material. The resulting positions feature White's spatial advantage and piece activity compensating for the pawn deficit."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: Smith-Morra Gambit Accepted, Chicago Defense",
+    "description": "Black's Chicago Defense within the accepted Smith-Morra aims for rapid piece development and counterplay. Black often plays ...e5 or similar moves to control the center and limit White's attacking scope."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: Smith-Morra Gambit Accepted, Classical Formation",
+    "description": "Black adopts a classical setup within the accepted Smith-Morra, prioritizing solid development and central presence. White's attacking chances depend on piece coordination and tactical opportunities rather than structural weaknesses."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: Smith-Morra Gambit Accepted, Danish Variation",
+    "description": "A Danish-influenced approach to the Smith-Morra Accepted with specific opening ideas and piece placements. White seeks rapid kingside attacking chances while Black defends solidly in the center."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: Smith-Morra Gambit Accepted, Fianchetto Defense",
+    "description": "Black fianchettoes the king's bishop within the Smith-Morra Accepted, aiming for long-term stability and piece coordination. This solid setup gives Black decent defensive resources despite White's spatial advantage."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: Smith-Morra Gambit Accepted, Finegold Defense",
+    "description": "Finegold's defensive setup within the Smith-Morra Accepted, emphasizing piece coordination and strategic play. Black seeks to neutralize White's initiative through careful positioning and counterattacking ideas."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: Smith-Morra Gambit Accepted, Kan Formation",
+    "description": "Black employs a Kan-style pawn structure within the Smith-Morra Accepted, achieving central control and piece flexibility. The resulting positions favor Black's solid defensive setup over White's attacking schemes."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: Smith-Morra Gambit Accepted, Larsen Defense",
+    "description": "A Larsen-influenced defensive system in the Smith-Morra Accepted prioritizing flexibility and unconventional piece placement. Black aims to disrupt White's attacking flow through subtle positional play."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: Smith-Morra Gambit Accepted, Morphy Defense",
+    "description": "The classical Morphy Defense within the Smith-Morra Accepted, featuring rapid development and solid piece coordination. Black achieves reasonable defensive chances with accurate move selection and positional understanding."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: Smith-Morra Gambit Accepted, Morphy Defense Deferred",
+    "description": "A delayed version of the Morphy Defense concept in the Smith-Morra Accepted, allowing Black flexible move orders. The deferred approach often gains Black additional options depending on White's piece placement."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: Smith-Morra Gambit Accepted, Paulsen Formation",
+    "description": "A Paulsen-influenced pawn and piece structure within the Smith-Morra Accepted, emphasizing central control and harmony. This solid setup provides Black adequate defensive resources against White's compensatory attacking play."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: Smith-Morra Gambit Accepted, Pin Defense",
+    "description": "Black counters White's attacking potential with specific pinning ideas and defensive maneuvers in the Smith-Morra Accepted. The tactical focus shifts toward Black's ability to exploit pins and weak squares."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: Smith-Morra Gambit Accepted, Scheveningen Formation",
+    "description": "A Scheveningen-style pawn structure in the Smith-Morra Accepted, providing Black flexibility and piece options. White maintains spatial advantage but Black's structure offers practical defensive chances."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: Smith-Morra Gambit Accepted, Siberian Variation",
+    "description": "The aggressive Siberian Variation in the Smith-Morra Accepted, where Black challenges White's center immediately. This sharp, counterattacking approach often leads to tactical complications favoring accurate play."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: Smith-Morra Gambit Accepted, Siberian Variation, Siberian Trap",
+    "description": "A tactical trap within the Siberian Variation seeking to exploit White's attacking weaknesses through precise piece play. Black's counterattack can deliver a quick kingside assault if White overextends."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: Smith-Morra Gambit Accepted, Sozin Formation",
+    "description": "A Sozin-inspired pawn structure in the Smith-Morra Accepted, featuring specific piece development and central play. Black seeks to balance solid defense with opportunities for central counterplay."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: Smith-Morra Gambit Accepted, Taimanov Formation",
+    "description": "Taimanov's solid setup within the Smith-Morra Accepted, emphasizing piece coordination and strategic depth. Black's defensive fortress proves difficult for White to penetrate despite the pawn deficit."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: Smith-Morra Gambit Declined, Alapin Formation",
+    "description": "Black declines the Smith-Morra gambit and adopts Alapin-style central control and piece placement. White must then pursue slower positional play without the tactical compensatory chances of accepted lines."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: Smith-Morra Gambit Declined, Center Formation",
+    "description": "Black declines the Smith-Morra gambit and immediately contests the center with pawns and pieces. This straightforward approach gives Black solid positional chances without White's sacrificial compensation."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: Smith-Morra Gambit Declined, Dubois Variation",
+    "description": "A Dubois-inspired defensive system where Black declines the Smith-Morra gambit with specific move orders. The resulting positions offer Black solid defensive prospects in a non-tactical framework."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: Smith-Morra Gambit Declined, Push Variation",
+    "description": "Black counters the Smith-Morra pawn offer by pushing central pawns, declining the gambit through aggressive central play. White must adapt to Black's immediate central challenge rather than pursuing typical compensatory tactics."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: Smith-Morra Gambit Declined, Scandinavian Formation",
+    "description": "A Scandinavian-influenced piece setup where Black declines the Smith-Morra gambit. Black achieves balanced piece development and avoids White's main tactical compensation ideas."
+  },
+  {
+    "eco": "B21",
+    "name": "Sicilian Defense: Smith-Morra Gambit Declined, Wing Formation",
+    "description": "Black declines the Smith-Morra gambit using a wing-based approach with flexible pawn and piece placement. The resulting positions tend toward Black's solid positional advantage without sharp tactical complications."
+  },
+  {
+    "eco": "B22",
+    "name": "Sicilian Defense: Alapin Variation, Anti-Alapin Gambit",
+    "description": "White sacrifices material in the Alapin framework seeking rapid kingside attacking chances and piece activity. Black's defense requires careful evaluation of whether to accept or decline based on tactical complications."
+  },
+  {
+    "eco": "B22",
+    "name": "Sicilian Defense: Alapin Variation, Barmen Defense",
+    "description": "A solid defensive approach in the Alapin where Black prioritizes piece harmony and central control. Black's setup offers good practical defensive chances despite White's historical theoretical attempts."
+  },
+  {
+    "eco": "B22",
+    "name": "Sicilian Defense: Alapin Variation, Barmen Defense, Central Exchange",
+    "description": "An exchange-focused continuation within the Barmen Defense, simplifying the position toward Black's advantage. The resulting structures favor Black's solid defensive setup and piece coordination."
+  },
+  {
+    "eco": "B22",
+    "name": "Sicilian Defense: Alapin Variation, Barmen Defense, Endgame Variation",
+    "description": "A simplified endgame-oriented line within the Barmen Defense, emphasizing pawn structure and king activity. Both sides maneuver carefully in this less tactical, more strategic framework."
+  },
+  {
+    "eco": "B22",
+    "name": "Sicilian Defense: Alapin Variation, Barmen Defense, Milner-Barry Attack",
+    "description": "Milner-Barry's aggressive attacking approach within the Barmen Defense, seeking kingside play despite Black's solid setup. White's complications often compensate for structural weaknesses if calculations hold."
+  },
+  {
+    "eco": "B22",
+    "name": "Sicilian Defense: Alapin Variation, Barmen Defense, Modern Line",
+    "description": "A contemporary approach to the Barmen Defense incorporating modern understanding of tactical and strategic nuances. Black maintains solid defensive prospects using flexible piece placement and central control."
+  },
+  {
+    "eco": "B22",
+    "name": "Sicilian Defense: Alapin Variation, Smith-Morra Declined",
+    "description": "An Alapin system where Black declines early Smith-Morra gambit ideas, prioritizing solid central control. Black achieves comfortable defensive positions without White's tactical compensatory chances."
+  },
+  {
+    "eco": "B22",
+    "name": "Sicilian Defense: Alapin Variation, Stoltz Attack",
+    "description": "Stoltz's aggressive attacking setup in the Alapin, pursuing kingside expansion and piece activity against Black's center. The resulting complications favor sharp tactical play over positional maneuvering."
+  },
+  {
+    "eco": "B22",
+    "name": "Sicilian Defense: Alapin Variation, Stoltz Attack, Ivanchuk Line",
+    "description": "Ivanchuk's modern refinement of the Stoltz Attack in the Alapin, combining aggression with deep strategic ideas. White's attacking chances remain dangerous despite Black's solid defensive resources."
+  },
+  {
+    "eco": "B22",
+    "name": "Sicilian Defense: Delayed Alapin Variation",
+    "description": "White plays Alapin-style moves (c3 and d4) after initial moves other than 2.c3, gaining move order flexibility. The delayed approach can surprise opponents unfamiliar with specific move orders."
+  },
+  {
+    "eco": "B22",
+    "name": "Sicilian Defense: Heidenfeld Variation",
+    "description": "A Heidenfeld-inspired defensive system in the B22 complex emphasizing piece flexibility and positional play. Black achieves solid defensive positions while maintaining practical winning chances through careful maneuvering."
+  },
+  {
+    "eco": "B23",
+    "name": "Sicilian Defense: Closed, Carlsen Variation",
+    "description": "Carlsen's sophisticated approach to the Closed Sicilian with refined move orders and deep strategic ideas. The resulting positions feature flexible pawn structures favoring White's superior understanding if executed precisely."
+  },
+  {
+    "eco": "B23",
+    "name": "Sicilian Defense: Closed, Chameleon Variation",
+    "description": "A flexible defensive system where Black adapts piece placement and structure to counter White's setup, earning its 'Chameleon' nickname. Black's adaptability provides practical defensive chances in complex positions."
+  },
+  {
+    "eco": "B23",
+    "name": "Sicilian Defense: Closed, Grob Attack",
+    "description": "White employs Grob's unconventional attacking ideas within the Closed Sicilian framework, sacrificing material for attacking potential. The sharp complications suit players comfortable with non-theoretical positions."
+  },
+  {
+    "eco": "B23",
+    "name": "Sicilian Defense: Closed, Korchnoi Defense",
+    "description": "A Korchnoi-influenced solid defensive setup in the Closed Sicilian with precise piece placement and strategic depth. Black's fortress proves difficult to penetrate despite White's kingside attacking attempts."
+  },
+  {
+    "eco": "B23",
+    "name": "Sicilian Defense: Closed, Portland Attack",
+    "description": "A specific Closed Sicilian system with aggressive kingside intentions through f4 and piece coordination. White seeks spatial advantage and attacking chances while Black defends with piece flexibility."
+  },
+  {
+    "eco": "B23",
+    "name": "Sicilian Defense: Closed, Traditional",
+    "description": "The classical Closed Sicilian approach prioritizing solid piece development and kingside play rather than sharp tactics. Both sides maneuver strategically seeking long-term advantages through patient piece placement."
+  },
+  {
+    "eco": "B23",
+    "name": "Sicilian Defense: Grand Prix Attack, Schofman Variation",
+    "description": "Schofman's defensive refinement within the Grand Prix Attack framework, emphasizing solid piece coordination. Black achieves reasonable defensive chances through careful strategic maneuvering and piece placement."
+  },
+  {
+    "eco": "B24",
+    "name": "Sicilian Defense: Closed, Fianchetto Variation",
+    "description": "White fianchettoes the kingside bishop in the Closed Sicilian, emphasizing long diagonal control and piece coordination. This strategic approach creates imbalanced positions favoring both players' specific advantages."
+  },
+  {
+    "eco": "B24",
+    "name": "Sicilian Defense: Closed, Smyslov Variation",
+    "description": "Smyslov's refined defensive approach to the Closed Sicilian with precise piece placement and strategic depth. Black maintains solid defensive prospects through careful maneuvers and counterplay ideas."
+  },
+  {
+    "eco": "B25",
+    "name": "Sicilian Defense: Closed, Botvinnik Defense, Edge Variation",
+    "description": "An edge-focused variation within Botvinnik's Closed Sicilian defense system emphasizing piece coordination. Black's solid setup offers practical defensive chances through flexible maneuvering and strategic counterplay."
+  },
+  {
+    "eco": "B25",
+    "name": "Sicilian Defense: Closed, Botvinnik Defense, with f4",
+    "description": "Botvinnik's aggressive kingside expansion through f4 in the Closed Sicilian, seeking space and attacking potential. White's attacking chances depend on precise piece coordination while Black defends with solid structures."
+  },
+  {
+    "eco": "B25",
+    "name": "Sicilian Defense: Closed, Botvinnik Defense, with Nge2",
+    "description": "A flexible knight setup in Botvinnik's Closed Sicilian defense allowing adaptable piece placement and strategy. White maintains flexible attacking options while Black counters with precise defensive piece coordination."
+  },
+  {
+    "eco": "B27",
+    "name": "Modern Defense: Pterodactyl Variation",
+    "description": "The exotic Pterodactyl, a Modern Defense variation with dinosaur-themed variations emphasizing Black's flexible development. Black achieves solid defensive positions while maintaining counterattacking ideas through unconventional piece placement."
+  },
+  {
+    "eco": "B27",
+    "name": "Pterodactyl Defense: Sicilian, Anhanguera",
+    "description": "An Anhanguera variation within the Pterodactyl Defense framework emphasizing specific piece setups and move orders. Black achieves flexible defensive chances through non-standard pawn and piece arrangements."
+  },
+  {
+    "eco": "B27",
+    "name": "Pterodactyl Defense: Sicilian, Benoni Gambit",
+    "description": "A Benoni-influenced gambit attempt within the Pterodactyl Defense seeking tactical complications. White sacrifices material for attacking potential while Black aims to consolidate the material advantage."
+  },
+  {
+    "eco": "B27",
+    "name": "Pterodactyl Defense: Sicilian, Pteranodon",
+    "description": "The Pteranodon, a dinosaur-named Pterodactyl variation with specific tactical and strategic characteristics. Black's flexible structure offers practical defensive chances against White's attacking attempts."
+  },
+  {
+    "eco": "B27",
+    "name": "Pterodactyl Defense: Sicilian, Rhamphorhynchus",
+    "description": "A Rhamphorhynchus continuation within the Pterodactyl Defense featuring specific piece developments and structures. Black maintains solid defensive resources through careful maneuvers and strategic play."
+  },
+  {
+    "eco": "B27",
+    "name": "Pterodactyl Defense: Sicilian, Unpin",
+    "description": "An anti-pin variation within the Pterodactyl Defense where Black neutralizes White's piece pressure through specific moves. The unpinning approach gives Black tactical and strategic counterplay opportunities."
+  },
+  {
+    "eco": "B27",
+    "name": "Pterodactyl Defense: Western, Pterodactyl",
+    "description": "A Western Defense Pterodactyl variation featuring specific piece placements and strategic ideas distinct from Sicilian versions. Black's flexible setup provides practical defensive chances in this unconventional framework."
+  },
+  {
+    "eco": "B27",
+    "name": "Pterodactyl Defense: Western, Rhamphorhynchus",
+    "description": "A Western Defense variant using Rhamphorhynchus piece arrangements and strategic concepts. Black achieves flexible defensive positions through unconventional development and counterattacking ideas."
+  },
+  {
+    "eco": "B27",
+    "name": "Sicilian Defense: Acton Extension",
+    "description": "An extension concept in the B27 Sicilian complex where specific moves extend Black's defensive options. The resulting positions offer Black solid defensive chances through flexible piece placement and structures."
+  },
+  {
+    "eco": "B27",
+    "name": "Sicilian Defense: Brussels Gambit",
+    "description": "A Brussels-named gambit attempt in the B27 Sicilian where White sacrifices material for attacking chances. Black's defense requires accurate calculation to either consolidate the material or create sufficient counterplay."
+  },
+  {
+    "eco": "B27",
+    "name": "Sicilian Defense: Bücker Variation",
+    "description": "A Bücker-inspired defensive system in the B27 emphasizing piece coordination and strategic flexibility. Black achieves practical defensive prospects through careful maneuvering and solid pawn structures."
+  },
+  {
+    "eco": "B27",
+    "name": "Sicilian Defense: Double-Dutch Gambit",
+    "description": "A Dutch-influenced gambit in the B27 Sicilian where both sides pursue material sacrifices for compensation. The resulting sharp complications suit players comfortable with non-standard tactical positions."
+  },
+  {
+    "eco": "B27",
+    "name": "Sicilian Defense: Frederico Variation",
+    "description": "A Frederico-named variation in the B27 offering Black flexible defensive options and piece placements. Black maintains solid defensive chances through careful strategic maneuvering and counterattacking ideas."
+  },
+  {
+    "eco": "B27",
+    "name": "Sicilian Defense: Hyperaccelerated Dragon",
+    "description": "An accelerated Dragon approach where Black reaches Dragon-like structures more quickly through non-standard move orders. The flexible development gives Black solid defensive prospects with additional move order options."
+  },
+  {
+    "eco": "B27",
+    "name": "Sicilian Defense: Hyperaccelerated Pterodactyl",
+    "description": "An accelerated Pterodactyl setup where Black develops rapidly to achieve Pterodactyl-like positions through flexible move orders. Black's quick development provides practical defensive chances against White's attacking attempts."
+  },
+  {
+    "eco": "B27",
+    "name": "Sicilian Defense: Hyperaccelerated Pterodactyl, Exchange Variation",
+    "description": "An exchange-focused line within the Hyperaccelerated Pterodactyl simplifying positions toward Black's advantage. The resulting structures favor Black's solid defensive setup despite White's structural compensation ideas."
+  },
+  {
+    "eco": "B27",
+    "name": "Sicilian Defense: Jalalabad Variation",
+    "description": "A Jalalabad-named variation in the B27 Sicilian offering unconventional piece placements and strategic ideas. Black achieves flexible defensive prospects through non-standard development and counterattacking maneuvers."
+  },
+  {
+    "eco": "B27",
+    "name": "Sicilian Defense: Katalimov Variation",
+    "description": "A Katalimov-inspired system in the B27 with specific tactical and strategic characteristics. Black maintains solid defensive resources through careful piece placement and strategic flexibility."
+  },
+  {
+    "eco": "B27",
+    "name": "Sicilian Defense: Mongoose Variation",
+    "description": "An animal-named Mongoose variation in the B27 Sicilian emphasizing Black's defensive flexibility and counterplay. Black's unconventional setup provides practical defensive chances through solid structures and piece coordination."
+  },
+  {
+    "eco": "B27",
+    "name": "Sicilian Defense: Polish Gambit",
+    "description": "A Polish-influenced gambit in the B27 where White sacrifices material for rapid piece development and attacking chances. Black's defense depends on accurate calculation and strategic understanding of compensation values."
+  },
+  {
+    "eco": "B27",
+    "name": "Sicilian Defense: Quinteros Variation",
+    "description": "A Quinteros-inspired defensive approach in the B27 emphasizing piece harmony and strategic play. Black achieves solid defensive positions through careful maneuvers and flexible piece placements."
+  },
+  {
+    "eco": "B28",
+    "name": "Sicilian Defense: O'Kelly Variation",
+    "description": "O'Kelly's flexible 2...a6 setup allows Black to adapt to White's approach while maintaining solid defensive resources. The move order flexibility gives Black significant practical chances against various White systems."
+  },
+  {
+    "eco": "B28",
+    "name": "Sicilian Defense: O'Kelly Variation, Aronin System",
+    "description": "Aronin's strategic approach within the O'Kelly emphasizing solid piece coordination and flexible structures. Black achieves practical defensive chances through careful maneuvering and strategic understanding."
+  },
+  {
+    "eco": "B28",
+    "name": "Sicilian Defense: O'Kelly Variation, Kieseritzky System",
+    "description": "A Kieseritzky-inspired system in the O'Kelly featuring specific attacking ideas for White. White pursues tactical complications while Black defends with solid piece placement and strategic flexibility."
+  },
+  {
+    "eco": "B28",
+    "name": "Sicilian Defense: O'Kelly Variation, Maróczy Bind",
+    "description": "The Maróczy Bind in the O'Kelly variation creates a Long-diagonal stranglehold preventing Black's typical counterplay. Black must find resourceful maneuvering within White's restrictive pawn structure."
+  },
+  {
+    "eco": "B28",
+    "name": "Sicilian Defense: O'Kelly Variation, Maróczy Bind, Paulsen Line",
+    "description": "Paulsen's strategic approach within the O'Kelly Maróczy Bind emphasizing piece coordination and central play. Black achieves practical defensive prospects through precise maneuvering and counterplay ideas."
+  },
+  {
+    "eco": "B28",
+    "name": "Sicilian Defense: O'Kelly Variation, Maróczy Bind, Robatsch Line",
+    "description": "A Robatsch-inspired system in the O'Kelly Maróczy Bind prioritizing piece flexibility and strategic play. Black maintains solid defensive chances through careful maneuvering within White's restrictive setup."
+  },
+  {
+    "eco": "B28",
+    "name": "Sicilian Defense: O'Kelly Variation, Normal System",
+    "description": "The classical O'Kelly system with standard piece development and strategic ideas for both sides. Black's flexibility allows practical defensive chances against various White approaches and tactical complications."
+  },
+  {
+    "eco": "B28",
+    "name": "Sicilian Defense: O'Kelly Variation, Normal System, Cortlever Gambit",
+    "description": "Cortlever's gambit attempt within the O'Kelly Normal System sacrificing material for attacking chances. Black's defense requires careful calculation to either consolidate material or generate sufficient counterplay."
+  },
+  {
+    "eco": "B28",
+    "name": "Sicilian Defense: O'Kelly Variation, Normal System, Smith-Morra Line",
+    "description": "A Smith-Morra influence within the O'Kelly Normal System featuring specific gambit ideas and structures. White maintains compensatory attacking chances while Black defends with piece flexibility and strategic understanding."
+  },
+  {
+    "eco": "B28",
+    "name": "Sicilian Defense: O'Kelly Variation, Normal System, Taimanov Line",
+    "description": "Taimanov's refined approach to the O'Kelly Normal System with solid piece coordination and strategic depth. Black achieves practical defensive prospects through careful maneuvering and flexible piece placement."
+  },
+  {
+    "eco": "B28",
+    "name": "Sicilian Defense: O'Kelly Variation, Normal System, Zagorovsky Line",
+    "description": "A Zagorovsky-inspired system in the O'Kelly Normal System emphasizing specific tactical and strategic ideas. Black maintains solid defensive resources through careful piece placement and counterattacking maneuvers."
+  },
+  {
+    "eco": "B28",
+    "name": "Sicilian Defense: O'Kelly Variation, Quiet System",
+    "description": "A quiet, positional approach to the O'Kelly avoiding sharp tactical complications. Both sides maneuver strategically seeking long-term advantages through patient piece placement and pawn structures."
+  },
+  {
+    "eco": "B28",
+    "name": "Sicilian Defense: O'Kelly Variation, Réti System",
+    "description": "A Réti-influenced strategic approach within the O'Kelly emphasizing flexible piece placement and control. Black maintains solid defensive chances through careful maneuvering and strategic understanding."
+  },
+  {
+    "eco": "B28",
+    "name": "Sicilian Defense: O'Kelly Variation, Venice System",
+    "description": "The Venice System in the O'Kelly features specific tactical and strategic ideas for both sides in a complex framework. White and Black seek dynamic imbalance through precise move orders and flexible piece placement."
+  },
+  {
+    "eco": "B28",
+    "name": "Sicilian Defense: O'Kelly Variation, Venice System, Barcza Line",
+    "description": "Barcza's approach within the O'Kelly Venice System emphasizing solid piece coordination and strategic play. Black achieves practical defensive prospects through careful maneuvering and flexible structures."
+  },
+  {
+    "eco": "B28",
+    "name": "Sicilian Defense: O'Kelly Variation, Venice System, Gambit Line",
+    "description": "A gambit-oriented line in the O'Kelly Venice System where White sacrifices material for attacking potential. Black's defense requires careful evaluation of compensation and counterplay opportunities."
+  },
+  {
+    "eco": "B28",
+    "name": "Sicilian Defense: O'Kelly Variation, Venice System, Ljubojevic Line",
+    "description": "Ljubojevic's refined approach to the O'Kelly Venice System incorporating modern strategic ideas. Black maintains solid defensive prospects through careful piece placement and flexible maneuvering."
+  },
+  {
+    "eco": "B28",
+    "name": "Sicilian Defense: O'Kelly Variation, Venice System, Steiner Line",
+    "description": "Steiner's strategic approach within the O'Kelly Venice System emphasizing piece coordination and tactical play. Black achieves practical defensive chances through precise maneuvering and counterattacking ideas."
+  },
+  {
+    "eco": "B28",
+    "name": "Sicilian Defense: O'Kelly Variation, Wing Gambit",
+    "description": "A Wing Gambit concept within the O'Kelly where White sacrifices the b4 pawn for rapid piece development. Black's decision to accept or decline determines the resulting position's tactical and strategic character."
+  },
+  {
+    "eco": "B28",
+    "name": "Sicilian Defense: O'Kelly Variation, Yerevan System",
+    "description": "A Yerevan-named system in the O'Kelly featuring specific piece placements and strategic ideas. Black maintains solid defensive resources through careful maneuvering and flexible piece coordination."
+  },
+  {
+    "eco": "B29",
+    "name": "Sicilian Defense: Nimzowitsch Variation, Advance Variation",
+    "description": "The Advance Variation within Nimzowitsch's system features rapid pawn advancement and aggressive positioning. White seeks spatial advantage and tactical complications while Black defends with solid piece coordination."
+  },
+  {
+    "eco": "B29",
+    "name": "Sicilian Defense: Nimzowitsch Variation, Closed Variation",
+    "description": "A closed, strategic approach in the Nimzowitsch Variation emphasizing piece coordination over tactics. Black achieves practical defensive chances through careful maneuvering and flexible structures."
+  },
+  {
+    "eco": "B29",
+    "name": "Sicilian Defense: Nimzowitsch Variation, Exchange Variation",
+    "description": "An exchange-focused line in the Nimzowitsch Variation simplifying positions toward mutual advantage. The resulting structures favor careful strategic play over sharp tactical complications."
+  },
+  {
+    "eco": "B29",
+    "name": "Sicilian Defense: Nimzowitsch Variation, Main Line",
+    "description": "The critical continuation in Nimzowitsch's system with sharp tactical and strategic play for both sides. White pursues central and kingside play while Black defends with flexible piece coordination and counterplay."
+  },
+  {
+    "eco": "B30",
+    "name": "Sicilian Defense: Closed, Anti-Sveshnikov Variation",
+    "description": "An anti-Sveshnikov setup within the Closed Sicilian preventing Black's typical dynamic counterplay. White gains structural advantages through precise piece placement while Black seeks solid defensive prospects."
+  },
+  {
+    "eco": "B30",
+    "name": "Sicilian Defense: Closed, Anti-Sveshnikov Variation, Kharlov-Kramnik Line",
+    "description": "The Kharlov-Kramnik line in the Anti-Sveshnikov Variation features deep strategic ideas and refined handling. White maintains structural advantages through precise maneuvering while Black defends methodically."
+  },
+  {
+    "eco": "B30",
+    "name": "Sicilian Defense: Closed, Anti-Sveshnikov Variation, with d6",
+    "description": "A d6 setup in the Anti-Sveshnikov Variation providing Black flexible defensive options and piece placements. Black achieves solid defensive prospects through careful strategic maneuvering and piece coordination."
+  },
+  {
+    "eco": "B30",
+    "name": "Sicilian Defense: Closed, Anti-Sveshnikov Variation, with Nf6",
+    "description": "An Nf6 placement in the Anti-Sveshnikov Variation offering Black flexible piece development and counterplay. Black maintains solid defensive chances through careful maneuvering within White's structures."
+  },
+  {
+    "eco": "B30",
+    "name": "Sicilian Defense: Nyezhmetdinov-Rossolimo Attack, Brooklyn Retreat Defense",
+    "description": "The Brooklyn Retreat within the Nyezhmetdinov-Rossolimo Attack allows Black flexible piece placement and defensive setup. Black's defensive resources depend on precise maneuvering and counterattacking ideas."
+  },
+  {
+    "eco": "B30",
+    "name": "Sicilian Defense: Nyezhmetdinov-Rossolimo Attack, San Francisco Gambit",
+    "description": "A San Francisco-named gambit within the Nyezhmetdinov-Rossolimo Attack sacrificing material for rapid attacking play. White seeks immediate kingside threats while Black aims to consolidate material advantage defensively."
+  },
+  {
+    "eco": "B30",
+    "name": "Sicilian Defense: Old Sicilian",
+    "description": "A classical, historical approach to the Sicilian emphasizing solid piece development and strategic understanding. The resulting positions reflect traditional principles with both sides maneuvering carefully for long-term advantage."
+  },
+  {
+    "eco": "B30",
+    "name": "Sicilian Defense: Portsmouth Gambit",
+    "description": "A Portsmouth-named gambit where White sacrifices a pawn for rapid piece development and attacking potential. Black's defense requires careful calculation to evaluate compensation and counterplay opportunities."
+  },
+  {
+    "eco": "B31",
+    "name": "Sicilian Defense: Nyezhmetdinov-Rossolimo Attack, Fianchetto Variation",
+    "description": "White fianchettoes the kingside bishop in the Nyezhmetdinov-Rossolimo Attack, emphasizing long-diagonal control. Black defends solidly while seeking to undermine White's fianchettoed structure."
+  },
+  {
+    "eco": "B31",
+    "name": "Sicilian Defense: Nyezhmetdinov-Rossolimo Attack, Fianchetto Variation, Gufeld Gambit",
+    "description": "Gufeld's gambit within the Fianchetto Variation sacrificing material for attacking chances and piece activity. Black's defense requires accurate calculation to handle White's compensatory attacking potential."
+  },
+  {
+    "eco": "B31",
+    "name": "Sicilian Defense: Nyezhmetdinov-Rossolimo Attack, Fianchetto Variation, Lutikov Gambit",
+    "description": "Lutikov's gambit attempt in the Fianchetto Variation offering material for rapid kingside attacking chances. White seeks immediate tactical complications while Black aims for defensive consolidation and counterplay."
+  },
+  {
+    "eco": "B31",
+    "name": "Sicilian Defense: Nyezhmetdinov-Rossolimo Attack, Fianchetto Variation, Totsky Attack",
+    "description": "Totsky's aggressive attacking setup in the Fianchetto Variation seeking to overwhelm Black's defenses. White combines piece activity with spatial advantage while Black defends with solid coordination."
+  },
+  {
+    "eco": "B31",
+    "name": "Sicilian Defense: Nyezhmetdinov-Rossolimo Attack, Gurgenidze Variation",
+    "description": "A Gurgenidze-inspired variation in the Nyezhmetdinov-Rossolimo Attack with specific tactical and strategic ideas. Black maintains solid defensive prospects through careful piece placement and flexible maneuvering."
+  },
+  {
+    "eco": "B32",
+    "name": "Sicilian Defense: Flohr Variation",
+    "description": "Flohr's strategic defensive setup in the Sicilian emphasizing solid piece coordination and careful maneuvering. Black achieves practical defensive chances through precise positional play and counterattacking ideas."
+  },
+  {
+    "eco": "B32",
+    "name": "Sicilian Defense: Franco-Sicilian Variation",
+    "description": "A Franco-influenced variation in the B32 offering unique pawn structures and strategic opportunities. Black maintains flexible defensive prospects through careful maneuvering and piece coordination."
+  },
+  {
+    "eco": "B32",
+    "name": "Sicilian Defense: Godiva Variation",
+    "description": "A Godiva-named variation in the B32 featuring specific piece placements and strategic concepts. Black achieves solid defensive chances through careful maneuvering and flexible piece coordination."
+  },
+  {
+    "eco": "B32",
+    "name": "Sicilian Defense: Kalashnikov Variation",
+    "description": "A Kalashnikov-inspired aggressive setup for Black with e5 central play and dynamic piece coordination. Black's active piece play provides practical counterattacking chances against White's positional setup."
+  },
+  {
+    "eco": "B32",
+    "name": "Sicilian Defense: Löwenthal Variation",
+    "description": "Löwenthal's classical defensive approach emphasizing solid structure and piece coordination. Black achieves practical defensive prospects through careful maneuvering and flexible pawn placements."
+  },
+  {
+    "eco": "B32",
+    "name": "Sicilian Defense: Nimzo-American Variation",
+    "description": "A Nimzo-American influenced variation in the B32 combining strategic ideas from multiple opening systems. Black maintains solid defensive prospects through flexible piece placement and careful maneuvering."
+  },
+  {
+    "eco": "B32",
+    "name": "Sicilian Defense: O'Kelly Variation, Maróczy Bind, Geller Line",
+    "description": "Geller's refined approach to the O'Kelly Maróczy Bind incorporating modern strategic understanding. Black achieves practical defensive prospects through precise piece placement and counterattacking ideas."
+  },
+  {
+    "eco": "B32",
+    "name": "Sicilian Defense: Open",
+    "description": "The Open Sicilian framework in B32 featuring tactical and strategic complexity for both sides. White pursues aggressive piece play and central control while Black seeks dynamic counterplay and practical chances."
+  },
+  {
+    "eco": "B33",
+    "name": "Sicilian Defense: Lasker-Pelikan Variation",
+    "description": "The Lasker-Pelikan features e5 and a highly dynamic setup with sharp tactical opportunities for both sides. Black's active piece play and counterattacking ideas provide practical chances despite White's spatial advantages."
+  },
+  {
+    "eco": "B33",
+    "name": "Sicilian Defense: Lasker-Pelikan Variation, Bird Variation",
+    "description": "Bird's approach to the Lasker-Pelikan emphasizing specific piece placements and tactical ideas. The resulting positions feature sharp play where both sides must calculate accurately for successful execution."
+  },
+  {
+    "eco": "B33",
+    "name": "Sicilian Defense: Lasker-Pelikan Variation, Exchange Variation",
+    "description": "An exchange-focused line in the Lasker-Pelikan simplifying positions toward mutual complexity. Black's resulting pawn structure provides practical defensive prospects despite White's potential space advantage."
+  },
+  {
+    "eco": "B33",
+    "name": "Sicilian Defense: Lasker-Pelikan Variation, Retreat Variation",
+    "description": "A retreat-oriented continuation in the Lasker-Pelikan allowing flexible piece repositioning and strategy. Black maintains solid defensive resources through careful maneuvering within this tactical framework."
+  },
+  {
+    "eco": "B33",
+    "name": "Sicilian Defense: Lasker-Pelikan Variation, Schlechter Variation",
+    "description": "Schlechter's refined approach to the Lasker-Pelikan with solid piece coordination and strategic play. Black achieves practical defensive prospects through precise maneuvering and flexible piece placements."
+  },
+  {
+    "eco": "B33",
+    "name": "Sicilian Defense: Lasker-Pelikan Variation, Sveshnikov Variation, Chelyabinsk Variation",
+    "description": "The Chelyabinsk line within Sveshnikov's system features specific tactical and strategic ideas for both sides. White pursues tactical complications while Black defends with solid piece coordination and counterplay."
+  },
+  {
+    "eco": "B33",
+    "name": "Sicilian Defense: Lasker-Pelikan Variation, Sveshnikov Variation, Novosibirsk Variation",
+    "description": "The Novosibirsk variation within Sveshnikov's system offering tactical and strategic complexity. Black maintains solid defensive prospects through flexible piece placement and careful maneuvering."
+  },
+  {
+    "eco": "B33",
+    "name": "Sicilian Defense: Lasker-Pelikan Variation, Sveshnikov Variation, Peresypkin's Sacrifice",
+    "description": "Peresypkin's tactical sacrifice idea within the Sveshnikov system seeking immediate attacking compensation. White sacrifices material for rapid piece development and tactical complications against Black's king."
+  },
+  {
+    "eco": "B33",
+    "name": "Sicilian Defense: Open",
+    "description": "The Open Sicilian in B33 features tactical and strategic play with sharp positions for both sides. White's aggressive piece play and central control face Black's dynamic counterattacking possibilities."
+  },
+  {
+    "eco": "B34",
+    "name": "Sicilian Defense: Accelerated Dragon, Exchange Variation",
+    "description": "An exchange-focused line in the Accelerated Dragon simplifying positions while maintaining dynamic play. The resulting structures offer Black practical defensive chances through flexible piece coordination."
+  },
+  {
+    "eco": "B34",
+    "name": "Sicilian Defense: Accelerated Dragon, Modern Variation",
+    "description": "A modern, refined approach to the Accelerated Dragon incorporating contemporary strategic ideas. Black achieves solid defensive prospects through flexible piece placement and careful maneuvering."
+  },
+  {
+    "eco": "B35",
+    "name": "Sicilian Defense: Accelerated Dragon, Modern Bc4 Variation",
+    "description": "A Bc4 setup in the Accelerated Dragon offering White tactical and strategic attacking chances. Black defends solidly while seeking to neutralize White's long-diagonal pressure and threats."
+  },
+  {
+    "eco": "B35",
+    "name": "Sicilian Defense: Dragon Variation, Modern Bc4 Variation",
+    "description": "The modern Bc4 approach against the classical Dragon provides White immediate tactical opportunities. Black's defense requires careful coordination to handle both White's immediate threats and long-term attacking ideas."
+  },
+  {
+    "eco": "B36",
+    "name": "Sicilian Defense: Accelerated Dragon, Maróczy Bind",
+    "description": "The Maróczy Bind against the Accelerated Dragon restricts Black's queenside expansion and piece play. Black must find resourceful piece coordination and defensive ideas to maintain practical drawing chances."
+  }
+]
