@@ -122,7 +122,7 @@ def get_puzzles_next_text(
     puzzle = get_next_puzzle(db, current_user.id, theme=theme)
     if puzzle is None:
         raise HTTPException(status_code=404, detail="No puzzles available")
-    return render_puzzle_next(puzzle)
+    return render_puzzle_next(puzzle) + "\n"
 
 
 @router.post("/puzzles/{puzzle_id}/attempts.text", response_class=PlainTextResponse)
@@ -146,7 +146,7 @@ def post_puzzle_attempt_text(
         raise HTTPException(status_code=404, detail="Puzzle not found")
     if result.http_status == 400:
         raise HTTPException(status_code=400, detail=result.error_message)
-    return render_puzzle_attempt(result)
+    return render_puzzle_attempt(result) + "\n"
 
 
 @router.get("/puzzles/summary", response_model=PuzzleSummaryResponse)
@@ -175,7 +175,7 @@ def get_puzzles_summary_text(
     if current_user is None:
         return PlainTextResponse(LOGIN_INSTRUCTIONS, status_code=401)
     summary = get_puzzle_summary(db, current_user.id)
-    return render_puzzle_summary(summary)
+    return render_puzzle_summary(summary) + "\n"
 
 
 @router.get("/puzzles/themes", response_model=list[PuzzleThemeCount])

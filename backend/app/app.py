@@ -73,4 +73,3 @@ def dashboard_text(
         ]
     )
     return body + "\n"
-
