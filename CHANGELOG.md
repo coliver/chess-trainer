@@ -1,6 +1,13 @@
 ## 2026-08-25
 
 ### Features
+- feat(backend): `GET /dashboard.text` now ends with a "What next?" menu listing the other `.text` routes (`puzzles/next`, `puzzles/summary`, `puzzles/themes`, `progress/summary`) with a ready-to-run curl example, so a terminal user isn't left without a next step after logging in (`backend/app/modules/shared/text_mode.py`'s new `TEXT_MODE_OPTIONS`).
+
+### Fixes
+- fix(backend): every `.text` route now ends its response body with a trailing newline, so `curl`'s output no longer runs into the next shell prompt.
+
+### Refactors
+- refactor(backend): `GET /puzzles/themes.text` now delegates to a `render_puzzle_themes` function instead of building its lines inline, matching every other `.text` route's render-function pattern.
 - feat(backend): add `.text` format siblings for viewing/using the API from a terminal instead of the React SPA — `GET /progress/summary.text`, `GET /puzzles/summary.text`, `GET /puzzles/next.text`, and `POST /puzzles/{puzzle_id}/attempts.text`. Puzzle routes render an ASCII chess board (via `python-chess`'s `str(Board)`) instead of raw FEN/JSON, so a puzzle can be solved end-to-end from curl without reading a FEN string by eye; attempts take `moveUci`/`moveIndex` as query params instead of a JSON body. Every `.text` route delegates to the same service function as its JSON counterpart (`get_summary`, `get_puzzle_summary`, `get_next_puzzle`, `submit_puzzle_attempt`) — only the output rendering (`backend/app/modules/puzzles/text_rendering.py`) differs. Follows Rails' format-suffix convention rather than a separate route tree, so the `.text` variant lives right next to the route it mirrors.
 - feat(backend): add `GET /dashboard.text` — a BBS-style landing screen combining the progress and puzzle summaries in one curl call, reusing `render_progress_summary`/`render_puzzle_summary` rather than duplicating the formatting. Both the authenticated dashboard and the unauthenticated login-instructions response are topped with a `KNIGHT_SCHOOL_BANNER` ASCII wordmark (`backend/app/modules/shared/text_mode.py`, figlet "slant" font) for the retro splash-screen feel.
 - feat(backend): unauthenticated requests to any `.text` route now get a plain-text "how to log in" message (with a ready-to-run `curl .../auth/login` command) instead of the JSON `{"detail": "Missing Bearer token"}` body every other route returns. Implemented via a new `get_current_user_or_none` dependency (`backend/app/routers/auth.py`) that each `.text` route checks explicitly — no global exception handler, so JSON-route error responses are completely unaffected.

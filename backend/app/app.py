@@ -7,7 +7,11 @@ from sqlalchemy.orm import Session
 from backend.app.modules.progress.service import get_summary
 from backend.app.modules.puzzles.service import get_puzzle_summary
 from backend.app.modules.shared.db import get_db
-from backend.app.modules.shared.text_mode import KNIGHT_SCHOOL_BANNER, LOGIN_INSTRUCTIONS
+from backend.app.modules.shared.text_mode import (
+    KNIGHT_SCHOOL_BANNER,
+    LOGIN_INSTRUCTIONS,
+    TEXT_MODE_OPTIONS,
+)
 from backend.app.routers.auth import get_current_user_or_none
 from backend.app.routers.auth import router as auth_router
 from backend.app.routers.openings import router as openings_router
@@ -65,6 +69,8 @@ def dashboard_text(
             f"logged in as {current_user.email}",
             render_progress_summary(progress),
             render_puzzle_summary(puzzles),
+            TEXT_MODE_OPTIONS,
         ]
     )
-    return body
+    return body + "\n"
+

@@ -85,7 +85,7 @@ def get_progress_summary_text(
     if current_user is None:
         return PlainTextResponse(LOGIN_INSTRUCTIONS, status_code=401)
     summary = get_summary(db, current_user.id)
-    return render_progress_summary(summary)
+    return render_progress_summary(summary) + "\n"
 
 
 @router.get("/progress/due", response_model=list[DuePositionResponse])

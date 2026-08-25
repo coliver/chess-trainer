@@ -186,6 +186,14 @@ def get_puzzles_themes(
     return [PuzzleThemeCount(theme=theme, count=count) for theme, count in get_theme_counts(db)]
 
 
+def render_puzzle_themes(counts: list[tuple[str, int]]) -> str:
+    lines = ["Puzzle themes", ""]
+    lines += [f"  {theme:<20} {count}" for theme, count in counts]
+    lines.append("")
+    lines.append("Pick one with GET /puzzles/next.text?theme=<name>")
+    return "\n".join(lines)
+
+
 @router.get("/puzzles/themes.text", response_class=PlainTextResponse)
 def get_puzzles_themes_text(
     db: Session = Depends(get_db),
@@ -194,8 +202,4 @@ def get_puzzles_themes_text(
     if current_user is None:
         return PlainTextResponse(LOGIN_INSTRUCTIONS, status_code=401)
     counts = get_theme_counts(db)
-    lines = ["Puzzle themes", ""]
-    lines += [f"  {theme:<20} {count}" for theme, count in counts]
-    lines.append("")
-    lines.append("Pick one with GET /puzzles/next.text?theme=<name>")
-    return "\n".join(lines)
+    return render_puzzle_themes(counts) + "\n"

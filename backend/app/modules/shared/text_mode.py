@@ -20,3 +20,13 @@ Log in first:
 Then reuse the access_token as a Bearer header on any .text route, e.g.:
   curl -H "Authorization: Bearer <token>" https://knightschool.click/api/dashboard.text
 """
+
+TEXT_MODE_OPTIONS = """What next?
+  GET /puzzles/next.text          serve a puzzle to solve
+  GET /puzzles/summary.text       your puzzle stats
+  GET /puzzles/themes.text        browse puzzle themes
+  GET /progress/summary.text      your opening progress
+  GET /dashboard.text             back to this dashboard
+
+Add the Bearer token to each request, e.g.:
+  curl -H "Authorization: Bearer <token>" https://knightschool.click/api/puzzles/next.text"""
