@@ -1,0 +1,87 @@
+<% prefs = current_preferences %>
+<div
+  class="overflow-menu"
+  id="header-overflow-menu"
+  data-header-menu-target="menu"
+  hidden
+>
+  <nav
+    class="overflow-menu-items"
+    role="dialog"
+    aria-modal="true"
+    aria-label="<%= t("header.nav") %>"
+  >
+    <%= link_to t("header.settings"), settings_path, class: "overflow-menu-item" %>
+
+    <%= button_to logout_path, method: :delete,
+          class: "overflow-menu-item", form: { style: "display: contents" } do %>
+      <%= t("header.logout") %>
+    <% end %>
+
+    <a
+      href="https://github.com/coliver/chess-trainer"
+      class="overflow-menu-item"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <%= t("header.viewSource") %>
+    </a>
+
+    <div class="overflow-menu-divider" />
+
+    <div class="overflow-menu-control">
+      <span class="overflow-menu-label">Language</span>
+      <%= form_with url: settings_path, method: :patch, data: { controller: "language-toggle" }, style: "display: contents", local: true do %>
+        <%= hidden_field_tag :return_to, request.path %>
+        <%= hidden_field_tag :language, prefs["language"], data: { language_toggle_target: "langField" } %>
+        <%= hidden_field_tag :theme, prefs["theme"] %>
+        <%= hidden_field_tag :board_theme, prefs["board_theme"] %>
+        <%= hidden_field_tag :piece_set, prefs["piece_set"] %>
+        <%= hidden_field_tag :show_coordinates, prefs["show_coordinates"] %>
+        <%= hidden_field_tag :board_animations, prefs["board_animations"] %>
+        <%= hidden_field_tag :board_orientation_mode, prefs["board_orientation_mode"] %>
+        <%= hidden_field_tag :sound, prefs["sound"] %>
+        <select class="language-toggle-select" data-action="language-toggle#change" data-language-toggle-target="select">
+          <option value="en" <%= 'selected' if prefs["language"] == "en" %>>English</option>
+          <option value="es" <%= 'selected' if prefs["language"] == "es" %>>Español</option>
+          <option value="fr" <%= 'selected' if prefs["language"] == "fr" %>>Français</option>
+          <option value="de" <%= 'selected' if prefs["language"] == "de" %>>Deutsch</option>
+          <option value="it" <%= 'selected' if prefs["language"] == "it" %>>Italiano</option>
+          <option value="pt" <%= 'selected' if prefs["language"] == "pt" %>>Português</option>
+          <option value="ru" <%= 'selected' if prefs["language"] == "ru" %>>Русский</option>
+          <option value="ja" <%= 'selected' if prefs["language"] == "ja" %>>日本語</option>
+          <option value="zh" <%= 'selected' if prefs["language"] == "zh" %>>中文</option>
+        </select>
+      <% end %>
+    </div>
+
+    <div class="overflow-menu-control">
+      <span class="overflow-menu-label"><%= t("theme.toggle") %></span>
+      <%= form_with url: settings_path, method: :patch, data: { controller: "theme-toggle" }, style: "display: contents", local: true do %>
+        <%= hidden_field_tag :return_to, request.path %>
+        <%= hidden_field_tag :language, prefs["language"] %>
+        <%= hidden_field_tag :theme, prefs["theme"], data: { theme_toggle_target: "themeField" } %>
+        <%= hidden_field_tag :board_theme, prefs["board_theme"] %>
+        <%= hidden_field_tag :piece_set, prefs["piece_set"] %>
+        <%= hidden_field_tag :show_coordinates, prefs["show_coordinates"] %>
+        <%= hidden_field_tag :board_animations, prefs["board_animations"] %>
+        <%= hidden_field_tag :board_orientation_mode, prefs["board_orientation_mode"] %>
+        <%= hidden_field_tag :sound, prefs["sound"] %>
+        <button type="button" class="theme-toggle-btn" data-action="theme-toggle#toggle" aria-label="<%= t("theme.toggle") %>">
+          <span data-theme-toggle-target="sunIcon" hidden aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z" stroke="currentColor" stroke-width="2" />
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+          </span>
+          <span data-theme-toggle-target="moonIcon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M21 13.2A8.4 8.4 0 0 1 10.8 3a6.9 6.9 0 1 0 10.2 10.2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+            </svg>
+          </span>
+        </button>
+      <% end %>
+    </div>
+
+  </nav>
+</div>

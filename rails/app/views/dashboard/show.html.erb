@@ -99,7 +99,7 @@
                   </button>
                 </div>
 
-                <div class="ws-expanded" id="needs-work-expanded" data-needs-work-target="panel" hidden>
+                <div class="ws-expanded" id="needs-work-expanded" data-needs-work-target="panel" hidden="hidden">
                   <% @weak_spots.drop(1).each do |w| %>
                     <% name = w["openingName"] || t("dashboard.progress.weakSpotFallbackName") %>
                     <% pct = w["attempts"].to_i > 0 ? ((w["correctCount"].to_f / w["attempts"]) * 100).round : 0 %>
