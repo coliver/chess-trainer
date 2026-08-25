@@ -38,8 +38,27 @@ jobs:
       - name: Unit / component tests
         run: npx vitest run
 
+      - name: Get installed Playwright version
+        id: playwright-version
+        run: echo "version=$(node -p "require('./package-lock.json').packages['node_modules/@playwright/test'].version")" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
+
       - name: Install Playwright browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install --with-deps chromium
+
+      # The cache only stores the browser binaries, not the apt packages
+      # --with-deps installs; those are needed every run regardless of cache
+      # hit, but are cheap/no-op if already present on the runner image.
+      - name: Install Playwright OS dependencies
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
 
       - name: E2E tests (Playwright)
         run: npx playwright test
