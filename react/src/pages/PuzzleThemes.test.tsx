@@ -11,6 +11,11 @@ vi.mock("../api", () => ({
   default: { get: vi.fn(), post: vi.fn() },
 }));
 
+// The real cm-chessboard needs a DOM/canvas the test env doesn't provide.
+vi.mock("../components/Board", () => ({
+  default: () => <div data-testid="board" />,
+}));
+
 const mockNavigate = vi.fn();
 vi.mock("react-router-dom", async () => {
   const actual =
@@ -51,6 +56,17 @@ describe("PuzzleThemes Page", () => {
     expect(screen.getByText("endgame")).toBeInTheDocument();
     expect(screen.getByText("4688 puzzles")).toBeInTheDocument();
     expect(screen.getByText("back Rank Mate")).toBeInTheDocument();
+  });
+
+  it("renders a mini board diagram instead of an emoji icon for named-mate themes", async () => {
+    (api.get as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+      data: THEME_COUNTS,
+    });
+
+    renderPage();
+
+    await screen.findByText("back Rank Mate");
+    expect(screen.getAllByTestId("board")).toHaveLength(1);
   });
 
   it("links each theme card to the practice-mode puzzles route", async () => {

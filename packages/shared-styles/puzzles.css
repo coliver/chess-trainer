@@ -143,6 +143,13 @@
   margin-bottom: 2px;
 }
 
+.puzzle-theme-card-board {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 4px;
+  pointer-events: none;
+}
+
 .puzzle-theme-card-name {
   font-size: 14px;
   font-weight: 650;

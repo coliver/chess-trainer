@@ -186,3 +186,26 @@ const THEME_ICONS: Record<string, string> = {
 
 export const themeIcon = (theme: string): string =>
   THEME_ICONS[theme] ?? DEFAULT_THEME_ICON;
+
+/**
+ * Minimal, verified checkmate positions for the named-mate theme tags —
+ * each is a legal, confirmed-checkmate FEN with as few pieces as possible,
+ * used to render a tiny static board diagram on that theme's card.
+ */
+export const MATE_FENS: Record<string, string> = {
+  backRankMate: "3R2k1/5ppp/8/8/8/8/8/6K1 b - - 0 1",
+  smotheredMate: "6rk/5Npp/8/8/8/8/8/6K1 b - - 0 1",
+  anastasiaMate: "7k/6p1/5N2/8/8/8/7R/6K1 b - - 0 1",
+  arabianMate: "6Rk/8/5N2/8/8/8/8/6K1 b - - 0 1",
+  bodenMate: "1nkr4/2p5/B7/8/6B1/8/8/6K1 b - - 0 1",
+  cornerMate: "7k/5ppQ/5N2/8/8/8/8/6K1 b - - 0 1",
+  dovetailMate: "6kQ/5pp1/6N1/8/8/8/8/6K1 b - - 0 1",
+  epauletteMate: "3rkr2/8/4Q3/8/8/8/8/4K3 b - - 0 1",
+  hookMate: "7k/7R/5N2/6P1/8/8/8/6K1 b - - 0 1",
+  killBoxMate: "7k/7R/6Q1/8/8/8/8/6K1 b - - 0 1",
+  morphysMate: "7k/7p/8/8/2B5/8/8/6RK b - - 0 1",
+  operaMate: "2kR4/1p6/1B6/8/8/8/8/6K1 b - - 0 1",
+  pillsburysMate: "7k/6p1/8/8/2B5/8/8/6KR b - - 0 1",
+  swallowstailMate: "8/2N5/4Q3/4k3/3ppp2/8/8/6K1 b - - 0 1",
+  triangleMate: "7k/6Q1/4N3/7R/8/8/8/6K1 b - - 0 1",
+};

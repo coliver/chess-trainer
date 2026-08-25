@@ -3,7 +3,13 @@ import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { useApiResource } from "../hooks/useApiResource";
-import { formatThemeLabel, themeIcon, THEME_GROUPS } from "../utils/puzzleThemes";
+import {
+  formatThemeLabel,
+  themeIcon,
+  MATE_FENS,
+  THEME_GROUPS,
+} from "../utils/puzzleThemes";
+import Board from "../components/Board";
 
 type ThemeCount = { theme: string; count: number };
 
@@ -43,23 +49,32 @@ export const PuzzleThemes = () => {
                 {t(`puzzleThemes.${group.key}`)}
               </h2>
               <div className="puzzle-theme-grid">
-                {themes.map((theme) => (
-                  <Link
-                    key={theme}
-                    to={`/puzzles?theme=${theme}`}
-                    className="puzzle-theme-card"
-                  >
-                    <span className="puzzle-theme-card-icon" aria-hidden="true">
-                      {themeIcon(theme)}
-                    </span>
-                    <span className="puzzle-theme-card-name">
-                      {formatThemeLabel(theme)}
-                    </span>
-                    <span className="puzzle-theme-card-count">
-                      {t("puzzleThemes.cardCount", { count: countByTheme.get(theme) })}
-                    </span>
-                  </Link>
-                ))}
+                {themes.map((theme) => {
+                  const mateFen = MATE_FENS[theme];
+                  return (
+                    <Link
+                      key={theme}
+                      to={`/puzzles?theme=${theme}`}
+                      className="puzzle-theme-card"
+                    >
+                      {mateFen ? (
+                        <div className="puzzle-theme-card-board" aria-hidden="true">
+                          <Board position={mateFen} interactive={false} />
+                        </div>
+                      ) : (
+                        <span className="puzzle-theme-card-icon" aria-hidden="true">
+                          {themeIcon(theme)}
+                        </span>
+                      )}
+                      <span className="puzzle-theme-card-name">
+                        {formatThemeLabel(theme)}
+                      </span>
+                      <span className="puzzle-theme-card-count">
+                        {t("puzzleThemes.cardCount", { count: countByTheme.get(theme) })}
+                      </span>
+                    </Link>
+                  );
+                })}
               </div>
             </section>
           );
