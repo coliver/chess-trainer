@@ -71,6 +71,7 @@
   border: none;
   background: none;
   padding: 0;
+  justify-content: center;
 }
 .progress-stat-value {
   display: inline-flex;
@@ -108,21 +109,27 @@
   transition: width 0.3s ease;
 }
 .progress-review-btn {
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--text-h);
-  border-radius: 6px;
-  padding: 6px 12px;
-  font-size: 13px;
+  height: 100%;
+  min-height: 68px;
+  border: 1px solid var(--accent, #6c8cff);
+  background: var(--accent, #6c8cff);
+  color: #fff;
+  border-radius: 12px;
+  padding: 6px 20px;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
+  transition: filter 0.15s;
 }
 .progress-review-btn:disabled {
-  opacity: 0.5;
+  background: var(--code-bg);
+  color: var(--text);
+  border-color: var(--border);
+  opacity: 1;
   cursor: default;
 }
 .progress-review-btn:not(:disabled):hover {
-  border-color: var(--accent, #6c8cff);
+  filter: brightness(1.08);
 }
 
 /* On wide screens, put Training and Puzzles side by side as one KPI
