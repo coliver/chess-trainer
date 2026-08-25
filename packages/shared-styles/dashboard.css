@@ -850,6 +850,9 @@
   margin-top: 4px;
   border-top: 1px solid var(--border);
 }
+.ws-expanded[hidden] {
+  display: none;
+}
 
 .ws-row {
   display: flex;
