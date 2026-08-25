@@ -12,7 +12,8 @@ from backend.app.modules.progress.service import (
     get_weak_spots,
 )
 from backend.app.modules.shared.db import get_db
-from backend.app.routers.auth import get_current_user
+from backend.app.modules.shared.text_auth import LOGIN_INSTRUCTIONS
+from backend.app.routers.auth import get_current_user, get_current_user_or_none
 from backend.app.utils import to_camel
 
 
@@ -64,12 +65,7 @@ def get_progress_summary(
     return get_summary(db, current_user.id)
 
 
-@router.get("/progress/summary.text", response_class=PlainTextResponse)
-def get_progress_summary_text(
-    db: Session = Depends(get_db),
-    current_user=Depends(get_current_user),
-):
-    summary = get_summary(db, current_user.id)
+def render_progress_summary(summary: dict) -> str:
     lines = [
         "Progress",
         f"  positions seen:   {summary['positions_seen']}",
@@ -79,6 +75,17 @@ def get_progress_summary_text(
         f"  longest streak:   {summary['longest_streak']}",
     ]
     return "\n".join(lines)
+
+
+@router.get("/progress/summary.text", response_class=PlainTextResponse)
+def get_progress_summary_text(
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user_or_none),
+):
+    if current_user is None:
+        return PlainTextResponse(LOGIN_INSTRUCTIONS, status_code=401)
+    summary = get_summary(db, current_user.id)
+    return render_progress_summary(summary)
 
 
 @router.get("/progress/due", response_model=list[DuePositionResponse])

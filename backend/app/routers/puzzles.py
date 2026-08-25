@@ -12,7 +12,8 @@ from backend.app.modules.puzzles.service import (
 )
 from backend.app.modules.puzzles.text_rendering import render_puzzle_attempt, render_puzzle_next
 from backend.app.modules.shared.db import get_db
-from backend.app.routers.auth import get_current_user
+from backend.app.modules.shared.text_auth import LOGIN_INSTRUCTIONS
+from backend.app.routers.auth import get_current_user, get_current_user_or_none
 from backend.app.utils import to_camel
 
 
@@ -114,8 +115,10 @@ def post_puzzle_attempt(
 def get_puzzles_next_text(
     theme: str | None = Query(None),
     db: Session = Depends(get_db),
-    current_user=Depends(get_current_user),
+    current_user=Depends(get_current_user_or_none),
 ):
+    if current_user is None:
+        return PlainTextResponse(LOGIN_INSTRUCTIONS, status_code=401)
     puzzle = get_next_puzzle(db, current_user.id, theme=theme)
     if puzzle is None:
         raise HTTPException(status_code=404, detail="No puzzles available")
@@ -128,8 +131,10 @@ def post_puzzle_attempt_text(
     move_uci: str = Query(..., alias="moveUci"),
     move_index: int = Query(0, alias="moveIndex"),
     db: Session = Depends(get_db),
-    current_user=Depends(get_current_user),
+    current_user=Depends(get_current_user_or_none),
 ):
+    if current_user is None:
+        return PlainTextResponse(LOGIN_INSTRUCTIONS, status_code=401)
     result = submit_puzzle_attempt(
         db,
         user_id=current_user.id,
@@ -152,12 +157,7 @@ def get_puzzles_summary(
     return PuzzleSummaryResponse(**get_puzzle_summary(db, current_user.id))
 
 
-@router.get("/puzzles/summary.text", response_class=PlainTextResponse)
-def get_puzzles_summary_text(
-    db: Session = Depends(get_db),
-    current_user=Depends(get_current_user),
-):
-    summary = get_puzzle_summary(db, current_user.id)
+def render_puzzle_summary(summary: dict) -> str:
     lines = [
         "Puzzles",
         f"  puzzles seen:     {summary['puzzles_seen']}",
@@ -165,6 +165,17 @@ def get_puzzles_summary_text(
         f"  mastered:         {summary['mastered']}",
     ]
     return "\n".join(lines)
+
+
+@router.get("/puzzles/summary.text", response_class=PlainTextResponse)
+def get_puzzles_summary_text(
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user_or_none),
+):
+    if current_user is None:
+        return PlainTextResponse(LOGIN_INSTRUCTIONS, status_code=401)
+    summary = get_puzzle_summary(db, current_user.id)
+    return render_puzzle_summary(summary)
 
 
 @router.get("/puzzles/themes", response_model=list[PuzzleThemeCount])

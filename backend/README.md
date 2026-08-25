@@ -133,6 +133,16 @@ Preferences routes are under `/users/me/preferences`. Require authentication.
 |---|---|---|
 | `GET` | `/openings` | List all openings that have parsed UCI moves (no auth required) |
 
+## Text Mode
+
+Most routes have a `.text` sibling (e.g. `GET /progress/summary` → `GET /progress/summary.text`) that renders the same data as plain text instead of JSON, for using the app from curl or a terminal browser rather than the React app — see the `.text` rows in the tables below. There's also one combined route with no JSON counterpart:
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/dashboard.text` | Progress summary + puzzle summary together in one call — a BBS-style landing screen |
+
+An unauthenticated request to any `.text` route returns a plain-text `401` explaining how to log in (`POST /auth/login`) and reuse the resulting token as a Bearer header, rather than the JSON `{"detail": "..."}` body other routes return. JSON routes are unaffected.
+
 ## Progress Endpoints
 
 Progress routes provide spaced-repetition tracking and analysis of the user's training performance. All require authentication.

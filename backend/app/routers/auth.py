@@ -206,6 +206,22 @@ def get_current_user(
     return user
 
 
+def get_current_user_or_none(
+    authorization: str | None = Header(default=None),
+    db=Depends(get_db),
+) -> User | None:
+    """Same checks as get_current_user, but returns None instead of raising.
+
+    For .text routes, which report unauthenticated access as a plain-text
+    message rather than the JSON error body get_current_user's exceptions
+    produce.
+    """
+    try:
+        return get_current_user(authorization=authorization, db=db)
+    except HTTPException:
+        return None
+
+
 # New /refresh endpoint
 class RefreshRequest(BaseModel):
     refresh_token: str

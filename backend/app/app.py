@@ -1,11 +1,19 @@
 # backend/app/app.py
-from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
+from fastapi import Depends, FastAPI
+from fastapi.responses import HTMLResponse, PlainTextResponse
 from pydantic import BaseModel
+from sqlalchemy.orm import Session
 
+from backend.app.modules.progress.service import get_summary
+from backend.app.modules.puzzles.service import get_puzzle_summary
+from backend.app.modules.shared.db import get_db
+from backend.app.modules.shared.text_auth import LOGIN_INSTRUCTIONS
+from backend.app.routers.auth import get_current_user_or_none
 from backend.app.routers.auth import router as auth_router
 from backend.app.routers.openings import router as openings_router
+from backend.app.routers.progress import render_progress_summary
 from backend.app.routers.progress import router as progress_router
+from backend.app.routers.puzzles import render_puzzle_summary
 from backend.app.routers.puzzles import router as puzzles_router
 from backend.app.routers.training import router as training_router
 from backend.app.routers.users import router as users_router
@@ -39,3 +47,22 @@ def home():
 @app.get("/ping", response_model=PingResponse)
 def ping():
     return {"message": "ok"}
+
+
+@app.get("/dashboard.text", response_class=PlainTextResponse)
+def dashboard_text(
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user_or_none),
+):
+    if current_user is None:
+        return PlainTextResponse(LOGIN_INSTRUCTIONS, status_code=401)
+    progress = get_summary(db, current_user.id)
+    puzzles = get_puzzle_summary(db, current_user.id)
+    body = "\n\n".join(
+        [
+            f"Knight School - {current_user.email}",
+            render_progress_summary(progress),
+            render_puzzle_summary(puzzles),
+        ]
+    )
+    return body
