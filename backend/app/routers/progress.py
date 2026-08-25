@@ -12,7 +12,7 @@ from backend.app.modules.progress.service import (
     get_weak_spots,
 )
 from backend.app.modules.shared.db import get_db
-from backend.app.modules.shared.text_auth import LOGIN_INSTRUCTIONS
+from backend.app.modules.shared.text_mode import LOGIN_INSTRUCTIONS
 from backend.app.routers.auth import get_current_user, get_current_user_or_none
 from backend.app.utils import to_camel
 

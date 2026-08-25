@@ -3,6 +3,7 @@ from fastapi.testclient import TestClient
 
 from backend.app.app import app
 from backend.app.modules.progress import service as progress_service
+from backend.app.modules.shared.text_mode import KNIGHT_SCHOOL_BANNER
 from backend.app.routers.auth import get_current_user_or_none
 
 
@@ -13,6 +14,7 @@ def test_dashboard_text_requires_auth():
         assert r.headers["content-type"].startswith("text/plain")
         assert "Not authenticated" in r.text
         assert "auth/login" in r.text
+        assert KNIGHT_SCHOOL_BANNER in r.text
 
 
 def test_dashboard_text_combines_progress_and_puzzles(db, test_user):
@@ -31,6 +33,7 @@ def test_dashboard_text_combines_progress_and_puzzles(db, test_user):
             r = client.get("/dashboard.text")
             assert r.status_code == 200
             assert r.headers["content-type"].startswith("text/plain")
+            assert KNIGHT_SCHOOL_BANNER in r.text
             assert test_user.email in r.text
             assert "Progress" in r.text
             assert "positions seen:   1" in r.text

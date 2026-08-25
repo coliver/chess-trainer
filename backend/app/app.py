@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from backend.app.modules.progress.service import get_summary
 from backend.app.modules.puzzles.service import get_puzzle_summary
 from backend.app.modules.shared.db import get_db
-from backend.app.modules.shared.text_auth import LOGIN_INSTRUCTIONS
+from backend.app.modules.shared.text_mode import KNIGHT_SCHOOL_BANNER, LOGIN_INSTRUCTIONS
 from backend.app.routers.auth import get_current_user_or_none
 from backend.app.routers.auth import router as auth_router
 from backend.app.routers.openings import router as openings_router
@@ -55,12 +55,14 @@ def dashboard_text(
     current_user=Depends(get_current_user_or_none),
 ):
     if current_user is None:
-        return PlainTextResponse(LOGIN_INSTRUCTIONS, status_code=401)
+        body = KNIGHT_SCHOOL_BANNER + "\n\n" + LOGIN_INSTRUCTIONS
+        return PlainTextResponse(body, status_code=401)
     progress = get_summary(db, current_user.id)
     puzzles = get_puzzle_summary(db, current_user.id)
     body = "\n\n".join(
         [
-            f"Knight School - {current_user.email}",
+            KNIGHT_SCHOOL_BANNER,
+            f"logged in as {current_user.email}",
             render_progress_summary(progress),
             render_puzzle_summary(puzzles),
         ]

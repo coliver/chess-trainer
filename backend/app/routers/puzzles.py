@@ -12,7 +12,7 @@ from backend.app.modules.puzzles.service import (
 )
 from backend.app.modules.puzzles.text_rendering import render_puzzle_attempt, render_puzzle_next
 from backend.app.modules.shared.db import get_db
-from backend.app.modules.shared.text_auth import LOGIN_INSTRUCTIONS
+from backend.app.modules.shared.text_mode import LOGIN_INSTRUCTIONS
 from backend.app.routers.auth import get_current_user, get_current_user_or_none
 from backend.app.utils import to_camel
 
