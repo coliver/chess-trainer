@@ -213,7 +213,15 @@ export const Puzzles = () => {
   const statusKind = feedbackKind === "neutral" ? "your" : feedbackKind;
   // Puzzles keeps its own neutral icon (pawn) rather than deriveStatus's king.
   const statusIcon = feedbackKind === "neutral" ? "♟" : feedbackIcon;
-  const statusMsg = feedback || (puzzleId ? t("puzzles.findBestMove") : "");
+  const statusMsg =
+    feedback ||
+    (puzzleId
+      ? t(
+          solverColor === "b"
+            ? "puzzles.findBestMoveBlack"
+            : "puzzles.findBestMoveWhite",
+        )
+      : "");
 
   const onMove = useCallback(
     (from: string, to: string): boolean => {

@@ -109,8 +109,26 @@ describe("Puzzles Page", () => {
 
     await screen.findByText("Rating ~1500");
     expect(screen.getByText(/Streak: 0/)).toBeInTheDocument();
-    expect(screen.getByText("Find the best move.")).toBeInTheDocument();
+    expect(
+      screen.getByText("Find the best move for White."),
+    ).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /Skip puzzle/ })).toBeEnabled();
+  });
+
+  it("shows the Black-to-move prompt when Black is the solver", async () => {
+    (api.get as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+      data: NEXT_PUZZLE,
+    });
+    sideToMoveMock.mockReturnValue("b");
+
+    renderPuzzles();
+
+    await screen.findByText("Rating ~1500");
+    expect(
+      screen.getByText("Find the best move for Black."),
+    ).toBeInTheDocument();
+
+    sideToMoveMock.mockReturnValue("w");
   });
 
   it("increments streak and best streak on a correct move", async () => {
