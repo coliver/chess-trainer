@@ -322,7 +322,6 @@ test.describe("Auth & flows coverage", () => {
 
     const results = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa"])
-      .exclude(".site-header-version") // pre-existing contrast issue, see e2e/README.md
       .analyze();
 
     expect(results.violations, JSON.stringify(results.violations, null, 2)).toEqual([]);
@@ -390,7 +389,6 @@ test.describe("Auth & flows coverage", () => {
 
     const results = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa"])
-      .exclude(".site-header-version") // pre-existing contrast issue, see e2e/README.md
       .analyze();
 
     expect(results.violations, JSON.stringify(results.violations, null, 2)).toEqual([]);
@@ -421,7 +419,6 @@ test.describe("Auth & flows coverage", () => {
 
     const results = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa"])
-      .exclude(".site-header-version") // pre-existing contrast issue, see e2e/README.md
       .analyze();
 
     expect(results.violations, JSON.stringify(results.violations, null, 2)).toEqual([]);
@@ -457,7 +454,6 @@ test.describe("Auth & flows coverage", () => {
 
     const results = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa"])
-      .exclude(".site-header-version") // pre-existing contrast issue, see e2e/README.md
       .analyze();
 
     expect(results.violations, JSON.stringify(results.violations, null, 2)).toEqual([]);
@@ -477,7 +473,6 @@ test.describe("Auth & flows coverage", () => {
 
     const results = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa"])
-      .exclude(".site-header-version") // pre-existing contrast issue, see e2e/README.md
       .analyze();
 
     expect(results.violations, JSON.stringify(results.violations, null, 2)).toEqual([]);
@@ -491,7 +486,6 @@ test.describe("Auth & flows coverage", () => {
 
     const results = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa"])
-      .exclude(".site-header-version") // pre-existing contrast issue, see e2e/README.md
       .analyze();
 
     expect(results.violations, JSON.stringify(results.violations, null, 2)).toEqual([]);
@@ -517,7 +511,6 @@ test.describe("Auth & flows coverage", () => {
 
     const results = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa"])
-      .exclude(".site-header-version") // pre-existing contrast issue, see e2e/README.md
       .analyze();
 
     expect(results.violations, JSON.stringify(results.violations, null, 2)).toEqual([]);

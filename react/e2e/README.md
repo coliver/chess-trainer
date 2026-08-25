@@ -101,13 +101,15 @@ surfaced the same missing-mock bug a third time in
 refresh-and-redirect path fired mid-render. Fixed by adding the mock there
 too.
 
-### A real accessibility violation (excluded, not fixed)
+### A real accessibility violation (fixed)
 
-The `@axe-core` scan flags `.site-header-version` (the small "dev" build-version
-badge in the header) for insufficient color contrast (3.04 vs the WCAG AA
-4.5:1 minimum for its font size). The accessibility tests `.exclude()` this
-selector so the scan can still catch regressions elsewhere; the underlying
-contrast issue is unfixed and should be picked up as a small CSS follow-up.
+The `@axe-core` scan flagged `.site-header-version` (the small "dev"
+build-version badge in the header) for insufficient color contrast (3.04 on
+light theme, 3.34 on dark, vs the WCAG AA 4.5:1 minimum for its font size) —
+the same `opacity`-on-`--text` pattern as the other contrast bugs below, just
+lower (`0.6`). Raised to `0.85` in `header.css`, clearing 5.6:1/5.43:1 on
+light/dark; the tests' `.exclude(".site-header-version")` calls were removed
+now that the scan passes without it.
 
 ### More real violations, caught by extending the scan to `/puzzles`, `/training/:id`, `/settings` (fixed)
 
