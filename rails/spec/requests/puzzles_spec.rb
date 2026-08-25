@@ -120,20 +120,27 @@ RSpec.describe "Puzzles", type: :request do
       expect(response).to redirect_to(login_path)
     end
 
-    it "renders theme cards grouped by category, using counts from the API" do
-      log_in
-      stub_preferences
-      stub_request(:get, "#{base}/puzzles/themes").to_return(
-        status: 200,
-        body: [{ theme: "fork", count: 42 }, { theme: "backRankMate", count: 7 }].to_json,
-        headers: { "Content-Type" => "application/json" }
-      )
+    context "with theme counts from the API" do
+      before do
+        log_in
+        stub_preferences
+        stub_request(:get, "#{base}/puzzles/themes").to_return(
+          status: 200,
+          body: [ { theme: "fork", count: 42 }, { theme: "backRankMate", count: 7 } ].to_json,
+          headers: { "Content-Type" => "application/json" }
+        )
+        get puzzle_themes_path, env: env
+      end
 
-      get puzzle_themes_path, env: env
-      expect(response).to have_http_status(:ok)
-      expect(response.body).to include("fork")
-      expect(response.body).to include("42")
-      expect(response.body).to include("back Rank Mate")
+      it "renders theme cards with their counts" do
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include("fork")
+        expect(response.body).to include("42")
+      end
+
+      it "formats camelCase theme names as spaced labels" do
+        expect(response.body).to include("back Rank Mate")
+      end
     end
   end
 

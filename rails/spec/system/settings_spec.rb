@@ -37,6 +37,7 @@ RSpec.describe "Settings", type: :system do
     )
     stub_request(:get, "#{base}/progress/due").to_return(status: 200, body: "[]", headers: { "Content-Type" => "application/json" })
     stub_request(:get, "#{base}/progress/weak-spots").to_return(status: 200, body: "[]", headers: { "Content-Type" => "application/json" })
+    stub_request(:get, "#{base}/progress/step-accuracy").to_return(status: 200, body: "[]", headers: { "Content-Type" => "application/json" })
     stub_request(:get, "#{base}/openings").to_return(status: 200, body: "[]", headers: { "Content-Type" => "application/json" })
 
     visit login_path
