@@ -272,7 +272,9 @@ export default class extends Controller {
       this.statusIconTarget.textContent = kind === "correct" ? "✅" : kind === "incorrect" ? "❌" : "♟"
     }
     if (this.hasStatusMsgTarget) {
-      this.statusMsgTarget.textContent = this.feedback || (this.puzzleId ? t("puzzles.findBestMove") : "")
+      const findBestMoveKey =
+        sideToMove(this.fen) === "b" ? "puzzles.findBestMoveBlack" : "puzzles.findBestMoveWhite"
+      this.statusMsgTarget.textContent = this.feedback || (this.puzzleId ? t(findBestMoveKey) : "")
     }
     if (this.hasRatingChipTarget) {
       this.ratingChipTarget.textContent = this.rating ? t("puzzles.rating", { rating: this.rating }) : ""
