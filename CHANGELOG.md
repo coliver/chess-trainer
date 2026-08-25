@@ -6,6 +6,7 @@
 - feat(backend): unauthenticated requests to any `.text` route now get a plain-text "how to log in" message (with a ready-to-run `curl .../auth/login` command) instead of the JSON `{"detail": "Missing Bearer token"}` body every other route returns. Implemented via a new `get_current_user_or_none` dependency (`backend/app/routers/auth.py`) that each `.text` route checks explicitly — no global exception handler, so JSON-route error responses are completely unaffected.
 - feat(backend): add `GET /puzzles/themes.text` — a menu screen listing puzzle themes and counts, with the exact `GET /puzzles/next.text?theme=<name>` command to pick one, completing the curl-navigable BBS-style flow (login prompt → dashboard → theme menu → puzzle → attempt).
 - feat(nginx): `curl`/`wget`/`httpie` hitting the bare domain (`https://knightschool.click/`, no path) now get redirected straight to `/api/dashboard.text` instead of the React SPA's raw HTML — no browser needed to discover the text-mode BBS exists. Detected via a `$http_user_agent` map (`nginx/terminal-client.conf`, duplicated in `nginx/conf-prod/` since prod fully replaces the mounted `conf.d` directory) and an exact-match `location = /` so every other path is completely unaffected regardless of User-Agent.
+- feat(backend): `KNIGHT_SCHOOL_BANNER` now includes an ASCII knight/horse illustration between the "KNIGHT" and "SCHOOL" halves of the wordmark (art credit: Andreas Freise, asciiart.eu).
 
 ## 2026-08-24
 

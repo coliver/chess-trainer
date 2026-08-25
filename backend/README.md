@@ -139,7 +139,7 @@ Most routes have a `.text` sibling (e.g. `GET /progress/summary` → `GET /progr
 
 | Method | Endpoint | Description |
 |---|---|---|
-| `GET` | `/dashboard.text` | Progress summary + puzzle summary together in one call — a BBS-style landing screen, topped with an ASCII "KNIGHT SCHOOL" banner |
+| `GET` | `/dashboard.text` | Progress summary + puzzle summary together in one call — a BBS-style landing screen, topped with an ASCII "KNIGHT SCHOOL" banner (knight/horse art between the two words, credit: Andreas Freise, asciiart.eu) |
 
 An unauthenticated request to any `.text` route returns a plain-text `401` explaining how to log in (`POST /auth/login`) and reuse the resulting token as a Bearer header, rather than the JSON `{"detail": "..."}` body other routes return. JSON routes are unaffected. `/dashboard.text` shows the banner on both the authenticated and unauthenticated responses.
 
