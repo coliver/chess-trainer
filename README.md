@@ -3,6 +3,7 @@
 [![python](https://github.com/coliver/chess-trainer/actions/workflows/tests.yml/badge.svg)](https://github.com/coliver/chess-trainer/actions/workflows/tests.yml)
 [![react](https://github.com/coliver/chess-trainer/actions/workflows/react.yml/badge.svg)](https://github.com/coliver/chess-trainer/actions/workflows/react.yml)
 [![rails](https://github.com/coliver/chess-trainer/actions/workflows/rails.yml/badge.svg)](https://github.com/coliver/chess-trainer/actions/workflows/rails.yml)
+[![accessibility](https://github.com/coliver/chess-trainer/actions/workflows/react.yml/badge.svg?label=accessibility%20%28jsx-a11y%20%2B%20axe%29)](#-accessibility)
 
 A web-based chess openings trainer designed to drill specific lines and track performance metrics.
 
@@ -77,8 +78,11 @@ Knight School uses a decoupled architecture to separate the chess engine from th
 ### ♿ Accessibility
 
 - **Board interaction:** `Board.tsx` uses cm-chessboard's [`Accessibility` extension](https://github.com/shaack/cm-chessboard/blob/master/src/extensions/accessibility/Accessibility.js) — screen readers get a hidden move-form/table/piece-list description of the position plus braille notation, and keyboard move input (arrow keys, Enter/Space, Escape) is available on interactive boards.
+- **Static linting:** `eslint-plugin-jsx-a11y` runs as part of `npm run lint` (and CI), catching issues like invalid ARIA roles/attributes and `autoFocus` misuse before they ship.
 - **Automated scanning:** `@axe-core/playwright` runs WCAG 2 A/AA scans against `/login` and `/dashboard` as part of the e2e suite, which has already caught and fixed real issues (color-contrast and `aria-required-attr` violations). Coverage isn't complete yet — `/training/:id`, `/puzzles`, `/settings`, `/register`, and `/verify-email` aren't scanned — and automated scans are no substitute for manual screen-reader/keyboard testing. See [react/e2e/README.md](./react/e2e/README.md) for the full picture, including one known, unfixed contrast violation (`.site-header-version`) currently excluded from the scan.
-- **Internationalization:** 35+ locale translations ([packages/i18n-locales](./packages/i18n-locales)) so the UI isn't English-only.
+- **Modal/menu semantics:** the header's overflow menu (`OverflowMenu.tsx`) uses `role="dialog"`/`aria-modal`, traps focus while open, closes on Escape, and returns focus to the trigger button on close.
+- **Live regions:** Login/Register error messages carry `role="alert"` so screen readers announce them as soon as they appear.
+- **Internationalization:** 35+ locale translations ([packages/i18n-locales](./packages/i18n-locales)) so the UI isn't English-only; `<html lang>` tracks the active language automatically.
 
 ### 📟 Text mode
 
