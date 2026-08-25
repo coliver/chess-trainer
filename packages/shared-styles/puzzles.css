@@ -88,6 +88,21 @@
   font-size: 14px;
 }
 
+.puzzle-themes-random-btn {
+  margin-top: 14px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #fff;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 650;
+  cursor: pointer;
+}
+.puzzle-themes-random-btn:hover {
+  opacity: 0.92;
+}
+
 .puzzle-theme-group {
   margin-bottom: 24px;
 }

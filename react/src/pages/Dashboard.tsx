@@ -548,7 +548,7 @@ export const Dashboard = () => {
                   <button
                     type="button"
                     className="progress-review-btn"
-                    onClick={() => navigate("/puzzles")}
+                    onClick={() => navigate("/puzzles/themes")}
                   >
                     {t("dashboard.progress.practicePuzzles")}
                   </button>

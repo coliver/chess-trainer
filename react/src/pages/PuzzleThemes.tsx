@@ -1,7 +1,7 @@
 // react/src/pages/PuzzleThemes.tsx
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useApiResource } from "../hooks/useApiResource";
 import { formatThemeLabel, THEME_GROUPS } from "../utils/puzzleThemes";
 
@@ -9,6 +9,7 @@ type ThemeCount = { theme: string; count: number };
 
 export const PuzzleThemes = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const themeCounts = useApiResource<ThemeCount[]>("/puzzles/themes", []);
 
   const countByTheme = useMemo(
@@ -23,6 +24,13 @@ export const PuzzleThemes = () => {
           <div className="rail-eyebrow">{t("puzzleThemes.eyebrow")}</div>
           <h1>{t("puzzleThemes.title")}</h1>
           <p className="puzzle-themes-subtitle">{t("puzzleThemes.subtitle")}</p>
+          <button
+            type="button"
+            className="puzzle-themes-random-btn"
+            onClick={() => navigate("/puzzles")}
+          >
+            {t("puzzleThemes.randomPuzzle")}
+          </button>
         </div>
 
         {THEME_GROUPS.map((group) => {
@@ -53,10 +61,6 @@ export const PuzzleThemes = () => {
             </section>
           );
         })}
-
-        <Link to="/puzzles" className="puzzles-back-link">
-          {t("puzzleThemes.backToPuzzles")}
-        </Link>
       </div>
     </main>
   );

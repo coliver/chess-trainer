@@ -48,7 +48,7 @@ export function HomeHeader() {
                 {t("header.openings")}
               </Link>
               <Link
-                to="/puzzles"
+                to="/puzzles/themes"
                 className={`home-header-tab${isPuzzlesActive ? " active" : ""}`}
               >
                 {t("header.puzzles")}

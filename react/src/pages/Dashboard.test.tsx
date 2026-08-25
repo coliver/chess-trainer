@@ -391,6 +391,18 @@ describe("Dashboard", () => {
     ).toContain("—");
   });
 
+  it("navigates to the puzzle theme picker when Practice puzzles is clicked", async () => {
+    const user = userEvent.setup();
+    renderDashboard();
+
+    const practiceBtn = await screen.findByRole("button", {
+      name: "Practice puzzles",
+    });
+    await user.click(practiceBtn);
+
+    expect(mockNavigate).toHaveBeenCalledWith("/puzzles/themes");
+  });
+
   it("startSession failure shows an alert", async () => {
     const alertSpy = vi.spyOn(window, "alert").mockImplementation(() => {});
     (api.post as unknown as ReturnType<typeof vi.fn>).mockRejectedValueOnce(

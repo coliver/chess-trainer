@@ -116,7 +116,8 @@
     "groupPhasesEndgames": "Phases & Endgames",
     "groupMaterialSpecial": "Material & Special Moves",
     "groupAttack": "Attack",
-    "groupLengthDifficulty": "Length & Difficulty"
+    "groupLengthDifficulty": "Length & Difficulty",
+    "randomPuzzle": "Random puzzle ›"
   },
   "training": {
     "whiteToMove": "Hvid skal flytte",

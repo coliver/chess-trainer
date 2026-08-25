@@ -61,6 +61,19 @@ describe("HomeHeader", () => {
     expect(screen.getByText("Openings")).not.toHaveClass("active");
   });
 
+  it("links the puzzles tab to the theme picker, not straight into a puzzle", () => {
+    (useAuth as ReturnType<typeof vi.fn>).mockReturnValue({
+      isLoggedIn: true,
+      username: "alice",
+    });
+    renderAt("/dashboard");
+
+    expect(screen.getByText("Puzzles")).toHaveAttribute(
+      "href",
+      "/puzzles/themes",
+    );
+  });
+
   it("hides tabs entirely off the dashboard/puzzles routes", () => {
     (useAuth as ReturnType<typeof vi.fn>).mockReturnValue({
       isLoggedIn: true,
