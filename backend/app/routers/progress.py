@@ -1,5 +1,6 @@
 # /backend/app/routers/progress.py
 from fastapi import APIRouter, Depends
+from fastapi.responses import PlainTextResponse
 from pydantic import BaseModel, ConfigDict
 from sqlalchemy.orm import Session
 
@@ -61,6 +62,23 @@ def get_progress_summary(
     current_user=Depends(get_current_user),
 ):
     return get_summary(db, current_user.id)
+
+
+@router.get("/progress/summary.text", response_class=PlainTextResponse)
+def get_progress_summary_text(
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user),
+):
+    summary = get_summary(db, current_user.id)
+    lines = [
+        "Progress",
+        f"  positions seen:   {summary['positions_seen']}",
+        f"  overall accuracy: {summary['overall_accuracy']:.0%}",
+        f"  mastered:         {summary['mastered']}",
+        f"  current streak:   {summary['current_streak']}",
+        f"  longest streak:   {summary['longest_streak']}",
+    ]
+    return "\n".join(lines)
 
 
 @router.get("/progress/due", response_model=list[DuePositionResponse])

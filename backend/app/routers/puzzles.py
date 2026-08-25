@@ -1,5 +1,6 @@
 # backend/app/routers/puzzles.py
 from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi.responses import PlainTextResponse
 from pydantic import BaseModel, ConfigDict
 from sqlalchemy.orm import Session
 
@@ -9,6 +10,7 @@ from backend.app.modules.puzzles.service import (
     get_theme_counts,
     submit_puzzle_attempt,
 )
+from backend.app.modules.puzzles.text_rendering import render_puzzle_attempt, render_puzzle_next
 from backend.app.modules.shared.db import get_db
 from backend.app.routers.auth import get_current_user
 from backend.app.utils import to_camel
@@ -108,12 +110,61 @@ def post_puzzle_attempt(
     )
 
 
+@router.get("/puzzles/next.text", response_class=PlainTextResponse)
+def get_puzzles_next_text(
+    theme: str | None = Query(None),
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user),
+):
+    puzzle = get_next_puzzle(db, current_user.id, theme=theme)
+    if puzzle is None:
+        raise HTTPException(status_code=404, detail="No puzzles available")
+    return render_puzzle_next(puzzle)
+
+
+@router.post("/puzzles/{puzzle_id}/attempts.text", response_class=PlainTextResponse)
+def post_puzzle_attempt_text(
+    puzzle_id: str,
+    move_uci: str = Query(..., alias="moveUci"),
+    move_index: int = Query(0, alias="moveIndex"),
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user),
+):
+    result = submit_puzzle_attempt(
+        db,
+        user_id=current_user.id,
+        puzzle_id=puzzle_id,
+        move_uci=move_uci,
+        move_index=move_index,
+    )
+    if result is None:
+        raise HTTPException(status_code=404, detail="Puzzle not found")
+    if result.http_status == 400:
+        raise HTTPException(status_code=400, detail=result.error_message)
+    return render_puzzle_attempt(result)
+
+
 @router.get("/puzzles/summary", response_model=PuzzleSummaryResponse)
 def get_puzzles_summary(
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user),
 ):
     return PuzzleSummaryResponse(**get_puzzle_summary(db, current_user.id))
+
+
+@router.get("/puzzles/summary.text", response_class=PlainTextResponse)
+def get_puzzles_summary_text(
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user),
+):
+    summary = get_puzzle_summary(db, current_user.id)
+    lines = [
+        "Puzzles",
+        f"  puzzles seen:     {summary['puzzles_seen']}",
+        f"  overall accuracy: {summary['overall_accuracy']:.0%}",
+        f"  mastered:         {summary['mastered']}",
+    ]
+    return "\n".join(lines)
 
 
 @router.get("/puzzles/themes", response_model=list[PuzzleThemeCount])

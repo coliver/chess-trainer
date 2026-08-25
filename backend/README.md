@@ -140,6 +140,7 @@ Progress routes provide spaced-repetition tracking and analysis of the user's tr
 | Method | Endpoint | Description |
 |---|---|---|
 | `GET` | `/progress/summary` | Return overall training statistics: positions seen, overall accuracy, number mastered, per-opening breakdown, current and longest streak |
+| `GET` | `/progress/summary.text` | Plain-text rendering of `/progress/summary`, for viewing/scripting from a terminal (curl, etc.) instead of the React app |
 | `GET` | `/progress/due` | Return list of positions the user should review soon (spaced-repetition due items) with FEN, correct move, opening info, and due timestamp |
 | `GET` | `/progress/weak-spots` | Return list of positions the user struggles with (low accuracy) with attempt counts and success/failure breakdown |
 | `GET` | `/progress/step-accuracy` | Return per-ply accuracy within each opening's move sequence for this user (`order_index`, accuracy, most common wrong moves), worst-first — identifies which specific step trainees fail, not just whole-opening totals |
@@ -152,8 +153,11 @@ Puzzle routes present tactical puzzles to the user and track their performance. 
 | Method | Endpoint | Description |
 |---|---|---|
 | `GET` | `/puzzles/next` | Fetch the next puzzle with FEN position, rating, themes, correct move, and opponent's setup move for board highlighting |
+| `GET` | `/puzzles/next.text` | Plain-text rendering of `/puzzles/next` — an ASCII board plus a move prompt, for solving puzzles from a terminal |
 | `POST` | `/puzzles/{puzzle_id}/attempts` | Submit an attempted move (`{"moveUci": "..."}`) and receive feedback on correctness and next board state |
+| `POST` | `/puzzles/{puzzle_id}/attempts.text` | Plain-text sibling of the above — takes `moveUci`/`moveIndex` as query params instead of a JSON body, returns an ASCII board and outcome |
 | `GET` | `/puzzles/summary` | Return overall puzzle statistics: puzzles seen, overall accuracy, number mastered |
+| `GET` | `/puzzles/summary.text` | Plain-text rendering of `/puzzles/summary` |
 
 ## Testing
 

@@ -1,3 +1,8 @@
+## 2026-08-25
+
+### Features
+- feat(backend): add `.text` format siblings for viewing/using the API from a terminal instead of the React SPA — `GET /progress/summary.text`, `GET /puzzles/summary.text`, `GET /puzzles/next.text`, and `POST /puzzles/{puzzle_id}/attempts.text`. Puzzle routes render an ASCII chess board (via `python-chess`'s `str(Board)`) instead of raw FEN/JSON, so a puzzle can be solved end-to-end from curl without reading a FEN string by eye; attempts take `moveUci`/`moveIndex` as query params instead of a JSON body. Every `.text` route delegates to the same service function as its JSON counterpart (`get_summary`, `get_puzzle_summary`, `get_next_puzzle`, `submit_puzzle_attempt`) — only the output rendering (`backend/app/modules/puzzles/text_rendering.py`) differs. Follows Rails' format-suffix convention rather than a separate route tree, so the `.text` variant lives right next to the route it mirrors.
+
 ## 2026-08-24
 
 ### Fixes
