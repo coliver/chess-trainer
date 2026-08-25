@@ -58,11 +58,11 @@ Then reuse the access_token as a Bearer header on any .text route, e.g.:
 """
 
 TEXT_MODE_OPTIONS = f"""{sgr("What next?", FG_GOLD)}
-  GET /puzzles/next.text          serve a puzzle to solve
-  GET /puzzles/summary.text       your puzzle stats
-  GET /puzzles/themes.text        browse puzzle themes
-  GET /progress/summary.text      your opening progress
-  GET /dashboard.text             back to this dashboard
+  GET /api/puzzles/next.text          serve a puzzle to solve
+  GET /api/puzzles/summary.text       your puzzle stats
+  GET /api/puzzles/themes.text        browse puzzle themes
+  GET /api/progress/summary.text      your opening progress
+  GET /api/dashboard.text             back to this dashboard
 
 Add the Bearer token to each request, e.g.:
   curl -H "Authorization: Bearer <token>" https://knightschool.click/api/puzzles/next.text"""
