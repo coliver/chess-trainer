@@ -38,6 +38,18 @@
   --logo-accent: var(--accent);
 }
 
+/* --accent text on --accent-bg (used by .eco-chip/.r-eco, the only places
+   accent text sits directly on the accent-tinted background rather than on
+   --card-bg) falls short of the 4.5:1 AA minimum with the default
+   --accent/--accent-bg pairing: 4.15:1 on light theme, 2.18:1 on dark theme.
+   Scoped overrides here instead of changing --accent/--accent-bg themselves,
+   which several hover/selected states elsewhere also rely on and which
+   intentionally hold the brand jewel-tone hue (see STYLE_GUIDE.md). */
+:root {
+  --eco-chip-fg: var(--accent);
+  --eco-chip-bg: rgba(181, 72, 42, 0.03);
+}
+
 @media (max-width: 1024px) {
   :root {
     font: 16px/145% var(--sans);
@@ -57,6 +69,12 @@ html[data-theme="dark"] {
   --accent: #8a3f56;
   --accent-bg: rgba(138, 63, 86, 0.15);
   --accent-border: rgba(138, 63, 86, 0.6);
+
+  /* Lighter mauve, not --accent itself: --accent on --accent-bg is only
+     2.18:1 here, so .eco-chip/.r-eco need a brighter variant to read on a
+     dark chip background — same hue family, tuned for legibility. */
+  --eco-chip-fg: #c97b96;
+  --eco-chip-bg: rgba(138, 63, 86, 0.15);
 
   --social-bg: rgba(47, 48, 58, 0.5);
 

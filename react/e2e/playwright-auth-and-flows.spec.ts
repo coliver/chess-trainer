@@ -395,4 +395,131 @@ test.describe("Auth & flows coverage", () => {
 
     expect(results.violations, JSON.stringify(results.violations, null, 2)).toEqual([]);
   });
+
+  test("puzzles page has no automatically-detectable accessibility violations", async ({
+    page,
+  }) => {
+    await mockAuth(page);
+
+    await page.route("**/api/puzzles/next", async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          puzzleId: "puzzle-1",
+          fen: START_FEN,
+          correctMoveUci: "e2e4",
+        }),
+      });
+    });
+
+    await page.goto(`${baseURL}/puzzles`, { waitUntil: "domcontentloaded" });
+    await page.waitForSelector(".board-host svg", {
+      state: "attached",
+      timeout: 15000,
+    });
+
+    const results = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa"])
+      .exclude(".site-header-version") // pre-existing contrast issue, see e2e/README.md
+      .analyze();
+
+    expect(results.violations, JSON.stringify(results.violations, null, 2)).toEqual([]);
+  });
+
+  test("training session page has no automatically-detectable accessibility violations", async ({
+    page,
+  }) => {
+    await mockAuth(page);
+
+    await page.route("**/api/training-sessions/*/next", async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          itemId: "item-1",
+          fen: START_FEN,
+          correctMoveUci: "e2e4",
+          openingName: "Italian Game",
+          openingEco: "C50",
+          pgn: "",
+        }),
+      });
+    });
+
+    await page.goto(`${baseURL}/training/sess-1`, {
+      waitUntil: "domcontentloaded",
+    });
+    await page.waitForSelector(".board-host svg", {
+      state: "attached",
+      timeout: 15000,
+    });
+
+    const results = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa"])
+      .exclude(".site-header-version") // pre-existing contrast issue, see e2e/README.md
+      .analyze();
+
+    expect(results.violations, JSON.stringify(results.violations, null, 2)).toEqual([]);
+  });
+
+  test("settings page has no automatically-detectable accessibility violations", async ({
+    page,
+  }) => {
+    await mockAuth(page);
+
+    await page.goto(`${baseURL}/settings`, { waitUntil: "domcontentloaded" });
+    await page.waitForSelector("main.page .card", { timeout: 15000 });
+    await page.waitForSelector(".settings-preview-board .board-host svg", {
+      state: "attached",
+      timeout: 15000,
+    });
+
+    const results = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa"])
+      .exclude(".site-header-version") // pre-existing contrast issue, see e2e/README.md
+      .analyze();
+
+    expect(results.violations, JSON.stringify(results.violations, null, 2)).toEqual([]);
+  });
+
+  test("register page has no automatically-detectable accessibility violations", async ({
+    page,
+  }) => {
+    await page.goto(`${baseURL}/register`, { waitUntil: "domcontentloaded" });
+    await page.waitForSelector("main.page .card", { timeout: 15000 });
+
+    const results = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa"])
+      .exclude(".site-header-version") // pre-existing contrast issue, see e2e/README.md
+      .analyze();
+
+    expect(results.violations, JSON.stringify(results.violations, null, 2)).toEqual([]);
+  });
+
+  test("verify-email page has no automatically-detectable accessibility violations", async ({
+    page,
+  }) => {
+    await page.route("**/api/auth/verify-email**", async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({ email: "lobter@example.com" }),
+      });
+    });
+
+    await page.goto(`${baseURL}/verify-email?token=valid-token`, {
+      waitUntil: "domcontentloaded",
+    });
+    await expect(page.getByRole("link", { name: /go to login|log in/i })).toBeVisible({
+      timeout: 15000,
+    });
+
+    const results = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa"])
+      .exclude(".site-header-version") // pre-existing contrast issue, see e2e/README.md
+      .analyze();
+
+    expect(results.violations, JSON.stringify(results.violations, null, 2)).toEqual([]);
+  });
 });

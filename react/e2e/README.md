@@ -50,14 +50,13 @@ Legend: 🟢 covered · 🟡 partial (loads/screenshots only, weak interaction c
 | Settings / preferences | `/settings` | `playwright-settings-preview-check.spec.ts`, `playwright-auth-and-flows.spec.ts` | Preview spec covers board theme, piece set, coordinates, orientation toggle live; auth-and-flows spec confirms a changed board theme persists across a page reload via the backend (video: `settings-persistence.webm`). |
 | Password reset / forgot password | n/a | none | Feature not yet built (tracked in memory `project_remaining_work_punchlist`). No route exists to test. |
 | Route protection (unauthenticated access) | any protected route | `playwright-auth-and-flows.spec.ts` | Confirms hitting `/dashboard` while logged out redirects to `/login` (video: `unauthenticated-redirect.webm`). Only `/dashboard` is exercised directly; `/puzzles`, `/settings`, `/training/:id` share the same `RequireAuth` guard but aren't individually asserted. |
-| Accessibility | `/login`, `/dashboard` | `playwright-auth-and-flows.spec.ts` | Automated `@axe-core/playwright` scan (WCAG 2 A/AA rules) on both pages (videos: `accessibility-login.webm`, `accessibility-dashboard.webm`). Not a substitute for manual screen-reader/keyboard testing, and only these two pages are scanned so far. |
+| Accessibility | `/login`, `/dashboard`, `/puzzles`, `/training/:id`, `/settings`, `/register`, `/verify-email` | `playwright-auth-and-flows.spec.ts` | Automated `@axe-core/playwright` scan (WCAG 2 A/AA rules) on all seven pages. Not a substitute for manual screen-reader/keyboard testing. |
 
 ## Summary of remaining gaps
 
 1. Puzzle **correct**-answer path (only the wrong-move path is covered).
 2. Training session completion / advancing through multiple items.
-3. Accessibility scan coverage for `/training/:id`, `/puzzles`, `/settings`, `/register`, `/verify-email`.
-4. Route-guard coverage for `/puzzles`, `/settings`, `/training/:id` individually (currently only `/dashboard` is asserted against `RequireAuth`).
+3. Route-guard coverage for `/puzzles`, `/settings`, `/training/:id` individually (currently only `/dashboard` is asserted against `RequireAuth`).
 
 ## Findings from writing these tests
 
@@ -109,3 +108,29 @@ badge in the header) for insufficient color contrast (3.04 vs the WCAG AA
 4.5:1 minimum for its font size). The accessibility tests `.exclude()` this
 selector so the scan can still catch regressions elsewhere; the underlying
 contrast issue is unfixed and should be picked up as a small CSS follow-up.
+
+### More real violations, caught by extending the scan to `/puzzles`, `/training/:id`, `/settings` (fixed)
+
+Scanning beyond `/login`/`/dashboard` immediately found two more real bugs:
+
+1. `.settings-section-heading` ("Appearance", "Board orientation") used
+   `opacity: 0.7` on `var(--text)` — the exact same pattern already fixed on
+   the dashboard's `.progress-group-label`/`.dashboard-greeting`, just not
+   applied here. Raised to `0.85` in `packages/shared-styles/settings.css`.
+2. `.eco-chip`/`.variation-row .r-eco` (the ECO-code pill, e.g. "C50") render
+   `var(--accent)` text on `var(--accent-bg)`, and that pairing was never
+   actually checked for contrast: 4.15:1 on light theme (`.eco-chip` sits on
+   `--card-bg` in dashboard/puzzles cards) and as low as 2.18:1 on dark theme
+   — both below the 4.5:1 AA minimum, dark theme badly so. Worse, the chip's
+   *background* itself varies by page: on `/training/:id` it sits on
+   `.train-rail`'s `--bg` rather than `--card-bg`, which is close enough to
+   the accent tint that even fully removing the background tint only reaches
+   4.75:1 — so the fix needed enough margin to survive both contexts.
+   Fixed by introducing `--eco-chip-fg`/`--eco-chip-bg` tokens (`tokens.css`)
+   instead of touching the shared `--accent`/`--accent-bg` tokens (which
+   several hover/selected states elsewhere rely on, and which intentionally
+   hold the brand jewel-tone hue per `STYLE_GUIDE.md`): light theme keeps
+   `--accent` unchanged for the text but drops the background tint's alpha to
+   `0.03`; dark theme keeps `--accent-bg` but swaps in a brighter mauve
+   (`#c97b96`) for the text, since darkening dark-theme text only makes
+   dark-on-dark contrast worse.
