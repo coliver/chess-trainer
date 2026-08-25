@@ -1,11 +1,12 @@
 # backend/app/routers/puzzles.py
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from pydantic import BaseModel, ConfigDict
 from sqlalchemy.orm import Session
 
 from backend.app.modules.puzzles.service import (
     get_next_puzzle,
     get_puzzle_summary,
+    get_theme_counts,
     submit_puzzle_attempt,
 )
 from backend.app.modules.shared.db import get_db
@@ -51,12 +52,18 @@ class PuzzleSummaryResponse(CamelModel):
     mastered: int
 
 
+class PuzzleThemeCount(CamelModel):
+    theme: str
+    count: int
+
+
 @router.get("/puzzles/next", response_model=PuzzleNextResponse)
 def get_puzzles_next(
+    theme: str | None = Query(None),
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user),
 ):
-    puzzle = get_next_puzzle(db, current_user.id)
+    puzzle = get_next_puzzle(db, current_user.id, theme=theme)
     if puzzle is None:
         raise HTTPException(status_code=404, detail="No puzzles available")
 
@@ -107,3 +114,11 @@ def get_puzzles_summary(
     current_user=Depends(get_current_user),
 ):
     return PuzzleSummaryResponse(**get_puzzle_summary(db, current_user.id))
+
+
+@router.get("/puzzles/themes", response_model=list[PuzzleThemeCount])
+def get_puzzles_themes(
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user),
+):
+    return [PuzzleThemeCount(theme=theme, count=count) for theme, count in get_theme_counts(db)]

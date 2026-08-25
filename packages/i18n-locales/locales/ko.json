@@ -98,7 +98,25 @@
     "streakBest": " · 최고 {{best}}",
     "moveProgress": "수 {{current}} / {{total}}",
     "skipPuzzle": "퍼즐 건너뛰기 ›",
-    "backToDashboard": "← 대시보드로 돌아가기"
+    "backToDashboard": "← 대시보드로 돌아가기",
+    "browseThemes": "Browse themes ›",
+    "practicing": "Practicing: {{theme}}",
+    "backToDuePuzzles": "← Back to due puzzles",
+    "noPuzzlesForTheme": "No puzzles found for this theme."
+  },
+  "puzzleThemes": {
+    "eyebrow": "Puzzles",
+    "title": "Puzzle Themes",
+    "subtitle": "Pick a tactic to practice.",
+    "cardCount": "{{count}} puzzles",
+    "backToPuzzles": "← Back to puzzles",
+    "loadFailed": "Failed to load puzzle themes. Check your connection.",
+    "groupMotifs": "Motifs",
+    "groupMates": "Mates",
+    "groupPhasesEndgames": "Phases & Endgames",
+    "groupMaterialSpecial": "Material & Special Moves",
+    "groupAttack": "Attack",
+    "groupLengthDifficulty": "Length & Difficulty"
   },
   "training": {
     "whiteToMove": "백 차례",

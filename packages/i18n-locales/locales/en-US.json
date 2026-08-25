@@ -98,7 +98,26 @@
     "streakBest": " · best {{best}}",
     "moveProgress": "Move {{current}} of {{total}}",
     "skipPuzzle": "Skip puzzle ›",
-    "backToDashboard": "← Back to dashboard"
+    "backToDashboard": "← Back to dashboard",
+    "browseThemes": "Browse themes ›",
+    "practicing": "Practicing: {{theme}}",
+    "backToDuePuzzles": "← Back to due puzzles",
+    "noPuzzlesForTheme": "No puzzles found for this theme."
+  },
+  "puzzleThemes": {
+    "eyebrow": "Puzzles",
+    "title": "Puzzle Themes",
+    "subtitle": "Pick a tactic to practice.",
+    "cardCount": "{{count}} puzzles",
+    "backToPuzzles": "← Back to puzzles",
+    "loadFailed": "Failed to load puzzle themes. Check your connection.",
+    "groupMotifs": "Motifs",
+    "groupMates": "Mates",
+    "groupPhasesEndgames": "Phases & Endgames",
+    "groupMaterialSpecial": "Material & Special Moves",
+    "groupAttack": "Attack",
+    "groupLengthDifficulty": "Length & Difficulty",
+    "backToPuzzles": "← Back to puzzles"
   },
   "training": {
     "whiteToMove": "White to move",

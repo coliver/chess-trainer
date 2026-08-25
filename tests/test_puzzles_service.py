@@ -226,6 +226,57 @@ def test_get_puzzle_summary_aggregates_across_puzzles(db, test_user):
     assert summary["mastered"] == 0
 
 
+def test_get_next_puzzle_with_theme_filters_by_exact_token(db, test_user):
+    make_puzzle(db, id="p1", themes="fork middlegame")
+    make_puzzle(db, id="p2", themes="mateIn2 endgame")
+
+    result = service.get_next_puzzle(db, test_user.id, theme="fork")
+
+    assert result is not None
+    assert result.puzzle_id == "p1"
+
+
+def test_get_next_puzzle_with_theme_does_not_substring_match(db, test_user):
+    # "mate" must not match "mateIn2" — themes are matched as exact tokens.
+    make_puzzle(db, id="p1", themes="mateIn2 endgame")
+
+    result = service.get_next_puzzle(db, test_user.id, theme="mate")
+
+    assert result is None
+
+
+def test_get_next_puzzle_with_theme_ignores_due_dates(db, test_user):
+    make_puzzle(db, id="p1", themes="fork")
+
+    # Solve it once so it's no longer "unseen" and has a future due_at.
+    service.submit_puzzle_attempt(
+        db, user_id=test_user.id, puzzle_id="p1", move_uci="e7e5", move_index=0
+    )
+
+    # Free-practice mode should still return it even though it's not due.
+    result = service.get_next_puzzle(db, test_user.id, theme="fork")
+    assert result is not None
+    assert result.puzzle_id == "p1"
+
+
+def test_get_next_puzzle_with_theme_none_when_no_match(db, test_user):
+    make_puzzle(db, id="p1", themes="fork")
+
+    result = service.get_next_puzzle(db, test_user.id, theme="skewer")
+    assert result is None
+
+
+def test_get_theme_counts_aggregates_across_puzzles(db, test_user):
+    make_puzzle(db, id="p1", themes="fork middlegame")
+    make_puzzle(db, id="p2", themes="fork endgame")
+
+    counts = dict(service.get_theme_counts(db))
+
+    assert counts["fork"] == 2
+    assert counts["middlegame"] == 1
+    assert counts["endgame"] == 1
+
+
 def test_get_puzzle_summary_counts_mastered_puzzles(db, test_user):
     make_puzzle(db, id="p1")
 

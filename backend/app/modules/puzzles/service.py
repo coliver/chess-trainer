@@ -2,7 +2,7 @@ import datetime
 from dataclasses import dataclass
 
 import chess
-from sqlalchemy import func, select
+from sqlalchemy import func, select, text
 from sqlalchemy.orm import Session
 
 from backend.app.modules.progress.service import record_streak
@@ -53,8 +53,27 @@ def _solve_position(puzzle: Puzzle, move_index: int) -> tuple[str, str, str]:
     return board.fen(), last_move_uci, solver_moves[move_index]
 
 
-def get_next_puzzle(db: Session, user_id: int) -> PuzzlePosition | None:
-    """Pick a due review puzzle first, otherwise an unseen one (highest popularity)."""
+def get_next_puzzle(db: Session, user_id: int, theme: str | None = None) -> PuzzlePosition | None:
+    """Pick a due review puzzle first, otherwise an unseen one (highest popularity).
+
+    When `theme` is given, switch to free-practice mode: ignore due-dates and
+    just pick a random puzzle carrying that theme tag. Attempts still flow
+    through the normal SRS/progress bookkeeping.
+    """
+    if theme is not None:
+        puzzle = db.execute(
+            select(Puzzle)
+            .where(text("string_to_array(themes, ' ') @> ARRAY[:theme]"))
+            .params(theme=theme)
+            .order_by(func.random())
+            .limit(1)
+        ).scalar_one_or_none()
+
+        if puzzle is None:
+            return None
+
+        return _build_puzzle_position(puzzle)
+
     now = datetime.datetime.now(datetime.timezone.utc)
 
     due = db.execute(
@@ -78,6 +97,10 @@ def get_next_puzzle(db: Session, user_id: int) -> PuzzlePosition | None:
     if puzzle is None:
         return None
 
+    return _build_puzzle_position(puzzle)
+
+
+def _build_puzzle_position(puzzle: Puzzle) -> PuzzlePosition:
     solver_moves = _solver_moves(puzzle)
     fen, setup_move_uci, correct_move_uci = _solve_position(puzzle, move_index=0)
     return PuzzlePosition(
@@ -167,6 +190,18 @@ def submit_puzzle_attempt(
     db.commit()
 
     return result
+
+
+def get_theme_counts(db: Session) -> list[tuple[str, int]]:
+    """Distinct theme tags across all puzzles, with counts, sorted by count desc."""
+    query = text("""
+        SELECT theme, COUNT(*) AS count
+        FROM (SELECT unnest(string_to_array(themes, ' ')) AS theme FROM puzzles) t
+        GROUP BY theme
+        ORDER BY count DESC
+        """)
+    rows = db.execute(query).all()
+    return [(row.theme, row.count) for row in rows]
 
 
 def get_puzzle_summary(db: Session, user_id: int) -> dict:

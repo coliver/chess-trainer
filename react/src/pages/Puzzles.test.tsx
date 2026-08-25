@@ -91,9 +91,9 @@ describe("Puzzles Page", () => {
     (api.post as ReturnType<typeof vi.fn>).mockReset();
   });
 
-  const renderPuzzles = () =>
+  const renderPuzzles = (initialEntries = ["/puzzles"]) =>
     render(
-      <MemoryRouter>
+      <MemoryRouter initialEntries={initialEntries}>
         <PreferencesProvider>
           <Puzzles />
         </PreferencesProvider>
@@ -269,6 +269,46 @@ describe("Puzzles Page", () => {
     expect(
       screen.queryByRole("button", { name: /Skip puzzle/ }),
     ).not.toBeInTheDocument();
+  });
+
+  it("passes the theme query param to the API and shows a practicing indicator", async () => {
+    (api.get as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+      data: NEXT_PUZZLE,
+    });
+
+    renderPuzzles(["/puzzles?theme=fork"]);
+
+    await screen.findByText("Rating ~1500");
+    expect(api.get).toHaveBeenCalledWith("/puzzles/next", {
+      params: { theme: "fork" },
+    });
+    expect(screen.getByText("Practicing: fork")).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: /Back to due puzzles/ }),
+    ).toHaveAttribute("href", "/puzzles");
+  });
+
+  it("shows a theme-specific empty state when no themed puzzles are found", async () => {
+    (api.get as ReturnType<typeof vi.fn>).mockRejectedValueOnce({
+      response: { status: 404 },
+    });
+
+    renderPuzzles(["/puzzles?theme=skewer"]);
+
+    await screen.findByText("No puzzles found for this theme.");
+  });
+
+  it("shows a Browse themes link when not in theme mode", async () => {
+    (api.get as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+      data: NEXT_PUZZLE,
+    });
+
+    renderPuzzles();
+
+    await screen.findByText("Rating ~1500");
+    expect(
+      screen.getByRole("link", { name: /Browse themes/ }),
+    ).toHaveAttribute("href", "/puzzles/themes");
   });
 
   it("redirects to login on a 401", async () => {

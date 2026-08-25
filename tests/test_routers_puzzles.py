@@ -29,7 +29,7 @@ def client():
 
 
 def test_get_puzzles_next_404_when_none_available(client, monkeypatch: pytest.MonkeyPatch):
-    monkeypatch.setattr(puzzles_router, "get_next_puzzle", lambda db, user_id: None)
+    monkeypatch.setattr(puzzles_router, "get_next_puzzle", lambda db, user_id, theme=None: None)
 
     r = client.get("/puzzles/next")
     assert r.status_code == 404
@@ -47,7 +47,9 @@ def test_get_puzzles_next_success_maps_fields(client, monkeypatch: pytest.Monkey
         move_index: int = 0
         solver_moves_total: int = 1
 
-    monkeypatch.setattr(puzzles_router, "get_next_puzzle", lambda db, user_id: FakePosition())
+    monkeypatch.setattr(
+        puzzles_router, "get_next_puzzle", lambda db, user_id, theme=None: FakePosition()
+    )
 
     r = client.get("/puzzles/next")
     assert r.status_code == 200
@@ -61,6 +63,32 @@ def test_get_puzzles_next_success_maps_fields(client, monkeypatch: pytest.Monkey
         "moveIndex": 0,
         "solverMovesTotal": 1,
     }
+
+
+def test_get_puzzles_next_passes_theme_query_param(client, monkeypatch: pytest.MonkeyPatch):
+    captured = {}
+
+    def fake_get_next_puzzle(db, user_id, theme=None):
+        captured["theme"] = theme
+
+    monkeypatch.setattr(puzzles_router, "get_next_puzzle", fake_get_next_puzzle)
+
+    r = client.get("/puzzles/next", params={"theme": "fork"})
+    assert r.status_code == 404
+    assert captured["theme"] == "fork"
+
+
+def test_get_puzzles_themes_maps_fields(client, monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setattr(
+        puzzles_router, "get_theme_counts", lambda db: [("endgame", 4688), ("fork", 873)]
+    )
+
+    r = client.get("/puzzles/themes")
+    assert r.status_code == 200
+    assert r.json() == [
+        {"theme": "endgame", "count": 4688},
+        {"theme": "fork", "count": 873},
+    ]
 
 
 def test_post_puzzle_attempt_404_when_puzzle_missing(client, monkeypatch: pytest.MonkeyPatch):

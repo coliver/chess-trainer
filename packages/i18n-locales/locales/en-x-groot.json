@@ -98,7 +98,25 @@
     "streakBest": " · I am Groot {{best}}",
     "moveProgress": "I am Groot {{current}} I am Groot {{total}}",
     "skipPuzzle": "I am Groot ›",
-    "backToDashboard": "← I am Groot"
+    "backToDashboard": "← I am Groot",
+    "browseThemes": "Browse themes ›",
+    "practicing": "Practicing: {{theme}}",
+    "backToDuePuzzles": "← Back to due puzzles",
+    "noPuzzlesForTheme": "No puzzles found for this theme."
+  },
+  "puzzleThemes": {
+    "eyebrow": "Puzzles",
+    "title": "Puzzle Themes",
+    "subtitle": "Pick a tactic to practice.",
+    "cardCount": "{{count}} puzzles",
+    "backToPuzzles": "← Back to puzzles",
+    "loadFailed": "Failed to load puzzle themes. Check your connection.",
+    "groupMotifs": "Motifs",
+    "groupMates": "Mates",
+    "groupPhasesEndgames": "Phases & Endgames",
+    "groupMaterialSpecial": "Material & Special Moves",
+    "groupAttack": "Attack",
+    "groupLengthDifficulty": "Length & Difficulty"
   },
   "training": {
     "whiteToMove": "I am Groot",

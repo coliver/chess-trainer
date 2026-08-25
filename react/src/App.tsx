@@ -6,6 +6,7 @@ import VerifyEmail from "./pages/VerifyEmail";
 import { Dashboard } from "./pages/Dashboard";
 import { Training } from "./pages/Training";
 import { Puzzles } from "./pages/Puzzles";
+import { PuzzleThemes } from "./pages/PuzzleThemes";
 import Settings from "./pages/Settings";
 import { HomeHeader } from "./components/HomeHeader";
 import { GameHeader } from "./components/GameHeader";
@@ -77,6 +78,14 @@ function App() {
           element={
             <RequireAuth>
               <Puzzles />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/puzzles/themes"
+          element={
+            <RequireAuth>
+              <PuzzleThemes />
             </RequireAuth>
           }
         />

@@ -98,7 +98,25 @@
     "streakBest": " · καλύτερο {{best}}",
     "moveProgress": "Κίνηση {{current}} από {{total}}",
     "skipPuzzle": "Παράλειψη γρίφου ›",
-    "backToDashboard": "← Πίσω στον πίνακα"
+    "backToDashboard": "← Πίσω στον πίνακα",
+    "browseThemes": "Browse themes ›",
+    "practicing": "Practicing: {{theme}}",
+    "backToDuePuzzles": "← Back to due puzzles",
+    "noPuzzlesForTheme": "No puzzles found for this theme."
+  },
+  "puzzleThemes": {
+    "eyebrow": "Puzzles",
+    "title": "Puzzle Themes",
+    "subtitle": "Pick a tactic to practice.",
+    "cardCount": "{{count}} puzzles",
+    "backToPuzzles": "← Back to puzzles",
+    "loadFailed": "Failed to load puzzle themes. Check your connection.",
+    "groupMotifs": "Motifs",
+    "groupMates": "Mates",
+    "groupPhasesEndgames": "Phases & Endgames",
+    "groupMaterialSpecial": "Material & Special Moves",
+    "groupAttack": "Attack",
+    "groupLengthDifficulty": "Length & Difficulty"
   },
   "training": {
     "whiteToMove": "Κινεί τα λευκά",

@@ -75,3 +75,68 @@
 .puzzles-back-link:hover {
   color: var(--accent);
 }
+
+/* ===== Puzzle theme picker (/puzzles/themes) ===== */
+
+.puzzle-themes-head {
+  margin-bottom: 20px;
+}
+
+.puzzle-themes-subtitle {
+  margin: 4px 0 0;
+  color: var(--text-muted, var(--text));
+  font-size: 14px;
+}
+
+.puzzle-theme-group {
+  margin-bottom: 24px;
+}
+
+.puzzle-theme-group-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0 0 10px;
+  color: var(--text);
+}
+
+.puzzle-theme-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.puzzle-theme-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  text-decoration: none;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.puzzle-theme-card:hover {
+  border-color: var(--accent-border);
+  background: var(--accent-bg);
+}
+
+.puzzle-theme-card-name {
+  font-size: 14px;
+  font-weight: 650;
+  color: var(--text);
+  text-transform: capitalize;
+}
+
+.puzzle-theme-card-count {
+  font-size: 12px;
+  color: var(--text-muted, var(--text));
+  opacity: 0.75;
+}
+
+@media (max-width: 640px) {
+  .puzzle-theme-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  }
+}

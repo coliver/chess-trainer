@@ -1,7 +1,7 @@
 // react/src/pages/Puzzles.tsx
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { AxiosError } from "axios";
 import api from "../api";
 import Board, { type BoardMarker } from "../components/Board";
@@ -18,6 +18,7 @@ import {
 } from "@knight-school/chess-core";
 import { getMoveSound, playSound } from "../utils/sound";
 import { celebratePuzzleCorrect } from "../utils/winCelebration";
+import { formatThemeLabel } from "../utils/puzzleThemes";
 
 type NextPuzzle = {
   puzzleId: string;
@@ -33,6 +34,8 @@ type NextPuzzle = {
 export const Puzzles = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const theme = searchParams.get("theme");
 
   const [puzzleId, setPuzzleId] = useState<string | null>(null);
   const [fen, setFen] = useState(START_FEN);
@@ -78,7 +81,9 @@ export const Puzzles = () => {
     setFeedback("");
     setNoPuzzlesDue(false);
     try {
-      const res = await api.get<NextPuzzle>("/puzzles/next");
+      const res = await api.get<NextPuzzle>("/puzzles/next", {
+        params: theme ? { theme } : undefined,
+      });
       if (!isMountedRef.current) return;
       setPuzzleId(res.data.puzzleId);
       setFen(res.data.fen);
@@ -104,13 +109,15 @@ export const Puzzles = () => {
         setPuzzleId(null);
         setLastMoveUci("");
         setNoPuzzlesDue(true);
-        setFeedback(t("puzzles.noPuzzlesDue"));
+        setFeedback(
+          theme ? t("puzzles.noPuzzlesForTheme") : t("puzzles.noPuzzlesDue"),
+        );
         return;
       }
       setLastMoveUci("");
       setFeedback(t("puzzles.loadFailed"));
     }
-  }, [navigate, preferences.board_orientation_mode, setOrientation, t]);
+  }, [navigate, preferences.board_orientation_mode, setOrientation, t, theme]);
 
   useEffect(() => {
     const run = async () => {
@@ -230,7 +237,7 @@ export const Puzzles = () => {
       (themes ?? "")
         .split(" ")
         .filter(Boolean)
-        .map((theme) => theme.replace(/([a-z0-9])([A-Z])/g, "$1 $2")),
+        .map(formatThemeLabel),
     [themes],
   );
 
@@ -309,11 +316,17 @@ export const Puzzles = () => {
               </span>
             </div>
 
+            {theme && (
+              <span className="stat-pill is-active">
+                {t("puzzles.practicing", { theme: formatThemeLabel(theme) })}
+              </span>
+            )}
+
             {themeList.length > 0 && (
               <div className="puzzles-themes">
-                {themeList.map((theme) => (
-                  <span key={theme} className="puzzles-theme-chip">
-                    {theme}
+                {themeList.map((themeLabel) => (
+                  <span key={themeLabel} className="puzzles-theme-chip">
+                    {themeLabel}
                   </span>
                 ))}
               </div>
@@ -341,7 +354,17 @@ export const Puzzles = () => {
               </button>
             )}
 
-            {noPuzzlesDue && (
+            {theme ? (
+              <Link to="/puzzles" className="puzzles-back-link">
+                {t("puzzles.backToDuePuzzles")}
+              </Link>
+            ) : (
+              <Link to="/puzzles/themes" className="puzzles-back-link">
+                {t("puzzles.browseThemes")}
+              </Link>
+            )}
+
+            {noPuzzlesDue && !theme && (
               <Link to="/dashboard" className="puzzles-back-link">
                 {t("puzzles.backToDashboard")}
               </Link>
