@@ -81,6 +81,62 @@ RSpec.describe "Puzzles", type: :request do
     end
   end
 
+  describe "GET /rails/puzzles?theme=" do
+    it "forwards the theme to the API and shows the practicing pill" do
+      log_in
+      stub_preferences
+      stub_request(:get, "#{base}/puzzles/next").with(query: { "theme" => "fork" }).to_return(
+        status: 200,
+        body: {
+          puzzleId: "puzzle-1", fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+          rating: 1500, correctMoveUci: "e2e4", lastMoveUci: "d7d5"
+        }.to_json,
+        headers: { "Content-Type" => "application/json" }
+      )
+
+      get puzzles_path(theme: "fork"), env: env
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include("fork")
+    end
+
+    it "shows the theme-specific no-puzzles copy and a back-to-due-puzzles link on a 404" do
+      log_in
+      stub_preferences
+      stub_request(:get, "#{base}/puzzles/next").with(query: { "theme" => "fork" }).to_return(
+        status: 404, body: { detail: "No puzzles available" }.to_json,
+        headers: { "Content-Type" => "application/json" }
+      )
+
+      get puzzles_path(theme: "fork"), env: env
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include("No puzzles found for this theme")
+      expect(response.body).to include(puzzles_path)
+    end
+  end
+
+  describe "GET /rails/puzzles/themes" do
+    it "redirects to login when no session" do
+      get puzzle_themes_path, env: env
+      expect(response).to redirect_to(login_path)
+    end
+
+    it "renders theme cards grouped by category, using counts from the API" do
+      log_in
+      stub_preferences
+      stub_request(:get, "#{base}/puzzles/themes").to_return(
+        status: 200,
+        body: [{ theme: "fork", count: 42 }, { theme: "backRankMate", count: 7 }].to_json,
+        headers: { "Content-Type" => "application/json" }
+      )
+
+      get puzzle_themes_path, env: env
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include("fork")
+      expect(response.body).to include("42")
+      expect(response.body).to include("back Rank Mate")
+    end
+  end
+
   describe "GET /rails/puzzles/next" do
     it "proxies the next puzzle as JSON" do
       log_in
@@ -104,6 +160,18 @@ RSpec.describe "Puzzles", type: :request do
       get puzzles_next_path, env: env
       expect(response).to have_http_status(:not_found)
       expect(JSON.parse(response.body)["detail"]).to eq("No puzzles available")
+    end
+
+    it "forwards a theme query param to the API" do
+      log_in
+      stub_request(:get, "#{base}/puzzles/next").with(query: { "theme" => "fork" }).to_return(
+        status: 200, body: { puzzleId: "puzzle-3", fen: "start-fen" }.to_json,
+        headers: { "Content-Type" => "application/json" }
+      )
+
+      get puzzles_next_path(theme: "fork"), env: env
+      expect(response).to have_http_status(:ok)
+      expect(JSON.parse(response.body)["puzzleId"]).to eq("puzzle-3")
     end
   end
 

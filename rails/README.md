@@ -109,7 +109,15 @@ rails/
 - Puzzles serves the next due puzzle from `/puzzles/next`, tracks a
   solved/streak counter client-side, and proxies attempts through
   `POST /rails/puzzles/:id/attempts`; shows a "no puzzles due" panel on
-  a 404 instead of a board.
+  a 404 instead of a board. `/puzzles/themes` (linked from the header's
+  "Puzzles" tab, matching React) lists every theme tag with its puzzle
+  count, grouped into the same practice categories as
+  `react/src/utils/puzzleThemes.ts` (ported to
+  `app/services/puzzle_theme_grouping.rb`); picking one filters
+  `/puzzles?theme=...` the same way React's does. Rails' puzzle flow is
+  still single-move-per-puzzle — it does not yet port React's
+  multi-move puzzle support (`moveIndex`/`solverMovesTotal`/opponent
+  auto-reply for mateIn2+ puzzles).
 - Settings covers theme, board colors/piece set/coordinates/animations,
   board orientation mode, and sound — all round-trip to
   `/users/me/preferences` and actually apply. It does not cover the

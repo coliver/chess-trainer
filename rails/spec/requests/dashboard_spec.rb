@@ -31,6 +31,7 @@ RSpec.describe "Dashboard", type: :request do
     )
     stub_request(:get, "#{base}/progress/due").to_return(status: 200, body: "[]", headers: { "Content-Type" => "application/json" })
     stub_request(:get, "#{base}/progress/weak-spots").to_return(status: 200, body: "[]", headers: { "Content-Type" => "application/json" })
+    stub_request(:get, "#{base}/progress/step-accuracy").to_return(status: 200, body: "[]", headers: { "Content-Type" => "application/json" })
     stub_request(:get, "#{base}/openings").to_return(status: 200, body: openings.to_json, headers: { "Content-Type" => "application/json" })
 
     if preferences_status == 200
@@ -110,6 +111,40 @@ RSpec.describe "Dashboard", type: :request do
         get dashboard_path(eco: "B20", name: "Sicilian Defense"), env: env
         expect(response).to have_http_status(:ok)
         expect(response.body).to include("B20")
+      end
+
+      it "renders the weakest-opening and trickiest-move tiles" do
+        stub_auth_me
+        stub_dashboard_data(openings: [
+          { eco: "B20", name: "Sicilian Defense", epd: nil, pgn: nil, uci_moves: "e2e4 c7c5", description: nil }
+        ])
+        stub_request(:get, "#{base}/progress/weak-spots").to_return(
+          status: 200,
+          body: [
+            { openingName: "Sicilian Defense", attempts: 10, correctCount: 4, incorrectCount: 6 },
+            { openingName: "French Defense", attempts: 8, correctCount: 6, incorrectCount: 2 }
+          ].to_json,
+          headers: { "Content-Type" => "application/json" }
+        )
+        stub_request(:get, "#{base}/progress/step-accuracy").to_return(
+          status: 200,
+          body: [
+            {
+              openingName: "Sicilian Defense", orderIndex: 2, correctMoveUci: "g1f3",
+              attempts: 10, correctCount: 3, incorrectCount: 7, accuracy: 0.3,
+              commonWrongMoves: [ { moveUci: "b1c3", count: 5 } ]
+            }
+          ].to_json,
+          headers: { "Content-Type" => "application/json" }
+        )
+
+        get dashboard_path, env: env
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include("ws-tile")
+        expect(response.body).to include("40%") # weakest opening accuracy: 4/10
+        expect(response.body).to include("30%") # trickiest move accuracy
+        expect(response.body).to include("b1c3")
+        expect(response.body).to include("See all")
       end
 
       it "still renders when the preferences API call fails" do

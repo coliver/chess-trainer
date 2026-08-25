@@ -2,7 +2,8 @@ class PuzzlesController < ApplicationController
   before_action :require_auth!
 
   def show
-    assign_puzzle(api.get("/puzzles/next"))
+    @theme = params[:theme].presence
+    assign_puzzle(api.get("/puzzles/next", params: { theme: @theme }.compact))
   rescue ApiClient::ApiError => e
     if e.status == 404
       @no_puzzle = true
@@ -15,9 +16,18 @@ class PuzzlesController < ApplicationController
 
   # JSON proxy for the puzzle board's Stimulus controller (see trainings#next_item).
   def next_puzzle
-    render json: api.get("/puzzles/next")
+    render json: api.get("/puzzles/next", params: { theme: params[:theme].presence }.compact)
   rescue ApiClient::ApiError => e
     render json: { detail: e.detail }, status: e.status
+  end
+
+  # Theme picker page: shows every theme tag with a puzzle count, grouped
+  # into practice categories (see PuzzleThemeGrouping, a Ruby port of
+  # react/src/utils/puzzleThemes.ts).
+  def themes
+    counts = api.get("/puzzles/themes")
+    @count_by_theme = counts.each_with_object({}) { |tc, h| h[tc["theme"]] = tc["count"] }
+    @groups = PuzzleThemeGrouping::THEME_GROUPS
   end
 
   # JSON proxy for attempt submission (POST /rails/puzzles/:id/attempts).

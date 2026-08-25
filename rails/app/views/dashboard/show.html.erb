@@ -52,24 +52,82 @@
             </div>
           </div>
 
-          <% if @weak_spots.any? %>
-            <div class="progress-weak-spots">
-              <span class="progress-stat-label"><%= t("dashboard.progress.weakSpots") %></span>
-              <ul>
-                <% @weak_spots.each do |w| %>
-                  <% pct = w["attempts"].to_i > 0 ? ((w["correctCount"].to_f / w["attempts"]) * 100).round : 0 %>
-                  <% opening_name = w["openingName"] || t("dashboard.progress.weakSpotFallbackName") %>
-                  <li>
-                    <div class="ws-row">
-                      <span class="ws-name" title="<%= opening_name %>"><%= opening_name %></span>
-                      <span class="ws-pct"><%= pct %>%</span>
+          <% if @weak_spots.any? || @trouble_steps.any? %>
+            <% top_weak_spot = @weak_spots.first %>
+            <% top_trouble_step = @trouble_steps.first %>
+            <div class="ws-container" data-controller="needs-work">
+              <div class="ws-grid">
+                <% if top_weak_spot %>
+                  <% name = top_weak_spot["openingName"] || t("dashboard.progress.weakSpotFallbackName") %>
+                  <% pct = top_weak_spot["attempts"].to_i > 0 ? ((top_weak_spot["correctCount"].to_f / top_weak_spot["attempts"]) * 100).round : 0 %>
+                  <div class="ws-tile" role="group" aria-label="<%= t("dashboard.progress.weakestOpening") %>">
+                    <span class="ws-label"><%= t("dashboard.progress.weakestOpening") %></span>
+                    <span class="ws-title" title="<%= name %>"><%= name %></span>
+                    <div class="ws-stat">
+                      <span class="ws-value"><%= pct %>%</span>
+                      <span class="ws-stat-label"><%= t("dashboard.progress.accuracy") %></span>
                     </div>
-                    <div class="ws-bar" aria-hidden="true">
-                      <div class="ws-bar-fill" style="width: <%= pct %>%;"></div>
-                    </div>
-                  </li>
+                  </div>
                 <% end %>
-              </ul>
+
+                <% if top_trouble_step %>
+                  <% name = top_trouble_step["openingName"] || t("dashboard.progress.weakSpotFallbackName") %>
+                  <% move_number = (top_trouble_step["orderIndex"].to_i / 2) + 1 %>
+                  <% pct = (top_trouble_step["accuracy"].to_f * 100).round %>
+                  <% top_wrong_move = top_trouble_step["commonWrongMoves"]&.first %>
+                  <div class="ws-tile" role="group" aria-label="<%= t("dashboard.progress.trickiestMove") %>">
+                    <span class="ws-label"><%= t("dashboard.progress.trickiestMove") %></span>
+                    <span class="ws-title" title="<%= name %> · <%= t("dashboard.progress.moveAbbrev", move: move_number) %>">
+                      <%= name %> · <%= t("dashboard.progress.moveAbbrev", move: move_number) %>
+                    </span>
+                    <div class="ws-stat">
+                      <span class="ws-value"><%= pct %>%</span>
+                      <span class="ws-stat-label">
+                        <%= top_wrong_move ? t("dashboard.progress.troubleSpotWrongMoveShort", move: top_wrong_move["moveUci"]) : t("dashboard.progress.accuracy") %>
+                      </span>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+
+              <% if @weak_spots.size > 1 || @trouble_steps.size > 1 %>
+                <div class="ws-footer">
+                  <button type="button" class="ws-link" data-action="needs-work#toggle" data-needs-work-target="toggleBtn"
+                          data-collapsed-label="<%= t("dashboard.progress.seeAllWeakSpots", count: @weak_spots.size + @trouble_steps.size) %>"
+                          data-expanded-label="<%= t("dashboard.progress.seeLess") %>" aria-expanded="false" aria-controls="needs-work-expanded">
+                    <%= t("dashboard.progress.seeAllWeakSpots", count: @weak_spots.size + @trouble_steps.size) %>
+                  </button>
+                </div>
+
+                <div class="ws-expanded" id="needs-work-expanded" data-needs-work-target="panel" hidden>
+                  <% @weak_spots.drop(1).each do |w| %>
+                    <% name = w["openingName"] || t("dashboard.progress.weakSpotFallbackName") %>
+                    <% pct = w["attempts"].to_i > 0 ? ((w["correctCount"].to_f / w["attempts"]) * 100).round : 0 %>
+                    <div class="ws-row">
+                      <div class="ws-row-main">
+                        <span class="ws-row-name" title="<%= name %>"><%= name %></span>
+                        <span class="ws-row-sub"><%= t("dashboard.progress.wholeOpening") %></span>
+                      </div>
+                      <span class="ws-row-pct"><%= pct %>%</span>
+                    </div>
+                  <% end %>
+                  <% @trouble_steps.drop(1).each do |s| %>
+                    <% name = s["openingName"] || t("dashboard.progress.weakSpotFallbackName") %>
+                    <% move_number = (s["orderIndex"].to_i / 2) + 1 %>
+                    <% pct = (s["accuracy"].to_f * 100).round %>
+                    <% top_wrong_move = s["commonWrongMoves"]&.first %>
+                    <div class="ws-row">
+                      <div class="ws-row-main">
+                        <span class="ws-row-name" title="<%= name %>"><%= name %></span>
+                        <span class="ws-row-sub">
+                          <%= top_wrong_move ? t("dashboard.progress.troubleSpotItemWithWrongMove", move: move_number, wrongMove: top_wrong_move["moveUci"]) : t("dashboard.progress.moveAbbrev", move: move_number) %>
+                        </span>
+                      </div>
+                      <span class="ws-row-pct"><%= pct %>%</span>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
             </div>
           <% end %>
         </div>

@@ -10,7 +10,7 @@
         <nav class="site-header-nav" aria-label="Main">
           <%= link_to t("header.openings"), dashboard_path,
                 class: "site-header-nav-link#{' active' if request.path.start_with?(dashboard_path)}" %>
-          <%= link_to t("header.puzzles"), puzzles_path,
+          <%= link_to t("header.puzzles"), puzzle_themes_path,
                 class: "site-header-nav-link#{' active' if request.path.start_with?(puzzles_path)}" %>
 
           <div class="site-header-actions">

@@ -7,6 +7,7 @@ class DashboardController < ApplicationController
     @summary = api.get("/progress/summary")
     @due_count = api.get("/progress/due").size
     @weak_spots = api.get("/progress/weak-spots").first(5)
+    @trouble_steps = api.get("/progress/step-accuracy").first(5)
 
     @openings = api.get("/openings")
     @groups = OpeningGrouping.group_by_base(@openings)

@@ -19,6 +19,12 @@ application.register("training", TrainingController)
 import PuzzleController from "./puzzle_controller"
 application.register("puzzle", PuzzleController)
 
+import PuzzleThemeBoardController from "./puzzle_theme_board_controller"
+application.register("puzzle-theme-board", PuzzleThemeBoardController)
+
+import NeedsWorkController from "./needs_work_controller"
+application.register("needs-work", NeedsWorkController)
+
 import ThemeToggleController from "./theme_toggle_controller"
 application.register("theme-toggle", ThemeToggleController)
 

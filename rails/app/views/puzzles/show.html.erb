@@ -12,9 +12,17 @@
           </div>
           <div class="train-status your" role="status">
             <span class="train-status-ic" aria-hidden="true">♟</span>
-            <div><div class="train-status-msg"><%= t("puzzles.noPuzzlesDue") %></div></div>
+            <div>
+              <div class="train-status-msg">
+                <%= @theme ? t("puzzles.noPuzzlesForTheme") : t("puzzles.noPuzzlesDue") %>
+              </div>
+            </div>
           </div>
-          <%= link_to t("puzzles.backToDashboard"), dashboard_path, class: "puzzles-back-link" %>
+          <% if @theme %>
+            <%= link_to t("puzzles.backToDuePuzzles"), puzzles_path, class: "puzzles-back-link" %>
+          <% else %>
+            <%= link_to t("puzzles.backToDashboard"), dashboard_path, class: "puzzles-back-link" %>
+          <% end %>
         </aside>
       </div>
     <% else %>
@@ -25,7 +33,7 @@
            data-puzzle-rating-value="<%= @rating %>"
            data-puzzle-correct-move-uci-value="<%= @correct_move_uci %>"
            data-puzzle-last-move-uci-value="<%= @last_move_uci %>"
-           data-puzzle-next-url-value="<%= puzzles_next_path %>"
+           data-puzzle-next-url-value="<%= puzzles_next_path(theme: @theme) %>"
            data-puzzle-attempts-url-template-value="<%= puzzles_attempts_path("__ID__") %>"
            data-puzzle-dashboard-url-value="<%= dashboard_path %>"
            data-puzzle-board-theme-value="<%= @board_theme %>"
@@ -63,6 +71,12 @@
             <span class="stat-pill" data-puzzle-target="streakStat"><%= t("puzzles.streak", count: 0) %></span>
           </div>
 
+          <% if @theme %>
+            <span class="stat-pill is-active">
+              <%= t("puzzles.practicing", theme: PuzzleThemeGrouping.format_label(@theme)) %>
+            </span>
+          <% end %>
+
           <div class="train-status your" data-puzzle-target="status" role="status">
             <span class="train-status-ic" data-puzzle-target="statusIcon" aria-hidden="true">♟</span>
             <div>
@@ -73,6 +87,12 @@
           <button type="button" class="puzzles-skip" data-action="puzzle#skip" data-puzzle-target="skipButton">
             <%= t("puzzles.skipPuzzle") %>
           </button>
+
+          <% if @theme %>
+            <%= link_to t("puzzles.backToDuePuzzles"), puzzles_path, class: "puzzles-back-link" %>
+          <% else %>
+            <%= link_to t("puzzles.browseThemes"), puzzle_themes_path, class: "puzzles-back-link" %>
+          <% end %>
 
           <div data-puzzle-target="noPuzzleBox" hidden>
             <%= link_to t("puzzles.backToDashboard"), dashboard_path, class: "puzzles-back-link" %>

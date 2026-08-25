@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     post "trainings/:id/moves" => "trainings#create_response", as: :training_moves
 
     get "puzzles" => "puzzles#show", as: :puzzles
+    get "puzzles/themes" => "puzzles#themes", as: :puzzle_themes
     get "puzzles/next" => "puzzles#next_puzzle", as: :puzzles_next
     post "puzzles/:id/attempts" => "puzzles#create_attempt", as: :puzzles_attempts
 

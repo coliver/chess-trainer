@@ -1,0 +1,39 @@
+<% content_for :title, "Puzzle Themes" %>
+
+<main class="page">
+  <div class="card">
+    <div class="puzzle-themes-head">
+      <div class="rail-eyebrow"><%= t("puzzleThemes.eyebrow") %></div>
+      <h1><%= t("puzzleThemes.title") %></h1>
+      <p class="puzzle-themes-subtitle"><%= t("puzzleThemes.subtitle") %></p>
+      <%= link_to t("puzzleThemes.randomPuzzle"), puzzles_path, class: "puzzle-themes-random-btn" %>
+    </div>
+
+    <% @groups.each do |group| %>
+      <% themes = group.themes.select { |theme| @count_by_theme.key?(theme) } %>
+      <% next if themes.empty? %>
+
+      <section class="puzzle-theme-group">
+        <h2 class="puzzle-theme-group-title"><%= t("puzzleThemes.#{group.key}") %></h2>
+        <div class="puzzle-theme-grid">
+          <% themes.each do |theme| %>
+            <% mate_fen = PuzzleThemeGrouping.mate_fen_for(theme) %>
+            <%= link_to puzzles_path(theme: theme), class: "puzzle-theme-card" do %>
+              <% if mate_fen %>
+                <div class="puzzle-theme-card-board" aria-hidden="true"
+                     data-controller="puzzle-theme-board"
+                     data-puzzle-theme-board-fen-value="<%= mate_fen %>"></div>
+              <% else %>
+                <span class="puzzle-theme-card-icon" aria-hidden="true"><%= PuzzleThemeGrouping.icon_for(theme) %></span>
+              <% end %>
+              <span class="puzzle-theme-card-name"><%= PuzzleThemeGrouping.format_label(theme) %></span>
+              <span class="puzzle-theme-card-count">
+                <%= t("puzzleThemes.cardCount", count: @count_by_theme[theme]) %>
+              </span>
+            <% end %>
+          <% end %>
+        </div>
+      </section>
+    <% end %>
+  </div>
+</main>
