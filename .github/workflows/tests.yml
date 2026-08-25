@@ -42,8 +42,10 @@ jobs:
           cache: pip
 
       # Install the exact pinned deps (psycopg v3 stays psycopg v3 — no drift).
+      # No --no-cache-dir here: that flag would stop pip writing to its cache
+      # dir, defeating the actions/setup-python `cache: pip` step above.
       - name: Install dependencies
-        run: pip install --no-cache-dir -r requirements.txt
+        run: pip install -r requirements.txt
 
       # Linters need no DB — run them first so style failures fail fast.
       - name: Lint (ruff)
