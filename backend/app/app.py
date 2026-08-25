@@ -1,5 +1,5 @@
 # backend/app/app.py
-from fastapi import Depends, FastAPI
+from fastapi import Depends, FastAPI, Query
 from fastapi.responses import HTMLResponse, PlainTextResponse
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
@@ -11,6 +11,7 @@ from backend.app.modules.shared.text_mode import (
     KNIGHT_SCHOOL_BANNER,
     LOGIN_INSTRUCTIONS,
     TEXT_MODE_OPTIONS,
+    text_response,
 )
 from backend.app.routers.auth import get_current_user_or_none
 from backend.app.routers.auth import router as auth_router
@@ -55,12 +56,13 @@ def ping():
 
 @app.get("/dashboard.text", response_class=PlainTextResponse)
 def dashboard_text(
+    ansi: bool = Query(True),
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user_or_none),
 ):
     if current_user is None:
         body = KNIGHT_SCHOOL_BANNER + "\n\n" + LOGIN_INSTRUCTIONS
-        return PlainTextResponse(body, status_code=401)
+        return text_response(body, ansi, status_code=401)
     progress = get_summary(db, current_user.id)
     puzzles = get_puzzle_summary(db, current_user.id)
     body = "\n\n".join(
@@ -72,4 +74,4 @@ def dashboard_text(
             TEXT_MODE_OPTIONS,
         ]
     )
-    return body + "\n"
+    return text_response(body + "\n", ansi)

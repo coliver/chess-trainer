@@ -1,5 +1,5 @@
 # /backend/app/routers/progress.py
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query
 from fastapi.responses import PlainTextResponse
 from pydantic import BaseModel, ConfigDict
 from sqlalchemy.orm import Session
@@ -11,8 +11,9 @@ from backend.app.modules.progress.service import (
     get_summary,
     get_weak_spots,
 )
+from backend.app.modules.shared.ansi import FG_GOLD, sgr
 from backend.app.modules.shared.db import get_db
-from backend.app.modules.shared.text_mode import LOGIN_INSTRUCTIONS
+from backend.app.modules.shared.text_mode import LOGIN_INSTRUCTIONS, text_response
 from backend.app.routers.auth import get_current_user, get_current_user_or_none
 from backend.app.utils import to_camel
 
@@ -67,7 +68,7 @@ def get_progress_summary(
 
 def render_progress_summary(summary: dict) -> str:
     lines = [
-        "Progress",
+        sgr("Progress", FG_GOLD),
         f"  positions seen:   {summary['positions_seen']}",
         f"  overall accuracy: {summary['overall_accuracy']:.0%}",
         f"  mastered:         {summary['mastered']}",
@@ -79,13 +80,14 @@ def render_progress_summary(summary: dict) -> str:
 
 @router.get("/progress/summary.text", response_class=PlainTextResponse)
 def get_progress_summary_text(
+    ansi: bool = Query(True),
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user_or_none),
 ):
     if current_user is None:
-        return PlainTextResponse(LOGIN_INSTRUCTIONS, status_code=401)
+        return text_response(LOGIN_INSTRUCTIONS, ansi, status_code=401)
     summary = get_summary(db, current_user.id)
-    return render_progress_summary(summary) + "\n"
+    return text_response(render_progress_summary(summary) + "\n", ansi)
 
 
 @router.get("/progress/due", response_model=list[DuePositionResponse])

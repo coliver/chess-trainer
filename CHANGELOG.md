@@ -1,6 +1,7 @@
 ## 2026-08-25
 
 ### Features
+- feat(backend): all `.text` routes now emit ANSI color by default — the `KNIGHT_SCHOOL_BANNER` wordmark (gold) and knight art (grey), section headers ("Progress", "Puzzles", "Puzzle themes", "What next?" in gold, "Not authenticated." in rose), puzzle result headlines (green/red), and a new `render_board` for puzzle FEN rendering with alternating light/dark square backgrounds and white/black piece foregrounds, replacing the bare `str(chess.Board)` glyphs. Every route accepts `?ansi=0` to strip codes for scripts/pipes (`backend/app/modules/shared/ansi.py`'s `strip_ansi`, applied uniformly via a new `text_response` helper in `text_mode.py`), since the server can't detect a client's TTY/color support itself.
 - feat(backend): `GET /dashboard.text` now ends with a "What next?" menu listing the other `.text` routes (`puzzles/next`, `puzzles/summary`, `puzzles/themes`, `progress/summary`) with a ready-to-run curl example, so a terminal user isn't left without a next step after logging in (`backend/app/modules/shared/text_mode.py`'s new `TEXT_MODE_OPTIONS`).
 
 ### Fixes

@@ -11,8 +11,9 @@ from backend.app.modules.puzzles.service import (
     submit_puzzle_attempt,
 )
 from backend.app.modules.puzzles.text_rendering import render_puzzle_attempt, render_puzzle_next
+from backend.app.modules.shared.ansi import FG_GOLD, sgr
 from backend.app.modules.shared.db import get_db
-from backend.app.modules.shared.text_mode import LOGIN_INSTRUCTIONS
+from backend.app.modules.shared.text_mode import LOGIN_INSTRUCTIONS, text_response
 from backend.app.routers.auth import get_current_user, get_current_user_or_none
 from backend.app.utils import to_camel
 
@@ -114,15 +115,16 @@ def post_puzzle_attempt(
 @router.get("/puzzles/next.text", response_class=PlainTextResponse)
 def get_puzzles_next_text(
     theme: str | None = Query(None),
+    ansi: bool = Query(True),
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user_or_none),
 ):
     if current_user is None:
-        return PlainTextResponse(LOGIN_INSTRUCTIONS, status_code=401)
+        return text_response(LOGIN_INSTRUCTIONS, ansi, status_code=401)
     puzzle = get_next_puzzle(db, current_user.id, theme=theme)
     if puzzle is None:
         raise HTTPException(status_code=404, detail="No puzzles available")
-    return render_puzzle_next(puzzle) + "\n"
+    return text_response(render_puzzle_next(puzzle) + "\n", ansi)
 
 
 @router.post("/puzzles/{puzzle_id}/attempts.text", response_class=PlainTextResponse)
@@ -130,11 +132,12 @@ def post_puzzle_attempt_text(
     puzzle_id: str,
     move_uci: str = Query(..., alias="moveUci"),
     move_index: int = Query(0, alias="moveIndex"),
+    ansi: bool = Query(True),
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user_or_none),
 ):
     if current_user is None:
-        return PlainTextResponse(LOGIN_INSTRUCTIONS, status_code=401)
+        return text_response(LOGIN_INSTRUCTIONS, ansi, status_code=401)
     result = submit_puzzle_attempt(
         db,
         user_id=current_user.id,
@@ -146,7 +149,7 @@ def post_puzzle_attempt_text(
         raise HTTPException(status_code=404, detail="Puzzle not found")
     if result.http_status == 400:
         raise HTTPException(status_code=400, detail=result.error_message)
-    return render_puzzle_attempt(result) + "\n"
+    return text_response(render_puzzle_attempt(result) + "\n", ansi)
 
 
 @router.get("/puzzles/summary", response_model=PuzzleSummaryResponse)
@@ -159,7 +162,7 @@ def get_puzzles_summary(
 
 def render_puzzle_summary(summary: dict) -> str:
     lines = [
-        "Puzzles",
+        sgr("Puzzles", FG_GOLD),
         f"  puzzles seen:     {summary['puzzles_seen']}",
         f"  overall accuracy: {summary['overall_accuracy']:.0%}",
         f"  mastered:         {summary['mastered']}",
@@ -169,13 +172,14 @@ def render_puzzle_summary(summary: dict) -> str:
 
 @router.get("/puzzles/summary.text", response_class=PlainTextResponse)
 def get_puzzles_summary_text(
+    ansi: bool = Query(True),
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user_or_none),
 ):
     if current_user is None:
-        return PlainTextResponse(LOGIN_INSTRUCTIONS, status_code=401)
+        return text_response(LOGIN_INSTRUCTIONS, ansi, status_code=401)
     summary = get_puzzle_summary(db, current_user.id)
-    return render_puzzle_summary(summary) + "\n"
+    return text_response(render_puzzle_summary(summary) + "\n", ansi)
 
 
 @router.get("/puzzles/themes", response_model=list[PuzzleThemeCount])
@@ -187,7 +191,7 @@ def get_puzzles_themes(
 
 
 def render_puzzle_themes(counts: list[tuple[str, int]]) -> str:
-    lines = ["Puzzle themes", ""]
+    lines = [sgr("Puzzle themes", FG_GOLD), ""]
     lines += [f"  {theme:<20} {count}" for theme, count in counts]
     lines.append("")
     lines.append("Pick one with GET /puzzles/next.text?theme=<name>")
@@ -196,10 +200,11 @@ def render_puzzle_themes(counts: list[tuple[str, int]]) -> str:
 
 @router.get("/puzzles/themes.text", response_class=PlainTextResponse)
 def get_puzzles_themes_text(
+    ansi: bool = Query(True),
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user_or_none),
 ):
     if current_user is None:
-        return PlainTextResponse(LOGIN_INSTRUCTIONS, status_code=401)
+        return text_response(LOGIN_INSTRUCTIONS, ansi, status_code=401)
     counts = get_theme_counts(db)
-    return render_puzzle_themes(counts) + "\n"
+    return text_response(render_puzzle_themes(counts) + "\n", ansi)
