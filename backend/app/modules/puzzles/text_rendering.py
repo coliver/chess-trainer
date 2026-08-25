@@ -38,11 +38,11 @@ def render_board(board: chess.Board, ansi: bool = True) -> str:
             piece = board.piece_at(chess.square(file, rank))
             bg = BG_LIGHT_SQUARE if (rank + file) % 2 == 0 else BG_DARK_SQUARE
             if piece is None:
-                squares.append(sgr("  ", bg))
+                squares.append(sgr("   ", bg))
                 continue
             fg = FG_WHITE_PIECE if piece.color == chess.WHITE else FG_BLACK_PIECE
             glyph = _UNICODE_PIECES[piece.symbol().lower()] if ansi else piece.symbol()
-            squares.append(sgr(f" {glyph}", bg, fg))
+            squares.append(sgr(f" {glyph} ", bg, fg))
         rows.append("".join(squares))
     return "\n".join(rows)
 
