@@ -147,7 +147,7 @@ An unauthenticated request to any `.text` route returns a plain-text `401` expla
 
 ### ANSI color and Unicode pieces
 
-Every `.text` route emits ANSI color by default (gold/grey banner, colored section headers, green/red puzzle outcomes) and the puzzle board renders with alternating light/dark square backgrounds and filled Unicode chess glyphs (♚♛♜♝♞♟, colored by side) instead of bare letters. Since the server can't detect whether a client's terminal supports color, every route accepts `?ansi=0` to fall back to plain ASCII (no escape codes, letters instead of Unicode pieces) — useful when piping to a file, a script that parses the output, or a dumb terminal.
+Every `.text` route emits ANSI color by default (gold/grey banner, colored section headers, green/red puzzle outcomes) and the puzzle board renders with alternating light/dark square backgrounds and Unicode chess glyphs colored by side — outline glyphs (♔♕♖♗♘♙) for White, filled glyphs (♚♛♜♝♞♟) for Black — instead of bare letters, so shape (not just ANSI color, which some terminal fonts override on the filled codepoints) tells the sides apart. Since the server can't detect whether a client's terminal supports color, every route accepts `?ansi=0` to fall back to plain ASCII (no escape codes, letters instead of Unicode pieces) — useful when piping to a file, a script that parses the output, or a dumb terminal.
 
 ### Connecting with curl
 

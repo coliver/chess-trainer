@@ -13,9 +13,20 @@ from backend.app.modules.shared.ansi import (
 )
 from backend.app.modules.training.chess_rules import ValidationResult
 
-# Filled glyphs only (not the outline set) - foreground color already carries
-# white/black, and outline glyphs are nearly invisible on a dark terminal bg.
-_UNICODE_PIECES = {
+# Many terminal fonts render the filled glyphs with their own fixed
+# black/white fill and ignore (or only partly honor) the ANSI foreground
+# color, so relying on color alone leaves black vs white indistinguishable.
+# Use the outline set for white and the filled set for black so the glyph
+# shape itself carries the distinction, with FG color as reinforcement.
+_UNICODE_PIECES_WHITE = {
+    "k": "♔",
+    "q": "♕",
+    "r": "♖",
+    "b": "♗",
+    "n": "♘",
+    "p": "♙",
+}
+_UNICODE_PIECES_BLACK = {
     "k": "♚",
     "q": "♛",
     "r": "♜",
@@ -40,19 +51,28 @@ def render_board(board: chess.Board, ansi: bool = True) -> str:
             if piece is None:
                 squares.append(sgr("   ", bg))
                 continue
-            fg = FG_WHITE_PIECE if piece.color == chess.WHITE else FG_BLACK_PIECE
-            glyph = _UNICODE_PIECES[piece.symbol().lower()] if ansi else piece.symbol()
-            squares.append(sgr(f" {glyph} ", bg, fg))
+            symbol = piece.symbol().lower()
+            if ansi:
+                fg = FG_WHITE_PIECE if piece.color == chess.WHITE else FG_BLACK_PIECE
+                glyphs = (
+                    _UNICODE_PIECES_WHITE if piece.color == chess.WHITE else _UNICODE_PIECES_BLACK
+                )
+                glyph = glyphs[symbol]
+                squares.append(sgr(f" {glyph} ", bg, fg))
+            else:
+                squares.append(sgr(f" {piece.symbol()} ", bg))
         rows.append("".join(squares))
     return "\n".join(rows)
 
 
 def render_puzzle_next(pos: PuzzlePosition, ansi: bool = True) -> str:
     board = chess.Board(pos.fen)
+    to_move = "White" if board.turn == chess.WHITE else "Black"
     lines = [
         sgr(f"Puzzle {pos.puzzle_id} (rating {pos.rating})", FG_GOLD),
         f"Themes: {pos.themes or '-'}",
         f"Move {pos.move_index + 1} of {pos.solver_moves_total}",
+        f"To move: {to_move}",
         "",
         render_board(board, ansi),
         "",
@@ -68,7 +88,9 @@ def render_puzzle_attempt(result: ValidationResult, ansi: bool = True) -> str:
         result.reason,
     ]
     if result.fen_after:
-        lines += ["", render_board(chess.Board(result.fen_after), ansi)]
+        board_after = chess.Board(result.fen_after)
+        to_move = "White" if board_after.turn == chess.WHITE else "Black"
+        lines += ["", f"To move: {to_move}", "", render_board(board_after, ansi)]
     if result.puzzle_complete:
         lines += ["", sgr("Puzzle complete.", FG_GREEN)]
     elif result.next_correct_move_uci:
