@@ -35,6 +35,12 @@ The Nginx configuration in `default.conf` defines these routes:
 | `/vite-hmr` | `http://react:5173` | Vite HMR WebSocket (for React hot reload) |
 | `/htmlcov/` | `/app/htmlcov/` | Coverage report (alias to mounted volume) |
 
+## Terminal-Client Redirect
+
+The bare root (`location = /`, an exact match — every other path is unaffected) checks `$is_terminal_client`, a variable set by a `map $http_user_agent` block in `terminal-client.conf` (matching `curl`/`wget`/`httpie` User-Agents). A match returns a `302` to `/api/dashboard.text`, so `curl https://knightschool.click/` lands straight on the text-mode dashboard instead of the React SPA's raw HTML — no `.text` suffix or `/api/` prefix needed to discover it exists.
+
+`terminal-client.conf` is duplicated (not shared via a single file) between `nginx/` and `nginx/conf-prod/` — prod's compose override fully replaces the mounted `/etc/nginx/conf.d` directory rather than layering on top of dev's (see the comment in `docker-compose.prod.yml`), so a file only present in `nginx/` would silently not exist in prod. Both copies carry a comment pointing at the other; keep them in sync by hand.
+
 ## SSL/TLS Configuration
 
 The config is set up for HTTPS:

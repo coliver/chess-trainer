@@ -143,6 +143,8 @@ Most routes have a `.text` sibling (e.g. `GET /progress/summary` → `GET /progr
 
 An unauthenticated request to any `.text` route returns a plain-text `401` explaining how to log in (`POST /auth/login`) and reuse the resulting token as a Bearer header, rather than the JSON `{"detail": "..."}` body other routes return. JSON routes are unaffected. `/dashboard.text` shows the banner on both the authenticated and unauthenticated responses.
 
+`curl`/`wget`/`httpie` clients hitting the bare domain (no path) are redirected straight to `/dashboard.text` at the nginx level — see `nginx/README.md`.
+
 ## Progress Endpoints
 
 Progress routes provide spaced-repetition tracking and analysis of the user's training performance. All require authentication.
