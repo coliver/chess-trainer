@@ -3,7 +3,7 @@
 [![python](https://github.com/coliver/chess-trainer/actions/workflows/tests.yml/badge.svg)](https://github.com/coliver/chess-trainer/actions/workflows/tests.yml)
 [![react](https://github.com/coliver/chess-trainer/actions/workflows/react.yml/badge.svg)](https://github.com/coliver/chess-trainer/actions/workflows/react.yml)
 [![rails](https://github.com/coliver/chess-trainer/actions/workflows/rails.yml/badge.svg)](https://github.com/coliver/chess-trainer/actions/workflows/rails.yml)
-[![accessibility](https://github.com/coliver/chess-trainer/actions/workflows/react.yml/badge.svg?label=accessibility%20%28jsx-a11y%20%2B%20axe%29)](#-accessibility)
+[![accessibility](https://img.shields.io/github/actions/workflow/status/coliver/chess-trainer/react.yml?branch=main&label=accessibility%20%28jsx-a11y%20%2B%20axe%29)](#-accessibility)
 
 A web-based chess openings trainer designed to drill specific lines and track performance metrics.
 
