@@ -145,6 +145,49 @@ An unauthenticated request to any `.text` route returns a plain-text `401` expla
 
 `curl`/`wget`/`httpie` clients hitting the bare domain (no path) are redirected straight to `/dashboard.text` at the nginx level — see `nginx/README.md`.
 
+### ANSI color and Unicode pieces
+
+Every `.text` route emits ANSI color by default (gold/grey banner, colored section headers, green/red puzzle outcomes) and the puzzle board renders with alternating light/dark square backgrounds and filled Unicode chess glyphs (♚♛♜♝♞♟, colored by side) instead of bare letters. Since the server can't detect whether a client's terminal supports color, every route accepts `?ansi=0` to fall back to plain ASCII (no escape codes, letters instead of Unicode pieces) — useful when piping to a file, a script that parses the output, or a dumb terminal.
+
+### Connecting with curl
+
+```bash
+# Log in and grab a token
+TOKEN=$(curl -s -X POST https://knightschool.click/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"username":"<you>","password":"<yours>"}' \
+  | python3 -c "import sys,json; print(json.load(sys.stdin)['access_token'])")
+
+# Hit any .text route with it as a Bearer token
+curl -H "Authorization: Bearer $TOKEN" https://knightschool.click/api/dashboard.text
+
+# Plain ASCII, no color/unicode (good for piping to a file or a script)
+curl -H "Authorization: Bearer $TOKEN" "https://knightschool.click/api/puzzles/next.text?ansi=0"
+
+# Bare domain, no path, no login needed — redirects straight to the dashboard
+curl https://knightschool.click/
+```
+
+### Connecting with wget
+
+```bash
+TOKEN=$(wget -qO- --method=POST --header="Content-Type: application/json" \
+  --body-data='{"username":"<you>","password":"<yours>"}' \
+  https://knightschool.click/api/auth/login \
+  | python3 -c "import sys,json; print(json.load(sys.stdin)['access_token'])")
+
+wget -qO- --header="Authorization: Bearer $TOKEN" https://knightschool.click/api/dashboard.text
+```
+
+### Connecting with httpie
+
+```bash
+TOKEN=$(http --print=b POST https://knightschool.click/api/auth/login \
+  username=<you> password=<yours> | jq -r .access_token)
+
+http https://knightschool.click/api/dashboard.text "Authorization: Bearer $TOKEN"
+```
+
 ## Progress Endpoints
 
 Progress routes provide spaced-repetition tracking and analysis of the user's training performance. All require authentication.
@@ -165,9 +208,9 @@ Puzzle routes present tactical puzzles to the user and track their performance. 
 | Method | Endpoint | Description |
 |---|---|---|
 | `GET` | `/puzzles/next` | Fetch the next puzzle with FEN position, rating, themes, correct move, and opponent's setup move for board highlighting |
-| `GET` | `/puzzles/next.text` | Plain-text rendering of `/puzzles/next` — an ASCII board plus a move prompt, for solving puzzles from a terminal |
+| `GET` | `/puzzles/next.text` | Plain-text rendering of `/puzzles/next` — a colored board (Unicode chess glyphs, or ASCII letters with `?ansi=0`) plus a move prompt, for solving puzzles from a terminal |
 | `POST` | `/puzzles/{puzzle_id}/attempts` | Submit an attempted move (`{"moveUci": "..."}`) and receive feedback on correctness and next board state |
-| `POST` | `/puzzles/{puzzle_id}/attempts.text` | Plain-text sibling of the above — takes `moveUci`/`moveIndex` as query params instead of a JSON body, returns an ASCII board and outcome |
+| `POST` | `/puzzles/{puzzle_id}/attempts.text` | Plain-text sibling of the above — takes `moveUci`/`moveIndex` as query params instead of a JSON body, returns a colored board and outcome |
 | `GET` | `/puzzles/summary` | Return overall puzzle statistics: puzzles seen, overall accuracy, number mastered |
 | `GET` | `/puzzles/summary.text` | Plain-text rendering of `/puzzles/summary` |
 | `GET` | `/puzzles/themes` | List all theme tags with puzzle counts (e.g. `mate`, `fork`, `endgame`), sorted by count descending |
