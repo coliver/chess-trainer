@@ -137,6 +137,12 @@
   background: var(--accent-bg);
 }
 
+.puzzle-theme-card-icon {
+  font-size: 20px;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
 .puzzle-theme-card-name {
   font-size: 14px;
   font-weight: 650;

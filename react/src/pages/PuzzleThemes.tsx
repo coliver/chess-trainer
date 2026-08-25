@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { useApiResource } from "../hooks/useApiResource";
-import { formatThemeLabel, THEME_GROUPS } from "../utils/puzzleThemes";
+import { formatThemeLabel, themeIcon, THEME_GROUPS } from "../utils/puzzleThemes";
 
 type ThemeCount = { theme: string; count: number };
 
@@ -49,6 +49,9 @@ export const PuzzleThemes = () => {
                     to={`/puzzles?theme=${theme}`}
                     className="puzzle-theme-card"
                   >
+                    <span className="puzzle-theme-card-icon" aria-hidden="true">
+                      {themeIcon(theme)}
+                    </span>
                     <span className="puzzle-theme-card-name">
                       {formatThemeLabel(theme)}
                     </span>
