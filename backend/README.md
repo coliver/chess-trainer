@@ -168,6 +168,8 @@ Puzzle routes present tactical puzzles to the user and track their performance. 
 | `POST` | `/puzzles/{puzzle_id}/attempts.text` | Plain-text sibling of the above — takes `moveUci`/`moveIndex` as query params instead of a JSON body, returns an ASCII board and outcome |
 | `GET` | `/puzzles/summary` | Return overall puzzle statistics: puzzles seen, overall accuracy, number mastered |
 | `GET` | `/puzzles/summary.text` | Plain-text rendering of `/puzzles/summary` |
+| `GET` | `/puzzles/themes` | List all theme tags with puzzle counts (e.g. `mate`, `fork`, `endgame`), sorted by count descending |
+| `GET` | `/puzzles/themes.text` | Plain-text menu of themes and counts, with the exact `GET /puzzles/next.text?theme=<name>` command to pick one |
 
 ## Testing
 

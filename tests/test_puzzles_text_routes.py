@@ -36,6 +36,31 @@ def make_2_solver_move_puzzle(db, id="p1"):
     return make_puzzle(db, id=id, moves="e2e4 e7e5 g1f3 b8c6", themes="mateIn2")
 
 
+def test_puzzles_themes_text_requires_auth():
+    with TestClient(app) as client:
+        r = client.get("/puzzles/themes.text")
+        assert r.status_code == 401
+        assert "Not authenticated" in r.text
+
+
+def test_puzzles_themes_text_lists_themes_and_counts(db, test_user):
+    make_puzzle(db, id="p1", themes="mate fork")
+    make_puzzle(db, id="p2", themes="mate")
+
+    app.dependency_overrides[get_current_user_or_none] = lambda: test_user
+    try:
+        with TestClient(app) as client:
+            r = client.get("/puzzles/themes.text")
+            assert r.status_code == 200
+            assert r.headers["content-type"].startswith("text/plain")
+            assert "Puzzle themes" in r.text
+            assert "mate" in r.text
+            assert "fork" in r.text
+            assert "next.text?theme=" in r.text
+    finally:
+        app.dependency_overrides.pop(get_current_user_or_none, None)
+
+
 def test_puzzles_next_text_requires_auth():
     with TestClient(app) as client:
         r = client.get("/puzzles/next.text")
