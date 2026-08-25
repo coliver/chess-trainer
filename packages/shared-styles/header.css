@@ -331,6 +331,9 @@
   z-index: 1000;
   animation: fadeInBackdrop 0.25s ease-out;
 }
+.overflow-menu[hidden] {
+  display: none;
+}
 
 @keyframes fadeInBackdrop {
   from {
