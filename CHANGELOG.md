@@ -5,6 +5,8 @@
 - feat(backend): `GET /dashboard.text` now ends with a "What next?" menu listing the other `.text` routes (`puzzles/next`, `puzzles/summary`, `puzzles/themes`, `progress/summary`) with a ready-to-run curl example, so a terminal user isn't left without a next step after logging in (`backend/app/modules/shared/text_mode.py`'s new `TEXT_MODE_OPTIONS`).
 
 ### Fixes
+- fix(backend): puzzle `.text` board rendering now uses filled Unicode chess glyphs (♚♛♜♝♞♟, colored by piece side) by default instead of bare letters, falling back to plain ASCII letters when `?ansi=0` since the glyphs lean on foreground color to tell white from black (`render_board`/`render_puzzle_next`/`render_puzzle_attempt` now take the `ansi` flag through to glyph selection, not just color stripping).
+- fix(backend): the "What next?" menu's example routes (`TEXT_MODE_OPTIONS`) were missing the `/api` prefix nginx actually requires, so copy-pasting them from a curl session 404'd against the React SPA instead of hitting the backend.
 - fix(backend): every `.text` route now ends its response body with a trailing newline, so `curl`'s output no longer runs into the next shell prompt.
 
 ### Refactors
