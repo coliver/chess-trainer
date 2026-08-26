@@ -4,6 +4,12 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ## August 26, 2026
 
+### 🔒 Security
+
+#### 🛡️ Dependency Vulnerability Patches
+
+> Patched esbuild dev-server file-read/CORS vulnerabilities in `packages/chess-core` and `rails/`, and upgraded `angular/` from Angular 19 to 21 (via official `ng update`) to resolve high-severity Dependabot alerts across postcss, tar, sigstore, http-proxy-middleware, piscina, and the Angular framework itself. One low-risk alert (`webpack-dev-server`, dev-server-only) remains open pending an upstream Angular devkit release.
+
 ### ✨ Added
 
 #### 🩹 Sentry Error Reporting
