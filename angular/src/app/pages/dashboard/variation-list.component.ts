@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { Opening } from '../../core/openings.service';
 import { variationLabelOf, groupVariations, subVariationLabelOf } from '../../lib/group-openings';
 import type { VariationGroup } from '../../lib/group-openings';
@@ -16,60 +16,64 @@ import type { VariationGroup } from '../../lib/group-openings';
 @Component({
   selector: 'app-variation-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   template: `
     <div class="variation-rows" role="list">
-      <ng-container *ngFor="let g of groups; trackBy: trackByGroup">
+      @for (g of groups; track trackByGroup($index, g)) {
         <!-- Single-row group: render as plain row -->
-        <button
-          *ngIf="g.rows.length === 1"
-          type="button"
-          role="listitem"
-          class="variation-row"
-          [class.selected]="selectedKey === g.rows[0].eco + g.rows[0].name"
-          [attr.aria-pressed]="selectedKey === g.rows[0].eco + g.rows[0].name"
-          (click)="pick.emit(g.rows[0])"
-        >
-          <span class="r-eco">{{ g.rows[0].eco }}</span>
-          <span class="r-name">{{ variationLabelOf(g.rows[0].name) }}</span>
-        </button>
-
-        <!-- Multi-row group: collapsible -->
-        <div *ngIf="g.rows.length > 1" class="variation-group">
+        @if (g.rows.length === 1) {
           <button
             type="button"
-            class="variation-group-header"
-            (click)="toggle(g.label)"
-            [attr.aria-expanded]="isOpen(g)"
-          >
-            <span class="vg-caret" aria-hidden="true">
-              {{ isOpen(g) ? '▾' : '▸' }}
-            </span>
-            <span class="vg-label">{{ g.label }}</span>
-            <span class="vg-count">{{ g.rows.length }}</span>
-          </button>
-          <div
-            *ngIf="isOpen(g)"
-            class="variation-group-rows"
-            role="list"
-          >
-            <button
-              *ngFor="let o of g.rows; trackBy: trackByRow"
-              type="button"
-              role="listitem"
-              class="variation-row"
-              [class.selected]="selectedKey === o.eco + o.name"
-              [attr.aria-pressed]="selectedKey === o.eco + o.name"
-              (click)="pick.emit(o)"
+            role="listitem"
+            class="variation-row"
+            [class.selected]="selectedKey === g.rows[0].eco + g.rows[0].name"
+            [attr.aria-pressed]="selectedKey === g.rows[0].eco + g.rows[0].name"
+            (click)="pick.emit(g.rows[0])"
             >
-              <span class="r-eco">{{ o.eco }}</span>
-              <span class="r-name">{{ subVariationLabelOf(o.name) }}</span>
+            <span class="r-eco">{{ g.rows[0].eco }}</span>
+            <span class="r-name">{{ variationLabelOf(g.rows[0].name) }}</span>
+          </button>
+        }
+        <!-- Multi-row group: collapsible -->
+        @if (g.rows.length > 1) {
+          <div class="variation-group">
+            <button
+              type="button"
+              class="variation-group-header"
+              (click)="toggle(g.label)"
+              [attr.aria-expanded]="isOpen(g)"
+              >
+              <span class="vg-caret" aria-hidden="true">
+                {{ isOpen(g) ? '▾' : '▸' }}
+              </span>
+              <span class="vg-label">{{ g.label }}</span>
+              <span class="vg-count">{{ g.rows.length }}</span>
             </button>
+            @if (isOpen(g)) {
+              <div
+                class="variation-group-rows"
+                role="list"
+                >
+                @for (o of g.rows; track trackByRow($index, o)) {
+                  <button
+                    type="button"
+                    role="listitem"
+                    class="variation-row"
+                    [class.selected]="selectedKey === o.eco + o.name"
+                    [attr.aria-pressed]="selectedKey === o.eco + o.name"
+                    (click)="pick.emit(o)"
+                    >
+                    <span class="r-eco">{{ o.eco }}</span>
+                    <span class="r-name">{{ subVariationLabelOf(o.name) }}</span>
+                  </button>
+                }
+              </div>
+            }
           </div>
-        </div>
-      </ng-container>
+        }
+      }
     </div>
-  `,
+    `,
   styles: [],
 })
 export class VariationListComponent {
