@@ -1,4 +1,7 @@
 # backend/app/app.py
+import os
+
+import sentry_sdk
 from fastapi import Depends, FastAPI, Query
 from fastapi.responses import HTMLResponse, PlainTextResponse
 from pydantic import BaseModel
@@ -22,6 +25,13 @@ from backend.app.routers.puzzles import render_puzzle_summary
 from backend.app.routers.puzzles import router as puzzles_router
 from backend.app.routers.training import router as training_router
 from backend.app.routers.users import router as users_router
+
+if dsn := os.environ.get("SENTRY_DSN"):
+    sentry_sdk.init(
+        dsn=dsn,
+        environment=os.environ.get("SENTRY_ENVIRONMENT", "development"),
+        traces_sample_rate=0.1,
+    )
 
 app = FastAPI(title="Knight School")
 

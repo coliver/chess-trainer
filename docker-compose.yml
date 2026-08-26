@@ -41,6 +41,8 @@ services:
       SMTP_USER: ${SMTP_USER}
       SMTP_PASSWORD: ${SMTP_PASSWORD}
       SMTP_FROM_ADDRESS: ${SMTP_FROM_ADDRESS}
+      SENTRY_DSN: ${SENTRY_DSN}
+      SENTRY_ENVIRONMENT: ${SENTRY_ENVIRONMENT:-development}
     expose:
       - "8000"
     depends_on:

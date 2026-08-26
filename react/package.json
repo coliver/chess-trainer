@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@knight-school/chess-core": "file:../packages/chess-core",
+    "@sentry/react": "^9.0.0",
     "axios": "^1.18.1",
     "canvas-confetti": "^1.9.4",
     "cm-chessboard": "^8.12.19",
