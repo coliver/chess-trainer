@@ -50,6 +50,8 @@ Copy the example environment file and fill in your secrets:
 
     cp .env.example .env
 
+`SENTRY_DSN` / `VITE_SENTRY_DSN` are optional — leave blank to skip error reporting entirely, or see [backend/README.md](./backend/README.md#error-reporting-sentry-optional) to wire up Sentry.
+
 ### 2. Launch the Stack
 
     docker compose up -d --build

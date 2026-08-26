@@ -2,6 +2,16 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ---
 
+## August 26, 2026
+
+### ✨ Added
+
+#### 🩹 Sentry Error Reporting
+
+> Optional error reporting for both backend and frontend, gated entirely by env vars (`SENTRY_DSN`/`VITE_SENTRY_DSN`) — a no-op when unset. Backend calls `sentry_sdk.init()` in `app.py` (auto-instruments FastAPI); frontend calls `Sentry.init()` in `main.tsx` and wraps the app in `Sentry.ErrorBoundary`. `deploy.yml` sources `.env` on the host and passes `VITE_SENTRY_DSN`/`VITE_SENTRY_ENVIRONMENT=production` into the frontend build container. See [backend/README.md](./backend/README.md#error-reporting-sentry-optional) and [react/README.md](./react/README.md#error-reporting-sentry-optional).
+
+---
+
 ## August 25, 2026
 
 ### ✨ Added

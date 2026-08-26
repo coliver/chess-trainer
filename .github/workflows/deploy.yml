@@ -38,12 +38,23 @@ jobs:
 
             APP_VERSION="$(git describe --tags --always)"
 
+            # .env lives on the host (gitignored, provisioned by hand) and is
+            # auto-loaded by `docker compose` for its own interpolation, but
+            # this build step shells out to a bare node container instead —
+            # source it here so VITE_SENTRY_DSN reaches that container too.
+            set -a
+            [ -f .env ] && source .env
+            set +a
+
             # Host has no Node installed; build the frontend/chess-core
             # bundles with a throwaway node container instead.
             docker run --rm -v "$(pwd)":/work -w /work/packages/chess-core node:20 \
               sh -c 'npm ci && npm run build'
-            docker run --rm -v "$(pwd)":/work -w /work/react -e VITE_APP_VERSION="$APP_VERSION" node:20 \
-              sh -c 'npm ci && npm run build'
+            docker run --rm -v "$(pwd)":/work -w /work/react \
+              -e VITE_APP_VERSION="$APP_VERSION" \
+              -e VITE_SENTRY_DSN="${VITE_SENTRY_DSN:-}" \
+              -e VITE_SENTRY_ENVIRONMENT=production \
+              node:20 sh -c 'npm ci && npm run build'
 
             docker compose -f docker-compose.yml -f docker-compose.prod.yml \
               up -d --build db api rails nginx

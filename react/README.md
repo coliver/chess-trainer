@@ -85,6 +85,10 @@ To run the production-ready build served via Nginx:
 docker compose up -d --build
 ```
 
+## 🩹 Error reporting (Sentry, optional)
+
+Set `VITE_SENTRY_DSN` (build-time env var) to send unhandled frontend errors to [Sentry](https://sentry.io) (free tier). `Sentry.init()` is only called when it's set, so local dev without it is unaffected. `VITE_SENTRY_ENVIRONMENT` (default `development`) tags events — the prod deploy build passes `production`. `main.tsx` also wraps the app in `Sentry.ErrorBoundary` to catch render errors. See [backend/README.md](../backend/README.md#error-reporting-sentry-optional) for the matching backend setup.
+
 ## 🧪 Testing
 
 - **Unit/component tests:** `npm run test` (Vitest + Testing Library + jsdom). API calls are mocked via MSW (`src/tests/msw/`), not a live backend.
