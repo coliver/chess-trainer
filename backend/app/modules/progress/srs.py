@@ -6,6 +6,8 @@ No DB access here — keeps this trivially unit-testable.
 import datetime
 from dataclasses import dataclass
 
+MAX_INTERVAL_DAYS = 365
+
 
 @dataclass
 class SrsState:
@@ -49,6 +51,7 @@ def next_state(
             interval_days = 6
         else:
             interval_days = round(prev.interval_days * ease_factor)
+        interval_days = min(interval_days, MAX_INTERVAL_DAYS)
 
     due_at = now + datetime.timedelta(days=interval_days)
 
