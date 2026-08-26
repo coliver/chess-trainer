@@ -52,3 +52,13 @@ def test_ease_factor_has_a_floor_of_1_3():
     result = next_state(quality=0, prev=state, now=now)
 
     assert result.ease_factor >= 1.3
+
+
+def test_interval_is_capped_to_avoid_datetime_overflow():
+    now = datetime.datetime(2026, 1, 1, tzinfo=datetime.timezone.utc)
+    state = SrsState(ease_factor=2.5, interval_days=100000, repetitions=5)
+
+    result = next_state(quality=5, prev=state, now=now)
+
+    assert result.interval_days <= 365
+    assert result.due_at == now + datetime.timedelta(days=result.interval_days)
