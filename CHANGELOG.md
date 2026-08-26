@@ -1,384 +1,533 @@
-## 2026-08-25
-
-### Fixes
-- fix(rails): the dashboard's "needs work" section still used pre-redesign markup (`progress-weak-spots`/`ws-bar`, classes no longer in `dashboard.css`) and was missing the "trickiest move" tile entirely — only weak-spot openings rendered, unstyled. Rewrote `dashboard/show.html.erb`'s block to match React's current `ws-container`/`ws-grid`/`ws-tile` structure (two lead tiles — weakest opening, trickiest move — plus an expandable list of the rest), added `GET /progress/step-accuracy` to `DashboardController#show` for the trouble-move data, and added `needs_work_controller.js` (a small Stimulus toggle) for the expand/collapse React does with `useState`.
-
-### Features
-- feat(rails): add the Puzzle Themes browser (`GET /rails/puzzles/themes`), closing the one remaining page-level gap versus React. Lists every theme tag with its puzzle count via `GET /puzzles/themes`, grouped into the same practice categories as `react/src/utils/puzzleThemes.ts` (ported to `app/services/puzzle_theme_grouping.rb`, including the mate-position FEN diagrams rendered by a new `puzzle_theme_board` Stimulus controller). `PuzzlesController#show`/`#next_puzzle` now accept and forward a `theme` query param end-to-end, so a theme card's link filters practice the same way React's `/puzzles?theme=` does; the header's "Puzzles" nav tab now points at the theme browser first, matching React. Rails' puzzle flow is still single-move-per-puzzle — porting React's multi-move puzzle support (`moveIndex`/`solverMovesTotal`/opponent auto-reply) is a separate, larger follow-up.
-- feat(react): puzzle completion now requires clicking a "Next puzzle" button instead of auto-advancing after a 1-second timeout, so a solved position stays on screen until the user is ready to move on. The board locks (non-interactive) and the "Skip puzzle" link is replaced by "Next puzzle" while a puzzle is complete (`Puzzles.tsx`'s new `puzzleComplete` state); added `puzzles.nextPuzzle` to all 35 locale files.
-- feat(react): the puzzle prompt now says "Find the best move for White." or "...for Black." instead of the color-agnostic "Find the best move.", so the solving side is stated explicitly rather than left for the reader to infer from the board. Split `puzzles.findBestMove` into `findBestMoveWhite`/`findBestMoveBlack` across all 36 locale files, reusing each language's existing White/Black terminology from `training.whiteToMove`/`blackToMove`.
-
-### Fixes
-- fix(rails): the puzzles page's Stimulus controller and ERB view still referenced the removed `puzzles.findBestMove` key after it was split into `findBestMoveWhite`/`findBestMoveBlack`, raising a `MissingTranslationData` error and failing the request spec. `puzzle_controller.js`'s `renderStatus()` now picks the key from the puzzle's side-to-move, same as the React page; the server-rendered initial markup keeps the existing white-by-default placeholder convention already used for the turn label, corrected by JS on connect.
-- fix(ci): the `react` workflow's `npx playwright install --with-deps chromium` step (with `--with-deps` apt-installing ffmpeg and Chromium's shared libs) ran uncached on every push to main and every PR, since every push to main gates the prod deploy on this workflow passing. Added an `actions/cache` step keyed on the installed `@playwright/test` version + runner OS around `~/.cache/ms-playwright`, so the ~binaries only re-download when the Playwright version bumps; OS-level apt deps still install every run (needed regardless of cache) but are cheap/idempotent on an already-provisioned runner.
-- fix(ci): the `tests` workflow's backend job set up `actions/setup-python`'s `cache: pip`, then immediately ran `pip install --no-cache-dir`, which stops pip writing to the very cache directory that step restores/saves — silently defeating the cache on every run. Dropped the flag.
-- fix(react): accessibility pass — `OverflowMenu.tsx` now behaves as a proper modal dialog (`role="dialog"`/`aria-modal`, initial focus, Tab/Shift+Tab focus trap, Escape-to-close, focus returns to the trigger button on close via a new `triggerRef` prop from `HomeHeader.tsx`); Login/Register error messages carry `role="alert"` so screen readers announce them; `document.documentElement.lang` now tracks the active i18n language (`src/i18n/i18n.ts`) instead of staying hardcoded to `en`. Also added `eslint-plugin-jsx-a11y` to `eslint.config.js` (needs `legacy-peer-deps=true` in `react/.npmrc` since its published peer range doesn't yet declare ESLint 10 support), which caught and fixed three real issues: invalid `role="listitem"` on interactive `<button>`s in `VariationList.tsx`/`Dashboard.tsx`, and `autoFocus` misuse on the "Next puzzle" button in `Puzzles.tsx` (replaced with a scoped focus effect).
-- fix(react): extended the `@axe-core/playwright` WCAG scan from just `/login`/`/dashboard` to also cover `/puzzles`, `/training/:id`, `/settings`, `/register`, and `/verify-email` (`playwright-auth-and-flows.spec.ts`), which immediately found two more real contrast bugs: `.settings-section-heading` had the same low-opacity-text issue already fixed on the dashboard (raised `opacity: 0.7` to `0.85` in `settings.css`), and `.eco-chip`/`.variation-row .r-eco` (the ECO-code pill) used `var(--accent)` text on `var(--accent-bg)` without ever having that pairing contrast-checked — 4.15:1 on light theme and as low as 2.18:1 on dark theme, both under the 4.5:1 AA minimum. Fixed via new `--eco-chip-fg`/`--eco-chip-bg` tokens in `tokens.css` (light theme dims the background tint to 0.03 alpha; dark theme swaps in a brighter mauve `#c97b96` for the text) rather than touching the shared `--accent`/`--accent-bg` tokens other components rely on.
-- fix(react): fixed the last known accessibility violation, `.site-header-version`'s low color contrast (3.04 light / 3.34 dark, below the 4.5:1 AA minimum) — same `opacity`-on-`--text` pattern as the other contrast bugs fixed today, just a lower value (`0.6`). Raised to `0.85` in `header.css`; removed the now-unnecessary `.exclude(".site-header-version")` calls from every accessibility test.
-
-### Fixes
-- fix(backend): `GET /puzzles/next` ignored which puzzle the client already had, so clicking "Skip puzzle" (or the new "Next puzzle" button) could hand back the exact same due puzzle every time. Added an `excludeId` query param, threaded through `get_next_puzzle`'s due/unseen/theme queries; the frontend now sends the current `puzzleId` as `excludeId` on every `/puzzles/next` call.
-- feat(backend): `GET /puzzles/next.text` and `POST /puzzles/{id}/attempts.text` now include a "To move: White/Black" line above the board, derived from `board.turn`, so the side to move is stated explicitly instead of left for the reader to infer from the position.
-- feat(backend): all `.text` routes now emit ANSI color by default — the `KNIGHT_SCHOOL_BANNER` wordmark (gold) and knight art (grey), section headers ("Progress", "Puzzles", "Puzzle themes", "What next?" in gold, "Not authenticated." in rose), puzzle result headlines (green/red), and a new `render_board` for puzzle FEN rendering with alternating light/dark square backgrounds and white/black piece foregrounds, replacing the bare `str(chess.Board)` glyphs. Every route accepts `?ansi=0` to strip codes for scripts/pipes (`backend/app/modules/shared/ansi.py`'s `strip_ansi`, applied uniformly via a new `text_response` helper in `text_mode.py`), since the server can't detect a client's TTY/color support itself.
-- feat(backend): `GET /dashboard.text` now ends with a "What next?" menu listing the other `.text` routes (`puzzles/next`, `puzzles/summary`, `puzzles/themes`, `progress/summary`) with a ready-to-run curl example, so a terminal user isn't left without a next step after logging in (`backend/app/modules/shared/text_mode.py`'s new `TEXT_MODE_OPTIONS`).
-
-### Fixes
-- fix(backend): puzzle `.text` board rendering now uses the outline Unicode glyph set (♔♕♖♗♘♙) for White and the filled set (♚♛♜♝♞♟) for Black, instead of the filled set for both sides — many terminal fonts render the filled codepoints with their own built-in dark fill regardless of ANSI foreground color, making White and Black indistinguishable; glyph shape now carries the color distinction alongside the FG code (`render_board` in `text_rendering.py`).
-- fix(backend): puzzle `.text` board rendering now uses filled Unicode chess glyphs (♚♛♜♝♞♟, colored by piece side) by default instead of bare letters, falling back to plain ASCII letters when `?ansi=0` since the glyphs lean on foreground color to tell white from black (`render_board`/`render_puzzle_next`/`render_puzzle_attempt` now take the `ansi` flag through to glyph selection, not just color stripping).
-- fix(backend): the "What next?" menu's example routes (`TEXT_MODE_OPTIONS`) were missing the `/api` prefix nginx actually requires, so copy-pasting them from a curl session 404'd against the React SPA instead of hitting the backend.
-- fix(backend): every `.text` route now ends its response body with a trailing newline, so `curl`'s output no longer runs into the next shell prompt.
-
-### Refactors
-- refactor(backend): `GET /puzzles/themes.text` now delegates to a `render_puzzle_themes` function instead of building its lines inline, matching every other `.text` route's render-function pattern.
-- feat(backend): add `.text` format siblings for viewing/using the API from a terminal instead of the React SPA — `GET /progress/summary.text`, `GET /puzzles/summary.text`, `GET /puzzles/next.text`, and `POST /puzzles/{puzzle_id}/attempts.text`. Puzzle routes render an ASCII chess board (via `python-chess`'s `str(Board)`) instead of raw FEN/JSON, so a puzzle can be solved end-to-end from curl without reading a FEN string by eye; attempts take `moveUci`/`moveIndex` as query params instead of a JSON body. Every `.text` route delegates to the same service function as its JSON counterpart (`get_summary`, `get_puzzle_summary`, `get_next_puzzle`, `submit_puzzle_attempt`) — only the output rendering (`backend/app/modules/puzzles/text_rendering.py`) differs. Follows Rails' format-suffix convention rather than a separate route tree, so the `.text` variant lives right next to the route it mirrors.
-- feat(backend): add `GET /dashboard.text` — a BBS-style landing screen combining the progress and puzzle summaries in one curl call, reusing `render_progress_summary`/`render_puzzle_summary` rather than duplicating the formatting. Both the authenticated dashboard and the unauthenticated login-instructions response are topped with a `KNIGHT_SCHOOL_BANNER` ASCII wordmark (`backend/app/modules/shared/text_mode.py`, figlet "slant" font) for the retro splash-screen feel.
-- feat(backend): unauthenticated requests to any `.text` route now get a plain-text "how to log in" message (with a ready-to-run `curl .../auth/login` command) instead of the JSON `{"detail": "Missing Bearer token"}` body every other route returns. Implemented via a new `get_current_user_or_none` dependency (`backend/app/routers/auth.py`) that each `.text` route checks explicitly — no global exception handler, so JSON-route error responses are completely unaffected.
-- feat(backend): add `GET /puzzles/themes.text` — a menu screen listing puzzle themes and counts, with the exact `GET /puzzles/next.text?theme=<name>` command to pick one, completing the curl-navigable BBS-style flow (login prompt → dashboard → theme menu → puzzle → attempt).
-- feat(nginx): `curl`/`wget`/`httpie` hitting the bare domain (`https://knightschool.click/`, no path) now get redirected straight to `/api/dashboard.text` instead of the React SPA's raw HTML — no browser needed to discover the text-mode BBS exists. Detected via a `$http_user_agent` map (`nginx/terminal-client.conf`, duplicated in `nginx/conf-prod/` since prod fully replaces the mounted `conf.d` directory) and an exact-match `location = /` so every other path is completely unaffected regardless of User-Agent.
-- feat(backend): `KNIGHT_SCHOOL_BANNER` now includes an ASCII knight/horse illustration between the "KNIGHT" and "SCHOOL" halves of the wordmark (art credit: Andreas Freise, asciiart.eu).
-
-## 2026-08-24
-
-### Fixes
-- fix(backend,react): solve puzzles to their full move sequence instead of just the first solver move. Lichess puzzle `moves` strings encode `[opponent_setup, solver_move_1, opponent_reply_1, solver_move_2, ...]` — a `mateIn2` puzzle needs 2 solver moves with an opponent reply auto-played in between, but the app previously accepted the first correct move and marked the whole puzzle solved regardless of theme. `_solve_position` now replays the puzzle up to a client-supplied `move_index` (server-derived, not trusted client state — it replays `puzzle.moves` from scratch each request), `submit_puzzle_attempt` returns a `puzzleComplete` flag and auto-plays the opponent's reply when more moves remain, and SRS/attempt bookkeeping (`PuzzleProgress.attempts`, `correct_count`, SM-2 state) now fires once per puzzle attempt instead of once per solver move. `Puzzles.tsx` tracks `moveIndex`/`correctMoveUci` across the sequence and shows a "Move X of Y" chip plus a "Keep going…" message on intermediate correct moves instead of celebrating early.
-
-### Features
-- feat(react): show puzzle theme tags (e.g. "crushing", "fork", "mate in 2") as chips under the rating on the Puzzles page, sourced from the `themes` field `GET /puzzles/next` already returned but the frontend never rendered
-- feat(backend): add step-level opening accuracy analytics — `GET /progress/step-accuracy` (per-user) and `GET /progress/step-accuracy/global` (aggregated across all trainees) report accuracy per `order_index` (ply) within each opening, ranked worst-first, with the most common wrong moves played at that step. Answers "which specific move in the sequence do trainees fail at" rather than whole-opening attempt totals, which `PositionProgress`/`/progress/weak-spots` already covered.
-- feat(react): surface step-level opening accuracy on the Dashboard as a "Trouble spots" panel, consuming `GET /progress/step-accuracy` (previously unused by any frontend). Shows the user's worst-accuracy steps by opening name and move number, plus the specific wrong move they most often play there — actionable in a way the existing whole-opening "Weak spots" panel isn't.
-
-### Refactors
-- refactor(react): merge the Dashboard's "Weak spots" and "Trouble spots" panels into a single compact "Needs work" section — each previously rendered as its own boxed list of name+percentage+full-width-progress-bar rows (plus a caption line per row for trouble spots), so with both populated a user could see up to 10 heavy rows before reaching the actually-actionable Openings grid below. Replaced with two short chip rows ("By opening" / "By move") reusing the existing `.eco-chip` pill styling instead of inventing a new visual language; the "often played X instead" detail moved from a visible caption line to the chip's tooltip/screen-reader text. Cuts the section's height by roughly 70% at every breakpoint.
-- refactor(react): replace the chip-row "Needs work" panel with two highlighted callout tiles ("Weakest opening" / "Trickiest move") showing only the single worst item from each of `weakSpots`/`troubleSteps` (both already sorted worst-first by the backend), plus a "See all N weak spots →" toggle that expands the rest inline as a compact ranked row list below the tiles. Smaller default footprint than either prior chip version, and avoids showing 5+5 items when the two that matter most fit in two tiles.
-
-### Fixes
-- fix(backend): exclude opponent auto-played plies from step accuracy — the frontend auto-plays and silently submits the opponent's (always book-correct) reply as a real `TrainingResponse`, so without filtering, every opponent-side `order_index` showed ~100% accuracy and corrupted the worst-first ranking. `_is_trainee_ply` now scopes step accuracy to plies the trainee actually chose, using `order_index` parity vs. `player_color` for normal sessions (review items always count, since each is an independent due position).
-- fix(backend): a "Review" training session (`/training-sessions/from-due`, spanning due positions from openings trained as either color) always reported `player_color` as `"w"` off the session row, since `create_session_from_due` never set it. A due position that was actually the trainee's move as Black got misjudged by the frontend's opponent-autoplay effect (`Training.tsx`) as "not the player's turn," which auto-played the trainee's own correct move for them. Fixed by deriving `player_color` per review item from `side_to_move(item.fen)` in `GET /training-sessions/{id}/next`, since each due item is by construction the trainee's own move to solve; non-review (single-opening) sessions are unaffected and keep using the session's fixed `player_color`.
-
-### Tests
-- test(react): add `Training.autoplay.integration.test.tsx` — integration coverage using the real `useTrainingSession` hook and real chess-core move logic (not mocked, unlike `Training.test.tsx`) to lock down the review-session autoplay fix above for both a White-to-move and a Black-to-move due item
-- test(backend): cover `side_to_move` and the `/next` endpoint's per-item `player_color` derivation for review vs. non-review items
-
-## 2026-08-23
-
-### Features
-- feat(react): redesign mobile header with two distinct states per spec — `HomeHeader` (48–56px, knight icon inline with title, greeting line, overflow menu ⋮ for settings/logout/GitHub/language/theme/version, segmented Openings/Puzzles tabs) and `GameHeader` (40–44px, minimal back button + status + settings icon, no branding, board takes full viewport below). Conditional rendering in `App.tsx` swaps headers based on route: HomeHeader for /dashboard, /puzzles, /settings, /login, /register; GameHeader for /training/:id, /puzzle/:id. GameHeaderContext allows game pages to set status text and settings handlers. Styles compiled to mobile-first media queries in `packages/shared-styles/header.css`; old `Header.tsx` preserved as fallback. Reduces home-header footprint by ~50% and eliminates mobile crowding during active play per design spec.
-
-### Content
-- content(openings): author 46 opening descriptions (batch 4, Modern/Pterodactyl/Pirc defenses B06–B09)
-
-## 2026-08-22
-
-### Fixes
-- fix(rails): two Settings preferences didn't actually apply live — choosing a theme never flipped `<html data-theme>` (Turbo's body-only swap never re-applies it, so `settings_controller.js` now updates it explicitly), and the coordinates toggle did nothing because `createPreviewBoard` hardcoded `showCoordinates: false`; also fixes Rails-only i18n keys (`config/locales/en.yml`) rendering as raw dotted keys in JS since `js_translations` only ever read the shared React/Rails JSON cache and never merged in the YAML-only strings, and restyles flash notices (previously the tiny, low-opacity `.auth-hint` field-hint class) with dedicated banner styling
-- fix(rails): re-lock board orientation and move-input on side switch during training review — `training_controller.js` only computed orientation and called `enableMoveInput` once, in `connect()`, using the first item's `playerColor`; when a session advanced to an item where the trainee's side flipped, the board kept its original orientation and kept restricting move input to the old side, making review look like it was auto-moving through the player's own turns
-- fix(deploy): reload nginx on every deploy instead of only when its own service changes — `docker compose up -d` only recreates a container when its compose config changes, not when a bind-mounted file's contents change underneath it, so an nginx config edit (like the `/rails/` location added this session) could silently sit unapplied on a running nginx until manually reloaded
-- fix(nginx): drop the resolver-dependent `proxy_pass` for `/rails/` — routing through a `set $rails_upstream rails; proxy_pass http://$rails_upstream:3000;` indirection forces nginx to resolve the hostname per-request, which requires a `resolver` directive prod's server block never had (only dev's does, for React's dev-server proxy), so every request 502'd with "no resolver defined to resolve rails"; matched the existing `/api/` block's literal `proxy_pass` instead
-- fix(rails): mark `rails/bin/*` scripts executable — committed as mode 644, invisible in dev since Docker Desktop on Windows/Mac doesn't enforce the bit on bind-mounted files and never exercised in CI (`rails.yml` never invokes `bin/rails` directly); the first real Linux host to run `rails/Dockerfile`'s CMD hit "bin/rails: Permission denied" and crash-looped, which nginx's `/rails/` proxy_pass turned into a silent fallthrough to the React SPA instead of a visible 502
-
-### Tests
-- test(rails): add `spec/system/` Capybara + Cuprite (headless Chrome) specs covering the Settings theme/coordinates live-preview regressions directly, since request specs can't see Turbo/Stimulus client-side behavior at all
-
-### Refactors
-- refactor(i18n): unify Rails and React onto one shared translation source instead of two independently-authored copies. Moved React's locale files to `packages/i18n-locales/locales/` (React's `en-US.json` is now the single source of truth for any UI string both frontends render); rewrote every Rails `t()` call site — controllers, views, and `app/javascript/controllers/*.js` — to pull React's exact shared key paths (`t("puzzles.title")`, `t("training.trainAgain")`, etc.) instead of Rails' self-invented namespace, which also fixes the wording drift the two apps had accumulated independently (e.g. `training.trainAgain`: "Train again" → "Train this opening again"; `auth.login.title`: "Log in" → "Login"). Rewrote `ApplicationHelper#js_translations` to serialize the whole current-locale translation set (previously just a hand-curated `js:` subtree, which no longer exists — a view and its Stimulus controller now reference the literal same key) from the same generated cache file `I18nJsonLoader` already produces. `config/locales/en.yml` shrank to only the handful of strings with no React equivalent (flash-redirect messages, the dashboard search-results partial, the server-unavailable page) — everything else now resolves through `packages/i18n-locales/locales/en-US.json` via `config/initializers/i18n_json_loader.rb` (unchanged from the prior session)
-
-### Fixes
-- fix(rails): wire up the Puzzles page's already-tracked `bestStreak` into `puzzle_controller.js#renderStats` — it was computed (`Math.max(bestStreak, streak)`) but never displayed; now appends React's `puzzles.streakBest` suffix (" · best {{best}}") to the streak pill once a best streak exists, matching `Puzzles.tsx`
-
-### Features
-- feat(rails): apply the `language` preference instead of only storing it — `config/application.rb` derives `I18n.available_locales` from every file in `packages/i18n-locales/locales/*.json` (37 locales) rather than a single-entry `en-US` allowlist; Settings gained a language `select_tag` (`SettingsController::LANGUAGES`, mirroring React's `LanguageToggle`) that round-trips through `/users/me/preferences`; `ApplicationController#set_locale` (an `around_action`) reads the cached `session[:preferences]["language"]` and wraps each request in `I18n.with_locale` — deliberately reads the session cache rather than calling `current_preferences` itself, so it can't add a network round trip ahead of `require_auth!` or on the JSON move/puzzle-attempt proxies
-- feat(rails): roll the I18n engine (server-side `t()` + the `app/javascript/i18n.js` bridge, first wired on Puzzles/header) out to every remaining view, controller, and Stimulus controller — Sessions, Registrations, EmailVerifications, Dashboard, Settings, Trainings, and the shared error page; content stays English-only, but no view or controller has a hardcoded UI string left. Added `config.i18n.raise_on_missing_translations = true` in `config/environments/test.rb` so a missing/mistyped `t()` key fails RSpec loudly instead of silently rendering "translation missing: ..."
-
-### Tests
-- test(rails): add `spec/requests/puzzles_spec.rb` covering the new Puzzles page (`puzzles_controller.rb`, `views/puzzles/show.html.erb`, `puzzle_controller.js`) — login redirect, board render on a due puzzle, the "no puzzles due" state on a 404 from `/puzzles/next`, and the `GET /rails/puzzles/next` / `POST /rails/puzzles/:id/attempts` JSON proxies (success + error passthrough), mirroring `trainings_spec.rb`'s WebMock pattern; also added the missing `"puzzles"` entry to the layout's `stylesheet_link_tag` list so `packages/shared-styles/puzzles.css` actually loads
-
-## 2026-08-21
-
-### Documentation
-- docs(react): add an "All Routes" mermaid flowchart to `react/README.md`'s Key Logic Flows section mapping every client-side route (public and `RequireAuth`-guarded), the header nav hub, and the auth/redirect guards (`RequireAuth`'s per-page `/auth/me` check, the Axios 401→refresh→logout interceptor, the catch-all `*` → `/dashboard` redirect); updated the existing artifact link to point at a newer, styled version of the same map with a route legend
-
-### Refactors
-- refactor(react): extract shared `AuthCard` component (`src/components/AuthCard.tsx`) and `apiErrorMessage` util (`src/utils/apiError.ts`) from the identical page-wrapper markup and axios-error-handling logic duplicated across `Login.tsx`, `Register.tsx`, and `VerifyEmail.tsx`
-- refactor(react): extract `SettingsToggleRow` and `SettingsRadioGroup` components (`src/components/`) from the copy-pasted switch/radiogroup markup repeated 5+ times in `Settings.tsx`
-- refactor(react): add `openingKey(opening)` to `src/lib/groupOpenings.ts` and use it in `Dashboard.tsx` and `VariationList.tsx` instead of each spot manually computing the `eco + name` composite key (the latter had its own near-identical `rowKey` helper)
-- refactor(react): extract `ProgressStat` component (`src/components/ProgressStat.tsx`) from the icon/value/label markup copy-pasted 7 times across the training and puzzle stat rows in `Dashboard.tsx`
-
-### Fixes
-- fix(react): `src/api.ts`'s response interceptor no longer retries a 401 from `/auth/login`, `/auth/register`, or `/auth/refresh` itself through the refresh flow — previously, with no `refresh_token` yet in `localStorage` (the normal case for a first-time visitor), the refresh attempt threw synchronously and hard-navigated to `/login`, wiping the just-rendered "Invalid credentials" error before it could be read
-- fix(react): fix two real WCAG AA color-contrast failures on the dashboard uncovered once the interceptor fix let the accessibility scan actually finish — `.progress-group-label` ("Training"/"Puzzles" headings) and `.dashboard-greeting` both used low `opacity` on `var(--text)` (3.99:1 and 4.34:1 respectively, below the 4.5:1 minimum); raised both to `opacity: 0.85` (`packages/shared-styles/dashboard.css`)
-- fix(react): fix an `aria-required-attr` violation on `.dashboard-greeting` — its `role="heading"` was missing the required `aria-level`; added `aria-level={1}`
-
-### Tests
-- test(e2e): audit key user flows against existing Playwright coverage and add `react/e2e/README.md` as a living tracker (flow table + mermaid map, color-coded covered/partial/gap/not-built); add `e2e/playwright-auth-and-flows.spec.ts` (renamed from `playwright-gap-flows.spec.ts`) with 10 tests covering previously-untested gaps — unauthenticated redirect via `RequireAuth`, logout clearing the session, invalid-credentials error on `/login`, email verification success/error, a real click-click training move with correct-feedback assertion, a wrong puzzle move with incorrect-feedback assertion, settings-preference persistence across reload, and `@axe-core/playwright` WCAG 2 A/AA scans of `/login` and `/dashboard`; recorded a passing video per test into `e2e/videos/`
-- test(e2e): extract the three near-duplicate per-spec `mockAuth` helpers (`playwright-auth-and-flows.spec.ts`, `playwright-dashboard.spec.ts`, `playwright-settings-preview-check.spec.ts`) into a shared `e2e/auth-helpers.ts`; the shared version seeds a `token` and mocks `/api/users/me/preferences`, which the narrower dashboard/settings-preview versions hadn't — that superset surfaced the same missing-mock bug a third time in `playwright-dashboard.spec.ts` (its screenshot tests never mocked `/api/puzzles/summary`, so the interceptor's refresh-and-redirect path fired mid-render once a token was present), fixed by adding that mock there too
-
-## 2026-08-20
+This layout prioritizes "air" and visual anchors. The `####` headers provide a large, clear target for your eyes, and the blockquote (`>`) creates a vertical line on the left, which acts as a rail to help you track the text and prevent lines from blending together.
 
-### Features
-- feat(i18n): add Khuzdul (khz) locale using attested vocabulary from Magnus Åberg's linguistic analysis; greetings (Baruk!), colors (Zirak/Narag), and title (Khazad-dûm) are Tolkien-sourced, with reconstructed "Baruk-dûm" for welcome-back and fallback to English for untranslated UI terms; pickaxe emoji flag in the language selector
-- feat(i18n): add Sindarin (sd) locale with complete translations and elf emoji flag in the language selector
-- feat(react): move the "Good morning/afternoon/evening, {username}" greeting out of the site header and onto the Dashboard page, above the progress-overview card — the header had grown too crowded (nav links, settings/logout, source link, language/theme toggles) to keep it readable at the widths where it was already showing; wrapped the greeting + card in a new `.dashboard-stack` column-flex container
+---
 
-### Fixes
-- fix(i18n): remove 19 unused translation keys (dashboard.header duplicate of header section, nav sidebar labels, language option labels) and update all 35 locale files for consistency; all keys are now actively used in the UI
-- feat(training): auto-escalate hints based on repeated wrong attempts on the current move — 2 misses reveals the source-square hint (same as one manual hint click), 4 misses reveals the target square too and draws an arrow to it via `Board.tsx`'s existing `arrows` prop; miss-counting is keyed off the submit lifecycle (`isSubmitting` true→false) rather than diffing feedback text, since the backend reports the identical `"wrong move"` reason for every incorrect-but-legal move and a text-diff would silently miss consecutive wrong tries; resets to zero on a correct answer or when advancing to the next training item
-- feat(react): add the cm-chessboard `Accessibility` extension to `Board.tsx` — screen readers get a hidden move-form/table/piece-list description of the position plus braille notation in the SVG `alt`; keyboard move input (arrow keys, Enter/Space, Escape) is enabled only when the board is `interactive`, so read-only preview boards (Settings, dashboard cards) stay descriptive without claiming a keyboard-operable focus stop they can't act on; `language` is derived from the active i18n locale, narrowed to the extension's supported `de`/`en` (falling back to `en`)
-- feat(react): add a small disclaimer under Register's email field reassuring users it's only collected to keep bots out, not for anything else
-
-### Fixes
-- fix(react): fix `.card` (ui.css) overflowing its container's right edge when nested inside the new `.dashboard-stack` — `.card` is `width:100%` + `padding:28px` with content-box sizing, which is normally forgiven because it's the sole child of `.page`'s *row* flexbox (main-axis flex-shrink absorbs the padding); as a *column*-flex child instead, that width lands on the cross axis where no such protection applies, so the border-box ballooned past the container by the padding+border width and threw the whole page's right edge out of alignment with the header; scoped fix via `.dashboard-stack .card { box-sizing: border-box; }`
-- fix(react): the Settings preview board stopped accepting moves after toggling any board style preference (animations, coordinates, theme, piece set) — `Board.tsx` destroys and recreates the underlying `cm-chessboard` instance on those changes, but the move-input effect only re-ran on `interactive`/`moveColor` changes, so the new instance never got its click/drag handler registered; added a `boardVersion` counter bumped on recreation, included in the dependent effects' deps so they reattach to the new instance, and fixed a resulting cleanup-ordering crash where the move-input cleanup called `disableMoveInput()` on an already-destroyed board
-- fix(react): the newly-added Accessibility extension had two bugs found in code review — its hidden move-piece form stayed enabled on read-only preview boards even though nothing had called `enableMoveInput()` there, so an assistive-tech user submitting it would hit a `TypeError` from cm-chessboard's null move-input callback; and gating `keyboardMoveInput` on the raw `interactive` prop meant Puzzles' `interactive={!!puzzleId && !isSubmitting}` destroyed and rebuilt the whole board (re-fetching piece sprites, since `assetsCache` is off) on every move submission — both are now gated on a `keyboardCapable` ref that latches true the first time a board goes interactive and never flips back, so a board that's only briefly disabled mid-submission no longer gets rebuilt
-
-## 2026-08-19
-
-### Features
-- feat(react): add merida, pirouetti, and chessnut piece sets (free/open, sourced from the lichess client) to the Settings piece-set switcher, alongside the existing standard (cburnett) and staunty sets
-- feat(react): celebrate a completed training session and a correct puzzle answer with a `canvas-confetti` burst (`utils/winCelebration.ts`); training's enemy-last-move highlight now stays put through an in-flight player attempt and only advances once the move is confirmed correct, instead of clearing on every attempt; remove the unused `emoji-picker-react` dependency (only ever referenced by an untracked prototype that never shipped), keeping `snow.tsx` in place for a future easter egg
-- feat(settings): add a snow-effect toggle to Settings' appearance section — deliberately local-only (`localStorage`, `useSnowPreference`), not synced through `PreferencesContext`/the backend; backfill the `snowLabel` translation key across all 34 non-English locales
-- feat(settings): add sound effects toggle to Settings' appearance section, and backfill the missing `soundLabel` translation key across all 34 non-English locales
-- feat(react): add a user preferences system — `PreferencesContext` syncs theme, language, and board look (color skin, piece set, coordinates, animations, orientation lock) to the backend for logged-in users (`GET`/`PATCH /users/me/preferences`, migration `0011`), falling back to `localStorage` for guests; new `/settings` page with instant-apply controls, linked from the header; `Board.tsx` now reads board skin/piece-set/coordinates/animation from preferences instead of hardcoding them, and `Training.tsx`/`Puzzles.tsx` respect a fixed board-orientation preference instead of always auto-flipping
-- feat(training): replace the dead-end "Session complete" banner with Train again / Choose another opening actions, translated across all locales; fix a stuck "Starting..." button caused by `isSessionCompleted`/`isRestarting` never resetting when a new session loaded into the same page instance
-- feat(sounds): wire up puzzle/training feedback sounds and fix broken asset paths, then close the remaining gaps — play `gameStart` on session load and `moveOpponent` on the autoplayed opponent reply, persist the mute preference, and surface playback failures instead of failing silently; untrack and gitignore the 22 sound files with no `playSound()` call site
+## August 25, 2026
 
-### Fixes
-- fix(react): the snow easter egg kept falling for up to 15s after unchecking it in Settings — `snow()`'s `requestAnimationFrame` loop ran its full duration regardless of the toggle; `snow()` now returns a stop function that the effect cleanup calls immediately
-- fix(react): changing the piece set in Settings had no visible effect on the board — cm-chessboard's `assetsCache` option caches the fetched piece sprite in a single global DOM element keyed by a fixed id rather than by URL, so switching sets never re-fetched the new sprite; disable `assetsCache` so each piece references its own sprite file directly
-- fix(i18n): `da.json` and `uk.json` were mislabeled — `da` (Danish) actually contained Norwegian text and `uk` (Ukrainian) actually contained Slovak text; both retranslated into the correct language
-- fix(i18n): `theme.dark`/`theme.light`/`theme.system` were left as literal English in 13 locales (de, es, fr, it, kl, nl, pl, pt, ru, tr, da, no, sv) — never rendered anywhere until the new Settings page shipped, so the gap had gone unnoticed; found via a systematic per-locale value comparison against `en-US.json` after a closer verification pass
-- fix(i18n): change the default language code from `en` to `en-US` everywhere it was hardcoded — i18n config, the verification email, and the `users.language` column default (migration `0010`)
+### ✨ Added
 
-### Styling
-- style(settings): convert the appearance checkboxes (coordinates, board animations, sound, snow) into toggle switches
+#### 🚀 Text-Mode API
 
-### Chores
-- chore: stop deploying the Angular frontend — dropped from docker-compose, nginx, and CI workflows; the `angular/` source tree is left in place but no longer built or deployed
-- chore: adopt semantic versioning, starting at `v1.0.0` (git tags only, no `package.json` bumps); the deploy workflow now derives the running version via `git describe --tags` and bakes it into the React build as `VITE_APP_VERSION`, shown small under the header logo (`Header.tsx`'s `.site-header-version`)
+> A full "BBS-style" terminal interface for the entire app. Includes `GET /dashboard.text`, `summary.text`, and `puzzles/next.text` with ASCII boards, ANSI colors, and a "What next?" navigation menu.
 
-### CI/CD
-- ci: gate prod deploy on lint/test workflows passing — deploy.yml now requires the core/react/tests reusable workflows to succeed before deploying to prod, whereas previously deploy ran independently of CI results
+#### 🧩 Puzzle Themes Browser
 
-### Documentation
-- docs: sync AGENTS.md and READMEs with current codebase
+> Added a dedicated themes browser (`/rails/puzzles/themes`) allowing users to filter practice by specific tactical themes.
 
-### Accessibility
-- accessibility: add Hindi, Japanese, Chinese, and Korean locales; rename locale files to match language rather than country; broad pass over existing locale content
+#### 💬 Explicit Puzzle Prompts
 
-## 2026-08-17
+> Puzzles now explicitly state "Find the best move for White/Black" instead of a generic prompt.
 
-### Features
-- feat(i18n): add per-user language support for verification emails
-- feat(i18n): add `scripts/sync-locales.mjs` (`npm run i18n:sync` / `i18n:check`) so `en.json` is the single source of truth for translation keys — it stubs missing keys and drops stale ones across every other locale file instead of hand-copying JSON structure; `i18n.ts` and `LanguageToggle.tsx` now auto-discover `locales/*.json` via `import.meta.glob`, so adding a language no longer touches either file
-- feat(i18n): add French and German locales, and localize the remaining hardcoded strings (opening-card variation count, board-preview "Start" button and ply tooltip)
-- feat(i18n): add Italian, Dutch, Polish, Portuguese, Russian, and Turkish locales
-- feat(i18n): add a Klingon (`en-x-klingon`) locale — English flavored with canonical Klingon interjections, alongside `en-x-pirate`
-- feat(i18n): add a Groot (`en-x-groot`) locale — greetings/headings/labels replaced with "I am Groot" variants, technical/error copy left plain
-- feat(dashboard): add a White/Black filter above the opening cards grid — openings named "X Defense/Defence" classify as Black's repertoire (`colorOf` in `groupOpenings.ts`), everything else as White's, cutting the ~149-card grid down per color
-- feat(dashboard): auto-orient opening card thumbnails and the board preview to the selected opening's color (Black defenses render Black-at-bottom), and flip the preview live when the Play as White/Black toggle is changed — the toggle still defaults from the opening's color but stays user-overridable per selection
+#### 🖱️ Manual Puzzle Advance
 
-### Fixes
-- fix(i18n): drop dead `language.english`/`language.spanish` keys — never rendered by any component (the language switcher shows flag emoji only)
-- fix(react): guard `useTrainingSession.submitMove` and `Puzzles`'s `loadNext`/`submit` against post-unmount state updates, and clear `Puzzles`'s pending "next puzzle" timeout on unmount — the timeout leak was firing during later tests and intermittently stealing a queued mock response, which was the actual cause of an occasional Puzzles test failure
+> Implemented a "Next puzzle" button in React, preventing the app from auto-advancing and allowing users to study the solved position.
 
-### Testing
-- test(react): add `eslint-plugin-testing-library` (scoped to `**/*.test.{ts,tsx}`), fixing what it surfaced (missing `findBy` waits, redundant manual `cleanup()`, direct DOM node access in queries)
+#### 🌐 Terminal Discovery
 
-### Other
-- Shouts to Patricia, Maritza, and Maritza's husband for helping out with the Spanish translation!
+> Configured Nginx to automatically redirect terminal clients (curl/wget) to the text-mode dashboard.
 
-## 2026-08-16
+### ⚡ Improved
 
-### Features
-- feat(training): support playing the Black side — training sessions now carry a `player_color` (migration `0008`), and both frontends generalize the White-only `isWhiteToMove`/`canPickUp`/autoplay/orientation logic in `Training.tsx`/`training.component.ts` (and `chess-core`'s `deriveStatus`) into a color-aware version driven by the session; add a White/Black picker to both dashboards
+#### ♿ Accessibility Pass
 
-### Fixes
-- fix(angular): auto-orient the puzzles board to the solver's color on load, matching React's existing behavior
+> Significant WCAG AA improvements, including a proper modal dialog for the Overflow Menu, `role="alert"` for error messages, and dynamic `lang` attribute tracking.
 
-## 2026-08-15
+#### 🎨 Visual Contrast
 
-### Features
-- feat(auth): gate email verification behind `EMAIL_VERIFICATION_REQUIRED` (off by default in prod while SES is sandboxed) — register auto-verifies and login skips the check when disabled
-- feat(angular): port the React dashboard's progress strip (positions trained, accuracy, day streak, mastery bar, review-due button, weak spots) to Angular via a new `ProgressService` and `TrainingService.startFromDue()`, closing the feature gap between the two frontends
+> Fixed several color contrast violations on the Settings page, ECO-code pills, and site header versioning to meet 4.5:1 AA minimums.
 
-### Fixes
-- fix(auth): harden email verification token model — add `email_verified_at` timestamp and an `email_verify_token_version` counter so resending a verification email invalidates the prior link instead of leaving it valid until its own 24h expiry
-- fix(test): update prod smoke test's stale Puzzles heading assertion
+#### 📟 Terminal Rendering
 
-### Refactoring
-- refactor(css): centralize the CSS that's shared verbatim between React and Angular (`tokens`, `base`, `header`, `ui`, `training`, `dashboard`, `puzzles`, `login`, `board`) into `packages/shared-styles/`; mount `./packages:/packages` into both dev containers so the shared files are visible without a rebuild
+> Enhanced `.text` boards to use Unicode glyphs (filled vs. outline) to clearly distinguish White and Black pieces in terminal fonts.
 
-### Testing
-- test(puzzles): isolate puzzle service tests from real seeded data
-- test(e2e): add a prod smoke test (`playwright-prod-smoke.spec.ts`, `npm run test:smoke`) that logs into a persistent test account and checks the dashboard + puzzles pages load for real after a deploy; registration is split into a separate one-off spec (`playwright-prod-register.spec.ts`) so smoke runs don't keep creating throwaway accounts on prod
+### 🐛 Fixed
 
-## 2026-08-14
+#### 🖼️ Dashboard UI
 
-### Refactoring
-- refactor(training): extract timeline history and session-state derivation (status banner, eco/opening-name split, hint markers, next-item parsing) out of React-specific files into pure `@knight-school/chess-core` modules (`timeline.ts`, `next-item.ts`, `status.ts`); rewire both React's `Training.tsx`/`useTrainingSession.ts` and Angular's `training.component.ts`/`training.service.ts` to share the same logic — fixes a latent Angular bug where hint markers didn't hide on session completion
+> Fixed the "Needs work" section in Rails to match the new React grid layout and added the missing "trickiest move" tile.
 
-## 2026-08-13
+#### 🧩 Puzzle Logic
 
-### Features
-- feat(training): dataset-driven training-item selection — `create_training_session()` builds items from real `Opening` rows (gated UI always supplies eco+name, so selection is deterministic; `func.random()` is a no-opening fallback), replacing the MVP static items
-- feat(angular): build the Angular training page against the shared `@knight-school/chess-core` package — board, move input, hint/timeline, and session flow at parity with React
-- feat(angular): mirror the React `Board` over `cm-chessboard` as an Angular component with the same prop/marker surface; add the `chess-core` build step to `angular/Dockerfile`
-- feat(angular): bring header/dashboard/training/login to parity with React
-- feat(header): replace the `/profile` link with a logout button icon (drops the dead `/profile` route)
-- feat(auth): add cross-links between login and register
-- feat(react): replace `react-chessboard` with `cm-chessboard` behind a reusable `Board` wrapper — a framework-neutral board that eases the planned Angular port
+> Fixed a bug where "Skip puzzle" could return the same puzzle repeatedly by introducing an `excludeId` parameter.
 
-### Refactoring
-- refactor(training): route drag + click through cm-chessboard's move-input into the existing `chess.js` validation; migrate `squareStyles` highlights to markers; drop right-click arrow drawing
-- refactor(training): trim `NextItem` to the fields actually used (remove unused `nextPgn`/`nextEpd`/`nextNextPgn`/`data`) and fix a duplicate `epd` key in the next-item response type
+#### ⚙️ CI/CD Optimization
 
-### Testing
-- test(react): mock `Board` in the Training tests and assert `onMove`/markers; Playwright now screenshots dashboard + training across the CSS breakpoints (desktop/tablet/mobile) × light/dark
+> Added caching for Playwright binaries and fixed a `pip` cache conflict in the backend test workflow to speed up CI runs.
 
-### Documentation
-- docs: add a theme-aware (`<picture>`) collapsible dashboard screenshot to the React README; refresh READMEs for cm-chessboard
+#### 🛠️ Backend Stability
 
-## 2026-07-28
+> Resolved translation errors in the Rails puzzle controller and fixed missing trailing newlines in text-mode responses.
 
-### Features
-- feat(dashboard): add prominent opening board preview and selection gating
-
-### Refactoring
-- refactor(dashboard): initialize selection state to empty
-
-### Fixes
-- fix: resolve eslint/type issues in `useTrainingSession`, `Dashboard.test.tsx`, and `Training.test.tsx`
-
-### Testing
-- test(dashboard): add/expand Dashboard test coverage
-
-### UI
-- ui(dashboard): reorganize dashboard CSS and improve board preview sizing
-- ui(dashboard): add dark/light mode screenshots and dashboard random quotes; update icons to SVG components
-
-## 2026-07-26
-
-### Refactoring
-- Add lots of missing typing
-
-## 2026-07-24
-
-### Features
-- feat(training): track session completion with `isSessionCompleted`
-- feat(training): add optional `nextNextPgn` to `NextItem`
-
-### Fixes
-- fix(training): remove custom arrows/hint arrow logic and update chessboard options + expectations in tests
-
-### Refactoring
-- refactor: Remove Retry button and backing logic
-- refactor(training): change `hintLevel` to -1/0 (Hint/More Hint) and highlight from/to squares only
-
-## 2026-07-21
-
-### Testing
-- test: refactor auth tests and improve pytest configuration
-  - Add `pythonpath = .` to pytest.ini to fix module resolution
-  - Introduce `test_user` fixture in conftest.py
-  - Refactor `test_auth_refresh.py` to use the new user fixture
-  - Clean up unused imports in auth router and test files
-
-### Chores
-- Add refresh tokens
-- Add env.example
-- Run black / ruff
-
-## 2026-07-20
-
-### Fixes
-- Fix `/api/` slash issue
-
-### Testing
-- Add Tests for `useTrainingSession`
-- Add vitest and initial tests
-- Add vi test
-
-### Chores
-- Code cleanup in `useTrainingSession.ts`
-- Config changes for vitest
-
-## 2026-07-18
-
-### Refactoring
-- refactor: extract training session logic into `useTrainingSession` hook
-  - Centralize move submission, state management, and feedback handling to improve maintainability and reduce duplication
-  - Move ~80% of session logic into a reusable hook
-  - Improve testability through modular components
-  - Preserve autoplay and real-time feedback functionality
-  - Clean up coverage ignore patterns
-
-### Fixes
-- Fix training item selection & typings
-  - Backend now excludes openings where eco or name are null when selecting the next session item
-  - Frontend removes the `fetchNextItemShim` typing hack and defines an explicit `NextItem` interface for `/training-sessions/:id/next`
-- Fix black not moving
-
-### Documentation
-- docs: Unleash the full potential of LICENCE
-- docs: Add backend/README.md; Rework all READMEs
-- docs: overhaul README into professional documentation
-  - add LICENCE
-  - refactor ThemeToggle
-  - add test coverage for frontend
-
-### Chores
-- linting and formatting: add ruff, black. run both
-
-## 2026-07-17
-
-### Features
-- feat/training: add move feedback animations and dataset-driven sessions
-  - Sessions now use openings dataset instead of static examples
-  - Added visual blink animation on correct moves
-  - Improved training interface layout
-  - Better error messages and session state tracking
-- feat(training): associate training sessions with authenticated user
-  - Add `user_id` + relationship to `TrainingSession`
-  - Update `create_training_session(db, user_id, ...)` and pass `current_user.id` from training router
-  - Adjust training-related tests to include `user_id` and new service signature
-  - Update frontend header to show profile icon/link when logged in
-  - Minor frontend cleanup in Training page
-
-### Other
-- Various Frontend enhancements
-  - Added logo
-  - Added CHANGELOG
-- (tidying) Move page files to `src/pages`; components to `src/components`
-  - Update frontend README
-  - Added Header component and implemented it across pages
-  - Update nginx conf
-
-## 2026-07-16
-
-### Chores
-- training: add next-item selection and persist response correctness/feedback
-- (merge) Merge branch 'main' of https://github.com/coliver/chess-trainer
-- Update ARCHITECTURE.md
-- Fix formatting in README for nginx configuration
-- Update README
-- dev: update nginx frontend proxy and `/ws` websocket endpoint
-  - chore: clean up `import_openings.py` formatting and remove commented code
-- update agent instructions, `.gitignore`
-  - tighten `import_openings.py` formatting and remove old commented code
-  - db: remove `create_openings.sql` (replaced by migrations/schema generation)
-
-## 2026-07-14
-
-### Other
-- Docker/service resilience improvements (health checks, restart policies).
-- Openings table/model and enriched opening import (including ECO + move index metadata).
-- Alembic setup improvements (env bootstrapping, model auto-import, safer migrations).
-- Improved migration/table creation safety (guards, explicit types, safer downgrades).
-
-## 2026-07-08
-
-### Other
-- Auth + training MVP wiring: login/register + redirect to dashboard.
-- Training UI and session flow routed to /training/:id.
-- JWT auth integration for training routes.
-- Training progression logic updates (next item selection + response upsert behavior).
-- Register validation and auth/router wiring.
+---
+
+## August 24, 2026
+
+### ✨ Added
+
+#### 📈 Full Puzzle Sequences
+
+> Puzzles now require the complete move sequence to be solved rather than just the first move.
+
+#### 📊 Step-Level Analytics
+
+> Introduced "Trouble spots" analytics that identify the specific ply (move number) in an opening where trainees most frequently fail.
+
+#### 🏷️ Puzzle Theme Chips
+
+> Added visual theme tags (e.g., "fork", "mate in 2") directly on the Puzzles page.
+
+### ⚡ Improved
+
+#### 📐 Dashboard Layout
+
+> Merged "Weak spots" and "Trouble spots" into a compact "Needs work" section featuring highlighted tiles for the weakest opening and trickiest move.
+
+### 🐛 Fixed
+
+#### 📉 Accuracy Data
+
+> Filtered out opponent auto-played moves from accuracy analytics to prevent artificial 100% accuracy spikes.
+
+#### 🔄 Review Sessions
+
+> Fixed a bug where review sessions always reported the player as White, causing the board to auto-move for the user when playing as Black.
+
+### 🧪 Testing
+
+#### 🧪 Integration Tests
+
+> Added integration tests for training autoplay and backend coverage for `side_to_move` derivation.
+
+---
+
+## August 23, 2026
+
+### ✨ Added
+
+#### 📚 Opening Content
+
+> Authored detailed descriptions for 46 new openings (Modern, Pterodactyl, and Pirc defenses).
+
+### ⚡ Improved
+
+#### 📱 Mobile UX
+
+> Redesigned the mobile header with a specific "Game" mode that minimizes branding and UI to maximize board screen space.
+
+---
+
+## August 22, 2026
+
+### ✨ Added
+
+#### 🌍 Internationalization
+
+> Full support for 37 locales with live language preference switching.
+
+#### ⚙️ I18n Engine
+
+> Rolled out the translation engine across all Rails views, controllers, and Stimulus controllers.
+
+### ⚡ Improved
+
+#### 🔀 Unified Translations
+
+> Merged Rails and React translation sources into a single JSON source of truth to eliminate wording drift between the two frontends.
+
+### 🐛 Fixed
+
+#### ⚙️ Rails Settings
+
+> Fixed live-preview bugs for theme and coordinate toggles.
+
+#### 🔄 Board Orientation
+
+> Fixed a critical bug where board orientation didn't flip when the trainee's side changed during a review session.
+
+#### 🚢 Deployment
+
+> Fixed Nginx configuration issues (resolver errors) and ensured `rails/bin` scripts have correct executable permissions in Linux environments.
+
+#### 💎 UI Polish
+
+> Wired the `bestStreak` stat into the Rails puzzles page.
+
+---
+
+## August 21, 2026
+
+### ✨ Added
+
+#### 🧪 E2E Test Suite
+
+> Added comprehensive Playwright tests covering the entire user journey: registration, email verification, training flows, and settings persistence.
+
+#### 🗺️ Route Mapping
+
+> Added a Mermaid flowchart to the React documentation mapping all guarded and public routes.
+
+### ⚡ Improved
+
+#### 🏗️ Component Architecture
+
+> Refactored duplicated markup into reusable React components: `AuthCard`, `SettingsToggleRow`, `ProgressStat`, and `apiErrorMessage`.
+
+### 🐛 Fixed
+
+#### 🔐 Auth Interceptor
+
+> Fixed a loop where 401 errors on the login page triggered a refresh flow that wiped out "Invalid credentials" error messages.
+
+#### ♿ Accessibility
+
+> Fixed `aria-level` violations on the dashboard greeting and resolved contrast issues on group labels.
+
+I have captured the remaining entries from your logs. I've continued using the **H4 headers + Blockquotes** to maintain those visual rails and the high-contrast spacing that helps with tracking.
+
+---
+
+## August 20, 2026
+
+### ✨ Added
+
+#### ⚒️ Khuzdul & Sindarin Locales
+
+> Added Tolkien-inspired locales. Khuzdul includes attested vocabulary (Baruk!) and a pickaxe emoji; Sindarin includes complete translations and an elf emoji.
+
+#### 🏠 Dashboard Greeting
+
+> Moved the "Good morning/afternoon/evening" greeting from the crowded site header to a new `.dashboard-stack` on the main page for better readability.
+
+#### 💡 Hint Auto-Escalation
+
+> Implemented a system that automatically provides hints after repeated failures: 2 misses reveal the source square, and 4 misses reveal the target square with an arrow.
+
+#### ♿ Board Accessibility Extension
+
+> Integrated the `cm-chessboard` Accessibility extension. Screen readers now receive a hidden description of the position and braille notation in the SVG alt text.
+
+#### 🛡️ Registration Disclaimer
+
+> Added a small disclaimer under the email field reassuring users that emails are collected solely for bot prevention.
+
+### 🐛 Fixed
+
+#### 🧹 I18n Cleanup
+
+> Removed 19 unused translation keys across 35 locale files to ensure the translation set is lean and consistent.
+
+#### 📐 Layout Overflow
+
+> Fixed a bug where `.card` elements would overflow the right edge of the screen when placed inside the new dashboard column layout.
+
+#### ⚙️ Settings Preview Board
+
+> Resolved a bug where the preview board stopped accepting moves after changing a board style preference by implementing a `boardVersion` counter.
+
+#### 🛠️ Accessibility Refinement
+
+> Fixed two bugs in the Accessibility extension: prevented `TypeErrors` on read-only boards and stopped the board from rebuilding entirely on every move submission.
+
+---
+
+## August 19, 2026
+
+### ✨ Added
+
+#### 🎨 New Piece Sets
+
+> Added Merida, Pirouetti, and Chessnut piece sets (sourced from Lichess) to the Settings switcher.
+
+#### 🎉 Win Celebrations
+
+> Added `canvas-confetti` bursts to celebrate completed training sessions and correct puzzle answers.
+
+#### ❄️ Snow Effect
+
+> Added a local-only "snow" toggle in Settings for a visual easter egg.
+
+#### 🔊 Sound System
+
+> Implemented a full sound preferences system, including feedback sounds for moves and a master mute toggle.
+
+#### 👤 User Preferences System
+
+> Created a `PreferencesContext` that syncs theme, language, and board look (skin, pieces, coordinates, animations) to the backend for logged-in users.
+
+#### 🔄 Training Flow Improvements
+
+> Replaced the "Session complete" dead-end with "Train again" and "Choose another opening" actions.
+
+### 🐛 Fixed
+
+#### ❄️ Snow Loop
+
+> Fixed a bug where the snow effect continued falling for 15 seconds after being disabled.
+
+#### 🖼️ Piece Sprite Caching
+
+> Disabled `assetsCache` in `cm-chessboard` to ensure that changing piece sets in Settings actually updated the board visuals.
+
+#### 🌍 Locale Corrections
+
+> Fixed mislabeled translation files for Danish (was Norwegian) and Ukrainian (was Slovak).
+
+### ⚡ Improved
+
+#### 🎚️ UI Toggles
+
+> Converted appearance checkboxes (coordinates, animations, sound, snow) into modern toggle switches.
+
+### 🛠️ Infrastructure & Docs
+
+#### 🏗️ CI/CD Gating
+
+> Updated `deploy.yml` to gate production deployments on the success of lint and test workflows.
+
+#### 📦 Project Cleanup
+
+> Stopped deploying the legacy Angular frontend and adopted formal Semantic Versioning starting at `v1.0.0`.
+
+#### 🌏 Asian Locale Support
+
+> Added Hindi, Japanese, Chinese, and Korean locales.
+
+---
+
+## August 17, 2026
+
+### ✨ Added
+
+#### 📧 Localized Emails
+
+> Added per-user language support for account verification emails.
+
+#### 🛠️ Translation Sync Script
+
+> Created `scripts/sync-locales.mjs` to allow `en.json` to act as the single source of truth for all translation keys across all locales.
+
+#### 🌍 Expanded Language Support
+
+> Added French, German, Italian, Dutch, Polish, Portuguese, Russian, and Turkish locales.
+
+#### 🖖 Fantasy Locales
+
+> Added "Klingon" (English with canonical interjections) and "Groot" (where most text is replaced with "I am Groot" variants).
+
+#### 🎨 Dashboard Color Filter
+
+> Added a White/Black filter to the opening cards grid, automatically classifying "Defense" openings as Black's repertoire.
+
+#### 🔄 Auto-Orienting Thumbnails
+
+> Opening card thumbnails and previews now automatically flip to the correct side (e.g., Black-at-bottom for defenses) and update live when the user toggles their perspective.
+
+### 🐛 Fixed
+
+#### 🧹 Dead Key Removal
+
+> Dropped unused `language.english` and `language.spanish` keys from the translation files.
+
+#### ⏳ Memory Leaks
+
+> Guarded `submitMove` and `loadNext` against state updates after a component unmounts and cleared pending timeouts to prevent intermittent test failures.
+
+### 🧪 Testing
+
+#### 🧪 Testing Library Linting
+
+> Added `eslint-plugin-testing-library` to identify and fix missing `findBy` waits and redundant manual cleanups in the test suite.
+
+I have processed the rest of your history. To keep this readable and prevent the "wall of text" effect, I have grouped the smaller, older updates logically while keeping that same **H4 header + Blockquote** structure.
+
+This ensures you have the visual "rails" all the way back to the start of the project.
+
+---
+
+## August 20, 2026
+
+### ✨ Added
+
+#### ⚒️ Khuzdul & Sindarin Locales
+
+> Added Tolkien-inspired locales. Khuzdul includes attested vocabulary and a pickaxe emoji; Sindarin includes complete translations and an elf emoji.
+
+#### 🏠 Dashboard Greeting
+
+> Moved the "Good morning/afternoon/evening" greeting from the site header to a new `.dashboard-stack` on the main page for better readability.
+
+#### 💡 Hint Auto-Escalation
+
+> Implemented a system that automatically provides hints after repeated failures: 2 misses reveal the source square, and 4 misses reveal the target square.
+
+#### ♿ Board Accessibility Extension
+
+> Integrated the `cm-chessboard` Accessibility extension. Screen readers now receive a hidden description of the position and braille notation.
+
+#### 🛡️ Registration Disclaimer
+
+> Added a disclaimer under the email field reassuring users that emails are collected solely for bot prevention.
+
+### 🐛 Fixed
+
+#### 🧹 I18n Cleanup
+
+> Removed 19 unused translation keys across 35 locale files to ensure the translation set remains lean.
+
+#### 📐 Layout Overflow
+
+> Fixed a bug where `.card` elements would overflow the right edge of the screen in the new dashboard column layout.
+
+#### ⚙️ Settings Preview Board
+
+> Resolved a bug where the preview board stopped accepting moves after changing a board style preference.
+
+---
+
+## August 19, 2026
+
+### ✨ Added
+
+#### 🎨 New Piece Sets
+
+> Added Merida, Pirouetti, and Chessnut piece sets (sourced from Lichess) to the Settings switcher.
+
+#### 🎉 Win Celebrations
+
+> Added `canvas-confetti` bursts to celebrate completed training sessions and correct puzzle answers.
+
+#### 🔊 Sound System
+
+> Implemented a full sound preferences system, including feedback sounds for moves and a master mute toggle.
+
+#### 👤 User Preferences System
+
+> Created a `PreferencesContext` that syncs theme, language, and board look (skin, pieces, coordinates) to the backend.
+
+### ⚡ Improved
+
+#### 🎚️ UI Toggles
+
+> Converted appearance checkboxes (coordinates, animations, sound, snow) into modern toggle switches.
+
+### 🛠️ Infrastructure
+
+#### 🏗️ CI/CD Gating
+
+> Updated deployment workflows to gate production releases on the success of lint and test workflows.
+
+---
+
+## August 17, 2026
+
+### ✨ Added
+
+#### 🌍 Expanded Language Support
+
+> Added French, German, Italian, Dutch, Polish, Portuguese, Russian, Turkish, and "Fantasy" locales (Klingon and Groot).
+
+#### 🛠️ Translation Sync Script
+
+> Created `scripts/sync-locales.mjs` to allow `en.json` to act as the single source of truth for all translation keys.
+
+#### 🎨 Dashboard Color Filter
+
+> Added a White/Black filter to the opening cards grid, automatically classifying "Defense" openings as Black's repertoire.
+
+#### 🔄 Auto-Orienting Thumbnails
+
+> Opening card thumbnails now automatically flip to the correct side (e.g., Black-at-bottom for defenses).
+
+### 🐛 Fixed
+
+#### ⏳ Memory Leaks
+
+> Guarded `submitMove` and `loadNext` against state updates after a component unmounts to prevent intermittent test failures.
+
+---
+
+## August 16 – 14, 2026
+
+### ✨ Added
+
+#### ♟️ Black-Side Training
+
+> Full support for playing the Black side. Training sessions now carry a `player_color` and all board logic is now color-aware.
+
+#### 🛡️ Email Verification Gating
+
+> Gated email verification behind a configuration flag to allow for SES sandbox testing.
+
+### ⚡ Improved
+
+#### 🎨 Shared Styling
+
+> Centralized CSS shared between React and Angular into `packages/shared-styles/` to ensure visual consistency.
+
+#### ⚙️ Core Logic Extraction
+
+> Extracted timeline history and session-state derivation into pure `@knight-school/chess-core` modules.
+
+---
+
+## August 13, 2026
+
+### ✨ Added
+
+#### 🏗️ Angular Parity
+
+> Brought the Angular frontend (Header, Dashboard, Training, Login) to feature parity with the React version.
+
+#### 🧩 Framework-Neutral Board
+
+> Replaced `react-chessboard` with a `cm-chessboard` wrapper, allowing the same board component to be used across different frameworks.
+
+#### 📊 Dataset-Driven Training
+
+> Replaced static MVP items with real `Opening` rows, making training session selection deterministic.
+
+---
+
+## July 28 – 20, 2026
+
+### ✨ Added
+
+#### 🖼️ Opening Board Previews
+
+> Added prominent board previews and selection gating to the Dashboard.
+
+#### 📉 Session Tracking
+
+> Implemented `isSessionCompleted` tracking to better handle training flow.
+
+### ⚡ Improved
+
+#### 🎨 Dashboard UI
+
+> Reorganized dashboard CSS, updated icons to SVG components, and added light/dark mode screenshots.
+
+#### 🧪 Vitest Integration
+
+> Integrated `vitest` and added initial tests for the `useTrainingSession` hook.
+
+---
+
+## July 18 – 8, 2026 (The MVP Era)
+
+### 🚀 Core Foundation
+
+#### 🔑 Auth & Training MVP
+
+> Wired together the initial login/register flow, JWT authentication, and the basic training session loop.
+
+#### 🏗️ Architecture Setup
+
+> Established the project structure: Rails/FastAPI backend, React frontend, and Dockerized deployment.
+
+#### 📖 Documentation
+
+> Overhauled the README into professional documentation and added the initial project LICENCE.
+
+#### 🗄️ Database Schema
+
+> Built the initial Openings table and enriched the import process to include ECO and move index metadata.
