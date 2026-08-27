@@ -31,6 +31,14 @@ export const routes: Routes = [
       import('./pages/puzzles/puzzles.component').then((m) => m.PuzzlesComponent),
   },
   {
+    path: 'puzzles/themes',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/puzzle-themes/puzzle-themes.component').then(
+        (m) => m.PuzzleThemesComponent,
+      ),
+  },
+  {
     path: 'settings',
     canActivate: [authGuard],
     loadComponent: () =>

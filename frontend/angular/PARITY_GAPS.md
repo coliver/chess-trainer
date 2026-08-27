@@ -67,9 +67,13 @@ single in-flight refresh Observable (e.g. `shareReplay(1)` reset on completion).
   writer, avoids the two fighting each other).
 - **VerifyEmail** — `frontend/react/src/pages/VerifyEmail.tsx`: reads `?token=`, calls
   `GET /auth/verify-email`, shows loading/success/error states.
-- **PuzzleThemes** — `frontend/react/src/pages/PuzzleThemes.tsx`: grouped theme browser
-  (`utils/puzzleThemes.ts` — `THEME_GROUPS`, `MATE_FENS`, `formatThemeLabel`, `themeIcon`)
-  fetching `/puzzles/themes` counts, links to `/puzzles?theme=X`.
+- **PuzzleThemes** — **Status: landed 2026-08-27.** Ported to
+  `pages/puzzle-themes/puzzle-themes.component.ts` + `lib/puzzle-themes.ts` (`THEME_GROUPS`,
+  `MATE_FENS`, `formatThemeLabel`, `themeIcon`), route at `/puzzles/themes` (guarded), fetches
+  `/api/puzzles/themes` counts, links to `/puzzles?theme=X`. Note: that `?theme=` query param
+  isn't consumed by `PuzzlesComponent` yet (no theme-filtered fetch, no "practicing X" banner,
+  no theme chips) — React's `Puzzles.tsx` has this wired up but it's a separate, still-open
+  piece of parity work, not tracked as its own item here yet.
 
 `frontend/angular/src/app/app.routes.ts` only defines `login`, `register`, `dashboard`,
 `training/:id`, `puzzles` — no `/settings`, `/verify-email`, `/puzzles/themes` routes exist.

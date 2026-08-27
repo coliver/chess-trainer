@@ -6,6 +6,10 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ### ✨ Added
 
+#### 🧩 Angular PuzzleThemes Page
+
+> Continuing the Angular/React parity backport (`frontend/angular/PARITY_GAPS.md`, item 3): ported `react/src/pages/PuzzleThemes.tsx` to `pages/puzzle-themes/puzzle-themes.component.ts`, with `react/src/utils/puzzleThemes.ts`'s theme grouping, mate-position FENs, label formatting, and icon lookup ported data-identical to `lib/puzzle-themes.ts`. Routed at `/puzzles/themes` (guarded), fetches theme counts via `PuzzlesService.themes()`, and links each theme card to `/puzzles?theme=<tag>` — that query param isn't consumed by `PuzzlesComponent` yet, which remains a separate open item.
+
 #### ⚙️ Angular Settings Page
 
 > Continuing the Angular/React parity backport (`frontend/angular/PARITY_GAPS.md`, item 3): ported `react/src/pages/Settings.tsx` to `pages/settings/settings.component.ts` — theme/board-theme/piece-set pickers, show-coordinates/animations/sound toggles, board-orientation-mode, reset-to-defaults, and a live interactive preview board (reusing the existing `BoardComponent`). Backed by a new signal-based `PreferencesStoreService` (Angular's counterpart to React's `PreferencesContext`), which hydrates from `/api/users/me/preferences` on login and keeps `document.documentElement`'s theme and `TranslateService`'s language in sync with whatever preferences are active. `AuthService` gained a `loggedIn` signal so the store can react to login/logout without polling. `LanguageToggleComponent` now routes language changes through the store instead of calling `TranslateService` directly — matching React's actual data flow and avoiding two independent writers fighting over the active language. The snow toggle and sound-on-preview-move aren't wired to anything yet (their underlying utilities are a separate, still-open parity item), but persist correctly.
