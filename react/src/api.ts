@@ -10,6 +10,31 @@ api.interceptors.request.use((config) => {
 
 const refreshClient = axios.create({ baseURL: "/api" }); // no interceptors
 
+// Shared across concurrent 401s so only one /auth/refresh request is ever in flight;
+// otherwise simultaneous requests each refresh independently and a single-use/rotating
+// refresh token invalidates all but the first, wrongly logging the user out.
+let refreshPromise: Promise<string> | null = null;
+
+function refreshAccessToken(): Promise<string> {
+  if (!refreshPromise) {
+    refreshPromise = (async () => {
+      const refreshToken = localStorage.getItem("refresh_token");
+      if (!refreshToken) throw new Error("No refresh token available");
+
+      const response = await refreshClient.post("/auth/refresh", {
+        refresh_token: refreshToken,
+      });
+
+      const { access_token } = response.data;
+      localStorage.setItem("token", access_token);
+      return access_token;
+    })().finally(() => {
+      refreshPromise = null;
+    });
+  }
+  return refreshPromise;
+}
+
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -26,16 +51,7 @@ api.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        const refreshToken = localStorage.getItem("refresh_token");
-        if (!refreshToken) throw new Error("No refresh token available");
-
-        const response = await refreshClient.post("/auth/refresh", {
-          refresh_token: refreshToken,
-        });
-
-        const { access_token } = response.data;
-        localStorage.setItem("token", access_token);
-
+        const access_token = await refreshAccessToken();
         originalRequest.headers.Authorization = `Bearer ${access_token}`;
         return api(originalRequest);
       } catch (refreshError) {
