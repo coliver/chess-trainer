@@ -5,17 +5,17 @@ import { RouterLink } from '@angular/router';
 import { AuthService } from '../../core/auth.service';
 import { TranslateService } from '../../core/i18n/translate.service';
 import { TranslatePipe } from '../../core/i18n/translate.pipe';
+import { AuthCardComponent } from '../../shared/auth-card.component';
 
 @Component({
   selector: 'app-register',
   changeDetection: ChangeDetectionStrategy.Eager,
-  imports: [FormsModule, RouterLink, TranslatePipe],
+  imports: [FormsModule, RouterLink, TranslatePipe, AuthCardComponent],
   template: `
-    <main class="page">
-      <div class="card">
-        <h1 class="title">{{ 'auth.register.title' | translate }}</h1>
-        <p class="subtitle">{{ 'auth.register.subtitle' | translate }}</p>
-
+    <app-auth-card
+      [title]="'auth.register.title' | translate"
+      [subtitle]="'auth.register.subtitle' | translate"
+    >
         @if (success) {
           <div>
             <p [innerHTML]="successHtml"></p>
@@ -89,8 +89,7 @@ import { TranslatePipe } from '../../core/i18n/translate.pipe';
           {{ 'auth.register.haveAccount' | translate }}
           <a routerLink="/login">{{ 'auth.register.loginLink' | translate }}</a>
         </p>
-      </div>
-    </main>
+    </app-auth-card>
   `,
 })
 export class RegisterComponent {

@@ -11,6 +11,7 @@ import { describeOpening } from '../../lib/opening-text';
 import { OpeningCardComponent } from './opening-card.component';
 import { VariationListComponent } from './variation-list.component';
 import { BoardPreviewComponent } from './board-preview.component';
+import { ProgressStatComponent } from '../../shared/progress-stat.component';
 
 const SEARCH_PAGE = 60;
 
@@ -23,7 +24,14 @@ const SEARCH_PAGE = 60;
   selector: 'app-dashboard',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.Eager,
-  imports: [FormsModule, DecimalPipe, OpeningCardComponent, VariationListComponent, BoardPreviewComponent],
+  imports: [
+    FormsModule,
+    DecimalPipe,
+    OpeningCardComponent,
+    VariationListComponent,
+    BoardPreviewComponent,
+    ProgressStatComponent,
+  ],
   template: `
     <main class="page">
       <div class="card">
@@ -31,36 +39,28 @@ const SEARCH_PAGE = 60;
           <div class="progress-group" aria-label="Training progress">
             <h2 class="progress-group-label">Training</h2>
             <div class="progress-group-row">
-              <div class="progress-stat">
-                <span class="progress-stat-value">{{ summary?.positionsSeen ?? 0 }}</span>
-                <span class="progress-stat-label">Positions trained</span>
-              </div>
-              <div class="progress-stat">
-                <span class="progress-stat-value">
-                  {{ summary ? (summary.overallAccuracy * 100 | number: '1.0-0') + '%' : '—' }}
-                </span>
-                <span class="progress-stat-label">Accuracy</span>
-              </div>
-              <div class="progress-stat">
-                <span class="progress-stat-value">
-                  {{ summary?.currentStreak ?? 0 }}{{ (summary?.currentStreak ?? 0) > 0 ? ' 🔥' : '' }}
-                </span>
-                <span class="progress-stat-label">
-                  Day streak{{ summary?.longestStreak ? ' · best ' + summary!.longestStreak : '' }}
-                </span>
-              </div>
-              <div class="progress-stat progress-stat--mastery">
-                <span class="progress-stat-value">{{ summary?.mastered ?? 0 }}</span>
-                <span class="progress-stat-label">Mastered</span>
+              <app-progress-stat icon="♟️" label="Positions trained">
+                {{ summary?.positionsSeen ?? 0 }}
+              </app-progress-stat>
+              <app-progress-stat icon="🎯" label="Accuracy">
+                {{ summary ? (summary.overallAccuracy * 100 | number: '1.0-0') + '%' : '—' }}
+              </app-progress-stat>
+              <app-progress-stat
+                icon="📅"
+                [label]="
+                  'Day streak' + (summary?.longestStreak ? ' · best ' + summary!.longestStreak : '')
+                "
+              >
+                {{ summary?.currentStreak ?? 0 }}{{ (summary?.currentStreak ?? 0) > 0 ? ' 🔥' : '' }}
+              </app-progress-stat>
+              <app-progress-stat icon="🏆" label="Mastered" variant="mastery">
+                {{ summary?.mastered ?? 0 }}
                 @if (summary && summary.positionsSeen > 0) {
-                  <div class="mastery-bar" aria-hidden="true">
-                    <div
-                      class="mastery-bar-fill"
-                      [style.width.%]="masteryPct"
-                    ></div>
+                  <div stat-extra class="mastery-bar" aria-hidden="true">
+                    <div class="mastery-bar-fill" [style.width.%]="masteryPct"></div>
                   </div>
                 }
-              </div>
+              </app-progress-stat>
               <div class="progress-stat">
                 <button
                   type="button"
@@ -87,20 +87,19 @@ const SEARCH_PAGE = 60;
           <div class="progress-group progress-group--puzzles" aria-label="Puzzle progress">
             <h2 class="progress-group-label">Puzzles</h2>
             <div class="progress-group-row">
-              <div class="progress-stat">
-                <span class="progress-stat-value">{{ puzzleSummary?.puzzlesSeen ?? 0 }}</span>
-                <span class="progress-stat-label">Puzzles solved</span>
-              </div>
-              <div class="progress-stat">
-                <span class="progress-stat-value">
-                  {{ puzzleSummary ? (puzzleSummary.overallAccuracy * 100 | number: '1.0-0') + '%' : '—' }}
-                </span>
-                <span class="progress-stat-label">Accuracy</span>
-              </div>
-              <div class="progress-stat">
-                <span class="progress-stat-value">{{ puzzleSummary?.mastered ?? 0 }}</span>
-                <span class="progress-stat-label">Mastered</span>
-              </div>
+              <app-progress-stat icon="🧩" label="Puzzles solved">
+                {{ puzzleSummary?.puzzlesSeen ?? 0 }}
+              </app-progress-stat>
+              <app-progress-stat icon="🎯" label="Accuracy">
+                {{
+                  puzzleSummary
+                    ? (puzzleSummary.overallAccuracy * 100 | number: '1.0-0') + '%'
+                    : '—'
+                }}
+              </app-progress-stat>
+              <app-progress-stat icon="🏆" label="Mastered">
+                {{ puzzleSummary?.mastered ?? 0 }}
+              </app-progress-stat>
               <div class="progress-stat">
                 <button type="button" class="progress-review-btn" (click)="goToPuzzles()">
                   Practice puzzles

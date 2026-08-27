@@ -133,10 +133,27 @@ Only `flip-board-button`, `header`, `knight-school-icon`, `theme-toggle` exist u
 | `FenTurnBadge.tsx` | turn indicator badge |
 | `GameHeaderContext.tsx` | status text shared into `GameHeader` |
 
-Also entirely absent as concepts: sound feedback (`useSound.ts`, `utils/sound.ts`), snow effect
+**Status: `AuthCard`/`ProgressStat` landed 2026-08-27.** `shared/auth-card.component.ts` and
+`shared/progress-stat.component.ts` added, and `login`/`register`/`verify-email` (AuthCard) and
+`dashboard` (ProgressStat, both progress rows) refactored to use them. Dashboard's stat icons
+(♟️ 🎯 📅 🏆 🧩) were also added while doing this — Angular didn't have them, React does.
+`RandomQuote.tsx` and `FenTurnBadge.tsx` were checked and are dead code in React itself (defined
+and unit-tested, but not imported by any page) — not ported, nothing to port.
+
+Still entirely absent as concepts: sound feedback (`useSound.ts`, `utils/sound.ts`), snow effect
 (`utils/snow.tsx`, `useSnowPreference.ts`), win-celebration confetti
 (`utils/winCelebration.ts`). Note: Angular's `training.component.ts` already has its own local
 `blinkGreen` correct-move flash (parity with `useBlinkGreen.ts`) — don't redo that one.
+
+## 8. Newly discovered: Dashboard/Training/Puzzles pages were never i18n'd
+
+While wiring `ProgressStat` into `dashboard.component.ts`, found it (and `training.component.ts`,
+`puzzles.component.ts`) still hardcoded English throughout — zero `| translate` usage in any of
+the three, versus 35/9/12 `t()` calls in React's `Dashboard.tsx`/`Training.tsx`/`Puzzles.tsx`
+respectively. §1 flagged "the rest of the page components" as open when i18n plumbing landed, but
+these three are the biggest remaining pages by far and hadn't been explicitly called out as their
+own item. This is a large, separate pass (three pages, 56+ strings) — not folded into the
+component work above. Not started.
 
 ## 6. Shared packages — consumed correctly, not stale
 

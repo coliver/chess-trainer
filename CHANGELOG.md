@@ -6,6 +6,12 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ### ✨ Added
 
+#### 🧱 Angular AuthCard + ProgressStat Shared Components
+
+> Continuing the Angular/React parity backport (`frontend/angular/PARITY_GAPS.md`, item 5): added `shared/auth-card.component.ts` (the login/register/verify-email card shell, with content projection for the title/subtitle-optional layout React's `AuthCard.tsx` uses) and `shared/progress-stat.component.ts` (the icon/value/label/mastery-bar stat display, using content projection for the value and an optional `[stat-extra]`-selected slot for the mastery bar, since the value markup varies per stat). Refactored `login`, `register`, `verify-email`, and `dashboard` (both progress rows) to use them instead of duplicating the card/stat markup inline. Also added Dashboard's stat icons (♟️ 🎯 📅 🏆 🧩), which Angular was missing entirely. Checked `RandomQuote.tsx`/`FenTurnBadge.tsx` from the same parity-gap list — both are dead code in React itself (unit-tested but never imported by a page), so nothing to port.
+>
+> Discovered while doing this: `dashboard.component.ts`, `training.component.ts`, and `puzzles.component.ts` were never i18n'd — hardcoded English throughout, versus 35/9/12 `t()` calls in their React counterparts. Logged as a new item in `PARITY_GAPS.md` (§8); not fixed in this pass, it's a large separate effort.
+
 #### 📝 Angular Register: Password Confirmation, Language, Persistent Success Message + i18n
 
 > Closes the gap flagged when the Login resend-verification work landed (`frontend/angular/PARITY_GAPS.md`): `register.component.ts` now matches `react/src/pages/Register.tsx` — a password-confirmation field (checked client-side before submit), `language` sent on register (from `TranslateService`), and a persistent "check your inbox" success message with a manual "return to login" link instead of auto-navigating past it. Fully i18n'd via `TranslatePipe`. The success message interpolates the registered email into a `<strong>` tag (matching React's `Trans` usage) via a sanitized `[innerHTML]` binding, since Angular's `{{ }}` interpolation would otherwise render the tag as literal text. `AuthService.register()` gained a `language` parameter.

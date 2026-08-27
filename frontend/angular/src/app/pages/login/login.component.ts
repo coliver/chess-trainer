@@ -5,17 +5,17 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/auth.service';
 import { TranslateService } from '../../core/i18n/translate.service';
 import { TranslatePipe } from '../../core/i18n/translate.pipe';
+import { AuthCardComponent } from '../../shared/auth-card.component';
 
 @Component({
   selector: 'app-login',
   changeDetection: ChangeDetectionStrategy.Eager,
-  imports: [FormsModule, RouterLink, TranslatePipe],
+  imports: [FormsModule, RouterLink, TranslatePipe, AuthCardComponent],
   template: `
-    <main class="page">
-      <div class="card">
-        <h1 class="title">{{ 'auth.login.title' | translate }}</h1>
-        <p class="subtitle">{{ 'auth.login.subtitle' | translate }}</p>
-
+    <app-auth-card
+      [title]="'auth.login.title' | translate"
+      [subtitle]="'auth.login.subtitle' | translate"
+    >
         <form class="auth-form" (ngSubmit)="submit()">
           <label class="auth-field">
             <span class="auth-label">{{ 'auth.login.usernameLabel' | translate }}</span>
@@ -78,8 +78,7 @@ import { TranslatePipe } from '../../core/i18n/translate.pipe';
           {{ 'auth.login.needAccount' | translate }}
           <a routerLink="/register">{{ 'auth.login.registerLink' | translate }}</a>
         </p>
-      </div>
-    </main>
+    </app-auth-card>
   `,
 })
 export class LoginComponent {

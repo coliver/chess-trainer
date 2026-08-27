@@ -2,6 +2,7 @@ import { Component, ChangeDetectionStrategy, OnInit, inject, signal } from '@ang
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/auth.service';
 import { TranslatePipe } from '../../core/i18n/translate.pipe';
+import { AuthCardComponent } from '../../shared/auth-card.component';
 
 type VerificationState = 'loading' | 'success' | 'error';
 
@@ -10,48 +11,44 @@ type VerificationState = 'loading' | 'success' | 'error';
   selector: 'app-verify-email',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.Eager,
-  imports: [RouterLink, TranslatePipe],
+  imports: [RouterLink, TranslatePipe, AuthCardComponent],
   template: `
-    <main class="page">
-      <div class="card">
-        @switch (state()) {
-          @case ('loading') {
-            <h1 class="title" style="margin-bottom: 6px">
-              {{ 'auth.verifyEmail.loadingTitle' | translate }}
-            </h1>
-            <p class="subtitle">{{ 'auth.verifyEmail.loadingSubtitle' | translate }}</p>
-          }
-          @case ('success') {
-            <h1 class="title" style="margin-bottom: 6px">
-              {{ 'auth.verifyEmail.successTitle' | translate }}
-            </h1>
-            <p class="subtitle">
-              @if (email(); as verifiedEmail) {
-                {{ 'auth.verifyEmail.successSubtitleWithEmail' | translate: { email: verifiedEmail } }}
-              } @else {
-                {{ 'auth.verifyEmail.successSubtitleNoEmail' | translate }}
-              }
-            </p>
-            <p style="margin-top: 20px">
-              <a routerLink="/login" class="btn" style="display: inline-block">
-                {{ 'auth.verifyEmail.goToLogin' | translate }}
-              </a>
-            </p>
-          }
-          @case ('error') {
-            <h1 class="title" style="margin-bottom: 6px">
-              {{ 'auth.verifyEmail.errorTitle' | translate }}
-            </h1>
-            <p class="subtitle">{{ 'auth.verifyEmail.errorSubtitle' | translate }}</p>
-            <p style="margin-top: 20px">
-              <a routerLink="/login" class="btn" style="display: inline-block">
-                {{ 'auth.verifyEmail.returnToLogin' | translate }}
-              </a>
-            </p>
-          }
-        }
-      </div>
-    </main>
+    @switch (state()) {
+      @case ('loading') {
+        <app-auth-card
+          [title]="'auth.verifyEmail.loadingTitle' | translate"
+          [subtitle]="'auth.verifyEmail.loadingSubtitle' | translate"
+        ></app-auth-card>
+      }
+      @case ('success') {
+        <app-auth-card [title]="'auth.verifyEmail.successTitle' | translate">
+          <p class="subtitle">
+            @if (email(); as verifiedEmail) {
+              {{ 'auth.verifyEmail.successSubtitleWithEmail' | translate: { email: verifiedEmail } }}
+            } @else {
+              {{ 'auth.verifyEmail.successSubtitleNoEmail' | translate }}
+            }
+          </p>
+          <p style="margin-top: 20px">
+            <a routerLink="/login" class="btn" style="display: inline-block">
+              {{ 'auth.verifyEmail.goToLogin' | translate }}
+            </a>
+          </p>
+        </app-auth-card>
+      }
+      @case ('error') {
+        <app-auth-card
+          [title]="'auth.verifyEmail.errorTitle' | translate"
+          [subtitle]="'auth.verifyEmail.errorSubtitle' | translate"
+        >
+          <p style="margin-top: 20px">
+            <a routerLink="/login" class="btn" style="display: inline-block">
+              {{ 'auth.verifyEmail.returnToLogin' | translate }}
+            </a>
+          </p>
+        </app-auth-card>
+      }
+    }
   `,
 })
 export class VerifyEmailComponent implements OnInit {
