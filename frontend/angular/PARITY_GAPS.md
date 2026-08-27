@@ -65,8 +65,16 @@ single in-flight refresh Observable (e.g. `shareReplay(1)` reset on completion).
   login/logout, and `LanguageToggleComponent` now routes language changes through the store
   instead of calling `TranslateService` directly, matching React's actual architecture (single
   writer, avoids the two fighting each other).
-- **VerifyEmail** — `frontend/react/src/pages/VerifyEmail.tsx`: reads `?token=`, calls
-  `GET /auth/verify-email`, shows loading/success/error states.
+- **VerifyEmail** — **Status: landed 2026-08-27.** Ported to
+  `pages/verify-email/verify-email.component.ts`, route at `/verify-email` (unguarded, matching
+  React). Reads `?token=`, calls `AuthService.verifyEmail()`, shows loading/success/error
+  states.
+  **Newly discovered while doing this:** React's `Login.tsx` has an "email not verified" 403
+  branch with a resend-verification button (using the same `/auth/resend-verification` endpoint
+  `AuthService.resendVerification()` already wraps) and is fully i18n'd — Angular's
+  `login.component.ts` has neither (still hardcoded English, generic error only, no resend
+  path). Not fixed in this pass; tracked here as a gap, not folded into §7's "remaining small
+  components" since it's login-flow logic, not a standalone component.
 - **PuzzleThemes** — **Status: landed 2026-08-27.** Ported to
   `pages/puzzle-themes/puzzle-themes.component.ts` + `lib/puzzle-themes.ts` (`THEME_GROUPS`,
   `MATE_FENS`, `formatThemeLabel`, `themeIcon`), route at `/puzzles/themes` (guarded), fetches

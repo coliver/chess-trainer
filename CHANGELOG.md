@@ -6,6 +6,10 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ### ✨ Added
 
+#### 📧 Angular VerifyEmail Page
+
+> Continuing the Angular/React parity backport (`frontend/angular/PARITY_GAPS.md`, item 3): ported `react/src/pages/VerifyEmail.tsx` to `pages/verify-email/verify-email.component.ts`, routed at `/verify-email` (unguarded, matching React). Reads the `?token=` query param, calls `AuthService.verifyEmail()`, and shows loading/success/error states. Surfaced a related, previously-untracked gap while doing this: React's `Login.tsx` has an "email not verified" 403 branch with a resend-verification button and is fully i18n'd, neither of which Angular's `login.component.ts` has yet — logged in `PARITY_GAPS.md`, not fixed in this pass.
+
 #### 🧩 Angular PuzzleThemes Page
 
 > Continuing the Angular/React parity backport (`frontend/angular/PARITY_GAPS.md`, item 3): ported `react/src/pages/PuzzleThemes.tsx` to `pages/puzzle-themes/puzzle-themes.component.ts`, with `react/src/utils/puzzleThemes.ts`'s theme grouping, mate-position FENs, label formatting, and icon lookup ported data-identical to `lib/puzzle-themes.ts`. Routed at `/puzzles/themes` (guarded), fetches theme counts via `PuzzlesService.themes()`, and links each theme card to `/puzzles?theme=<tag>` — that query param isn't consumed by `PuzzlesComponent` yet, which remains a separate open item.
