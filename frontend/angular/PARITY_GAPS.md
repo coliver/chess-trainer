@@ -140,10 +140,38 @@ Only `flip-board-button`, `header`, `knight-school-icon`, `theme-toggle` exist u
 `RandomQuote.tsx` and `FenTurnBadge.tsx` were checked and are dead code in React itself (defined
 and unit-tested, but not imported by any page) — not ported, nothing to port.
 
-Still entirely absent as concepts: sound feedback (`useSound.ts`, `utils/sound.ts`), snow effect
-(`utils/snow.tsx`, `useSnowPreference.ts`), win-celebration confetti
-(`utils/winCelebration.ts`). Note: Angular's `training.component.ts` already has its own local
-`blinkGreen` correct-move flash (parity with `useBlinkGreen.ts`) — don't redo that one.
+**Status: sound/snow/win-celebration landed 2026-08-27.** `core/sound.service.ts` (port of
+`utils/sound.ts` + `hooks/useSound.ts`), `core/snow-preference.service.ts` (port of
+`useSnowPreference.ts`, using a signal instead of `useSyncExternalStore` since an injected
+service already gives every consumer the same reactive value), `lib/snow.ts`, and
+`lib/win-celebration.ts` all added — `canvas-confetti` added as a dependency
+(`package-lock.json` regenerated with `npm install --package-lock-only`, since `npm ci` requires
+it in sync). Sound files are synced from `packages/shared-assets/sounds/` the same way locale
+JSON is (`scripts/sync-shared-assets.mjs`, gitignored `public/sounds/`, wired into the
+Dockerfile and every `npm run` sync step). Wired into `app.component.ts` (the periodic snow
+animation, gated on `SnowPreferenceService`), `settings.component.ts` (a snow toggle row that
+was **entirely missing from the page**, not just inert as previously noted here — plus the
+preview-move sound), `training.component.ts` (gameStart/correct/achievement/incorrect/
+moveOpponent/illegal sounds + `celebrateWin()`), and `puzzles.component.ts`
+(puzzleCorrect/puzzleWrong/illegal/move sounds + `celebratePuzzleCorrect()`). Note: Angular's
+`training.component.ts` already has its own local `blinkGreen` correct-move flash (parity with
+`useBlinkGreen.ts`) — that one wasn't touched.
+
+## 9. Newly discovered: Angular's puzzle attempts don't handle multi-move puzzles
+
+While wiring puzzle sounds/confetti into `puzzles.component.ts`, found its submit flow only
+handles single-move puzzles: `PuzzleAttemptResult` (in `core/puzzles.service.ts`) has just
+`correct`/`reason`/`fenAfter`, and any correct answer is treated as puzzle-complete. React's
+`Puzzles.tsx` (and the backend, per project memory — this was already fixed there 2026-08-24)
+distinguishes `correct && puzzleComplete` from `correct` alone: on a correct-but-not-complete
+answer it applies `opponentReplyUci`, advances to `nextCorrectMoveUci`, and increments
+`moveIndex` on the next submit — keeping the puzzle interactive through the rest of a mateIn2+
+sequence. Angular's `submit()` doesn't send `moveIndex` and has nowhere to put
+`opponentReplyUci`/`nextCorrectMoveUci`/`puzzleComplete` even if the backend sent them — a
+mateIn2+ puzzle in Angular likely ends (or misbehaves) after its first correct move instead of
+continuing. This is a real correctness bug, not a missing polish item — not fixed in this pass,
+needs its own pass touching `PuzzleAttemptResult`, `PuzzlesService.submit()`, and
+`puzzles.component.ts`'s submit handler together.
 
 ## 8. Newly discovered: Dashboard/Training/Puzzles pages were never i18n'd
 

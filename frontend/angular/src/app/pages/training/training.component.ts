@@ -21,6 +21,8 @@ import {
 import { BoardComponent, BoardMarker } from './board.component';
 import { TrainingItem, TrainingService } from '../../core/training.service';
 import { FlipBoardButtonComponent } from '../../shared/flip-board-button.component';
+import { SoundService } from '../../core/sound.service';
+import { celebrateWin } from '../../lib/win-celebration';
 
 const BLINK_CYCLE_MS = 420; // fadeIn(120) + hold(120) + fadeOut(180), matches react's useBlinkGreen
 
@@ -143,6 +145,7 @@ export class TrainingComponent implements OnInit, OnDestroy {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly training = inject(TrainingService);
+  private readonly sound = inject(SoundService);
 
   sessionId = '';
   fen = START_FEN;
@@ -242,6 +245,7 @@ export class TrainingComponent implements OnInit, OnDestroy {
         this.isSessionCompleted = false;
         this.resetTimeline(item.fen);
         this.maybeAutoplay();
+        this.sound.play('gameStart');
       },
       error: () => {
         this.feedback = 'No more moves in this session or session expired.';
@@ -292,6 +296,7 @@ export class TrainingComponent implements OnInit, OnDestroy {
     if (applied) {
       this.fen = applied.nextFen;
       this.appendTimelineFen(applied.nextFen);
+      this.sound.play('moveOpponent');
     }
     // Opponent's reply, not the player's turn — don't show the "Correct!" banner for it.
     this.submitMove(uci, preFen, { silent: true });
@@ -304,6 +309,7 @@ export class TrainingComponent implements OnInit, OnDestroy {
     const preFen = this.fen;
     const result = applyMove(this.fen, from, to, this.correctMoveUci);
     if (!result) {
+      this.sound.play('illegal');
       this.feedback = '❌ Illegal move';
       return false;
     }
@@ -313,6 +319,7 @@ export class TrainingComponent implements OnInit, OnDestroy {
     this.feedback = '';
     this.moveInput = result.uci;
     this.submitMove(result.uci, preFen);
+    this.sound.play(this.sound.getMoveSound(preFen, result.uci));
     return true;
   }
 
@@ -334,7 +341,10 @@ export class TrainingComponent implements OnInit, OnDestroy {
         this.isSubmitting = false;
 
         if (data.correct) {
-          if (!silent) this.feedback = '✅ Correct!';
+          if (!silent) {
+            this.sound.play('correct');
+            this.feedback = '✅ Correct!';
+          }
           this.blinkGreen(uci, 2);
 
           if (data.fenAfter) {
@@ -346,6 +356,8 @@ export class TrainingComponent implements OnInit, OnDestroy {
               clearTimeout(this.advanceTimer);
               this.advanceTimer = null;
             }
+            this.sound.play('achievement');
+            celebrateWin();
             this.feedback = '✅ Session completed.';
             this.isSessionCompleted = true;
             this.isAdvancing = false;
@@ -384,6 +396,7 @@ export class TrainingComponent implements OnInit, OnDestroy {
         }
 
         // Incorrect: revert to the position that was actually submitted from.
+        this.sound.play('incorrect');
         this.fen = preFen;
         this.resetTimeline(preFen);
         this.feedback = `❌ ${data.reason ?? 'Incorrect move'}`;

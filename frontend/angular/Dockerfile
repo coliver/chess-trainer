@@ -8,10 +8,12 @@ WORKDIR /app
 COPY packages/chess-core /packages/chess-core
 RUN cd /packages/chess-core && npm ci && npm run build
 
-# Shared locale JSON, synced into public/i18n/ by scripts/sync-i18n-locales.mjs
+# Shared locale JSON and sound effects, synced into public/i18n/ and
+# public/sounds/ by scripts/sync-i18n-locales.mjs and scripts/sync-shared-assets.mjs
 # (run via the start/build/test npm scripts) since the Angular CLI's asset
 # glob can't reach outside the workspace root.
 COPY packages/i18n-locales /packages/i18n-locales
+COPY packages/shared-assets /packages/shared-assets
 
 # styles.css imports these directly by relative path (../../packages/shared-styles/*.css),
 # resolved by esbuild at build/serve time rather than through npm — baked in here so a

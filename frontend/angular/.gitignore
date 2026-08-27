@@ -9,6 +9,9 @@
 # Synced from ../packages/i18n-locales/locales by scripts/sync-i18n-locales.mjs
 /public/i18n
 
+# Synced from ../packages/shared-assets/sounds by scripts/sync-shared-assets.mjs
+/public/sounds
+
 # Node
 /node_modules
 npm-debug.log

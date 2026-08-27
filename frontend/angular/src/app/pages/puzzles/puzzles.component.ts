@@ -10,6 +10,8 @@ import {
 import { BoardComponent, BoardMarker } from '../training/board.component';
 import { FlipBoardButtonComponent } from '../../shared/flip-board-button.component';
 import { NextPuzzle, PuzzlesService } from '../../core/puzzles.service';
+import { SoundService } from '../../core/sound.service';
+import { celebratePuzzleCorrect } from '../../lib/win-celebration';
 
 /**
  * Angular puzzles page — mirror of react/src/pages/Puzzles.tsx: loads the
@@ -85,6 +87,7 @@ import { NextPuzzle, PuzzlesService } from '../../core/puzzles.service';
 export class PuzzlesComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly puzzles = inject(PuzzlesService);
+  private readonly sound = inject(SoundService);
 
   puzzleId: string | null = null;
   fen = START_FEN;
@@ -146,8 +149,12 @@ export class PuzzlesComponent implements OnInit {
     if (this.isSubmitting || !this.puzzleId || from === to) return false;
     const preFen = this.fen;
     const result = applyMove(this.fen, from, to, this.correctMoveUci);
-    if (!result) return false;
+    if (!result) {
+      this.sound.play('illegal');
+      return false;
+    }
     this.fen = result.nextFen;
+    this.sound.play(this.sound.getMoveSound(preFen, result.uci));
     this.submit(result.uci, preFen);
     return true;
   }
@@ -166,12 +173,15 @@ export class PuzzlesComponent implements OnInit {
         this.isSubmitting = false;
 
         if (data.correct) {
+          this.sound.play('puzzleCorrect');
+          celebratePuzzleCorrect();
           this.feedback = '✅ Correct!';
           this.solved += 1;
           this.streak += 1;
           this.bestStreak = Math.max(this.bestStreak, this.streak);
           setTimeout(() => this.loadNext(), 600);
         } else {
+          this.sound.play('puzzleWrong');
           this.feedback = `❌ ${data.reason || 'Not quite — try again.'}`;
           this.fen = preFen;
           this.streak = 0;

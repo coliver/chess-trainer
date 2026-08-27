@@ -12,6 +12,8 @@ import {
   SettingsRadioOption,
 } from '../../shared/settings-radio-group.component';
 import { BoardOrientationMode, BoardTheme, PieceSet, Theme } from '../../core/preferences';
+import { SnowPreferenceService } from '../../core/snow-preference.service';
+import { SoundService } from '../../core/sound.service';
 
 const THEMES: Theme[] = ['light', 'dark', 'system'];
 const BOARD_THEMES: BoardTheme[] = [
@@ -26,12 +28,7 @@ const BOARD_THEMES: BoardTheme[] = [
 const PIECE_SETS: PieceSet[] = ['standard', 'staunty', 'merida', 'pirouetti', 'chessnut'];
 const ORIENTATION_MODES: BoardOrientationMode[] = ['auto', 'white', 'black'];
 
-/**
- * Angular counterpart of react/src/pages/Settings.tsx. Sound-on-preview-move
- * isn't wired up (react/src/hooks/useSound.ts / utils/sound.ts aren't ported
- * yet — separate PARITY_GAPS.md item) but everything else — appearance,
- * board orientation, live interactive preview, reset — is.
- */
+/** Angular counterpart of react/src/pages/Settings.tsx. */
 @Component({
   selector: 'app-settings',
   standalone: true,
@@ -138,6 +135,12 @@ const ORIENTATION_MODES: BoardOrientationMode[] = ['auto', 'white', 'black'];
             [checked]="preferences().sound"
             (checkedChange)="update({ sound: $event })"
           />
+
+          <app-settings-toggle-row
+            [label]="'settings.appearance.snowLabel' | translate"
+            [checked]="snowPreference.enabled()"
+            (checkedChange)="snowPreference.setEnabled($event)"
+          />
         </section>
 
         <section class="settings-section">
@@ -165,6 +168,8 @@ export class SettingsComponent {
   private readonly router = inject(Router);
   private readonly store = inject(PreferencesStoreService);
   private readonly translate = inject(TranslateService);
+  private readonly sound = inject(SoundService);
+  readonly snowPreference = inject(SnowPreferenceService);
 
   readonly preferences = this.store.preferences;
   readonly boardThemes = BOARD_THEMES;
@@ -178,6 +183,7 @@ export class SettingsComponent {
     if (!from || !to || from === to) return false;
     const result = applyMove(this.previewFen, from, to, `${from}${to}q`);
     if (!result) return false;
+    this.sound.play(this.sound.getMoveSound(this.previewFen, result.uci));
     this.previewFen = result.nextFen;
     return true;
   };
@@ -204,6 +210,7 @@ export class SettingsComponent {
   handleReset(): void {
     if (!window.confirm(this.translate.t('settings.resetConfirm'))) return;
     this.store.reset();
+    this.snowPreference.setEnabled(false);
   }
 
   goBack(): void {
