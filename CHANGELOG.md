@@ -6,6 +6,10 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ### ✨ Added
 
+#### 🧭 Angular Header Split: HomeHeader / GameHeader / OverflowMenu
+
+> Continuing the Angular/React parity backport (`frontend/angular/PARITY_GAPS.md`, item 4): replaced the single legacy `header.component.ts` with `HomeHeaderComponent` (hamburger menu + brand + Openings/Puzzles tabs) and a minimal `GameHeaderComponent` (back button, live status, settings gear), switched between by route in `app.component.ts` — training/puzzle routes get `GameHeader`, everything else gets `HomeHeader`, matching React's `AppHeader()`. Added `OverflowMenuComponent` (focus trap, Escape-to-close, outside-click, matching React's `OverflowMenu.tsx` accessibility behavior) and a `GameStatusService` standing in for React's `GameHeaderContext`. The settings gear links to `/settings`, which doesn't exist yet (falls back to the dashboard redirect) until the Settings page itself lands.
+
 #### 🔐 Angular API Client Parity: Single-Flight Refresh + Missing Endpoints
 
 > Continuing the Angular/React parity backport (`frontend/angular/PARITY_GAPS.md`): `auth.interceptor.ts` now shares one in-flight `/auth/refresh` call across concurrent 401s instead of firing one per request, mirroring `react/src/api.ts`'s `refreshPromise` pattern — without it, a single-use/rotating refresh token would invalidate all but the first concurrent refresh, wrongly logging the user out. Also added `AuthService.verifyEmail`/`resendVerification`, `PuzzlesService.themes()`, and a new `PreferencesService`, matching endpoints React already calls that Angular's services didn't.

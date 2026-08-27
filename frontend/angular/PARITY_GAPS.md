@@ -68,6 +68,16 @@ single in-flight refresh Observable (e.g. `shareReplay(1)` reset on completion).
 
 ## 4. Header architecture has diverged
 
+**Status: landed 2026-08-27.** Split into `HomeHeaderComponent` (hamburger + brand + tabs) and
+`GameHeaderComponent` (back/status/settings), routed by URL in `app.component.ts`/`.html`
+matching React's `AppHeader()`. Added `OverflowMenuComponent` (focus trap, Escape, outside-click
+— rendered in place rather than portalled to `<body>`, since `.overflow-menu` is already
+`position: fixed`) and a `GameStatusService` (plain signal-based service standing in for
+React's `GameHeaderContext`). The old single `header.component.ts` was deleted, not kept as
+dead code. Note: the settings link/gear navigates to `/settings`, which doesn't exist yet
+(§3 above) — it redirects to the dashboard via the wildcard route until that lands, same as
+React before its Settings page shipped.
+
 React replaced its single `Header.tsx` (now dead code) with two headers in `App.tsx`:
 - `HomeHeader.tsx` — hamburger menu (`OverflowMenu.tsx`) for dashboard/puzzles, tab nav.
 - `GameHeader.tsx` — minimal header for training/puzzle screens: back button, live status text

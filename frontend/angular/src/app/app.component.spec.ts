@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
+import { Router, provideRouter } from '@angular/router';
+import { provideLocationMocks } from '@angular/common/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { AppComponent } from './app.component';
@@ -10,11 +11,16 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
-      providers: [provideRouter([]), provideHttpClient(), provideHttpClientTesting()],
+      providers: [
+        provideRouter([{ path: 'training/:id', children: [] }]),
+        provideLocationMocks(),
+        provideHttpClient(),
+        provideHttpClientTesting(),
+      ],
     }).compileComponents();
     stubTranslate(TestBed.inject(TranslateService), {
       'header.title': 'Knight School',
-      'header.login': 'Login',
+      'header.nav': 'Primary',
     });
     localStorage.clear();
   });
@@ -24,17 +30,24 @@ describe('AppComponent', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('renders the Knight School brand', () => {
+  it('shows the HomeHeader brand on non-game routes', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const el: HTMLElement = fixture.nativeElement;
-    expect(el.querySelector('.site-header-title')?.textContent).toContain('Knight');
+    expect(el.querySelector('.home-header-title-text')?.textContent).toContain('Knight');
+    expect(el.querySelector('.game-header')).toBeNull();
   });
 
-  it('shows a Login link when logged out', () => {
+  it('switches to the minimal GameHeader on a training route', async () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
+    const router = TestBed.inject(Router);
+
+    await router.navigateByUrl('/training/1');
+    fixture.detectChanges();
+
     const el: HTMLElement = fixture.nativeElement;
-    expect(el.querySelector('a[aria-label="Login"]')).toBeTruthy();
+    expect(el.querySelector('.game-header')).toBeTruthy();
+    expect(el.querySelector('.home-header')).toBeNull();
   });
 });

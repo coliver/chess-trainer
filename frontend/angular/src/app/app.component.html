@@ -1,3 +1,7 @@
-<app-header />
+@if (isGameRoute()) {
+  <app-game-header />
+} @else {
+  <app-home-header />
+}
 
 <router-outlet />
