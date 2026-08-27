@@ -53,10 +53,18 @@ single in-flight refresh Observable (e.g. `shareReplay(1)` reset on completion).
 
 ## 3. Missing pages (no Angular route/component at all)
 
-- **Settings** — `frontend/react/src/pages/Settings.tsx`: theme (light/dark/system), board
-  theme (7 options), piece set (5 options), show-coordinates, board-animation, sound, snow,
-  board-orientation-mode (auto/white/black), reset-to-defaults, live preview, language toggle.
-  Backed by `PreferencesContext.tsx`, `preferences.ts`, `useSnowPreference.ts`.
+- **Settings** — **Status: landed 2026-08-27** (minus the snow toggle's actual effect and
+  sound-on-preview-move, both of which depend on §5's still-unported snow/sound utilities —
+  the toggles themselves persist correctly, they just don't do anything visible yet).
+  `frontend/react/src/pages/Settings.tsx` ported to `pages/settings/settings.component.ts`,
+  backed by a new `PreferencesStoreService` (signal-based stand-in for `PreferencesContext`),
+  `core/preferences.ts` (ported from `preferences.ts`), and
+  `shared/settings-toggle-row.component.ts` / `shared/settings-radio-group.component.ts`. The
+  live interactive preview reuses the existing `BoardComponent` from training. Route added at
+  `/settings` (guarded). `AuthService` gained a `loggedIn` signal so the store can react to
+  login/logout, and `LanguageToggleComponent` now routes language changes through the store
+  instead of calling `TranslateService` directly, matching React's actual architecture (single
+  writer, avoids the two fighting each other).
 - **VerifyEmail** — `frontend/react/src/pages/VerifyEmail.tsx`: reads `?token=`, calls
   `GET /auth/verify-email`, shows loading/success/error states.
 - **PuzzleThemes** — `frontend/react/src/pages/PuzzleThemes.tsx`: grouped theme browser

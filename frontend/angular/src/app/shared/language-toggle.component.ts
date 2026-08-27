@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { LANGUAGES, TranslateService } from '../core/i18n/translate.service';
 import { TranslatePipe } from '../core/i18n/translate.pipe';
+import { PreferencesStoreService } from '../core/preferences-store.service';
 
 // One flag per configured language. Falls back to the language code itself
 // if a new locale file is added before its flag is picked. Kept in sync with
@@ -70,11 +71,15 @@ const FLAGS: Partial<Record<string, string>> = {
 })
 export class LanguageToggleComponent {
   readonly translate = inject(TranslateService);
+  private readonly preferencesStore = inject(PreferencesStoreService);
   readonly languages = [...LANGUAGES].sort((a, b) => a.localeCompare(b));
   readonly flags = FLAGS;
 
   onChange(event: Event): void {
     const value = (event.target as HTMLSelectElement).value;
-    void this.translate.setLanguage(value);
+    // Routed through the preferences store (not TranslateService directly)
+    // so it's persisted/synced the same way every other preference is —
+    // the store's own effect is what actually calls translate.setLanguage().
+    this.preferencesStore.update({ language: value });
   }
 }

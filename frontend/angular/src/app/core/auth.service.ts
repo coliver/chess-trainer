@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 
@@ -22,6 +22,10 @@ export class AuthService {
 
   // localStorage keys are kept identical to the React app (react/src/auth.ts).
   private readonly keys = ['token', 'refresh_token', 'user_id', 'username', 'email'];
+
+  // Reactive counterpart of `isLoggedIn` for services (e.g. PreferencesStoreService)
+  // that need to react to login/logout rather than re-check localStorage each cycle.
+  readonly loggedIn = signal(!!localStorage.getItem('token'));
 
   login(username: string, password: string): Observable<LoginResponse> {
     return this.http
@@ -69,6 +73,7 @@ export class AuthService {
 
   logout(): void {
     this.keys.forEach((k) => localStorage.removeItem(k));
+    this.loggedIn.set(false);
   }
 
   private store(d: LoginResponse): void {
@@ -77,5 +82,6 @@ export class AuthService {
     localStorage.setItem('user_id', String(d.id));
     localStorage.setItem('username', d.username);
     localStorage.setItem('email', d.email);
+    this.loggedIn.set(true);
   }
 }

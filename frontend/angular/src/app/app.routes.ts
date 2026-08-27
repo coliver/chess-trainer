@@ -30,5 +30,11 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/puzzles/puzzles.component').then((m) => m.PuzzlesComponent),
   },
+  {
+    path: 'settings',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/settings/settings.component').then((m) => m.SettingsComponent),
+  },
   { path: '**', redirectTo: 'dashboard' },
 ];
