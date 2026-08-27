@@ -2,7 +2,10 @@
 
 An Angular 19 (standalone) frontend for the Knight School chess-trainer backend. It lets a
 user log in and browse the openings library, talking to the FastAPI backend over its `/api`
-routes. Served by nginx under **`/angular/`**.
+routes.
+
+**Legacy, frozen** — no longer wired into `docker-compose.yml` or nginx; run it locally with
+the Angular CLI (below) against the Dockerized backend.
 
 ## 📂 Structure
 
@@ -16,20 +19,20 @@ angular/
 │   │   │   ├── auth.guard.ts          # guards routes via GET /auth/me
 │   │   │   ├── openings.service.ts    # GET /api/openings
 │   │   │   ├── progress.service.ts    # user progress tracking
-│   │   │   ├── puzzles.service.ts     # GET /api/puzzles
+│   │   │   ├── puzzles.service.ts     # GET /api/puzzles/next, POST /api/puzzles/:id/attempts
 │   │   │   └── training.service.ts    # training session data
 │   │   ├── pages/
 │   │   │   ├── login/                 # POST /api/auth/login
 │   │   │   ├── register/              # user registration
 │   │   │   ├── dashboard/             # openings list (guarded)
 │   │   │   ├── training/              # puzzle training view (guarded)
+│   │   │   │   └── board.component.ts # chess board UI (used in training)
 │   │   │   └── puzzles/               # puzzles library (guarded)
 │   │   ├── shared/
 │   │   │   ├── header.component.ts    # top navigation
 │   │   │   ├── theme-toggle.component.ts   # light/dark theme switcher
 │   │   │   ├── flip-board-button.component.ts # board orientation control
 │   │   │   └── knight-school-icon.component.ts # branding icon
-│   │   ├── board.component.ts         # chess board UI (used in training/dashboard)
 │   │   ├── lib/                       # utility functions
 │   │   │   ├── group-openings.ts      # opening grouping logic
 │   │   │   └── opening-text.ts        # opening name/description utilities

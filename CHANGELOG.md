@@ -9,6 +9,11 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 #### 🛡️ Dependency Vulnerability Patches
 
 > Patched esbuild dev-server file-read/CORS vulnerabilities in `packages/chess-core` and `rails/`, and upgraded `angular/` from Angular 19 to 21 (via official `ng update`) to resolve high-severity Dependabot alerts across postcss, tar, sigstore, http-proxy-middleware, piscina, and the Angular framework itself. One low-risk alert (`webpack-dev-server`, dev-server-only) remains open pending an upstream Angular devkit release.
+### 🐛 Fixed
+
+#### 🔐 Token Refresh Race Condition
+
+> Concurrent `401` responses previously each triggered their own `/auth/refresh` call. With single-use/rotating refresh tokens, only the first succeeded and the rest wrongly logged the user out. `react/src/api.ts` now shares one in-flight refresh promise across concurrent requests.
 
 ### ✨ Added
 

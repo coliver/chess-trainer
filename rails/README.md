@@ -119,10 +119,9 @@ rails/
   multi-move puzzle support (`moveIndex`/`solverMovesTotal`/opponent
   auto-reply for mateIn2+ puzzles).
 - Settings covers theme, board colors/piece set/coordinates/animations,
-  board orientation mode, and sound — all round-trip to
+  board orientation mode, sound, and language — all round-trip to
   `/users/me/preferences` and actually apply. It does not cover the
-  language toggle (still English-only) or the snow effect (client-only
-  in React, not backend-synced).
+  snow effect (client-only in React, not backend-synced).
 - I18n is wired throughout (`t()` in views/controllers,
   `app/javascript/i18n.js` bridging translations into Stimulus
   controllers). `config.i18n.available_locales` is derived at boot from

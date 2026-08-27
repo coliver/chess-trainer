@@ -126,6 +126,29 @@ frontend-agnostic.
 
 No backend changes are ever required.
 
+### 📋 Frontend feature matrix
+
+What each client implements today, at a glance. ✅ shipped · 🟡 partial · ⬜ missing.
+
+| Feature | React | Angular | Rails |
+|---|:---:|:---:|:---:|
+| Login / Register | ✅ | ✅ | ✅ |
+| Email verification | ✅ | ⬜ | ✅ |
+| Dashboard / opening browser | ✅ | ✅ | ✅ |
+| Training drills | ✅ | 🟡 | ✅ |
+| Black-side play | ✅ | ✅ | ✅ |
+| Autoplay | ✅ | ✅ | ✅ |
+| Puzzles | ✅ | ✅ | ✅ |
+| Puzzle themes | ✅ | ⬜ | ✅ |
+| Settings (theme/board/pieces) | ✅ | 🟡 | ✅ |
+| i18n (30+ locales) | ✅ | ⬜ | ⬜ |
+| Sound feedback | ✅ | ⬜ | ✅ |
+| PWA / offline shell | ⬜ | ⬜ | ⬜ |
+
+**React** — production, actively deployed; the reference implementation.
+**Angular** — legacy, frozen since it stopped being built; missing everything shipped to React afterward.
+**Rails** — dev-only experiment, not yet publicized; closest to React in coverage, with unwired PWA scaffolding unique to it.
+
 ### 🧩 Shared chess logic (`packages/chess-core`)
 
 The framework-neutral chess logic — FEN handling, move validation, and opening-preview

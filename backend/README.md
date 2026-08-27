@@ -36,7 +36,9 @@ Note the `+psycopg` in `DATABASE_URL` — the app depends on `psycopg` (v3), not
 Optional auth tuning (defaults shown): `JWT_ALGORITHM=HS256`, `JWT_EXPIRES_MINUTES=60`, `JWT_REFRESH_EXPIRES_DAYS=7`.
 
 ### Error reporting (Sentry, optional)
-Set `SENTRY_DSN` to send unhandled backend exceptions to [Sentry](https://sentry.io) (free tier). `sentry_sdk.init()` is a no-op when `SENTRY_DSN` is unset, so it's safe to leave blank for local dev. `SENTRY_ENVIRONMENT` (default `development`) tags events by environment — the prod deploy sets it to `production`. See [react/README.md](../react/README.md#error-reporting-sentry-optional) for the matching frontend setup.
+Set `SENTRY_DSN` to send unhandled backend exceptions to [Sentry](https://sentry.io) (free tier). `sentry_sdk.init()` is a no-op when `SENTRY_DSN` is unset, so it's safe to leave blank for local dev. `SENTRY_ENVIRONMENT` (default `development`) tags events by environment - the prod deploy sets it to `production`. See [react/README.md](../react/README.md#error-reporting-sentry-optional) for the matching frontend setup.
+
+The Sentry GitHub integration is installed on this repo, so a commit or PR description containing `Fixes PYTHON-FASTAPI-<N>` (or `Resolves`/`Closes`) auto-resolves that issue in Sentry once merged to main. Reference the issue's short ID (visible in the Sentry issue URL) when fixing a reported error.
 
 ### 2) Launch the Stack
 Run:
