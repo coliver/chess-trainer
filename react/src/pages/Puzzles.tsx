@@ -73,10 +73,18 @@ export const Puzzles = () => {
     fenRef.current = fen;
   }, [fen]);
 
+  // Mirrored synchronously at every write site (not via a useEffect) so
+  // submit() always reads the up-to-date value: an effect-based mirror
+  // would lag behind DOM updates that tests (and users) can act on
+  // immediately, causing the next submit() to send a stale moveIndex.
   const moveIndexRef = useRef(moveIndex);
-  useEffect(() => {
-    moveIndexRef.current = moveIndex;
-  }, [moveIndex]);
+  const updateMoveIndex = (next: number | ((prev: number) => number)) => {
+    setMoveIndex((prev) => {
+      const resolved = typeof next === "function" ? next(prev) : next;
+      moveIndexRef.current = resolved;
+      return resolved;
+    });
+  };
 
   const isMountedRef = useRef(true);
   useEffect(() => {
@@ -102,7 +110,7 @@ export const Puzzles = () => {
       setFen(res.data.fen);
       setCorrectMoveUci(res.data.correctMoveUci);
       setLastMoveUci(res.data.lastMoveUci);
-      setMoveIndex(res.data.moveIndex);
+      updateMoveIndex(res.data.moveIndex);
       setSolverMovesTotal(res.data.solverMovesTotal);
       setRating(res.data.rating);
       setThemes(res.data.themes ?? null);
@@ -176,7 +184,7 @@ export const Puzzles = () => {
           if (res.data.fenAfter) setFen(res.data.fenAfter);
           if (res.data.opponentReplyUci) setLastMoveUci(res.data.opponentReplyUci);
           if (res.data.nextCorrectMoveUci) setCorrectMoveUci(res.data.nextCorrectMoveUci);
-          setMoveIndex((n) => n + 1);
+          updateMoveIndex((n) => n + 1);
         } else {
           playSound("puzzleWrong");
           setFeedback(
