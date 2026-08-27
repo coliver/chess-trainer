@@ -34,8 +34,9 @@ react/
 │   │   ├── Board.tsx           # cm-chessboard wrapper
 │   │   ├── HomeHeader.tsx       # Compact home/dashboard header (~48–56px): knight icon + title + greeting + tabs + overflow menu
 │   │   ├── GameHeader.tsx       # Minimal in-game header (~40–44px): back button + status + settings icon
+│   │   ├── Header.tsx          # Nav header: dashboard/puzzles/settings/login/register + GitHub link
 │   │   ├── OverflowMenu.tsx     # Bottom-sheet menu: settings, logout, GitHub, language, theme, version
-│   │   └── openings/          # BoardPreview, OpeningCombo, DashboardTile
+│   │   └── openings/          # BoardPreview, OpeningCard, VariationList
 │   ├── pages/                 # Login, Register, Dashboard, Training, VerifyEmail, Puzzles, Settings (+ *.test.tsx alongside each)
 │   ├── hooks/                 # useTrainingSession, useBlinkGreen, useSound, useBoardOrientation (+ *.test.ts alongside each)
 │   ├── context/                # PreferencesContext — backend-synced (guests fall back to localStorage) user preferences: theme, language, board look, board-orientation lock. GameHeaderContext — game pages set status/settings handlers for the global GameHeader.
@@ -48,10 +49,10 @@ react/
 │   ├── preferences.ts          # Preferences type, defaults, and localStorage read/write helpers
 │   ├── cm-chessboard.d.ts      # Ambient types for cm-chessboard (the package ships none)
 │   ├── RequireAuth.tsx         # Route guard: calls GET /auth/me, redirects to /login on failure
-│   ├── App.tsx                 # Routes: /login, /register, /dashboard, /training/:id, /verify-email, /puzzles, /settings, * -> Dashboard
+│   ├── App.tsx                 # Routes: /login, /register, /dashboard, /training/:id, /verify-email, /puzzles, /puzzles/themes, /settings, * -> Dashboard
 │   ├── main.tsx                # React root / entrypoint (wraps App in PreferencesProvider)
 │   └── index.css               # Global styles (imports src/styles/*.css)
-│   └── i18n/                   # react-i18next config + locales/*.json translation resources
+│   └── i18n/                   # react-i18next config; locale *.json resources live in ../packages/i18n-locales/locales/
 ├── public/                     # favicon.svg, quotes.txt, cm-chessboard-assets/ (board sprites), sounds/ (feedback audio)
 ├── e2e/                          # Playwright E2E specs + README.md (flow-coverage tracker) + videos/
 ├── vite.config.ts               # Vite configuration
@@ -104,7 +105,7 @@ The application expects API requests to be served under the `/api` path (the fro
 
 - **Base path for frontend API calls:** `/api`
 - **Authorization:** on login, the access token, refresh token, `user_id`, `username`, and `email` are all written to `localStorage` (see `src/pages/Login.tsx`). The Axios request interceptor in `src/api.ts` attaches `Authorization: Bearer <token>` from the `token` key. `auth.ts#logout()` clears all five keys.
-- **Header routing:** `App.tsx` conditionally renders `HomeHeader` (compact, logo + greeting + tabs + overflow menu) for home/dashboard/settings routes, and `GameHeader` (minimal, back + status + settings) for in-game routes (`/training/:id`, `/puzzle/:id`), per mobile-first redesign spec. `GameHeaderContext` allows game pages to set dynamic status text and a settings callback handler.
+- **Header routing:** `App.tsx` conditionally renders `HomeHeader` (compact, logo + greeting + tabs + overflow menu) for home/dashboard/settings routes, and `GameHeader` (minimal, back + status + settings) for in-game routes. The route check tests `/training/` and `/puzzle/` prefixes, but the actual puzzles routes are `/puzzles` and `/puzzles/themes` (plural), so in practice `GameHeader` only ever renders for `/training/:id`; the `/puzzle/` branch is dead. `GameHeaderContext` allows game pages to set dynamic status text and a settings callback handler.
 
 ## 🔄 Key Logic Flows
 
@@ -243,14 +244,16 @@ Actual backend response shape (`TrainingNextResponse`, camelCased):
   "moveCountLimit": null,
   "openingEco": "B01",
   "openingName": "Scandinavian Defense",
-  "correctMoveUci": "e7e5"
+  "correctMoveUci": "e7e5",
+  "playerColor": "w"
 }
 ```
 
-The frontend derives:
-- FEN from `data.fen` in practice — `useTrainingSession.ts` also falls back to `data.fenAfter`/`data.epd`, but the `/next` endpoint never actually sends those, so that fallback path is currently dead
-- item id from `data.itemId` (falls back to `data.id`, also unused by this endpoint)
+The frontend derives this via `deriveNextItem()` in `@knight-school/chess-core` (`packages/chess-core/src/next-item.ts`), not in `useTrainingSession.ts` itself:
+- FEN from `data.fenAfter ?? data.fen ?? data.epd` — `fenAfter`/`epd` take precedence in the fallback chain, but the `/next` endpoint only ever sends `fen`, so in practice those two branches are dead
+- item id from `data.itemId ?? data.id` (the `id` fallback is also unused by this endpoint)
 - correct move from `data.correctMoveUci`
+- player color from `data.playerColor` (defaults to `"w"` if absent)
 
 `NextItem` is deliberately narrow — `nextFen`, `nextItemId`, `nextOpeningLabel`, `nextCorrectMoveUci`. (Earlier unused `nextPgn`/`nextEpd`/`nextNextPgn` scaffolding fields were removed.)
 
@@ -318,6 +321,3 @@ Shouts to Patricia, Maritza, and Maritza's husband for helping out with the Span
 - Opening and puzzle descriptive content (`src/data/openingText.ts` and backend-authored opening prose) — English-only for now.
 - Status/feedback strings that live in `packages/chess-core` (`deriveStatus`, `classifyFeedback`, `splitOpeningLabel`) — e.g. "Your move", "Session completed", the "Training" fallback label. That package is consumed via its built `dist/`, so localizing it needs its own pass (edit `src`, `npm run build` in `packages/chess-core`, verify both frontends still pick up the change) rather than a one-off string swap.
 
-## ⚠️ Known Gap
-
-`Header.tsx` renders a link to `/profile`, but `App.tsx` has no `/profile` route — it falls through to the catch-all (`path="*"`) and silently renders the Dashboard instead. There's no `Profile` page component yet.
