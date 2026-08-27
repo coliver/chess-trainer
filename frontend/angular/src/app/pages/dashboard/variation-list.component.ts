@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ChangeDetectionStrategy, EventEmitter, Input, Output } from '@angular/core';
 
 import { Opening } from '../../core/openings.service';
 import { variationLabelOf, groupVariations, subVariationLabelOf } from '../../lib/group-openings';
@@ -16,6 +16,7 @@ import type { VariationGroup } from '../../lib/group-openings';
 @Component({
   selector: 'app-variation-list',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [],
   template: `
     <div class="variation-rows" role="list">

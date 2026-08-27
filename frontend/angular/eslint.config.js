@@ -30,6 +30,12 @@ module.exports = tseslint.config(
           style: "kebab-case",
         },
       ],
+      // Angular 22 defaults new components to OnPush and flags the
+      // `ChangeDetectionStrategy.Eager` opt-out this app's `ng update`
+      // migration added to every existing component (to preserve pre-v22
+      // "check always" behavior without a full OnPush rewrite). Re-enable
+      // once components are migrated to OnPush individually.
+      "@angular-eslint/prefer-on-push-component-change-detection": "off",
     },
   },
   {

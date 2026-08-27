@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   Component,
+  ChangeDetectionStrategy,
   ElementRef,
   Input,
   OnChanges,
@@ -48,6 +49,7 @@ const CUSTOM_MARKER: Record<
 @Component({
   selector: 'app-board',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `<div #host class="board-host"></div>`,
   styles: [
     `

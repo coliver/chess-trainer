@@ -4,6 +4,20 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ## August 27, 2026
 
+### ✨ Added
+
+#### 🌐 Angular i18n Infrastructure + Re-wired Into Docker Compose
+
+> Started bringing `frontend/angular` back up to feature parity with React (see `frontend/angular/PARITY_GAPS.md` for the full gap list and order). Landed the foundational piece first: a `TranslateService`/`TranslatePipe`/`LanguageToggleComponent` that reads the same shared `packages/i18n-locales/locales/*.json` React and Rails use, with dot-path lookup, `{{var}}` interpolation, and i18next-style `_one`/`_other` plural resolution. Since the Angular CLI's asset pipeline can't glob outside the workspace root, a `scripts/sync-i18n-locales.mjs` script copies the locale files into `public/i18n/` before every serve/build/test. Header, theme toggle, and flip-board-button now read their strings through it. Re-added the `angular` service to `docker-compose.yml` (mirroring `react`/`rails`: code + shared `packages/` volume mounts) and an nginx `/angular/` proxy location, so it's no longer a frozen, unwired standalone `Dockerfile`.
+
+### 🐛 Fixed
+
+#### ⬆️ Angular Dependency Versions Were Inconsistent, Blocking Every Build
+
+> `frontend/angular/package.json` had `@angular/core`/`common`/`compiler` pinned to `^22.1.4` while `forms`/`platform-browser`/`router`/the CLI/`build-angular`/`compiler-cli` were still on `^21.2.x` — a partial upgrade that made `ng build`/`ng test` fail outright (`npm ci` ERESOLVE conflict, then a hard Angular-version check once resolved). Finished the upgrade: all `@angular/*` packages to `22.1.x`, TypeScript `~5.9.3` → `~6.0.3` (required by `compiler-cli@22.1.4`), `typescript-eslint` to `8.68.0` and `angular-eslint` to `22.1.0` (both needed for TS 6 support), and the Dockerfile's base image from `node:20` to `node:22` (the 22.1.x CLI requires Node `^22.22.3`).
+>
+> The upgrade surfaced a second, more serious issue: Angular 22 defaults components with no explicit `changeDetection` to `OnPush` instead of the old "check always" behavior, which silently broke every page — state mutations stopped updating the DOM entirely after the first render (confirmed via a failing unit test; matches [angular/angular#69530](https://github.com/angular/angular/issues/69530)). Fixed by adding `changeDetection: ChangeDetectionStrategy.Eager` to all 15 components (the same fix Angular's own `ng update` migration schematic applies), preserving pre-v22 behavior without a full OnPush rewrite. `@angular-eslint/prefer-on-push-component-change-detection` (new default in `angular-eslint@22`) is disabled repo-wide until that rewrite happens.
+
 ### ♻️ Refactor
 
 #### 📁 Frontend Directories Consolidated Under `frontend/`

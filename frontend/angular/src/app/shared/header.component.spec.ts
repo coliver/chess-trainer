@@ -4,6 +4,8 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideRouter, Router } from '@angular/router';
 import { HeaderComponent } from './header.component';
 import { AuthService } from '../core/auth.service';
+import { TranslateService } from '../core/i18n/translate.service';
+import { stubTranslate } from '../core/i18n/testing';
 
 describe('HeaderComponent', () => {
   let router: Router;
@@ -14,6 +16,19 @@ describe('HeaderComponent', () => {
       providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([])],
     }).compileComponents();
     router = TestBed.inject(Router);
+    stubTranslate(TestBed.inject(TranslateService), {
+      'header.title': 'Knight School',
+      'header.nav': 'Primary',
+      'header.openings': 'Openings',
+      'header.puzzles': 'Puzzles',
+      'header.login': 'Login',
+      'header.register': 'Register',
+      'header.logout': 'Logout',
+      'header.viewSource': 'View source on GitHub',
+      'header.greetingMorning': 'Good morning ☀️',
+      'header.greetingAfternoon': 'Good afternoon 🌤️',
+      'header.greetingEvening': 'Good evening 🌙',
+    });
     localStorage.clear();
   });
 

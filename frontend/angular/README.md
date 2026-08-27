@@ -1,11 +1,11 @@
 # ♞ Knight School (Chess Trainer) — Angular Frontend
 
-An Angular 19 (standalone) frontend for the Knight School chess-trainer backend. It lets a
+An Angular 22 (standalone) frontend for the Knight School chess-trainer backend. It lets a
 user log in and browse the openings library, talking to the FastAPI backend over its `/api`
 routes.
 
-**Legacy, frozen** — no longer wired into `docker-compose.yml` or nginx; run it locally with
-the Angular CLI (below) against the Dockerized backend.
+A secondary frontend alongside React, being brought back up to feature parity — see
+[`PARITY_GAPS.md`](./PARITY_GAPS.md) for what's still missing and the backport order.
 
 ## 📂 Structure
 
@@ -20,7 +20,8 @@ angular/
 │   │   │   ├── openings.service.ts    # GET /api/openings
 │   │   │   ├── progress.service.ts    # user progress tracking
 │   │   │   ├── puzzles.service.ts     # GET /api/puzzles/next, POST /api/puzzles/:id/attempts
-│   │   │   └── training.service.ts    # training session data
+│   │   │   ├── training.service.ts    # training session data
+│   │   │   └── i18n/                  # TranslateService/TranslatePipe, loads packages/i18n-locales
 │   │   ├── pages/
 │   │   │   ├── login/                 # POST /api/auth/login
 │   │   │   ├── register/              # user registration
@@ -31,6 +32,7 @@ angular/
 │   │   ├── shared/
 │   │   │   ├── header.component.ts    # top navigation
 │   │   │   ├── theme-toggle.component.ts   # light/dark theme switcher
+│   │   │   ├── language-toggle.component.ts # language switcher
 │   │   │   ├── flip-board-button.component.ts # board orientation control
 │   │   │   └── knight-school-icon.component.ts # branding icon
 │   │   ├── lib/                       # utility functions
@@ -70,7 +72,8 @@ The app runs as a service in the root `docker-compose.yml`; from the repo root:
 docker compose up -d --build       # http://localhost/angular/
 ```
 
-For local iteration outside Docker (Node 20+):
+For local iteration outside Docker (Node 22.22+/24.15+/26+, per the Angular 22 CLI's
+engines requirement):
 
 ```bash
 cd angular
@@ -78,7 +81,10 @@ npm install
 npm start -- --serve-path /angular/   # http://localhost:4200/angular/
 ```
 
-(The `baseHref` is configured in `angular.json`, not as a CLI flag.)
+(The `baseHref` is configured in `angular.json`, not as a CLI flag. `npm start`/`build`/`test`
+all run `scripts/sync-i18n-locales.mjs` first, copying `packages/i18n-locales/locales/` into
+`public/i18n/` — the Angular CLI's asset glob can't reach outside the workspace root, so calling
+`ng serve`/`build`/`test` directly instead of the npm script skips that sync.)
 
 ## 🧪 Testing & linting
 
@@ -86,8 +92,8 @@ Run inside the container:
 
 ```bash
 docker compose exec angular ./node_modules/.bin/ng lint
-docker compose exec angular ./node_modules/.bin/ng test --watch=false --browsers=ChromeHeadlessNoSandbox
-docker compose exec angular ./node_modules/.bin/ng build
+docker compose exec angular npm run test:ci
+docker compose exec angular npm run build
 ```
 
 - **Lint:** ESLint via `@angular-eslint`.

@@ -1,4 +1,4 @@
-FROM node:20
+FROM node:22
 
 WORKDIR /app
 
@@ -8,13 +8,24 @@ WORKDIR /app
 COPY packages/chess-core /packages/chess-core
 RUN cd /packages/chess-core && npm ci && npm run build
 
+# Shared locale JSON, synced into public/i18n/ by scripts/sync-i18n-locales.mjs
+# (run via the start/build/test npm scripts) since the Angular CLI's asset
+# glob can't reach outside the workspace root.
+COPY packages/i18n-locales /packages/i18n-locales
+
+# styles.css imports these directly by relative path (../../packages/shared-styles/*.css),
+# resolved by esbuild at build/serve time rather than through npm — baked in here so a
+# plain `docker build` of this image is self-sufficient even without docker-compose's
+# ./frontend/packages:/packages dev volume mount overlaying the same path.
+COPY packages/shared-styles /packages/shared-styles
+
 COPY angular/package*.json ./
 RUN npm ci
 
 # Chromium's shared-lib deps, installed directly (not via the `chromium` apt
 # package, whose Recommends chain pulls in a perl postinst that fails to
 # configure under this build sandbox). --reinstall on libglib2.0-0 works
-# around a truncated copy in the base node:20 image (0-byte .so on disk).
+# around a truncated copy in the base node image (0-byte .so on disk).
 # fontconfig/libpango/libcairo's own postinst also fails here (same sandbox
 # restriction, unrelated to the package contents) — their .so files still land
 # on disk during unpack, so `|| true` lets the build continue past the

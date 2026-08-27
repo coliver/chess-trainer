@@ -1,14 +1,21 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { AppComponent } from './app.component';
+import { TranslateService } from './core/i18n/translate.service';
+import { stubTranslate } from './core/i18n/testing';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
-      providers: [provideRouter([]), provideHttpClient()],
+      providers: [provideRouter([]), provideHttpClient(), provideHttpClientTesting()],
     }).compileComponents();
+    stubTranslate(TestBed.inject(TranslateService), {
+      'header.title': 'Knight School',
+      'header.login': 'Login',
+    });
     localStorage.clear();
   });
 

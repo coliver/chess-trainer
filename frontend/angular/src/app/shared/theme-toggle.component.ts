@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { TranslatePipe } from '../core/i18n/translate.pipe';
 
 @Component({
   selector: 'app-theme-toggle',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [TranslatePipe],
   template: `
     <button
       class="theme-toggle-btn"
       type="button"
       (click)="toggle()"
-      aria-label="Toggle theme"
-      title="Toggle theme"
+      [attr.aria-label]="'theme.toggle' | translate"
+      [attr.title]="'theme.toggle' | translate"
     >
       @if (theme === 'dark') {
         <svg

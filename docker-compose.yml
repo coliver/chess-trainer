@@ -66,6 +66,21 @@ services:
     restart: unless-stopped
     logging: *default-logging
 
+  angular:
+    build:
+      context: ./frontend
+      dockerfile: angular/Dockerfile
+    volumes:
+      - ./frontend/angular:/app               # Syncs the code
+      - ./frontend/packages:/packages       # Shared workspace packages (chess-core, i18n-locales, shared-styles)
+      - /app/node_modules          # Keeps container modules separate
+    expose:
+      - "4200"
+    depends_on:
+      - api
+    restart: unless-stopped
+    logging: *default-logging
+
   rails:
     build:
       context: ./frontend

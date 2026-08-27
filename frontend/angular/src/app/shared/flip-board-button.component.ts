@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
+import { TranslatePipe } from '../core/i18n/translate.pipe';
 
 /**
  * Angular counterpart of react/src/components/FlipBoardButton.tsx — accumulates
@@ -8,13 +9,15 @@ import { Component, EventEmitter, Output } from '@angular/core';
 @Component({
   selector: 'app-flip-board-button',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [TranslatePipe],
   template: `
     <button
       type="button"
       class="btn btn-secondary"
       (click)="handleClick()"
-      aria-label="Flip board"
-      title="Flip board"
+      [attr.aria-label]="'flipBoard.label' | translate"
+      [attr.title]="'flipBoard.label' | translate"
     >
       <span class="flip-icon" [style.transform]="'rotate(' + rotation + 'deg)'" aria-hidden="true">
         ⟳

@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'app-knight-school-icon',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <svg
       [attr.height]="height"

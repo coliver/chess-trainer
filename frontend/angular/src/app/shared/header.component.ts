@@ -1,8 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../core/auth.service';
+import { TranslateService } from '../core/i18n/translate.service';
+import { TranslatePipe } from '../core/i18n/translate.pipe';
 import { KnightSchoolIconComponent } from './knight-school-icon.component';
 import { ThemeToggleComponent } from './theme-toggle.component';
+import { LanguageToggleComponent } from './language-toggle.component';
 
 /**
  * Angular counterpart of react/src/components/Header.tsx — same brand,
@@ -12,25 +15,37 @@ import { ThemeToggleComponent } from './theme-toggle.component';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, KnightSchoolIconComponent, ThemeToggleComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [
+    RouterLink,
+    KnightSchoolIconComponent,
+    ThemeToggleComponent,
+    LanguageToggleComponent,
+    TranslatePipe,
+  ],
   template: `
     <header class="site-header">
       <div class="site-header-inner">
         <div class="site-header-brand">
           <app-knight-school-icon height="64px" className="site-header-logo" />
-          <a routerLink="/dashboard" class="site-header-title">Knight&nbsp;School</a>
+          <a routerLink="/dashboard" class="site-header-title">{{ 'header.title' | translate }}</a>
         </div>
 
         <div class="site-header-right">
           <div role="heading" aria-level="2" class="site-header-greeting">{{ greeting }}</div>
 
-          <nav class="site-header-nav" aria-label="Primary">
+          <nav class="site-header-nav" [attr.aria-label]="'header.nav' | translate">
             @if (auth.isLoggedIn) {
-              <a routerLink="/dashboard" class="site-header-nav-link">Openings</a>
-              <a routerLink="/puzzles" class="site-header-nav-link">Puzzles</a>
+              <a routerLink="/dashboard" class="site-header-nav-link">{{ 'header.openings' | translate }}</a>
+              <a routerLink="/puzzles" class="site-header-nav-link">{{ 'header.puzzles' | translate }}</a>
             }
             @if (!auth.isLoggedIn) {
-              <a routerLink="/login" class="site-header-profile-link" aria-label="Login" title="Login">
+              <a
+                routerLink="/login"
+                class="site-header-profile-link"
+                [attr.aria-label]="'header.login' | translate"
+                [attr.title]="'header.login' | translate"
+              >
                 <svg
                   width="22"
                   height="22"
@@ -47,7 +62,12 @@ import { ThemeToggleComponent } from './theme-toggle.component';
                   <line x1="15" y1="12" x2="3" y2="12" />
                 </svg>
               </a>
-              <a routerLink="/register" class="site-header-profile-link" aria-label="Register" title="Register">
+              <a
+                routerLink="/register"
+                class="site-header-profile-link"
+                [attr.aria-label]="'header.register' | translate"
+                [attr.title]="'header.register' | translate"
+              >
                 <svg
                   width="22"
                   height="22"
@@ -70,8 +90,8 @@ import { ThemeToggleComponent } from './theme-toggle.component';
                 class="site-header-profile-link"
                 type="button"
                 (click)="onLogout()"
-                aria-label="Logout"
-                title="Logout"
+                [attr.aria-label]="'header.logout' | translate"
+                [attr.title]="'header.logout' | translate"
               >
                 <svg
                   width="22"
@@ -97,8 +117,8 @@ import { ThemeToggleComponent } from './theme-toggle.component';
                 class="site-header-profile-link"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="View source on GitHub"
-                title="View source on GitHub"
+                [attr.aria-label]="'header.viewSource' | translate"
+                [attr.title]="'header.viewSource' | translate"
               >
                 <svg width="22" height="22" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                   <path
@@ -106,6 +126,7 @@ import { ThemeToggleComponent } from './theme-toggle.component';
                   />
                 </svg>
               </a>
+              <app-language-toggle />
               <app-theme-toggle />
             </div>
           </nav>
@@ -117,10 +138,16 @@ import { ThemeToggleComponent } from './theme-toggle.component';
 export class HeaderComponent {
   readonly auth = inject(AuthService);
   private readonly router = inject(Router);
+  private readonly translate = inject(TranslateService);
 
   get greeting(): string {
     const hour = new Date().getHours();
-    const base = hour < 12 ? 'Good morning ☀️' : hour < 18 ? 'Good afternoon 🌤️' : 'Good evening 🌙';
+    const base =
+      hour < 12
+        ? this.translate.t('header.greetingMorning')
+        : hour < 18
+          ? this.translate.t('header.greetingAfternoon')
+          : this.translate.t('header.greetingEvening');
     const who = this.auth.username ? `, ${this.auth.username}` : '';
     return `${base}${who}`;
   }

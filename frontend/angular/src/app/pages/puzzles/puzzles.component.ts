@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import {
   START_FEN,
@@ -20,6 +20,7 @@ import { NextPuzzle, PuzzlesService } from '../../core/puzzles.service';
 @Component({
   selector: 'app-puzzles',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [BoardComponent, FlipBoardButtonComponent, RouterLink],
   template: `
     <main class="page">

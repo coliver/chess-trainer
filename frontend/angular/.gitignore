@@ -6,6 +6,9 @@
 /out-tsc
 /bazel-out
 
+# Synced from ../packages/i18n-locales/locales by scripts/sync-i18n-locales.mjs
+/public/i18n
+
 # Node
 /node_modules
 npm-debug.log

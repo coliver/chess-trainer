@@ -34,10 +34,13 @@ Chess rules:
 
 Past the MVP stage — React frontend and FastAPI backend, with auth, opening training,
 puzzles, spaced-repetition progress tracking, i18n (30+ locales), and sound feedback all
-shipped. The `frontend/angular/` directory contains legacy source code that is no longer
-built or deployed. All frontend code (`react/`, `angular/`, `rails/`, and the shared
-`packages/`) lives under `frontend/`. See [`CHANGELOG.md`](./CHANGELOG.md) for what's landed
-and [`ROADMAP.md`](./ROADMAP.md) for what's next.
+shipped. The `frontend/angular/` directory is an actively-maintained secondary frontend
+being brought back up to feature parity with React (i18n infrastructure landed; see
+`frontend/angular/PARITY_GAPS.md` for the remaining gaps and order). It's built and served
+via `docker-compose.yml` (`angular` service) and nginx under `/angular/`, same as `rails/`.
+All frontend code (`react/`, `angular/`, `rails/`, and the shared `packages/`) lives under
+`frontend/`. See [`CHANGELOG.md`](./CHANGELOG.md) for what's landed and
+[`ROADMAP.md`](./ROADMAP.md) for what's next.
 
 ### Auth (FastAPI paths; nginx exposes them under `/api`)
 - `POST /auth/register` — creates an account and emails a verification link

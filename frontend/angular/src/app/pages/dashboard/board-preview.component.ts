@@ -1,5 +1,6 @@
 import {
   Component,
+  ChangeDetectionStrategy,
   Input,
   ViewChild,
   ElementRef,
@@ -20,6 +21,7 @@ import { Opening } from '../../core/openings.service';
 @Component({
   selector: 'app-board-preview',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [BoardComponent],
   template: `
     <div class="boardPreview" #container>

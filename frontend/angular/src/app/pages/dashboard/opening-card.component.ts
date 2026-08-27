@@ -1,5 +1,6 @@
 import {
   Component,
+  ChangeDetectionStrategy,
   EventEmitter,
   Input,
   Output,
@@ -22,6 +23,7 @@ import type { OpeningGroup } from '../../lib/group-openings';
 @Component({
   selector: 'app-opening-card',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [BoardComponent],
   template: `
     <button
