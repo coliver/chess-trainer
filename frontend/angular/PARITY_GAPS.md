@@ -69,12 +69,19 @@ single in-flight refresh Observable (e.g. `shareReplay(1)` reset on completion).
   `pages/verify-email/verify-email.component.ts`, route at `/verify-email` (unguarded, matching
   React). Reads `?token=`, calls `AuthService.verifyEmail()`, shows loading/success/error
   states.
-  **Newly discovered while doing this:** React's `Login.tsx` has an "email not verified" 403
-  branch with a resend-verification button (using the same `/auth/resend-verification` endpoint
-  `AuthService.resendVerification()` already wraps) and is fully i18n'd — Angular's
-  `login.component.ts` has neither (still hardcoded English, generic error only, no resend
-  path). Not fixed in this pass; tracked here as a gap, not folded into §7's "remaining small
-  components" since it's login-flow logic, not a standalone component.
+  **Status: landed 2026-08-27.** `login.component.ts` now handles the 403 "Email not verified"
+  response with a resend-verification button (`AuthService.resendVerification()`) and is fully
+  i18n'd, matching React's `Login.tsx`.
+
+  **Newly discovered while doing that:** `register.component.ts` has a bigger gap than Login
+  did — React's `Register.tsx` also has a password-confirmation field, sends
+  `language: i18n.language` on register, and (correctly) does NOT auto-navigate to `/login` on
+  success — it shows a persistent "check your email" message with a manual "return to login"
+  link, since the account isn't usable until email verification completes. Angular's
+  `register.component.ts` has none of that: no password confirm, doesn't send `language`,
+  hardcoded English, and auto-navigates to `/login` immediately on success (arguably a bug,
+  since it skips past the just-added success message with no time to read it). Not fixed in
+  this pass — bigger than a like-for-like i18n port, needs its own pass.
 - **PuzzleThemes** — **Status: landed 2026-08-27.** Ported to
   `pages/puzzle-themes/puzzle-themes.component.ts` + `lib/puzzle-themes.ts` (`THEME_GROUPS`,
   `MATE_FENS`, `formatThemeLabel`, `themeIcon`), route at `/puzzles/themes` (guarded), fetches

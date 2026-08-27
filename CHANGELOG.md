@@ -6,6 +6,10 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ### ✨ Added
 
+#### 🔑 Angular Login: Resend-Verification + i18n
+
+> Closes the gap flagged when the VerifyEmail page landed (`frontend/angular/PARITY_GAPS.md`): `login.component.ts` now handles a 403 "Email not verified" response with a resend-verification button (`AuthService.resendVerification()`) and is fully i18n'd, matching `react/src/pages/Login.tsx`. Checking `register.component.ts` for the same treatment turned up a bigger gap — no password-confirmation field, doesn't send `language` on register, hardcoded English, and auto-navigates to `/login` immediately on success instead of showing a persistent "check your email" message. Logged as its own item, not fixed in this pass.
+
 #### 📧 Angular VerifyEmail Page
 
 > Continuing the Angular/React parity backport (`frontend/angular/PARITY_GAPS.md`, item 3): ported `react/src/pages/VerifyEmail.tsx` to `pages/verify-email/verify-email.component.ts`, routed at `/verify-email` (unguarded, matching React). Reads the `?token=` query param, calls `AuthService.verifyEmail()`, and shows loading/success/error states. Surfaced a related, previously-untracked gap while doing this: React's `Login.tsx` has an "email not verified" 403 branch with a resend-verification button and is fully i18n'd, neither of which Angular's `login.component.ts` has yet — logged in `PARITY_GAPS.md`, not fixed in this pass.
