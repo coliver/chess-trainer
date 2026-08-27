@@ -25,6 +25,12 @@ export interface PuzzleSummary {
   mastered: number;
 }
 
+/** Shape of one entry in `GET /api/puzzles/themes`. */
+export interface ThemeCount {
+  theme: string;
+  count: number;
+}
+
 /**
  * Thin API layer for puzzles — the Angular counterpart of the request half
  * of react's Puzzles.tsx (`api.get('/puzzles/next')` /
@@ -46,5 +52,9 @@ export class PuzzlesService {
 
   getSummary(): Observable<PuzzleSummary> {
     return this.http.get<PuzzleSummary>('/api/puzzles/summary');
+  }
+
+  themes(): Observable<ThemeCount[]> {
+    return this.http.get<ThemeCount[]>('/api/puzzles/themes');
   }
 }

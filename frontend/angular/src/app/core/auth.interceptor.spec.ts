@@ -74,6 +74,32 @@ describe('authInterceptor', () => {
     expect(auth.token).toBe('NEW');
   });
 
+  it('shares a single refresh call across concurrent 401s', () => {
+    auth.setAccessToken('EXPIRED');
+    localStorage.setItem('refresh_token', 'RT');
+
+    const results: unknown[] = [];
+    http.get('/api/progress/summary').subscribe((r) => results.push(r));
+    http.get('/api/progress/due').subscribe((r) => results.push(r));
+
+    httpMock
+      .expectOne('/api/progress/summary')
+      .flush('unauthorized', { status: 401, statusText: 'Unauthorized' });
+    httpMock
+      .expectOne('/api/progress/due')
+      .flush('unauthorized', { status: 401, statusText: 'Unauthorized' });
+
+    // Only one refresh call in flight for both concurrent 401s.
+    const refresh = httpMock.expectOne('/api/auth/refresh');
+    refresh.flush({ access_token: 'NEW' });
+
+    httpMock.expectOne('/api/progress/summary').flush({ a: 1 });
+    httpMock.expectOne('/api/progress/due').flush({ b: 2 });
+
+    expect(results).toEqual([{ a: 1 }, { b: 2 }]);
+    expect(auth.token).toBe('NEW');
+  });
+
   it('logs out and navigates to /login when the refresh call itself fails', () => {
     auth.setAccessToken('EXPIRED');
     localStorage.setItem('refresh_token', 'RT');

@@ -6,6 +6,10 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ### ✨ Added
 
+#### 🔐 Angular API Client Parity: Single-Flight Refresh + Missing Endpoints
+
+> Continuing the Angular/React parity backport (`frontend/angular/PARITY_GAPS.md`): `auth.interceptor.ts` now shares one in-flight `/auth/refresh` call across concurrent 401s instead of firing one per request, mirroring `react/src/api.ts`'s `refreshPromise` pattern — without it, a single-use/rotating refresh token would invalidate all but the first concurrent refresh, wrongly logging the user out. Also added `AuthService.verifyEmail`/`resendVerification`, `PuzzlesService.themes()`, and a new `PreferencesService`, matching endpoints React already calls that Angular's services didn't.
+
 #### 🌐 Angular i18n Infrastructure + Re-wired Into Docker Compose
 
 > Started bringing `frontend/angular` back up to feature parity with React (see `frontend/angular/PARITY_GAPS.md` for the full gap list and order). Landed the foundational piece first: a `TranslateService`/`TranslatePipe`/`LanguageToggleComponent` that reads the same shared `packages/i18n-locales/locales/*.json` React and Rails use, with dot-path lookup, `{{var}}` interpolation, and i18next-style `_one`/`_other` plural resolution. Since the Angular CLI's asset pipeline can't glob outside the workspace root, a `scripts/sync-i18n-locales.mjs` script copies the locale files into `public/i18n/` before every serve/build/test. Header, theme toggle, and flip-board-button now read their strings through it. Re-added the `angular` service to `docker-compose.yml` (mirroring `react`/`rails`: code + shared `packages/` volume mounts) and an nginx `/angular/` proxy location, so it's no longer a frozen, unwired standalone `Dockerfile`.

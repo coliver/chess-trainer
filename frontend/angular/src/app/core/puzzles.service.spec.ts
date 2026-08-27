@@ -49,4 +49,16 @@ describe('PuzzlesService', () => {
 
     expect(result).toEqual(attemptResult);
   });
+
+  it('GETs theme counts', () => {
+    const themes = [{ theme: 'fork', count: 12 }];
+    let result: unknown;
+    service.themes().subscribe((r) => (result = r));
+
+    const req = httpMock.expectOne('/api/puzzles/themes');
+    expect(req.request.method).toBe('GET');
+    req.flush(themes);
+
+    expect(result).toEqual(themes);
+  });
 });

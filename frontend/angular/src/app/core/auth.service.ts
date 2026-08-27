@@ -37,6 +37,16 @@ export class AuthService {
     return this.http.get<{ id: number | string; username: string }>(`${this.base}/auth/me`);
   }
 
+  verifyEmail(token: string): Observable<{ email: string }> {
+    return this.http.get<{ email: string }>(`${this.base}/auth/verify-email`, {
+      params: { token },
+    });
+  }
+
+  resendVerification(username: string): Observable<void> {
+    return this.http.post<void>(`${this.base}/auth/resend-verification`, { username });
+  }
+
   get token(): string | null {
     return localStorage.getItem('token');
   }

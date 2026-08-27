@@ -45,6 +45,27 @@ describe('AuthService', () => {
     expect(service.isLoggedIn).toBe(true);
   });
 
+  it('verifies an email token', () => {
+    let result: { email: string } | undefined;
+    service.verifyEmail('TOK').subscribe((r) => (result = r));
+
+    const req = httpMock.expectOne((r) => r.url === '/api/auth/verify-email');
+    expect(req.request.method).toBe('GET');
+    expect(req.request.params.get('token')).toBe('TOK');
+    req.flush({ email: 'bob@example.com' });
+
+    expect(result).toEqual({ email: 'bob@example.com' });
+  });
+
+  it('requests a verification resend by username', () => {
+    service.resendVerification('bob').subscribe();
+
+    const req = httpMock.expectOne('/api/auth/resend-verification');
+    expect(req.request.method).toBe('POST');
+    expect(req.request.body).toEqual({ username: 'bob' });
+    req.flush(null);
+  });
+
   it('clears all auth keys on logout', () => {
     localStorage.setItem('token', 'AT');
     localStorage.setItem('refresh_token', 'RT');

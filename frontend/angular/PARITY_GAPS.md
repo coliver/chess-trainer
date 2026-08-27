@@ -28,6 +28,13 @@ hardcoded strings with translation keys (the keys already exist in the shared lo
 
 ## 2. API client — token-refresh race condition + missing endpoints
 
+**Status: landed 2026-08-27.** `auth.interceptor.ts` now shares a single in-flight
+`/auth/refresh` call across concurrent 401s (module-level `Observable` + `shareReplay(1)`,
+mirroring `api.ts`'s `refreshPromise`). Added `AuthService.verifyEmail`/`resendVerification`,
+`PuzzlesService.themes()`, and a new `PreferencesService` (`get`/`update` against
+`/api/users/me/preferences`). These are service-layer only — the pages that consume them
+(Settings, VerifyEmail, PuzzleThemes) are still §3/§4 below.
+
 `frontend/react/src/api.ts` uses a single-flight refresh (shared `refreshPromise`) so concurrent
 401s only trigger one `/auth/refresh` call. Angular's
 `frontend/angular/src/app/core/auth.interceptor.ts` has no single-flight guard — concurrent 401s
