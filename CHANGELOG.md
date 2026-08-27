@@ -6,6 +6,10 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ### ✨ Added
 
+#### 📝 Angular Register: Password Confirmation, Language, Persistent Success Message + i18n
+
+> Closes the gap flagged when the Login resend-verification work landed (`frontend/angular/PARITY_GAPS.md`): `register.component.ts` now matches `react/src/pages/Register.tsx` — a password-confirmation field (checked client-side before submit), `language` sent on register (from `TranslateService`), and a persistent "check your inbox" success message with a manual "return to login" link instead of auto-navigating past it. Fully i18n'd via `TranslatePipe`. The success message interpolates the registered email into a `<strong>` tag (matching React's `Trans` usage) via a sanitized `[innerHTML]` binding, since Angular's `{{ }}` interpolation would otherwise render the tag as literal text. `AuthService.register()` gained a `language` parameter.
+
 #### 🔑 Angular Login: Resend-Verification + i18n
 
 > Closes the gap flagged when the VerifyEmail page landed (`frontend/angular/PARITY_GAPS.md`): `login.component.ts` now handles a 403 "Email not verified" response with a resend-verification button (`AuthService.resendVerification()`) and is fully i18n'd, matching `react/src/pages/Login.tsx`. Checking `register.component.ts` for the same treatment turned up a bigger gap — no password-confirmation field, doesn't send `language` on register, hardcoded English, and auto-navigates to `/login` immediately on success instead of showing a persistent "check your email" message. Logged as its own item, not fixed in this pass.

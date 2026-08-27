@@ -45,6 +45,20 @@ describe('AuthService', () => {
     expect(service.isLoggedIn).toBe(true);
   });
 
+  it('registers with the given language', () => {
+    service.register('bob@example.com', 'bob', 'pw', 'fr').subscribe();
+
+    const req = httpMock.expectOne('/api/auth/register');
+    expect(req.request.method).toBe('POST');
+    expect(req.request.body).toEqual({
+      email: 'bob@example.com',
+      username: 'bob',
+      password: 'pw',
+      language: 'fr',
+    });
+    req.flush(null);
+  });
+
   it('verifies an email token', () => {
     let result: { email: string } | undefined;
     service.verifyEmail('TOK').subscribe((r) => (result = r));

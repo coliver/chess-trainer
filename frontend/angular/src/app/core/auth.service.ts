@@ -33,8 +33,13 @@ export class AuthService {
       .pipe(tap((data) => this.store(data)));
   }
 
-  register(email: string, username: string, password: string): Observable<void> {
-    return this.http.post<void>(`${this.base}/auth/register`, { email, username, password });
+  register(email: string, username: string, password: string, language: string): Observable<void> {
+    return this.http.post<void>(`${this.base}/auth/register`, {
+      email,
+      username,
+      password,
+      language,
+    });
   }
 
   me(): Observable<{ id: number | string; username: string }> {

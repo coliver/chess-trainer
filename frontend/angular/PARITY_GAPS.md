@@ -73,15 +73,12 @@ single in-flight refresh Observable (e.g. `shareReplay(1)` reset on completion).
   response with a resend-verification button (`AuthService.resendVerification()`) and is fully
   i18n'd, matching React's `Login.tsx`.
 
-  **Newly discovered while doing that:** `register.component.ts` has a bigger gap than Login
-  did — React's `Register.tsx` also has a password-confirmation field, sends
-  `language: i18n.language` on register, and (correctly) does NOT auto-navigate to `/login` on
-  success — it shows a persistent "check your email" message with a manual "return to login"
-  link, since the account isn't usable until email verification completes. Angular's
-  `register.component.ts` has none of that: no password confirm, doesn't send `language`,
-  hardcoded English, and auto-navigates to `/login` immediately on success (arguably a bug,
-  since it skips past the just-added success message with no time to read it). Not fixed in
-  this pass — bigger than a like-for-like i18n port, needs its own pass.
+  **Status: landed 2026-08-27.** `register.component.ts` now has a password-confirmation field
+  (checked client-side, `auth.register.passwordMismatch` on mismatch), sends
+  `language: translate.lang()` on register, shows a persistent "check your inbox" success
+  message (email interpolated into a sanitized `[innerHTML]` binding, matching React's `Trans`
+  usage) instead of auto-navigating to `/login`, and is fully i18n'd. `AuthService.register()`
+  gained a `language` parameter.
 - **PuzzleThemes** — **Status: landed 2026-08-27.** Ported to
   `pages/puzzle-themes/puzzle-themes.component.ts` + `lib/puzzle-themes.ts` (`THEME_GROUPS`,
   `MATE_FENS`, `formatThemeLabel`, `themeIcon`), route at `/puzzles/themes` (guarded), fetches
