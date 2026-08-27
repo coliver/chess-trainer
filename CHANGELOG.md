@@ -4,6 +4,12 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ## August 26, 2026
 
+### 🐛 Fixed
+
+#### 🔐 Token Refresh Race Condition
+
+> Concurrent `401` responses previously each triggered their own `/auth/refresh` call. With single-use/rotating refresh tokens, only the first succeeded and the rest wrongly logged the user out. `react/src/api.ts` now shares one in-flight refresh promise across concurrent requests.
+
 ### ✨ Added
 
 #### 🩹 Sentry Error Reporting
