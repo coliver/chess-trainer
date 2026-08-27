@@ -70,6 +70,43 @@ describe("api interceptors", () => {
     expect(protectedCalls).toBe(2);
   });
 
+  it("dedupes concurrent 401s into a single refresh request", async () => {
+    localStorage.setItem("token", "expired");
+    localStorage.setItem("refresh_token", "refresh-abc");
+
+    let refreshCalls = 0;
+
+    server.use(
+      http.get("/api/protected-a", ({ request }) => {
+        const auth = request.headers.get("authorization");
+        if (auth === "Bearer expired") {
+          return HttpResponse.json({ detail: "unauthorized" }, { status: 401 });
+        }
+        return HttpResponse.json({ ok: true, auth });
+      }),
+      http.get("/api/protected-b", ({ request }) => {
+        const auth = request.headers.get("authorization");
+        if (auth === "Bearer expired") {
+          return HttpResponse.json({ detail: "unauthorized" }, { status: 401 });
+        }
+        return HttpResponse.json({ ok: true, auth });
+      }),
+      http.post("/api/auth/refresh", async () => {
+        refreshCalls += 1;
+        return HttpResponse.json({ access_token: "new-token" });
+      }),
+    );
+
+    const [resA, resB] = await Promise.all([
+      api.get("/protected-a"),
+      api.get("/protected-b"),
+    ]);
+
+    expect(resA.data).toEqual({ ok: true, auth: "Bearer new-token" });
+    expect(resB.data).toEqual({ ok: true, auth: "Bearer new-token" });
+    expect(refreshCalls).toBe(1);
+  });
+
   it("on refresh failure, clears tokens and redirects to /login", async () => {
     localStorage.setItem("token", "expired");
     localStorage.setItem("refresh_token", "refresh-abc");
