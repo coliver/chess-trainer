@@ -8,7 +8,7 @@ import {
   OnDestroy,
   SimpleChanges,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { BoardComponent } from '../training/board.component';
 import { uciListToMoves, previewFen } from '@knight-school/chess-core';
 import { Opening } from '../../core/openings.service';
@@ -20,41 +20,43 @@ import { Opening } from '../../core/openings.service';
 @Component({
   selector: 'app-board-preview',
   standalone: true,
-  imports: [CommonModule, BoardComponent],
+  imports: [BoardComponent],
   template: `
     <div class="boardPreview" #container>
       <div class="boardPreview-board" [style.width.px]="sizePx">
-        <app-board
-          *ngIf="opening"
-          [position]="previewPosition"
-          [interactive]="false"
-          [showCoordinates]="false"
-        ></app-board>
+        @if (opening) {
+          <app-board
+            [position]="previewPosition"
+            [interactive]="false"
+            [showCoordinates]="false"
+          ></app-board>
+        }
       </div>
-
+    
       <div class="ply-stepper">
         <button
           type="button"
           class="ply-btn"
           [class.active]="selectedPly === 0"
           (click)="selectedPly = 0"
-        >
+          >
           Start
         </button>
-
-        <button
-          *ngFor="let uci of moveList; let idx = index"
-          type="button"
-          class="ply-btn"
-          [class.active]="selectedPly === idx + 1"
-          [title]="'After ply ' + (idx + 1)"
-          (click)="selectedPly = idx + 1"
-        >
-          {{ uci }}
-        </button>
+    
+        @for (uci of moveList; track uci; let idx = $index) {
+          <button
+            type="button"
+            class="ply-btn"
+            [class.active]="selectedPly === idx + 1"
+            [title]="'After ply ' + (idx + 1)"
+            (click)="selectedPly = idx + 1"
+            >
+            {{ uci }}
+          </button>
+        }
       </div>
     </div>
-  `,
+    `,
   styles: [],
 })
 export class BoardPreviewComponent

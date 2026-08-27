@@ -8,7 +8,7 @@ import {
   OnDestroy,
   ElementRef,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { BoardComponent } from '../training/board.component';
 import { previewFen, uciListToMoves } from '@knight-school/chess-core';
 import type { OpeningGroup } from '../../lib/group-openings';
@@ -22,7 +22,7 @@ import type { OpeningGroup } from '../../lib/group-openings';
 @Component({
   selector: 'app-opening-card',
   standalone: true,
-  imports: [CommonModule, BoardComponent],
+  imports: [BoardComponent],
   template: `
     <button
       #hostBtn
@@ -31,16 +31,19 @@ import type { OpeningGroup } from '../../lib/group-openings';
       [class.selected]="selected"
       [attr.aria-pressed]="selected"
       (click)="cardSelect.emit()"
-    >
+      >
       <div class="oc-thumb">
-        <app-board
-          *ngIf="boardVisible"
-          [position]="fen"
-          [interactive]="false"
-          [showCoordinates]="false"
-          [animated]="false"
-        ></app-board>
-        <div *ngIf="!boardVisible" class="oc-thumb-ph" aria-hidden="true"></div>
+        @if (boardVisible) {
+          <app-board
+            [position]="fen"
+            [interactive]="false"
+            [showCoordinates]="false"
+            [animated]="false"
+          ></app-board>
+        }
+        @if (!boardVisible) {
+          <div class="oc-thumb-ph" aria-hidden="true"></div>
+        }
       </div>
       <div class="oc-name">{{ group.base }}</div>
       <div class="oc-foot">
@@ -50,7 +53,7 @@ import type { OpeningGroup } from '../../lib/group-openings';
         <span class="eco-chip">{{ group.eco }}</span>
       </div>
     </button>
-  `,
+    `,
   styles: [],
 })
 export class OpeningCardComponent implements AfterViewInit, OnDestroy {
