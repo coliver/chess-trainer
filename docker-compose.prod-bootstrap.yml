@@ -2,8 +2,8 @@
 # (no TLS directives, so it can start with zero certs) so certbot's HTTP-01
 # webroot challenge has somewhere to land. See nginx/conf-bootstrap/default.conf.
 #
-#   npm --prefix packages/chess-core run build
-#   npm --prefix react run build
+#   npm --prefix frontend/packages/chess-core run build
+#   npm --prefix frontend/react run build
 #   mkdir -p certbot-www
 #   docker compose -f docker-compose.yml -f docker-compose.prod-bootstrap.yml up -d --build db api nginx
 #   sudo certbot certonly --webroot -w certbot-www -d knightschool.click
@@ -13,5 +13,5 @@ services:
     volumes:
       - ./nginx/conf-bootstrap:/etc/nginx/conf.d:ro
       - ./htmlcov:/app/htmlcov:ro
-      - ./react/dist:/usr/share/nginx/html:ro
+      - ./frontend/react/dist:/usr/share/nginx/html:ro
       - ./certbot-www:/var/www/certbot:ro

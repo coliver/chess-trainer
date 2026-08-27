@@ -48,9 +48,9 @@ jobs:
 
             # Host has no Node installed; build the frontend/chess-core
             # bundles with a throwaway node container instead.
-            docker run --rm -v "$(pwd)":/work -w /work/packages/chess-core node:20 \
+            docker run --rm -v "$(pwd)":/work -w /work/frontend/packages/chess-core node:20 \
               sh -c 'npm ci && npm run build'
-            docker run --rm -v "$(pwd)":/work -w /work/react \
+            docker run --rm -v "$(pwd)":/work -w /work/frontend/react \
               -e VITE_APP_VERSION="$APP_VERSION" \
               -e VITE_SENTRY_DSN="${VITE_SENTRY_DSN:-}" \
               -e VITE_SENTRY_ENVIRONMENT=production \

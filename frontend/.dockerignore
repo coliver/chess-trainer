@@ -1,0 +1,10 @@
+# frontend/.dockerignore — applies to any service built with context: ./frontend
+# (react, rails). Mirrors the root .dockerignore's node_modules exclusions, which
+# only apply to the repo-root context (used by the api/backend service).
+node_modules/
+**/node_modules/
+.git
+dist/
+coverage/
+test-results/
+.angular/

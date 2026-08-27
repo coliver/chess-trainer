@@ -2,6 +2,26 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ---
 
+## August 27, 2026
+
+### ♻️ Refactor
+
+#### 📁 Frontend Directories Consolidated Under `frontend/`
+
+> `react/`, `angular/`, `rails/`, and the shared `packages/` now live under a single `frontend/` directory (`frontend/react`, `frontend/angular`, `frontend/rails`, `frontend/packages`), moved with `git mv` to preserve history. Docker Compose's `react`/`rails` services build with `context: ./frontend` instead of the repo root, so their Dockerfiles needed no changes; a new `frontend/.dockerignore` was required since Docker resolves `.dockerignore` relative to the build context, and the root one no longer applied to those two services. All four CI workflows, `.dockerignore`, root `.gitignore`, and docs were updated for the new paths.
+
+### 🐛 Fixed
+
+#### 🌐 Backend Couldn't Find Locale Files After the Move
+
+> `backend/app/modules/email/sender.py` resolved `packages/i18n-locales/locales` relative to the repo root for `supported_languages()`/verification-email translations — broke once `packages/` moved under `frontend/`, rejecting valid languages (e.g. `de`) as unsupported. Fixed to `frontend/packages/i18n-locales/locales`.
+
+#### 🎭 Rails System Specs Silently Used an Unconfigured Cuprite Driver
+
+> `spec/system/settings_spec.rb` failed with `Ferrum::ProcessTimeoutError` (or, in some environments, killed the whole `rspec` process outright). Root cause: Rails 8's `ActionDispatch::SystemTesting::Driver` treats `:cuprite` as one of its own known driver names, so calling `driven_by :cuprite` silently re-registered the Capybara driver with bare defaults — discarding the app's `no-sandbox`/`disable-dev-shm-usage` browser options and Ferrum's default 10s `process_timeout`, which is too short for Chrome to start reliably under Docker's small `/dev/shm`. Fixed by passing those options through Rails' own `driven_by :cuprite, options: { ... }` instead of a separate, silently-overridden `Capybara.register_driver` call. See `frontend/rails/spec/rails_helper.rb`.
+
+---
+
 ## August 26, 2026
 
 ### 🔒 Security

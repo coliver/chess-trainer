@@ -2,14 +2,14 @@
 # cert already exists (see docker-compose.prod-bootstrap.yml for a brand-new
 # host's first cert — and scripts/certbot-deploy-hook.sh so renewals reload
 # nginx instead of silently sitting unused on disk):
-#   npm --prefix packages/chess-core run build
-#   npm --prefix react run build         # writes react/dist
+#   npm --prefix frontend/packages/chess-core run build
+#   npm --prefix frontend/react run build         # writes frontend/react/dist
 #   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build db api rails nginx
 #
 # db, api, rails, and nginx run in prod — react is a dev-server-only
 # service and is intentionally not started (prod serves its static build
 # instead, mounted into nginx below). Rails needs RAILS_MASTER_KEY set in
-# the server's .env (see rails/config/master.key locally) — it isn't
+# the server's .env (see frontend/rails/config/master.key locally) — it isn't
 # committed, so it must be provisioned on the host once, by hand.
 #
 # nginx/conf.d note: the base compose file bind-mounts the whole ./nginx
@@ -29,5 +29,5 @@ services:
       - ./nginx/conf-prod:/etc/nginx/conf.d:ro
       - /etc/letsencrypt:/etc/nginx/certs:ro
       - ./htmlcov:/app/htmlcov:ro
-      - ./react/dist:/usr/share/nginx/html:ro
+      - ./frontend/react/dist:/usr/share/nginx/html:ro
       - ./certbot-www:/var/www/certbot:ro

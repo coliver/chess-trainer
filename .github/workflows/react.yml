@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: react
+        working-directory: frontend/react
 
     steps:
       - uses: actions/checkout@v4
@@ -20,12 +20,12 @@ jobs:
         with:
           node-version: "22"
           cache: npm
-          cache-dependency-path: react/package-lock.json
+          cache-dependency-path: frontend/react/package-lock.json
 
       # React depends on @knight-school/chess-core via file:../packages/chess-core,
       # so build the package first (its own isolated install + tsup build).
       - name: Build chess-core package
-        working-directory: packages/chess-core
+        working-directory: frontend/packages/chess-core
         run: npm ci && npm run build
 
       # Clean, reproducible install straight from the lockfile.

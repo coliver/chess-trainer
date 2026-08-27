@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: rails
+        working-directory: frontend/rails
 
     env:
       RAILS_ENV: test
@@ -23,12 +23,12 @@ jobs:
         with:
           node-version: "22"
           cache: npm
-          cache-dependency-path: rails/package-lock.json
+          cache-dependency-path: frontend/rails/package-lock.json
 
       # Rails depends on @knight-school/chess-core via file:../packages/chess-core,
       # so build the package first (its own isolated install + tsup build).
       - name: Build chess-core package
-        working-directory: packages/chess-core
+        working-directory: frontend/packages/chess-core
         run: npm ci && npm run build
 
       - name: Install JS dependencies
@@ -43,7 +43,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          working-directory: rails
+          working-directory: frontend/rails
           bundler-cache: true
 
       - name: Lint (rubocop)

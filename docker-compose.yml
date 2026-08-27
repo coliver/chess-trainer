@@ -53,11 +53,11 @@ services:
 
   react:
     build:
-      context: .
+      context: ./frontend
       dockerfile: react/Dockerfile
     volumes:
-      - ./react:/app               # Syncs the code
-      - ./packages:/packages       # Shared workspace packages (chess-core, shared-styles)
+      - ./frontend/react:/app               # Syncs the code
+      - ./frontend/packages:/packages       # Shared workspace packages (chess-core, shared-styles)
       - /app/node_modules          # Keeps container modules separate
     expose:
       - "5173"
@@ -68,11 +68,11 @@ services:
 
   rails:
     build:
-      context: .
+      context: ./frontend
       dockerfile: rails/Dockerfile
     volumes:
-      - ./rails:/app               # Syncs the code
-      - ./packages:/packages       # Shared workspace packages (chess-core, shared-styles)
+      - ./frontend/rails:/app               # Syncs the code
+      - ./frontend/packages:/packages       # Shared workspace packages (chess-core, shared-styles)
       - /app/node_modules          # Keeps container modules separate
     environment:
       API_BASE_URL: http://api:8000
@@ -95,7 +95,7 @@ services:
       - ./nginx:/etc/nginx/conf.d:ro
       - ./letsencrypt:/etc/nginx/certs:ro
       - ./htmlcov:/app/htmlcov:ro
-      - ./react/dist:/usr/share/nginx/html:ro
+      - ./frontend/react/dist:/usr/share/nginx/html:ro
     restart: unless-stopped
     logging: *default-logging
 

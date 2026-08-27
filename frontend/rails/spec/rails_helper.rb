@@ -13,16 +13,22 @@ require 'capybara/rspec'
 require 'capybara/cuprite'
 # Add additional requires below this line. Rails is not loaded until this point!
 
-# Headless Chrome via CDP/Ferrum for spec/system — no selenium/chromedriver
+# Headless Chrome via CDP/Ferrum for spec/system, no selenium/chromedriver
 # version coupling. `disable-dev-shm-usage` avoids Chrome crashing against
 # Docker's small default /dev/shm instead of raising shm_size in compose.
-Capybara.register_driver(:cuprite) do |app|
-  Capybara::Cuprite::Driver.new(
-    app,
-    window_size: [ 1200, 800 ],
+#
+# Registration itself is left to Rails' `driven_by` (see below), not done
+# here: Rails 8's ActionDispatch::SystemTesting::Driver treats :cuprite as
+# one of its own known driver names and re-registers it via `driven_by`
+# regardless of any prior Capybara.register_driver(:cuprite) call here, so a
+# manual registration gets silently clobbered with bare defaults (no
+# no-sandbox/disable-dev-shm-usage, Ferrum's default 10s process_timeout),
+# which then leaves Chrome unable to start under Docker's small /dev/shm.
+def cuprite_options
+  {
     browser_options: { "no-sandbox" => nil, "disable-dev-shm-usage" => nil },
-    process_timeout: 15
-  )
+    process_timeout: 30, timeout: 30
+  }
 end
 Capybara.default_driver = :rack_test
 Capybara.javascript_driver = :cuprite
@@ -55,7 +61,12 @@ RSpec.configure do |config|
     host! "localhost"
   end
 
-  config.before(:each, type: :system) { driven_by :cuprite }
+  # Pass our hardened options through Rails' own `driven_by` (see cuprite_options
+  # above) rather than relying on a separately Capybara.register_driver'd
+  # :cuprite, since Rails re-registers :cuprite from these `options:` on every call.
+  config.before(:each, type: :system) do
+    driven_by :cuprite, screen_size: [ 1200, 800 ], options: cuprite_options
+  end
 
   # If you enable ActiveRecord support you should uncomment these lines,
   # note if you'd prefer not to run each example within a transaction, you

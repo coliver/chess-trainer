@@ -12,7 +12,7 @@ Help implement features in this repository following `backend/app/docs/ARCHITECT
 - Make minimal, correct, testable changes.
 - No secrets/credentials added to the repo.
 - Dockerize end-to-end from the start (no dev-only non-container workflows).
-- New user-facing React UI text must go through i18n, not a hardcoded string — add the key to `react/src/i18n/locales/en-US.json` (the source of truth), then run `npm run i18n:sync` to propagate it to the other 30+ locales. See `react/README.md`'s Internationalization section for details.
+- New user-facing React UI text must go through i18n, not a hardcoded string — add the key to `frontend/react/src/i18n/locales/en-US.json` (the source of truth), then run `npm run i18n:sync` to propagate it to the other 30+ locales. See `frontend/react/README.md`'s Internationalization section for details.
 
 ## Developer communication rule
 When working with a developer, keep responses as short as possible and explain one thing at a time.
@@ -34,9 +34,10 @@ Chess rules:
 
 Past the MVP stage — React frontend and FastAPI backend, with auth, opening training,
 puzzles, spaced-repetition progress tracking, i18n (30+ locales), and sound feedback all
-shipped. The `angular/` directory contains legacy source code that is no longer built or
-deployed. See [`CHANGELOG.md`](./CHANGELOG.md) for what's landed and [`ROADMAP.md`](./ROADMAP.md)
-for what's next.
+shipped. The `frontend/angular/` directory contains legacy source code that is no longer
+built or deployed. All frontend code (`react/`, `angular/`, `rails/`, and the shared
+`packages/`) lives under `frontend/`. See [`CHANGELOG.md`](./CHANGELOG.md) for what's landed
+and [`ROADMAP.md`](./ROADMAP.md) for what's next.
 
 ### Auth (FastAPI paths; nginx exposes them under `/api`)
 - `POST /auth/register` — creates an account and emails a verification link

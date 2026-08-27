@@ -12,20 +12,20 @@ This is a work in progress — see the [Roadmap](./ROADMAP.md) for planned work.
 <details>
   <summary>Light mode</summary>
 
-  ![Light mode](./react/dashboard-light-1440.png)
+  ![Light mode](./frontend/react/dashboard-light-1440.png)
 </details>
 
 <details open>
   <summary>Dark mode</summary>
 
-  ![Dark mode](./react/dashboard-dark-1440.png)
+  ![Dark mode](./frontend/react/dashboard-dark-1440.png)
 </details>
 
 ### 📂 Project Navigation
 - **[Backend](./backend/README.md)**: API logic, Database schema, and Chess engine rules.
-- **[React frontend](./react/README.md)**: React components, State management, and UI/UX.
-- **[Shared core](./packages/chess-core)**: Framework-neutral chess logic (`chess.js`) used by the frontend.
-- **[Shared translations](./packages/i18n-locales)**: UI copy, one JSON file per locale, the single source of truth for translated strings.
+- **[React frontend](./frontend/react/README.md)**: React components, State management, and UI/UX.
+- **[Shared core](./frontend/packages/chess-core)**: Framework-neutral chess logic (`chess.js`) used by the frontend.
+- **[Shared translations](./frontend/packages/i18n-locales)**: UI copy, one JSON file per locale, the single source of truth for translated strings.
 - **[Infrastructure](./nginx)**: Nginx configuration and Docker orchestration.
 
 ---
@@ -81,10 +81,10 @@ Knight School uses a decoupled architecture to separate the chess engine from th
 
 - **Board interaction:** `Board.tsx` uses cm-chessboard's [`Accessibility` extension](https://github.com/shaack/cm-chessboard/blob/master/src/extensions/accessibility/Accessibility.js) — screen readers get a hidden move-form/table/piece-list description of the position plus braille notation, and keyboard move input (arrow keys, Enter/Space, Escape) is available on interactive boards.
 - **Static linting:** `eslint-plugin-jsx-a11y` runs as part of `npm run lint` (and CI), catching issues like invalid ARIA roles/attributes and `autoFocus` misuse before they ship.
-- **Automated scanning:** `@axe-core/playwright` runs WCAG 2 A/AA scans against every major page (`/login`, `/dashboard`, `/puzzles`, `/training/:id`, `/settings`, `/register`, `/verify-email`) as part of the e2e suite, which has already caught and fixed several real issues (color-contrast on the header version tag, dashboard/settings headings, and the ECO-code chip; an `aria-required-attr` violation). Automated scans are no substitute for manual screen-reader/keyboard testing, though. See [react/e2e/README.md](./react/e2e/README.md) for the full picture.
+- **Automated scanning:** `@axe-core/playwright` runs WCAG 2 A/AA scans against every major page (`/login`, `/dashboard`, `/puzzles`, `/training/:id`, `/settings`, `/register`, `/verify-email`) as part of the e2e suite, which has already caught and fixed several real issues (color-contrast on the header version tag, dashboard/settings headings, and the ECO-code chip; an `aria-required-attr` violation). Automated scans are no substitute for manual screen-reader/keyboard testing, though. See [frontend/react/e2e/README.md](./frontend/react/e2e/README.md) for the full picture.
 - **Modal/menu semantics:** the header's overflow menu (`OverflowMenu.tsx`) uses `role="dialog"`/`aria-modal`, traps focus while open, closes on Escape, and returns focus to the trigger button on close.
 - **Live regions:** Login/Register error messages carry `role="alert"` so screen readers announce them as soon as they appear.
-- **Internationalization:** 35+ locale translations ([packages/i18n-locales](./packages/i18n-locales)) so the UI isn't English-only; `<html lang>` tracks the active language automatically.
+- **Internationalization:** 35+ locale translations ([frontend/packages/i18n-locales](./frontend/packages/i18n-locales)) so the UI isn't English-only; `<html lang>` tracks the active language automatically.
 
 ### 📟 Text mode
 
@@ -149,11 +149,11 @@ What each client implements today, at a glance. ✅ shipped · 🟡 partial · �
 **Angular** — legacy, frozen since it stopped being built; missing everything shipped to React afterward.
 **Rails** — dev-only experiment, not yet publicized; closest to React in coverage, with unwired PWA scaffolding unique to it.
 
-### 🧩 Shared chess logic (`packages/chess-core`)
+### 🧩 Shared chess logic (`frontend/packages/chess-core`)
 
 The framework-neutral chess logic — FEN handling, move validation, and opening-preview
 positions, all built on `chess.js` with **no** framework code — lives in a standalone package,
-[`@knight-school/chess-core`](./packages/chess-core). The frontend pulls it in with a **`file:`
+[`@knight-school/chess-core`](./frontend/packages/chess-core). The frontend pulls it in with a **`file:`
 dependency**. The package builds to an ESM bundle + type declarations and is unit-tested
 against real `chess.js` independently of the UI, so the UI only tests its own wiring
 (mocking the package boundary).
@@ -162,7 +162,7 @@ against real `chess.js` independently of the UI, so the UI only tests its own wi
 
 ## 🤝 Contribution
 
-- **Development:** Please refer to the [Backend](./backend/README.md) and [React](./react/README.md) guides for specific coding standards.
+- **Development:** Please refer to the [Backend](./backend/README.md) and [React](./frontend/react/README.md) guides for specific coding standards.
 - **Commits:** Use conventional commits (`feat:`, `fix:`, `docs:`, `test:`).
 - **PRs:** Ensure all new logic is covered by tests.
 

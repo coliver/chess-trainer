@@ -12,7 +12,7 @@ container — the container already has `playwright` in
 `chromium-cli` from the host: this app must be reached through
 nginx (see Gotchas), and the driver already handles that.
 
-All paths below are relative to `react/` (the unit root), unless a
+All paths below are relative to `frontend/react/` (the unit root), unless a
 command explicitly `cd`s to the repo root for `docker compose`.
 
 ## Prerequisites
@@ -31,7 +31,7 @@ Copy the driver into the running `react` container, then pipe it a
 command script over stdin. From the repo root:
 
 ```bash
-docker compose cp react/.claude/skills/run-react/driver.mjs react:/app/driver.mjs
+docker compose cp frontend/react/.claude/skills/run-react/driver.mjs react:/app/driver.mjs
 docker compose exec -T react node driver.mjs <<'EOF'
 nav /login
 shot 01-login
