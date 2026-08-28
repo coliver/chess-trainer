@@ -7,6 +7,8 @@ import {
 import { provideRouter, Router } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import type { Opening } from '../../core/openings.service';
+import { TranslateService } from '../../core/i18n/translate.service';
+import { stubTranslate } from '../../core/i18n/testing';
 
 function opening(overrides: Partial<Opening>): Opening {
   return {
@@ -31,6 +33,10 @@ describe('DashboardComponent', () => {
     }).compileComponents();
     httpMock = TestBed.inject(HttpTestingController);
     router = TestBed.inject(Router);
+    stubTranslate(TestBed.inject(TranslateService), {
+      'dashboard.openings.chooseOpening': 'Choose an opening',
+      'dashboard.openings.startLabel': 'Start {{name}}',
+    });
   });
 
   afterEach(() => httpMock.verify());

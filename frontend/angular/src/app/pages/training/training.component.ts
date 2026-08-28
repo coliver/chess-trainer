@@ -23,6 +23,7 @@ import { TrainingItem, TrainingService } from '../../core/training.service';
 import { FlipBoardButtonComponent } from '../../shared/flip-board-button.component';
 import { SoundService } from '../../core/sound.service';
 import { celebrateWin } from '../../lib/win-celebration';
+import { TranslatePipe } from '../../core/i18n/translate.pipe';
 
 const BLINK_CYCLE_MS = 420; // fadeIn(120) + hold(120) + fadeOut(180), matches react's useBlinkGreen
 
@@ -36,7 +37,7 @@ const BLINK_CYCLE_MS = 420; // fadeIn(120) + hold(120) + fadeOut(180), matches r
   selector: 'app-training',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.Eager,
-  imports: [FormsModule, BoardComponent, FlipBoardButtonComponent],
+  imports: [FormsModule, BoardComponent, FlipBoardButtonComponent, TranslatePipe],
   template: `
     <main class="page">
       <div class="card">
@@ -57,7 +58,7 @@ const BLINK_CYCLE_MS = 420; // fadeIn(120) + hold(120) + fadeOut(180), matches r
             <div class="board-under">
               <span class="turn" [class.black]="!isWhiteToMove">
                 <span class="turn-dot" aria-hidden="true"></span>
-                {{ isWhiteToMove ? 'White to move' : 'Black to move' }}
+                {{ (isWhiteToMove ? 'training.whiteToMove' : 'training.blackToMove') | translate }}
               </span>
               <app-flip-board-button (flip)="flipBoard()" />
             </div>
@@ -65,7 +66,7 @@ const BLINK_CYCLE_MS = 420; // fadeIn(120) + hold(120) + fadeOut(180), matches r
 
           <aside class="train-rail">
             <div class="rail-head">
-              <div class="rail-eyebrow">Training</div>
+              <div class="rail-eyebrow">{{ 'training.eyebrow' | translate }}</div>
               <div class="rail-title">
                 <h1>{{ openingName }}</h1>
                 @if (eco) {
@@ -92,7 +93,7 @@ const BLINK_CYCLE_MS = 420; // fadeIn(120) + hold(120) + fadeOut(180), matches r
                   (click)="jumpToIndex(timeline.index - 1)"
                   [disabled]="busy || timeline.index <= 0"
                 >
-                  ‹ Prev
+                  {{ 'training.prev' | translate }}
                 </button>
                 <button
                   class="btn"
@@ -100,7 +101,7 @@ const BLINK_CYCLE_MS = 420; // fadeIn(120) + hold(120) + fadeOut(180), matches r
                   (click)="jumpToIndex(timeline.index + 1)"
                   [disabled]="busy || timeline.index >= timeline.fens.length - 1"
                 >
-                  Next ›
+                  {{ 'training.next' | translate }}
                 </button>
               </div>
 
@@ -109,8 +110,8 @@ const BLINK_CYCLE_MS = 420; // fadeIn(120) + hold(120) + fadeOut(180), matches r
                 type="button"
                 (click)="hint()"
                 [disabled]="busy || !itemId"
-                aria-label="Show a hint"
-                title="Show a hint"
+                [attr.aria-label]="'training.showHint' | translate"
+                [title]="'training.showHint' | translate"
               >
                 💡
               </button>
@@ -120,21 +121,23 @@ const BLINK_CYCLE_MS = 420; // fadeIn(120) + hold(120) + fadeOut(180), matches r
                   class="text-input"
                   name="moveInput"
                   [(ngModel)]="moveInput"
-                  placeholder="or type a move, e.g. e2e4"
+                  [placeholder]="'training.movePlaceholder' | translate"
                   [disabled]="isSubmitting"
                 />
                 <button
                   class="btn primary"
                   type="submit"
                   [disabled]="busy || !moveInput.trim() || !atLatest"
-                  [title]="!atLatest ? 'Jump to latest before submitting' : undefined"
+                  [title]="!atLatest ? ('training.jumpToLatest' | translate) : undefined"
                 >
-                  Play
+                  {{ 'training.play' | translate }}
                 </button>
               </form>
             </div>
 
-            <button class="train-exit" type="button" (click)="exit()">← Back to openings</button>
+            <button class="train-exit" type="button" (click)="exit()">
+              {{ 'training.backToOpenings' | translate }}
+            </button>
           </aside>
         </div>
       </div>

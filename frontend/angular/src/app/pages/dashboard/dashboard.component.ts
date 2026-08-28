@@ -12,6 +12,8 @@ import { OpeningCardComponent } from './opening-card.component';
 import { VariationListComponent } from './variation-list.component';
 import { BoardPreviewComponent } from './board-preview.component';
 import { ProgressStatComponent } from '../../shared/progress-stat.component';
+import { TranslatePipe } from '../../core/i18n/translate.pipe';
+import { TranslateService } from '../../core/i18n/translate.service';
 
 const SEARCH_PAGE = 60;
 
@@ -31,29 +33,25 @@ const SEARCH_PAGE = 60;
     VariationListComponent,
     BoardPreviewComponent,
     ProgressStatComponent,
+    TranslatePipe,
   ],
   template: `
     <main class="page">
       <div class="card">
-        <section class="progress-overview" aria-label="Your progress">
-          <div class="progress-group" aria-label="Training progress">
-            <h2 class="progress-group-label">Training</h2>
+        <section class="progress-overview" [attr.aria-label]="'dashboard.progress.yourProgress' | translate">
+          <div class="progress-group" [attr.aria-label]="'dashboard.progress.trainingLabel' | translate">
+            <h2 class="progress-group-label">{{ 'dashboard.progress.trainingHeading' | translate }}</h2>
             <div class="progress-group-row">
-              <app-progress-stat icon="♟️" label="Positions trained">
+              <app-progress-stat icon="♟️" [label]="'dashboard.progress.positionsTrained' | translate">
                 {{ summary?.positionsSeen ?? 0 }}
               </app-progress-stat>
-              <app-progress-stat icon="🎯" label="Accuracy">
+              <app-progress-stat icon="🎯" [label]="'dashboard.progress.accuracy' | translate">
                 {{ summary ? (summary.overallAccuracy * 100 | number: '1.0-0') + '%' : '—' }}
               </app-progress-stat>
-              <app-progress-stat
-                icon="📅"
-                [label]="
-                  'Day streak' + (summary?.longestStreak ? ' · best ' + summary!.longestStreak : '')
-                "
-              >
+              <app-progress-stat icon="📅" [label]="streakLabel()">
                 {{ summary?.currentStreak ?? 0 }}{{ (summary?.currentStreak ?? 0) > 0 ? ' 🔥' : '' }}
               </app-progress-stat>
-              <app-progress-stat icon="🏆" label="Mastered" variant="mastery">
+              <app-progress-stat icon="🏆" [label]="'dashboard.progress.mastered' | translate" variant="mastery">
                 {{ summary?.mastered ?? 0 }}
                 @if (summary && summary.positionsSeen > 0) {
                   <div stat-extra class="mastery-bar" aria-hidden="true">
@@ -68,7 +66,7 @@ const SEARCH_PAGE = 60;
                   [disabled]="dueCount === 0"
                   (click)="startReviewSession()"
                 >
-                  Review due ({{ dueCount }})
+                  {{ 'dashboard.progress.reviewDue' | translate: { count: dueCount } }}
                 </button>
               </div>
               @if (weakSpots.length > 0) {
@@ -84,25 +82,25 @@ const SEARCH_PAGE = 60;
             </div>
           </div>
 
-          <div class="progress-group progress-group--puzzles" aria-label="Puzzle progress">
-            <h2 class="progress-group-label">Puzzles</h2>
+          <div class="progress-group progress-group--puzzles" [attr.aria-label]="'dashboard.progress.puzzleLabel' | translate">
+            <h2 class="progress-group-label">{{ 'dashboard.progress.puzzlesHeading' | translate }}</h2>
             <div class="progress-group-row">
-              <app-progress-stat icon="🧩" label="Puzzles solved">
+              <app-progress-stat icon="🧩" [label]="'dashboard.progress.puzzlesSolved' | translate">
                 {{ puzzleSummary?.puzzlesSeen ?? 0 }}
               </app-progress-stat>
-              <app-progress-stat icon="🎯" label="Accuracy">
+              <app-progress-stat icon="🎯" [label]="'dashboard.progress.accuracy' | translate">
                 {{
                   puzzleSummary
                     ? (puzzleSummary.overallAccuracy * 100 | number: '1.0-0') + '%'
                     : '—'
                 }}
               </app-progress-stat>
-              <app-progress-stat icon="🏆" label="Mastered">
+              <app-progress-stat icon="🏆" [label]="'dashboard.progress.mastered' | translate">
                 {{ puzzleSummary?.mastered ?? 0 }}
               </app-progress-stat>
               <div class="progress-stat">
                 <button type="button" class="progress-review-btn" (click)="goToPuzzles()">
-                  Practice puzzles
+                  {{ 'dashboard.progress.practicePuzzles' | translate }}
                 </button>
               </div>
             </div>
@@ -112,7 +110,7 @@ const SEARCH_PAGE = 60;
         <section class="opening-browser">
           <header class="ob-toolbar">
             <div class="ob-heading">
-              <h1 class="ob-title">Openings</h1>
+              <h1 class="ob-title">{{ 'dashboard.openings.title' | translate }}</h1>
               <p class="ob-sub">{{ subText }}</p>
             </div>
             <span class="ob-grow"></span>
@@ -120,8 +118,8 @@ const SEARCH_PAGE = 60;
               <span class="ob-search-icon" aria-hidden="true">⌕</span>
               <input
                 type="search"
-                aria-label="Search openings"
-                placeholder="Search openings or ECO…"
+                [attr.aria-label]="'dashboard.openings.searchAriaLabel' | translate"
+                [placeholder]="'dashboard.openings.searchPlaceholder' | translate"
                 autocomplete="off"
                 [(ngModel)]="query"
                 (ngModelChange)="onQueryChange()"
@@ -129,7 +127,7 @@ const SEARCH_PAGE = 60;
             </div>
             @if (view === 'bases') {
               <button type="button" class="ob-sort" (click)="sortAZ = !sortAZ">
-                Sort: {{ sortAZ ? 'A–Z' : 'Popular' }}
+                {{ sortButtonLabel() }}
               </button>
             }
           </header>
@@ -168,8 +166,8 @@ const SEARCH_PAGE = 60;
               }
 
               @if (view === 'variations' && activeGroup) {
-                <nav class="ob-crumbs" aria-label="Breadcrumb">
-                  <button type="button" (click)="goHome()">All openings</button>
+                <nav class="ob-crumbs" [attr.aria-label]="'dashboard.openings.breadcrumb' | translate">
+                  <button type="button" (click)="goHome()">{{ 'dashboard.openings.allOpenings' | translate }}</button>
                   <span class="sep">/</span>
                   <span class="here">{{ activeGroup.base }}</span>
                 </nav>
@@ -208,12 +206,12 @@ const SEARCH_PAGE = 60;
                 <div class="ob-empty-state">
                   <span class="ob-empty-glyph" aria-hidden="true">♞</span>
                   <p class="opening-description opening-description--empty">
-                    Pick an opening to preview the line and start training.
+                    {{ 'dashboard.openings.pickToPreview' | translate }}
                   </p>
                 </div>
               }
 
-              <div class="ob-color-toggle" role="radiogroup" aria-label="Play as">
+              <div class="ob-color-toggle" role="radiogroup" [attr.aria-label]="'dashboard.openings.playAs' | translate">
                 <button
                   type="button"
                   role="radio"
@@ -222,7 +220,7 @@ const SEARCH_PAGE = 60;
                   [class.selected]="playerColor === 'w'"
                   (click)="playerColor = 'w'"
                 >
-                  Play as White
+                  {{ 'dashboard.openings.playAsWhite' | translate }}
                 </button>
                 <button
                   type="button"
@@ -232,7 +230,7 @@ const SEARCH_PAGE = 60;
                   [class.selected]="playerColor === 'b'"
                   (click)="playerColor = 'b'"
                 >
-                  Play as Black
+                  {{ 'dashboard.openings.playAsBlack' | translate }}
                 </button>
               </div>
 
@@ -257,6 +255,7 @@ export class DashboardComponent implements OnInit {
   private readonly progressService = inject(ProgressService);
   private readonly puzzlesService = inject(PuzzlesService);
   private readonly router = inject(Router);
+  private readonly translate = inject(TranslateService);
 
   openings: Opening[] = [];
   query = '';
@@ -308,6 +307,19 @@ export class DashboardComponent implements OnInit {
     return Math.min(100, Math.round((this.summary.mastered / this.summary.positionsSeen) * 100));
   }
 
+  streakLabel(): string {
+    return this.summary?.longestStreak
+      ? this.translate.t('dashboard.progress.dayStreakBest', { best: this.summary.longestStreak })
+      : this.translate.t('dashboard.progress.dayStreak');
+  }
+
+  sortButtonLabel(): string {
+    const mode = this.translate.t(
+      this.sortAZ ? 'dashboard.openings.sortAZ' : 'dashboard.openings.sortPopular',
+    );
+    return this.translate.t('dashboard.openings.sortButton', { mode });
+  }
+
   goToPuzzles(): void {
     this.router.navigate(['/puzzles']);
   }
@@ -317,7 +329,7 @@ export class DashboardComponent implements OnInit {
       next: (res) => this.router.navigate(['/training', res.id]),
       error: (err) => {
         console.error('Error starting review session:', err);
-        alert('No positions due for review yet.');
+        alert(this.translate.t('dashboard.progress.reviewSessionFailed'));
       },
     });
   }
@@ -359,22 +371,23 @@ export class DashboardComponent implements OnInit {
 
   get subText(): string {
     if (this.view === 'search') {
-      const n = this.searchMatches.length;
-      return `${n} match${n === 1 ? '' : 'es'}`;
+      return this.translate.t('dashboard.openings.matches', { count: this.searchMatches.length });
     }
     if (this.view === 'variations' && this.activeGroup) {
-      return `${this.activeGroup.count} variations in the full library`;
+      return this.translate.t('dashboard.openings.variationsInLibrary', {
+        count: this.activeGroup.count,
+      });
     }
-    return `${this.groups.length} openings · pick one to train`;
+    return this.translate.t('dashboard.openings.openingsToTrain', { count: this.groups.length });
   }
 
   get startLabel(): string {
-    if (!this.selected) return 'Choose an opening';
+    if (!this.selected) return this.translate.t('dashboard.openings.chooseOpening');
     const label =
       variationLabelOf(this.selected.name) === 'Main line'
         ? baseNameOf(this.selected.name)
         : variationLabelOf(this.selected.name);
-    return `Start ${label}`;
+    return this.translate.t('dashboard.openings.startLabel', { name: label });
   }
 
   get previewFullName(): string {
@@ -407,7 +420,7 @@ export class DashboardComponent implements OnInit {
       next: (res) => this.router.navigate(['/training', res.id]),
       error: (err) => {
         console.error('Error starting session:', err);
-        alert('Failed to start session. Check your connection or token.');
+        alert(this.translate.t('dashboard.progress.startSessionFailed'));
       },
     });
   }

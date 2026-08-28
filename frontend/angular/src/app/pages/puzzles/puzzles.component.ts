@@ -12,6 +12,8 @@ import { FlipBoardButtonComponent } from '../../shared/flip-board-button.compone
 import { NextPuzzle, PuzzlesService } from '../../core/puzzles.service';
 import { SoundService } from '../../core/sound.service';
 import { celebratePuzzleCorrect } from '../../lib/win-celebration';
+import { TranslateService } from '../../core/i18n/translate.service';
+import { TranslatePipe } from '../../core/i18n/translate.pipe';
 
 /**
  * Angular puzzles page — mirror of react/src/pages/Puzzles.tsx: loads the
@@ -23,20 +25,20 @@ import { celebratePuzzleCorrect } from '../../lib/win-celebration';
   selector: 'app-puzzles',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.Eager,
-  imports: [BoardComponent, FlipBoardButtonComponent, RouterLink],
+  imports: [BoardComponent, FlipBoardButtonComponent, RouterLink, TranslatePipe],
   template: `
     <main class="page">
       <div class="card puzzles-card">
         <header class="puzzles-header">
-          <h1>Puzzles</h1>
+          <h1>{{ 'puzzles.title' | translate }}</h1>
           <div class="puzzles-meta">
             @if (rating !== null) {
-              <span>Rating ~{{ rating }}</span>
+              <span>{{ 'puzzles.rating' | translate: { rating: rating } }}</span>
             }
-            <span>Solved: {{ solved }}</span>
+            <span>{{ 'puzzles.solved' | translate: { count: solved } }}</span>
             <span class="puzzles-streak" [class.is-active]="streak > 0">
-              Streak: {{ streak }}{{ streak > 0 ? ' 🔥' : '' }}{{
-                bestStreak > 0 ? ' · best ' + bestStreak : ''
+              {{ 'puzzles.streak' | translate: { count: streak } }}{{ streak > 0 ? ' 🔥' : '' }}{{
+                bestStreak > 0 ? ('puzzles.streakBest' | translate: { best: bestStreak }) : ''
               }}
             </span>
           </div>
@@ -57,17 +59,19 @@ import { celebratePuzzleCorrect } from '../../lib/win-celebration';
         <div class="board-under">
           <span class="turn" [class.black]="solverColor === 'b'">
             <span class="turn-dot" aria-hidden="true"></span>
-            {{ solverColor === 'b' ? 'Black to move' : 'White to move' }}
+            {{ (solverColor === 'b' ? 'training.blackToMove' : 'training.whiteToMove') | translate }}
           </span>
           <app-flip-board-button (flip)="flipBoard()" />
         </div>
 
         <p class="puzzles-feedback" role="status">
-          {{ feedback || (puzzleId ? 'Find the best move.' : '') }}
+          {{ feedback || (puzzleId ? findBestMoveHint() : '') }}
         </p>
 
         @if (noPuzzlesDue) {
-          <a routerLink="/dashboard" class="puzzles-back-link">Back to dashboard</a>
+          <a routerLink="/dashboard" class="puzzles-back-link">{{
+            'puzzles.backToDashboard' | translate
+          }}</a>
         }
 
         @if (puzzleId) {
@@ -77,7 +81,7 @@ import { celebratePuzzleCorrect } from '../../lib/win-celebration';
             (click)="skip()"
             [disabled]="isSubmitting"
           >
-            Skip puzzle ›
+            {{ 'puzzles.skipPuzzle' | translate }}
           </button>
         }
       </div>
@@ -88,6 +92,7 @@ export class PuzzlesComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly puzzles = inject(PuzzlesService);
   private readonly sound = inject(SoundService);
+  private readonly translate = inject(TranslateService);
 
   puzzleId: string | null = null;
   fen = START_FEN;
@@ -108,6 +113,12 @@ export class PuzzlesComponent implements OnInit {
 
   get solverColor(): string {
     return sideToMove(this.fen);
+  }
+
+  findBestMoveHint(): string {
+    return this.translate.t(
+      this.solverColor === 'b' ? 'puzzles.findBestMoveBlack' : 'puzzles.findBestMoveWhite',
+    );
   }
 
   ngOnInit(): void {
@@ -137,10 +148,10 @@ export class PuzzlesComponent implements OnInit {
         if (err?.status === 404) {
           this.puzzleId = null;
           this.noPuzzlesDue = true;
-          this.feedback = 'No puzzles due right now — check back later.';
+          this.feedback = this.translate.t('puzzles.noPuzzlesDue');
           return;
         }
-        this.feedback = 'Failed to load a puzzle. Check your connection.';
+        this.feedback = this.translate.t('puzzles.loadFailed');
       },
     });
   }
@@ -175,14 +186,14 @@ export class PuzzlesComponent implements OnInit {
         if (data.correct) {
           this.sound.play('puzzleCorrect');
           celebratePuzzleCorrect();
-          this.feedback = '✅ Correct!';
+          this.feedback = this.translate.t('puzzles.correct');
           this.solved += 1;
           this.streak += 1;
           this.bestStreak = Math.max(this.bestStreak, this.streak);
           setTimeout(() => this.loadNext(), 600);
         } else {
           this.sound.play('puzzleWrong');
-          this.feedback = `❌ ${data.reason || 'Not quite — try again.'}`;
+          this.feedback = `❌ ${data.reason || this.translate.t('puzzles.incorrectFallback')}`;
           this.fen = preFen;
           this.streak = 0;
         }
@@ -190,7 +201,7 @@ export class PuzzlesComponent implements OnInit {
       error: (err: { status?: number }) => {
         this.isSubmitting = false;
         if (err?.status === 401) this.router.navigate(['/login']);
-        this.feedback = 'Error submitting move.';
+        this.feedback = this.translate.t('puzzles.submitError');
       },
     });
   }

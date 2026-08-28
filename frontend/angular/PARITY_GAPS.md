@@ -173,15 +173,48 @@ continuing. This is a real correctness bug, not a missing polish item — not fi
 needs its own pass touching `PuzzleAttemptResult`, `PuzzlesService.submit()`, and
 `puzzles.component.ts`'s submit handler together.
 
-## 8. Newly discovered: Dashboard/Training/Puzzles pages were never i18n'd
+## 8. Dashboard/Training/Puzzles pages were never i18n'd
 
-While wiring `ProgressStat` into `dashboard.component.ts`, found it (and `training.component.ts`,
-`puzzles.component.ts`) still hardcoded English throughout — zero `| translate` usage in any of
-the three, versus 35/9/12 `t()` calls in React's `Dashboard.tsx`/`Training.tsx`/`Puzzles.tsx`
-respectively. §1 flagged "the rest of the page components" as open when i18n plumbing landed, but
-these three are the biggest remaining pages by far and hadn't been explicitly called out as their
-own item. This is a large, separate pass (three pages, 56+ strings) — not folded into the
-component work above. Not started.
+**Status: landed 2026-08-27.** All three pages now route their existing strings through
+`TranslatePipe`/`TranslateService`, using the same locale keys React already had (no new keys
+needed — the shared JSON already carried them). This was a pure i18n pass: Angular's markup was
+translated as-is, not restructured to match React's current layout. Along the way this surfaced
+that Angular's Dashboard/Training/Puzzles pages have real *structural* gaps versus React beyond
+missing translations — logged as a new §10 below, not fixed here.
+
+Two spots were deliberately left hardcoded because React doesn't translate them either (both in
+Dashboard's opening search): the "No openings match…try a name (Sicilian) or an ECO code (B90)"
+empty-state text, and the "Show N more" button. Also left untouched: Dashboard's "Weak spots"
+list block (`progress-weak-spots`), which has no equivalent structure or locale key in React (see
+§10) — forcing an approximate key onto it would have been a mismatch, not a translation.
+
+Originally: found while wiring `ProgressStat` into `dashboard.component.ts` that it (and
+`training.component.ts`, `puzzles.component.ts`) was hardcoded English throughout — zero
+`| translate` usage versus 35/9/12 `t()` calls in React's `Dashboard.tsx`/`Training.tsx`/
+`Puzzles.tsx`. §1 had flagged "the rest of the page components" as open when i18n plumbing
+landed, but these three biggest pages hadn't been called out as their own item until now.
+
+## 10. Newly discovered: Dashboard/Training/Puzzles have structural gaps beyond i18n
+
+Found while doing the §8 i18n pass — these pages don't just lag on translation, their Angular
+markup diverges from React's current structure:
+
+- **Dashboard**: React has a `troubleSteps` section (per-move accuracy, "trickiest move" tile,
+  common-wrong-move callouts) and a needs-work expand/collapse list — Angular has neither.
+  React also has a White/Black/All color filter for the opening browser — Angular doesn't.
+  Angular's own "Weak spots" list block (plain list, no expand) has no React equivalent at all —
+  it looks like an earlier, simpler design that wasn't removed when React's richer
+  `ws-tile`/`ws-grid` layout replaced it.
+- **Training**: React shows a distinct "session completed" screen (Train again / Choose another
+  opening buttons) — Angular has no such state; the regular controls just stay visible.
+- **Puzzles**: React uses the same `train-rail` layout as Training (eyebrow, stat pills, theme
+  chips, a "Next puzzle" button with focus management) — Angular's Puzzles page still uses an
+  older, simpler `puzzles-header`/`puzzles-meta` layout. This compounds with the already-flagged
+  §9 multi-move bug: React's rail shows move-progress ("Move 2 of 3") and per-puzzle theme chips
+  that Angular has nowhere to put even after §9 is fixed.
+
+None of this was fixed in the i18n pass — these are real feature/redesign gaps, not translation
+gaps, and each is sized more like its own item than a quick follow-on. Not started.
 
 ## 6. Shared packages — consumed correctly, not stale
 

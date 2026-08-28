@@ -6,6 +6,8 @@ import {
 } from '@angular/common/http/testing';
 import { provideRouter, Router } from '@angular/router';
 import { PuzzlesComponent } from './puzzles.component';
+import { TranslateService } from '../../core/i18n/translate.service';
+import { stubTranslate } from '../../core/i18n/testing';
 
 describe('PuzzlesComponent', () => {
   let httpMock: HttpTestingController;
@@ -18,6 +20,13 @@ describe('PuzzlesComponent', () => {
     }).compileComponents();
     httpMock = TestBed.inject(HttpTestingController);
     router = TestBed.inject(Router);
+    stubTranslate(TestBed.inject(TranslateService), {
+      'puzzles.noPuzzlesDue': 'No puzzles due right now — check back later.',
+      'puzzles.loadFailed': 'Failed to load a puzzle. Check your connection.',
+      'puzzles.correct': '✅ Correct!',
+      'puzzles.incorrectFallback': 'Not quite — try again.',
+      'puzzles.submitError': 'Error submitting move.',
+    });
   });
 
   afterEach(() => httpMock.verify());

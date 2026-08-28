@@ -6,6 +6,12 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ### ✨ Added
 
+#### 🌐 Angular Dashboard/Training/Puzzles i18n
+
+> Closes `frontend/angular/PARITY_GAPS.md` §8: `dashboard.component.ts`, `training.component.ts`, and `puzzles.component.ts` were the three biggest pages still hardcoded in English (zero `| translate` usage versus 35/9/12 `t()` calls in their React counterparts) — now all three route through `TranslatePipe`/`TranslateService`, reusing the locale keys React already had (no new keys needed). Left deliberately untouched: two Dashboard search-empty-state strings React doesn't translate either, and Dashboard's "Weak spots" list block, which has no React equivalent to key against (see below).
+>
+> Surfaced while doing this: Dashboard/Training/Puzzles have real structural gaps versus React beyond translation — Dashboard is missing React's trouble-steps section, needs-work expand/collapse, and color filter (and has an orphaned "Weak spots" block React doesn't have at all); Training has no "session completed" screen; Puzzles still uses an older layout instead of React's `train-rail` design with stat pills and theme chips. Logged as `PARITY_GAPS.md` §10, not fixed here — each is closer to its own item than a quick follow-on.
+
 #### 🔊❄️🎉 Angular Sound, Snow, and Win-Celebration Effects
 
 > Continuing the Angular/React parity backport (`frontend/angular/PARITY_GAPS.md`, item 7): ported `utils/sound.ts`/`hooks/useSound.ts` to `core/sound.service.ts`, `hooks/useSnowPreference.ts` to `core/snow-preference.service.ts` (a signal-based service does the same job `useSyncExternalStore` + a module-level listener set did in React — no extra machinery needed), and `utils/snow.tsx`/`utils/winCelebration.ts` to `lib/snow.ts`/`lib/win-celebration.ts`. Added `canvas-confetti` as a dependency and a `scripts/sync-shared-assets.mjs` step (mirroring the existing i18n locale sync) to pull `packages/shared-assets/sounds/*.mp3` into `public/sounds/` before serve/build/test, since the Angular CLI's asset glob can't reach outside the workspace root. Wired into `app.component.ts` (the periodic snow animation), `training.component.ts` and `puzzles.component.ts` (move/correct/incorrect/illegal sounds plus win/puzzle-correct confetti), and `settings.component.ts` (preview-move sound, and a snow toggle row that turned out to be entirely missing from the page — an earlier `PARITY_GAPS.md` note had it as merely inert, but it wasn't rendered at all).
