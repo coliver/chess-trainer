@@ -106,6 +106,8 @@ export class PuzzlesComponent implements OnInit {
   noPuzzlesDue = false;
   orientation: 'white' | 'black' = 'white';
   markers: BoardMarker[] = [];
+  moveIndex = 0;
+  lastMoveUci = '';
 
   readonly onMove = (from: string, to: string): boolean => this.processMove(from, to);
   readonly onMoveStart = (square: string): boolean => this.canPickUp(square);
@@ -138,7 +140,15 @@ export class PuzzlesComponent implements OnInit {
         this.fen = data.fen;
         this.correctMoveUci = data.correctMoveUci;
         this.rating = data.rating;
+        this.moveIndex = data.moveIndex;
+        this.lastMoveUci = data.lastMoveUci;
         this.orientation = sideToMove(data.fen) === 'b' ? 'black' : 'white';
+        this.markers = data.lastMoveUci
+          ? [
+              { square: data.lastMoveUci.slice(0, 2), type: 'lastmove' },
+              { square: data.lastMoveUci.slice(2, 4), type: 'lastmove' },
+            ]
+          : [];
       },
       error: (err: { status?: number }) => {
         if (err?.status === 401) {
@@ -179,11 +189,11 @@ export class PuzzlesComponent implements OnInit {
     if (!this.puzzleId || this.isSubmitting) return;
     this.isSubmitting = true;
 
-    this.puzzles.submit(this.puzzleId, uci).subscribe({
+    this.puzzles.submit(this.puzzleId, uci, this.moveIndex).subscribe({
       next: (data) => {
         this.isSubmitting = false;
 
-        if (data.correct) {
+        if (data.correct && data.puzzleComplete) {
           this.sound.play('puzzleCorrect');
           celebratePuzzleCorrect();
           this.feedback = this.translate.t('puzzles.correct');
@@ -191,6 +201,19 @@ export class PuzzlesComponent implements OnInit {
           this.streak += 1;
           this.bestStreak = Math.max(this.bestStreak, this.streak);
           setTimeout(() => this.loadNext(), 600);
+        } else if (data.correct) {
+          this.sound.play('puzzleCorrect');
+          this.feedback = this.translate.t('puzzles.keepGoing');
+          if (data.fenAfter) this.fen = data.fenAfter;
+          if (data.opponentReplyUci) {
+            this.lastMoveUci = data.opponentReplyUci;
+            this.markers = [
+              { square: data.opponentReplyUci.slice(0, 2), type: 'lastmove' },
+              { square: data.opponentReplyUci.slice(2, 4), type: 'lastmove' },
+            ];
+          }
+          if (data.nextCorrectMoveUci) this.correctMoveUci = data.nextCorrectMoveUci;
+          this.moveIndex += 1;
         } else {
           this.sound.play('puzzleWrong');
           this.feedback = `❌ ${data.reason || this.translate.t('puzzles.incorrectFallback')}`;

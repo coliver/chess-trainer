@@ -9,6 +9,9 @@ export interface NextPuzzle {
   rating: number;
   themes?: string | null;
   correctMoveUci: string;
+  lastMoveUci: string;
+  moveIndex: number;
+  solverMovesTotal: number;
 }
 
 /** Shape of `POST /api/puzzles/:id/attempts`. */
@@ -16,6 +19,9 @@ export interface PuzzleAttemptResult {
   correct: boolean;
   reason: string;
   fenAfter?: string | null;
+  puzzleComplete?: boolean | null;
+  opponentReplyUci?: string | null;
+  nextCorrectMoveUci?: string | null;
 }
 
 /** Shape of `GET /api/puzzles/summary`. */
@@ -44,9 +50,10 @@ export class PuzzlesService {
     return this.http.get<NextPuzzle>('/api/puzzles/next');
   }
 
-  submit(puzzleId: string, moveUci: string): Observable<PuzzleAttemptResult> {
+  submit(puzzleId: string, moveUci: string, moveIndex: number): Observable<PuzzleAttemptResult> {
     return this.http.post<PuzzleAttemptResult>(`/api/puzzles/${puzzleId}/attempts`, {
       moveUci,
+      moveIndex,
     });
   }
 

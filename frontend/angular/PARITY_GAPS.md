@@ -157,21 +157,20 @@ moveOpponent/illegal sounds + `celebrateWin()`), and `puzzles.component.ts`
 `training.component.ts` already has its own local `blinkGreen` correct-move flash (parity with
 `useBlinkGreen.ts`) — that one wasn't touched.
 
-## 9. Newly discovered: Angular's puzzle attempts don't handle multi-move puzzles
+## 9. Angular's puzzle attempts didn't handle multi-move puzzles
 
-While wiring puzzle sounds/confetti into `puzzles.component.ts`, found its submit flow only
-handles single-move puzzles: `PuzzleAttemptResult` (in `core/puzzles.service.ts`) has just
-`correct`/`reason`/`fenAfter`, and any correct answer is treated as puzzle-complete. React's
-`Puzzles.tsx` (and the backend, per project memory — this was already fixed there 2026-08-24)
-distinguishes `correct && puzzleComplete` from `correct` alone: on a correct-but-not-complete
-answer it applies `opponentReplyUci`, advances to `nextCorrectMoveUci`, and increments
-`moveIndex` on the next submit — keeping the puzzle interactive through the rest of a mateIn2+
-sequence. Angular's `submit()` doesn't send `moveIndex` and has nowhere to put
-`opponentReplyUci`/`nextCorrectMoveUci`/`puzzleComplete` even if the backend sent them — a
-mateIn2+ puzzle in Angular likely ends (or misbehaves) after its first correct move instead of
-continuing. This is a real correctness bug, not a missing polish item — not fixed in this pass,
-needs its own pass touching `PuzzleAttemptResult`, `PuzzlesService.submit()`, and
-`puzzles.component.ts`'s submit handler together.
+**Status: landed 2026-08-27.** Confirmed the backend already fully supported this (fixed there
+2026-08-24, per project history) — `PuzzleNextResponse`/`PuzzleAttemptResponse` in
+`backend/app/routers/puzzles.py` already return `lastMoveUci`/`moveIndex`/`solverMovesTotal` and
+`puzzleComplete`/`opponentReplyUci`/`nextCorrectMoveUci`/accept `moveIndex`; this was a
+frontend-only gap. `core/puzzles.service.ts`'s `NextPuzzle`/`PuzzleAttemptResult` types widened
+to match, `submit()` now sends `moveIndex`, and `puzzles.component.ts`'s submit handler branches
+three ways (`correct && puzzleComplete` / `correct` alone / incorrect) instead of two — a
+correct-but-incomplete answer now applies `opponentReplyUci` (highlighted via a new `'lastmove'`
+marker kind added to `board.component.ts`'s `BoardMarkerKind`, wired to an already-existing but
+previously-unused `.marker-square-lastmove` CSS rule in `shared-styles/board.css`), advances to
+`nextCorrectMoveUci`, and increments `moveIndex` — staying interactive instead of reloading.
+`skip()`/reload-after-complete behavior is unchanged from before.
 
 ## 8. Dashboard/Training/Puzzles pages were never i18n'd
 

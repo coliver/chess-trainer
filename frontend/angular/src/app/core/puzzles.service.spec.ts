@@ -40,11 +40,11 @@ describe('PuzzlesService', () => {
   it('POSTs a submitted move to the puzzle attempts endpoint', () => {
     const attemptResult = { correct: true, reason: 'correct' };
     let result: unknown;
-    service.submit('p1', 'e2e4').subscribe((r) => (result = r));
+    service.submit('p1', 'e2e4', 0).subscribe((r) => (result = r));
 
     const req = httpMock.expectOne('/api/puzzles/p1/attempts');
     expect(req.request.method).toBe('POST');
-    expect(req.request.body).toEqual({ moveUci: 'e2e4' });
+    expect(req.request.body).toEqual({ moveUci: 'e2e4', moveIndex: 0 });
     req.flush(attemptResult);
 
     expect(result).toEqual(attemptResult);

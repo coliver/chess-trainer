@@ -45,6 +45,9 @@ describe('PuzzlesComponent', () => {
       fen: 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1',
       correctMoveUci: 'e7e5',
       rating: 1200,
+      lastMoveUci: 'e2e4',
+      moveIndex: 0,
+      solverMovesTotal: 1,
     });
 
     expect(cmp.puzzleId).toBe('p1');
@@ -82,6 +85,9 @@ describe('PuzzlesComponent', () => {
       fen: 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1',
       correctMoveUci: 'e7e5',
       rating: 1200,
+      lastMoveUci: 'e2e4',
+      moveIndex: 0,
+      solverMovesTotal: 1,
     });
 
     expect(cmp.orientation).toBe('black');
@@ -104,18 +110,51 @@ describe('PuzzlesComponent', () => {
       fen: 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1',
       correctMoveUci: 'e7e5',
       rating: 1200,
+      lastMoveUci: 'e2e4',
+      moveIndex: 0,
+      solverMovesTotal: 1,
     });
 
     const moved = cmp.onMove('e7', 'e5');
     expect(moved).toBe(true);
     expect(cmp.isSubmitting).toBe(true);
 
-    httpMock.expectOne('/api/puzzles/p1/attempts').flush({ correct: true, reason: '' });
+    httpMock.expectOne('/api/puzzles/p1/attempts').flush({ correct: true, reason: '', puzzleComplete: true });
 
     expect(cmp.solved).toBe(1);
     expect(cmp.streak).toBe(1);
     expect(cmp.bestStreak).toBe(1);
     expect(cmp.feedback).toContain('Correct');
+  });
+
+  it('advances to the next solver move on a correct-but-incomplete answer, without reloading', () => {
+    const cmp = create();
+    cmp.ngOnInit();
+    httpMock.expectOne('/api/puzzles/next').flush({
+      puzzleId: 'p1',
+      fen: 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1',
+      correctMoveUci: 'e7e5',
+      rating: 1200,
+      lastMoveUci: 'e2e4',
+      moveIndex: 0,
+      solverMovesTotal: 2,
+    });
+
+    cmp.onMove('e7', 'e5');
+    httpMock.expectOne('/api/puzzles/p1/attempts').flush({
+      correct: true,
+      reason: '',
+      puzzleComplete: false,
+      fenAfter: 'rnbqkbnr/ppp1pppp/8/3p4/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2',
+      opponentReplyUci: 'g1f3',
+      nextCorrectMoveUci: 'd7d5',
+    });
+
+    expect(cmp.solved).toBe(0);
+    expect(cmp.moveIndex).toBe(1);
+    expect(cmp.correctMoveUci).toBe('d7d5');
+    expect(cmp.fen).toBe('rnbqkbnr/ppp1pppp/8/3p4/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2');
+    expect(cmp.puzzleId).toBe('p1');
   });
 
   it('reverts the board and resets streak on an incorrect answer', () => {
@@ -127,6 +166,9 @@ describe('PuzzlesComponent', () => {
       fen: startFen,
       correctMoveUci: 'e7e5',
       rating: 1200,
+      lastMoveUci: 'e2e4',
+      moveIndex: 0,
+      solverMovesTotal: 1,
     });
     cmp.streak = 3;
 
@@ -146,6 +188,9 @@ describe('PuzzlesComponent', () => {
       fen: 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1',
       correctMoveUci: 'e7e5',
       rating: 1200,
+      lastMoveUci: 'e2e4',
+      moveIndex: 0,
+      solverMovesTotal: 1,
     });
 
     expect(cmp.onMoveStart('e2')).toBe(false);
@@ -160,6 +205,9 @@ describe('PuzzlesComponent', () => {
       fen: 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1',
       correctMoveUci: 'e7e5',
       rating: 1200,
+      lastMoveUci: 'e2e4',
+      moveIndex: 0,
+      solverMovesTotal: 1,
     });
     cmp.streak = 5;
 
@@ -171,6 +219,9 @@ describe('PuzzlesComponent', () => {
       fen: 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1',
       correctMoveUci: 'e7e5',
       rating: 1200,
+      lastMoveUci: 'e2e4',
+      moveIndex: 0,
+      solverMovesTotal: 1,
     });
     expect(cmp.puzzleId).toBe('p2');
   });

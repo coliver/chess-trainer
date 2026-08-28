@@ -4,6 +4,12 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ## August 27, 2026
 
+### 🐛 Fixed
+
+#### 🧩 Angular Multi-Move Puzzles
+
+> Closes `frontend/angular/PARITY_GAPS.md` §9: Angular's puzzle-attempt flow treated any correct answer as puzzle-complete, so a mateIn2+ puzzle broke (or silently reloaded) after its first correct move. The backend already fully supported multi-move puzzles (fixed 2026-08-24) — `PuzzleNextResponse`/`PuzzleAttemptResponse` already carried `lastMoveUci`/`moveIndex`/`solverMovesTotal`/`puzzleComplete`/`opponentReplyUci`/`nextCorrectMoveUci` — so this was purely a frontend wiring gap. `puzzles.service.ts`'s types widened to match, `submit()` now sends `moveIndex`, and `puzzles.component.ts` branches three ways (complete / correct-but-more-to-go / incorrect) instead of two, applying the opponent's auto-played reply and advancing to the next required move instead of ending the puzzle early. The opponent's reply is now highlighted on the board via a new `'lastmove'` marker kind in `board.component.ts`, wired to a CSS rule (`shared-styles/board.css`) that existed but was never used by Angular.
+
 ### ✨ Added
 
 #### 🌐 Angular Dashboard/Training/Puzzles i18n

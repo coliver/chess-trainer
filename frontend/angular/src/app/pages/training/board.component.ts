@@ -25,7 +25,7 @@ import {
 // the app is served under /angular/.
 const ASSETS_URL = '/angular/cm-chessboard-assets/';
 
-export type BoardMarkerKind = 'hint' | 'blink';
+export type BoardMarkerKind = 'hint' | 'blink' | 'lastmove';
 export interface BoardMarker {
   square: string;
   type: BoardMarkerKind;
@@ -39,6 +39,7 @@ const CUSTOM_MARKER: Record<
 > = {
   hint: { class: 'marker-square-hint', slice: 'markerSquare' },
   blink: { class: 'marker-square-blink', slice: 'markerSquare' },
+  lastmove: { class: 'marker-square-lastmove', slice: 'markerSquare' },
 };
 
 /**
