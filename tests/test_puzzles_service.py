@@ -123,6 +123,54 @@ def test_submit_puzzle_attempt_records_hint_used_column_exists(db, test_user):
     assert row.hint_used is False
 
 
+def test_submit_puzzle_attempt_used_hint_true_sets_hint_used(db, test_user):
+    make_puzzle(db)
+
+    service.submit_puzzle_attempt(
+        db, user_id=test_user.id, puzzle_id="p1", move_uci="e7e5", move_index=0, used_hint=True
+    )
+
+    row = (
+        db.query(PuzzleProgress)
+        .filter(PuzzleProgress.user_id == test_user.id, PuzzleProgress.puzzle_id == "p1")
+        .first()
+    )
+    assert row.hint_used is True
+
+
+def test_submit_puzzle_attempt_hint_used_is_sticky_across_later_attempts(db, test_user):
+    make_puzzle(db)
+
+    service.submit_puzzle_attempt(
+        db, user_id=test_user.id, puzzle_id="p1", move_uci="e7e6", move_index=0, used_hint=True
+    )
+    service.submit_puzzle_attempt(
+        db, user_id=test_user.id, puzzle_id="p1", move_uci="e7e5", move_index=0, used_hint=False
+    )
+
+    row = (
+        db.query(PuzzleProgress)
+        .filter(PuzzleProgress.user_id == test_user.id, PuzzleProgress.puzzle_id == "p1")
+        .first()
+    )
+    assert row.hint_used is True
+
+
+def test_submit_puzzle_attempt_no_hint_leaves_hint_used_false(db, test_user):
+    make_puzzle(db)
+
+    service.submit_puzzle_attempt(
+        db, user_id=test_user.id, puzzle_id="p1", move_uci="e7e5", move_index=0
+    )
+
+    row = (
+        db.query(PuzzleProgress)
+        .filter(PuzzleProgress.user_id == test_user.id, PuzzleProgress.puzzle_id == "p1")
+        .first()
+    )
+    assert row.hint_used is False
+
+
 def test_submit_puzzle_attempt_unknown_puzzle_returns_none(db, test_user):
     result = service.submit_puzzle_attempt(
         db, user_id=test_user.id, puzzle_id="does-not-exist", move_uci="e7e5", move_index=0

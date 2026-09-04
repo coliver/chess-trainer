@@ -127,7 +127,12 @@ def _build_puzzle_position(puzzle: Puzzle) -> PuzzlePosition:
 
 
 def submit_puzzle_attempt(
-    db: Session, user_id: int, puzzle_id: str, move_uci: str, move_index: int
+    db: Session,
+    user_id: int,
+    puzzle_id: str,
+    move_uci: str,
+    move_index: int,
+    used_hint: bool = False,
 ):
     puzzle = db.get(Puzzle, puzzle_id)
     if puzzle is None:
@@ -174,6 +179,7 @@ def submit_puzzle_attempt(
         )
         db.add(row)
 
+    row.hint_used = row.hint_used or used_hint
     row.attempts += 1
     if result.correct:
         row.correct_count += 1

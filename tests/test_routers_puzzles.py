@@ -114,7 +114,7 @@ def test_post_puzzle_attempt_404_when_puzzle_missing(client, monkeypatch: pytest
     monkeypatch.setattr(
         puzzles_router,
         "submit_puzzle_attempt",
-        lambda db, user_id, puzzle_id, move_uci, move_index: None,
+        lambda db, user_id, puzzle_id, move_uci, move_index, used_hint=False: None,
     )
 
     r = client.post("/puzzles/missing/attempts", json={"moveUci": "e7e5"})
@@ -135,7 +135,7 @@ def test_post_puzzle_attempt_success_maps_fields(client, monkeypatch: pytest.Mon
     monkeypatch.setattr(
         puzzles_router,
         "submit_puzzle_attempt",
-        lambda db, user_id, puzzle_id, move_uci, move_index: Result(),
+        lambda db, user_id, puzzle_id, move_uci, move_index, used_hint=False: Result(),
     )
 
     r = client.post("/puzzles/p1/attempts", json={"moveUci": "e7e5"})
@@ -165,7 +165,7 @@ def test_post_puzzle_attempt_intermediate_move_maps_opponent_reply(
 
     captured = {}
 
-    def fake_submit(db, user_id, puzzle_id, move_uci, move_index):
+    def fake_submit(db, user_id, puzzle_id, move_uci, move_index, used_hint=False):
         captured["move_index"] = move_index
         return Result()
 
@@ -182,6 +182,30 @@ def test_post_puzzle_attempt_intermediate_move_maps_opponent_reply(
         "opponentReplyUci": "g1f3",
         "nextCorrectMoveUci": "b8c6",
     }
+
+
+def test_post_puzzle_attempt_passes_used_hint(client, monkeypatch: pytest.MonkeyPatch):
+    class Result:
+        http_status = 200
+        correct = True
+        reason = "correct move"
+        fen_after = "after-fen"
+        error_message = None
+        puzzle_complete = True
+        opponent_reply_uci = None
+        next_correct_move_uci = None
+
+    captured = {}
+
+    def fake_submit(db, user_id, puzzle_id, move_uci, move_index, used_hint=False):
+        captured["used_hint"] = used_hint
+        return Result()
+
+    monkeypatch.setattr(puzzles_router, "submit_puzzle_attempt", fake_submit)
+
+    r = client.post("/puzzles/p1/attempts", json={"moveUci": "e7e5", "usedHint": True})
+    assert r.status_code == 200
+    assert captured["used_hint"] is True
 
 
 def test_get_puzzles_summary_maps_fields(client, monkeypatch: pytest.MonkeyPatch):

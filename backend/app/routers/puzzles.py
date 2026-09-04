@@ -39,6 +39,7 @@ class PuzzleNextResponse(CamelModel):
 class PuzzleAttemptRequest(CamelModel):
     move_uci: str
     move_index: int = 0
+    used_hint: bool = False
 
 
 class PuzzleAttemptResponse(CamelModel):
@@ -97,6 +98,7 @@ def post_puzzle_attempt(
         puzzle_id=puzzle_id,
         move_uci=req.move_uci,
         move_index=req.move_index,
+        used_hint=req.used_hint,
     )
     if result is None:
         raise HTTPException(status_code=404, detail="Puzzle not found")
@@ -134,6 +136,7 @@ def post_puzzle_attempt_text(
     puzzle_id: str,
     move_uci: str = Query(..., alias="moveUci"),
     move_index: int = Query(0, alias="moveIndex"),
+    used_hint: bool = Query(False, alias="usedHint"),
     ansi: bool = Query(True),
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user_or_none),
@@ -146,6 +149,7 @@ def post_puzzle_attempt_text(
         puzzle_id=puzzle_id,
         move_uci=move_uci,
         move_index=move_index,
+        used_hint=used_hint,
     )
     if result is None:
         raise HTTPException(status_code=404, detail="Puzzle not found")
