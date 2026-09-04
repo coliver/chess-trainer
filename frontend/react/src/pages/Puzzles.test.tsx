@@ -706,6 +706,69 @@ describe("Puzzles Page", () => {
         params: { excludeId: "p1" },
       });
     });
+
+    it("does not leak the live puzzle's hint arrow or wrong-move feedback into a past entry", async () => {
+      (api.get as ReturnType<typeof vi.fn>)
+        .mockResolvedValueOnce({ data: NEXT_PUZZLE })
+        .mockResolvedValueOnce({ data: { ...NEXT_PUZZLE, puzzleId: "p2" } });
+      (api.post as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        data: {
+          correct: true,
+          reason: "",
+          fenAfter: NEXT_PUZZLE.fen,
+          puzzleComplete: true,
+        },
+      });
+
+      renderPuzzles();
+      await screen.findByText("Rating ~1500");
+
+      // Solve puzzle 1 and advance to puzzle 2 (the new frontier).
+      applyMoveMock.mockReturnValueOnce({
+        nextFen: NEXT_PUZZLE.fen,
+        uci: "e2e4",
+      });
+      act(() => {
+        capturedProps.onMove?.("e2", "e4");
+      });
+      const nextButton = await screen.findByRole("button", { name: /Next puzzle/ });
+      await user.click(nextButton);
+      await waitFor(() => expect(api.get).toHaveBeenCalledTimes(2));
+
+      // Miss 4 times on puzzle 2 to trigger the auto-hint-after-misses arrow.
+      const missOnce = async () => {
+        (api.post as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+          data: { correct: false, reason: "wrong move", fenAfter: null, puzzleComplete: false },
+        });
+        applyMoveMock.mockReturnValueOnce({
+          nextFen: "8/8/8/8/8/8/8/8 w - - 0 1",
+          uci: "e2e5",
+        });
+        await act(async () => {
+          capturedProps.onMove?.("e2", "e5");
+        });
+        await screen.findByText("❌ wrong move");
+      };
+      await missOnce();
+      await missOnce();
+      await missOnce();
+      await missOnce();
+
+      // Confirm the live puzzle really is showing a hint arrow and the wrong
+      // feedback before stepping back — otherwise this test proves nothing.
+      expect(capturedProps.arrows).toEqual([
+        { from: "e2", to: "e4", type: "info" },
+      ]);
+      expect(screen.getByText("❌ wrong move")).toBeInTheDocument();
+
+      const prevButton = screen.getByRole("button", { name: /Previous puzzle/ });
+      await user.click(prevButton);
+
+      // Now viewing puzzle 1's solved, read-only entry: neither puzzle 2's
+      // hint arrow nor its wrong-move feedback should leak into this view.
+      expect(capturedProps.arrows ?? []).toHaveLength(0);
+      expect(screen.queryByText("❌ wrong move")).not.toBeInTheDocument();
+    });
   });
 
   it("redirects to login on a 401", async () => {

@@ -294,7 +294,7 @@ export const Puzzles = () => {
   // Puzzles keeps its own neutral icon (pawn) rather than deriveStatus's king.
   const statusIcon = feedbackKind === "neutral" ? "♟" : feedbackIcon;
   const statusMsg =
-    feedback ||
+    (viewingPast ? "" : feedback) ||
     (puzzleId
       ? t(
           solverColor === "b"
@@ -364,11 +364,11 @@ export const Puzzles = () => {
   }, [viewingPast, currentEntry, lastMoveUci, correctMoveUci, effectiveHintLevel, puzzleComplete]);
 
   const hintArrows = useMemo((): BoardArrow[] => {
-    if (effectiveHintLevel < 1 || puzzleComplete || !correctMoveUci) return [];
+    if (viewingPast || effectiveHintLevel < 1 || puzzleComplete || !correctMoveUci) return [];
     return [
       { from: correctMoveUci.slice(0, 2), to: correctMoveUci.slice(2, 4), type: "info" },
     ];
-  }, [effectiveHintLevel, puzzleComplete, correctMoveUci]);
+  }, [viewingPast, effectiveHintLevel, puzzleComplete, correctMoveUci]);
 
   // The idle "find the best move" prompt shows a plain pawn glyph, colored
   // to match the side actually solving the puzzle (Puzzles overrides
