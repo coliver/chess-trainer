@@ -66,10 +66,14 @@ def get_next_puzzle(
     "skip"/"next" can't hand back the same due puzzle it was just given.
     """
     if theme is not None:
+        solved_ids = select(PuzzleProgress.puzzle_id).where(
+            PuzzleProgress.user_id == user_id, PuzzleProgress.correct_count > 0
+        )
         query = (
             select(Puzzle)
             .where(text("string_to_array(themes, ' ') @> ARRAY[:theme]"))
             .params(theme=theme)
+            .where(Puzzle.id.not_in(solved_ids))
         )
         if exclude_id is not None:
             query = query.where(Puzzle.id != exclude_id)

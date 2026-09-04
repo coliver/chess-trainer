@@ -315,15 +315,58 @@ def test_get_next_puzzle_with_theme_does_not_substring_match(db, test_user):
     assert result is None
 
 
-def test_get_next_puzzle_with_theme_ignores_due_dates(db, test_user):
+def test_get_next_puzzle_with_theme_excludes_solved_puzzles(db, test_user):
     make_puzzle(db, id="p1", themes="fork")
+    make_puzzle(db, id="p2", themes="fork")
 
-    # Solve it once so it's no longer "unseen" and has a future due_at.
     service.submit_puzzle_attempt(
         db, user_id=test_user.id, puzzle_id="p1", move_uci="e7e5", move_index=0
     )
 
-    # Free-practice mode should still return it even though it's not due.
+    result = service.get_next_puzzle(db, test_user.id, theme="fork")
+    assert result is not None
+    assert result.puzzle_id == "p2"
+
+
+def test_get_next_puzzle_with_theme_still_returns_skipped_but_unsolved_puzzle(db, test_user):
+    make_puzzle(db, id="p1", themes="fork")
+
+    # A wrong (unsolved) attempt must not exclude the puzzle from theme mode.
+    service.submit_puzzle_attempt(
+        db, user_id=test_user.id, puzzle_id="p1", move_uci="e7e6", move_index=0
+    )
+
+    result = service.get_next_puzzle(db, test_user.id, theme="fork")
+    assert result is not None
+    assert result.puzzle_id == "p1"
+
+
+def test_get_next_puzzle_with_theme_none_when_all_matches_solved(db, test_user):
+    make_puzzle(db, id="p1", themes="fork")
+
+    service.submit_puzzle_attempt(
+        db, user_id=test_user.id, puzzle_id="p1", move_uci="e7e5", move_index=0
+    )
+
+    result = service.get_next_puzzle(db, test_user.id, theme="fork")
+    assert result is None
+
+
+def test_get_next_puzzle_with_theme_ignores_due_dates_for_unsolved_puzzles(db, test_user):
+    make_puzzle(db, id="p1", themes="fork")
+
+    # A due_at in the future must not block an unsolved puzzle from theme mode.
+    row = PuzzleProgress(
+        user_id=test_user.id,
+        puzzle_id="p1",
+        attempts=1,
+        correct_count=0,
+        incorrect_count=1,
+        due_at=datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(days=5),
+    )
+    db.add(row)
+    db.commit()
+
     result = service.get_next_puzzle(db, test_user.id, theme="fork")
     assert result is not None
     assert result.puzzle_id == "p1"
