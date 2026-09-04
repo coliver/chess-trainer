@@ -62,7 +62,15 @@ export const Puzzles = () => {
   const viewingPast = !atFrontier && historyIndex >= 0;
   const currentEntry = viewingPast ? history[historyIndex] : null;
 
-  const puzzleId = atFrontier ? (history[historyIndex]?.puzzle.puzzleId ?? null) : null;
+  // Set when loadNext hits a 404 (no puzzles due). Without this, puzzleId
+  // would keep pointing at the previously-solved frontier entry, leaving the
+  // board interactive on an already-completed position.
+  const [frontierExhausted, setFrontierExhausted] = useState(false);
+
+  const puzzleId =
+    !frontierExhausted && atFrontier
+      ? (history[historyIndex]?.puzzle.puzzleId ?? null)
+      : null;
   const puzzleIdRef = useRef(puzzleId);
   useEffect(() => {
     puzzleIdRef.current = puzzleId;
@@ -137,6 +145,7 @@ export const Puzzles = () => {
     setHintLevel(-1);
     usedHintRef.current = false;
     setWrongAttempts(0);
+    setFrontierExhausted(false);
     try {
       const res = await api.get<NextPuzzle>("/puzzles/next", {
         params: {
@@ -178,6 +187,7 @@ export const Puzzles = () => {
       if (e.response?.status === 404) {
         setLastMoveUci("");
         setNoPuzzlesDue(true);
+        setFrontierExhausted(true);
         setFeedback(
           theme ? t("puzzles.noPuzzlesForTheme") : t("puzzles.noPuzzlesDue"),
         );
@@ -287,7 +297,18 @@ export const Puzzles = () => {
     }
   }, [loadNext]);
 
-  const solverColor = sideToMove(fen);
+  // While viewing a past entry, rating/themes/progress/to-move should reflect
+  // that entry's own puzzle, not the live frontier puzzle's current state.
+  const displayRating = viewingPast ? (currentEntry?.puzzle.rating ?? null) : rating;
+  const displayThemes = viewingPast ? (currentEntry?.puzzle.themes ?? null) : themes;
+  const displayMoveIndex = viewingPast
+    ? (currentEntry?.puzzle.moveIndex ?? 0)
+    : moveIndex;
+  const displaySolverMovesTotal = viewingPast
+    ? (currentEntry?.puzzle.solverMovesTotal ?? 1)
+    : solverMovesTotal;
+
+  const solverColor = sideToMove(viewingPast ? (currentEntry?.puzzle.fen ?? fen) : fen);
 
   const { kind: feedbackKind, icon: feedbackIcon } = classifyFeedback(feedback);
   const statusKind = feedbackKind === "neutral" ? "your" : feedbackKind;
@@ -339,11 +360,11 @@ export const Puzzles = () => {
 
   const themeList = useMemo(
     () =>
-      (themes ?? "")
+      (displayThemes ?? "")
         .split(" ")
         .filter(Boolean)
         .map(formatThemeLabel),
-    [themes],
+    [displayThemes],
   );
 
   // Highlight the enemy's setup move (from/to) that produced this puzzle position.
@@ -469,16 +490,16 @@ export const Puzzles = () => {
               <div className="rail-eyebrow">{t("puzzles.eyebrow")}</div>
               <div className="rail-title">
                 <h1>{t("puzzles.title")}</h1>
-                {rating != null && (
+                {displayRating != null && (
                   <span className="eco-chip">
-                    {t("puzzles.rating", { rating })}
+                    {t("puzzles.rating", { rating: displayRating })}
                   </span>
                 )}
-                {solverMovesTotal > 1 && (
+                {displaySolverMovesTotal > 1 && (
                   <span className="eco-chip">
                     {t("puzzles.moveProgress", {
-                      current: moveIndex + 1,
-                      total: solverMovesTotal,
+                      current: displayMoveIndex + 1,
+                      total: displaySolverMovesTotal,
                     })}
                   </span>
                 )}

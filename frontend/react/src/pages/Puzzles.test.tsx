@@ -335,6 +335,48 @@ describe("Puzzles Page", () => {
     });
   });
 
+  it("goes non-interactive with no Skip button when the frontier runs out after solving a puzzle", async () => {
+    (api.get as ReturnType<typeof vi.fn>)
+      .mockResolvedValueOnce({ data: NEXT_PUZZLE })
+      .mockRejectedValueOnce({ response: { status: 404 } });
+    (api.post as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+      data: {
+        correct: true,
+        reason: "",
+        fenAfter: NEXT_PUZZLE.fen,
+        puzzleComplete: true,
+      },
+    });
+
+    renderPuzzles();
+    await screen.findByText("Rating ~1500");
+
+    applyMoveMock.mockReturnValueOnce({
+      nextFen: NEXT_PUZZLE.fen,
+      uci: "e2e4",
+    });
+    act(() => {
+      capturedProps.onMove?.("e2", "e4");
+    });
+
+    const nextButton = await screen.findByRole("button", {
+      name: /Next puzzle/,
+    });
+    await user.click(nextButton);
+
+    await screen.findByText(
+      "No puzzles due right now — check back later.",
+    );
+
+    // The board must not stay interactive on the already-solved puzzle, and
+    // Skip must not reappear — otherwise a stray drag would submit a bogus
+    // attempt against a finished puzzle.
+    expect(capturedProps.interactive).toBe(false);
+    expect(
+      screen.queryByRole("button", { name: /Skip puzzle/ }),
+    ).not.toBeInTheDocument();
+  });
+
   it("shows an empty state and hides Skip when no puzzles are due", async () => {
     (api.get as ReturnType<typeof vi.fn>).mockRejectedValueOnce({
       response: { status: 404 },
@@ -768,6 +810,61 @@ describe("Puzzles Page", () => {
       // hint arrow nor its wrong-move feedback should leak into this view.
       expect(capturedProps.arrows ?? []).toHaveLength(0);
       expect(screen.queryByText("❌ wrong move")).not.toBeInTheDocument();
+    });
+
+    it("shows the past entry's own rating/themes/progress when viewing it, not the live puzzle's", async () => {
+      const PUZZLE_1 = { ...NEXT_MULTI_MOVE_PUZZLE, puzzleId: "p1", rating: 1200, themes: "pin" };
+      const PUZZLE_2 = { ...NEXT_MULTI_MOVE_PUZZLE, puzzleId: "p2", rating: 2000, themes: "skewer" };
+      (api.get as ReturnType<typeof vi.fn>)
+        .mockResolvedValueOnce({ data: PUZZLE_1 })
+        .mockResolvedValueOnce({ data: PUZZLE_2 });
+      (api.post as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        data: {
+          correct: true,
+          reason: "",
+          fenAfter: PUZZLE_1.fen,
+          puzzleComplete: false,
+          opponentReplyUci: "g1f3",
+          nextCorrectMoveUci: "b8c6",
+        },
+      });
+      (api.post as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        data: { correct: true, reason: "", fenAfter: "final-fen", puzzleComplete: true },
+      });
+
+      renderPuzzles();
+      await screen.findByText("Rating ~1200");
+
+      // Solve both moves of puzzle 1 to completion.
+      applyMoveMock.mockReturnValueOnce({ nextFen: PUZZLE_1.fen, uci: "e2e4" });
+      act(() => {
+        capturedProps.onMove?.("e2", "e4");
+      });
+      await screen.findByText("✅ Keep going…");
+
+      applyMoveMock.mockReturnValueOnce({ nextFen: "final-fen", uci: "b8c6" });
+      act(() => {
+        capturedProps.onMove?.("b8", "c6");
+      });
+
+      const nextButton = await screen.findByRole("button", { name: /Next puzzle/ });
+      await user.click(nextButton);
+      await waitFor(() => expect(api.get).toHaveBeenCalledTimes(2));
+
+      // Confirm puzzle 2 (the live frontier) is showing its own metadata.
+      await screen.findByText("Rating ~2000");
+      expect(screen.queryByText(/pin/)).not.toBeInTheDocument();
+
+      const prevButton = screen.getByRole("button", { name: /Previous puzzle/ });
+      await user.click(prevButton);
+
+      // Now viewing puzzle 1's past entry: rating/themes/progress must
+      // reflect puzzle 1, not the live puzzle 2 state.
+      expect(screen.getByText("Rating ~1200")).toBeInTheDocument();
+      expect(screen.queryByText("Rating ~2000")).not.toBeInTheDocument();
+      expect(screen.getByText(/pin/)).toBeInTheDocument();
+      expect(screen.queryByText(/skewer/)).not.toBeInTheDocument();
+      expect(screen.getByText("Move 1 of 2")).toBeInTheDocument();
     });
   });
 
