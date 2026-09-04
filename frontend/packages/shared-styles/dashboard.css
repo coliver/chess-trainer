@@ -115,6 +115,8 @@
   transition: width 0.3s ease;
 }
 .progress-review-btn {
+  position: relative;
+  overflow: hidden;
   height: 100%;
   min-height: 68px;
   border: 1px solid var(--accent, #6c8cff);
@@ -133,6 +135,19 @@
   border-color: var(--border);
   opacity: 1;
   cursor: default;
+}
+.progress-review-btn:not(:disabled) {
+  background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 75%, black));
+  font-weight: 700;
+}
+.progress-review-btn:not(:disabled)::after {
+  content: "🔥";
+  position: absolute;
+  right: -6px;
+  top: -10px;
+  font-size: 54px;
+  opacity: 0.18;
+  pointer-events: none;
 }
 .progress-review-btn:not(:disabled):hover {
   filter: brightness(1.08);
@@ -830,21 +845,8 @@
     display: none;
   }
   .progress-review-btn:not(:disabled) {
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 75%, black));
     min-height: 52px;
     font-size: 15px;
-    font-weight: 700;
-  }
-  .progress-review-btn:not(:disabled)::after {
-    content: "🔥";
-    position: absolute;
-    right: -6px;
-    top: -10px;
-    font-size: 54px;
-    opacity: 0.18;
-    pointer-events: none;
   }
 }
 

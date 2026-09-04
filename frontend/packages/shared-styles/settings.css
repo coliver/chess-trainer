@@ -9,8 +9,12 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  width: 100%;
-  margin: -28px -28px 20px;
+  /* .card's padding (28px) + border (1px) on each side; width:100% alone
+     can't be pulled wider by the negative margins below because a button's
+     auto-sizing shrink-wraps to content instead of filling like a normal
+     block box, so the extra bleed has to be added explicitly here. */
+  width: calc(100% + 58px);
+  margin: -29px -29px 20px;
   padding: 14px 20px;
   border: none;
   border-bottom: 1px solid var(--border);
@@ -22,6 +26,15 @@
   text-align: left;
   cursor: pointer;
   transition: background 0.15s, color 0.15s;
+}
+
+/* .card's padding drops to 18px/14px (asymmetric) below 600px; match it so
+   the button keeps bleeding flush to the card's edges at that breakpoint too. */
+@media (max-width: 600px) {
+  .settings-back-button {
+    width: calc(100% + 30px);
+    margin: -19px -15px 20px;
+  }
 }
 
 .settings-back-button:hover {

@@ -2,6 +2,20 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ---
 
+## September 4, 2026
+
+### ✨ Added
+
+#### 🎨 Dashboard Hero Review Button on Desktop
+
+> The mobile-first dashboard redesign gave the "Review due" / "Practice puzzles" buttons a gradient-plus-fire hero treatment, extended to the tablet breakpoint shortly after, but desktop (981px+) kept the original flat button, so the widest, most-used layout looked the least finished. `dashboard.css`'s gradient background, bold weight, and fire-glyph flourish now live in `.progress-review-btn`'s base rule instead of the `max-width: 980px` block, so all three breakpoints match; only the mobile/tablet-specific height and font-size bump stayed scoped to that block. Desktop's two-column stat strip and boxy weak-spot cards were left untouched: those are deliberate wide-screen treatments, not gaps.
+
+### 🐛 Fixed
+
+#### 🎨 Settings Back Button Not Stretching on Desktop
+
+> `.settings-back-button` set `width: 100%` plus negative margins meant to bleed it out to `.card`'s padded edges, but margins only reposition a box, they don't resize it, and a button's `width: auto` shrink-wraps to content instead of filling like a normal block element. That left the button up to 57px short of the card's right edge once `.settings-card`'s `max-width: 560px` kicked in on desktop. Switched to `width: calc(100% + Npx)` sized to the card's actual padding+border, with a matching override for the 18px/14px padding `.card` gets below 600px, so the button stays flush at every breakpoint.
+
 ## August 27, 2026
 
 ### 🐛 Fixed
