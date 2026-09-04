@@ -214,7 +214,7 @@ Puzzle routes present tactical puzzles to the user and track their performance. 
 |---|---|---|
 | `GET` | `/puzzles/next` | Fetch the next puzzle with FEN position, rating, themes, correct move, and opponent's setup move for board highlighting |
 | `GET` | `/puzzles/next.text` | Plain-text rendering of `/puzzles/next` — a colored board (Unicode chess glyphs, or ASCII letters with `?ansi=0`) plus a move prompt, for solving puzzles from a terminal |
-| `POST` | `/puzzles/{puzzle_id}/attempts` | Submit an attempted move (`{"moveUci": "..."}`) and receive feedback on correctness and next board state |
+| `POST` | `/puzzles/{puzzle_id}/attempts` | Submit an attempted move (`{"moveUci": "...", "moveIndex": 0}`, `moveIndex` defaults to `0`) and receive feedback on correctness and next board state; multi-move puzzles keep incrementing `moveIndex` across calls |
 | `POST` | `/puzzles/{puzzle_id}/attempts.text` | Plain-text sibling of the above — takes `moveUci`/`moveIndex` as query params instead of a JSON body, returns a colored board and outcome |
 | `GET` | `/puzzles/summary` | Return overall puzzle statistics: puzzles seen, overall accuracy, number mastered |
 | `GET` | `/puzzles/summary.text` | Plain-text rendering of `/puzzles/summary` |

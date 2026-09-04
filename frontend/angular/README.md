@@ -14,33 +14,52 @@ angular/
 ├── src/
 │   ├── app/
 │   │   ├── core/
-│   │   │   ├── auth.service.ts        # login/logout, token storage
-│   │   │   ├── auth.interceptor.ts    # attaches Bearer, refreshes on 401
+│   │   │   ├── auth.service.ts        # login/register/logout, verify-email, resend-verification
+│   │   │   ├── auth.interceptor.ts    # attaches Bearer, single-flight refresh on 401
 │   │   │   ├── auth.guard.ts          # guards routes via GET /auth/me
 │   │   │   ├── openings.service.ts    # GET /api/openings
-│   │   │   ├── progress.service.ts    # user progress tracking
-│   │   │   ├── puzzles.service.ts     # GET /api/puzzles/next, POST /api/puzzles/:id/attempts
+│   │   │   ├── progress.service.ts    # summary/due/weak-spots progress tracking
+│   │   │   ├── puzzles.service.ts     # next/attempts/summary/themes
 │   │   │   ├── training.service.ts    # training session data
+│   │   │   ├── preferences.ts         # Preferences type + defaults
+│   │   │   ├── preferences.service.ts # GET/PATCH /api/users/me/preferences
+│   │   │   ├── preferences-store.service.ts # signal-based store over PreferencesService
+│   │   │   ├── sound.service.ts       # sound-effect playback
+│   │   │   ├── snow-preference.service.ts   # signal wrapper around the snow toggle
+│   │   │   ├── game-status.service.ts # status text shared into GameHeader
 │   │   │   └── i18n/                  # TranslateService/TranslatePipe, loads packages/i18n-locales
 │   │   ├── pages/
-│   │   │   ├── login/                 # POST /api/auth/login
+│   │   │   ├── login/                 # POST /api/auth/login (+ resend-verification on 403)
 │   │   │   ├── register/              # user registration
+│   │   │   ├── verify-email/          # GET /api/auth/verify-email (unguarded)
 │   │   │   ├── dashboard/             # openings list (guarded)
 │   │   │   ├── training/              # puzzle training view (guarded)
-│   │   │   │   └── board.component.ts # chess board UI (used in training)
-│   │   │   └── puzzles/               # puzzles library (guarded)
+│   │   │   │   └── board.component.ts # chess board UI (used in training/puzzles)
+│   │   │   ├── puzzles/               # puzzles library (guarded)
+│   │   │   ├── puzzle-themes/         # theme browser, links into puzzles (guarded)
+│   │   │   └── settings/              # preferences UI incl. live board preview (guarded)
 │   │   ├── shared/
-│   │   │   ├── header.component.ts    # top navigation
+│   │   │   ├── home-header.component.ts    # hamburger + brand + tabs (dashboard/puzzles)
+│   │   │   ├── game-header.component.ts    # back/status/settings (training/puzzles play)
+│   │   │   ├── overflow-menu.component.ts  # hamburger dropdown
 │   │   │   ├── theme-toggle.component.ts   # light/dark theme switcher
 │   │   │   ├── language-toggle.component.ts # language switcher
 │   │   │   ├── flip-board-button.component.ts # board orientation control
-│   │   │   └── knight-school-icon.component.ts # branding icon
+│   │   │   ├── knight-school-icon.component.ts # branding icon
+│   │   │   ├── auth-card.component.ts      # shared login/register/verify-email card shell
+│   │   │   ├── progress-stat.component.ts  # dashboard stat display
+│   │   │   ├── settings-toggle-row.component.ts  # settings on/off row
+│   │   │   └── settings-radio-group.component.ts # settings radio group
 │   │   ├── lib/                       # utility functions
 │   │   │   ├── group-openings.ts      # opening grouping logic
-│   │   │   └── opening-text.ts        # opening name/description utilities
-│   │   ├── app.routes.ts              # /login, /register, /dashboard, /training/:id, /puzzles (guarded), redirects
+│   │   │   ├── opening-text.ts        # opening name/description utilities
+│   │   │   ├── puzzle-themes.ts       # theme groups/labels/icons
+│   │   │   ├── snow.ts                # snow animation
+│   │   │   └── win-celebration.ts     # confetti celebration
+│   │   ├── app.routes.ts              # login, register, verify-email, dashboard, training/:id,
+│   │   │                              # puzzles, puzzles/themes, settings (guarded where noted)
 │   │   ├── app.config.ts              # provideHttpClient(withInterceptors([authInterceptor]))
-│   │   └── app.component.*            # top bar shell + <router-outlet>
+│   │   └── app.component.*            # routes HomeHeader/GameHeader by URL + <router-outlet>
 │   ├── index.html
 │   └── styles.css
 ├── Dockerfile                          # ng serve under /angular/ on :4200
@@ -60,9 +79,25 @@ interceptor attaches the access token as a `Bearer` header and, on a `401`, perf
 | Method | Endpoint | Purpose |
 |---|---|---|
 | `POST` | `/api/auth/login` | Authenticate; returns `{ id, email, username, access_token, refresh_token }` |
-| `POST` | `/api/auth/refresh` | Exchange a refresh token for a new access token |
+| `POST` | `/api/auth/register` | Register a new account |
+| `POST` | `/api/auth/refresh` | Exchange a refresh token for a new access token (single-flight) |
 | `GET`  | `/api/auth/me` | Confirm the current user (used by the route guard) |
+| `GET`  | `/api/auth/verify-email` | Verify an account via emailed token |
+| `POST` | `/api/auth/resend-verification` | Resend the verification email |
 | `GET`  | `/api/openings` | List openings for the dashboard (no auth) |
+| `GET`  | `/api/progress/summary` | Dashboard progress summary |
+| `GET`  | `/api/progress/due` | Positions due for review |
+| `GET`  | `/api/progress/weak-spots` | Weak-spot list |
+| `POST` | `/api/training-sessions` | Start a training session for an opening |
+| `POST` | `/api/training-sessions/from-due` | Start a review session from due positions |
+| `GET`  | `/api/training-sessions/:id/next` | Next training item |
+| `POST` | `/api/training-sessions/:id/responses` | Submit a training move |
+| `GET`  | `/api/puzzles/next` | Fetch the next puzzle |
+| `POST` | `/api/puzzles/:id/attempts` | Submit a puzzle attempt (supports multi-move via `moveIndex`) |
+| `GET`  | `/api/puzzles/summary` | Puzzle progress summary |
+| `GET`  | `/api/puzzles/themes` | Puzzle theme counts (Puzzle Themes page) |
+| `GET`  | `/api/users/me/preferences` | Fetch user preferences |
+| `PATCH`| `/api/users/me/preferences` | Update user preferences |
 
 ## 🚧 Development
 

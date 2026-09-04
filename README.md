@@ -133,20 +133,20 @@ What each client implements today, at a glance. ✅ shipped · 🟡 partial · �
 | Feature | React | Angular | Rails |
 |---|:---:|:---:|:---:|
 | Login / Register | ✅ | ✅ | ✅ |
-| Email verification | ✅ | ⬜ | ✅ |
-| Dashboard / opening browser | ✅ | ✅ | ✅ |
+| Email verification | ✅ | ✅ | ✅ |
+| Dashboard / opening browser | ✅ | 🟡 | ✅ |
 | Training drills | ✅ | 🟡 | ✅ |
 | Black-side play | ✅ | ✅ | ✅ |
 | Autoplay | ✅ | ✅ | ✅ |
-| Puzzles | ✅ | ✅ | ✅ |
-| Puzzle themes | ✅ | ⬜ | ✅ |
-| Settings (theme/board/pieces) | ✅ | 🟡 | ✅ |
-| i18n (30+ locales) | ✅ | ⬜ | ⬜ |
-| Sound feedback | ✅ | ⬜ | ✅ |
+| Puzzles | ✅ | 🟡 | ✅ |
+| Puzzle themes | ✅ | ✅ | ✅ |
+| Settings (theme/board/pieces) | ✅ | ✅ | ✅ |
+| i18n (30+ locales) | ✅ | ✅ | ⬜ |
+| Sound feedback | ✅ | ✅ | ✅ |
 | PWA / offline shell | ⬜ | ⬜ | ⬜ |
 
 **React** — production, actively deployed; the reference implementation.
-**Angular** — legacy, frozen since it stopped being built; missing everything shipped to React afterward.
+**Angular** — actively being brought back to parity (no longer frozen); infrastructure and all pages/routes now exist, but Dashboard/Training/Puzzles still lag React's current layout in places — see [`frontend/angular/PARITY_GAPS.md`](./frontend/angular/PARITY_GAPS.md) for the itemized list.
 **Rails** — dev-only experiment, not yet publicized; closest to React in coverage, with unwired PWA scaffolding unique to it.
 
 ### 🧩 Shared chess logic (`frontend/packages/chess-core`)

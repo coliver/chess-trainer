@@ -90,11 +90,12 @@ rails/
 │   ├── controllers/          # ApplicationController (auth/error rescue), sessions, registrations,
 │   │                          # email_verifications, dashboard, trainings, puzzles, settings
 │   ├── services/              # ApiClient, AuthenticatedApiClient, OpeningGrouping (Ruby port of
-│   │                          # react/src/lib/groupOpenings.ts)
+│   │                          # react/src/lib/groupOpenings.ts), PuzzleThemeGrouping
 │   ├── views/                 # ERB templates + Turbo Frame partials (dashboard/opening browser,
 │   │                          # trainings/show, puzzles/show)
 │   ├── javascript/
-│   │   ├── controllers/       # Stimulus: training, puzzle, board_preview, opening_thumb
+│   │   ├── controllers/       # Stimulus: training, puzzle, board_preview, opening_thumb,
+│   │   │                      # header_menu, needs_work, puzzle_theme_board, theme_select, theme_toggle
 │   │   └── chess/              # board_factory.js (cm-chessboard setup), sound.js
 │   └── assets/stylesheets/    # application.css (page-flash, etc.) — most styling comes from
 │                               # packages/shared-styles/*.css instead

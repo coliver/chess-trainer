@@ -34,7 +34,6 @@ react/
 │   │   ├── Board.tsx           # cm-chessboard wrapper
 │   │   ├── HomeHeader.tsx       # Compact home/dashboard header (~48–56px): knight icon + title + greeting + tabs + overflow menu
 │   │   ├── GameHeader.tsx       # Minimal in-game header (~40–44px): back button + status + settings icon
-│   │   ├── Header.tsx          # Nav header: dashboard/puzzles/settings/login/register + GitHub link
 │   │   ├── OverflowMenu.tsx     # Bottom-sheet menu: settings, logout, GitHub, language, theme, version
 │   │   └── openings/          # BoardPreview, OpeningCard, VariationList
 │   ├── pages/                 # Login, Register, Dashboard, Training, VerifyEmail, Puzzles, Settings (+ *.test.tsx alongside each)
