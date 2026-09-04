@@ -752,15 +752,58 @@
     border-color: var(--border);
     opacity: 1;
   }
+  .ob-toolbar {
+    padding-bottom: 14px;
+  }
+  .ob-title {
+    font-size: 18px;
+  }
+  .ob-search {
+    min-width: 0;
+    flex: 1 1 100%;
+  }
+  .ob-sort {
+    flex: 1 1 auto;
+  }
+  .ob-body {
+    margin-top: 14px;
+  }
+  .opening-grid {
+    grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
+    gap: 10px;
+  }
+  .opening-carousel .opening-card {
+    flex: 0 0 128px;
+  }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 980px) {
+  .ob-body {
+    grid-template-columns: 1fr;
+  }
+  .ob-preview {
+    border-left: 0;
+    padding-left: 0;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    order: -1; /* selected preview sits above the grid on narrow screens */
+  }
+  .ob-preview.is-empty {
+    display: none;
+  }
+
+  /* Below the desktop two-column split, Training and Puzzles stacking
+     full-height each burns too much vertical space, so tablet adopts the
+     phone's segmented toggle instead of showing both at once. */
   .stat-tabs {
     display: flex;
     flex-direction: row;
     width: 100%;
-    padding: 0 4px;
+    padding: 4px;
     margin-bottom: 10px;
     background: var(--code-bg);
     border-radius: 11px;
-    padding: 4px;
     gap: 0;
   }
   .stat-tab {
@@ -802,46 +845,6 @@
     font-size: 54px;
     opacity: 0.18;
     pointer-events: none;
-  }
-  .ob-toolbar {
-    padding-bottom: 14px;
-  }
-  .ob-title {
-    font-size: 18px;
-  }
-  .ob-search {
-    min-width: 0;
-    flex: 1 1 100%;
-  }
-  .ob-sort {
-    flex: 1 1 auto;
-  }
-  .ob-body {
-    margin-top: 14px;
-  }
-  .opening-grid {
-    grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
-    gap: 10px;
-  }
-  .opening-carousel .opening-card {
-    flex: 0 0 128px;
-  }
-}
-
-/* ===== Responsive ===== */
-@media (max-width: 980px) {
-  .ob-body {
-    grid-template-columns: 1fr;
-  }
-  .ob-preview {
-    border-left: 0;
-    padding-left: 0;
-    border-top: 1px solid var(--border);
-    padding-top: 16px;
-    order: -1; /* selected preview sits above the grid on narrow screens */
-  }
-  .ob-preview.is-empty {
-    display: none;
   }
 }
 
@@ -977,7 +980,9 @@
   font-variant-numeric: tabular-nums;
 }
 
-@media (max-width: 600px) {
+/* Below desktop width, weak-spot cards drop to the phone's compact list
+   rows instead of the boxier card treatment desktop's extra width affords. */
+@media (max-width: 980px) {
   .ws-grid {
     flex-direction: column;
     align-items: stretch;
