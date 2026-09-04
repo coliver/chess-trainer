@@ -90,6 +90,20 @@ Knight School uses a decoupled architecture to separate the chess engine from th
 
 Most API routes have a `.text` sibling (e.g. `GET /progress/summary.text`) that renders a BBS-style plain-text view instead of JSON — colored ANSI output with a Unicode chess board, for playing from `curl`, `wget`, `httpie`, or any terminal instead of the React app. `GET /dashboard.text` is the landing screen, with an ASCII "KNIGHT SCHOOL" banner and a menu of the other `.text` routes; hitting the bare domain with a CLI client (no path) redirects straight there.
 
+```
+                                         |
+                                         |
+                                         + \
+    __ __ _   ______________  ________   \.G_.*=.       _____ ________  ______  ____  __
+   / //_// | / /  _/ ____/ / / /_  __/    `(#'/.\|     / ___// ____/ / / / __ \/ __ \/ /
+  / ,<  /  |/ // // / __/ /_/ / / /        .>' (_--.   \__ \/ /   / /_/ / / / / / / / /
+ / /| |/ /|  // // /_/ / __  / / /      _=/d   ,^\    ___/ / /___/ __  / /_/ / /_/ / /___
+/_/ |_/_/ |_/___/\____/_/ /_/ /_/      ~~ \)-'   '   /____/\____/_/ /_/\____/\____/_____/
+                                          / |   a:f
+                                         '  '
+```
+<sub>Knight/horse ASCII art credit: Andreas Freise (asciiart.eu)</sub>
+
 **Connecting with curl:**
 
 ```bash

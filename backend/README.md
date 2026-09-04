@@ -146,6 +146,19 @@ Most routes have a `.text` sibling (e.g. `GET /progress/summary` → `GET /progr
 |---|---|---|
 | `GET` | `/dashboard.text` | Progress summary + puzzle summary together in one call — a BBS-style landing screen, topped with an ASCII "KNIGHT SCHOOL" banner (knight/horse art between the two words, credit: Andreas Freise, asciiart.eu), followed by a "What next?" menu of the other `.text` routes |
 
+```
+                                         |
+                                         |
+                                         + \
+    __ __ _   ______________  ________   \.G_.*=.       _____ ________  ______  ____  __
+   / //_// | / /  _/ ____/ / / /_  __/    `(#'/.\|     / ___// ____/ / / / __ \/ __ \/ /
+  / ,<  /  |/ // // / __/ /_/ / / /        .>' (_--.   \__ \/ /   / /_/ / / / / / / / /
+ / /| |/ /|  // // /_/ / __  / / /      _=/d   ,^\    ___/ / /___/ __  / /_/ / /_/ / /___
+/_/ |_/_/ |_/___/\____/_/ /_/ /_/      ~~ \)-'   '   /____/\____/_/ /_/\____/\____/_____/
+                                          / |   a:f
+                                         '  '
+```
+
 An unauthenticated request to any `.text` route returns a plain-text `401` explaining how to log in (`POST /auth/login`) and reuse the resulting token as a Bearer header, rather than the JSON `{"detail": "..."}` body other routes return. JSON routes are unaffected. `/dashboard.text` shows the banner on both the authenticated and unauthenticated responses.
 
 `curl`/`wget`/`httpie` clients hitting the bare domain (no path) are redirected straight to `/dashboard.text` at the nginx level — see `nginx/README.md`.
