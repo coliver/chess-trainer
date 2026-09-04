@@ -108,6 +108,21 @@ def test_submit_puzzle_attempt_wrong_move(db, test_user):
     assert result.puzzle_complete is False
 
 
+def test_submit_puzzle_attempt_records_hint_used_column_exists(db, test_user):
+    make_puzzle(db)
+
+    service.submit_puzzle_attempt(
+        db, user_id=test_user.id, puzzle_id="p1", move_uci="e7e5", move_index=0
+    )
+
+    row = (
+        db.query(PuzzleProgress)
+        .filter(PuzzleProgress.user_id == test_user.id, PuzzleProgress.puzzle_id == "p1")
+        .first()
+    )
+    assert row.hint_used is False
+
+
 def test_submit_puzzle_attempt_unknown_puzzle_returns_none(db, test_user):
     result = service.submit_puzzle_attempt(
         db, user_id=test_user.id, puzzle_id="does-not-exist", move_uci="e7e5", move_index=0

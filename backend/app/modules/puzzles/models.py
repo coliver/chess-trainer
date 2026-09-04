@@ -1,6 +1,6 @@
 import datetime
 
-from sqlalchemy import DateTime, Float, ForeignKey, Integer, String, UniqueConstraint, func
+from sqlalchemy import Boolean, DateTime, Float, ForeignKey, Integer, String, UniqueConstraint, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from backend.app.modules.shared.db import Base
@@ -44,6 +44,8 @@ class PuzzleProgress(Base):
     attempts: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     correct_count: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     incorrect_count: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+
+    hint_used: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
 
     ease_factor: Mapped[float] = mapped_column(Float, nullable=False, default=2.5)
     interval_days: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
