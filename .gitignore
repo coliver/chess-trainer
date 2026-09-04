@@ -75,3 +75,6 @@ frontend/react/coverage
 
 # Angular
 .angular/
+
+# Git worktrees (scratch, used for isolated plan execution)
+.worktrees/
