@@ -15,6 +15,9 @@
     "lint": "ng lint"
   },
   "private": true,
+  "overrides": {
+    "uuid": "^11.1.1"
+  },
   "dependencies": {
     "@angular/common": "^22.1.4",
     "@angular/compiler": "^22.1.4",
