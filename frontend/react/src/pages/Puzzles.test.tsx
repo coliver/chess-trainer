@@ -273,6 +273,7 @@ describe("Puzzles Page", () => {
     expect(api.post).toHaveBeenLastCalledWith("/puzzles/p1/attempts", {
       moveUci: "b8c6",
       moveIndex: 1,
+      usedHint: false,
     });
   });
 
@@ -454,6 +455,72 @@ describe("Puzzles Page", () => {
       // survived the puzzle switch, this would still show the hint markers.
       expect(hasMarker("e2", "hint")).toBe(false);
       expect(capturedProps.arrows ?? []).toHaveLength(0);
+    });
+
+    it("sends usedHint: true on the attempt after the hint button was clicked", async () => {
+      (api.get as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        data: NEXT_PUZZLE,
+      });
+      (api.post as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        data: {
+          correct: true,
+          reason: "",
+          fenAfter: NEXT_PUZZLE.fen,
+          puzzleComplete: true,
+        },
+      });
+
+      renderPuzzles();
+      await screen.findByText("Rating ~1500");
+
+      await user.click(screen.getByRole("button", { name: /hint/i }));
+
+      applyMoveMock.mockReturnValueOnce({
+        nextFen: NEXT_PUZZLE.fen,
+        uci: "e2e4",
+      });
+      act(() => {
+        capturedProps.onMove?.("e2", "e4");
+      });
+
+      await screen.findByText("✅ Correct!");
+      expect(api.post).toHaveBeenCalledWith("/puzzles/p1/attempts", {
+        moveUci: "e2e4",
+        moveIndex: 0,
+        usedHint: true,
+      });
+    });
+
+    it("sends usedHint: false when no hint was used", async () => {
+      (api.get as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        data: NEXT_PUZZLE,
+      });
+      (api.post as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        data: {
+          correct: true,
+          reason: "",
+          fenAfter: NEXT_PUZZLE.fen,
+          puzzleComplete: true,
+        },
+      });
+
+      renderPuzzles();
+      await screen.findByText("Rating ~1500");
+
+      applyMoveMock.mockReturnValueOnce({
+        nextFen: NEXT_PUZZLE.fen,
+        uci: "e2e4",
+      });
+      act(() => {
+        capturedProps.onMove?.("e2", "e4");
+      });
+
+      await screen.findByText("✅ Correct!");
+      expect(api.post).toHaveBeenCalledWith("/puzzles/p1/attempts", {
+        moveUci: "e2e4",
+        moveIndex: 0,
+        usedHint: false,
+      });
     });
 
     const missOnce = async () => {

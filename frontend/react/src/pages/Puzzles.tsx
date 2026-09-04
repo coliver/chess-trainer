@@ -94,6 +94,11 @@ export const Puzzles = () => {
     });
   };
 
+  // Sticky per-puzzle: true once the hint button has been clicked anywhere
+  // in this puzzle's move sequence, sent on every attempt so the backend can
+  // persist it even though intermediate correct moves never touch the DB.
+  const usedHintRef = useRef(false);
+
   const isMountedRef = useRef(true);
   useEffect(() => {
     isMountedRef.current = true;
@@ -107,6 +112,7 @@ export const Puzzles = () => {
     setNoPuzzlesDue(false);
     setPuzzleComplete(false);
     setHintLevel(-1);
+    usedHintRef.current = false;
     setWrongAttempts(0);
     try {
       const res = await api.get<NextPuzzle>("/puzzles/next", {
@@ -172,6 +178,7 @@ export const Puzzles = () => {
         }>(`/puzzles/${puzzleId}/attempts`, {
           moveUci,
           moveIndex: moveIndexRef.current,
+          usedHint: usedHintRef.current,
         });
         if (!isMountedRef.current) return;
 
@@ -361,6 +368,7 @@ export const Puzzles = () => {
                   className="icon-btn hint-icon"
                   onClick={() => {
                     if (!puzzleId || isSubmitting || puzzleComplete) return;
+                    usedHintRef.current = true;
                     setHintLevel((h) => (h < 0 ? 0 : 1));
                   }}
                   disabled={!puzzleId || isSubmitting || puzzleComplete}
