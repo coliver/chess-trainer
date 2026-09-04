@@ -5,6 +5,8 @@
     "greetingAfternoon": "Chào buổi chiều 🌤️",
     "greetingEvening": "Chào buổi tối 🌙",
     "nav": "Trang chủ",
+    "sectionTabsNav": "Tab phần",
+    "bottomNav": "Điều hướng dưới cùng",
     "openings": "Khai cuộc",
     "puzzles": "Bài tập",
     "login": "Đăng nhập",
@@ -79,7 +81,10 @@
       "variationCount_one": "{{count}} biến thể",
       "variationCount_other": "{{count}} biến thể",
       "boardPreviewStart": "Bắt đầu",
-      "boardPreviewAfterPly": "Sau nước {{ply}}"
+      "boardPreviewAfterPly": "Sau nước {{ply}}",
+      "showMore_one": "Hiển thị {{count}} mục khác",
+      "showMore_other": "Hiển thị {{count}} mục khác",
+      "popularHeading": "Mở đầu phổ biến"
     }
   },
   "puzzles": {

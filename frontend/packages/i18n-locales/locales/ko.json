@@ -5,6 +5,8 @@
     "greetingAfternoon": "좋은 오후입니다 🌤️",
     "greetingEvening": "좋은 저녁입니다 🌙",
     "nav": "주 메뉴",
+    "sectionTabsNav": "섹션 탭",
+    "bottomNav": "하단 탐색",
     "openings": "오프닝",
     "puzzles": "퍼즐",
     "login": "로그인",
@@ -79,7 +81,10 @@
       "variationCount_one": "변형 {{count}}개",
       "variationCount_other": "변형 {{count}}개",
       "boardPreviewStart": "시작",
-      "boardPreviewAfterPly": "{{ply}}수 후"
+      "boardPreviewAfterPly": "{{ply}}수 후",
+      "showMore_one": "{{count}}개 더 보기",
+      "showMore_other": "{{count}}개 더 보기",
+      "popularHeading": "인기 있는 오프닝"
     }
   },
   "puzzles": {

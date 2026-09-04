@@ -5,6 +5,8 @@
     "greetingAfternoon": "शुभ दोपहर 🌤️",
     "greetingEvening": "शुभ संध्या 🌙",
     "nav": "मुख्य",
+    "sectionTabsNav": "अनुभाग टैब",
+    "bottomNav": "नीचे नेविगेशन",
     "openings": "ओपनिंग्स",
     "puzzles": "पहेलियाँ",
     "login": "लॉगिन",
@@ -79,7 +81,10 @@
       "variationCount_one": "{{count}} वैरिएशन",
       "variationCount_other": "{{count}} वैरिएशन",
       "boardPreviewStart": "शुरू",
-      "boardPreviewAfterPly": "{{ply}} ply के बाद"
+      "boardPreviewAfterPly": "{{ply}} ply के बाद",
+      "showMore_one": "{{count}} अधिक दिखाएँ",
+      "showMore_other": "{{count}} अधिक दिखाएँ",
+      "popularHeading": "लोकप्रिय उद्घाटन"
     }
   },
   "puzzles": {

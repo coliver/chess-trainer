@@ -5,6 +5,8 @@
     "greetingAfternoon": "مساء الخير 🌤️",
     "greetingEvening": "مساء الخير 🌙",
     "nav": "الرئيسية",
+    "sectionTabsNav": "تبويبات القسم",
+    "bottomNav": "التنقل السفلي",
     "openings": "الافتتاحيات",
     "puzzles": "الألغاز",
     "login": "تسجيل الدخول",
@@ -79,7 +81,10 @@
       "variationCount_one": "تنويع واحد",
       "variationCount_other": "{{count}} تنويعات",
       "boardPreviewStart": "ابدأ",
-      "boardPreviewAfterPly": "بعد نصف نقلة {{ply}}"
+      "boardPreviewAfterPly": "بعد نصف نقلة {{ply}}",
+      "showMore_one": "عرض {{count}} أكثر",
+      "showMore_other": "عرض {{count}} أكثر",
+      "popularHeading": "الافتتاحيات الشهيرة"
     }
   },
   "puzzles": {

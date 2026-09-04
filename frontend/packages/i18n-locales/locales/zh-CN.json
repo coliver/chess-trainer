@@ -5,6 +5,8 @@
     "greetingAfternoon": "下午好 🌤️",
     "greetingEvening": "晚上好 🌙",
     "nav": "主导航",
+    "sectionTabsNav": "部分选项卡",
+    "bottomNav": "底部导航",
     "openings": "开局",
     "puzzles": "谜题",
     "login": "登录",
@@ -79,7 +81,10 @@
       "variationCount_one": "{{count}} 个变化",
       "variationCount_other": "{{count}} 个变化",
       "boardPreviewStart": "开始",
-      "boardPreviewAfterPly": "第 {{ply}} 步后"
+      "boardPreviewAfterPly": "第 {{ply}} 步后",
+      "showMore_one": "显示 {{count}} 个更多",
+      "showMore_other": "显示 {{count}} 个更多",
+      "popularHeading": "热门开局"
     }
   },
   "puzzles": {

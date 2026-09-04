@@ -5,6 +5,8 @@
     "greetingAfternoon": "צהריים טובים 🌤️",
     "greetingEvening": "ערב טוב 🌙",
     "nav": "ראשי",
+    "sectionTabsNav": "לשוניות סעיף",
+    "bottomNav": "ניווט תחתון",
     "openings": "פתיחות",
     "puzzles": "חידות",
     "login": "התחברות",
@@ -79,7 +81,10 @@
       "variationCount_one": "וריאציה אחת",
       "variationCount_other": "{{count}} וריאציות",
       "boardPreviewStart": "התחלה",
-      "boardPreviewAfterPly": "אחרי חצי-מסע {{ply}}"
+      "boardPreviewAfterPly": "אחרי חצי-מסע {{ply}}",
+      "showMore_one": "הצג {{count}} נוסף",
+      "showMore_other": "הצג {{count}} נוספים",
+      "popularHeading": "פתיחות פופולריות"
     }
   },
   "puzzles": {

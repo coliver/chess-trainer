@@ -5,6 +5,8 @@
     "greetingAfternoon": "Καλό απόγευμα 🌤️",
     "greetingEvening": "Καλησπέρα 🌙",
     "nav": "Κεντρικό",
+    "sectionTabsNav": "Καρτέλες ενότητας",
+    "bottomNav": "Κάτω περιήγηση",
     "openings": "Ανοίγματα",
     "puzzles": "Γρίφοι",
     "login": "Σύνδεση",
@@ -79,7 +81,10 @@
       "variationCount_one": "{{count}} παραλλαγή",
       "variationCount_other": "{{count}} παραλλαγές",
       "boardPreviewStart": "Έναρξη",
-      "boardPreviewAfterPly": "Μετά από ημι-κίνηση {{ply}}"
+      "boardPreviewAfterPly": "Μετά από ημι-κίνηση {{ply}}",
+      "showMore_one": "Εμφάνιση {{count}} περισσότερης",
+      "showMore_other": "Εμφάνιση {{count}} περισσότερων",
+      "popularHeading": "Δημοφιλή ανοίγματα"
     }
   },
   "puzzles": {

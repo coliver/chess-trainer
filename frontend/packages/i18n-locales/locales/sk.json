@@ -5,6 +5,8 @@
     "greetingAfternoon": "Dobrý deň 🌤️",
     "greetingEvening": "Dobrý večer 🌙",
     "nav": "Domov",
+    "sectionTabsNav": "Karty sekcií",
+    "bottomNav": "Spodná navigácia",
     "openings": "Otvárania",
     "puzzles": "Úlohy",
     "login": "Prihlásiť sa",
@@ -79,7 +81,10 @@
       "variationCount_one": "{{count}} variant",
       "variationCount_other": "{{count}} variantov",
       "boardPreviewStart": "Začiatok",
-      "boardPreviewAfterPly": "Po ťahu {{ply}}"
+      "boardPreviewAfterPly": "Po ťahu {{ply}}",
+      "showMore_one": "Zobraziť {{count}} ďalší",
+      "showMore_other": "Zobraziť {{count}} ďalších",
+      "popularHeading": "Populárne otvárania"
     }
   },
   "puzzles": {

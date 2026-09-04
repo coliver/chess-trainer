@@ -5,6 +5,8 @@
     "greetingAfternoon": "Qapla'! rep vItIv, SoH yIH! 🌤️",
     "greetingEvening": "Qapla'! ram vItIv, SoH yIH! 🌙",
     "nav": "qelI'qam",
+    "sectionTabsNav": "qelI'qam Sep",
+    "bottomNav": "pagh yIng jup",
     "openings": "poHmey",
     "puzzles": "bIQtIq SeH",
     "login": "nuqneH — yI'el",
@@ -79,7 +81,10 @@
       "variationCount_one": "{{count}} nuv",
       "variationCount_other": "{{count}} nuvmey",
       "boardPreviewStart": "qaS pegh",
-      "boardPreviewAfterPly": "{{ply}} 'ar loDpu' vI"
+      "boardPreviewAfterPly": "{{ply}} 'ar loDpu' vI",
+      "showMore_one": "{{count}} latlh yIlegh",
+      "showMore_other": "{{count}} latlh yIlegh",
+      "popularHeading": "poplar poHmey"
     }
   },
   "puzzles": {

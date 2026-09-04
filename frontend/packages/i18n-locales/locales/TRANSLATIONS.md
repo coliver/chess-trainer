@@ -13,6 +13,14 @@ Documentation for locale strings in this directory. Organized by section and fea
 - Links to GitHub repository
 - Keep concise for header UI constraints
 
+**sectionTabsNav**
+- Accessible landmark name (aria-label) for the top Openings/Puzzles tab switcher, distinct from `nav` ("Primary", used by the overflow menu) and `bottomNav`
+- Not visible text — only announced by screen readers; keep it short
+
+**bottomNav**
+- Accessible landmark name (aria-label) for the fixed mobile bottom tab bar (Openings/Puzzles/Settings)
+- Not visible text — only announced by screen readers; keep it short
+
 ## Theme & Appearance
 
 **toggle**
@@ -86,6 +94,15 @@ Documentation for locale strings in this directory. Organized by section and fea
 
 **variationCount_one, variationCount_other**
 - Pluralized: "X variation" vs "X variations" in opening details
+
+**showMore_one, showMore_other**
+- Template: `Show {{count}} more`
+- Button that reveals the next page of opening cards in the grid (same pattern as search results pagination)
+- `{{count}}` = number of remaining, not-yet-shown openings
+
+**popularHeading**
+- Heading above the horizontal-scrolling "quick access" row of the most popular openings, shown above the full search/browse grid
+- Short label (like `trainingHeading`/`puzzlesHeading`), not a sentence
 
 ## Openings (Training Mode)
 

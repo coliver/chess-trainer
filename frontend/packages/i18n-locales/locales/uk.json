@@ -5,6 +5,8 @@
     "greetingAfternoon": "Добрий день 🌤️",
     "greetingEvening": "Добрий вечір 🌙",
     "nav": "Головна",
+    "sectionTabsNav": "Вкладки розділу",
+    "bottomNav": "Нижня навігація",
     "openings": "Дебюти",
     "puzzles": "Головоломки",
     "login": "Увійти",
@@ -79,7 +81,10 @@
       "variationCount_one": "{{count}} варіація",
       "variationCount_other": "{{count}} варіацій",
       "boardPreviewStart": "Початок",
-      "boardPreviewAfterPly": "Після ходу {{ply}}"
+      "boardPreviewAfterPly": "Після ходу {{ply}}",
+      "showMore_one": "Показати {{count}} ще",
+      "showMore_other": "Показати {{count}} ще",
+      "popularHeading": "Популярні дебюти"
     }
   },
   "puzzles": {

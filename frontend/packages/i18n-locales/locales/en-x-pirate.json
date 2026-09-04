@@ -5,6 +5,8 @@
     "greetingAfternoon": "Arrr, good afternoon 🌤️",
     "greetingEvening": "Arrr, good evening 🌙",
     "nav": "Jolly Primary",
+    "sectionTabsNav": "Tabs o' the deck",
+    "bottomNav": "Bottom rigging",
     "openings": "Openings, ye scurvy devil",
     "puzzles": "Puzzles o' Plunder",
     "login": "Log in",
@@ -79,7 +81,10 @@
       "variationCount_one": "{{count}} variation",
       "variationCount_other": "{{count}} variations",
       "boardPreviewStart": "Set sail",
-      "boardPreviewAfterPly": "After ply {{ply}}"
+      "boardPreviewAfterPly": "After ply {{ply}}",
+      "showMore_one": "Show {{count}} more",
+      "showMore_other": "Show {{count}} more",
+      "popularHeading": "Openings o' Renown"
     }
   },
   "puzzles": {

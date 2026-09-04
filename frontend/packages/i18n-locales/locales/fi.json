@@ -5,6 +5,8 @@
     "greetingAfternoon": "Hyvää iltapäivää 🌤️",
     "greetingEvening": "Hyvää iltaa 🌙",
     "nav": "Pää",
+    "sectionTabsNav": "Osion välilehdet",
+    "bottomNav": "Alanavigaatio",
     "openings": "Avaukset",
     "puzzles": "Pulmat",
     "login": "Kirjaudu sisään",
@@ -79,7 +81,10 @@
       "variationCount_one": "{{count}} variaatio",
       "variationCount_other": "{{count}} variaatiota",
       "boardPreviewStart": "Aloita",
-      "boardPreviewAfterPly": "{{ply}} puolen siirron jälkeen"
+      "boardPreviewAfterPly": "{{ply}} puolen siirron jälkeen",
+      "showMore_one": "Näytä {{count}} lisää",
+      "showMore_other": "Näytä {{count}} lisää",
+      "popularHeading": "Suositut avaukset"
     }
   },
   "puzzles": {

@@ -5,6 +5,8 @@
     "greetingAfternoon": "Selamat tengah hari 🌤️",
     "greetingEvening": "Selamat malam 🌙",
     "nav": "Utama",
+    "sectionTabsNav": "Tab bahagian",
+    "bottomNav": "Navigasi bawah",
     "openings": "Pembukaan",
     "puzzles": "Teka-teki",
     "login": "Log masuk",
@@ -79,7 +81,10 @@
       "variationCount_one": "{{count}} variasi",
       "variationCount_other": "{{count}} variasi",
       "boardPreviewStart": "Mula",
-      "boardPreviewAfterPly": "Selepas ply {{ply}}"
+      "boardPreviewAfterPly": "Selepas ply {{ply}}",
+      "showMore_one": "Tampilkan {{count}} lagi",
+      "showMore_other": "Tampilkan {{count}} lagi",
+      "popularHeading": "Pembukaan yang popular"
     }
   },
   "puzzles": {

@@ -5,6 +5,8 @@
     "greetingAfternoon": "Dzień dobry 🌤️",
     "greetingEvening": "Dobry wieczór 🌙",
     "nav": "Główne",
+    "sectionTabsNav": "Karty sekcji",
+    "bottomNav": "Dolna nawigacja",
     "openings": "Debiuty",
     "puzzles": "Zadania",
     "login": "Zaloguj się",
@@ -79,7 +81,10 @@
       "variationCount_one": "{{count}} wariant",
       "variationCount_other": "{{count}} wariantów",
       "boardPreviewStart": "Start",
-      "boardPreviewAfterPly": "Po ruchu {{ply}}"
+      "boardPreviewAfterPly": "Po ruchu {{ply}}",
+      "showMore_one": "Pokaż {{count}} więcej",
+      "showMore_other": "Pokaż {{count}} więcej",
+      "popularHeading": "Popularne otwarcia"
     }
   },
   "puzzles": {

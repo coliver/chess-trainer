@@ -76,6 +76,7 @@ h2 {
 @media (max-width: 600px) {
   .page {
     padding: 20px 14px 32px;
+    padding-bottom: calc(48px + 64px + env(safe-area-inset-bottom));
   }
 
   h1 {

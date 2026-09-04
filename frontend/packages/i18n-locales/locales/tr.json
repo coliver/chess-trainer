@@ -5,6 +5,8 @@
     "greetingAfternoon": "İyi günler 🌤️",
     "greetingEvening": "İyi akşamlar 🌙",
     "nav": "Birincil",
+    "sectionTabsNav": "Bölüm sekmeleri",
+    "bottomNav": "Alt gezinti",
     "openings": "Açılışlar",
     "puzzles": "Bulmacalar",
     "login": "Giriş yap",
@@ -79,7 +81,10 @@
       "variationCount_one": "{{count}} varyasyon",
       "variationCount_other": "{{count}} varyasyon",
       "boardPreviewStart": "Başla",
-      "boardPreviewAfterPly": "{{ply}} hamleden sonra"
+      "boardPreviewAfterPly": "{{ply}} hamleden sonra",
+      "showMore_one": "Daha {{count}} göster",
+      "showMore_other": "Daha {{count}} göster",
+      "popularHeading": "Popüler açılışlar"
     }
   },
   "puzzles": {

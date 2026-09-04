@@ -30,6 +30,10 @@
   vertical-align: middle;
 }
 
+.stat-tabs {
+  display: none;
+}
+
 /* ===== Dashboard: progress overview (training + puzzles) ===== */
 .progress-overview {
   display: flex;
@@ -270,6 +274,32 @@
 }
 .ob-content {
   min-width: 0;
+}
+
+/* ===== Horizontal carousel section ===== */
+.ob-carousel-section {
+  margin: 18px 0;
+}
+
+.ob-carousel-heading {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-h);
+  margin: 0 0 10px;
+  letter-spacing: -0.01em;
+}
+
+.opening-carousel {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scroll-snap-type: x proximity;
+}
+
+.opening-carousel .opening-card {
+  flex: 0 0 148px;
+  scroll-snap-align: start;
 }
 
 /* ===== Base card grid ===== */
@@ -722,6 +752,57 @@
     border-color: var(--border);
     opacity: 1;
   }
+  .stat-tabs {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 0 4px;
+    margin-bottom: 10px;
+    background: var(--code-bg);
+    border-radius: 11px;
+    padding: 4px;
+    gap: 0;
+  }
+  .stat-tab {
+    flex: 1;
+    background: transparent;
+    color: var(--text);
+    border: none;
+    border-radius: 9px;
+    font-weight: 650;
+    font-size: 12.5px;
+    padding: 8px 0;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .stat-tab.active {
+    background: var(--card-bg);
+    color: var(--text-h);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  }
+  .progress-overview[data-mobile-tab="training"] .progress-group--puzzles {
+    display: none;
+  }
+  .progress-overview[data-mobile-tab="puzzles"] .progress-group--training {
+    display: none;
+  }
+  .progress-review-btn:not(:disabled) {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 75%, black));
+    min-height: 52px;
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .progress-review-btn:not(:disabled)::after {
+    content: "🔥";
+    position: absolute;
+    right: -6px;
+    top: -10px;
+    font-size: 54px;
+    opacity: 0.18;
+    pointer-events: none;
+  }
   .ob-toolbar {
     padding-bottom: 14px;
   }
@@ -741,6 +822,9 @@
   .opening-grid {
     grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
     gap: 10px;
+  }
+  .opening-carousel .opening-card {
+    flex: 0 0 128px;
   }
 }
 
@@ -902,5 +986,20 @@
     width: 100%;
     min-width: 0;
     box-sizing: border-box;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+  }
+  .ws-label {
+    display: none;
+  }
+  .ws-title {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+  }
+  .ws-stat {
+    flex: 0 0 auto;
   }
 }

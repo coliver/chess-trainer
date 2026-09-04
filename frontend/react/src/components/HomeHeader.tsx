@@ -2,7 +2,7 @@
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
-import { Menu } from "lucide-react";
+import { Menu, Crown, Puzzle, Settings } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
 import { KnightSchoolIcon } from "./KnightSchoolIcon";
 import { OverflowMenu } from "./OverflowMenu";
@@ -16,55 +16,86 @@ export function HomeHeader() {
 
   const isOpeningsActive = location.pathname.startsWith("/dashboard");
   const isPuzzlesActive = location.pathname.startsWith("/puzzles");
+  const isSettingsActive = location.pathname.startsWith("/settings");
 
   return (
-    <header className="home-header">
-      <div className="home-header-inner">
-        <div className="home-header-top">
-          <div className="home-header-brand-group">
-            <button
-              ref={menuButtonRef}
-              className="home-header-menu-button"
-              onClick={() => setMenuOpen(!menuOpen)}
-              aria-label="Menu"
-              aria-expanded={menuOpen}
-            >
-              <Menu size={20} aria-hidden="true" />
-            </button>
-            <div className="home-header-branding">
-              <KnightSchoolIcon height="24px" className="home-header-icon" />
-              <span className="home-header-title-text">
-                {t("header.title")}
-              </span>
+    <>
+      <header className="home-header">
+        <div className="home-header-inner">
+          <div className="home-header-top">
+            <div className="home-header-brand-group">
+              <button
+                ref={menuButtonRef}
+                className="home-header-menu-button"
+                onClick={() => setMenuOpen(!menuOpen)}
+                aria-label="Menu"
+                aria-expanded={menuOpen}
+              >
+                <Menu size={20} aria-hidden="true" />
+              </button>
+              <div className="home-header-branding">
+                <KnightSchoolIcon height="24px" className="home-header-icon" />
+                <span className="home-header-title-text">
+                  {t("header.title")}
+                </span>
+              </div>
             </div>
+
+            {isLoggedIn && (isOpeningsActive || isPuzzlesActive) && (
+              <nav
+                className="home-header-tabs"
+                aria-label={t("header.sectionTabsNav")}
+              >
+                <Link
+                  to="/dashboard"
+                  className={`home-header-tab${
+                    isOpeningsActive ? " active" : ""
+                  }`}
+                >
+                  {t("header.openings")}
+                </Link>
+                <Link
+                  to="/puzzles/themes"
+                  className={`home-header-tab${isPuzzlesActive ? " active" : ""}`}
+                >
+                  {t("header.puzzles")}
+                </Link>
+              </nav>
+            )}
+
+            <OverflowMenu
+              open={menuOpen}
+              onClose={() => setMenuOpen(false)}
+              triggerRef={menuButtonRef}
+            />
           </div>
-
-          {isLoggedIn && (isOpeningsActive || isPuzzlesActive) && (
-            <nav className="home-header-tabs">
-              <Link
-                to="/dashboard"
-                className={`home-header-tab${
-                  isOpeningsActive ? " active" : ""
-                }`}
-              >
-                {t("header.openings")}
-              </Link>
-              <Link
-                to="/puzzles/themes"
-                className={`home-header-tab${isPuzzlesActive ? " active" : ""}`}
-              >
-                {t("header.puzzles")}
-              </Link>
-            </nav>
-          )}
-
-          <OverflowMenu
-            open={menuOpen}
-            onClose={() => setMenuOpen(false)}
-            triggerRef={menuButtonRef}
-          />
         </div>
-      </div>
-    </header>
+      </header>
+      {isLoggedIn && (
+        <nav className="bottom-tabbar" aria-label={t("header.bottomNav")}>
+          <Link
+            to="/dashboard"
+            className={`bottom-tab${isOpeningsActive ? " active" : ""}`}
+          >
+            <Crown size={20} aria-hidden="true" />
+            <span>{t("header.openings")}</span>
+          </Link>
+          <Link
+            to="/puzzles/themes"
+            className={`bottom-tab${isPuzzlesActive ? " active" : ""}`}
+          >
+            <Puzzle size={20} aria-hidden="true" />
+            <span>{t("header.puzzles")}</span>
+          </Link>
+          <Link
+            to="/settings"
+            className={`bottom-tab${isSettingsActive ? " active" : ""}`}
+          >
+            <Settings size={20} aria-hidden="true" />
+            <span>{t("header.settings")}</span>
+          </Link>
+        </nav>
+      )}
+    </>
   );
 }

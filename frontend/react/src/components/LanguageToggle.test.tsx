@@ -1,11 +1,16 @@
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { render, screen, waitFor, act } from "@testing-library/react";
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
+import { render, screen, waitFor, act, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import i18n from "../i18n/i18n";
 import { LanguageToggle } from "./LanguageToggle";
-import Header from "./Header";
+import { HomeHeader } from "./HomeHeader";
 import { MemoryRouter } from "react-router-dom";
 import { PreferencesProvider } from "../context/PreferencesContext";
+import { useAuth } from "../hooks/useAuth";
+
+vi.mock("../hooks/useAuth", () => ({
+  useAuth: vi.fn(),
+}));
 
 const renderLanguageToggle = () =>
   render(
@@ -17,6 +22,10 @@ const renderLanguageToggle = () =>
 describe("LanguageToggle", () => {
   beforeEach(async () => {
     localStorage.clear();
+    (useAuth as ReturnType<typeof vi.fn>).mockReturnValue({
+      isLoggedIn: false,
+      username: null,
+    });
     await act(async () => {
       await i18n.changeLanguage("en-US");
     });
@@ -45,21 +54,29 @@ describe("LanguageToggle", () => {
   });
 
   it("changing language re-renders translated text elsewhere on the page", async () => {
+    (useAuth as ReturnType<typeof vi.fn>).mockReturnValue({
+      isLoggedIn: true,
+      username: "alice",
+    });
     const user = userEvent.setup();
     render(
-      <MemoryRouter>
+      <MemoryRouter initialEntries={["/dashboard"]}>
         <PreferencesProvider>
-          <Header />
+          <LanguageToggle />
+          <HomeHeader />
         </PreferencesProvider>
       </MemoryRouter>,
     );
 
-    expect(screen.getByRole("link", { name: /login/i })).toBeInTheDocument();
+    const sectionTabs = screen.getByRole("navigation", {
+      name: "Section tabs",
+    });
+    expect(within(sectionTabs).getByText("Openings")).toBeInTheDocument();
 
     await user.selectOptions(screen.getByRole("combobox"), "es");
 
     expect(
-      await screen.findByRole("link", { name: /iniciar sesión/i }),
+      await within(sectionTabs).findByText("Aperturas"),
     ).toBeInTheDocument();
   });
 

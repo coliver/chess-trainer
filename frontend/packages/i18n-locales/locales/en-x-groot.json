@@ -5,6 +5,8 @@
     "greetingAfternoon": "I am Groot 🌤️",
     "greetingEvening": "I am Groot 🌙",
     "nav": "Groot",
+    "sectionTabsNav": "I am Groot",
+    "bottomNav": "I am Groot",
     "openings": "Groot",
     "puzzles": "Groot",
     "login": "I am Groot",
@@ -79,7 +81,10 @@
       "variationCount_one": "{{count}} I am Groot",
       "variationCount_other": "{{count}} I am Groot",
       "boardPreviewStart": "I am Groot",
-      "boardPreviewAfterPly": "I am Groot {{ply}}"
+      "boardPreviewAfterPly": "I am Groot {{ply}}",
+      "showMore_one": "{{count}} I am Groot",
+      "showMore_other": "{{count}} I am Groot",
+      "popularHeading": "I am Groot"
     }
   },
   "puzzles": {

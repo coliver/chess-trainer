@@ -5,6 +5,8 @@
     "greetingAfternoon": "Jó napot 🌤️",
     "greetingEvening": "Jó estét 🌙",
     "nav": "Főmenü",
+    "sectionTabsNav": "Szekció lapok",
+    "bottomNav": "Alsó navigáció",
     "openings": "Megnyitások",
     "puzzles": "Feladványok",
     "login": "Bejelentkezés",
@@ -79,7 +81,10 @@
       "variationCount_one": "{{count}} változat",
       "variationCount_other": "{{count}} változat",
       "boardPreviewStart": "Kezdés",
-      "boardPreviewAfterPly": "{{ply}}. fél lépés után"
+      "boardPreviewAfterPly": "{{ply}}. fél lépés után",
+      "showMore_one": "{{count}} további megjelenítése",
+      "showMore_other": "{{count}} további megjelenítése",
+      "popularHeading": "Népszerű megnyitások"
     }
   },
   "puzzles": {

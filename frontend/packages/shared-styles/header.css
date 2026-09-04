@@ -205,6 +205,11 @@
   gap: 10px;
 }
 
+/* ===== Bottom Tab Bar (mobile only) ===== */
+.bottom-tabbar {
+  display: none;
+}
+
 /* ===== Mobile Home Header (redesigned) ===== */
 .home-header {
   border-bottom: 1px solid var(--border);
@@ -511,6 +516,40 @@
 
 /* ===== Phone layout ===== */
 @media (max-width: 600px) {
+  .bottom-tabbar {
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+    background: var(--card-bg);
+    border-top: 1px solid var(--border);
+    padding: 6px 0 max(6px, env(safe-area-inset-bottom));
+  }
+
+  .bottom-tab {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 6px 0;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .bottom-tab.active {
+    color: var(--accent);
+  }
+
+  .home-header-tabs {
+    display: none;
+  }
+
   .site-header-inner {
     flex-wrap: wrap;
     gap: 10px 12px;

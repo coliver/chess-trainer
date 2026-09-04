@@ -5,6 +5,8 @@
     "greetingAfternoon": "Bon après-midi 🌤️",
     "greetingEvening": "Bonsoir 🌙",
     "nav": "Menu principal",
+    "sectionTabsNav": "Onglets de section",
+    "bottomNav": "Navigation inférieure",
     "openings": "Ouvertures",
     "puzzles": "Puzzles",
     "login": "Connexion",
@@ -79,7 +81,10 @@
       "variationCount_one": "{{count}} variante",
       "variationCount_other": "{{count}} variantes",
       "boardPreviewStart": "Départ",
-      "boardPreviewAfterPly": "Après le coup {{ply}}"
+      "boardPreviewAfterPly": "Après le coup {{ply}}",
+      "showMore_one": "Afficher {{count}} autre",
+      "showMore_other": "Afficher {{count}} autres",
+      "popularHeading": "Ouvertures populaires"
     }
   },
   "puzzles": {

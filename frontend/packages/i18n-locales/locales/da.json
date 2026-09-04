@@ -5,6 +5,8 @@
     "greetingAfternoon": "God eftermiddag 🌤️",
     "greetingEvening": "God aften 🌙",
     "nav": "Primært",
+    "sectionTabsNav": "Sektions-faner",
+    "bottomNav": "Bundne navigation",
     "openings": "Åbninger",
     "puzzles": "Opgaver",
     "login": "Log ind",
@@ -79,7 +81,10 @@
       "variationCount_one": "{{count}} variation",
       "variationCount_other": "{{count}} variationer",
       "boardPreviewStart": "Start",
-      "boardPreviewAfterPly": "Efter halvtræk {{ply}}"
+      "boardPreviewAfterPly": "Efter halvtræk {{ply}}",
+      "showMore_one": "Vis {{count}} mere",
+      "showMore_other": "Vis {{count}} mere",
+      "popularHeading": "Populære åbninger"
     }
   },
   "puzzles": {

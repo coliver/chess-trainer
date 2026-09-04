@@ -30,6 +30,8 @@ export type Opening = {
 };
 
 const SEARCH_PAGE = 60;
+const BASES_PAGE = 12;
+const CAROUSEL_SIZE = 8;
 
 type ProgressSummary = {
   positionsSeen: number;
@@ -104,6 +106,10 @@ export const Dashboard = () => {
   const [sortAZ, setSortAZ] = useState(false);
   const [colorFilter, setColorFilter] = useState<"all" | "w" | "b">("all");
   const [searchLimit, setSearchLimit] = useState(SEARCH_PAGE);
+  const [gridLimit, setGridLimit] = useState(BASES_PAGE);
+  const [mobileStatTab, setMobileStatTab] = useState<"training" | "puzzles">(
+    "training",
+  );
   const previewRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -151,6 +157,16 @@ export const Dashboard = () => {
       (g) => colorFilter === "all" || colorOf(g.base) === colorFilter,
     );
   }, [sortedGroups, colorFilter]);
+
+  // The carousel only earns its place when there's more to browse than fits
+  // on one grid page; below that threshold its top picks would just repeat
+  // the grid's own first page directly beneath it. When it does show, the
+  // grid picks up right where the carousel left off instead of restarting
+  // from 0, so the same opening never appears twice on screen at once.
+  const showCarousel = colorFilteredGroups.length > BASES_PAGE;
+  const gridStart = showCarousel ? CAROUSEL_SIZE : 0;
+  const gridGroups = colorFilteredGroups.slice(gridStart, gridStart + gridLimit);
+  const gridRemaining = colorFilteredGroups.length - gridStart - gridLimit;
 
   const activeGroup: OpeningGroup | undefined = useMemo(
     () => groups.find((g) => g.base === activeBase),
@@ -276,12 +292,37 @@ export const Dashboard = () => {
           {greeting.who}
         </div>
         <div className="card">
+          <div
+            className="stat-tabs"
+            role="tablist"
+            aria-label={t("dashboard.progress.yourProgress")}
+          >
+            <button
+              type="button"
+              role="tab"
+              aria-selected={mobileStatTab === "training"}
+              className={`stat-tab${mobileStatTab === "training" ? " active" : ""}`}
+              onClick={() => setMobileStatTab("training")}
+            >
+              {t("dashboard.progress.trainingHeading")}
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={mobileStatTab === "puzzles"}
+              className={`stat-tab${mobileStatTab === "puzzles" ? " active" : ""}`}
+              onClick={() => setMobileStatTab("puzzles")}
+            >
+              {t("dashboard.progress.puzzlesHeading")}
+            </button>
+          </div>
           <section
             className="progress-overview"
             aria-label={t("dashboard.progress.yourProgress")}
+            data-mobile-tab={mobileStatTab}
           >
             <div
-              className="progress-group"
+              className="progress-group progress-group--training"
               aria-label={t("dashboard.progress.trainingLabel")}
             >
               <h2 className="progress-group-label">
@@ -636,6 +677,27 @@ export const Dashboard = () => {
               )}
             </header>
 
+            {view === "bases" && showCarousel && (
+              <div className="ob-carousel-section">
+                <h2 className="ob-carousel-heading">
+                  {t("dashboard.openings.popularHeading")}
+                </h2>
+                <div className="opening-carousel">
+                  {colorFilteredGroups.slice(0, CAROUSEL_SIZE).map((g) => (
+                    <OpeningCard
+                      key={g.base}
+                      group={g}
+                      selected={
+                        selected != null &&
+                        baseNameOf(selected.name) === g.base
+                      }
+                      onSelect={() => openBase(g)}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div className="ob-body">
               <div className="ob-content">
                 {view === "search" && (
@@ -670,19 +732,32 @@ export const Dashboard = () => {
                 )}
 
                 {view === "bases" && (
-                  <div className="opening-grid">
-                    {colorFilteredGroups.map((g) => (
-                      <OpeningCard
-                        key={g.base}
-                        group={g}
-                        selected={
-                          selected != null &&
-                          baseNameOf(selected.name) === g.base
-                        }
-                        onSelect={() => openBase(g)}
-                      />
-                    ))}
-                  </div>
+                  <>
+                    <div className="opening-grid">
+                      {gridGroups.map((g) => (
+                        <OpeningCard
+                          key={g.base}
+                          group={g}
+                          selected={
+                            selected != null &&
+                            baseNameOf(selected.name) === g.base
+                          }
+                          onSelect={() => openBase(g)}
+                        />
+                      ))}
+                    </div>
+                    {gridRemaining > 0 && (
+                      <button
+                        type="button"
+                        className="ob-showmore"
+                        onClick={() => setGridLimit((n) => n + BASES_PAGE)}
+                      >
+                        {t("dashboard.openings.showMore", {
+                          count: gridRemaining,
+                        })}
+                      </button>
+                    )}
+                  </>
                 )}
               </div>
 

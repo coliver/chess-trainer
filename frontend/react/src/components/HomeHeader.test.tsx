@@ -1,5 +1,5 @@
 // src/components/HomeHeader.test.tsx
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi, describe, it, expect, beforeEach } from "vitest";
 import { MemoryRouter } from "react-router-dom";
@@ -29,14 +29,19 @@ describe("HomeHeader", () => {
     (useAuth as ReturnType<typeof vi.fn>).mockReset();
   });
 
-  it("hides tabs when logged out", () => {
+  it("hides both the section tabs and the bottom nav when logged out", () => {
     (useAuth as ReturnType<typeof vi.fn>).mockReturnValue({
       isLoggedIn: false,
       username: null,
     });
     renderAt("/dashboard");
 
-    expect(screen.queryByText("Openings")).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("navigation", { name: "Section tabs" }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("navigation", { name: "Bottom navigation" }),
+    ).not.toBeInTheDocument();
   });
 
   it("marks the openings tab active on the dashboard route", () => {
@@ -46,8 +51,13 @@ describe("HomeHeader", () => {
     });
     renderAt("/dashboard");
 
-    expect(screen.getByText("Openings")).toHaveClass("active");
-    expect(screen.getByText("Puzzles")).not.toHaveClass("active");
+    const sectionTabs = screen.getByRole("navigation", {
+      name: "Section tabs",
+    });
+    expect(within(sectionTabs).getByText("Openings")).toHaveClass("active");
+    expect(within(sectionTabs).getByText("Puzzles")).not.toHaveClass(
+      "active",
+    );
   });
 
   it("marks the puzzles tab active on the puzzles route", () => {
@@ -57,8 +67,13 @@ describe("HomeHeader", () => {
     });
     renderAt("/puzzles");
 
-    expect(screen.getByText("Puzzles")).toHaveClass("active");
-    expect(screen.getByText("Openings")).not.toHaveClass("active");
+    const sectionTabs = screen.getByRole("navigation", {
+      name: "Section tabs",
+    });
+    expect(within(sectionTabs).getByText("Puzzles")).toHaveClass("active");
+    expect(within(sectionTabs).getByText("Openings")).not.toHaveClass(
+      "active",
+    );
   });
 
   it("links the puzzles tab to the theme picker, not straight into a puzzle", () => {
@@ -68,21 +83,46 @@ describe("HomeHeader", () => {
     });
     renderAt("/dashboard");
 
-    expect(screen.getByText("Puzzles")).toHaveAttribute(
+    const sectionTabs = screen.getByRole("navigation", {
+      name: "Section tabs",
+    });
+    expect(within(sectionTabs).getByText("Puzzles")).toHaveAttribute(
       "href",
       "/puzzles/themes",
     );
   });
 
-  it("hides tabs entirely off the dashboard/puzzles routes", () => {
+  it("hides the section tabs off the dashboard/puzzles routes", () => {
     (useAuth as ReturnType<typeof vi.fn>).mockReturnValue({
       isLoggedIn: true,
       username: "alice",
     });
     renderAt("/settings");
 
-    expect(screen.queryByText("Openings")).not.toBeInTheDocument();
-    expect(screen.queryByText("Puzzles")).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("navigation", { name: "Section tabs" }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("shows the bottom nav on every logged-in route and marks the current one active", () => {
+    (useAuth as ReturnType<typeof vi.fn>).mockReturnValue({
+      isLoggedIn: true,
+      username: "alice",
+    });
+    renderAt("/settings");
+
+    const bottomNav = screen.getByRole("navigation", {
+      name: "Bottom navigation",
+    });
+    expect(
+      within(bottomNav).getByRole("link", { name: "Openings" }),
+    ).not.toHaveClass("active");
+    expect(
+      within(bottomNav).getByRole("link", { name: "Puzzles" }),
+    ).not.toHaveClass("active");
+    expect(
+      within(bottomNav).getByRole("link", { name: "Settings" }),
+    ).toHaveClass("active");
   });
 
   it("toggles the overflow menu open on menu button click", async () => {

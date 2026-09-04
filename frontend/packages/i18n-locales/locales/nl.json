@@ -5,6 +5,8 @@
     "greetingAfternoon": "Goedemiddag 🌤️",
     "greetingEvening": "Goedenavond 🌙",
     "nav": "Primair",
+    "sectionTabsNav": "Sectietabbladen",
+    "bottomNav": "Onderste navigatie",
     "openings": "Openingen",
     "puzzles": "Puzzels",
     "login": "Inloggen",
@@ -79,7 +81,10 @@
       "variationCount_one": "{{count}} variatie",
       "variationCount_other": "{{count}} variaties",
       "boardPreviewStart": "Start",
-      "boardPreviewAfterPly": "Na zet {{ply}}"
+      "boardPreviewAfterPly": "Na zet {{ply}}",
+      "showMore_one": "{{count}} meer weergeven",
+      "showMore_other": "{{count}} meer weergeven",
+      "popularHeading": "Populaire openingen"
     }
   },
   "puzzles": {

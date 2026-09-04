@@ -5,6 +5,8 @@
     "greetingAfternoon": "Suilad 🌤️",
     "greetingEvening": "Suilad 🌙",
     "nav": "Tad-dollen",
+    "sectionTabsNav": "Tad-veleg",
+    "bottomNav": "Tog dolen",
     "openings": "Dagorath",
     "puzzles": "Gorthad",
     "login": "Enedh",
@@ -79,7 +81,10 @@
       "variationCount_one": "{{count}} athra",
       "variationCount_other": "{{count}} athra",
       "boardPreviewStart": "Tog",
-      "boardPreviewAfterPly": "Aph {{ply}}"
+      "boardPreviewAfterPly": "Aph {{ply}}",
+      "showMore_one": "Lîra {{count}} nîn",
+      "showMore_other": "Lîra {{count}} nîn",
+      "popularHeading": "Methred"
     }
   },
   "puzzles": {

@@ -5,6 +5,8 @@
     "greetingAfternoon": "Boa tarde 🌤️",
     "greetingEvening": "Boa noite 🌙",
     "nav": "Primário",
+    "sectionTabsNav": "Separadores de secção",
+    "bottomNav": "Navegação inferior",
     "openings": "Aberturas",
     "puzzles": "Quebra-cabeças",
     "login": "Entrar",
@@ -79,7 +81,10 @@
       "variationCount_one": "{{count}} variação",
       "variationCount_other": "{{count}} variações",
       "boardPreviewStart": "Iniciar",
-      "boardPreviewAfterPly": "Após o lance {{ply}}"
+      "boardPreviewAfterPly": "Após o lance {{ply}}",
+      "showMore_one": "Mostrar {{count}} mais",
+      "showMore_other": "Mostrar {{count}} mais",
+      "popularHeading": "Aberturas populares"
     }
   },
   "puzzles": {

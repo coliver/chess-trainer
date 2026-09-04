@@ -5,6 +5,8 @@
     "greetingAfternoon": "こんにちは 🌤️",
     "greetingEvening": "こんばんは 🌙",
     "nav": "メイン",
+    "sectionTabsNav": "セクションタブ",
+    "bottomNav": "ボトムナビゲーション",
     "openings": "定跡",
     "puzzles": "問題",
     "login": "ログイン",
@@ -79,7 +81,10 @@
       "variationCount_one": "{{count}}種類の変化",
       "variationCount_other": "{{count}}種類の変化",
       "boardPreviewStart": "開始",
-      "boardPreviewAfterPly": "{{ply}}手後"
+      "boardPreviewAfterPly": "{{ply}}手後",
+      "showMore_one": "あと {{count}} 件を表示",
+      "showMore_other": "あと {{count}} 件を表示",
+      "popularHeading": "人気のあるオープニング"
     }
   },
   "puzzles": {

@@ -5,6 +5,8 @@
     "greetingAfternoon": "Bună ziua 🌤️",
     "greetingEvening": "Bună seara 🌙",
     "nav": "Acasă",
+    "sectionTabsNav": "Filele secțiunilor",
+    "bottomNav": "Navigare inferioară",
     "openings": "Deschideri",
     "puzzles": "Puzzle-uri",
     "login": "Autentificare",
@@ -79,7 +81,10 @@
       "variationCount_one": "{{count}} variantă",
       "variationCount_other": "{{count}} variante",
       "boardPreviewStart": "Început",
-      "boardPreviewAfterPly": "După mutarea {{ply}}"
+      "boardPreviewAfterPly": "După mutarea {{ply}}",
+      "showMore_one": "Arată {{count}} mai mult",
+      "showMore_other": "Arată {{count}} mai mulți",
+      "popularHeading": "Deschideri populare"
     }
   },
   "puzzles": {

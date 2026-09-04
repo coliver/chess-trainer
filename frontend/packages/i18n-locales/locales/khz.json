@@ -5,6 +5,8 @@
     "greetingAfternoon": "Baruk! 🌤️",
     "greetingEvening": "Baruk! 🌙",
     "nav": "Primary",
+    "sectionTabsNav": "Section tabs",
+    "bottomNav": "Bottom navigation",
     "openings": "Openings",
     "puzzles": "Puzzles",
     "login": "Medan",
@@ -79,7 +81,10 @@
       "variationCount_one": "{{count}} variation",
       "variationCount_other": "{{count}} variations",
       "boardPreviewStart": "Start",
-      "boardPreviewAfterPly": "After ply {{ply}}"
+      "boardPreviewAfterPly": "After ply {{ply}}",
+      "showMore_one": "Show {{count}} more",
+      "showMore_other": "Show {{count}} more",
+      "popularHeading": "Popular openings"
     }
   },
   "puzzles": {

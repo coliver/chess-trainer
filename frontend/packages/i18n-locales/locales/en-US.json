@@ -5,6 +5,8 @@
     "greetingAfternoon": "Good afternoon 🌤️",
     "greetingEvening": "Good evening 🌙",
     "nav": "Primary",
+    "sectionTabsNav": "Section tabs",
+    "bottomNav": "Bottom navigation",
     "openings": "Openings",
     "puzzles": "Puzzles",
     "login": "Login",
@@ -78,6 +80,9 @@
       "openingsToTrain_other": "{{count}} openings · pick one to train",
       "variationCount_one": "{{count}} variation",
       "variationCount_other": "{{count}} variations",
+      "showMore_one": "Show {{count}} more",
+      "showMore_other": "Show {{count}} more",
+      "popularHeading": "Popular openings",
       "boardPreviewStart": "Start",
       "boardPreviewAfterPly": "After ply {{ply}}"
     }

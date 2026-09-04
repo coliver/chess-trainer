@@ -5,6 +5,8 @@
     "greetingAfternoon": "Guten Nachmittag 🌤️",
     "greetingEvening": "Guten Abend 🌙",
     "nav": "Primär",
+    "sectionTabsNav": "Abschnitt-Reiter",
+    "bottomNav": "Untere Navigation",
     "openings": "Eröffnungen",
     "puzzles": "Rätsel",
     "login": "Anmelden",
@@ -79,7 +81,10 @@
       "variationCount_one": "{{count}} Variante",
       "variationCount_other": "{{count}} Varianten",
       "boardPreviewStart": "Start",
-      "boardPreviewAfterPly": "Nach Halbzug {{ply}}"
+      "boardPreviewAfterPly": "Nach Halbzug {{ply}}",
+      "showMore_one": "{{count}} weitere anzeigen",
+      "showMore_other": "{{count}} weitere anzeigen",
+      "popularHeading": "Beliebte Eröffnungen"
     }
   },
   "puzzles": {

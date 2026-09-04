@@ -5,6 +5,8 @@
     "greetingAfternoon": "Добрый день 🌤️",
     "greetingEvening": "Добрый вечер 🌙",
     "nav": "Основное",
+    "sectionTabsNav": "Вкладки раздела",
+    "bottomNav": "Нижняя навигация",
     "openings": "Дебюты",
     "puzzles": "Задачи",
     "login": "Войти",
@@ -79,7 +81,10 @@
       "variationCount_one": "{{count}} вариация",
       "variationCount_other": "{{count}} вариаций",
       "boardPreviewStart": "Старт",
-      "boardPreviewAfterPly": "После хода {{ply}}"
+      "boardPreviewAfterPly": "После хода {{ply}}",
+      "showMore_one": "Показать {{count}} ещё",
+      "showMore_other": "Показать {{count}} ещё",
+      "popularHeading": "Популярные дебюты"
     }
   },
   "puzzles": {
