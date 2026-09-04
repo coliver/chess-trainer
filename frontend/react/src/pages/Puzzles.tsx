@@ -5,6 +5,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { AxiosError } from "axios";
 import api from "../api";
 import Board, { type BoardMarker } from "../components/Board";
+import { Button } from "../components/Button";
 import { FlipBoardButton } from "../components/FlipBoardButton";
 import { useBoardOrientation } from "../hooks/useBoardOrientation";
 import { usePreferences } from "../context/PreferencesContext";
@@ -283,10 +284,29 @@ export const Puzzles = () => {
     ];
   }, [lastMoveUci]);
 
+  // The idle "find the best move" prompt shows a plain pawn glyph, colored
+  // to match the side actually solving the puzzle (Puzzles overrides
+  // deriveStatus's white king icon with a pawn for exactly this state).
+  const isBlackToFindMove = feedbackKind === "neutral" && solverColor === "b";
+
+  const statusBanner = statusMsg && (
+    <div className={`train-status ${statusKind}`} role="status">
+      <span
+        className={`train-status-ic${isBlackToFindMove ? " is-black-piece" : ""}`}
+        aria-hidden="true"
+      >
+        {statusIcon}
+      </span>
+      <div>
+        <div className="train-status-msg">{statusMsg}</div>
+      </div>
+    </div>
+  );
+
   return (
     <main className="page">
       <div className="card">
-        <div className="train">
+        <div className="train puzzles-train">
           <div className="train-board-col">
             <div className="training-board-wrap">
               <Board
@@ -309,11 +329,26 @@ export const Puzzles = () => {
               </span>
               <div className="board-toolbar">
                 <FlipBoardButton className="icon-btn" onClick={flip} />
+                {puzzleId && !puzzleComplete && (
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    className="icon-btn"
+                    onClick={skip}
+                    disabled={isSubmitting}
+                    aria-label={t("puzzles.skipPuzzle")}
+                    title={t("puzzles.skipPuzzle")}
+                  >
+                    <span aria-hidden="true">⏭</span>
+                  </Button>
+                )}
               </div>
             </div>
           </div>
 
-          <aside className="train-rail">
+          <div className="puzzle-status-slot">{statusBanner}</div>
+
+          <aside className="train-rail puzzles-rail">
             <div className="rail-head">
               <div className="rail-eyebrow">{t("puzzles.eyebrow")}</div>
               <div className="rail-title">
@@ -334,47 +369,38 @@ export const Puzzles = () => {
               </div>
             </div>
 
-            <div className="puzzles-stats">
-              <span className="stat-pill">
-                {t("puzzles.solved", { count: solved })}
-              </span>
-              <span
-                className={streak > 0 ? "stat-pill is-active" : "stat-pill"}
-              >
-                {t("puzzles.streak", { count: streak })}
-                {streak > 0 ? " 🔥" : ""}
-                {bestStreak > 0
-                  ? t("puzzles.streakBest", { best: bestStreak })
-                  : ""}
-              </span>
-            </div>
-
-            {theme && (
-              <span className="stat-pill is-active">
-                {t("puzzles.practicing", { theme: formatThemeLabel(theme) })}
-              </span>
-            )}
-
-            {themeList.length > 0 && (
-              <div className="puzzles-themes">
-                {themeList.map((themeLabel) => (
-                  <span key={themeLabel} className="puzzles-theme-chip">
-                    {themeLabel}
-                  </span>
-                ))}
-              </div>
-            )}
-
-            {statusMsg && (
-              <div className={`train-status ${statusKind}`} role="status">
-                <span className="train-status-ic" aria-hidden="true">
-                  {statusIcon}
+            <div className="puzzles-meta">
+              <div className="puzzles-stats">
+                <span className="stat-pill">
+                  {t("puzzles.solved", { count: solved })}
                 </span>
-                <div>
-                  <div className="train-status-msg">{statusMsg}</div>
-                </div>
+                <span
+                  className={streak > 0 ? "stat-pill is-active" : "stat-pill"}
+                >
+                  {t("puzzles.streak", { count: streak })}
+                  {streak > 0 ? " 🔥" : ""}
+                  {bestStreak > 0
+                    ? t("puzzles.streakBest", { best: bestStreak })
+                    : ""}
+                </span>
               </div>
-            )}
+
+              {theme && (
+                <span className="stat-pill is-active">
+                  {t("puzzles.practicing", { theme: formatThemeLabel(theme) })}
+                </span>
+              )}
+
+              {themeList.length > 0 && (
+                <div className="puzzles-themes">
+                  {themeList.map((themeLabel) => (
+                    <span key={themeLabel} className="puzzles-theme-chip">
+                      {themeLabel}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
 
             {puzzleId && puzzleComplete && (
               <button
@@ -384,17 +410,6 @@ export const Puzzles = () => {
                 onClick={next}
               >
                 {t("puzzles.nextPuzzle")}
-              </button>
-            )}
-
-            {puzzleId && !puzzleComplete && (
-              <button
-                type="button"
-                className="puzzles-skip"
-                onClick={skip}
-                disabled={isSubmitting}
-              >
-                {t("puzzles.skipPuzzle")}
               </button>
             )}
 

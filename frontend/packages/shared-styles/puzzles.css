@@ -3,6 +3,55 @@
    .training-board-wrap / .train-rail) so puzzles and training share one
    professional desktop skin instead of drifting apart. */
 
+/* Matches the dark tone .turn.black already uses under the board: when
+   solving for Black, the status icon reads as a black piece instead of the
+   white one used for every other state. */
+.train-status-ic.is-black-piece {
+  color: #2c2c30;
+}
+
+/* Groups stats + active theme filter + theme tags so the mobile breakpoint
+   below can collapse what are three separately-boxed rows on desktop into
+   one quiet meta line, instead of stacking pill row after pill row. */
+.puzzles-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Puzzles gets its own grid areas (scoped via .puzzles-train, kept out of
+   the shared .train rules in training.css so Training's layout is
+   untouched): the status banner is pulled out of the rail and given its
+   own area, positioned above the rail's title on desktop and above the
+   board entirely on phone — "what to do" always comes before "the
+   details", not buried after stats and theme tags. */
+.train.puzzles-train {
+  grid-template-areas:
+    "board status"
+    "board rail";
+  grid-template-rows: auto 1fr;
+}
+.puzzles-train .train-board-col {
+  grid-area: board;
+}
+.puzzle-status-slot {
+  grid-area: status;
+}
+.puzzles-train .puzzles-rail {
+  grid-area: rail;
+}
+
+@media (max-width: 900px) {
+  .train.puzzles-train {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "status"
+      "board"
+      "rail";
+    grid-template-rows: auto auto auto;
+  }
+}
+
 .puzzles-stats {
   display: flex;
   gap: 8px;
@@ -44,25 +93,6 @@
   font-weight: 600;
   color: var(--text);
   text-transform: capitalize;
-}
-
-.puzzles-skip {
-  font: inherit;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text);
-  background: none;
-  border: 0;
-  cursor: pointer;
-  padding: 4px 0;
-  text-align: left;
-}
-.puzzles-skip:hover {
-  color: var(--accent);
-}
-.puzzles-skip:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
 }
 
 .puzzles-next {
@@ -182,5 +212,51 @@
 @media (max-width: 640px) {
   .puzzle-theme-grid {
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  }
+}
+
+/* ===== Puzzle Training screen, phone ===== */
+
+@media (max-width: 600px) {
+  /* Solved/streak, the active theme filter, and theme tags were three
+     separately bordered pill rows stacked above the status banner. On a
+     phone they read as clutter, not information — flatten them into one
+     quiet line of plain text with a single hairline divider marking the
+     boundary between "your session" and "this puzzle's tags". */
+  .puzzles-meta {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 14px;
+  }
+
+  .puzzles-meta .stat-pill,
+  .puzzles-meta .puzzles-theme-chip {
+    border: 0;
+    background: none;
+    padding: 0;
+    border-radius: 0;
+    font-size: 12.5px;
+  }
+
+  .puzzles-meta .stat-pill.is-active {
+    color: var(--accent);
+  }
+
+  .puzzles-meta .puzzles-themes {
+    padding-left: 14px;
+    border-left: 1px solid var(--border);
+  }
+
+  .puzzles-next {
+    width: 100%;
+    padding: 13px 16px;
+    font-size: 15px;
+  }
+
+  .puzzles-back-link {
+    display: block;
+    text-align: center;
+    margin: 2px 0 0;
   }
 }
