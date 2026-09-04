@@ -103,6 +103,7 @@
     "streak": "Streak: {{count}}",
     "streakBest": " · best {{best}}",
     "moveProgress": "Move {{current}} of {{total}}",
+    "showHint": "Show a hint",
     "skipPuzzle": "Skip puzzle ›",
     "nextPuzzle": "Next puzzle ›",
     "backToDashboard": "← Back to dashboard",

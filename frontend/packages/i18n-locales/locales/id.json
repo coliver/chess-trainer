@@ -80,11 +80,11 @@
       "openingsToTrain_other": "{{count}} pembukaan · pilih satu untuk dilatih",
       "variationCount_one": "{{count}} variasi",
       "variationCount_other": "{{count}} variasi",
-      "boardPreviewStart": "Mulai",
-      "boardPreviewAfterPly": "Setelah ply {{ply}}",
       "showMore_one": "Tampilkan {{count}} lagi",
       "showMore_other": "Tampilkan {{count}} lagi",
-      "popularHeading": "Pembukaan populer"
+      "popularHeading": "Pembukaan populer",
+      "boardPreviewStart": "Mulai",
+      "boardPreviewAfterPly": "Setelah ply {{ply}}"
     }
   },
   "puzzles": {
@@ -103,6 +103,7 @@
     "streak": "Rangkaian: {{count}}",
     "streakBest": " · terbaik {{best}}",
     "moveProgress": "Langkah {{current}} dari {{total}}",
+    "showHint": "Tampilkan petunjuk",
     "skipPuzzle": "Lewati teka-teki ›",
     "nextPuzzle": "Teka-teki berikutnya ›",
     "backToDashboard": "← Kembali ke dasbor",
@@ -116,6 +117,7 @@
     "title": "Puzzle Themes",
     "subtitle": "Pick a tactic to practice.",
     "cardCount": "{{count}} puzzles",
+    "randomPuzzle": "Random puzzle ›",
     "backToPuzzles": "← Back to puzzles",
     "loadFailed": "Failed to load puzzle themes. Check your connection.",
     "groupMotifs": "Motifs",
@@ -123,8 +125,7 @@
     "groupPhasesEndgames": "Phases & Endgames",
     "groupMaterialSpecial": "Material & Special Moves",
     "groupAttack": "Attack",
-    "groupLengthDifficulty": "Length & Difficulty",
-    "randomPuzzle": "Random puzzle ›"
+    "groupLengthDifficulty": "Length & Difficulty"
   },
   "training": {
     "whiteToMove": "Putih jalan",

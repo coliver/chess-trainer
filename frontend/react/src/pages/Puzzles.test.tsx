@@ -79,6 +79,11 @@ const NEXT_MULTI_MOVE_PUZZLE = {
   solverMovesTotal: 2,
 };
 
+const hasMarker = (square: string, type: "hint" | "lastmove") =>
+  (capturedProps.markers ?? []).some(
+    (m) => m.square === square && m.type === type,
+  );
+
 describe("Puzzles Page", () => {
   let user: ReturnType<typeof userEvent.setup>;
 
@@ -382,6 +387,164 @@ describe("Puzzles Page", () => {
     expect(
       screen.getByRole("link", { name: /Browse themes/ }),
     ).toHaveAttribute("href", "/puzzles/themes");
+  });
+
+  describe("Hint", () => {
+    it("marks only the from-square on first click, and from+to on second click", async () => {
+      (api.get as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        data: NEXT_PUZZLE,
+      });
+
+      renderPuzzles();
+      await screen.findByText("Rating ~1500");
+
+      expect(hasMarker("e2", "hint")).toBe(false);
+      expect(hasMarker("e4", "hint")).toBe(false);
+
+      const hintBtn = screen.getByRole("button", { name: /hint/i });
+      await user.click(hintBtn);
+
+      expect(hasMarker("e2", "hint")).toBe(true);
+      expect(hasMarker("e4", "hint")).toBe(false);
+
+      await user.click(hintBtn);
+
+      expect(hasMarker("e2", "hint")).toBe(true);
+      expect(hasMarker("e4", "hint")).toBe(true);
+      expect(capturedProps.arrows).toEqual([
+        { from: "e2", to: "e4", type: "info" },
+      ]);
+    });
+
+    it("does not carry an active hint over into the next puzzle", async () => {
+      (api.get as ReturnType<typeof vi.fn>)
+        .mockResolvedValueOnce({ data: NEXT_PUZZLE })
+        .mockResolvedValueOnce({ data: { ...NEXT_PUZZLE, puzzleId: "p2" } });
+      (api.post as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        data: {
+          correct: true,
+          reason: "",
+          fenAfter: NEXT_PUZZLE.fen,
+          puzzleComplete: true,
+        },
+      });
+
+      renderPuzzles();
+      await screen.findByText("Rating ~1500");
+
+      const hintBtn = screen.getByRole("button", { name: /hint/i });
+      await user.click(hintBtn);
+      expect(hasMarker("e2", "hint")).toBe(true);
+
+      applyMoveMock.mockReturnValueOnce({
+        nextFen: NEXT_PUZZLE.fen,
+        uci: "e2e4",
+      });
+      act(() => {
+        capturedProps.onMove?.("e2", "e4");
+      });
+
+      const nextButton = await screen.findByRole("button", {
+        name: /Next puzzle/,
+      });
+      await user.click(nextButton);
+      await waitFor(() => expect(api.get).toHaveBeenCalledTimes(2));
+
+      // Same correctMoveUci as the first puzzle (e2e4) — if hintLevel had
+      // survived the puzzle switch, this would still show the hint markers.
+      expect(hasMarker("e2", "hint")).toBe(false);
+      expect(capturedProps.arrows ?? []).toHaveLength(0);
+    });
+
+    const missOnce = async () => {
+      (api.post as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        data: { correct: false, reason: "wrong move", fenAfter: null, puzzleComplete: false },
+      });
+      applyMoveMock.mockReturnValueOnce({
+        nextFen: "8/8/8/8/8/8/8/8 w - - 0 1",
+        uci: "e2e5",
+      });
+      await act(async () => {
+        capturedProps.onMove?.("e2", "e5");
+      });
+      await screen.findByText("❌ wrong move");
+    };
+
+    it("auto-reveals the source square after 2 misses, and source+destination after 4", async () => {
+      (api.get as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        data: NEXT_PUZZLE,
+      });
+
+      renderPuzzles();
+      await screen.findByText("Rating ~1500");
+
+      await missOnce();
+      expect(hasMarker("e2", "hint")).toBe(false);
+
+      await missOnce();
+      expect(hasMarker("e2", "hint")).toBe(true);
+      expect(hasMarker("e4", "hint")).toBe(false);
+
+      await missOnce();
+      await missOnce();
+      expect(hasMarker("e2", "hint")).toBe(true);
+      expect(hasMarker("e4", "hint")).toBe(true);
+      expect(capturedProps.arrows).toEqual([
+        { from: "e2", to: "e4", type: "info" },
+      ]);
+    });
+
+    it("resets the hint and miss count when the puzzle advances to its next required move", async () => {
+      (api.get as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        data: NEXT_MULTI_MOVE_PUZZLE,
+      });
+      (api.post as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        data: {
+          correct: true,
+          reason: "",
+          fenAfter: "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
+          puzzleComplete: false,
+          opponentReplyUci: "g1f3",
+          nextCorrectMoveUci: "b8c6",
+        },
+      });
+
+      renderPuzzles();
+      await screen.findByText("Rating ~1500");
+
+      const hintBtn = screen.getByRole("button", { name: /hint/i });
+      await user.click(hintBtn);
+      expect(hasMarker("e2", "hint")).toBe(true);
+
+      applyMoveMock.mockReturnValueOnce({
+        nextFen: "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+        uci: "e7e5",
+      });
+      act(() => {
+        capturedProps.onMove?.("e7", "e5");
+      });
+      await screen.findByText("✅ Keep going…");
+
+      // Hint was for the first move's e2e4; the puzzle is now on b8c6 — the
+      // old hint must not still be showing e2 as the source square.
+      expect(hasMarker("e2", "hint")).toBe(false);
+      expect(capturedProps.arrows ?? []).toHaveLength(0);
+
+      // And the miss count must have restarted too: a single miss on this
+      // new move should not immediately re-show a hint.
+      (api.post as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        data: { correct: false, reason: "wrong move", fenAfter: null, puzzleComplete: false },
+      });
+      applyMoveMock.mockReturnValueOnce({
+        nextFen: "8/8/8/8/8/8/8/8 w - - 0 1",
+        uci: "b8d7",
+      });
+      await act(async () => {
+        capturedProps.onMove?.("b8", "d7");
+      });
+      await screen.findByText("❌ wrong move");
+      expect(hasMarker("b8", "hint")).toBe(false);
+    });
   });
 
   it("redirects to login on a 401", async () => {

@@ -6,6 +6,10 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ### ✨ Added
 
+#### 🧩 Hint Button on the Puzzles Screen
+
+> The Puzzles page had no hint mechanic at all, unlike Training's opening-move trainer. Ported Training's existing client-side hint system as-is: a 💡 button in the board toolbar (between flip and skip) reveals the correct move's source square on first click and source+destination plus an arrow on a second click, escalating automatically after 2 and 4 wrong attempts. Reuses `deriveHintMarkers` from `@knight-school/chess-core` and the `.hint-icon` styling already in `training.css` — no new backend or CSS. One addition beyond Training's behavior: since a puzzle can require several solver moves in sequence, the hint level and miss count now also reset every time the puzzle advances to its next required move, not just on a full puzzle load, so a stale hint from move 1 can't linger onto move 2's different squares.
+
 #### 🎨 Dashboard Hero Review Button on Desktop
 
 > The mobile-first dashboard redesign gave the "Review due" / "Practice puzzles" buttons a gradient-plus-fire hero treatment, extended to the tablet breakpoint shortly after, but desktop (981px+) kept the original flat button, so the widest, most-used layout looked the least finished. `dashboard.css`'s gradient background, bold weight, and fire-glyph flourish now live in `.progress-review-btn`'s base rule instead of the `max-width: 980px` block, so all three breakpoints match; only the mobile/tablet-specific height and font-size bump stayed scoped to that block. Desktop's two-column stat strip and boxy weak-spot cards were left untouched: those are deliberate wide-screen treatments, not gaps.

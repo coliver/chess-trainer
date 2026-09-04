@@ -80,11 +80,11 @@
       "openingsToTrain_other": "오프닝 {{count}}개 · 하나를 선택해 훈련",
       "variationCount_one": "변형 {{count}}개",
       "variationCount_other": "변형 {{count}}개",
-      "boardPreviewStart": "시작",
-      "boardPreviewAfterPly": "{{ply}}수 후",
       "showMore_one": "{{count}}개 더 보기",
       "showMore_other": "{{count}}개 더 보기",
-      "popularHeading": "인기 있는 오프닝"
+      "popularHeading": "인기 있는 오프닝",
+      "boardPreviewStart": "시작",
+      "boardPreviewAfterPly": "{{ply}}수 후"
     }
   },
   "puzzles": {
@@ -103,6 +103,7 @@
     "streak": "연속: {{count}}",
     "streakBest": " · 최고 {{best}}",
     "moveProgress": "수 {{current}} / {{total}}",
+    "showHint": "힌트 보기",
     "skipPuzzle": "퍼즐 건너뛰기 ›",
     "nextPuzzle": "다음 퍼즐 ›",
     "backToDashboard": "← 대시보드로 돌아가기",
@@ -116,6 +117,7 @@
     "title": "Puzzle Themes",
     "subtitle": "Pick a tactic to practice.",
     "cardCount": "{{count}} puzzles",
+    "randomPuzzle": "Random puzzle ›",
     "backToPuzzles": "← Back to puzzles",
     "loadFailed": "Failed to load puzzle themes. Check your connection.",
     "groupMotifs": "Motifs",
@@ -123,8 +125,7 @@
     "groupPhasesEndgames": "Phases & Endgames",
     "groupMaterialSpecial": "Material & Special Moves",
     "groupAttack": "Attack",
-    "groupLengthDifficulty": "Length & Difficulty",
-    "randomPuzzle": "Random puzzle ›"
+    "groupLengthDifficulty": "Length & Difficulty"
   },
   "training": {
     "whiteToMove": "백 차례",

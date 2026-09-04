@@ -80,11 +80,11 @@
       "openingsToTrain_other": "{{count}} khai cuộc · chọn một để luyện",
       "variationCount_one": "{{count}} biến thể",
       "variationCount_other": "{{count}} biến thể",
-      "boardPreviewStart": "Bắt đầu",
-      "boardPreviewAfterPly": "Sau nước {{ply}}",
       "showMore_one": "Hiển thị {{count}} mục khác",
       "showMore_other": "Hiển thị {{count}} mục khác",
-      "popularHeading": "Mở đầu phổ biến"
+      "popularHeading": "Mở đầu phổ biến",
+      "boardPreviewStart": "Bắt đầu",
+      "boardPreviewAfterPly": "Sau nước {{ply}}"
     }
   },
   "puzzles": {
@@ -103,6 +103,7 @@
     "streak": "Chuỗi: {{count}}",
     "streakBest": " · tốt nhất {{best}}",
     "moveProgress": "Nước đi {{current}} / {{total}}",
+    "showHint": "Hiện gợi ý",
     "skipPuzzle": "Bỏ qua bài tập ›",
     "nextPuzzle": "Bài tập tiếp theo ›",
     "backToDashboard": "← Quay lại bảng điều khiển",
@@ -116,6 +117,7 @@
     "title": "Puzzle Themes",
     "subtitle": "Pick a tactic to practice.",
     "cardCount": "{{count}} puzzles",
+    "randomPuzzle": "Random puzzle ›",
     "backToPuzzles": "← Back to puzzles",
     "loadFailed": "Failed to load puzzle themes. Check your connection.",
     "groupMotifs": "Motifs",
@@ -123,8 +125,7 @@
     "groupPhasesEndgames": "Phases & Endgames",
     "groupMaterialSpecial": "Material & Special Moves",
     "groupAttack": "Attack",
-    "groupLengthDifficulty": "Length & Difficulty",
-    "randomPuzzle": "Random puzzle ›"
+    "groupLengthDifficulty": "Length & Difficulty"
   },
   "training": {
     "whiteToMove": "Quân trắng đi",

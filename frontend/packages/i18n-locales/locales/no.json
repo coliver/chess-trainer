@@ -80,11 +80,11 @@
       "openingsToTrain_other": "{{count}} åpninger · velg én å trene",
       "variationCount_one": "{{count}} variant",
       "variationCount_other": "{{count}} varianter",
-      "boardPreviewStart": "Start",
-      "boardPreviewAfterPly": "Etter trekk {{ply}}",
       "showMore_one": "Vis {{count}} flere",
       "showMore_other": "Vis {{count}} flere",
-      "popularHeading": "Populære åpninger"
+      "popularHeading": "Populære åpninger",
+      "boardPreviewStart": "Start",
+      "boardPreviewAfterPly": "Etter trekk {{ply}}"
     }
   },
   "puzzles": {
@@ -103,6 +103,7 @@
     "streak": "Rekke: {{count}}",
     "streakBest": " · best {{best}}",
     "moveProgress": "Trekk {{current}} av {{total}}",
+    "showHint": "Vis hint",
     "skipPuzzle": "Hopp over oppgave ›",
     "nextPuzzle": "Neste oppgave ›",
     "backToDashboard": "← Tilbake til oversikten",
@@ -116,6 +117,7 @@
     "title": "Puzzle Themes",
     "subtitle": "Pick a tactic to practice.",
     "cardCount": "{{count}} puzzles",
+    "randomPuzzle": "Random puzzle ›",
     "backToPuzzles": "← Back to puzzles",
     "loadFailed": "Failed to load puzzle themes. Check your connection.",
     "groupMotifs": "Motifs",
@@ -123,8 +125,7 @@
     "groupPhasesEndgames": "Phases & Endgames",
     "groupMaterialSpecial": "Material & Special Moves",
     "groupAttack": "Attack",
-    "groupLengthDifficulty": "Length & Difficulty",
-    "randomPuzzle": "Random puzzle ›"
+    "groupLengthDifficulty": "Length & Difficulty"
   },
   "training": {
     "whiteToMove": "Hvit i trekket",

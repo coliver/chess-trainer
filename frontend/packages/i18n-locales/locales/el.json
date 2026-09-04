@@ -80,11 +80,11 @@
       "openingsToTrain_other": "{{count}} ανοίγματα · επιλέξτε ένα για εξάσκηση",
       "variationCount_one": "{{count}} παραλλαγή",
       "variationCount_other": "{{count}} παραλλαγές",
-      "boardPreviewStart": "Έναρξη",
-      "boardPreviewAfterPly": "Μετά από ημι-κίνηση {{ply}}",
       "showMore_one": "Εμφάνιση {{count}} περισσότερης",
       "showMore_other": "Εμφάνιση {{count}} περισσότερων",
-      "popularHeading": "Δημοφιλή ανοίγματα"
+      "popularHeading": "Δημοφιλή ανοίγματα",
+      "boardPreviewStart": "Έναρξη",
+      "boardPreviewAfterPly": "Μετά από ημι-κίνηση {{ply}}"
     }
   },
   "puzzles": {
@@ -103,6 +103,7 @@
     "streak": "Σερί: {{count}}",
     "streakBest": " · καλύτερο {{best}}",
     "moveProgress": "Κίνηση {{current}} από {{total}}",
+    "showHint": "Εμφάνιση υπόδειξης",
     "skipPuzzle": "Παράλειψη γρίφου ›",
     "nextPuzzle": "Επόμενος γρίφος ›",
     "backToDashboard": "← Πίσω στον πίνακα",
@@ -116,6 +117,7 @@
     "title": "Puzzle Themes",
     "subtitle": "Pick a tactic to practice.",
     "cardCount": "{{count}} puzzles",
+    "randomPuzzle": "Random puzzle ›",
     "backToPuzzles": "← Back to puzzles",
     "loadFailed": "Failed to load puzzle themes. Check your connection.",
     "groupMotifs": "Motifs",
@@ -123,8 +125,7 @@
     "groupPhasesEndgames": "Phases & Endgames",
     "groupMaterialSpecial": "Material & Special Moves",
     "groupAttack": "Attack",
-    "groupLengthDifficulty": "Length & Difficulty",
-    "randomPuzzle": "Random puzzle ›"
+    "groupLengthDifficulty": "Length & Difficulty"
   },
   "training": {
     "whiteToMove": "Κινεί τα λευκά",

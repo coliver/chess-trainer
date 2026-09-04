@@ -80,11 +80,11 @@
       "openingsToTrain_other": "{{count}} ओपनिंग्स · प्रशिक्षण के लिए एक चुनें",
       "variationCount_one": "{{count}} वैरिएशन",
       "variationCount_other": "{{count}} वैरिएशन",
-      "boardPreviewStart": "शुरू",
-      "boardPreviewAfterPly": "{{ply}} ply के बाद",
       "showMore_one": "{{count}} अधिक दिखाएँ",
       "showMore_other": "{{count}} अधिक दिखाएँ",
-      "popularHeading": "लोकप्रिय उद्घाटन"
+      "popularHeading": "लोकप्रिय उद्घाटन",
+      "boardPreviewStart": "शुरू",
+      "boardPreviewAfterPly": "{{ply}} ply के बाद"
     }
   },
   "puzzles": {
@@ -103,6 +103,7 @@
     "streak": "स्ट्रीक: {{count}}",
     "streakBest": " · सर्वोत्तम {{best}}",
     "moveProgress": "चाल {{current}} / {{total}}",
+    "showHint": "संकेत दिखाएँ",
     "skipPuzzle": "पहेली छोड़ें ›",
     "nextPuzzle": "अगली पहेली ›",
     "backToDashboard": "← डैशबोर्ड पर वापस",
@@ -116,6 +117,7 @@
     "title": "Puzzle Themes",
     "subtitle": "Pick a tactic to practice.",
     "cardCount": "{{count}} puzzles",
+    "randomPuzzle": "Random puzzle ›",
     "backToPuzzles": "← Back to puzzles",
     "loadFailed": "Failed to load puzzle themes. Check your connection.",
     "groupMotifs": "Motifs",
@@ -123,8 +125,7 @@
     "groupPhasesEndgames": "Phases & Endgames",
     "groupMaterialSpecial": "Material & Special Moves",
     "groupAttack": "Attack",
-    "groupLengthDifficulty": "Length & Difficulty",
-    "randomPuzzle": "Random puzzle ›"
+    "groupLengthDifficulty": "Length & Difficulty"
   },
   "training": {
     "whiteToMove": "सफ़ेद की चाल",

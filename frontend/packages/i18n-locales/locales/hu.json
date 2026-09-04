@@ -80,11 +80,11 @@
       "openingsToTrain_other": "{{count}} megnyitás · válassz egyet az edzéshez",
       "variationCount_one": "{{count}} változat",
       "variationCount_other": "{{count}} változat",
-      "boardPreviewStart": "Kezdés",
-      "boardPreviewAfterPly": "{{ply}}. fél lépés után",
       "showMore_one": "{{count}} további megjelenítése",
       "showMore_other": "{{count}} további megjelenítése",
-      "popularHeading": "Népszerű megnyitások"
+      "popularHeading": "Népszerű megnyitások",
+      "boardPreviewStart": "Kezdés",
+      "boardPreviewAfterPly": "{{ply}}. fél lépés után"
     }
   },
   "puzzles": {
@@ -103,6 +103,7 @@
     "streak": "Sorozat: {{count}}",
     "streakBest": " · legjobb {{best}}",
     "moveProgress": "Lépés {{current}} / {{total}}",
+    "showHint": "Tipp megjelenítése",
     "skipPuzzle": "Feladvány kihagyása ›",
     "nextPuzzle": "Következő feladvány ›",
     "backToDashboard": "← Vissza az irányítópultra",
@@ -116,6 +117,7 @@
     "title": "Puzzle Themes",
     "subtitle": "Pick a tactic to practice.",
     "cardCount": "{{count}} puzzles",
+    "randomPuzzle": "Random puzzle ›",
     "backToPuzzles": "← Back to puzzles",
     "loadFailed": "Failed to load puzzle themes. Check your connection.",
     "groupMotifs": "Motifs",
@@ -123,8 +125,7 @@
     "groupPhasesEndgames": "Phases & Endgames",
     "groupMaterialSpecial": "Material & Special Moves",
     "groupAttack": "Attack",
-    "groupLengthDifficulty": "Length & Difficulty",
-    "randomPuzzle": "Random puzzle ›"
+    "groupLengthDifficulty": "Length & Difficulty"
   },
   "training": {
     "whiteToMove": "Világos következik",

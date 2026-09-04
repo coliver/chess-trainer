@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { AxiosError } from "axios";
 import api from "../api";
-import Board, { type BoardMarker } from "../components/Board";
+import Board, { type BoardArrow, type BoardMarker } from "../components/Board";
 import { Button } from "../components/Button";
 import { FlipBoardButton } from "../components/FlipBoardButton";
 import { useBoardOrientation } from "../hooks/useBoardOrientation";
@@ -13,6 +13,7 @@ import {
   START_FEN,
   applyMove,
   classifyFeedback,
+  deriveHintMarkers,
   legalMoves,
   pieceColorAt,
   sideToMove,
@@ -57,6 +58,12 @@ export const Puzzles = () => {
   const [bestStreak, setBestStreak] = useState(0);
   const [noPuzzlesDue, setNoPuzzlesDue] = useState(false);
   const [puzzleComplete, setPuzzleComplete] = useState(false);
+  const [hintLevel, setHintLevel] = useState(-1);
+  const [wrongAttempts, setWrongAttempts] = useState(0);
+  const effectiveHintLevel = Math.max(
+    hintLevel,
+    wrongAttempts >= 4 ? 1 : wrongAttempts >= 2 ? 0 : -1,
+  );
   const nextButtonRef = useRef<HTMLButtonElement>(null);
 
   // Move focus to the "Next puzzle" button when it appears, so keyboard
@@ -99,6 +106,8 @@ export const Puzzles = () => {
     setFeedback("");
     setNoPuzzlesDue(false);
     setPuzzleComplete(false);
+    setHintLevel(-1);
+    setWrongAttempts(0);
     try {
       const res = await api.get<NextPuzzle>("/puzzles/next", {
         params: {
@@ -185,6 +194,8 @@ export const Puzzles = () => {
           if (res.data.fenAfter) setFen(res.data.fenAfter);
           if (res.data.opponentReplyUci) setLastMoveUci(res.data.opponentReplyUci);
           if (res.data.nextCorrectMoveUci) setCorrectMoveUci(res.data.nextCorrectMoveUci);
+          setHintLevel(-1);
+          setWrongAttempts(0);
           updateMoveIndex((n) => n + 1);
         } else {
           playSound("puzzleWrong");
@@ -193,6 +204,7 @@ export const Puzzles = () => {
           );
           setFen(preFen); // snap back to the puzzle position
           setStreak(0);
+          setWrongAttempts((n) => n + 1);
         }
       } catch (err) {
         if (!isMountedRef.current) return;
@@ -277,12 +289,25 @@ export const Puzzles = () => {
 
   // Highlight the enemy's setup move (from/to) that produced this puzzle position.
   const markers = useMemo((): BoardMarker[] => {
-    if (!lastMoveUci || lastMoveUci.length < 4) return [];
+    const arr: BoardMarker[] = [];
+    if (lastMoveUci && lastMoveUci.length >= 4) {
+      arr.push({ square: lastMoveUci.slice(0, 2), type: "lastmove" });
+      arr.push({ square: lastMoveUci.slice(2, 4), type: "lastmove" });
+    }
+    const hint = deriveHintMarkers(correctMoveUci, effectiveHintLevel, puzzleComplete);
+    if (hint) {
+      arr.push({ square: hint.from, type: "hint" });
+      if (hint.to) arr.push({ square: hint.to, type: "hint" });
+    }
+    return arr;
+  }, [lastMoveUci, correctMoveUci, effectiveHintLevel, puzzleComplete]);
+
+  const hintArrows = useMemo((): BoardArrow[] => {
+    if (effectiveHintLevel < 1 || puzzleComplete || !correctMoveUci) return [];
     return [
-      { square: lastMoveUci.slice(0, 2), type: "lastmove" },
-      { square: lastMoveUci.slice(2, 4), type: "lastmove" },
+      { from: correctMoveUci.slice(0, 2), to: correctMoveUci.slice(2, 4), type: "info" },
     ];
-  }, [lastMoveUci]);
+  }, [effectiveHintLevel, puzzleComplete, correctMoveUci]);
 
   // The idle "find the best move" prompt shows a plain pawn glyph, colored
   // to match the side actually solving the puzzle (Puzzles overrides
@@ -315,6 +340,7 @@ export const Puzzles = () => {
                 interactive={!!puzzleId && !isSubmitting && !puzzleComplete}
                 moveColor={solverColor === "b" ? "black" : "white"}
                 markers={markers}
+                arrows={hintArrows}
                 onMoveStart={canPickUp}
                 getLegalMoves={getLegalMoves}
                 onMove={onMove}
@@ -329,6 +355,20 @@ export const Puzzles = () => {
               </span>
               <div className="board-toolbar">
                 <FlipBoardButton className="icon-btn" onClick={flip} />
+                <Button
+                  type="button"
+                  variant="secondary"
+                  className="icon-btn hint-icon"
+                  onClick={() => {
+                    if (!puzzleId || isSubmitting || puzzleComplete) return;
+                    setHintLevel((h) => (h < 0 ? 0 : 1));
+                  }}
+                  disabled={!puzzleId || isSubmitting || puzzleComplete}
+                  aria-label={t("puzzles.showHint")}
+                  title={t("puzzles.showHint")}
+                >
+                  <span aria-hidden="true">💡</span>
+                </Button>
                 {puzzleId && !puzzleComplete && (
                   <Button
                     type="button"

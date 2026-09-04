@@ -80,11 +80,11 @@
       "openingsToTrain_other": "{{count}} 个开局 · 选一个训练",
       "variationCount_one": "{{count}} 个变化",
       "variationCount_other": "{{count}} 个变化",
-      "boardPreviewStart": "开始",
-      "boardPreviewAfterPly": "第 {{ply}} 步后",
       "showMore_one": "显示 {{count}} 个更多",
       "showMore_other": "显示 {{count}} 个更多",
-      "popularHeading": "热门开局"
+      "popularHeading": "热门开局",
+      "boardPreviewStart": "开始",
+      "boardPreviewAfterPly": "第 {{ply}} 步后"
     }
   },
   "puzzles": {
@@ -103,6 +103,7 @@
     "streak": "连胜：{{count}}",
     "streakBest": " · 最佳 {{best}}",
     "moveProgress": "第{{current}}步，共{{total}}步",
+    "showHint": "显示提示",
     "skipPuzzle": "跳过谜题 ›",
     "nextPuzzle": "下一道谜题 ›",
     "backToDashboard": "← 返回仪表盘",
@@ -116,6 +117,7 @@
     "title": "Puzzle Themes",
     "subtitle": "Pick a tactic to practice.",
     "cardCount": "{{count}} puzzles",
+    "randomPuzzle": "Random puzzle ›",
     "backToPuzzles": "← Back to puzzles",
     "loadFailed": "Failed to load puzzle themes. Check your connection.",
     "groupMotifs": "Motifs",
@@ -123,8 +125,7 @@
     "groupPhasesEndgames": "Phases & Endgames",
     "groupMaterialSpecial": "Material & Special Moves",
     "groupAttack": "Attack",
-    "groupLengthDifficulty": "Length & Difficulty",
-    "randomPuzzle": "Random puzzle ›"
+    "groupLengthDifficulty": "Length & Difficulty"
   },
   "training": {
     "whiteToMove": "白方走棋",

@@ -80,11 +80,11 @@
       "openingsToTrain_other": "{{count}} openingen · kies er één om te trainen",
       "variationCount_one": "{{count}} variatie",
       "variationCount_other": "{{count}} variaties",
-      "boardPreviewStart": "Start",
-      "boardPreviewAfterPly": "Na zet {{ply}}",
       "showMore_one": "{{count}} meer weergeven",
       "showMore_other": "{{count}} meer weergeven",
-      "popularHeading": "Populaire openingen"
+      "popularHeading": "Populaire openingen",
+      "boardPreviewStart": "Start",
+      "boardPreviewAfterPly": "Na zet {{ply}}"
     }
   },
   "puzzles": {
@@ -103,6 +103,7 @@
     "streak": "Reeks: {{count}}",
     "streakBest": " · beste {{best}}",
     "moveProgress": "Zet {{current}} van {{total}}",
+    "showHint": "Toon een hint",
     "skipPuzzle": "Puzzel overslaan ›",
     "nextPuzzle": "Volgende puzzel ›",
     "backToDashboard": "← Terug naar dashboard",
@@ -116,6 +117,7 @@
     "title": "Puzzle Themes",
     "subtitle": "Pick a tactic to practice.",
     "cardCount": "{{count}} puzzles",
+    "randomPuzzle": "Random puzzle ›",
     "backToPuzzles": "← Back to puzzles",
     "loadFailed": "Failed to load puzzle themes. Check your connection.",
     "groupMotifs": "Motifs",
@@ -123,8 +125,7 @@
     "groupPhasesEndgames": "Phases & Endgames",
     "groupMaterialSpecial": "Material & Special Moves",
     "groupAttack": "Attack",
-    "groupLengthDifficulty": "Length & Difficulty",
-    "randomPuzzle": "Random puzzle ›"
+    "groupLengthDifficulty": "Length & Difficulty"
   },
   "training": {
     "whiteToMove": "Wit aan zet",

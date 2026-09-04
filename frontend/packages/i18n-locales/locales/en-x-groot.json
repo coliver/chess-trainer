@@ -80,11 +80,11 @@
       "openingsToTrain_other": "{{count}} I am Groot · I am Groot",
       "variationCount_one": "{{count}} I am Groot",
       "variationCount_other": "{{count}} I am Groot",
-      "boardPreviewStart": "I am Groot",
-      "boardPreviewAfterPly": "I am Groot {{ply}}",
       "showMore_one": "{{count}} I am Groot",
       "showMore_other": "{{count}} I am Groot",
-      "popularHeading": "I am Groot"
+      "popularHeading": "I am Groot",
+      "boardPreviewStart": "I am Groot",
+      "boardPreviewAfterPly": "I am Groot {{ply}}"
     }
   },
   "puzzles": {
@@ -103,6 +103,7 @@
     "streak": "I am Groot: {{count}}",
     "streakBest": " · I am Groot {{best}}",
     "moveProgress": "I am Groot {{current}} I am Groot {{total}}",
+    "showHint": "I am Groot",
     "skipPuzzle": "I am Groot ›",
     "nextPuzzle": "I am Groot ›",
     "backToDashboard": "← I am Groot",
@@ -116,6 +117,7 @@
     "title": "Puzzle Themes",
     "subtitle": "Pick a tactic to practice.",
     "cardCount": "{{count}} puzzles",
+    "randomPuzzle": "Random puzzle ›",
     "backToPuzzles": "← Back to puzzles",
     "loadFailed": "Failed to load puzzle themes. Check your connection.",
     "groupMotifs": "Motifs",
@@ -123,8 +125,7 @@
     "groupPhasesEndgames": "Phases & Endgames",
     "groupMaterialSpecial": "Material & Special Moves",
     "groupAttack": "Attack",
-    "groupLengthDifficulty": "Length & Difficulty",
-    "randomPuzzle": "Random puzzle ›"
+    "groupLengthDifficulty": "Length & Difficulty"
   },
   "training": {
     "whiteToMove": "I am Groot",

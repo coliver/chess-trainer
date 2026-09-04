@@ -80,11 +80,11 @@
       "openingsToTrain_other": "{{count}} פתיחות · בחר אחת לאימון",
       "variationCount_one": "וריאציה אחת",
       "variationCount_other": "{{count}} וריאציות",
-      "boardPreviewStart": "התחלה",
-      "boardPreviewAfterPly": "אחרי חצי-מסע {{ply}}",
       "showMore_one": "הצג {{count}} נוסף",
       "showMore_other": "הצג {{count}} נוספים",
-      "popularHeading": "פתיחות פופולריות"
+      "popularHeading": "פתיחות פופולריות",
+      "boardPreviewStart": "התחלה",
+      "boardPreviewAfterPly": "אחרי חצי-מסע {{ply}}"
     }
   },
   "puzzles": {
@@ -103,6 +103,7 @@
     "streak": "רצף: {{count}}",
     "streakBest": " · הכי טוב {{best}}",
     "moveProgress": "מהלך {{current}} מתוך {{total}}",
+    "showHint": "הצג רמז",
     "skipPuzzle": "דילוג על חידה ›",
     "nextPuzzle": "החידה הבאה ›",
     "backToDashboard": "← חזרה ללוח הבקרה",
@@ -116,6 +117,7 @@
     "title": "Puzzle Themes",
     "subtitle": "Pick a tactic to practice.",
     "cardCount": "{{count}} puzzles",
+    "randomPuzzle": "Random puzzle ›",
     "backToPuzzles": "← Back to puzzles",
     "loadFailed": "Failed to load puzzle themes. Check your connection.",
     "groupMotifs": "Motifs",
@@ -123,8 +125,7 @@
     "groupPhasesEndgames": "Phases & Endgames",
     "groupMaterialSpecial": "Material & Special Moves",
     "groupAttack": "Attack",
-    "groupLengthDifficulty": "Length & Difficulty",
-    "randomPuzzle": "Random puzzle ›"
+    "groupLengthDifficulty": "Length & Difficulty"
   },
   "training": {
     "whiteToMove": "לבן בתור",

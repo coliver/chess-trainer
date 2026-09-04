@@ -80,11 +80,11 @@
       "openingsToTrain_other": "{{count}} açılış · antrenman için birini seç",
       "variationCount_one": "{{count}} varyasyon",
       "variationCount_other": "{{count}} varyasyon",
-      "boardPreviewStart": "Başla",
-      "boardPreviewAfterPly": "{{ply}} hamleden sonra",
       "showMore_one": "Daha {{count}} göster",
       "showMore_other": "Daha {{count}} göster",
-      "popularHeading": "Popüler açılışlar"
+      "popularHeading": "Popüler açılışlar",
+      "boardPreviewStart": "Başla",
+      "boardPreviewAfterPly": "{{ply}} hamleden sonra"
     }
   },
   "puzzles": {
@@ -103,6 +103,7 @@
     "streak": "Seri: {{count}}",
     "streakBest": " · en iyi {{best}}",
     "moveProgress": "Hamle {{current}} / {{total}}",
+    "showHint": "İpucu göster",
     "skipPuzzle": "Bulmacayı atla ›",
     "nextPuzzle": "Sonraki bulmaca ›",
     "backToDashboard": "← Gösterge paneline dön",
@@ -116,6 +117,7 @@
     "title": "Puzzle Themes",
     "subtitle": "Pick a tactic to practice.",
     "cardCount": "{{count}} puzzles",
+    "randomPuzzle": "Random puzzle ›",
     "backToPuzzles": "← Back to puzzles",
     "loadFailed": "Failed to load puzzle themes. Check your connection.",
     "groupMotifs": "Motifs",
@@ -123,8 +125,7 @@
     "groupPhasesEndgames": "Phases & Endgames",
     "groupMaterialSpecial": "Material & Special Moves",
     "groupAttack": "Attack",
-    "groupLengthDifficulty": "Length & Difficulty",
-    "randomPuzzle": "Random puzzle ›"
+    "groupLengthDifficulty": "Length & Difficulty"
   },
   "training": {
     "whiteToMove": "Sıra beyazda",

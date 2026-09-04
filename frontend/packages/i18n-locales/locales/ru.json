@@ -80,11 +80,11 @@
       "openingsToTrain_other": "{{count}} дебютов · выберите один для тренировки",
       "variationCount_one": "{{count}} вариация",
       "variationCount_other": "{{count}} вариаций",
-      "boardPreviewStart": "Старт",
-      "boardPreviewAfterPly": "После хода {{ply}}",
       "showMore_one": "Показать {{count}} ещё",
       "showMore_other": "Показать {{count}} ещё",
-      "popularHeading": "Популярные дебюты"
+      "popularHeading": "Популярные дебюты",
+      "boardPreviewStart": "Старт",
+      "boardPreviewAfterPly": "После хода {{ply}}"
     }
   },
   "puzzles": {
@@ -103,6 +103,7 @@
     "streak": "Серия: {{count}}",
     "streakBest": " · лучшее {{best}}",
     "moveProgress": "Ход {{current}} из {{total}}",
+    "showHint": "Показать подсказку",
     "skipPuzzle": "Пропустить задачу ›",
     "nextPuzzle": "Следующая задача ›",
     "backToDashboard": "← Назад на панель",
@@ -116,6 +117,7 @@
     "title": "Puzzle Themes",
     "subtitle": "Pick a tactic to practice.",
     "cardCount": "{{count}} puzzles",
+    "randomPuzzle": "Random puzzle ›",
     "backToPuzzles": "← Back to puzzles",
     "loadFailed": "Failed to load puzzle themes. Check your connection.",
     "groupMotifs": "Motifs",
@@ -123,8 +125,7 @@
     "groupPhasesEndgames": "Phases & Endgames",
     "groupMaterialSpecial": "Material & Special Moves",
     "groupAttack": "Attack",
-    "groupLengthDifficulty": "Length & Difficulty",
-    "randomPuzzle": "Random puzzle ›"
+    "groupLengthDifficulty": "Length & Difficulty"
   },
   "training": {
     "whiteToMove": "Ход белых",

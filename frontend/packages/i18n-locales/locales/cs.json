@@ -80,11 +80,11 @@
       "openingsToTrain_other": "{{count}} otevření · vyberte jedno k tréninku",
       "variationCount_one": "{{count}} varianta",
       "variationCount_other": "{{count}} variant",
-      "boardPreviewStart": "Začít",
-      "boardPreviewAfterPly": "Po půltahu {{ply}}",
       "showMore_one": "Zobrazit {{count}} další",
       "showMore_other": "Zobrazit {{count}} dalších",
-      "popularHeading": "Oblíbené zahájení"
+      "popularHeading": "Oblíbené zahájení",
+      "boardPreviewStart": "Začít",
+      "boardPreviewAfterPly": "Po půltahu {{ply}}"
     }
   },
   "puzzles": {
@@ -103,6 +103,7 @@
     "streak": "Série: {{count}}",
     "streakBest": " · nejlepší {{best}}",
     "moveProgress": "Tah {{current}} z {{total}}",
+    "showHint": "Zobrazit nápovědu",
     "skipPuzzle": "Přeskočit úlohu ›",
     "nextPuzzle": "Další úloha ›",
     "backToDashboard": "← Zpět na nástěnku",
@@ -116,6 +117,7 @@
     "title": "Puzzle Themes",
     "subtitle": "Pick a tactic to practice.",
     "cardCount": "{{count}} puzzles",
+    "randomPuzzle": "Random puzzle ›",
     "backToPuzzles": "← Back to puzzles",
     "loadFailed": "Failed to load puzzle themes. Check your connection.",
     "groupMotifs": "Motifs",
@@ -123,8 +125,7 @@
     "groupPhasesEndgames": "Phases & Endgames",
     "groupMaterialSpecial": "Material & Special Moves",
     "groupAttack": "Attack",
-    "groupLengthDifficulty": "Length & Difficulty",
-    "randomPuzzle": "Random puzzle ›"
+    "groupLengthDifficulty": "Length & Difficulty"
   },
   "training": {
     "whiteToMove": "Na tahu bílé",
