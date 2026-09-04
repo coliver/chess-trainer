@@ -74,6 +74,13 @@ h2 {
 }
 
 @media (max-width: 600px) {
+  /* Reserves clearance above the fixed bottom tab bar so a native
+     scroll-into-view (e.g. Puzzles' auto-focus on the "Next puzzle" button)
+     doesn't land content flush behind it. */
+  html {
+    scroll-padding-bottom: calc(72px + env(safe-area-inset-bottom));
+  }
+
   .page {
     padding: 20px 14px 32px;
     padding-bottom: calc(48px + 64px + env(safe-area-inset-bottom));

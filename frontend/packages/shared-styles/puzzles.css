@@ -259,4 +259,29 @@
     text-align: center;
     margin: 2px 0 0;
   }
+
+  /* The "Puzzles" eyebrow + "Puzzle Training" h1 only repeat what the active
+     bottom tab already says, right where the next actionable content (this
+     puzzle's rating, session stats, the Next puzzle button) needs the room
+     most. Drop the eyebrow and take the h1 out of view rather than out of
+     the DOM, so the page keeps a real heading for screen readers; its
+     rating/move-progress chips stay, now the only visible thing on that
+     line so they can't force a mid-word wrap around hidden text. */
+  .puzzles-rail .rail-eyebrow {
+    display: none;
+  }
+  .puzzles-rail .rail-title {
+    margin-top: 0;
+  }
+  .puzzles-rail .rail-title h1 {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 }

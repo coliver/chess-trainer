@@ -12,6 +12,10 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ### 🐛 Fixed
 
+#### 🧩 Puzzle Screen Below-the-Board Area on Phone
+
+> Two problems below the board on the phone puzzle screen. First, a real bug: `Puzzles.tsx` auto-focuses the "Next puzzle" button on completion, and the browser's native scroll-into-view for that focus doesn't know the bottom tab bar is `position: fixed`, so the button (and anything else scrolled near the true bottom of the page) could land visually flush behind the bar instead of above it. Fixed with `scroll-padding-bottom` on `html` at the phone breakpoint, sized to the tab bar's height plus safe-area inset, in `base.css`. Second, a design issue: the "PUZZLES" eyebrow and "Puzzle Training" h1 repeated in the rail on every single puzzle only restated what the already-active "Puzzles" bottom tab says, and shared a flex row with the rating/move-progress chips with no wrap strategy, so a puzzle with both chips present broke the heading across two lines. `puzzles.css` now hides the eyebrow and visually hides (not removes, so the heading still exists for screen readers) the h1 on phone, leaving the chip row as the only visible content in that slot — freeing real space for the stats/CTA below and incidentally fixing the wrap.
+
 #### 🎨 Settings Back Button Not Stretching on Desktop
 
 > `.settings-back-button` set `width: 100%` plus negative margins meant to bleed it out to `.card`'s padded edges, but margins only reposition a box, they don't resize it, and a button's `width: auto` shrink-wraps to content instead of filling like a normal block element. That left the button up to 57px short of the card's right edge once `.settings-card`'s `max-width: 560px` kicked in on desktop. Switched to `width: calc(100% + Npx)` sized to the card's actual padding+border, with a matching override for the 18px/14px padding `.card` gets below 600px, so the button stays flush at every breakpoint.
