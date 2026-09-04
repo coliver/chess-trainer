@@ -104,6 +104,7 @@
     "streakBest": " · सर्वोत्तम {{best}}",
     "moveProgress": "चाल {{current}} / {{total}}",
     "showHint": "संकेत दिखाएँ",
+    "previousPuzzle": "Previous puzzle",
     "skipPuzzle": "पहेली छोड़ें ›",
     "nextPuzzle": "अगली पहेली ›",
     "backToDashboard": "← डैशबोर्ड पर वापस",

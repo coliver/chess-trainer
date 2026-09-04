@@ -614,6 +614,100 @@ describe("Puzzles Page", () => {
     });
   });
 
+  describe("Prev/next history navigation", () => {
+    it("does not show Prev on the first puzzle", async () => {
+      (api.get as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        data: NEXT_PUZZLE,
+      });
+
+      renderPuzzles();
+      await screen.findByText("Rating ~1500");
+
+      expect(
+        screen.queryByRole("button", { name: /Previous puzzle/ }),
+      ).not.toBeInTheDocument();
+    });
+
+    it("steps back to a solved puzzle read-only, then forward again without re-fetching", async () => {
+      (api.get as ReturnType<typeof vi.fn>)
+        .mockResolvedValueOnce({ data: NEXT_PUZZLE })
+        .mockResolvedValueOnce({ data: { ...NEXT_PUZZLE, puzzleId: "p2", fen: "8/8/8/8/8/8/8/8 w - - 0 1" } });
+      (api.post as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        data: {
+          correct: true,
+          reason: "",
+          fenAfter: NEXT_PUZZLE.fen,
+          puzzleComplete: true,
+        },
+      });
+
+      renderPuzzles();
+      await screen.findByText("Rating ~1500");
+
+      applyMoveMock.mockReturnValueOnce({
+        nextFen: NEXT_PUZZLE.fen,
+        uci: "e2e4",
+      });
+      act(() => {
+        capturedProps.onMove?.("e2", "e4");
+      });
+      await screen.findByText("✅ Correct!");
+
+      const nextButton = await screen.findByRole("button", { name: /Next puzzle/ });
+      await user.click(nextButton);
+      await waitFor(() => expect(api.get).toHaveBeenCalledTimes(2));
+
+      // Now viewing puzzle 2 (the live, unsolved puzzle) — Prev should be available.
+      const prevButton = screen.getByRole("button", { name: /Previous puzzle/ });
+      await user.click(prevButton);
+
+      // Back on puzzle 1's solved position, read-only: board is not interactive.
+      expect(capturedProps.position).toBe(NEXT_PUZZLE.fen);
+      expect(capturedProps.interactive).toBe(false);
+      expect(
+        screen.queryByRole("button", { name: /hint/i }),
+      ).not.toBeInTheDocument();
+
+      // Stepping forward again must not hit the API a third time.
+      const forwardButton = screen.getByRole("button", { name: /Next puzzle/ });
+      await user.click(forwardButton);
+      expect(api.get).toHaveBeenCalledTimes(2);
+      expect(capturedProps.position).toBe("8/8/8/8/8/8/8/8 w - - 0 1");
+    });
+
+    it("fetching a new puzzle from the frontier still calls the API as before", async () => {
+      (api.get as ReturnType<typeof vi.fn>)
+        .mockResolvedValueOnce({ data: NEXT_PUZZLE })
+        .mockResolvedValueOnce({ data: { ...NEXT_PUZZLE, puzzleId: "p2" } });
+      (api.post as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        data: {
+          correct: true,
+          reason: "",
+          fenAfter: NEXT_PUZZLE.fen,
+          puzzleComplete: true,
+        },
+      });
+
+      renderPuzzles();
+      await screen.findByText("Rating ~1500");
+
+      applyMoveMock.mockReturnValueOnce({
+        nextFen: NEXT_PUZZLE.fen,
+        uci: "e2e4",
+      });
+      act(() => {
+        capturedProps.onMove?.("e2", "e4");
+      });
+      const nextButton = await screen.findByRole("button", { name: /Next puzzle/ });
+
+      await user.click(nextButton);
+      await waitFor(() => expect(api.get).toHaveBeenCalledTimes(2));
+      expect(api.get).toHaveBeenNthCalledWith(2, "/puzzles/next", {
+        params: { excludeId: "p1" },
+      });
+    });
+  });
+
   it("redirects to login on a 401", async () => {
     (api.get as ReturnType<typeof vi.fn>).mockRejectedValueOnce({
       response: { status: 401 },

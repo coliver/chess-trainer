@@ -104,6 +104,7 @@
     "streakBest": " · gwann {{best}}",
     "moveProgress": "dantath {{current}} / {{total}}",
     "showHint": "Círa na vîr",
+    "previousPuzzle": "Previous puzzle",
     "skipPuzzle": "Dolven dantath ›",
     "nextPuzzle": "Amman dantath ›",
     "backToDashboard": "← Ad tolathron",

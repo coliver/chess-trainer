@@ -104,6 +104,7 @@
     "streakBest": " · legjobb {{best}}",
     "moveProgress": "Lépés {{current}} / {{total}}",
     "showHint": "Tipp megjelenítése",
+    "previousPuzzle": "Previous puzzle",
     "skipPuzzle": "Feladvány kihagyása ›",
     "nextPuzzle": "Következő feladvány ›",
     "backToDashboard": "← Vissza az irányítópultra",

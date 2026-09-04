@@ -104,6 +104,7 @@
     "streakBest": " · nejlepší {{best}}",
     "moveProgress": "Tah {{current}} z {{total}}",
     "showHint": "Zobrazit nápovědu",
+    "previousPuzzle": "Previous puzzle",
     "skipPuzzle": "Přeskočit úlohu ›",
     "nextPuzzle": "Další úloha ›",
     "backToDashboard": "← Zpět na nástěnku",

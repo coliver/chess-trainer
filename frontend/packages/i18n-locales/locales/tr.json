@@ -104,6 +104,7 @@
     "streakBest": " · en iyi {{best}}",
     "moveProgress": "Hamle {{current}} / {{total}}",
     "showHint": "İpucu göster",
+    "previousPuzzle": "Previous puzzle",
     "skipPuzzle": "Bulmacayı atla ›",
     "nextPuzzle": "Sonraki bulmaca ›",
     "backToDashboard": "← Gösterge paneline dön",

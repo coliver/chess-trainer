@@ -104,6 +104,7 @@
     "streakBest": " · καλύτερο {{best}}",
     "moveProgress": "Κίνηση {{current}} από {{total}}",
     "showHint": "Εμφάνιση υπόδειξης",
+    "previousPuzzle": "Previous puzzle",
     "skipPuzzle": "Παράλειψη γρίφου ›",
     "nextPuzzle": "Επόμενος γρίφος ›",
     "backToDashboard": "← Πίσω στον πίνακα",

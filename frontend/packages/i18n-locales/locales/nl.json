@@ -104,6 +104,7 @@
     "streakBest": " · beste {{best}}",
     "moveProgress": "Zet {{current}} van {{total}}",
     "showHint": "Toon een hint",
+    "previousPuzzle": "Previous puzzle",
     "skipPuzzle": "Puzzel overslaan ›",
     "nextPuzzle": "Volgende puzzel ›",
     "backToDashboard": "← Terug naar dashboard",

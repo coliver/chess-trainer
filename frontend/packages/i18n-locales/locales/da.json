@@ -104,6 +104,7 @@
     "streakBest": " · bedst {{best}}",
     "moveProgress": "Træk {{current}} af {{total}}",
     "showHint": "Vis et tip",
+    "previousPuzzle": "Previous puzzle",
     "skipPuzzle": "Spring opgave over ›",
     "nextPuzzle": "Næste opgave ›",
     "backToDashboard": "← Tilbage til dashboard",

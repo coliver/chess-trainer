@@ -39,7 +39,30 @@ export const Puzzles = () => {
   const [searchParams] = useSearchParams();
   const theme = searchParams.get("theme");
 
-  const [puzzleId, setPuzzleId] = useState<string | null>(null);
+  type HistoryEntry = {
+    puzzle: NextPuzzle;
+    solved: boolean;
+    usedHint: boolean;
+    finalFen: string;
+    finalLastMoveUci: string;
+  };
+
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
+  const historyRef = useRef(history);
+  useEffect(() => {
+    historyRef.current = history;
+  }, [history]);
+  const historyIndexRef = useRef(historyIndex);
+  useEffect(() => {
+    historyIndexRef.current = historyIndex;
+  }, [historyIndex]);
+
+  const atFrontier = historyIndex === history.length - 1;
+  const viewingPast = !atFrontier && historyIndex >= 0;
+  const currentEntry = viewingPast ? history[historyIndex] : null;
+
+  const puzzleId = atFrontier ? (history[historyIndex]?.puzzle.puzzleId ?? null) : null;
   const puzzleIdRef = useRef(puzzleId);
   useEffect(() => {
     puzzleIdRef.current = puzzleId;
@@ -122,7 +145,6 @@ export const Puzzles = () => {
         },
       });
       if (!isMountedRef.current) return;
-      setPuzzleId(res.data.puzzleId);
       setFen(res.data.fen);
       setCorrectMoveUci(res.data.correctMoveUci);
       setLastMoveUci(res.data.lastMoveUci);
@@ -130,6 +152,17 @@ export const Puzzles = () => {
       setSolverMovesTotal(res.data.solverMovesTotal);
       setRating(res.data.rating);
       setThemes(res.data.themes ?? null);
+      setHistory((prev) => [
+        ...prev,
+        {
+          puzzle: res.data,
+          solved: false,
+          usedHint: false,
+          finalFen: res.data.fen,
+          finalLastMoveUci: res.data.lastMoveUci,
+        },
+      ]);
+      setHistoryIndex((prev) => prev + 1);
       if (preferences.board_orientation_mode === "auto") {
         setOrientation(sideToMove(res.data.fen) === "b" ? "black" : "white");
       } else {
@@ -143,7 +176,6 @@ export const Puzzles = () => {
         return;
       }
       if (e.response?.status === 404) {
-        setPuzzleId(null);
         setLastMoveUci("");
         setNoPuzzlesDue(true);
         setFeedback(
@@ -193,6 +225,18 @@ export const Puzzles = () => {
             return next;
           });
           setPuzzleComplete(true);
+          setHistory((prev) => {
+            const next = [...prev];
+            const idx = next.length - 1;
+            next[idx] = {
+              ...next[idx],
+              solved: true,
+              usedHint: usedHintRef.current,
+              finalFen: fenRef.current,
+              finalLastMoveUci: moveUci,
+            };
+            return next;
+          });
         } else if (res.data.correct) {
           // Correct, but more solver moves remain: apply the auto-played
           // opponent reply and keep the puzzle interactive.
@@ -231,8 +275,16 @@ export const Puzzles = () => {
     void loadNext();
   }, [puzzleId, isSubmitting, loadNext]);
 
-  const next = useCallback(() => {
-    void loadNext();
+  const goToPrev = useCallback(() => {
+    setHistoryIndex((idx) => Math.max(0, idx - 1));
+  }, []);
+
+  const goToNext = useCallback(() => {
+    if (historyIndexRef.current < historyRef.current.length - 1) {
+      setHistoryIndex((idx) => idx + 1);
+    } else {
+      void loadNext();
+    }
   }, [loadNext]);
 
   const solverColor = sideToMove(fen);
@@ -297,17 +349,19 @@ export const Puzzles = () => {
   // Highlight the enemy's setup move (from/to) that produced this puzzle position.
   const markers = useMemo((): BoardMarker[] => {
     const arr: BoardMarker[] = [];
-    if (lastMoveUci && lastMoveUci.length >= 4) {
-      arr.push({ square: lastMoveUci.slice(0, 2), type: "lastmove" });
-      arr.push({ square: lastMoveUci.slice(2, 4), type: "lastmove" });
+    const lastMove = viewingPast ? currentEntry?.finalLastMoveUci : lastMoveUci;
+    if (lastMove && lastMove.length >= 4) {
+      arr.push({ square: lastMove.slice(0, 2), type: "lastmove" });
+      arr.push({ square: lastMove.slice(2, 4), type: "lastmove" });
     }
+    if (viewingPast) return arr;
     const hint = deriveHintMarkers(correctMoveUci, effectiveHintLevel, puzzleComplete);
     if (hint) {
       arr.push({ square: hint.from, type: "hint" });
       if (hint.to) arr.push({ square: hint.to, type: "hint" });
     }
     return arr;
-  }, [lastMoveUci, correctMoveUci, effectiveHintLevel, puzzleComplete]);
+  }, [viewingPast, currentEntry, lastMoveUci, correctMoveUci, effectiveHintLevel, puzzleComplete]);
 
   const hintArrows = useMemo((): BoardArrow[] => {
     if (effectiveHintLevel < 1 || puzzleComplete || !correctMoveUci) return [];
@@ -342,9 +396,9 @@ export const Puzzles = () => {
           <div className="train-board-col">
             <div className="training-board-wrap">
               <Board
-                position={fen}
+                position={viewingPast ? currentEntry!.finalFen : fen}
                 orientation={orientation}
-                interactive={!!puzzleId && !isSubmitting && !puzzleComplete}
+                interactive={!viewingPast && !!puzzleId && !isSubmitting && !puzzleComplete}
                 moveColor={solverColor === "b" ? "black" : "white"}
                 markers={markers}
                 arrows={hintArrows}
@@ -362,21 +416,35 @@ export const Puzzles = () => {
               </span>
               <div className="board-toolbar">
                 <FlipBoardButton className="icon-btn" onClick={flip} />
-                <Button
-                  type="button"
-                  variant="secondary"
-                  className="icon-btn hint-icon"
-                  onClick={() => {
-                    if (!puzzleId || isSubmitting || puzzleComplete) return;
-                    usedHintRef.current = true;
-                    setHintLevel((h) => (h < 0 ? 0 : 1));
-                  }}
-                  disabled={!puzzleId || isSubmitting || puzzleComplete}
-                  aria-label={t("puzzles.showHint")}
-                  title={t("puzzles.showHint")}
-                >
-                  <span aria-hidden="true">💡</span>
-                </Button>
+                {historyIndex > 0 && (
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    className="icon-btn"
+                    onClick={goToPrev}
+                    aria-label={t("puzzles.previousPuzzle")}
+                    title={t("puzzles.previousPuzzle")}
+                  >
+                    <span aria-hidden="true">⏮</span>
+                  </Button>
+                )}
+                {!viewingPast && (
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    className="icon-btn hint-icon"
+                    onClick={() => {
+                      if (!puzzleId || isSubmitting || puzzleComplete) return;
+                      usedHintRef.current = true;
+                      setHintLevel((h) => (h < 0 ? 0 : 1));
+                    }}
+                    disabled={!puzzleId || isSubmitting || puzzleComplete}
+                    aria-label={t("puzzles.showHint")}
+                    title={t("puzzles.showHint")}
+                  >
+                    <span aria-hidden="true">💡</span>
+                  </Button>
+                )}
                 {puzzleId && !puzzleComplete && (
                   <Button
                     type="button"
@@ -450,12 +518,12 @@ export const Puzzles = () => {
               )}
             </div>
 
-            {puzzleId && puzzleComplete && (
+            {((puzzleId && puzzleComplete) || viewingPast) && (
               <button
                 ref={nextButtonRef}
                 type="button"
                 className="puzzles-next"
-                onClick={next}
+                onClick={goToNext}
               >
                 {t("puzzles.nextPuzzle")}
               </button>

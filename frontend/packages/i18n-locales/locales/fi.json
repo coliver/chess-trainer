@@ -104,6 +104,7 @@
     "streakBest": " · paras {{best}}",
     "moveProgress": "Siirto {{current}} / {{total}}",
     "showHint": "Näytä vihje",
+    "previousPuzzle": "Previous puzzle",
     "skipPuzzle": "Ohita pulma ›",
     "nextPuzzle": "Seuraava pulma ›",
     "backToDashboard": "← Takaisin kojelautaan",

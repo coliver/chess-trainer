@@ -104,6 +104,7 @@
     "streakBest": " · 最佳 {{best}}",
     "moveProgress": "第{{current}}步，共{{total}}步",
     "showHint": "显示提示",
+    "previousPuzzle": "Previous puzzle",
     "skipPuzzle": "跳过谜题 ›",
     "nextPuzzle": "下一道谜题 ›",
     "backToDashboard": "← 返回仪表盘",

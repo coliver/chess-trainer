@@ -104,6 +104,7 @@
     "streakBest": " · best {{best}}",
     "moveProgress": "Move {{current}} of {{total}}",
     "showHint": "Show a hint, cap’n",
+    "previousPuzzle": "Previous puzzle",
     "skipPuzzle": "Skip puzzle ›",
     "nextPuzzle": "Next plunder ›",
     "backToDashboard": "← Back to dashboard",

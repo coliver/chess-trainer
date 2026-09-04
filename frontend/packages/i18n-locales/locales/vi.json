@@ -104,6 +104,7 @@
     "streakBest": " · tốt nhất {{best}}",
     "moveProgress": "Nước đi {{current}} / {{total}}",
     "showHint": "Hiện gợi ý",
+    "previousPuzzle": "Previous puzzle",
     "skipPuzzle": "Bỏ qua bài tập ›",
     "nextPuzzle": "Bài tập tiếp theo ›",
     "backToDashboard": "← Quay lại bảng điều khiển",

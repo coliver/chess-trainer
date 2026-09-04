@@ -104,6 +104,7 @@
     "streakBest": " · лучшее {{best}}",
     "moveProgress": "Ход {{current}} из {{total}}",
     "showHint": "Показать подсказку",
+    "previousPuzzle": "Previous puzzle",
     "skipPuzzle": "Пропустить задачу ›",
     "nextPuzzle": "Следующая задача ›",
     "backToDashboard": "← Назад на панель",

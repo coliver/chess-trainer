@@ -104,6 +104,7 @@
     "streakBest": " · mejor {{best}}",
     "moveProgress": "Movimiento {{current}} de {{total}}",
     "showHint": "Mostrar pista",
+    "previousPuzzle": "Previous puzzle",
     "skipPuzzle": "Saltar puzzle ›",
     "nextPuzzle": "Siguiente puzzle ›",
     "backToDashboard": "← Volver al panel",

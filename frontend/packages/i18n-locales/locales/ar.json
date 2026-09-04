@@ -104,6 +104,7 @@
     "streakBest": " · الأفضل {{best}}",
     "moveProgress": "الحركة {{current}} من {{total}}",
     "showHint": "إظهار تلميح",
+    "previousPuzzle": "Previous puzzle",
     "skipPuzzle": "تخطي اللغز ›",
     "nextPuzzle": "اللغز التالي ›",
     "backToDashboard": "← العودة إلى لوحة التحكم",

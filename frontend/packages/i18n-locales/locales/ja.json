@@ -104,6 +104,7 @@
     "streakBest": " · 最高 {{best}}",
     "moveProgress": "第{{current}}手 / {{total}}",
     "showHint": "ヒントを表示",
+    "previousPuzzle": "Previous puzzle",
     "skipPuzzle": "問題をスキップ ›",
     "nextPuzzle": "次の問題 ›",
     "backToDashboard": "← ダッシュボードに戻る",

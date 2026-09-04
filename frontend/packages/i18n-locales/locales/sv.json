@@ -104,6 +104,7 @@
     "streakBest": " · bäst {{best}}",
     "moveProgress": "Drag {{current}} av {{total}}",
     "showHint": "Visa ledtråd",
+    "previousPuzzle": "Previous puzzle",
     "skipPuzzle": "Hoppa över pussel ›",
     "nextPuzzle": "Nästa pussel ›",
     "backToDashboard": "← Tillbaka till översikten",

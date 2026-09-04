@@ -104,6 +104,7 @@
     "streakBest": " · record {{best}}",
     "moveProgress": "Mutarea {{current}} din {{total}}",
     "showHint": "Arată indiciu",
+    "previousPuzzle": "Previous puzzle",
     "skipPuzzle": "Sari peste puzzle ›",
     "nextPuzzle": "Puzzle următor ›",
     "backToDashboard": "← Înapoi la panou",

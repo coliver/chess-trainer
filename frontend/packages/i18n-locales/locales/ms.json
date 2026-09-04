@@ -104,6 +104,7 @@
     "streakBest": " · terbaik {{best}}",
     "moveProgress": "Langkah {{current}} daripada {{total}}",
     "showHint": "Tunjukkan petunjuk",
+    "previousPuzzle": "Previous puzzle",
     "skipPuzzle": "Langkau teka-teki ›",
     "nextPuzzle": "Teka-teki seterusnya ›",
     "backToDashboard": "← Kembali ke papan pemuka",

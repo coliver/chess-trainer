@@ -104,6 +104,7 @@
     "streakBest": " · I am Groot {{best}}",
     "moveProgress": "I am Groot {{current}} I am Groot {{total}}",
     "showHint": "I am Groot",
+    "previousPuzzle": "Previous puzzle",
     "skipPuzzle": "I am Groot ›",
     "nextPuzzle": "I am Groot ›",
     "backToDashboard": "← I am Groot",

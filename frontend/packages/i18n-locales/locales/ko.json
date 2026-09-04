@@ -104,6 +104,7 @@
     "streakBest": " · 최고 {{best}}",
     "moveProgress": "수 {{current}} / {{total}}",
     "showHint": "힌트 보기",
+    "previousPuzzle": "Previous puzzle",
     "skipPuzzle": "퍼즐 건너뛰기 ›",
     "nextPuzzle": "다음 퍼즐 ›",
     "backToDashboard": "← 대시보드로 돌아가기",

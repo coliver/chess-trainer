@@ -104,6 +104,7 @@
     "streakBest": " · best {{best}}",
     "moveProgress": "Trekk {{current}} av {{total}}",
     "showHint": "Vis hint",
+    "previousPuzzle": "Previous puzzle",
     "skipPuzzle": "Hopp over oppgave ›",
     "nextPuzzle": "Neste oppgave ›",
     "backToDashboard": "← Tilbake til oversikten",

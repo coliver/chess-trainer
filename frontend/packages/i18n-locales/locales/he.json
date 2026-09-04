@@ -104,6 +104,7 @@
     "streakBest": " · הכי טוב {{best}}",
     "moveProgress": "מהלך {{current}} מתוך {{total}}",
     "showHint": "הצג רמז",
+    "previousPuzzle": "Previous puzzle",
     "skipPuzzle": "דילוג על חידה ›",
     "nextPuzzle": "החידה הבאה ›",
     "backToDashboard": "← חזרה ללוח הבקרה",
