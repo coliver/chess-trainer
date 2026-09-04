@@ -233,6 +233,20 @@ shared-assets drift wasn't checked in detail.
 - Shared CSS centralization into `packages/shared-styles/` — done.
 - `chess-core` extraction — done and shared correctly.
 
+## 11. Puzzle prev/next navigation + hint tracking (new gap)
+
+**Status: not started.** React's Puzzles page (`frontend/react/src/pages/Puzzles.tsx`) gained
+session-local prev/next stepping through puzzles already fetched this session (read-only replay
+when stepping back — see `docs/superpowers/specs/2026-09-04-puzzle-prev-next-navigation-design.md`),
+plus a `usedHint` flag sent on attempt submission so the backend can persist whether a hint was
+used solving a puzzle (`PuzzleProgress.hint_used`). Angular's `puzzles.component.ts` still only
+tracks a single current puzzle id and has no hint-usage tracking or prev/next controls at all.
+This compounds with the already-flagged §10 structural gap on the same page.
+
+**To port:** mirror the `HistoryEntry[]`/`historyIndex` state model and the Prev/Next buttons from
+`Puzzles.tsx`, and send `usedHint` on `POST /puzzles/{id}/attempts` from `puzzles.component.ts`'s
+attempt submission (the backend endpoint already accepts it as of the React implementation).
+
 ## Suggested backport order
 
 1. i18n plumbing (§1) — everything else touches translated strings.
