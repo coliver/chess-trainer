@@ -94,9 +94,10 @@ rails/
 │   ├── views/                 # ERB templates + Turbo Frame partials (dashboard/opening browser,
 │   │                          # trainings/show, puzzles/show)
 │   ├── javascript/
-│   │   ├── controllers/       # Stimulus: training, puzzle, board_preview, opening_thumb,
+│   │   ├── controllers/       # Stimulus: training, puzzle, board_preview, opening_thumb, snow,
 │   │   │                      # header_menu, needs_work, puzzle_theme_board, theme_select, theme_toggle
-│   │   └── chess/              # board_factory.js (cm-chessboard setup), sound.js
+│   │   ├── chess/              # board_factory.js (cm-chessboard setup), sound.js
+│   │   └── utils/               # snow.js, snow_preference.js (localStorage, no user_preferences column)
 │   └── assets/stylesheets/    # application.css (page-flash, etc.) — most styling comes from
 │                               # packages/shared-styles/*.css instead
 ├── spec/requests/             # RSpec request specs, WebMock-stubbed FastAPI calls
@@ -120,12 +121,15 @@ rails/
   React's session-local prev/next puzzle history with a hint button
   (escalating after 2/4 wrong attempts, `used_hint` sent on attempts)
   are both ported, as are the rail's move-progress chip ("Move 2 of 3")
-  and per-puzzle theme chips (see `frontend/rails/PARITY_GAPS.md` for
-  what's still outstanding — Dashboard/Settings items, not Puzzles).
+  and per-puzzle theme chips. `frontend/rails/PARITY_GAPS.md`'s audit is
+  now fully closed — see it for the history of what was ported and when.
 - Settings covers theme, board colors/piece set/coordinates/animations,
-  board orientation mode, sound, and language — all round-trip to
-  `/users/me/preferences` and actually apply. It does not cover the
-  snow effect (client-only in React, not backend-synced).
+  board orientation mode, sound, language, and the snow effect — all but
+  the snow toggle round-trip to `/users/me/preferences` and actually
+  apply; snow is client-only (a `snow_enabled` localStorage flag, same as
+  React), matching `useSnowPreference` exactly rather than being
+  backend-synced. The preview board also accepts move input and plays a
+  move sound, matching React's `Settings.tsx`.
 - I18n is wired throughout (`t()` in views/controllers,
   `app/javascript/i18n.js` bridging translations into Stimulus
   controllers). `config.i18n.available_locales` is derived at boot from
