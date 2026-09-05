@@ -24,6 +24,13 @@ export function baseNameOf(name: string): string {
   return (i === -1 ? name : name.slice(0, i)).trim();
 }
 
+/** Classifies a base opening name by which color's repertoire it represents.
+ * Convention: openings named "X Defense/Defence" are Black's choice; all
+ * others (named for White's move/system) are White's. */
+export function colorOf(baseName: string): "w" | "b" {
+  return /defen[cs]e\b/i.test(baseName) ? "b" : "w";
+}
+
 /** Label for a row within its base ("Main line" for the root). */
 export function variationLabelOf(name: string): string {
   const base = baseNameOf(name);

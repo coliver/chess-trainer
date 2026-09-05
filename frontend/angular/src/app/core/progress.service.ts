@@ -28,6 +28,23 @@ export interface WeakSpot {
   incorrectCount: number;
 }
 
+export interface CommonWrongMove {
+  moveUci: string;
+  count: number;
+}
+
+export interface StepAccuracy {
+  openingEco?: string | null;
+  openingName?: string | null;
+  orderIndex: number;
+  correctMoveUci: string;
+  attempts: number;
+  correctCount: number;
+  incorrectCount: number;
+  accuracy: number;
+  commonWrongMoves: CommonWrongMove[];
+}
+
 @Injectable({ providedIn: 'root' })
 export class ProgressService {
   private readonly http = inject(HttpClient);
@@ -42,5 +59,9 @@ export class ProgressService {
 
   getWeakSpots(): Observable<WeakSpot[]> {
     return this.http.get<WeakSpot[]>('/api/progress/weak-spots');
+  }
+
+  getStepAccuracy(): Observable<StepAccuracy[]> {
+    return this.http.get<StepAccuracy[]>('/api/progress/step-accuracy');
   }
 }

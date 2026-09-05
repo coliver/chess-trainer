@@ -36,6 +36,9 @@ describe('DashboardComponent', () => {
     stubTranslate(TestBed.inject(TranslateService), {
       'dashboard.openings.chooseOpening': 'Choose an opening',
       'dashboard.openings.startLabel': 'Start {{name}}',
+      'header.greetingMorning': 'Good morning ☀️',
+      'header.greetingAfternoon': 'Good afternoon 🌤️',
+      'header.greetingEvening': 'Good evening 🌙',
     });
   });
 
@@ -59,6 +62,7 @@ describe('DashboardComponent', () => {
     httpMock.expectOne('/api/progress/weak-spots').flush([
       { attempts: 4, correctCount: 1, incorrectCount: 3, openingName: 'Sicilian Defense' },
     ]);
+    httpMock.expectOne('/api/progress/step-accuracy').flush([]);
     httpMock.expectOne('/api/puzzles/summary').flush({
       puzzlesSeen: 8,
       overallAccuracy: 0.6,
@@ -204,5 +208,82 @@ describe('DashboardComponent', () => {
     cmp.searchLimit = 999;
     cmp.onQueryChange();
     expect(cmp.searchLimit).toBe(60);
+  });
+
+  it('loads step accuracy (trouble steps) on init', () => {
+    const cmp = create();
+    cmp.ngOnInit();
+    httpMock.expectOne('/api/openings').flush([]);
+    httpMock.expectOne('/api/progress/summary').flush({
+      positionsSeen: 0,
+      overallAccuracy: 0,
+      mastered: 0,
+      currentStreak: 0,
+      longestStreak: 0,
+    });
+    httpMock.expectOne('/api/progress/due').flush([]);
+    httpMock.expectOne('/api/progress/weak-spots').flush([]);
+    httpMock.expectOne('/api/progress/step-accuracy').flush([
+      { orderIndex: 2, correctMoveUci: 'e2e4', attempts: 5, correctCount: 1, incorrectCount: 4, accuracy: 0.2, commonWrongMoves: [{ moveUci: 'd2d4', count: 3 }], openingName: 'Sicilian Defense' },
+    ]);
+    httpMock.expectOne('/api/puzzles/summary').flush({ puzzlesSeen: 0, overallAccuracy: 0, mastered: 0 });
+
+    expect(cmp.troubleSteps.length).toBe(1);
+    expect(cmp.troubleStepMoveNumber(cmp.troubleSteps[0])).toBe(2);
+    expect(cmp.troubleStepPct(cmp.troubleSteps[0])).toBe(20);
+    expect(cmp.troubleStepTopWrongMove(cmp.troubleSteps[0])?.moveUci).toBe('d2d4');
+  });
+
+  it('filters base openings by color', () => {
+    const cmp = create();
+    flushInit(cmp, [
+      opening({ name: 'Sicilian Defense' }),
+      opening({ name: 'French Defense', eco: 'C00' }),
+      opening({ name: "Queen's Gambit", eco: 'D06' }),
+    ]);
+
+    expect(cmp.colorFilter).toBe('all');
+    expect(cmp.colorFilteredGroups.length).toBe(3);
+
+    cmp.colorFilter = 'b';
+    expect(cmp.colorFilteredGroups.map((g) => g.base).sort()).toEqual(
+      ['French Defense', 'Sicilian Defense'].sort(),
+    );
+
+    cmp.colorFilter = 'w';
+    expect(cmp.colorFilteredGroups.map((g) => g.base)).toEqual(["Queen's Gambit"]);
+  });
+
+  it('paginates the opening grid and shows a carousel once there is more than one page', () => {
+    const cmp = create();
+    const openings = Array.from({ length: 15 }, (_, i) => opening({ name: `Opening ${i}`, eco: `A0${i}` }));
+    flushInit(cmp, openings);
+
+    expect(cmp.showCarousel).toBe(true);
+    expect(cmp.carouselGroups.length).toBe(8);
+    expect(cmp.gridStart).toBe(8);
+    expect(cmp.gridGroups.length).toBe(7);
+    expect(cmp.gridRemaining).toBe(-5);
+
+    cmp.showMoreGrid();
+    expect(cmp.gridLimit).toBe(24);
+  });
+
+  it('does not show a carousel when there is only one page of openings', () => {
+    const cmp = create();
+    flushInit(cmp, [opening({ name: 'Sicilian Defense' })]);
+
+    expect(cmp.showCarousel).toBe(false);
+    expect(cmp.gridStart).toBe(0);
+    expect(cmp.gridGroups.length).toBe(1);
+  });
+
+  it('builds a greeting from the translated time-of-day key', () => {
+    const cmp = create();
+    flushInit(cmp);
+
+    const greeting = cmp.greeting;
+    expect(['Good morning', 'Good afternoon', 'Good evening']).toContain(greeting.before);
+    expect(['☀️', '🌤️', '🌙']).toContain(greeting.emoji);
   });
 });

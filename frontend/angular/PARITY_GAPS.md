@@ -198,12 +198,18 @@ landed, but these three biggest pages hadn't been called out as their own item u
 Found while doing the §8 i18n pass — these pages don't just lag on translation, their Angular
 markup diverges from React's current structure:
 
-- **Dashboard**: React has a `troubleSteps` section (per-move accuracy, "trickiest move" tile,
-  common-wrong-move callouts) and a needs-work expand/collapse list — Angular has neither.
-  React also has a White/Black/All color filter for the opening browser — Angular doesn't.
-  Angular's own "Weak spots" list block (plain list, no expand) has no React equivalent at all —
-  it looks like an earlier, simpler design that wasn't removed when React's richer
-  `ws-tile`/`ws-grid` layout replaced it.
+- **Dashboard**: **Status: landed 2026-09-05.** Ported React's `troubleSteps` section
+  (`ProgressService.getStepAccuracy()` backing a "Trickiest move" tile next to "Weakest opening",
+  shared `ws-container`/`ws-grid`/`ws-footer`/`ws-expanded` markup replacing the old flat
+  `progress-weak-spots` list that had no React equivalent), the needs-work expand/collapse
+  ("See all N weak spots" / "See less"), and a White/Black/All color filter
+  (`colorOf()` added to `group-openings.ts`) for the opening browser. Also picked up, while doing
+  this, three more structural gaps found but not yet logged here: the time-of-day greeting header
+  (`dashboard-greeting`, absent from Angular entirely), the "Popular openings" carousel (shown once
+  there are more than 12 base-opening groups), and grid "Show more" pagination (Angular previously
+  rendered every group unpaginated) — plus the mobile training/puzzles `stat-tabs` toggle. Verified
+  with unit tests (`dashboard.component.spec.ts`) and a throwaway Playwright screenshot against the
+  dev server.
 - **Training**: React shows a distinct "session completed" screen (Train again / Choose another
   opening buttons) — Angular has no such state; the regular controls just stay visible.
 - **Puzzles**: **Status: landed 2026-09-05.** Ported to the same `train-rail` layout as Training

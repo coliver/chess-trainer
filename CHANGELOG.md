@@ -6,6 +6,18 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ### ✨ Added
 
+#### 📊 Angular Dashboard Structural Parity: Trouble Steps, Color Filter, Carousel, Pagination
+
+> Closes `frontend/angular/PARITY_GAPS.md` §10, the last real structural gap in the Angular
+> dashboard audit (plus a couple more found along the way that weren't yet logged there: the
+> greeting header, the popular-openings carousel, grid "Show more" pagination, and the mobile
+> training/puzzles stat-tabs toggle). `ProgressService` gained `getStepAccuracy()`
+> (`GET /progress/step-accuracy`), backing a "Trickiest move" tile alongside the existing
+> "Weakest opening" tile, both inside a shared `ws-container`/`ws-grid` with a "See all" expand
+> into per-item rows — replacing the old flat `progress-weak-spots` list, which had no React
+> equivalent. `group-openings.ts` gained `colorOf()` (White/Black repertoire classification by
+> name), backing a new `all`/`white`/`black` filter radiogroup in the opening browser toolbar.
+
 #### ❄️ Rails Settings Snow Toggle and Interactive Preview Board
 
 > Closes `frontend/rails/PARITY_GAPS.md` §5 and §6, the last two open Rails/React parity gaps. A
