@@ -103,6 +103,7 @@ services:
     image: nginx:1.27
     depends_on:
       - api
+      - rails
     ports:
       - "80:80"
       - "443:443"
