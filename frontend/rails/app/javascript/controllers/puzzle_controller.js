@@ -11,6 +11,10 @@ import { createTrainingBoard, COLOR, ARROW_TYPE, CUSTOM_MARKER } from "../chess/
 import { playSound, getMoveSound, setSoundsEnabled } from "../chess/sound"
 import { t } from "../i18n"
 
+// "backRankMate" -> "back Rank Mate" — mirrors react/src/utils/puzzleThemes.ts
+// and app/services/puzzle_theme_grouping.rb's format_label.
+const formatThemeLabel = (theme) => theme.replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+
 // Puzzles page controller — simpler cousin of training_controller.js: no
 // intra-puzzle timeline stepper, no opponent autoplay. Unlike Training, the
 // solver's color can change from one puzzle to the next (whoever is to move
@@ -28,6 +32,8 @@ export default class extends Controller {
     "turnLabel",
     "flipIcon",
     "ratingChip",
+    "moveProgressChip",
+    "themesRow",
     "status",
     "statusIcon",
     "statusMsg",
@@ -48,6 +54,7 @@ export default class extends Controller {
     lastMoveUci: String,
     moveIndex: Number,
     solverMovesTotal: Number,
+    themes: String,
     nextUrl: String,
     attemptsUrlTemplate: String,
     dashboardUrl: String,
@@ -65,6 +72,8 @@ export default class extends Controller {
     this.correctMoveUci = this.correctMoveUciValue || ""
     this.lastMoveUci = this.lastMoveUciValue || ""
     this.moveIndex = this.moveIndexValue || 0
+    this.solverMovesTotal = this.solverMovesTotalValue || 1
+    this.themes = this.themesValue || ""
     this.rating = this.ratingValue || ""
 
     this.isSubmitting = false
@@ -85,6 +94,9 @@ export default class extends Controller {
         fen: this.fen,
         rating: this.rating,
         correctMoveUci: this.correctMoveUci,
+        moveIndex: this.moveIndex,
+        solverMovesTotal: this.solverMovesTotal,
+        themes: this.themes,
         finalFen: this.fen,
         finalLastMoveUci: this.lastMoveUci,
       },
@@ -209,6 +221,7 @@ export default class extends Controller {
         const last = this.history[this.history.length - 1]
         this.history[this.history.length - 1] = {
           ...last,
+          moveIndex: this.moveIndex,
           finalFen: this.fen,
           finalLastMoveUci: moveUci,
         }
@@ -261,11 +274,16 @@ export default class extends Controller {
       this.correctMoveUci = data.correctMoveUci || ""
       this.lastMoveUci = data.lastMoveUci || ""
       this.moveIndex = data.moveIndex || 0
+      this.solverMovesTotal = data.solverMovesTotal || 1
+      this.themes = data.themes || ""
       this.history.push({
         puzzleId: this.puzzleId,
         fen: this.fen,
         rating: this.rating,
         correctMoveUci: this.correctMoveUci,
+        moveIndex: this.moveIndex,
+        solverMovesTotal: this.solverMovesTotal,
+        themes: this.themes,
         finalFen: this.fen,
         finalLastMoveUci: this.lastMoveUci,
       })
@@ -339,6 +357,7 @@ export default class extends Controller {
     this.renderBoard()
     this.renderTurn()
     this.renderStatus()
+    this.renderMeta()
     this.renderStats()
     this.renderControls()
   }
@@ -417,6 +436,32 @@ export default class extends Controller {
     if (this.hasRatingChipTarget) {
       const rating = viewingPast ? this.currentEntry().rating : this.rating
       this.ratingChipTarget.textContent = rating ? t("puzzles.rating", { rating }) : ""
+    }
+  }
+
+  renderMeta() {
+    const viewingPast = this.isViewingPast()
+    const entry = this.currentEntry()
+    const moveIndex = viewingPast ? (entry.moveIndex ?? 0) : this.moveIndex
+    const solverMovesTotal = viewingPast ? (entry.solverMovesTotal ?? 1) : this.solverMovesTotal
+    const themes = viewingPast ? (entry.themes ?? "") : this.themes
+
+    if (this.hasMoveProgressChipTarget) {
+      this.moveProgressChipTarget.hidden = solverMovesTotal <= 1
+      this.moveProgressChipTarget.textContent =
+        solverMovesTotal > 1 ? t("puzzles.moveProgress", { current: moveIndex + 1, total: solverMovesTotal }) : ""
+    }
+
+    if (this.hasThemesRowTarget) {
+      const labels = (themes || "").split(" ").filter(Boolean).map(formatThemeLabel)
+      this.themesRowTarget.innerHTML = ""
+      this.themesRowTarget.hidden = labels.length === 0
+      for (const label of labels) {
+        const chip = document.createElement("span")
+        chip.className = "puzzles-theme-chip"
+        chip.textContent = label
+        this.themesRowTarget.appendChild(chip)
+      }
     }
   }
 

@@ -54,6 +54,7 @@ class PuzzlesController < ApplicationController
     @last_move_uci = puzzle["lastMoveUci"]
     @move_index = puzzle["moveIndex"] || 0
     @solver_moves_total = puzzle["solverMovesTotal"] || 1
+    @themes = puzzle["themes"]
 
     prefs = current_preferences
     @board_theme = prefs["board_theme"]

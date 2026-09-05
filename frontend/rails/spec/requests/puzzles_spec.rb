@@ -71,6 +71,19 @@ RSpec.describe "Puzzles", type: :request do
       )
     end
 
+    it "passes the puzzle's themes through to the puzzle controller" do
+      log_in
+      stub_preferences
+      stub_request(:get, "#{base}/puzzles/next").to_return(
+        status: 200,
+        body: { puzzleId: "puzzle-1", fen: "start-fen", correctMoveUci: "e2e4", themes: "fork middlegame" }.to_json,
+        headers: { "Content-Type" => "application/json" }
+      )
+
+      get puzzles_path, env: env
+      expect(response.body).to include('data-puzzle-themes-value="fork middlegame"')
+    end
+
     it "passes the multi-move sequence position through to the puzzle controller" do
       log_in
       stub_preferences

@@ -35,6 +35,7 @@
            data-puzzle-last-move-uci-value="<%= @last_move_uci %>"
            data-puzzle-move-index-value="<%= @move_index %>"
            data-puzzle-solver-moves-total-value="<%= @solver_moves_total %>"
+           data-puzzle-themes-value="<%= @themes %>"
            data-puzzle-next-url-value="<%= puzzles_next_path(theme: @theme) %>"
            data-puzzle-attempts-url-template-value="<%= puzzles_attempts_path("__ID__") %>"
            data-puzzle-dashboard-url-value="<%= dashboard_path %>"
@@ -71,19 +72,24 @@
             <div class="rail-title">
               <h1><%= t("puzzles.title") %></h1>
               <span class="eco-chip" data-puzzle-target="ratingChip"></span>
+              <span class="eco-chip" data-puzzle-target="moveProgressChip" hidden></span>
             </div>
           </div>
 
-          <div class="puzzles-stats">
-            <span class="stat-pill" data-puzzle-target="solvedStat"><%= t("puzzles.solved", count: 0) %></span>
-            <span class="stat-pill" data-puzzle-target="streakStat"><%= t("puzzles.streak", count: 0) %></span>
-          </div>
+          <div class="puzzles-meta">
+            <div class="puzzles-stats">
+              <span class="stat-pill" data-puzzle-target="solvedStat"><%= t("puzzles.solved", count: 0) %></span>
+              <span class="stat-pill" data-puzzle-target="streakStat"><%= t("puzzles.streak", count: 0) %></span>
+            </div>
 
-          <% if @theme %>
-            <span class="stat-pill is-active">
-              <%= t("puzzles.practicing", theme: PuzzleThemeGrouping.format_label(@theme)) %>
-            </span>
-          <% end %>
+            <% if @theme %>
+              <span class="stat-pill is-active">
+                <%= t("puzzles.practicing", theme: PuzzleThemeGrouping.format_label(@theme)) %>
+              </span>
+            <% end %>
+
+            <div class="puzzles-themes" data-puzzle-target="themesRow" hidden></div>
+          </div>
 
           <div class="train-status your" data-puzzle-target="status" role="status">
             <span class="train-status-ic" data-puzzle-target="statusIcon" aria-hidden="true">♟</span>

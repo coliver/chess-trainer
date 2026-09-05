@@ -34,15 +34,17 @@ board toolbar), hint (icon, board toolbar), next (full-width, rail). No JS unit 
 surface (view markup, `used_hint` forwarding) covered by new specs in
 `spec/requests/puzzles_spec.rb`.
 
-## 3. Puzzle rail layout — partially landed
+## 3. Puzzle rail layout — landed
 
-**Status: partially landed.** `frontend/rails/app/views/puzzles/show.html.erb` already uses the
-modern rail markup (`rail-eyebrow`, `rail-title`, `eco-chip`, `puzzles-stats` stat pills) — ahead
-of Angular's older layout. Prev/Next buttons landed with §2 (2026-09-04). Still missing: a
+**Status: landed 2026-09-05.** `frontend/rails/app/views/puzzles/show.html.erb` uses the modern
+rail markup (`rail-eyebrow`, `rail-title`, `eco-chip`, `puzzles-stats` stat pills, now wrapped
+in `.puzzles-meta` matching React). Prev/Next buttons landed with §2 (2026-09-04); the
 move-progress chip (`puzzles.moveProgress`, "Move 2 of 3") and per-puzzle theme chips
-(`.puzzles-theme-chip`) — both need the current puzzle's `moveIndex`/`solverMovesTotal`/`themes`
-displayed per history entry, not just tracked internally. Compare React's rail block in
-`Puzzles.tsx` (lines ~488-568).
+(`.puzzles-theme-chip`, via a ported `formatThemeLabel`) landed 2026-09-05 — `puzzle_controller.js`
+now tracks `solverMovesTotal`/`themes` per history entry (previously only `moveIndex`/
+`solverMovesTotal` existed as unused Stimulus values from §1) and rebuilds the chip row on every
+render. Backend proxy (`PuzzlesController#assign_puzzle`) now also forwards `themes` as a
+Stimulus value.
 
 ## 4. Dashboard — mostly landed, one real gap
 
@@ -114,7 +116,7 @@ Icons are hand-rolled inline SVG vs React's `lucide-react` icons (cosmetic only)
 ## Suggested backport order
 
 1. ~~Puzzle multi-move handling fix (§1)~~ — landed 2026-09-04.
-2. Puzzle prev/next + hint tracking (§2), then the rail UI pieces that depend on it (§3).
+2. ~~Puzzle prev/next + hint tracking (§2), then the rail UI pieces that depend on it (§3)~~ — landed 2026-09-04/05.
 3. Dashboard puzzles progress-group + stat-tabs + carousel (§4).
 4. Settings snow toggle + interactive preview sound (§5).
 5. Minor: send active locale on register instead of hardcoded `en-US` (§6).
