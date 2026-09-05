@@ -56,8 +56,16 @@ jobs:
               -e VITE_SENTRY_ENVIRONMENT=production \
               node:20 sh -c 'npm ci && npm run build'
 
+            # --renew-anon-volumes: rails/angular mount an anonymous volume
+            # over /app/node_modules to keep container deps isolated from
+            # the host bind-mount (see docker-compose.yml). Without this
+            # flag, `up -d --build` reuses that volume's content from the
+            # PREVIOUS container even when the freshly built image would
+            # have different node_modules — e.g. a newly added npm
+            # dependency stays invisible at runtime until the volume itself
+            # is recreated, no matter how many times the image is rebuilt.
             docker compose -f docker-compose.yml -f docker-compose.prod.yml \
-              up -d --build db api rails nginx
+              up -d --build --renew-anon-volumes db api rails nginx
 
             # nginx's config is a bind-mounted directory (nginx/conf-prod),
             # so `up -d` won't recreate the nginx container just because a
