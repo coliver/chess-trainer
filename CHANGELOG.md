@@ -4,6 +4,18 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ## September 5, 2026
 
+### 🐛 Fixed
+
+#### 🎯 Angular Training: Auto-Hint After Repeated Misses
+
+> The Angular Training page ported the manual hint button but never the auto-hint-after-misses
+> behavior from React's `Training.tsx`: `hintLevel` only changed when the 💡 button was clicked, so
+> misses on a move never revealed anything on their own. `training.component.ts` now tracks
+> `wrongAttempts` (incremented per incorrect submission, reset on a correct move or a new item) and
+> derives an `effectiveHintLevel` from `Math.max(hintLevel, wrongAttempts)` thresholds, feeding both
+> the existing hint markers and a new hint arrow (already supported by `BoardComponent`, just unwired
+> here) — matching React's 2-miss/4-miss reveal exactly.
+
 ### ✨ Added
 
 #### 📊 Angular Dashboard Structural Parity: Trouble Steps, Color Filter, Carousel, Pagination

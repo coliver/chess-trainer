@@ -18,7 +18,7 @@ import {
   splitOpeningLabel,
   deriveHintMarkers,
 } from '@knight-school/chess-core';
-import { BoardComponent, BoardMarker } from './board.component';
+import { BoardComponent, BoardArrow, BoardMarker } from './board.component';
 import { TrainingItem, TrainingService } from '../../core/training.service';
 import { FlipBoardButtonComponent } from '../../shared/flip-board-button.component';
 import { SoundService } from '../../core/sound.service';
@@ -50,6 +50,7 @@ const BLINK_CYCLE_MS = 420; // fadeIn(120) + hold(120) + fadeOut(180), matches r
                 [interactive]="true"
                 [moveColor]="playerColor === 'b' ? 'black' : 'white'"
                 [markers]="markers"
+                [arrows]="arrows"
                 [getLegalMoves]="getLegalMoves"
                 [onMoveStart]="onMoveStart"
                 [onMove]="onMove"
@@ -162,7 +163,9 @@ export class TrainingComponent implements OnInit, OnDestroy {
   isAdvancing = false;
   isSessionCompleted = false;
   hintLevel = -1;
+  wrongAttempts = 0;
   markers: BoardMarker[] = [];
+  arrows: BoardArrow[] = [];
   orientation: 'white' | 'black' = 'white';
 
   timeline: Timeline = createTimeline(START_FEN);
@@ -192,6 +195,16 @@ export class TrainingComponent implements OnInit, OnDestroy {
     return this.isSubmitting || this.isAdvancing;
   }
 
+  // After 2 misses on this move, reveal the source-square hint; after 2 more
+  // (4 total), reveal the target square too and draw an arrow to it. Derived
+  // (not stored) so it only ever raises whatever the manual hint button set.
+  private get effectiveHintLevel(): number {
+    return Math.max(
+      this.hintLevel,
+      this.wrongAttempts >= 4 ? 1 : this.wrongAttempts >= 2 ? 0 : -1,
+    );
+  }
+
   private get openingParts() {
     return splitOpeningLabel(this.openingLabel);
   }
@@ -208,7 +221,7 @@ export class TrainingComponent implements OnInit, OnDestroy {
     return deriveStatus({
       isSessionCompleted: this.isSessionCompleted,
       feedback: this.feedback,
-      hintLevel: this.hintLevel,
+      hintLevel: this.effectiveHintLevel,
       isPlayerToMove: this.isPlayerToMove,
       playerColor: this.playerColor,
     });
@@ -264,6 +277,7 @@ export class TrainingComponent implements OnInit, OnDestroy {
     this.playerColor = item.playerColor;
     this.orientation = item.playerColor === 'b' ? 'black' : 'white';
     this.hintLevel = -1;
+    this.wrongAttempts = 0;
     this.updateMarkers();
   }
 
@@ -348,6 +362,8 @@ export class TrainingComponent implements OnInit, OnDestroy {
             this.sound.play('correct');
             this.feedback = '✅ Correct!';
           }
+          this.hintLevel = -1;
+          this.wrongAttempts = 0;
           this.blinkGreen(uci, 2);
 
           if (data.fenAfter) {
@@ -403,6 +419,10 @@ export class TrainingComponent implements OnInit, OnDestroy {
         this.fen = preFen;
         this.resetTimeline(preFen);
         this.feedback = `❌ ${data.reason ?? 'Incorrect move'}`;
+        if (!silent) {
+          this.wrongAttempts += 1;
+          this.updateMarkers();
+        }
       },
       error: (err: { status?: number }) => {
         this.isSubmitting = false;
@@ -449,13 +469,20 @@ export class TrainingComponent implements OnInit, OnDestroy {
   }
 
   private updateMarkers(): void {
+    const effectiveHintLevel = this.effectiveHintLevel;
     const arr: BoardMarker[] = [];
-    const hint = deriveHintMarkers(this.correctMoveUci, this.hintLevel, this.isSessionCompleted);
+    const hint = deriveHintMarkers(this.correctMoveUci, effectiveHintLevel, this.isSessionCompleted);
     if (hint) {
       arr.push({ square: hint.from, type: 'hint' });
       if (hint.to) arr.push({ square: hint.to, type: 'hint' });
     }
     if (this.blinkSquare) arr.push({ square: this.blinkSquare, type: 'blink' });
     this.markers = arr;
+
+    // Arrow to the correct square once the deep hint (level 1) kicks in.
+    this.arrows =
+      effectiveHintLevel >= 1 && !this.isSessionCompleted && this.correctMoveUci
+        ? [{ from: this.correctMoveUci.slice(0, 2), to: this.correctMoveUci.slice(2, 4), type: 'info' }]
+        : [];
   }
 }

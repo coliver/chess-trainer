@@ -165,6 +165,73 @@ describe('TrainingComponent', () => {
     expect(cmp.hintLevel).toBe(1);
   });
 
+  it('auto-reveals a hint after 2 misses and an arrow after 4, mirroring the manual hint button', () => {
+    configure();
+    const cmp = create();
+    cmp.ngOnInit();
+    httpMock.expectOne('/api/training-sessions/sess1/next').flush({
+      fen: WHITE_TO_MOVE_FEN,
+      itemId: 'item1',
+      openingName: 'Italian Game',
+      openingEco: 'C50',
+      correctMoveUci: 'e2e4',
+    });
+
+    const missOnce = () => {
+      cmp.processMove('d2', 'd4');
+      httpMock
+        .expectOne('/api/training-sessions/sess1/responses')
+        .flush({ correct: false, reason: 'Not the book move' });
+    };
+
+    const hasMarker = (square: string) =>
+      cmp.markers.some((m) => m.square === square && m.type === 'hint');
+
+    missOnce();
+    expect(hasMarker('e2')).toBe(false);
+
+    missOnce();
+    expect(hasMarker('e2')).toBe(true);
+    expect(hasMarker('e4')).toBe(false);
+    expect(cmp.arrows.length).toBe(0);
+
+    missOnce();
+    expect(hasMarker('e4')).toBe(false);
+
+    missOnce();
+    expect(hasMarker('e2')).toBe(true);
+    expect(hasMarker('e4')).toBe(true);
+    expect(cmp.arrows).toEqual([{ from: 'e2', to: 'e4', type: 'info' }]);
+  });
+
+  it('resets the miss count and hint when the puzzle advances to the next item', () => {
+    configure();
+    const cmp = create();
+    cmp.ngOnInit();
+    httpMock.expectOne('/api/training-sessions/sess1/next').flush({
+      fen: WHITE_TO_MOVE_FEN,
+      itemId: 'item1',
+      openingName: 'Italian Game',
+      openingEco: 'C50',
+      correctMoveUci: 'e2e4',
+    });
+
+    for (let i = 0; i < 4; i++) {
+      cmp.processMove('d2', 'd4');
+      httpMock
+        .expectOne('/api/training-sessions/sess1/responses')
+        .flush({ correct: false, reason: 'Not the book move' });
+    }
+    expect(cmp.wrongAttempts).toBe(4);
+
+    cmp.processMove('e2', 'e4');
+    httpMock
+      .expectOne('/api/training-sessions/sess1/responses')
+      .flush({ correct: true, sessionCompleted: false });
+
+    expect(cmp.wrongAttempts).toBe(0);
+  });
+
   it('jumps within the timeline and clears feedback/hint', () => {
     configure();
     const cmp = create();
