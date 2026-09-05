@@ -32,6 +32,11 @@ RSpec.describe "Dashboard", type: :request do
     stub_request(:get, "#{base}/progress/due").to_return(status: 200, body: "[]", headers: { "Content-Type" => "application/json" })
     stub_request(:get, "#{base}/progress/weak-spots").to_return(status: 200, body: "[]", headers: { "Content-Type" => "application/json" })
     stub_request(:get, "#{base}/progress/step-accuracy").to_return(status: 200, body: "[]", headers: { "Content-Type" => "application/json" })
+    stub_request(:get, "#{base}/puzzles/summary").to_return(
+      status: 200,
+      body: { puzzlesSeen: 0, overallAccuracy: 0, mastered: 0 }.to_json,
+      headers: { "Content-Type" => "application/json" }
+    )
     stub_request(:get, "#{base}/openings").to_return(status: 200, body: openings.to_json, headers: { "Content-Type" => "application/json" })
 
     if preferences_status == 200
@@ -154,6 +159,55 @@ RSpec.describe "Dashboard", type: :request do
         it "renders the expand-to-see-all link" do
           expect(response.body).to include("See all")
         end
+      end
+
+      it "renders the puzzles progress-group section" do
+        stub_auth_me
+        stub_dashboard_data(openings: [
+          { eco: "B20", name: "Sicilian Defense", epd: nil, pgn: nil, uci_moves: "e2e4 c7c5", description: nil }
+        ])
+        stub_request(:get, "#{base}/puzzles/summary").to_return(
+          status: 200,
+          body: { puzzlesSeen: 12, overallAccuracy: 0.75, mastered: 3 }.to_json,
+          headers: { "Content-Type" => "application/json" }
+        )
+
+        get dashboard_path, env: env
+        expect(response.body).to include("progress-group--puzzles")
+        expect(response.body).to include("12")
+        expect(response.body).to include("75%")
+      end
+
+      it "renders the mobile stat-tabs toggle" do
+        stub_auth_me
+        stub_dashboard_data(openings: [
+          { eco: "B20", name: "Sicilian Defense", epd: nil, pgn: nil, uci_moves: "e2e4 c7c5", description: nil }
+        ])
+
+        get dashboard_path, env: env
+        expect(response.body).to include("stat-tabs")
+        expect(response.body).to include("data-controller=\"stat-tabs\"")
+      end
+
+      it "renders the popular-openings carousel when there are more base openings than fit one grid page" do
+        stub_auth_me
+        openings = (1..13).map { |i| { eco: "B#{10 + i}", name: "Opening #{i}", epd: nil, pgn: nil, uci_moves: "", description: nil } }
+        stub_dashboard_data(openings: openings)
+
+        get dashboard_path, env: env
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include("ob-carousel-section")
+        expect(response.body).to include("opening-carousel")
+      end
+
+      it "does not render the carousel when there are few base openings" do
+        stub_auth_me
+        stub_dashboard_data(openings: [
+          { eco: "B20", name: "Sicilian Defense", epd: nil, pgn: nil, uci_moves: "e2e4 c7c5", description: nil }
+        ])
+
+        get dashboard_path, env: env
+        expect(response.body).not_to include("ob-carousel-section")
       end
 
       it "still renders when the preferences API call fails" do

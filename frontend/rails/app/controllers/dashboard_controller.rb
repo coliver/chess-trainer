@@ -2,12 +2,15 @@ class DashboardController < ApplicationController
   before_action :require_auth!
 
   SEARCH_PAGE = 60
+  BASES_PAGE = 12
+  CAROUSEL_SIZE = 8
 
   def show
     @summary = api.get("/progress/summary")
     @due_count = api.get("/progress/due").size
     @weak_spots = api.get("/progress/weak-spots").first(5)
     @trouble_steps = api.get("/progress/step-accuracy").first(5)
+    @puzzle_summary = api.get("/puzzles/summary")
 
     @openings = api.get("/openings")
     @groups = OpeningGrouping.group_by_base(@openings)
@@ -36,6 +39,10 @@ class DashboardController < ApplicationController
       @view = :bases
       sorted = @sort_az ? @groups.sort_by(&:base) : @groups
       @visible_groups = @color_filter == "all" ? sorted : sorted.select { |g| OpeningGrouping.color_of(g.base) == @color_filter }
+      @visible_group_count = @visible_groups.size
+      @show_carousel = @visible_group_count > BASES_PAGE
+      @carousel_groups = @show_carousel ? @visible_groups.first(CAROUSEL_SIZE) : []
+      @visible_groups = @visible_groups.drop(CAROUSEL_SIZE) if @show_carousel
     end
   end
 

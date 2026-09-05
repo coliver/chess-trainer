@@ -30,3 +30,6 @@ application.register("theme-toggle", ThemeToggleController)
 
 import ThemeSelectController from "./theme_select_controller"
 application.register("theme-select", ThemeSelectController)
+
+import StatTabsController from "./stat_tabs_controller"
+application.register("stat-tabs", StatTabsController)

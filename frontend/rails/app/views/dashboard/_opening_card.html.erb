@@ -1,0 +1,17 @@
+<%= link_to dashboard_path(base: g.base, eco: g.representative["eco"], name: g.representative["name"]),
+      class: "opening-card#{" selected" if @selected && OpeningGrouping.base_name_of(@selected["name"]) == g.base}",
+      data: { turbo_frame: "opening_browser" } do %>
+  <div class="oc-thumb" data-controller="opening-thumb"
+        data-opening-thumb-epd-value="<%= g.representative["epd"] %>"
+        data-opening-thumb-uci-moves-value="<%= g.representative["uci_moves"] %>"
+        data-opening-thumb-orientation-value="<%= OpeningGrouping.color_of(g.base) == "b" ? "black" : "white" %>"
+        data-opening-thumb-board-theme-value="<%= @board_theme %>"
+        data-opening-thumb-piece-set-value="<%= @piece_set %>">
+    <div class="board-host" data-opening-thumb-target="host"></div>
+  </div>
+  <div class="oc-name"><%= g.base %></div>
+  <div class="oc-foot">
+    <span class="oc-count"><%= t("dashboard.openings.variationCount", count: g.count) %></span>
+    <span class="eco-chip"><%= g.eco %></span>
+  </div>
+<% end %>

@@ -7,8 +7,18 @@
     </div>
 
     <div class="card">
-      <section class="progress-overview" aria-label="<%= t("dashboard.progress.yourProgress") %>">
-        <div class="progress-group" aria-label="<%= t("dashboard.progress.trainingHeading") %>">
+      <div class="stat-tabs" role="tablist" aria-label="<%= t("dashboard.progress.yourProgress") %>" data-controller="stat-tabs">
+        <button type="button" role="tab" aria-selected="true" class="stat-tab active"
+              data-stat-tabs-target="trainingTab" data-action="stat-tabs#showTraining">
+          <%= t("dashboard.progress.trainingHeading") %>
+        </button>
+        <button type="button" role="tab" aria-selected="false" class="stat-tab"
+              data-stat-tabs-target="puzzlesTab" data-action="stat-tabs#showPuzzles">
+          <%= t("dashboard.progress.puzzlesHeading") %>
+        </button>
+      </div>
+      <section class="progress-overview" aria-label="<%= t("dashboard.progress.yourProgress") %>" data-mobile-tab="training" data-stat-tabs-target="overview">
+        <div class="progress-group progress-group--training" aria-label="<%= t("dashboard.progress.trainingLabel") %>">
           <h2 class="progress-group-label"><%= t("dashboard.progress.trainingHeading") %></h2>
           <div class="progress-group-row">
             <div class="progress-stat">
@@ -130,6 +140,36 @@
               <% end %>
             </div>
           <% end %>
+        </div>
+
+        <div class="progress-group progress-group--puzzles" aria-label="<%= t("dashboard.progress.puzzleLabel") %>">
+          <h2 class="progress-group-label"><%= t("dashboard.progress.puzzlesHeading") %></h2>
+          <div class="progress-group-row">
+            <div class="progress-stat">
+              <span class="progress-stat-value">
+                <span class="progress-stat-icon" aria-hidden="true">🧩</span>
+                <%= @puzzle_summary["puzzlesSeen"] || 0 %>
+              </span>
+              <span class="progress-stat-label"><%= t("dashboard.progress.puzzlesSolved") %></span>
+            </div>
+            <div class="progress-stat">
+              <span class="progress-stat-value">
+                <span class="progress-stat-icon" aria-hidden="true">🎯</span>
+                <%= (@puzzle_summary["overallAccuracy"] && @puzzle_summary["puzzlesSeen"].to_i > 0) ? "#{(@puzzle_summary["overallAccuracy"] * 100).round}%" : "—" %>
+              </span>
+              <span class="progress-stat-label"><%= t("dashboard.progress.accuracy") %></span>
+            </div>
+            <div class="progress-stat">
+              <span class="progress-stat-value">
+                <span class="progress-stat-icon" aria-hidden="true">🏆</span>
+                <%= @puzzle_summary["mastered"] || 0 %>
+              </span>
+              <span class="progress-stat-label"><%= t("dashboard.progress.mastered") %></span>
+            </div>
+            <div class="progress-stat">
+              <%= link_to t("dashboard.progress.practicePuzzles"), puzzle_themes_path, class: "progress-review-btn" %>
+            </div>
+          </div>
         </div>
       </section>
 

@@ -46,23 +46,26 @@ now tracks `solverMovesTotal`/`themes` per history entry (previously only `moveI
 render. Backend proxy (`PuzzlesController#assign_puzzle`) now also forwards `themes` as a
 Stimulus value.
 
-## 4. Dashboard — mostly landed, one real gap
+## 4. Dashboard — landed
 
-**Status: mostly landed.** The troubleSteps/needs-work section is fully ported:
-`views/dashboard/show.html.erb` (lines 55-133) renders the same `ws-tile`/`ws-grid`/
-`ws-expanded` structure as React's `Dashboard.tsx`, backed by `needs_work_controller.js`, with
-`DashboardController#show` fetching `/progress/weak-spots` and `/progress/step-accuracy`. The
-White/Black/All opening-browser color filter also landed (`_opening_browser.html.erb` lines
-30-38 + `@color_filter` in `dashboard_controller.rb`).
+**Status: landed 2026-09-05.** The troubleSteps/needs-work section is fully ported:
+`views/dashboard/show.html.erb` renders the same `ws-tile`/`ws-grid`/`ws-expanded` structure as
+React's `Dashboard.tsx`, backed by `needs_work_controller.js`, with `DashboardController#show`
+fetching `/progress/weak-spots` and `/progress/step-accuracy`. The White/Black/All
+opening-browser color filter also landed (`_opening_browser.html.erb` + `@color_filter` in
+`dashboard_controller.rb`).
 
-**Gap found:** no "Puzzles" progress-group section at all — `dashboard_controller.rb` never
-calls `/puzzles/summary`, so there's no puzzlesSeen/accuracy/mastered stat block or "Practice
-puzzles" button (React `Dashboard.tsx` lines 560-598). Also missing: the mobile `stat-tabs`
-toggle (React lines 296-318) and the "popular openings" carousel section
-(`showCarousel`/`opening-carousel` in React, absent from `_opening_browser.html.erb`).
-
-**To port:** add a puzzles progress-group section (backend call + view block), the mobile
-stat-tabs toggle, and the popular-openings carousel.
+The remaining three pieces landed 2026-09-05: `DashboardController#show` now also calls
+`/puzzles/summary` and the view renders a `progress-group--puzzles` section
+(puzzlesSeen/accuracy/mastered stats + a "Practice puzzles" link to `puzzle_themes_path`),
+matching React `Dashboard.tsx` lines 560-598. The mobile `stat-tabs` toggle (training/puzzles)
+is wired via a new `stat_tabs_controller.js` Stimulus controller that flips
+`data-mobile-tab` on `.progress-overview`, matching React's CSS-driven mobile behavior. The
+"popular openings" carousel (`showCarousel`/`opening-carousel`) now renders in
+`_opening_browser.html.erb` when there are more than 12 base-opening groups — the grid card
+markup was extracted into a shared `_opening_card` partial reused by both the carousel and the
+grid. Covered by new specs in `spec/requests/dashboard_spec.rb` (puzzles section markup,
+stat-tabs markup, carousel presence/absence).
 
 ## 5. Settings — snow toggle and interactive preview missing
 
@@ -117,6 +120,6 @@ Icons are hand-rolled inline SVG vs React's `lucide-react` icons (cosmetic only)
 
 1. ~~Puzzle multi-move handling fix (§1)~~ — landed 2026-09-04.
 2. ~~Puzzle prev/next + hint tracking (§2), then the rail UI pieces that depend on it (§3)~~ — landed 2026-09-04/05.
-3. Dashboard puzzles progress-group + stat-tabs + carousel (§4).
+3. ~~Dashboard puzzles progress-group + stat-tabs + carousel (§4)~~ — landed 2026-09-05.
 4. Settings snow toggle + interactive preview sound (§5).
 5. Minor: send active locale on register instead of hardcoded `en-US` (§6).

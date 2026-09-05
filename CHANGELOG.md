@@ -6,6 +6,18 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ### ✨ Added
 
+#### 📊 Rails Dashboard Puzzles Progress-Group, Mobile Stat Tabs, and Popular-Openings Carousel
+
+> Closed `frontend/rails/PARITY_GAPS.md` §4, the last real gap in the dashboard audit.
+> `DashboardController#show` now also calls `/puzzles/summary`, backing a new
+> `progress-group--puzzles` section (puzzlesSeen/accuracy/mastered stats + a "Practice puzzles"
+> link) alongside the existing training progress group, matching React's `Dashboard.tsx`. A new
+> `stat_tabs_controller.js` Stimulus controller wires up the mobile training/puzzles tab toggle
+> (`data-mobile-tab` on `.progress-overview`), and the "popular openings" carousel now renders in
+> `_opening_browser.html.erb` once there are more than 12 base-opening groups, with the opening
+> card markup extracted into a shared `_opening_card` partial reused by both the carousel and the
+> grid.
+
 #### 🧩 Rails Puzzle Move-Progress Chip and Theme Chips
 
 > Closed `frontend/rails/PARITY_GAPS.md` §3: the puzzle rail now shows a "Move 2 of 3" chip next to the rating (for multi-move puzzles) and per-puzzle theme chips below the solved/streak stats, matching React's rail block. `puzzle_controller.js` now actually tracks `solverMovesTotal`/`themes` per history entry (both existed as Stimulus values from an earlier fix but were never read into controller state) and ports React's `formatThemeLabel` regex to rebuild the theme-chip row on every render. `PuzzlesController#assign_puzzle` forwards `themes` as a new Stimulus value; the stats/theme-chip markup moved into a `.puzzles-meta` wrapper, needed for the shared CSS's phone-breakpoint layout.
