@@ -115,10 +115,12 @@ rails/
   count, grouped into the same practice categories as
   `react/src/utils/puzzleThemes.ts` (ported to
   `app/services/puzzle_theme_grouping.rb`); picking one filters
-  `/puzzles?theme=...` the same way React's does. Rails' puzzle flow is
-  still single-move-per-puzzle — it does not yet port React's
-  multi-move puzzle support (`moveIndex`/`solverMovesTotal`/opponent
-  auto-reply for mateIn2+ puzzles).
+  `/puzzles?theme=...` the same way React's does. Multi-move puzzles
+  (`moveIndex`/`solverMovesTotal`/opponent auto-reply for mateIn2+) and
+  React's session-local prev/next puzzle history with a hint button
+  (escalating after 2/4 wrong attempts, `used_hint` sent on attempts)
+  are both ported; still missing is the move-progress chip and
+  per-puzzle theme chips in the rail (see `frontend/rails/PARITY_GAPS.md`).
 - Settings covers theme, board colors/piece set/coordinates/animations,
   board orientation mode, sound, and language — all round-trip to
   `/users/me/preferences` and actually apply. It does not cover the
