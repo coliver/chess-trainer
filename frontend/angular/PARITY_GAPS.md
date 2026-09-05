@@ -235,17 +235,17 @@ shared-assets drift wasn't checked in detail.
 
 ## 11. Puzzle prev/next navigation + hint tracking (new gap)
 
-**Status: not started.** React's Puzzles page (`frontend/react/src/pages/Puzzles.tsx`) gained
-session-local prev/next stepping through puzzles already fetched this session (read-only replay
-when stepping back — see `docs/superpowers/specs/2026-09-04-puzzle-prev-next-navigation-design.md`),
-plus a `usedHint` flag sent on attempt submission so the backend can persist whether a hint was
-used solving a puzzle (`PuzzleProgress.hint_used`). Angular's `puzzles.component.ts` still only
-tracks a single current puzzle id and has no hint-usage tracking or prev/next controls at all.
-This compounds with the already-flagged §10 structural gap on the same page.
-
-**To port:** mirror the `HistoryEntry[]`/`historyIndex` state model and the Prev/Next buttons from
-`Puzzles.tsx`, and send `usedHint` on `POST /puzzles/{id}/attempts` from `puzzles.component.ts`'s
-attempt submission (the backend endpoint already accepts it as of the React implementation).
+**Status: landed 2026-09-05.** Ported session-local puzzle history navigation and hint tracking
+from React's `Puzzles.tsx` to Angular's `puzzles.component.ts`. Added a `HistoryEntry` state
+model tracking each fetched puzzle's final state, hint usage, and solve status; `historyIndex`
+navigation backwards through completed puzzles (read-only replay showing each puzzle's initial
+position); hint escalation (dot -> arrow) with auto-escalation after wrong attempts; and
+`usedHint` flag sent on attempt submission. `PuzzlesService.submit()` now accepts a `usedHint`
+parameter. Updated `BoardComponent` to support arrows visualization (new `Arrows` extension
+from cm-chessboard, with a marker-clearing fix to prevent ghost highlights on subsequent
+refreshes). Removed the old `setTimeout(loadNext)` auto-advance on puzzle completion, requiring
+explicit "Next" click instead (matching React's interaction model). Note: the §10 train-rail
+visual redesign (theme chips, stat pills, eyebrow) remains unported as a separate gap.
 
 ## 12. Mobile bottom tab bar (new gap, landed 2026-09-04)
 

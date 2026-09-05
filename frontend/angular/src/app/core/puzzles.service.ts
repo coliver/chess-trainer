@@ -50,10 +50,16 @@ export class PuzzlesService {
     return this.http.get<NextPuzzle>('/api/puzzles/next');
   }
 
-  submit(puzzleId: string, moveUci: string, moveIndex: number): Observable<PuzzleAttemptResult> {
+  submit(
+    puzzleId: string,
+    moveUci: string,
+    moveIndex: number,
+    usedHint = false,
+  ): Observable<PuzzleAttemptResult> {
     return this.http.post<PuzzleAttemptResult>(`/api/puzzles/${puzzleId}/attempts`, {
       moveUci,
       moveIndex,
+      usedHint,
     });
   }
 

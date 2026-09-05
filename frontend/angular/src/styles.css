@@ -1,6 +1,7 @@
 /* cm-chessboard board + markers (used by BoardComponent). @import must lead. */
 @import 'cm-chessboard/assets/chessboard.css';
 @import 'cm-chessboard/assets/extensions/markers/markers.css';
+@import 'cm-chessboard/assets/extensions/arrows/arrows.css';
 
 @import '../../packages/shared-styles/tokens.css';
 @import '../../packages/shared-styles/base.css';

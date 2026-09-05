@@ -44,7 +44,7 @@ describe('PuzzlesService', () => {
 
     const req = httpMock.expectOne('/api/puzzles/p1/attempts');
     expect(req.request.method).toBe('POST');
-    expect(req.request.body).toEqual({ moveUci: 'e2e4', moveIndex: 0 });
+    expect(req.request.body).toEqual({ moveUci: 'e2e4', moveIndex: 0, usedHint: false });
     req.flush(attemptResult);
 
     expect(result).toEqual(attemptResult);

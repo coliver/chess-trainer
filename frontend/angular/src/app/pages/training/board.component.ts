@@ -20,6 +20,10 @@ import {
   Markers,
   MARKER_TYPE,
 } from 'cm-chessboard/src/extensions/markers/Markers.js';
+import {
+  Arrows,
+  ARROW_TYPE,
+} from 'cm-chessboard/src/extensions/arrows/Arrows.js';
 
 // Sprites are served from angular/public (copied from the cm-chessboard package);
 // the app is served under /angular/.
@@ -29,6 +33,11 @@ export type BoardMarkerKind = 'hint' | 'blink' | 'lastmove';
 export interface BoardMarker {
   square: string;
   type: BoardMarkerKind;
+}
+export interface BoardArrow {
+  from: string;
+  to: string;
+  type?: keyof typeof ARROW_TYPE;
 }
 
 // Custom marker types (styled in styles.css). Stable object refs so
@@ -72,6 +81,7 @@ export class BoardComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Input() showCoordinates = true;
   @Input() moveColor: 'white' | 'black' = 'white';
   @Input() markers: BoardMarker[] = [];
+  @Input() arrows: BoardArrow[] = [];
   @Input() getLegalMoves?: (
     square: string,
   ) => { to: string; promotion?: string }[];
@@ -94,10 +104,12 @@ export class BoardComponent implements AfterViewInit, OnChanges, OnDestroy {
       },
       extensions: [
         { class: Markers, props: { autoMarkers: MARKER_TYPE['frame'] } },
+        { class: Arrows, props: {} },
       ],
     });
     if (this.interactive) this.enableInput();
     this.applyMarkers();
+    this.applyArrows();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -116,6 +128,7 @@ export class BoardComponent implements AfterViewInit, OnChanges, OnDestroy {
       }
     }
     if (changes['markers']) this.applyMarkers();
+    if (changes['arrows']) this.applyArrows();
     if (changes['interactive'] || changes['moveColor']) {
       board.disableMoveInput();
       if (this.interactive) this.enableInput();
@@ -170,8 +183,18 @@ export class BoardComponent implements AfterViewInit, OnChanges, OnDestroy {
     if (!board) return;
     board.removeMarkers(CUSTOM_MARKER['hint']);
     board.removeMarkers(CUSTOM_MARKER['blink']);
+    board.removeMarkers(CUSTOM_MARKER['lastmove']);
     for (const m of this.markers ?? []) {
       board.addMarker(CUSTOM_MARKER[m.type], m.square);
+    }
+  }
+
+  private applyArrows(): void {
+    const board = this.board;
+    if (!board) return;
+    board.removeArrows();
+    for (const a of this.arrows ?? []) {
+      board.addArrow(ARROW_TYPE[a.type ?? 'default'], a.from, a.to);
     }
   }
 }
