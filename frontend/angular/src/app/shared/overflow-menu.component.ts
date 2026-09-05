@@ -33,6 +33,14 @@ const FOCUSABLE_SELECTOR =
   standalone: true,
   changeDetection: ChangeDetectionStrategy.Eager,
   imports: [TranslatePipe, ThemeToggleComponent, LanguageToggleComponent],
+  // Angular always emits a host element for a component, even with an empty
+  // @if template — unlike React's `return null`, which produces no DOM node
+  // at all. Left as a normal inline box, that empty host still counts as a
+  // flex child in HomeHeaderComponent's `justify-content: space-between`
+  // row, throwing off the tabs' alignment. `display: contents` removes the
+  // host from the box tree entirely (its `.overflow-menu` panel is
+  // `position: fixed` anyway, so this doesn't affect it when open).
+  styles: [':host { display: contents; }'],
   template: `
     @if (open) {
       <div class="overflow-menu" (mousedown)="onBackdropMouseDown($event)">
