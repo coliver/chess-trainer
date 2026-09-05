@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   ElementRef,
   EventEmitter,
+  HostBinding,
   Input,
   OnChanges,
   OnDestroy,
@@ -23,27 +24,22 @@ const FOCUSABLE_SELECTOR =
 
 /**
  * Angular counterpart of react/src/components/OverflowMenu.tsx — the
- * hamburger dropdown opened from HomeHeaderComponent. `.overflow-menu` is
- * `position: fixed` in header.css, so this renders in place rather than via
- * a true portal to `<body>` (React uses `createPortal` mainly to dodge
- * ancestor stacking/overflow, which doesn't apply here).
+ * hamburger dropdown opened from HomeHeaderComponent. React renders this via
+ * `createPortal(..., document.body)`; this component manually re-parents its
+ * `.overflow-menu` backdrop to `document.body` on open for the same reason:
+ * `.home-header` has `backdrop-filter`, which establishes a containing block
+ * for `position: fixed` descendants in Chromium, so without the portal the
+ * "fixed" backdrop resolves against the header's box instead of the
+ * viewport and renders as a tiny strip pinned to the header row.
  */
 @Component({
   selector: 'app-overflow-menu',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.Eager,
   imports: [TranslatePipe, ThemeToggleComponent, LanguageToggleComponent],
-  // Angular always emits a host element for a component, even with an empty
-  // @if template — unlike React's `return null`, which produces no DOM node
-  // at all. Left as a normal inline box, that empty host still counts as a
-  // flex child in HomeHeaderComponent's `justify-content: space-between`
-  // row, throwing off the tabs' alignment. `display: contents` removes the
-  // host from the box tree entirely (its `.overflow-menu` panel is
-  // `position: fixed` anyway, so this doesn't affect it when open).
-  styles: [':host { display: contents; }'],
   template: `
     @if (open) {
-      <div class="overflow-menu" (mousedown)="onBackdropMouseDown($event)">
+      <div class="overflow-menu" #backdrop (mousedown)="onBackdropMouseDown($event)">
         <nav
           class="overflow-menu-items"
           #menu
@@ -91,6 +87,17 @@ export class OverflowMenuComponent implements OnChanges, OnDestroy {
   @Input() triggerElement: HTMLElement | null = null;
   @Output() closed = new EventEmitter<void>();
   @ViewChild('menu') private readonly menuRef?: ElementRef<HTMLElement>;
+  @ViewChild('backdrop') private readonly backdropRef?: ElementRef<HTMLElement>;
+
+  // Angular always emits a host element for a component, even with an empty
+  // @if template — unlike React's `return null`, which produces no DOM node
+  // at all. Left as a normal inline box, that empty (or, once portaled,
+  // permanently childless) host would still count as a real flex child in
+  // HomeHeaderComponent's `justify-content: space-between` row, throwing off
+  // the tabs' alignment. `display: none` removes it from flex layout
+  // entirely in both states — the visible backdrop lives in `document.body`
+  // once open (see `onOpen`), so the host itself never needs to be visible.
+  @HostBinding('style.display') readonly hostDisplay = 'none';
 
   readonly auth = inject(AuthService);
   private readonly router = inject(Router);
@@ -132,6 +139,15 @@ export class OverflowMenuComponent implements OnChanges, OnDestroy {
     this.previouslyFocused = document.activeElement as HTMLElement | null;
     document.addEventListener('keydown', this.onKeyDown);
     queueMicrotask(() => {
+      // The @if block has just created a fresh backdrop element (Angular
+      // tears down and recreates it on every open/close toggle) — move it
+      // to document.body before focusing into it, matching React's
+      // createPortal target and escaping .home-header's backdrop-filter
+      // containing block. Angular removes it from whatever its current
+      // parent is when `open` goes false, so no manual cleanup is needed.
+      if (this.backdropRef) {
+        document.body.appendChild(this.backdropRef.nativeElement);
+      }
       this.menuRef?.nativeElement.querySelector<HTMLElement>(FOCUSABLE_SELECTOR)?.focus();
     });
   }
