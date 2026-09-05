@@ -15,6 +15,7 @@ describe('HomeHeaderComponent', () => {
         provideRouter([
           { path: 'dashboard', children: [] },
           { path: 'puzzles/themes', children: [] },
+          { path: 'settings', children: [] },
         ]),
         provideLocationMocks(),
         provideHttpClient(),
@@ -25,7 +26,9 @@ describe('HomeHeaderComponent', () => {
       'header.title': 'Knight School',
       'header.openings': 'Openings',
       'header.puzzles': 'Puzzles',
+      'header.settings': 'Settings',
       'header.nav': 'Primary',
+      'header.bottomNav': 'Bottom navigation',
     });
     localStorage.clear();
   });
@@ -44,6 +47,27 @@ describe('HomeHeaderComponent', () => {
     const fixture = TestBed.createComponent(HomeHeaderComponent);
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('.home-header-tabs')).toBeNull();
+  });
+
+  it('hides the bottom tab bar when logged out', () => {
+    const fixture = TestBed.createComponent(HomeHeaderComponent);
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('.bottom-tabbar')).toBeNull();
+  });
+
+  it('shows the bottom tab bar on /settings when logged in, marking Settings active', async () => {
+    localStorage.setItem('token', 'AT');
+    const fixture = TestBed.createComponent(HomeHeaderComponent);
+    const router = TestBed.inject(Router);
+    await router.navigateByUrl('/settings');
+    fixture.detectChanges();
+
+    const el: HTMLElement = fixture.nativeElement;
+    const tabs = el.querySelectorAll('.bottom-tab');
+    expect(tabs.length).toBe(3);
+    expect(tabs[0].classList.contains('active')).toBe(false);
+    expect(tabs[1].classList.contains('active')).toBe(false);
+    expect(tabs[2].classList.contains('active')).toBe(true);
   });
 
   it('shows the tab nav on /dashboard when logged in, marking Openings active', async () => {

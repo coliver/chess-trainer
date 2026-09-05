@@ -247,6 +247,17 @@ This compounds with the already-flagged §10 structural gap on the same page.
 `Puzzles.tsx`, and send `usedHint` on `POST /puzzles/{id}/attempts` from `puzzles.component.ts`'s
 attempt submission (the backend endpoint already accepts it as of the React implementation).
 
+## 12. Mobile bottom tab bar (new gap, landed 2026-09-04)
+
+**Status: landed 2026-09-04.** React's mobile-first dashboard redesign (2026-08 CSS makeover)
+added a fixed bottom tab bar (`.bottom-tabbar`, `shared-styles/header.css`) for
+Openings/Puzzles/Settings on phone widths, but only `HomeHeader.tsx` ever used it — the CSS
+shipped shared, the markup didn't reach Angular or Rails. Ported to
+`shared/home-header.component.ts`: an `@if (auth.isLoggedIn)` block with three `routerLink`s and
+hand-rolled SVG icons (matching the component's existing hamburger-icon style rather than adding
+an icon library), plus an `isSettingsActive()` signal alongside the existing
+`isOpeningsActive()`/`isPuzzlesActive()`. No new CSS or i18n keys needed — both already existed.
+
 ## Suggested backport order
 
 1. i18n plumbing (§1) — everything else touches translated strings.
