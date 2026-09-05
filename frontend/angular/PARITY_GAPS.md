@@ -206,11 +206,15 @@ markup diverges from React's current structure:
   `ws-tile`/`ws-grid` layout replaced it.
 - **Training**: React shows a distinct "session completed" screen (Train again / Choose another
   opening buttons) — Angular has no such state; the regular controls just stay visible.
-- **Puzzles**: React uses the same `train-rail` layout as Training (eyebrow, stat pills, theme
-  chips, a "Next puzzle" button with focus management) — Angular's Puzzles page still uses an
-  older, simpler `puzzles-header`/`puzzles-meta` layout. This compounds with the already-flagged
-  §9 multi-move bug: React's rail shows move-progress ("Move 2 of 3") and per-puzzle theme chips
-  that Angular has nowhere to put even after §9 is fixed.
+- **Puzzles**: **Status: landed 2026-09-05.** Ported to the same `train-rail` layout as Training
+  (`rail-head`/`rail-eyebrow`, `eco-chip`s for rating and move-progress, `stat-pill`s for
+  solved/streak, `puzzles-theme-chip`s for the puzzle's own themes, status banner via
+  `classifyFeedback` from chess-core) — replacing the older flat `puzzles-header`/`puzzles-meta`
+  layout. The "Next puzzle" focus management already existed (`nextBtnRef`). Verified visually via
+  a throwaway Playwright screenshot against the dev server. Note: the `?theme=` query-param
+  filtering (linking from PuzzleThemes into a themed session, "Practicing: X" chip) is still not
+  consumed by `PuzzlesComponent` — that remains open, tracked separately, not part of this layout
+  port.
 
 None of this was fixed in the i18n pass — these are real feature/redesign gaps, not translation
 gaps, and each is sized more like its own item than a quick follow-on. Not started.

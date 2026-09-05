@@ -33,6 +33,10 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 > Closed `frontend/rails/PARITY_GAPS.md` §3: the puzzle rail now shows a "Move 2 of 3" chip next to the rating (for multi-move puzzles) and per-puzzle theme chips below the solved/streak stats, matching React's rail block. `puzzle_controller.js` now actually tracks `solverMovesTotal`/`themes` per history entry (both existed as Stimulus values from an earlier fix but were never read into controller state) and ports React's `formatThemeLabel` regex to rebuild the theme-chip row on every render. `PuzzlesController#assign_puzzle` forwards `themes` as a new Stimulus value; the stats/theme-chip markup moved into a `.puzzles-meta` wrapper, needed for the shared CSS's phone-breakpoint layout.
 
+#### 🧩 Angular Puzzles Train-Rail Layout
+
+> Closed the Puzzles half of `frontend/angular/PARITY_GAPS.md` §10: `puzzles.component.ts` now uses the same `train-rail` layout as Training (`rail-head`/`rail-eyebrow`, `eco-chip`s for rating and move-progress, `stat-pill`s for solved/streak, theme chips for the puzzle's own themes via `formatThemeLabel`, and a status banner driven by chess-core's `classifyFeedback`) instead of the older flat `puzzles-header`/`puzzles-meta` layout. The `?theme=` query-param filtering into a themed session remains unported, tracked separately.
+
 ## September 4, 2026
 
 ### ✨ Added

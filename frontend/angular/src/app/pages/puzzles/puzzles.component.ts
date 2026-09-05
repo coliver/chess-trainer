@@ -3,6 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import {
   START_FEN,
   applyMove,
+  classifyFeedback,
   deriveHintMarkers,
   legalMoves,
   pieceColorAt,
@@ -13,6 +14,7 @@ import { FlipBoardButtonComponent } from '../../shared/flip-board-button.compone
 import { NextPuzzle, PuzzlesService } from '../../core/puzzles.service';
 import { SoundService } from '../../core/sound.service';
 import { celebratePuzzleCorrect } from '../../lib/win-celebration';
+import { formatThemeLabel } from '../../lib/puzzle-themes';
 import { TranslateService } from '../../core/i18n/translate.service';
 import { TranslatePipe } from '../../core/i18n/translate.pipe';
 
@@ -44,101 +46,134 @@ interface HistoryEntry {
   imports: [BoardComponent, FlipBoardButtonComponent, RouterLink, TranslatePipe],
   template: `
     <main class="page">
-      <div class="card puzzles-card">
-        <header class="puzzles-header">
-          <h1>{{ 'puzzles.title' | translate }}</h1>
-          <div class="puzzles-meta">
-            @if (displayRating !== null) {
-              <span>{{ 'puzzles.rating' | translate: { rating: displayRating } }}</span>
-            }
-            @if (displaySolverMovesTotal > 1) {
-              <span>{{
-                'puzzles.moveProgress'
-                  | translate: { current: displayMoveIndex + 1, total: displaySolverMovesTotal }
-              }}</span>
-            }
-            <span>{{ 'puzzles.solved' | translate: { count: solved } }}</span>
-            <span class="puzzles-streak" [class.is-active]="streak > 0">
-              {{ 'puzzles.streak' | translate: { count: streak } }}{{ streak > 0 ? ' 🔥' : '' }}{{
-                bestStreak > 0 ? ('puzzles.streakBest' | translate: { best: bestStreak }) : ''
-              }}
-            </span>
+      <div class="card">
+        <div class="train puzzles-train">
+          <div class="train-board-col">
+            <div class="training-board-wrap">
+              <app-board
+                [position]="displayFen"
+                [orientation]="orientation"
+                [interactive]="!viewingPast && !!puzzleId && !isSubmitting && !puzzleComplete"
+                [moveColor]="solverColor === 'b' ? 'black' : 'white'"
+                [markers]="markers"
+                [arrows]="arrows"
+                [getLegalMoves]="getLegalMoves"
+                [onMoveStart]="onMoveStart"
+                [onMove]="onMove"
+              ></app-board>
+            </div>
+            <div class="board-under">
+              <span class="turn" [class.black]="solverColor === 'b'">
+                <span class="turn-dot" aria-hidden="true"></span>
+                {{ (solverColor === 'b' ? 'training.blackToMove' : 'training.whiteToMove') | translate }}
+              </span>
+              <div class="board-toolbar">
+                <app-flip-board-button class="icon-btn" (flip)="flipBoard()" />
+                @if (historyIndex > 0) {
+                  <button
+                    type="button"
+                    class="icon-btn"
+                    (click)="goToPrev()"
+                    [attr.aria-label]="'puzzles.previousPuzzle' | translate"
+                    [attr.title]="'puzzles.previousPuzzle' | translate"
+                  >
+                    <span aria-hidden="true">⏮</span>
+                  </button>
+                }
+                @if (!viewingPast) {
+                  <button
+                    type="button"
+                    class="icon-btn hint-icon"
+                    (click)="showHint()"
+                    [disabled]="!puzzleId || isSubmitting || puzzleComplete"
+                    [attr.aria-label]="'puzzles.showHint' | translate"
+                    [attr.title]="'puzzles.showHint' | translate"
+                  >
+                    <span aria-hidden="true">💡</span>
+                  </button>
+                }
+                @if (puzzleId && !puzzleComplete) {
+                  <button
+                    type="button"
+                    class="icon-btn"
+                    (click)="skip()"
+                    [disabled]="isSubmitting"
+                    [attr.aria-label]="'puzzles.skipPuzzle' | translate"
+                    [attr.title]="'puzzles.skipPuzzle' | translate"
+                  >
+                    <span aria-hidden="true">⏭</span>
+                  </button>
+                }
+              </div>
+            </div>
           </div>
-        </header>
 
-        <div class="puzzles-board-wrap">
-          <app-board
-            [position]="displayFen"
-            [orientation]="orientation"
-            [interactive]="!viewingPast && !!puzzleId && !isSubmitting && !puzzleComplete"
-            [moveColor]="solverColor === 'b' ? 'black' : 'white'"
-            [markers]="markers"
-            [arrows]="arrows"
-            [getLegalMoves]="getLegalMoves"
-            [onMoveStart]="onMoveStart"
-            [onMove]="onMove"
-          ></app-board>
-        </div>
-        <div class="board-under">
-          <span class="turn" [class.black]="solverColor === 'b'">
-            <span class="turn-dot" aria-hidden="true"></span>
-            {{ (solverColor === 'b' ? 'training.blackToMove' : 'training.whiteToMove') | translate }}
-          </span>
-          <div class="board-toolbar">
-            <app-flip-board-button class="icon-btn" (flip)="flipBoard()" />
-            @if (historyIndex > 0) {
-              <button
-                type="button"
-                class="icon-btn"
-                (click)="goToPrev()"
-                [attr.aria-label]="'puzzles.previousPuzzle' | translate"
-                [attr.title]="'puzzles.previousPuzzle' | translate"
-              >
-                <span aria-hidden="true">⏮</span>
-              </button>
-            }
-            @if (!viewingPast) {
-              <button
-                type="button"
-                class="icon-btn hint-icon"
-                (click)="showHint()"
-                [disabled]="!puzzleId || isSubmitting || puzzleComplete"
-                [attr.aria-label]="'puzzles.showHint' | translate"
-                [attr.title]="'puzzles.showHint' | translate"
-              >
-                <span aria-hidden="true">💡</span>
-              </button>
-            }
-            @if (puzzleId && !puzzleComplete) {
-              <button
-                type="button"
-                class="icon-btn"
-                (click)="skip()"
-                [disabled]="isSubmitting"
-                [attr.aria-label]="'puzzles.skipPuzzle' | translate"
-                [attr.title]="'puzzles.skipPuzzle' | translate"
-              >
-                <span aria-hidden="true">⏭</span>
-              </button>
+          <div class="puzzle-status-slot">
+            @if (statusMsg) {
+              <div class="train-status {{ statusKind }}" role="status">
+                <span class="train-status-ic" [class.is-black-piece]="isBlackToFindMove" aria-hidden="true">
+                  {{ statusIcon }}
+                </span>
+                <div>
+                  <div class="train-status-msg">{{ statusMsg }}</div>
+                </div>
+              </div>
             }
           </div>
+
+          <aside class="train-rail puzzles-rail">
+            <div class="rail-head">
+              <div class="rail-eyebrow">{{ 'puzzles.eyebrow' | translate }}</div>
+              <div class="rail-title">
+                <h1>{{ 'puzzles.title' | translate }}</h1>
+                @if (displayRating !== null) {
+                  <span class="eco-chip">{{ 'puzzles.rating' | translate: { rating: displayRating } }}</span>
+                }
+                @if (displaySolverMovesTotal > 1) {
+                  <span class="eco-chip">{{
+                    'puzzles.moveProgress'
+                      | translate: { current: displayMoveIndex + 1, total: displaySolverMovesTotal }
+                  }}</span>
+                }
+              </div>
+            </div>
+
+            <div class="puzzles-meta">
+              <div class="puzzles-stats">
+                <span class="stat-pill">{{ 'puzzles.solved' | translate: { count: solved } }}</span>
+                <span class="stat-pill" [class.is-active]="streak > 0">
+                  {{ 'puzzles.streak' | translate: { count: streak } }}{{ streak > 0 ? ' 🔥' : '' }}{{
+                    bestStreak > 0 ? ('puzzles.streakBest' | translate: { best: bestStreak }) : ''
+                  }}
+                </span>
+              </div>
+
+              @if (themeList.length > 0) {
+                <div class="puzzles-themes">
+                  @for (themeLabel of themeList; track themeLabel) {
+                    <span class="puzzles-theme-chip">{{ themeLabel }}</span>
+                  }
+                </div>
+              }
+            </div>
+
+            @if ((puzzleId && puzzleComplete) || viewingPast) {
+              <button #nextBtn type="button" class="puzzles-next" (click)="goToNext()">
+                {{ 'puzzles.nextPuzzle' | translate }}
+              </button>
+            }
+
+            <a routerLink="/puzzles/themes" class="puzzles-back-link">{{
+              'puzzles.browseThemes' | translate
+            }}</a>
+
+            @if (noPuzzlesDue) {
+              <a routerLink="/dashboard" class="puzzles-back-link">{{
+                'puzzles.backToDashboard' | translate
+              }}</a>
+            }
+          </aside>
         </div>
-
-        <p class="puzzles-feedback" role="status">
-          {{ viewingPast ? '' : feedback || (puzzleId ? findBestMoveHint() : '') }}
-        </p>
-
-        @if ((puzzleId && puzzleComplete) || viewingPast) {
-          <button #nextBtn type="button" class="puzzles-next" (click)="goToNext()">
-            {{ 'puzzles.nextPuzzle' | translate }}
-          </button>
-        }
-
-        @if (noPuzzlesDue) {
-          <a routerLink="/dashboard" class="puzzles-back-link">{{
-            'puzzles.backToDashboard' | translate
-          }}</a>
-        }
       </div>
     </main>
   `,
@@ -158,6 +193,7 @@ export class PuzzlesComponent implements OnInit {
   fen = START_FEN;
   correctMoveUci = '';
   rating: number | null = null;
+  themes: string | null = null;
   moveIndex = 0;
   solverMovesTotal = 1;
   lastMoveUci = '';
@@ -223,7 +259,36 @@ export class PuzzlesComponent implements OnInit {
     return sideToMove(this.viewingPast ? (this.currentEntry?.puzzle.fen ?? this.fen) : this.fen);
   }
 
-  findBestMoveHint(): string {
+  get displayThemes(): string | null {
+    return this.viewingPast ? (this.currentEntry?.puzzle.themes ?? null) : this.themes;
+  }
+
+  get themeList(): string[] {
+    return (this.displayThemes ?? '').split(' ').filter(Boolean).map(formatThemeLabel);
+  }
+
+  private get feedbackKind(): string {
+    return classifyFeedback(this.feedback).kind;
+  }
+
+  get isBlackToFindMove(): boolean {
+    return this.feedbackKind === 'neutral' && this.solverColor === 'b';
+  }
+
+  get statusKind(): string {
+    const kind = this.feedbackKind;
+    return kind === 'neutral' ? 'your' : kind;
+  }
+
+  get statusIcon(): string {
+    if (this.feedbackKind === 'neutral') return '♟';
+    return classifyFeedback(this.feedback).icon;
+  }
+
+  get statusMsg(): string {
+    if (this.viewingPast) return '';
+    if (this.feedback) return this.feedback;
+    if (!this.puzzleId) return '';
     return this.translate.t(
       this.solverColor === 'b' ? 'puzzles.findBestMoveBlack' : 'puzzles.findBestMoveWhite',
     );
@@ -280,6 +345,7 @@ export class PuzzlesComponent implements OnInit {
         this.moveIndex = data.moveIndex;
         this.solverMovesTotal = data.solverMovesTotal;
         this.rating = data.rating;
+        this.themes = data.themes ?? null;
         this.history = [
           ...this.history,
           {
