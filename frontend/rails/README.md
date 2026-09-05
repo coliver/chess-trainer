@@ -119,8 +119,9 @@ rails/
   (`moveIndex`/`solverMovesTotal`/opponent auto-reply for mateIn2+) and
   React's session-local prev/next puzzle history with a hint button
   (escalating after 2/4 wrong attempts, `used_hint` sent on attempts)
-  are both ported; still missing is the move-progress chip and
-  per-puzzle theme chips in the rail (see `frontend/rails/PARITY_GAPS.md`).
+  are both ported, as are the rail's move-progress chip ("Move 2 of 3")
+  and per-puzzle theme chips (see `frontend/rails/PARITY_GAPS.md` for
+  what's still outstanding — Dashboard/Settings items, not Puzzles).
 - Settings covers theme, board colors/piece set/coordinates/animations,
   board orientation mode, sound, and language — all round-trip to
   `/users/me/preferences` and actually apply. It does not cover the
