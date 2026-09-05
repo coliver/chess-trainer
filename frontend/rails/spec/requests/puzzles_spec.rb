@@ -56,6 +56,21 @@ RSpec.describe "Puzzles", type: :request do
       expect(response.body).to include("puzzle-1")
     end
 
+    it "renders the prev/hint/next puzzle button markup" do
+      log_in
+      stub_preferences
+      body = { puzzleId: "puzzle-1", fen: "start-fen", correctMoveUci: "e2e4", lastMoveUci: "d7d5" }
+      stub_request(:get, "#{base}/puzzles/next").to_return(
+        status: 200, body: body.to_json, headers: { "Content-Type" => "application/json" }
+      )
+
+      get puzzles_path, env: env
+      expect(response.body).to include(
+        'data-puzzle-target="prevButton"', 'data-puzzle-target="hintButton"',
+        'data-puzzle-target="nextButton"', "puzzles-next"
+      )
+    end
+
     it "passes the multi-move sequence position through to the puzzle controller" do
       log_in
       stub_preferences
@@ -235,6 +250,30 @@ RSpec.describe "Puzzles", type: :request do
       post puzzles_attempts_path(1), params: { move_uci: "z9z9" }, env: env
       expect(response).to have_http_status(:unprocessable_entity)
       expect(JSON.parse(response.body)["detail"]).to eq("Invalid move")
+    end
+
+    it "forwards the used_hint param when true" do
+      log_in
+      stub_request(:post, "#{base}/puzzles/1/attempts")
+        .with(body: hash_including("move_uci" => "e2e4", "used_hint" => true))
+        .to_return(status: 200, body: { correct: true, reason: nil, fenAfter: "fen-after" }.to_json,
+                    headers: { "Content-Type" => "application/json" })
+
+      post puzzles_attempts_path(1), params: { move_uci: "e2e4", used_hint: true }, env: env
+      expect(response).to have_http_status(:ok)
+      expect(JSON.parse(response.body)["correct"]).to be(true)
+    end
+
+    it "defaults used_hint to false when omitted" do
+      log_in
+      stub_request(:post, "#{base}/puzzles/1/attempts")
+        .with(body: hash_including("move_uci" => "e2e4", "used_hint" => false))
+        .to_return(status: 200, body: { correct: true, reason: nil, fenAfter: "fen-after" }.to_json,
+                    headers: { "Content-Type" => "application/json" })
+
+      post puzzles_attempts_path(1), params: { move_uci: "e2e4" }, env: env
+      expect(response).to have_http_status(:ok)
+      expect(JSON.parse(response.body)["correct"]).to be(true)
     end
   end
 end

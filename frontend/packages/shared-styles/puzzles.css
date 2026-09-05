@@ -135,6 +135,7 @@
 }
 
 .puzzle-themes-random-btn {
+  display: inline-block;
   margin-top: 14px;
   border: 1px solid var(--accent);
   background: var(--accent);

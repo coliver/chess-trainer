@@ -14,11 +14,19 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 > Added session-local puzzle history navigation to React's Puzzles page: a prev/next button pair lets users step back through puzzles already fetched this session (read-only replay, board non-interactive) or forward to the next puzzle — no new API endpoints needed, just an in-memory array of fetched puzzles tracked alongside an index pointer. Backend gained a `hint_used` boolean column on `PuzzleProgress` to track whether a hint was used solving a puzzle, sent by the frontend on attempt submission and persisted for later reference. Theme-mode (`GET /puzzles/next?theme=...`) now excludes already-solved puzzles (correct_count > 0) in addition to the current id, reducing puzzle-fatigue by not re-serving known positions. Angular has no equivalent yet (logged as a new parity gap in `frontend/angular/PARITY_GAPS.md` §11).
 
+#### 🧩 Rails Puzzle Prev/Next Navigation and Hint Tracking
+
+> Ported the same session-history prev/next stepping and hint system to Rails' `puzzle_controller.js`/`show.html.erb`, closing §2 of `frontend/rails/PARITY_GAPS.md`. The Stimulus controller now keeps an in-memory `history`/`historyIndex` array (seeded from the server-rendered puzzle) mirroring React's `HistoryEntry[]`: stepping back shows a read-only replay of the puzzle's solved position, stepping forward either walks the history or fetches a new puzzle at the frontier. Reused Training's existing hint pattern (`deriveHintMarkers`, `CUSTOM_MARKER.hint`, `ARROW_TYPE.info`) for a 💡 button that escalates after 2 and 4 wrong attempts, and now forwards `used_hint` on `POST /puzzles/:id/attempts` (the backend already accepted it). Also drops the old "reload a new puzzle after a 1s timeout" behavior on solve in favor of an explicit "Next puzzle" button, matching React and fixing the auto-reload gap noted in §3.
+
 ### 🐛 Fixed
 
 #### 🧩 Rails Puzzles Page Didn't Handle Multi-Move Puzzles
 
 > Rails' puzzle-solving flow (`puzzle_controller.js`/`puzzles_controller.rb`) only ever branched on `correct`/`incorrect` and reloaded an entirely new puzzle after any correct answer, so mateIn2+ puzzles never actually let the solver play out their own sequence past move 1 — a correctness bug, not just a missing feature. The backend already fully supported this (`moveIndex`/`solverMovesTotal`/`puzzleComplete`/`opponentReplyUci`/`nextCorrectMoveUci` on `PuzzleNextResponse`/`PuzzleAttemptResponse`), and Angular already carried the equivalent fix (2026-08-27) — this ports the same three-way branch (`correct && puzzleComplete` / `correct` alone / incorrect) to Rails: a correct-but-incomplete answer now applies `opponentReplyUci`, advances to `nextCorrectMoveUci`, and increments `moveIndex` in place instead of reloading. Found via a fresh Rails-vs-React parity audit (`frontend/rails/PARITY_GAPS.md`, new doc mirroring Angular's).
+
+#### 🧩 Puzzle Themes Page Random-Puzzle Button Overlapping the Subtitle
+
+> On the Rails puzzle-themes page, the "Random puzzle" link sat visually on top of the subtitle text above it instead of below it. `.puzzle-themes-random-btn`'s `margin-top: 14px` never took effect because the link rendered as a plain `<a>` (default `display: inline`, which ignores vertical margins) — React/Angular's equivalent is a `<button>` (`display: inline-block` by default), so they weren't affected. Set `display: inline-block` (not `block` — an initial fix using `block` respected the margin but also stretched the link to the full container width, a regression from React's shrink-to-fit `<button>`) on the shared rule in `puzzles.css`, fixing Rails' overlap while keeping the same content-sized width as React/Angular.
 
 #### 🎨 Dashboard Hero Review Button on Desktop
 

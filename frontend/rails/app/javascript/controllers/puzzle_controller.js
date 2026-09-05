@@ -5,16 +5,22 @@ import {
   pieceColorAt,
   legalMoves,
   applyMove,
+  deriveHintMarkers,
 } from "@knight-school/chess-core"
-import { createTrainingBoard, COLOR, CUSTOM_MARKER } from "../chess/board_factory"
+import { createTrainingBoard, COLOR, ARROW_TYPE, CUSTOM_MARKER } from "../chess/board_factory"
 import { playSound, getMoveSound, setSoundsEnabled } from "../chess/sound"
 import { t } from "../i18n"
 
 // Puzzles page controller — simpler cousin of training_controller.js: no
-// timeline stepper, no hints, no opponent autoplay. Unlike Training, the
+// intra-puzzle timeline stepper, no opponent autoplay. Unlike Training, the
 // solver's color can change from one puzzle to the next (whoever is to move
 // in the fen), so enableMoveInput's color binding is re-applied on every
 // loadNext() rather than fixed once at connect().
+//
+// `history`/`historyIndex` mirror react/src/pages/Puzzles.tsx's session-local
+// prev/next stepping: every puzzle seen this session (starting with the one
+// the server rendered) is kept read-only-replayable, while only the frontier
+// entry (historyIndex === history.length - 1) is live/interactive.
 export default class extends Controller {
   static targets = [
     "host",
@@ -28,6 +34,9 @@ export default class extends Controller {
     "solvedStat",
     "streakStat",
     "skipButton",
+    "hintButton",
+    "prevButton",
+    "nextButton",
     "noPuzzleBox",
   ]
 
@@ -65,6 +74,22 @@ export default class extends Controller {
     this.feedback = ""
     this.lastBoardFen = null
     this.flipTurns = 0
+    this.puzzleComplete = false
+    this.hintLevel = -1
+    this.wrongAttempts = 0
+    this.usedHint = false
+
+    this.history = [
+      {
+        puzzleId: this.puzzleId,
+        fen: this.fen,
+        rating: this.rating,
+        correctMoveUci: this.correctMoveUci,
+        finalFen: this.fen,
+        finalLastMoveUci: this.lastMoveUci,
+      },
+    ]
+    this.historyIndex = 0
 
     setSoundsEnabled(this.soundEnabledValue !== "false")
 
@@ -131,13 +156,17 @@ export default class extends Controller {
     }
   }
 
+  isViewingPast() {
+    return this.historyIndex < this.history.length - 1
+  }
+
   canPickUp(square) {
-    if (this.isSubmitting || !this.puzzleId) return false
+    if (this.isSubmitting || !this.puzzleId || this.isViewingPast()) return false
     return pieceColorAt(this.fen, square) === sideToMove(this.fen)
   }
 
   processMove(from, to) {
-    if (this.isSubmitting || !this.puzzleId || from === to) return false
+    if (this.isSubmitting || !this.puzzleId || this.isViewingPast() || from === to) return false
 
     const preFen = this.fen
     const result = applyMove(preFen, from, to, this.correctMoveUci)
@@ -166,6 +195,7 @@ export default class extends Controller {
       const data = await this.postJson(this.attemptsUrl(this.puzzleId), {
         move_uci: moveUci,
         move_index: this.moveIndex,
+        used_hint: this.usedHint,
       })
 
       if (data.correct && data.puzzleComplete) {
@@ -174,8 +204,15 @@ export default class extends Controller {
         this.solved += 1
         this.streak += 1
         this.bestStreak = Math.max(this.bestStreak, this.streak)
+        this.puzzleComplete = true
+        this.isSubmitting = false
+        const last = this.history[this.history.length - 1]
+        this.history[this.history.length - 1] = {
+          ...last,
+          finalFen: this.fen,
+          finalLastMoveUci: moveUci,
+        }
         this.render()
-        window.setTimeout(() => void this.loadNext(), 1000)
         return
       }
 
@@ -186,6 +223,8 @@ export default class extends Controller {
         if (data.opponentReplyUci) this.lastMoveUci = data.opponentReplyUci
         if (data.nextCorrectMoveUci) this.correctMoveUci = data.nextCorrectMoveUci
         this.moveIndex += 1
+        this.hintLevel = -1
+        this.wrongAttempts = 0
         this.isSubmitting = false
         this.render()
         this.bindMoveInput()
@@ -196,6 +235,7 @@ export default class extends Controller {
       this.feedback = `❌ ${data.reason || t("puzzles.incorrectFallback")}`
       this.fen = preFen
       this.streak = 0
+      this.wrongAttempts += 1
       this.isSubmitting = false
       this.render()
       this.bindMoveInput()
@@ -208,6 +248,10 @@ export default class extends Controller {
 
   async loadNext() {
     this.feedback = ""
+    this.puzzleComplete = false
+    this.hintLevel = -1
+    this.wrongAttempts = 0
+    this.usedHint = false
 
     try {
       const data = await this.getJson(this.nextUrlValue)
@@ -217,6 +261,15 @@ export default class extends Controller {
       this.correctMoveUci = data.correctMoveUci || ""
       this.lastMoveUci = data.lastMoveUci || ""
       this.moveIndex = data.moveIndex || 0
+      this.history.push({
+        puzzleId: this.puzzleId,
+        fen: this.fen,
+        rating: this.rating,
+        correctMoveUci: this.correctMoveUci,
+        finalFen: this.fen,
+        finalLastMoveUci: this.lastMoveUci,
+      })
+      this.historyIndex = this.history.length - 1
       this.orientation = this.orientationFor(this.fen)
       this.board?.setOrientation(this.orientation === "black" ? COLOR.black : COLOR.white)
       this.isSubmitting = false
@@ -242,6 +295,35 @@ export default class extends Controller {
     void this.loadNext()
   }
 
+  showHint() {
+    if (this.isViewingPast() || this.isSubmitting || !this.puzzleId || this.puzzleComplete) return
+    this.usedHint = true
+    this.hintLevel = this.hintLevel < 0 ? 0 : 1
+    this.render()
+  }
+
+  prev() {
+    this.historyIndex = Math.max(0, this.historyIndex - 1)
+    this.render()
+  }
+
+  next() {
+    if (this.historyIndex < this.history.length - 1) {
+      this.historyIndex += 1
+      this.render()
+    } else {
+      void this.loadNext()
+    }
+  }
+
+  currentEntry() {
+    return this.history[this.historyIndex]
+  }
+
+  effectiveHintLevel() {
+    return Math.max(this.hintLevel, this.wrongAttempts >= 4 ? 1 : this.wrongAttempts >= 2 ? 0 : -1)
+  }
+
   flip() {
     this.orientation = this.orientation === "black" ? "white" : "black"
     this.board?.setOrientation(this.orientation === "black" ? COLOR.black : COLOR.white)
@@ -258,27 +340,61 @@ export default class extends Controller {
     this.renderTurn()
     this.renderStatus()
     this.renderStats()
+    this.renderControls()
+  }
 
-    if (this.hasSkipButtonTarget) this.skipButtonTarget.disabled = this.isSubmitting || !this.puzzleId
+  renderControls() {
+    const viewingPast = this.isViewingPast()
+    if (this.hasSkipButtonTarget) {
+      this.skipButtonTarget.hidden = !this.puzzleId || this.puzzleComplete
+      this.skipButtonTarget.disabled = this.isSubmitting
+    }
+    if (this.hasHintButtonTarget) {
+      this.hintButtonTarget.hidden = viewingPast
+      this.hintButtonTarget.disabled = this.isSubmitting || !this.puzzleId || this.puzzleComplete
+    }
+    if (this.hasPrevButtonTarget) this.prevButtonTarget.hidden = this.historyIndex <= 0
+    if (this.hasNextButtonTarget) {
+      this.nextButtonTarget.hidden = !((this.puzzleId && this.puzzleComplete) || viewingPast)
+    }
   }
 
   renderBoard() {
     if (!this.board) return
-    const placement = this.fen.split(" ")[0]
+    const viewingPast = this.isViewingPast()
+    const entry = this.currentEntry()
+    const position = viewingPast ? entry.finalFen : this.fen
+    const lastMoveUci = viewingPast ? entry.finalLastMoveUci : this.lastMoveUci
+
+    const placement = position.split(" ")[0]
     if (placement !== (this.lastBoardFen || "").split(" ")[0]) {
-      void this.board.setPosition(this.fen, true)
+      void this.board.setPosition(position, true)
     }
-    this.lastBoardFen = this.fen
+    this.lastBoardFen = position
 
     this.board.removeMarkers(CUSTOM_MARKER.lastmove)
-    if (this.lastMoveUci && this.lastMoveUci.length >= 4) {
-      this.board.addMarker(CUSTOM_MARKER.lastmove, this.lastMoveUci.slice(0, 2))
-      this.board.addMarker(CUSTOM_MARKER.lastmove, this.lastMoveUci.slice(2, 4))
+    this.board.removeMarkers(CUSTOM_MARKER.hint)
+    this.board.removeArrows()
+
+    if (lastMoveUci && lastMoveUci.length >= 4) {
+      this.board.addMarker(CUSTOM_MARKER.lastmove, lastMoveUci.slice(0, 2))
+      this.board.addMarker(CUSTOM_MARKER.lastmove, lastMoveUci.slice(2, 4))
+    }
+
+    if (!viewingPast) {
+      const hint = deriveHintMarkers(this.correctMoveUci, this.effectiveHintLevel(), this.puzzleComplete)
+      if (hint) {
+        this.board.addMarker(CUSTOM_MARKER.hint, hint.from)
+        if (hint.to) {
+          this.board.addMarker(CUSTOM_MARKER.hint, hint.to)
+          this.board.addArrow(ARROW_TYPE.info, hint.from, hint.to)
+        }
+      }
     }
   }
 
   renderTurn() {
-    const turn = sideToMove(this.fen)
+    const turn = sideToMove(this.isViewingPast() ? this.currentEntry().fen : this.fen)
     if (this.hasTurnTarget) this.turnTarget.classList.toggle("black", turn === "b")
     if (this.hasTurnLabelTarget) {
       this.turnLabelTarget.textContent = turn === "w" ? t("training.whiteToMove") : t("training.blackToMove")
@@ -286,7 +402,9 @@ export default class extends Controller {
   }
 
   renderStatus() {
-    const kind = this.feedback.startsWith("✅") ? "correct" : this.feedback.startsWith("❌") ? "incorrect" : "your"
+    const viewingPast = this.isViewingPast()
+    const feedback = viewingPast ? "" : this.feedback
+    const kind = feedback.startsWith("✅") ? "correct" : feedback.startsWith("❌") ? "incorrect" : "your"
     if (this.hasStatusTarget) this.statusTarget.className = `train-status ${kind}`
     if (this.hasStatusIconTarget) {
       this.statusIconTarget.textContent = kind === "correct" ? "✅" : kind === "incorrect" ? "❌" : "♟"
@@ -294,10 +412,11 @@ export default class extends Controller {
     if (this.hasStatusMsgTarget) {
       const findBestMoveKey =
         sideToMove(this.fen) === "b" ? "puzzles.findBestMoveBlack" : "puzzles.findBestMoveWhite"
-      this.statusMsgTarget.textContent = this.feedback || (this.puzzleId ? t(findBestMoveKey) : "")
+      this.statusMsgTarget.textContent = feedback || (!viewingPast && this.puzzleId ? t(findBestMoveKey) : "")
     }
     if (this.hasRatingChipTarget) {
-      this.ratingChipTarget.textContent = this.rating ? t("puzzles.rating", { rating: this.rating }) : ""
+      const rating = viewingPast ? this.currentEntry().rating : this.rating
+      this.ratingChipTarget.textContent = rating ? t("puzzles.rating", { rating }) : ""
     }
   }
 

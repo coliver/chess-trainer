@@ -34,7 +34,11 @@ class PuzzlesController < ApplicationController
   def create_attempt
     render json: api.post(
       "/puzzles/#{params[:id]}/attempts",
-      body: { move_uci: params[:move_uci], move_index: params[:move_index].to_i }
+      body: {
+        move_uci: params[:move_uci],
+        move_index: params[:move_index].to_i,
+        used_hint: ActiveModel::Type::Boolean.new.cast(params[:used_hint]) || false
+      }
     )
   rescue ApiClient::ApiError => e
     render json: { detail: e.detail }, status: e.status

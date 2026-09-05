@@ -55,6 +55,12 @@
               <button type="button" class="btn icon-btn" data-action="puzzle#flip" aria-label="<%= t("flipBoard.label") %>" title="<%= t("flipBoard.label") %>">
                 <span class="flip-icon" data-puzzle-target="flipIcon" aria-hidden="true">⟳</span>
               </button>
+              <button type="button" class="btn icon-btn" data-action="puzzle#prev" data-puzzle-target="prevButton" aria-label="<%= t("puzzles.previousPuzzle") %>" title="<%= t("puzzles.previousPuzzle") %>" hidden>
+                <span aria-hidden="true">⏮</span>
+              </button>
+              <button type="button" class="btn icon-btn hint-icon" data-action="puzzle#showHint" data-puzzle-target="hintButton" aria-label="<%= t("puzzles.showHint") %>" title="<%= t("puzzles.showHint") %>">
+                <span aria-hidden="true">💡</span>
+              </button>
             </div>
           </div>
         </div>
@@ -88,6 +94,10 @@
 
           <button type="button" class="puzzles-skip" data-action="puzzle#skip" data-puzzle-target="skipButton">
             <%= t("puzzles.skipPuzzle") %>
+          </button>
+
+          <button type="button" class="puzzles-next" data-action="puzzle#next" data-puzzle-target="nextButton" hidden>
+            <%= t("puzzles.nextPuzzle") %>
           </button>
 
           <% if @theme %>

@@ -20,24 +20,29 @@ JS test runner for Stimulus controllers (only esbuild), matching how the rest of
 
 ## 2. Puzzle prev/next navigation + hint tracking
 
-**Status: not started** (same gap as Angular). React's `Puzzles.tsx` (shipped 2026-09-04) added
-session-local prev/next stepping through already-fetched puzzles (`HistoryEntry[]`/
-`historyIndex`, read-only replay when going back) and sends a `usedHint` flag on
-`POST /puzzles/{id}/attempts`. Rails has no history state, no prev/next buttons, and no hint UI
-at all (no hint button, no `deriveHintMarkers` equivalent).
-
-**To port:** add history/prev-next state to `puzzle_controller.js`, Prev/Next buttons to
-`views/puzzles/show.html.erb`, and send `usedHint` on attempt submission (the backend already
-accepts it).
+**Status: landed 2026-09-04.** `puzzle_controller.js` now keeps an in-memory `history`/
+`historyIndex` array (seeded from the server-rendered puzzle in `connect()`), mirroring React's
+`HistoryEntry[]`/`historyIndex`: `prev()`/`next()` step through it, with a read-only replay
+(non-interactive board, no hint UI) whenever `historyIndex` isn't at the frontier. Hint UI was
+ported from `training_controller.js`'s existing pattern (`deriveHintMarkers`,
+`CUSTOM_MARKER.hint`, `ARROW_TYPE.info`, escalating after 2/4 wrong attempts), and `used_hint` is
+now forwarded on `POST /puzzles/:id/attempts` via `PuzzlesController#create_attempt`. The old
+"auto-reload after a 1s timeout" behavior on solve was replaced with an explicit "Next puzzle"
+button (also closes part of §3's gap). New buttons in `views/puzzles/show.html.erb`: prev (icon,
+board toolbar), hint (icon, board toolbar), next (full-width, rail). No JS unit test coverage
+(same pre-existing gap noted in §1 — this repo has no Stimulus test runner); server-testable
+surface (view markup, `used_hint` forwarding) covered by new specs in
+`spec/requests/puzzles_spec.rb`.
 
 ## 3. Puzzle rail layout — partially landed
 
 **Status: partially landed.** `frontend/rails/app/views/puzzles/show.html.erb` already uses the
 modern rail markup (`rail-eyebrow`, `rail-title`, `eco-chip`, `puzzles-stats` stat pills) — ahead
-of Angular's older layout. Missing, all downstream of §1/§2: a move-progress chip
-(`puzzles.moveProgress`, "Move 2 of 3"), per-puzzle theme chips (`.puzzles-theme-chip`), and
-Prev/Next buttons — Rails still auto-reloads on a timeout instead of showing a "Next puzzle"
-button. Compare React's rail block in `Puzzles.tsx` (lines ~488-568).
+of Angular's older layout. Prev/Next buttons landed with §2 (2026-09-04). Still missing: a
+move-progress chip (`puzzles.moveProgress`, "Move 2 of 3") and per-puzzle theme chips
+(`.puzzles-theme-chip`) — both need the current puzzle's `moveIndex`/`solverMovesTotal`/`themes`
+displayed per history entry, not just tracked internally. Compare React's rail block in
+`Puzzles.tsx` (lines ~488-568).
 
 ## 4. Dashboard — mostly landed, one real gap
 
