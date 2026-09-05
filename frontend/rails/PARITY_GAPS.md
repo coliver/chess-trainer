@@ -67,20 +67,24 @@ markup was extracted into a shared `_opening_card` partial reused by both the ca
 grid. Covered by new specs in `spec/requests/dashboard_spec.rb` (puzzles section markup,
 stat-tabs markup, carousel presence/absence).
 
-## 5. Settings — snow toggle and interactive preview missing
+## 5. Settings — snow toggle and interactive preview
 
-**Status: not started.** No snow toggle anywhere in `views/settings/show.html.erb` or elsewhere
-under `frontend/rails/app/` — the locale key `settings.appearance.snowLabel` already exists in
-the shared JSON but is never wired to a UI element, and there is no snow-effect animation in the
-Rails layout at all (React has `useSnowPreference`/`lib/snow.ts`; Angular ported it to
-`snow-preference.service.ts`). The settings preview board is also non-interactive:
-`board_preview_controller.js` only calls `createPreviewBoard`, with no move input and no
-preview-move sound, versus React's `Settings.tsx` `previewOnMove` (plays a sound via
-`useSound`). The main sound on/off toggle does exist and works correctly
-(`settings_controller.rb`, read by `puzzle_controller.js`/`training_controller.js`).
-
-**To port:** add a snow toggle row + snow animation, and wire move input + a preview-move sound
-into the settings preview board.
+**Status: landed 2026-09-05.** A `snow_controller.js` Stimulus controller is mounted on `<body>`
+(`layouts/application.html.erb`) so it stays in scope across every page, matching React's
+App.tsx-level effect; `utils/snow_preference.js`/`utils/snow.js` port `useSnowPreference`/
+`lib/snow.ts` 1:1 (same `snow_enabled` localStorage key, same `canvas-confetti`-based animation,
+now added as a Rails JS dependency). The settings snow toggle checkbox (using the existing
+`settings.appearance.snowLabel` locale key) lives outside the preferences `form_with` — like the
+preview board, it's a client-only preference with no `user_preferences` column — and reaches the
+body controller via `data-action="change->snow#toggle"`. The settings preview board is now
+interactive: `board_preview_controller.js` calls `board.enableMoveInput` when
+`data-board-preview-interactive-value="true"` (Settings only; the dashboard opening-browser
+preview stays click-through), applying free moves via `chess-core`'s `applyMove`/`legalMoves` and
+playing a move sound via `chess/sound.js`, matching React's `Settings.tsx` `previewOnMove`.
+`createPreviewBoard` in `chess/board_factory.js` now includes the Markers extension so
+`addLegalMovesMarkers` works. Covered by a new request spec in `spec/requests/settings_spec.rb`
+(interactive value + snow-toggle markup); the JS behavior itself has no test coverage, same
+pre-existing gap as the other Stimulus controllers (no JS test runner in this repo).
 
 ## 6. i18n coverage — landed, ahead of Angular in one respect
 
@@ -92,9 +96,9 @@ shape at boot, so all 37 locales are actually usable via Rails' own `t()`, not j
 Stimulus-side strings are bridged via `ApplicationHelper#js_translations` into a
 `<script id="i18n-strings">` blob read by `app/javascript/i18n.js`.
 
-**Minor gap:** `RegistrationsController#create` hardcodes `language: "en-US"` on the register API
-call (`registrations_controller.rb` line 15) instead of the user's currently-selected language,
-unlike React's `Register.tsx` which sends `translate.lang()`.
+**Landed 2026-09-05:** `RegistrationsController#create` now sends `I18n.locale.to_s` (the
+locale `ApplicationController#set_locale` already resolved for the request) instead of a
+hardcoded `"en-US"`, matching React's `Register.tsx` sending `translate.lang()`.
 
 ## 7. Missing pages — none, full page parity
 
@@ -121,5 +125,7 @@ Icons are hand-rolled inline SVG vs React's `lucide-react` icons (cosmetic only)
 1. ~~Puzzle multi-move handling fix (§1)~~ — landed 2026-09-04.
 2. ~~Puzzle prev/next + hint tracking (§2), then the rail UI pieces that depend on it (§3)~~ — landed 2026-09-04/05.
 3. ~~Dashboard puzzles progress-group + stat-tabs + carousel (§4)~~ — landed 2026-09-05.
-4. Settings snow toggle + interactive preview sound (§5).
-5. Minor: send active locale on register instead of hardcoded `en-US` (§6).
+4. ~~Settings snow toggle + interactive preview sound (§5)~~ — landed 2026-09-05.
+5. ~~Minor: send active locale on register instead of hardcoded `en-US` (§6)~~ — landed 2026-09-05.
+
+All tracked gaps are now closed.

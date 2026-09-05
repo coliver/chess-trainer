@@ -12,7 +12,8 @@
             data-board-preview-orientation-value="<%= @preferences["board_orientation_mode"] == "black" ? "black" : "white" %>"
             data-board-preview-board-theme-value="<%= @preferences["board_theme"] %>"
             data-board-preview-piece-set-value="<%= @preferences["piece_set"] %>"
-            data-board-preview-show-coordinates-value="<%= @preferences["show_coordinates"] %>">
+            data-board-preview-show-coordinates-value="<%= @preferences["show_coordinates"] %>"
+            data-board-preview-interactive-value="true">
         <div class="boardPreview-board" data-board-preview-target="host"></div>
       </div>
     </section>
@@ -96,6 +97,16 @@
         </div>
       </section>
     <% end %>
+
+    <section class="settings-section">
+      <label class="settings-row settings-row--checkbox">
+        <span class="settings-row-label"><%= t("settings.appearance.snowLabel") %></span>
+        <span class="settings-switch">
+          <input type="checkbox" role="switch" data-snow-target="toggleInput" data-action="change->snow#toggle">
+          <span class="settings-switch-track" aria-hidden="true"></span>
+        </span>
+      </label>
+    </section>
 
     <section class="settings-section settings-section--footer">
       <%= button_to t("settings.resetToDefaults"), settings_path, method: :patch,

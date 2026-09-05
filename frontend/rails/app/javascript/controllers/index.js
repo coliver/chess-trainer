@@ -33,3 +33,6 @@ application.register("theme-select", ThemeSelectController)
 
 import StatTabsController from "./stat_tabs_controller"
 application.register("stat-tabs", StatTabsController)
+
+import SnowController from "./snow_controller"
+application.register("snow", SnowController)

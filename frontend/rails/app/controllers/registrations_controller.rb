@@ -12,7 +12,7 @@ class RegistrationsController < ApplicationController
       email: params[:email],
       username: params[:username],
       password: params[:password],
-      language: "en-US"
+      language: I18n.locale.to_s
     })
 
     @email = params[:email]

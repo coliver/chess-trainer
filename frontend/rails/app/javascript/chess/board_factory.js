@@ -20,7 +20,9 @@ export const CUSTOM_MARKER = {
 export { COLOR, ARROW_TYPE, MARKER_TYPE }
 
 // Defaults match React's DEFAULT_PREFERENCES; callers that know the user's real
-// board_theme/piece_set (the Settings page) can override them.
+// board_theme/piece_set (the Settings page) can override them. Includes the
+// Markers extension so the Settings preview board can enable move input and
+// show legal-move markers on drag, matching React's Board.tsx.
 export function createPreviewBoard(el, { position, orientation, boardTheme = "default", pieceSet = "standard", showCoordinates = false }) {
   return new Chessboard(el, {
     position,
@@ -35,6 +37,9 @@ export function createPreviewBoard(el, { position, orientation, boardTheme = "de
       pieces: { file: `pieces/${pieceSet}.svg` },
       animationDuration: 300,
     },
+    extensions: [
+      { class: Markers, props: { autoMarkers: MARKER_TYPE.frame } },
+    ],
   })
 }
 

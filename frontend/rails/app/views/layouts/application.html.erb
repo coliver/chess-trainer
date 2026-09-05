@@ -33,7 +33,7 @@
     <script id="i18n-strings" type="application/json"><%= raw js_translations.to_json %></script>
   </head>
 
-  <body>
+  <body data-controller="snow">
     <%= render "layouts/header" %>
     <%= render "layouts/flash" %>
     <%= yield %>

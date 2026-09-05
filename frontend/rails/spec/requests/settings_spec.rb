@@ -49,6 +49,14 @@ RSpec.describe "Settings", type: :request do
         expect(response.body).to include("Settings")
       end
 
+      it "renders an interactive preview board and a snow toggle" do
+        stub_get_preferences
+
+        get settings_path, env: env
+        expect(response.body).to include('data-board-preview-interactive-value="true"')
+        expect(response.body).to include('data-action="change->snow#toggle"')
+      end
+
       it "falls back to defaults when the preferences fetch fails" do
         stub_get_preferences(status: 500)
 

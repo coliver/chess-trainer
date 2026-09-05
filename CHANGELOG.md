@@ -6,6 +6,17 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ### ✨ Added
 
+#### ❄️ Rails Settings Snow Toggle and Interactive Preview Board
+
+> Closes `frontend/rails/PARITY_GAPS.md` §5 and §6, the last two open Rails/React parity gaps. A
+> new `snow_controller.js` Stimulus controller, mounted on `<body>`, ports React's
+> `useSnowPreference`/`lib/snow.ts` (same `snow_enabled` localStorage key, `canvas-confetti`
+> animation) and is wired to a new settings toggle row. The settings preview board is now
+> interactive: `board_preview_controller.js` accepts free-play move input and plays a move sound
+> when `data-board-preview-interactive-value="true"`, matching React's `Settings.tsx`
+> `previewOnMove`. Separately, `RegistrationsController#create` now sends the request's resolved
+> locale instead of a hardcoded `"en-US"`.
+
 #### 📊 Rails Dashboard Puzzles Progress-Group, Mobile Stat Tabs, and Popular-Openings Carousel
 
 > Closed `frontend/rails/PARITY_GAPS.md` §4, the last real gap in the dashboard audit.
