@@ -37,6 +37,8 @@ export default class extends Controller {
     rating: String,
     correctMoveUci: String,
     lastMoveUci: String,
+    moveIndex: Number,
+    solverMovesTotal: Number,
     nextUrl: String,
     attemptsUrlTemplate: String,
     dashboardUrl: String,
@@ -53,6 +55,7 @@ export default class extends Controller {
     this.puzzleId = this.puzzleIdValue || null
     this.correctMoveUci = this.correctMoveUciValue || ""
     this.lastMoveUci = this.lastMoveUciValue || ""
+    this.moveIndex = this.moveIndexValue || 0
     this.rating = this.ratingValue || ""
 
     this.isSubmitting = false
@@ -160,9 +163,12 @@ export default class extends Controller {
     this.render()
 
     try {
-      const data = await this.postJson(this.attemptsUrl(this.puzzleId), { move_uci: moveUci })
+      const data = await this.postJson(this.attemptsUrl(this.puzzleId), {
+        move_uci: moveUci,
+        move_index: this.moveIndex,
+      })
 
-      if (data.correct) {
+      if (data.correct && data.puzzleComplete) {
         playSound("puzzleCorrect")
         this.feedback = `✅ ${t("puzzles.correct")}`
         this.solved += 1
@@ -170,6 +176,19 @@ export default class extends Controller {
         this.bestStreak = Math.max(this.bestStreak, this.streak)
         this.render()
         window.setTimeout(() => void this.loadNext(), 1000)
+        return
+      }
+
+      if (data.correct) {
+        playSound("puzzleCorrect")
+        this.feedback = `✅ ${t("puzzles.keepGoing")}`
+        if (data.fenAfter) this.fen = data.fenAfter
+        if (data.opponentReplyUci) this.lastMoveUci = data.opponentReplyUci
+        if (data.nextCorrectMoveUci) this.correctMoveUci = data.nextCorrectMoveUci
+        this.moveIndex += 1
+        this.isSubmitting = false
+        this.render()
+        this.bindMoveInput()
         return
       }
 
@@ -197,6 +216,7 @@ export default class extends Controller {
       this.rating = data.rating != null ? String(data.rating) : ""
       this.correctMoveUci = data.correctMoveUci || ""
       this.lastMoveUci = data.lastMoveUci || ""
+      this.moveIndex = data.moveIndex || 0
       this.orientation = this.orientationFor(this.fen)
       this.board?.setOrientation(this.orientation === "black" ? COLOR.black : COLOR.white)
       this.isSubmitting = false

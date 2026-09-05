@@ -32,7 +32,10 @@ class PuzzlesController < ApplicationController
 
   # JSON proxy for attempt submission (POST /rails/puzzles/:id/attempts).
   def create_attempt
-    render json: api.post("/puzzles/#{params[:id]}/attempts", body: { move_uci: params[:move_uci] })
+    render json: api.post(
+      "/puzzles/#{params[:id]}/attempts",
+      body: { move_uci: params[:move_uci], move_index: params[:move_index].to_i }
+    )
   rescue ApiClient::ApiError => e
     render json: { detail: e.detail }, status: e.status
   end
@@ -45,6 +48,8 @@ class PuzzlesController < ApplicationController
     @rating = puzzle["rating"]
     @correct_move_uci = puzzle["correctMoveUci"]
     @last_move_uci = puzzle["lastMoveUci"]
+    @move_index = puzzle["moveIndex"] || 0
+    @solver_moves_total = puzzle["solverMovesTotal"] || 1
 
     prefs = current_preferences
     @board_theme = prefs["board_theme"]

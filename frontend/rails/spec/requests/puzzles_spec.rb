@@ -56,6 +56,24 @@ RSpec.describe "Puzzles", type: :request do
       expect(response.body).to include("puzzle-1")
     end
 
+    it "passes the multi-move sequence position through to the puzzle controller" do
+      log_in
+      stub_preferences
+      stub_request(:get, "#{base}/puzzles/next").to_return(
+        status: 200,
+        body: {
+          puzzleId: "puzzle-1", fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+          rating: 1500, correctMoveUci: "e2e4", lastMoveUci: "d7d5",
+          moveIndex: 0, solverMovesTotal: 2
+        }.to_json,
+        headers: { "Content-Type" => "application/json" }
+      )
+
+      get puzzles_path, env: env
+      expect(response.body).to include('data-puzzle-move-index-value="0"')
+      expect(response.body).to include('data-puzzle-solver-moves-total-value="2"')
+    end
+
     it "shows the no-puzzles-due state on a 404" do
       log_in
       stub_preferences
@@ -193,6 +211,18 @@ RSpec.describe "Puzzles", type: :request do
       post puzzles_attempts_path(1), params: { move_uci: "e2e4" }, env: env
       expect(response).to have_http_status(:ok)
       expect(JSON.parse(response.body)["correct"]).to be(true)
+    end
+
+    it "forwards the move_index param for multi-move puzzles" do
+      log_in
+      stub_request(:post, "#{base}/puzzles/1/attempts")
+        .with(body: hash_including("move_uci" => "e2e4", "move_index" => 1))
+        .to_return(status: 200, body: { correct: true, reason: nil, puzzleComplete: false, opponentReplyUci: "e7e5" }.to_json,
+                    headers: { "Content-Type" => "application/json" })
+
+      post puzzles_attempts_path(1), params: { move_uci: "e2e4", move_index: 1 }, env: env
+      expect(response).to have_http_status(:ok)
+      expect(JSON.parse(response.body)["opponentReplyUci"]).to eq("e7e5")
     end
 
     it "proxies API errors with their status" do
