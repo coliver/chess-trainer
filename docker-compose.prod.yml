@@ -4,7 +4,7 @@
 # nginx instead of silently sitting unused on disk):
 #   npm --prefix frontend/packages/chess-core run build
 #   npm --prefix frontend/react run build         # writes frontend/react/dist
-#   npm --prefix frontend/angular run build       # writes frontend/angular/dist/angular
+#   npm --prefix frontend/angular run build       # writes frontend/angular/dist/angular/browser
 #   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build db api rails nginx
 #
 # db, api, rails, and nginx run in prod — react and angular are dev-server-only
@@ -31,5 +31,5 @@ services:
       - /etc/letsencrypt:/etc/nginx/certs:ro
       - ./htmlcov:/app/htmlcov:ro
       - ./frontend/react/dist:/usr/share/nginx/html:ro
-      - ./frontend/angular/dist/angular:/usr/share/nginx/angular:ro
+      - ./frontend/angular/dist/angular/browser:/usr/share/nginx/angular:ro
       - ./certbot-www:/var/www/certbot:ro
