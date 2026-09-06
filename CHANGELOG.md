@@ -6,6 +6,18 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ### 🐛 Fixed
 
+#### 🔙 Rails Settings: Back Button With Remembered Origin
+
+> Found via a navigation-path audit of `frontend/rails` against `frontend/react`'s route map:
+> `views/settings/show.html.erb` had no back link at all, and the header's Settings menu item
+> never threaded through where it was opened from — so opening Settings mid-training had no way
+> back to that session, since Rails (unlike React/Angular) shows the same full header everywhere,
+> including `/rails/trainings/:id`. Added a `.settings-back-button` matching React/Angular's
+> markup, backed by a `return_to` query param (`_header_menu.html.erb` now passes
+> `settings_path(return_to: request.fullpath)`, `SettingsController#show` resolves it via the
+> same-origin-only guard `#update` already used) defaulting to `/dashboard`. See
+> `frontend/rails/PARITY_GAPS.md` §10.
+
 #### 🎯 Angular Training: Auto-Hint After Repeated Misses
 
 > The Angular Training page ported the manual hint button but never the auto-hint-after-misses

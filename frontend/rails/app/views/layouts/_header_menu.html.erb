@@ -11,7 +11,7 @@
     aria-modal="true"
     aria-label="<%= t("header.nav") %>"
   >
-    <%= link_to t("header.settings"), settings_path, class: "overflow-menu-item" %>
+    <%= link_to t("header.settings"), settings_path(return_to: request.fullpath), class: "overflow-menu-item" %>
 
     <%= button_to logout_path, method: :delete,
           class: "overflow-menu-item", form: { style: "display: contents" } do %>

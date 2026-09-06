@@ -64,6 +64,30 @@ RSpec.describe "Settings", type: :request do
         expect(response).to have_http_status(:ok)
         expect(response.body).to include("Settings")
       end
+
+      it "shows a back link to the dashboard by default" do
+        stub_get_preferences
+
+        get settings_path, env: env
+        back_link = response.body[/<a[^>]*class="settings-back-button"[^>]*>/]
+        expect(back_link).to include(%(href="#{dashboard_path}"))
+      end
+
+      it "shows a back link to a safe return_to path" do
+        stub_get_preferences
+
+        get settings_path, params: { return_to: "/rails/trainings/42" }, env: env
+        back_link = response.body[/<a[^>]*class="settings-back-button"[^>]*>/]
+        expect(back_link).to include('href="/rails/trainings/42"')
+      end
+
+      it "ignores an unsafe return_to and falls back to the dashboard" do
+        stub_get_preferences
+
+        get settings_path, params: { return_to: "//evil.example.com" }, env: env
+        back_link = response.body[/<a[^>]*class="settings-back-button"[^>]*>/]
+        expect(back_link).to include(%(href="#{dashboard_path}"))
+      end
     end
   end
 

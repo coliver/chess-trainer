@@ -72,6 +72,7 @@ class SettingsController < ApplicationController
   }.freeze
 
   def show
+    @back_to = safe_return_to || dashboard_path
     @preferences = api.get("/users/me/preferences")
     session[:preferences] = @preferences
   rescue ApiClient::ApiError

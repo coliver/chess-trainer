@@ -120,6 +120,28 @@ Icons are hand-rolled inline SVG vs React's `lucide-react` icons (cosmetic only)
 `completedControls` block (Train again / Choose another opening) toggled by
 `training_controller.js` based on `isSessionCompleted` — matches React's `Training.tsx`.
 
+## 10. Settings had no way back to where you came from
+
+**Status: landed 2026-09-05.** Found via a navigation-path audit (mapping every route/link in
+`frontend/react`, then walking the same edges in Rails) rather than the feature-content audits
+above. React's `Settings.tsx` always renders a Back button that returns to
+`location.state.from`, defaulting to `/dashboard`; Angular ports the same via router state
+(`overflow-menu.component.ts`/`game-header.component.ts` pass `{ state: { from: this.router.url } }`,
+`settings.component.ts#goBack` reads it back). Rails had neither: `views/settings/show.html.erb`
+had no back link at all, and `layouts/_header_menu.html.erb`'s Settings link didn't carry the
+originating page anywhere for it to return to. Since Rails renders one shared header (with the
+hamburger menu) on every page — including `/rails/trainings/:id`, unlike React/Angular's stripped
+`GameHeader` there — this meant opening Settings mid-training had no way back to that session at
+all, not even via a persistent nav tab.
+
+Fixed server-side with a `return_to` query param instead of client router state:
+`_header_menu.html.erb`'s Settings link now passes `settings_path(return_to: request.fullpath)`;
+`SettingsController#show` resolves `@back_to = safe_return_to || dashboard_path` (reusing the
+same-origin-only guard already used by `#update`'s post-save redirect); `views/settings/show.html.erb`
+renders a `.settings-back-button` (same CSS class and markup as React/Angular) linking to `@back_to`.
+Covered by three new specs in `spec/requests/settings_spec.rb` (default-to-dashboard, honors a safe
+`return_to`, ignores an unsafe one like `//evil.example.com`).
+
 ## Suggested backport order
 
 1. ~~Puzzle multi-move handling fix (§1)~~ — landed 2026-09-04.
@@ -127,5 +149,6 @@ Icons are hand-rolled inline SVG vs React's `lucide-react` icons (cosmetic only)
 3. ~~Dashboard puzzles progress-group + stat-tabs + carousel (§4)~~ — landed 2026-09-05.
 4. ~~Settings snow toggle + interactive preview sound (§5)~~ — landed 2026-09-05.
 5. ~~Minor: send active locale on register instead of hardcoded `en-US` (§6)~~ — landed 2026-09-05.
+6. ~~Settings back-navigation via `return_to` (§10)~~ — landed 2026-09-05.
 
 All tracked gaps are now closed.
