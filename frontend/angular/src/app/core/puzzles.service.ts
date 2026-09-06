@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 /** Shape of `GET /api/puzzles/next`. */
@@ -46,8 +46,9 @@ export interface ThemeCount {
 export class PuzzlesService {
   private readonly http = inject(HttpClient);
 
-  next(): Observable<NextPuzzle> {
-    return this.http.get<NextPuzzle>('/api/puzzles/next');
+  next(theme?: string | null): Observable<NextPuzzle> {
+    const params = theme ? new HttpParams().set('theme', theme) : undefined;
+    return this.http.get<NextPuzzle>('/api/puzzles/next', { params });
   }
 
   submit(

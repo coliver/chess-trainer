@@ -4,6 +4,22 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ## September 6, 2026
 
+### ✨ Added
+
+#### 🏁 Angular: Training Session-Completed Screen and Puzzle Theme Filtering
+
+> Closes the last two open items in `frontend/angular/PARITY_GAPS.md`. Training now shows React's
+> "Train again" / "Choose another opening" screen once `isSessionCompleted`, replacing the
+> prev/next/hint/move-form controls; `trainAgain()` posts a new session via the existing
+> `TrainingService.start()` and navigates to `/training/:newId` — which required switching
+> `ngOnInit` from a one-time `route.snapshot.paramMap` read to a `route.paramMap` subscription,
+> since Angular reuses the component instance across two `/training/:id` routes (same route
+> config). Puzzles now consumes the `?theme=` query param set by linking in from PuzzleThemes:
+> `PuzzlesComponent` subscribes to `route.queryParamMap` (`distinctUntilChanged` on `theme`, same
+> route-reuse reasoning), threads it through `PuzzlesService.next()` as an HTTP param, shows a
+> "Practicing: X" chip, branches the empty-state message, and swaps the rail's bottom link between
+> "Back to due puzzles" and "Browse themes".
+
 ### ♻️ Refactor
 
 #### 🧹 Repo Housekeeping: Untrack Manual Test Artifacts, Fix Doc Casing

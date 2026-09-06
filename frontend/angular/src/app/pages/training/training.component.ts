@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import {
   applyMove,
   applyUci,
@@ -86,59 +87,77 @@ const BLINK_CYCLE_MS = 420; // fadeIn(120) + hold(120) + fadeOut(180), matches r
               </div>
             </div>
 
-            <div class="train-controls">
-              <div class="train-stepper">
-                <button
-                  class="btn"
-                  type="button"
-                  (click)="jumpToIndex(timeline.index - 1)"
-                  [disabled]="busy || timeline.index <= 0"
-                >
-                  {{ 'training.prev' | translate }}
-                </button>
-                <button
-                  class="btn"
-                  type="button"
-                  (click)="jumpToIndex(timeline.index + 1)"
-                  [disabled]="busy || timeline.index >= timeline.fens.length - 1"
-                >
-                  {{ 'training.next' | translate }}
-                </button>
-              </div>
-
-              <button
-                class="btn hint"
-                type="button"
-                (click)="hint()"
-                [disabled]="busy || !itemId"
-                [attr.aria-label]="'training.showHint' | translate"
-                [title]="'training.showHint' | translate"
-              >
-                💡
-              </button>
-
-              <form class="train-type-move" (ngSubmit)="onTextSubmit()">
-                <input
-                  class="text-input"
-                  name="moveInput"
-                  [(ngModel)]="moveInput"
-                  [placeholder]="'training.movePlaceholder' | translate"
-                  [disabled]="isSubmitting"
-                />
+            @if (isSessionCompleted) {
+              <div class="train-controls">
                 <button
                   class="btn primary"
-                  type="submit"
-                  [disabled]="busy || !moveInput.trim() || !atLatest"
-                  [title]="!atLatest ? ('training.jumpToLatest' | translate) : undefined"
+                  type="button"
+                  (click)="trainAgain()"
+                  [disabled]="isRestarting"
                 >
-                  {{ 'training.play' | translate }}
+                  {{ (isRestarting ? 'training.restarting' : 'training.trainAgain') | translate }}
                 </button>
-              </form>
-            </div>
+                <button class="btn" type="button" (click)="exit()">
+                  {{ 'training.chooseAnother' | translate }}
+                </button>
+              </div>
+            } @else {
+              <div class="train-controls">
+                <div class="train-stepper">
+                  <button
+                    class="btn"
+                    type="button"
+                    (click)="jumpToIndex(timeline.index - 1)"
+                    [disabled]="busy || timeline.index <= 0"
+                  >
+                    {{ 'training.prev' | translate }}
+                  </button>
+                  <button
+                    class="btn"
+                    type="button"
+                    (click)="jumpToIndex(timeline.index + 1)"
+                    [disabled]="busy || timeline.index >= timeline.fens.length - 1"
+                  >
+                    {{ 'training.next' | translate }}
+                  </button>
+                </div>
 
-            <button class="train-exit" type="button" (click)="exit()">
-              {{ 'training.backToOpenings' | translate }}
-            </button>
+                <button
+                  class="btn hint"
+                  type="button"
+                  (click)="hint()"
+                  [disabled]="busy || !itemId"
+                  [attr.aria-label]="'training.showHint' | translate"
+                  [title]="'training.showHint' | translate"
+                >
+                  💡
+                </button>
+
+                <form class="train-type-move" (ngSubmit)="onTextSubmit()">
+                  <input
+                    class="text-input"
+                    name="moveInput"
+                    [(ngModel)]="moveInput"
+                    [placeholder]="'training.movePlaceholder' | translate"
+                    [disabled]="isSubmitting"
+                  />
+                  <button
+                    class="btn primary"
+                    type="submit"
+                    [disabled]="busy || !moveInput.trim() || !atLatest"
+                    [title]="!atLatest ? ('training.jumpToLatest' | translate) : undefined"
+                  >
+                    {{ 'training.play' | translate }}
+                  </button>
+                </form>
+              </div>
+            }
+
+            @if (!isSessionCompleted) {
+              <button class="train-exit" type="button" (click)="exit()">
+                {{ 'training.backToOpenings' | translate }}
+              </button>
+            }
           </aside>
         </div>
       </div>
@@ -162,6 +181,7 @@ export class TrainingComponent implements OnInit, OnDestroy {
   isSubmitting = false;
   isAdvancing = false;
   isSessionCompleted = false;
+  isRestarting = false;
   hintLevel = -1;
   wrongAttempts = 0;
   markers: BoardMarker[] = [];
@@ -174,6 +194,7 @@ export class TrainingComponent implements OnInit, OnDestroy {
   private blinkTimer: ReturnType<typeof setTimeout> | null = null;
   private autoplayedItemId: string | null = null;
   private advanceTimer: ReturnType<typeof setTimeout> | null = null;
+  private paramSub?: Subscription;
 
   readonly onMove = (from: string, to: string): boolean => this.processMove(from, to);
   readonly onMoveStart = (square: string): boolean => this.canPickUp(square);
@@ -244,11 +265,20 @@ export class TrainingComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.sessionId = this.route.snapshot.paramMap.get('id') ?? '';
-    if (this.sessionId) this.loadNext();
+    // Subscribe (not snapshot) because trainAgain() navigates from one
+    // /training/:id to another — same route config, so Angular reuses this
+    // component instance rather than remounting it.
+    this.paramSub = this.route.paramMap.subscribe((params) => {
+      const id = params.get('id') ?? '';
+      if (!id) return;
+      this.sessionId = id;
+      this.isRestarting = false;
+      this.loadNext();
+    });
   }
 
   ngOnDestroy(): void {
+    this.paramSub?.unsubscribe();
     if (this.advanceTimer) clearTimeout(this.advanceTimer);
     if (this.blinkTimer) clearTimeout(this.blinkTimer);
   }
@@ -448,6 +478,18 @@ export class TrainingComponent implements OnInit, OnDestroy {
 
   exit(): void {
     this.router.navigate(['/dashboard']);
+  }
+
+  trainAgain(): void {
+    this.isRestarting = true;
+    this.training.start(this.eco, this.openingName, this.playerColor).subscribe({
+      next: (response) => {
+        this.router.navigate(['/training', response.id]);
+      },
+      error: () => {
+        this.isRestarting = false;
+      },
+    });
   }
 
   flipBoard(): void {

@@ -6,6 +6,7 @@ import {
 } from '@angular/common/http/testing';
 import { ActivatedRoute, convertToParamMap, Router } from '@angular/router';
 import { provideRouter } from '@angular/router';
+import { of } from 'rxjs';
 import { TrainingComponent } from './training.component';
 
 const WHITE_TO_MOVE_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
@@ -24,7 +25,7 @@ describe('TrainingComponent', () => {
         provideRouter([]),
         {
           provide: ActivatedRoute,
-          useValue: { snapshot: { paramMap: convertToParamMap(sessionId ? { id: sessionId } : {}) } },
+          useValue: { paramMap: of(convertToParamMap(sessionId ? { id: sessionId } : {})) },
         },
       ],
     });
@@ -107,6 +108,35 @@ describe('TrainingComponent', () => {
 
     expect(cmp.isSessionCompleted).toBe(true);
     expect(cmp.isAdvancing).toBe(false);
+  });
+
+  it('restarts a new session for the same opening via trainAgain', () => {
+    configure();
+    const cmp = create();
+    const navigateSpy = spyOn(router, 'navigate');
+    cmp.ngOnInit();
+    httpMock.expectOne('/api/training-sessions/sess1/next').flush({
+      fen: WHITE_TO_MOVE_FEN,
+      itemId: 'item1',
+      openingName: 'Italian Game',
+      openingEco: 'C50',
+      correctMoveUci: 'e2e4',
+    });
+
+    cmp.processMove('e2', 'e4');
+    httpMock
+      .expectOne('/api/training-sessions/sess1/responses')
+      .flush({ correct: true, sessionCompleted: true });
+    expect(cmp.isSessionCompleted).toBe(true);
+
+    cmp.trainAgain();
+    expect(cmp.isRestarting).toBe(true);
+
+    httpMock
+      .expectOne('/api/training-sessions')
+      .flush({ id: 'sess2' });
+
+    expect(navigateSpy).toHaveBeenCalledWith(['/training', 'sess2']);
   });
 
   it('reverts to the pre-move fen and reports the reason on an incorrect move', () => {

@@ -1,5 +1,7 @@
-import { Component, ChangeDetectionStrategy, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component, ChangeDetectionStrategy, ElementRef, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 import {
   START_FEN,
   applyMove,
@@ -148,6 +150,12 @@ interface HistoryEntry {
                 </span>
               </div>
 
+              @if (practicingThemeLabel) {
+                <span class="stat-pill is-active">{{
+                  'puzzles.practicing' | translate: { theme: practicingThemeLabel }
+                }}</span>
+              }
+
               @if (themeList.length > 0) {
                 <div class="puzzles-themes">
                   @for (themeLabel of themeList; track themeLabel) {
@@ -163,11 +171,17 @@ interface HistoryEntry {
               </button>
             }
 
-            <a routerLink="/puzzles/themes" class="puzzles-back-link">{{
-              'puzzles.browseThemes' | translate
-            }}</a>
+            @if (theme) {
+              <a routerLink="/puzzles" class="puzzles-back-link">{{
+                'puzzles.backToDuePuzzles' | translate
+              }}</a>
+            } @else {
+              <a routerLink="/puzzles/themes" class="puzzles-back-link">{{
+                'puzzles.browseThemes' | translate
+              }}</a>
+            }
 
-            @if (noPuzzlesDue) {
+            @if (noPuzzlesDue && !theme) {
               <a routerLink="/dashboard" class="puzzles-back-link">{{
                 'puzzles.backToDashboard' | translate
               }}</a>
@@ -178,13 +192,17 @@ interface HistoryEntry {
     </main>
   `,
 })
-export class PuzzlesComponent implements OnInit {
+export class PuzzlesComponent implements OnInit, OnDestroy {
+  private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly puzzles = inject(PuzzlesService);
   private readonly sound = inject(SoundService);
   private readonly translate = inject(TranslateService);
 
   @ViewChild('nextBtn') nextBtnRef?: ElementRef<HTMLButtonElement>;
+
+  private queryParamSub?: Subscription;
+  theme: string | null = null;
 
   history: HistoryEntry[] = [];
   historyIndex = -1;
@@ -267,6 +285,10 @@ export class PuzzlesComponent implements OnInit {
     return (this.displayThemes ?? '').split(' ').filter(Boolean).map(formatThemeLabel);
   }
 
+  get practicingThemeLabel(): string | null {
+    return this.theme ? formatThemeLabel(this.theme) : null;
+  }
+
   private get feedbackKind(): string {
     return classifyFeedback(this.feedback).kind;
   }
@@ -295,7 +317,22 @@ export class PuzzlesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadNext();
+    // distinctUntilChanged so navigating within /puzzles (route reused, e.g.
+    // the "back to due puzzles" link) only reloads when the theme actually
+    // changes, mirroring react's effect keyed on searchParams.get("theme").
+    this.queryParamSub = this.route.queryParamMap
+      .pipe(
+        map((params) => params.get('theme')),
+        distinctUntilChanged(),
+      )
+      .subscribe((theme) => {
+        this.theme = theme;
+        this.loadNext();
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.queryParamSub?.unsubscribe();
   }
 
   flipBoard(): void {
@@ -337,7 +374,7 @@ export class PuzzlesComponent implements OnInit {
     this.usedHint = false;
     this.wrongAttempts = 0;
     this.frontierExhausted = false;
-    this.puzzles.next().subscribe({
+    this.puzzles.next(this.theme).subscribe({
       next: (data: NextPuzzle) => {
         this.fen = data.fen;
         this.correctMoveUci = data.correctMoveUci;
@@ -369,7 +406,9 @@ export class PuzzlesComponent implements OnInit {
           this.lastMoveUci = '';
           this.noPuzzlesDue = true;
           this.frontierExhausted = true;
-          this.feedback = this.translate.t('puzzles.noPuzzlesDue');
+          this.feedback = this.translate.t(
+            this.theme ? 'puzzles.noPuzzlesForTheme' : 'puzzles.noPuzzlesDue',
+          );
           this.refreshOverlay();
           return;
         }

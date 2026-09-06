@@ -4,7 +4,8 @@ import {
   HttpTestingController,
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
-import { provideRouter, Router } from '@angular/router';
+import { ActivatedRoute, convertToParamMap, ParamMap, provideRouter, Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { PuzzlesComponent } from './puzzles.component';
 import { TranslateService } from '../../core/i18n/translate.service';
 import { stubTranslate } from '../../core/i18n/testing';
@@ -12,16 +13,24 @@ import { stubTranslate } from '../../core/i18n/testing';
 describe('PuzzlesComponent', () => {
   let httpMock: HttpTestingController;
   let router: Router;
+  let queryParamMap$: BehaviorSubject<ParamMap>;
 
   beforeEach(async () => {
+    queryParamMap$ = new BehaviorSubject<ParamMap>(convertToParamMap({}));
     await TestBed.configureTestingModule({
       imports: [PuzzlesComponent],
-      providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([])],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        provideRouter([]),
+        { provide: ActivatedRoute, useValue: { queryParamMap: queryParamMap$ } },
+      ],
     }).compileComponents();
     httpMock = TestBed.inject(HttpTestingController);
     router = TestBed.inject(Router);
     stubTranslate(TestBed.inject(TranslateService), {
       'puzzles.noPuzzlesDue': 'No puzzles due right now — check back later.',
+      'puzzles.noPuzzlesForTheme': 'No puzzles found for this theme.',
       'puzzles.loadFailed': 'Failed to load a puzzle. Check your connection.',
       'puzzles.correct': '✅ Correct!',
       'puzzles.incorrectFallback': 'Not quite — try again.',
@@ -319,5 +328,40 @@ describe('PuzzlesComponent', () => {
     cmp.goToNext();
     expect(cmp.viewingPast).toBe(false);
     expect(cmp.puzzleId).toBe('p2');
+  });
+
+  it('requests puzzles scoped to the ?theme= query param and exposes a practicing-theme label', () => {
+    queryParamMap$.next(convertToParamMap({ theme: 'fork' }));
+    const cmp = create();
+    cmp.ngOnInit();
+
+    expect(cmp.theme).toBe('fork');
+    expect(cmp.practicingThemeLabel).toBeTruthy();
+
+    const req = httpMock.expectOne((r) => r.url === '/api/puzzles/next');
+    expect(req.request.params.get('theme')).toBe('fork');
+    req.flush({
+      puzzleId: 'p1',
+      fen: 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1',
+      correctMoveUci: 'e7e5',
+      rating: 1200,
+      lastMoveUci: 'e2e4',
+      moveIndex: 0,
+      solverMovesTotal: 1,
+    });
+
+    expect(cmp.puzzleId).toBe('p1');
+  });
+
+  it('shows the theme-specific empty message on 404 when scoped to a theme', () => {
+    queryParamMap$.next(convertToParamMap({ theme: 'fork' }));
+    const cmp = create();
+    cmp.ngOnInit();
+
+    httpMock
+      .expectOne((r) => r.url === '/api/puzzles/next')
+      .flush('none', { status: 404, statusText: 'Not Found' });
+
+    expect(cmp.feedback).toContain('No puzzles found for this theme');
   });
 });

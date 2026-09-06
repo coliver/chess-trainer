@@ -82,10 +82,9 @@ single in-flight refresh Observable (e.g. `shareReplay(1)` reset on completion).
 - **PuzzleThemes** — **Status: landed 2026-08-27.** Ported to
   `pages/puzzle-themes/puzzle-themes.component.ts` + `lib/puzzle-themes.ts` (`THEME_GROUPS`,
   `MATE_FENS`, `formatThemeLabel`, `themeIcon`), route at `/puzzles/themes` (guarded), fetches
-  `/api/puzzles/themes` counts, links to `/puzzles?theme=X`. Note: that `?theme=` query param
-  isn't consumed by `PuzzlesComponent` yet (no theme-filtered fetch, no "practicing X" banner,
-  no theme chips) — React's `Puzzles.tsx` has this wired up but it's a separate, still-open
-  piece of parity work, not tracked as its own item here yet.
+  `/api/puzzles/themes` counts, links to `/puzzles?theme=X`. **Status: landed 2026-09-06** — see
+  §10's Puzzles entry: `PuzzlesComponent` now consumes `?theme=` (theme-filtered fetch,
+  "Practicing: X" chip, theme-specific empty state, back-to-due-puzzles link).
 
 `frontend/angular/src/app/app.routes.ts` only defines `login`, `register`, `dashboard`,
 `training/:id`, `puzzles` — no `/settings`, `/verify-email`, `/puzzles/themes` routes exist.
@@ -210,17 +209,28 @@ markup diverges from React's current structure:
   rendered every group unpaginated) — plus the mobile training/puzzles `stat-tabs` toggle. Verified
   with unit tests (`dashboard.component.spec.ts`) and a throwaway Playwright screenshot against the
   dev server.
-- **Training**: React shows a distinct "session completed" screen (Train again / Choose another
-  opening buttons) — Angular has no such state; the regular controls just stay visible.
+- **Training**: **Status: landed 2026-09-06.** Ported React's "session completed" screen
+  (Train again / Choose another opening buttons), replacing the prev/next/hint/move-form
+  controls when `isSessionCompleted`. `trainAgain()` posts `/training-sessions` (via the
+  existing `TrainingService.start()`) and navigates to the new session's `/training/:id` —
+  which required switching `ngOnInit` from a one-time `route.snapshot.paramMap` read to a
+  `route.paramMap` subscription, since Angular reuses the component instance across two
+  `/training/:id` routes with different ids (same route config).
 - **Puzzles**: **Status: landed 2026-09-05.** Ported to the same `train-rail` layout as Training
   (`rail-head`/`rail-eyebrow`, `eco-chip`s for rating and move-progress, `stat-pill`s for
   solved/streak, `puzzles-theme-chip`s for the puzzle's own themes, status banner via
   `classifyFeedback` from chess-core) — replacing the older flat `puzzles-header`/`puzzles-meta`
   layout. The "Next puzzle" focus management already existed (`nextBtnRef`). Verified visually via
-  a throwaway Playwright screenshot against the dev server. Note: the `?theme=` query-param
-  filtering (linking from PuzzleThemes into a themed session, "Practicing: X" chip) is still not
-  consumed by `PuzzlesComponent` — that remains open, tracked separately, not part of this layout
-  port.
+  a throwaway Playwright screenshot against the dev server.
+
+  **Status: `?theme=` query-param filtering landed 2026-09-06.** `PuzzlesComponent` now subscribes
+  to `route.queryParamMap` (via `distinctUntilChanged` on the `theme` value, since Angular reuses
+  the component when navigating within `/puzzles`) instead of a single snapshot read, passes
+  `theme` through to `PuzzlesService.next()` as an HTTP query param, shows a "Practicing: X"
+  stat-pill (`practicingThemeLabel`), branches the empty-state message
+  (`puzzles.noPuzzlesForTheme` vs `puzzles.noPuzzlesDue`), and swaps the rail's bottom link between
+  "Back to due puzzles" (`/puzzles`, themed) and "Browse themes" (`/puzzles/themes`, unthemed) —
+  matching React's `Puzzles.tsx`.
 
 None of this was fixed in the i18n pass — these are real feature/redesign gaps, not translation
 gaps, and each is sized more like its own item than a quick follow-on. Not started.
