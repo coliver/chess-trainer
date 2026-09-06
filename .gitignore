@@ -76,5 +76,9 @@ frontend/react/coverage
 # Angular
 .angular/
 
+# Playwright manual capture artifacts (regenerate locally, not committed)
+frontend/react/settings-preview-*.png
+frontend/react/e2e/videos/
+
 # Git worktrees (scratch, used for isolated plan execution)
 .worktrees/

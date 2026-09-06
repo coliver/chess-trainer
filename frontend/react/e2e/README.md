@@ -2,7 +2,10 @@
 
 Playwright specs live in this directory. This doc maps the app's key user
 flows (from `src/App.tsx` routes) to existing coverage and flags gaps.
-Recorded videos for the interactive gap-flow tests live in `e2e/videos/`.
+Video filenames named below are what `playwright.config.ts`'s
+`video: "retain-on-failure"` would produce for that spec if it failed;
+they aren't committed to the repo (gitignored), so regenerate them locally
+by running the suite if you need to look at one.
 
 ## Flow map
 
