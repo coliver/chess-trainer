@@ -6,6 +6,19 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ### ✨ Added
 
+#### 🚀 Angular: Deployed to Production
+
+> Angular now ships to prod as a static build at `/angular/`, mirroring how React is served
+> (Rails runs as a live container instead, since it's server-rendered). `docker-compose.prod.yml`
+> mounts `frontend/angular/dist/angular` into nginx alongside React's `dist`; `nginx/conf-prod/default.conf`
+> gained a `location /angular/` block with its own `try_files` SPA fallback (Angular's `baseHref`
+> was already set to `/angular/`, so no asset-path rewriting was needed). `deploy.yml` now builds
+> the Angular bundle the same way it builds React's, via a throwaway `node:22` container, and a
+> new `.github/workflows/angular.yml` (lint + unit tests + production build) gates the deploy job
+> alongside the existing core/react/tests/rails checks. This was unblocked by confirming a fresh
+> `npm ci && npm run build` succeeds cleanly from bare `main` — the previously-tracked "ng build
+> broken" issue no longer reproduces.
+
 #### 🏁 Angular: Training Session-Completed Screen and Puzzle Theme Filtering
 
 > Closes the last two open items in `frontend/angular/PARITY_GAPS.md`. Training now shows React's

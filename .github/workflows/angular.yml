@@ -1,0 +1,43 @@
+name: angular
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_call: {}
+
+jobs:
+  angular:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend/angular
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/angular/package-lock.json
+
+      # Angular depends on @knight-school/chess-core via file:../packages/chess-core,
+      # so build the package first (its own isolated install + tsup build).
+      - name: Build chess-core package
+        working-directory: frontend/packages/chess-core
+        run: npm ci && npm run build
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      # karma-chrome-launcher auto-detects the runner's system Chrome; see
+      # karma.conf.js for why CI needs no extra browser setup.
+      - name: Unit tests
+        run: npm run test:ci
+
+      - name: Production build
+        run: npm run build

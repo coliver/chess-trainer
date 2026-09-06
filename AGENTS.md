@@ -2,8 +2,8 @@
 
 Knight School: a chess openings + puzzle trainer. FastAPI + PostgreSQL backend, three
 frontends behind nginx — React (`/`, primary/production), Angular (`/angular/`, secondary,
-being brought to parity), Rails+Hotwire (`/rails/`, secondary, core loop only) — all
-same-origin against the same `/api`, so the backend is frontend-agnostic.
+static build, at parity with React), Rails+Hotwire (`/rails/`, secondary, core loop only) —
+all same-origin against the same `/api`, so the backend is frontend-agnostic.
 
 ## Run everything in Docker — never on the host
 - Never `pip install`/`npm install` into a local venv or `node_modules`, and never hand-set

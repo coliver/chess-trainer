@@ -97,9 +97,7 @@ matching React's `AppHeader()`. Added `OverflowMenuComponent` (focus trap, Escap
 — rendered in place rather than portalled to `<body>`, since `.overflow-menu` is already
 `position: fixed`) and a `GameStatusService` (plain signal-based service standing in for
 React's `GameHeaderContext`). The old single `header.component.ts` was deleted, not kept as
-dead code. Note: the settings link/gear navigates to `/settings`, which doesn't exist yet
-(§3 above) — it redirects to the dashboard via the wildcard route until that lands, same as
-React before its Settings page shipped.
+dead code. The settings link/gear navigates to `/settings`, which landed the same day (§3).
 
 React replaced its single `Header.tsx` (now dead code) with two headers in `App.tsx`:
 - `HomeHeader.tsx` — hamburger menu (`OverflowMenu.tsx`) for dashboard/puzzles, tab nav.
@@ -232,17 +230,17 @@ markup diverges from React's current structure:
   "Back to due puzzles" (`/puzzles`, themed) and "Browse themes" (`/puzzles/themes`, unthemed) —
   matching React's `Puzzles.tsx`.
 
-None of this was fixed in the i18n pass — these are real feature/redesign gaps, not translation
-gaps, and each is sized more like its own item than a quick follow-on. Not started.
+None of this was fixed in the i18n pass — these were real feature/redesign gaps, not translation
+gaps. All three (Dashboard, Training, Puzzles) are now landed as noted above.
 
 ## 6. Shared packages — consumed correctly, not stale
 
 Both `react/package.json` and `angular/package.json` reference `@knight-school/chess-core` via
 the same `file:../packages/chess-core` link. `angular/src/styles.css` imports the same
-`packages/shared-styles/*.css` files React does, except it's missing `login.css` and
-`settings.css` (consistent with those pages not existing yet). `packages/i18n-locales/` and
-`packages/shared-assets/` exist but Angular consumes neither — i18n-locales is §1;
-shared-assets drift wasn't checked in detail.
+`packages/shared-styles/*.css` files React does; `login.css`/`settings.css` landed with those
+pages in §3. `packages/i18n-locales/` is consumed per §1. `packages/shared-assets/sounds/` is
+synced via `scripts/sync-shared-assets.mjs` (landed with §5's sound port), the same pattern
+React uses.
 
 ## 7. Already done — do not re-port
 
@@ -288,3 +286,6 @@ an icon library), plus an `isSettingsActive()` signal alongside the existing
 6. VerifyEmail page + resend-verification (§3).
 7. Remaining small components: sound, snow, win-celebration, ProgressStat, RandomQuote,
    FenTurnBadge, AuthCard (§5).
+
+This list predates §9-§12, which were found and closed afterward. All tracked gaps (§1-§12)
+are now landed as of 2026-09-06.

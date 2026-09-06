@@ -3,6 +3,7 @@
 [![python](https://github.com/coliver/chess-trainer/actions/workflows/tests.yml/badge.svg)](https://github.com/coliver/chess-trainer/actions/workflows/tests.yml)
 [![react](https://github.com/coliver/chess-trainer/actions/workflows/react.yml/badge.svg)](https://github.com/coliver/chess-trainer/actions/workflows/react.yml)
 [![rails](https://github.com/coliver/chess-trainer/actions/workflows/rails.yml/badge.svg)](https://github.com/coliver/chess-trainer/actions/workflows/rails.yml)
+[![angular](https://github.com/coliver/chess-trainer/actions/workflows/angular.yml/badge.svg)](https://github.com/coliver/chess-trainer/actions/workflows/angular.yml)
 [![accessibility](https://img.shields.io/github/actions/workflow/status/coliver/chess-trainer/react.yml?branch=main&label=accessibility%20%28jsx-a11y%20%2B%20axe%29)](#-accessibility)
 
 A web-based chess openings trainer designed to drill specific lines and track performance metrics.
@@ -148,19 +149,19 @@ What each client implements today, at a glance. ✅ shipped · 🟡 partial · �
 |---|:---:|:---:|:---:|
 | Login / Register | ✅ | ✅ | ✅ |
 | Email verification | ✅ | ✅ | ✅ |
-| Dashboard / opening browser | ✅ | 🟡 | ✅ |
-| Training drills | ✅ | 🟡 | ✅ |
+| Dashboard / opening browser | ✅ | ✅ | ✅ |
+| Training drills | ✅ | ✅ | ✅ |
 | Black-side play | ✅ | ✅ | ✅ |
 | Autoplay | ✅ | ✅ | ✅ |
-| Puzzles | ✅ | 🟡 | ✅ |
+| Puzzles | ✅ | ✅ | ✅ |
 | Puzzle themes | ✅ | ✅ | ✅ |
 | Settings (theme/board/pieces) | ✅ | ✅ | ✅ |
-| i18n (30+ locales) | ✅ | ✅ | ⬜ |
+| i18n (30+ locales) | ✅ | ✅ | ✅ |
 | Sound feedback | ✅ | ✅ | ✅ |
 | PWA / offline shell | ⬜ | ⬜ | ⬜ |
 
 **React** — production, actively deployed; the reference implementation.
-**Angular** — actively being brought back to parity (no longer frozen); infrastructure and all pages/routes now exist, but Dashboard/Training/Puzzles still lag React's current layout in places — see [`frontend/angular/PARITY_GAPS.md`](./frontend/angular/PARITY_GAPS.md) for the itemized list.
+**Angular** — deployed alongside React as a static production build at `/angular/`; at full feature parity — see [`frontend/angular/PARITY_GAPS.md`](./frontend/angular/PARITY_GAPS.md) for the audit history.
 **Rails** — dev-only experiment, not yet publicized; closest to React in coverage, with unwired PWA scaffolding unique to it.
 
 ### 🧩 Shared chess logic (`frontend/packages/chess-core`)

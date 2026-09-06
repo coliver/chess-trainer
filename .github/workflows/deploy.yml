@@ -13,9 +13,11 @@ jobs:
     uses: ./.github/workflows/tests.yml
   rails:
     uses: ./.github/workflows/rails.yml
+  angular:
+    uses: ./.github/workflows/angular.yml
 
   deploy:
-    needs: [core, react, tests, rails]
+    needs: [core, react, tests, rails, angular]
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to knightschool.click
@@ -55,6 +57,8 @@ jobs:
               -e VITE_SENTRY_DSN="${VITE_SENTRY_DSN:-}" \
               -e VITE_SENTRY_ENVIRONMENT=production \
               node:20 sh -c 'npm ci && npm run build'
+            docker run --rm -v "$(pwd)":/work -w /work/frontend/angular node:22 \
+              sh -c 'npm ci && npm run build'
 
             # --renew-anon-volumes: rails/angular mount an anonymous volume
             # over /app/node_modules to keep container deps isolated from
