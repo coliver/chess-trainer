@@ -1,158 +1,80 @@
 # AGENTS.md
-# Chess Openings Trainer (FastAPI + PostgreSQL + Docker + nginx)
 
-## Goal
-Help implement features in this repository following `backend/app/docs/ARCHITECTURE.md`, keeping changes minimal and production-friendly.
+Knight School: a chess openings + puzzle trainer. FastAPI + PostgreSQL backend, three
+frontends behind nginx — React (`/`, primary/production), Angular (`/angular/`, secondary,
+being brought to parity), Rails+Hotwire (`/rails/`, secondary, core loop only) — all
+same-origin against the same `/api`, so the backend is frontend-agnostic.
 
-## Non-negotiables
-- Keep the existing working scaffold working:
-  - FastAPI app must still start
-  - `/ping` must still work
-  - nginx reverse proxy + self-signed TLS should not be changed unless the new feature requires it
-- Make minimal, correct, testable changes.
-- No secrets/credentials added to the repo.
-- Dockerize end-to-end from the start (no dev-only non-container workflows).
-- New user-facing React UI text must go through i18n, not a hardcoded string — add the key to `frontend/react/src/i18n/locales/en-US.json` (the source of truth), then run `npm run i18n:sync` to propagate it to the other 30+ locales. See `frontend/react/README.md`'s Internationalization section for details.
+## Run everything in Docker — never on the host
+- Never `pip install`/`npm install` into a local venv or `node_modules`, and never hand-set
+  env vars to fake the DB/JWT config — the containers are the real, sufficient environment.
+- Compose services: `db`, `api`, `react`, `angular`, `rails`, `nginx`, `erd` (SchemaCrawler,
+  regenerates the DB diagram into `backend/app/docs/`). Bring the stack up with
+  `docker compose up -d`; it mounts the repo live, so host edits are picked up without a
+  rebuild.
+- Backend checks: `docker compose exec api pytest`, `ruff check .`, `black --check .`,
+  Alembic commands, one-off scripts.
+- Frontend checks: `docker compose exec react npm run lint|test|build|test:e2e` — same
+  pattern for `angular` and `rails` using their own `package.json` scripts.
+- If an npm/ng command suddenly fails with a missing-package error after a dependency
+  change, the container's anonymous `node_modules` volume is stale:
+  `docker compose up -d --force-recreate --renew-anon-volumes <service>`.
 
-## Developer communication rule
-When working with a developer, keep responses as short as possible and explain one thing at a time.
+## Repo map
+- `backend/app/` — FastAPI app. `routers/` (one file per domain: auth, training, puzzles,
+  progress, openings, users) is thin routing + request/response models; `modules/<domain>/`
+  (`models.py`, `service.py`, plus `training/chess_rules.py` and `progress/srs.py` +
+  `streak.py`) holds the actual logic; `migrations/versions/` is Alembic, schema changes
+  only. Full walkthrough: `backend/app/docs/ARCHITECTURE.md`; setup: `backend/README.md`.
+- `tests/` (repo root) — the pytest suite; extend existing files rather than inventing a new
+  layout.
+- `frontend/react/` — primary, production frontend (Vite + React). Its README covers
+  page/hook structure and API contracts in detail.
+- `frontend/angular/` — secondary frontend being brought to parity with React;
+  `PARITY_GAPS.md` is the live punch list, ordered by what to port next.
+- `frontend/rails/` — secondary Rails+Hotwire frontend covering the core loop;
+  `README.md` has the architecture notes and a known-gaps list.
+- `frontend/packages/` — shared code consumed by more than one frontend: `chess-core`
+  (framework-neutral chess logic — consumed via built `dist/`, so `npm run build` there
+  after editing `src/` or frontends silently run stale logic), `i18n-locales` (translation
+  JSON, one file per locale, the single shared source of truth), `shared-styles`.
+- `nginx/` — reverse proxy config; the one place that stitches the three frontends and
+  `/api` together at the same origin.
+- Root docs: `README.md` (project overview, the "Swappable frontends" convention for adding
+  a new client, and a per-client feature matrix), `CHANGELOG.md` (dated log), `ROADMAP.md`
+  (planned work, kept short).
 
-## Tech & libraries
-- Backend: Python + FastAPI
-- Frontend: TypeScript + React
-- DB: PostgreSQL
+Adding or changing how a frontend is served (new client, new nginx route, new CI workflow)
+follows the convention in root `README.md`'s "Swappable frontends" section — don't duplicate
+it here.
 
-Data-layer:
-- Migrations with Alembic in `backend/app/migrations/`
-- ORM + migrations consistent with `backend/app/docs/architecture.md` (SQLAlchemy + Alembic)
+## The move-validation contract (must not change silently)
+`backend/app/modules/training/chess_rules.py:validate_and_apply()` is the single source of
+truth, and `tests/test_routers_training.py` / `tests/test_training_service.py` assert these
+exact values:
+- UCI doesn't parse → `400`, `correct=false`, `reason="invalid move_uci"`, `fen_after=null`
+- UCI parses but is illegal from `fen` → `200`, `correct=false`, `reason="illegal move"`,
+  `fen_after=null`
+- UCI is legal but not the expected move → `200`, `correct=false`, `reason="wrong move"`,
+  deterministic `fen_after` from applying the submitted move
 
-Chess rules:
-- Use `python-chess` for legality checks and applying moves to compute resulting positions/FEN.
-- Keep runtime logic inside trainer/opening modules; keep `app.py` thin.
+Changing any of this is a breaking change to every frontend's move-submission handling —
+treat it as deliberate, not incidental.
 
-## Status
+## i18n
+Source of truth is `frontend/packages/i18n-locales/locales/en-US.json`. Add or rename a key
+there, then run `docker compose exec react npm run i18n:sync` (the sync script lives in the
+react container regardless of which frontend the string is for) to propagate the change to
+the other 30+ locales. Details: `frontend/react/README.md`'s Internationalization section.
 
-Past the MVP stage — React frontend and FastAPI backend, with auth, opening training,
-puzzles, spaced-repetition progress tracking, i18n (30+ locales), and sound feedback all
-shipped. The `frontend/angular/` directory is an actively-maintained secondary frontend
-being brought back up to feature parity with React (i18n infrastructure landed; see
-`frontend/angular/PARITY_GAPS.md` for the remaining gaps and order). It's built and served
-via `docker-compose.yml` (`angular` service) and nginx under `/angular/`, same as `rails/`.
-All frontend code (`react/`, `angular/`, `rails/`, and the shared `packages/`) lives under
-`frontend/`. See [`CHANGELOG.md`](./CHANGELOG.md) for what's landed and
-[`ROADMAP.md`](./ROADMAP.md) for what's next.
+## Keep docs in sync
+When you land a notable change, add a `CHANGELOG.md` entry and update whichever doc actually
+describes the thing you changed (a frontend's `README.md`, `PARITY_GAPS.md`,
+`backend/app/docs/ARCHITECTURE.md`) — don't wait to be asked.
 
-### Auth (FastAPI paths; nginx exposes them under `/api`)
-- `POST /auth/register` — creates an account and emails a verification link
-- `POST /auth/login` — rejects unverified accounts with 403 "Email not verified"
-- `POST /auth/refresh` — exchanges a refresh token for a new access token
-- `GET /auth/me` — returns the authenticated user's `id` and `username`
-- `GET /auth/verify-email` — confirms a verification token, idempotent
-- `POST /auth/resend-verification` — resends the verification email (email or username)
-- Enforcement is gated by `EMAIL_VERIFICATION_REQUIRED` (env var, default off). When off, `register()` auto-verifies and skips sending the email, and `login()` never checks `email_verified` — this is the current prod state while SES is still in the sandbox / awaiting production access. `verify-email` and `resend-verification` stay live either way.
-
-### Training (position prompt + answer validation; FastAPI paths; nginx exposes them under `/api`)
-- `POST /training-sessions` — start a new session (optionally for a specific opening, or as Black)
-- `POST /training-sessions/from-due` — start a session from spaced-repetition due items
-- `GET /training-sessions/{id}/next`
-- `POST /training-sessions/{id}/responses`
-- `POST /training-sessions/{id}/items` — bulk add items to an already-initialized session
-
-### User preferences (FastAPI paths under `/api`)
-- `GET /users/me/preferences` — returns `language`, `theme`, `board_theme`, `piece_set`, `show_coordinates`, `board_animations`, `board_orientation_mode`
-- `PATCH /users/me/preferences` — partial update; each field validated against an allow-list, `422` on an unrecognized value
-
-### Puzzles (Lichess puzzle DB; FastAPI paths under `/api`)
-- `GET /puzzles/next`
-- `POST /puzzles/{puzzle_id}/attempts`
-- `GET /puzzles/summary`
-
-### Progress (SM-2 spaced repetition, streaks, mastery; FastAPI paths under `/api`)
-- `GET /progress/summary`
-- `GET /progress/due`
-- `GET /progress/weak-spots`
-
-### Openings
-- `GET /openings` — list all openings that have parsed UCI moves (no auth required)
-
-### Validation behavior (contract — must not change)
-Validation is performed by `backend/app/modules/training/chess_rules.py:validate_and_apply()`:
-
-- invalid UCI string (cannot parse):
-  - `http_status=400`
-  - `correct=false`
-  - `reason="invalid move_uci"`
-  - `fen_after=null`
-  - `error_message` must explain the UCI parsing requirement
-- illegal move (UCI parses but not legal from `fen`):
-  - `http_status=200`
-  - `correct=false`
-  - `reason="illegal move"`
-  - `fen_after=null`
-- wrong legal move (UCI is legal but not equal to expected):
-  - `http_status=200`
-  - `correct=false`
-  - `reason="wrong move"`
-  - includes deterministic `fen_after` (computed by applying the submitted legal move)
-
-## Current code layout (where logic lives)
-- `backend/app/`
-  - `app.py`: FastAPI wiring / startup concerns (keep thin)
-  - `routers/`
-    - `auth.py`, `training.py`, `puzzles.py`, `progress.py`, `openings.py`, `users.py`: routing + request/response models per domain
-
-- `backend/app/modules/`
-  - `openings/`
-    - `models.py`: opening dataset model(s)
-    - `service.py`: opening dataset lookup / prompt mapping
-  - `training/`
-    - `models.py`: `TrainingSession`, `TrainingItem`, `TrainingResponse`
-    - `service.py`: session creation + "next item" selection + response submission
-    - `chess_rules.py`: legality checks and `fen_after` computation
-  - `puzzles/`
-    - `models.py`, `service.py`: Lichess puzzle DB training
-  - `progress/`
-    - `models.py`, `service.py`: position progress tracking
-    - `srs.py`: SM-2 spaced repetition scheduling
-    - `streak.py`: streak calculation
-  - `auth/`, `users/`: account/session models and auth logic backing the `auth.py` router
-  - `email/`
-    - `sender.py`: SMTP verification email sending
-  - `shared/`
-    - `db.py`: DB session/deps/helpers
-
-- `backend/app/migrations/versions/`
-  - only schema migrations
-
-### Dataset → prompt mapping (openings contract)
-- `backend/app/modules/openings/service.py:get_prompt_and_move(eco: str, move_index: int, db)`
-  is the canonical mapping interface:
-  - loads a single `Opening` by `Opening.eco`
-  - splits `opening.uci_moves` into `moves`
-  - builds a `python-chess` board from `opening.epd`
-  - applies moves `[0..move_index-1]`
-  - returns:
-    - `fen` for the prompt position
-    - `correct_move_uci = moves[move_index]` (exactly one expected next-move UCI)
-
-### Validation contract
-- `backend/app/modules/training/chess_rules.py:validate_and_apply()` remains the single source of truth for:
-  - parsing invalid UCI => HTTP 400 + `reason="invalid move_uci"`
-  - illegal moves => `reason="illegal move"` and `fen_after=null`
-  - wrong legal moves => `reason="wrong move"` and deterministic `fen_after`
-
-## Tests (required)
-- Use `pytest`.
-- Extend existing unit tests rather than creating new layouts.
-- Add/adjust tests when changing validation, selection, or response mapping.
-
-Key existing tests to update/extend as needed:
-- `tests/test_openings_service.py`
-- `tests/test_training_service.py`
-- `tests/test_routers_training.py`
-- any tests that assert exact `fen_after` or `reason` values
-
-## Output constraints
-- Only text/code changes.
-- No hand-wavy steps.
-- Ensure the server still runs and existing endpoints (`/`, `/ping`, and current training/auth routes) still behave.
+## Working style
+- No secrets or credentials committed to the repo.
+- Minimal, surgical, testable changes — extend existing tests rather than restructuring.
+- Don't break the running app: FastAPI boots, `/ping` responds, nginx + TLS proxy stays
+  untouched unless the task actually requires changing it.
+- Keep responses short and explain one thing at a time.
