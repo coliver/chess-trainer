@@ -2,6 +2,24 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ---
 
+## September 6, 2026
+
+### ♻️ Refactor
+
+#### 🧹 Repo Housekeeping: Untrack Manual Test Artifacts, Fix Doc Casing
+
+> `frontend/react/settings-preview-*.png` and `frontend/react/e2e/videos/*.webm` were one-off
+> screenshots/recordings from manual test runs (not build outputs, not asserted against in any
+> test) that had been committed straight into the source tree — removed from git, gitignored, and
+> `e2e/README.md`'s per-flow video callouts reworded to make clear those filenames are what
+> `playwright.config.ts`'s `retain-on-failure` would produce locally, not files living in the
+> repo. Also renamed `AGENTS.MD` to `AGENTS.md`, the one root doc that didn't match the lowercase
+> `.md` convention of `README.md`/`CHANGELOG.md`/`ROADMAP.md`. Also removed three stale git
+> worktrees left over from finished tasks (`.claude/worktrees/puzzle-prev-next`,
+> `chess-trainer.worktrees/fix-header-width-issue-rails-frontend`, and a temp-scratchpad
+> `dependabot-test-37`) — all three were either already merged or had their changes independently
+> superseded in `main`.
+
 ## September 5, 2026
 
 ### 🐛 Fixed
