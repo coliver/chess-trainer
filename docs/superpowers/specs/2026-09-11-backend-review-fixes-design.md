@@ -80,21 +80,40 @@ touching the real hashing parameters or the response body.
 
 ### 2. Rate limiting on auth endpoints
 
-Add `slowapi` (a Starlette/FastAPI rate-limiting library keyed by client
-IP, in-memory storage — no Redis in this stack, and the prod deploy is a
-single EC2 instance per `project_prod_deployment` memory, so in-memory
-storage is sufficient). One shared `Limiter` instance lives in
-`backend/app/modules/shared/rate_limit.py` (avoids a circular import between
-`app.py` and `routers/auth.py`), registered on the app in `app.py` and
-applied via `@limiter.limit(...)` decorators on `/auth/login`,
-`/auth/register`, and `/auth/resend-verification`. Limit: `5/minute` per IP
-on each of those three routes — generous enough for normal retry-after-typo
-use, tight enough to blunt brute-forcing. A `RateLimitExceeded` handler
-returns `429`.
+Use the `limits` library (the same rate-limiting primitives package
+`slowapi` itself builds on — no Redis in this stack, and the prod deploy is
+a single EC2 instance per `project_prod_deployment` memory, so its
+in-memory storage is sufficient) directly, as a **FastAPI dependency**,
+rather than a decorator that wraps the route function itself.
 
-Because `slowapi`'s in-memory store is process-global, the test suite needs
-an autouse fixture that resets it between tests so unrelated tests don't
-trip each other's rate limits.
+This matters because `backend/app/routers/auth.py`'s route functions are
+called directly as plain Python functions by an existing unit test file:
+`tests/test_auth_register.py` calls `register(req, background_tasks=...,
+db=db)` and `login(req, db=db)` thirteen times across its test functions,
+entirely bypassing FastAPI's request pipeline. A decorator-based limiter
+(e.g. `slowapi`'s `@limiter.limit(...)`) needs the wrapped function to
+accept a `Request` parameter, which would turn every one of those 13 direct
+calls into a `TypeError`. A dependency listed in the route decorator's
+`dependencies=[...]` runs only when FastAPI's own dependency-injection
+resolves the route (real HTTP requests through the ASGI app, or
+`TestClient`) — exactly like the existing `db: Session = Depends(get_db)`
+pattern those same unit tests already bypass by passing `db` explicitly.
+This fits the codebase's existing test style with zero changes to
+`tests/test_auth_register.py`.
+
+One shared module, `backend/app/modules/shared/rate_limit.py`, builds a
+`rate_limit(limit_string)` factory returning a dependency callable, backed
+by one process-wide `limits.storage.MemoryStorage` +
+`limits.strategies.MovingWindowRateLimiter`. `/auth/login`,
+`/auth/register`, and `/auth/resend-verification` each add
+`dependencies=[Depends(rate_limit("5/minute"))]` to their `@router.post(...)`
+decorator — generous enough for normal retry-after-typo use, tight enough
+to blunt brute-forcing. The dependency keys on `request.client.host` and
+raises `HTTPException(429)` once the limit is hit.
+
+Because the in-memory store is process-global, the test suite needs an
+autouse fixture that calls its `.reset()` between tests so unrelated tests
+don't trip each other's rate limits.
 
 ### 3. `verify_password` fails closed on malformed input
 

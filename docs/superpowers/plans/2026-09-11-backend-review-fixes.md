@@ -8,13 +8,16 @@ first, each as an independently reviewable and revertable task with its own
 tests.
 
 **Architecture:** No new services or architectural changes. Two small
-additions (a module-level dummy-hash constant, a shared `slowapi` `Limiter`)
-plus surgical edits to existing files. Every fix keeps existing response
-shapes, status codes, and the training-session 404-not-leak pattern intact.
+additions (a module-level dummy-hash constant, a shared rate-limit
+dependency built on the `limits` library) plus surgical edits to existing
+files. Every fix keeps existing response shapes, status codes, and the
+training-session 404-not-leak pattern intact.
 
-**Tech Stack:** FastAPI + SQLAlchemy (backend), PyJWT, `slowapi` (new, for
-rate limiting), pytest + `fastapi.testclient.TestClient` (tests), all run via
-`docker compose exec api ...` — never a host venv.
+**Tech Stack:** FastAPI + SQLAlchemy (backend), PyJWT, `limits` (new, for
+rate limiting, used as a FastAPI dependency — not a route-wrapping
+decorator, since some routes are called directly as plain functions by
+existing unit tests), pytest + `fastapi.testclient.TestClient` (tests), all
+run via `docker compose exec api ...` — never a host venv.
 
 **Spec:** [docs/superpowers/specs/2026-09-11-backend-review-fixes-design.md](../specs/2026-09-11-backend-review-fixes-design.md)
 
@@ -141,126 +144,139 @@ git commit -m "fix(auth): close login timing side-channel for unknown users"
 
 **Files:**
 - Create: `backend/app/modules/shared/rate_limit.py`
-- Modify: `backend/app/app.py` (register limiter + exception handler),
-  `backend/app/routers/auth.py` (decorate the three routes),
-  `requirements.txt` (add `slowapi`)
-- Modify: `tests/conftest.py` (autouse fixture to reset the limiter between
-  tests)
+- Modify: `backend/app/routers/auth.py` (add a `dependencies=[...]` entry to
+  the three routes' `@router.post(...)` decorators — route function
+  signatures are NOT changed), `requirements.txt` (add `limits`)
+- Modify: `tests/conftest.py` (autouse fixture to reset rate-limit state
+  between tests)
 - Test: `tests/test_auth_rate_limit.py` (new file)
 
 **Interfaces:**
-- Produces: `backend.app.modules.shared.rate_limit.limiter` (a
-  `slowapi.Limiter` instance), imported by `app.py` and `routers/auth.py`.
+- Produces: `backend.app.modules.shared.rate_limit.rate_limit(limit_string:
+  str) -> Callable[[Request], None]` (a FastAPI dependency factory, used via
+  `dependencies=[Depends(rate_limit("5/minute"))]`) and
+  `backend.app.modules.shared.rate_limit.reset() -> None` (test-only,
+  clears all rate-limit state), both imported by `routers/auth.py` and
+  `tests/conftest.py` respectively.
+
+**Why a dependency, not a decorator:** `tests/test_auth_register.py` calls
+`register(req, background_tasks=..., db=db)` and `login(req, db=db)`
+directly as plain Python functions, 13 times across its test functions,
+entirely bypassing FastAPI's request pipeline. A decorator-based rate
+limiter needs the wrapped function to accept a `Request` parameter — adding
+one would turn every one of those 13 direct calls into a `TypeError`. A
+dependency listed in `@router.post(..., dependencies=[...])` only runs when
+FastAPI's own dependency-injection resolves the route (real HTTP requests,
+or `TestClient`) — exactly like the existing `db: Session = Depends(get_db)`
+pattern those same tests already bypass by passing `db` explicitly. So the
+route functions' signatures stay untouched and `tests/test_auth_register.py`
+needs no changes at all.
 
 - [ ] **Step 1: Add the dependency**
 
 Add to `requirements.txt`, after the `pyjwt` line:
 
 ```
-slowapi
+limits
 ```
 
-- [ ] **Step 2: Rebuild the api image so slowapi is installed**
+- [ ] **Step 2: Rebuild the api image so `limits` is installed**
 
 Run: `docker compose build api && docker compose up -d db api`
 
-- [ ] **Step 3: Create the shared limiter module**
+- [ ] **Step 3: Create the shared rate-limit module**
 
 Create `backend/app/modules/shared/rate_limit.py`:
 
 ```python
-from slowapi import Limiter
-from slowapi.util import get_remote_address
+from fastapi import HTTPException, Request
+from limits import parse
+from limits.storage import MemoryStorage
+from limits.strategies import MovingWindowRateLimiter
 
-limiter = Limiter(key_func=get_remote_address)
+_storage = MemoryStorage()
+_strategy = MovingWindowRateLimiter(_storage)
+
+
+def reset() -> None:
+    """Clear all rate-limit state. Test-only — call between tests so one
+    test's hits don't leak into the next."""
+    _storage.reset()
+
+
+def rate_limit(limit_string: str):
+    """FastAPI dependency factory: raises 429 once `limit_string` (e.g.
+    "5/minute") is exceeded for the requesting client's IP."""
+    item = parse(limit_string)
+
+    def _check(request: Request) -> None:
+        key = request.client.host if request.client else "unknown"
+        if not _strategy.hit(item, key):
+            raise HTTPException(status_code=429, detail="Too many requests")
+
+    return _check
 ```
 
-- [ ] **Step 4: Register the limiter on the app**
-
-In `backend/app/app.py`, add to the imports (near the other
-`backend.app.modules.shared` imports):
-
-```python
-from slowapi import _rate_limit_exceeded_handler
-from slowapi.errors import RateLimitExceeded
-
-from backend.app.modules.shared.rate_limit import limiter
-```
-
-Then, right after `app = FastAPI(title="Knight School")`:
-
-```python
-app.state.limiter = limiter
-app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
-```
-
-- [ ] **Step 5: Apply the limit to the three routes**
+- [ ] **Step 4: Apply the dependency to the three routes**
 
 In `backend/app/routers/auth.py`, add to the imports:
 
 ```python
-from fastapi import Request
-
-from backend.app.modules.shared.rate_limit import limiter
+from backend.app.modules.shared.rate_limit import rate_limit
 ```
 
-Decorate `register`, `login`, and `resend_verification`. Each route
-function needs a `request: Request` parameter for `slowapi` to key on the
-client IP. For example, `register` (currently `def register(req:
-RegisterRequest, background_tasks: BackgroundTasks, db=Depends(get_db)):`)
-becomes:
+Change each route decorator (function signatures and bodies are
+unchanged). `register`'s decorator:
 
 ```python
 @router.post("/register")
-@limiter.limit("5/minute")
-def register(
-    request: Request,
-    req: RegisterRequest,
-    background_tasks: BackgroundTasks,
-    db=Depends(get_db),
-):
 ```
 
-`login` becomes:
+becomes:
+
+```python
+@router.post("/register", dependencies=[Depends(rate_limit("5/minute"))])
+```
+
+`login`'s decorator:
 
 ```python
 @router.post("/login")
-@limiter.limit("5/minute")
-def login(request: Request, req: LoginRequest, db=Depends(get_db)):
 ```
 
-`resend_verification` becomes:
+becomes:
+
+```python
+@router.post("/login", dependencies=[Depends(rate_limit("5/minute"))])
+```
+
+`resend_verification`'s decorator:
 
 ```python
 @router.post("/resend-verification")
-@limiter.limit("5/minute")
-def resend_verification(
-    request: Request,
-    req: ResendVerificationRequest,
-    background_tasks: BackgroundTasks,
-    db=Depends(get_db),
-):
 ```
 
-(Function bodies are unchanged — only the signature gains `request: Request`
-and the decorator stack gains `@limiter.limit("5/minute")` directly above
-the `def`.)
+becomes:
 
-- [ ] **Step 6: Reset the limiter between tests**
+```python
+@router.post("/resend-verification", dependencies=[Depends(rate_limit("5/minute"))])
+```
+
+- [ ] **Step 5: Reset rate-limit state between tests**
 
 Add to `tests/conftest.py`, alongside the other autouse fixtures:
 
 ```python
-from backend.app.modules.shared.rate_limit import limiter
+from backend.app.modules.shared import rate_limit as rate_limit_module
 
 
 @pytest.fixture(autouse=True)
 def reset_rate_limiter():
-    limiter.reset()
+    rate_limit_module.reset()
     yield
 ```
 
-- [ ] **Step 7: Write the failing test**
+- [ ] **Step 6: Write the failing test**
 
 Create `tests/test_auth_rate_limit.py`:
 
@@ -287,32 +303,36 @@ def test_login_rate_limited_after_too_many_attempts(test_user):
     assert response.status_code == 429
 ```
 
-- [ ] **Step 8: Run test to verify it fails**
+- [ ] **Step 7: Run test to verify it fails**
 
 Run: `docker compose exec api pytest tests/test_auth_rate_limit.py -v`
-Expected: FAIL — the 6th request returns `401`, not `429` (no limiter
-applied yet if Steps 3-6 weren't done first; if they were, re-check Step 5's
-decorator placement).
+Expected: FAIL — the 6th request returns `401`, not `429` (no rate limit
+applied yet if Steps 3-5 weren't done first; if they were, re-check Step 4's
+`dependencies=[...]` placement).
 
-- [ ] **Step 9: Run test to verify it passes**
+- [ ] **Step 8: Run test to verify it passes**
 
 Run: `docker compose exec api pytest tests/test_auth_rate_limit.py -v`
 Expected: PASS
 
-- [ ] **Step 10: Run the full suite**
+- [ ] **Step 9: Run the full suite**
 
 Run: `docker compose exec api pytest`
-Expected: all tests pass — the `reset_rate_limiter` autouse fixture from
-Step 6 must prevent this new test's rate-limit hits from leaking into other
-auth tests (e.g. `tests/test_auth_login_verification.py`,
-`tests/test_auth_register.py`). If any unrelated test now fails with `429`,
-the fixture isn't resetting correctly — check it's registered as `autouse`
-and imports the same `limiter` instance used by the app.
+Expected: all tests pass — in particular, `tests/test_auth_register.py`'s
+13 direct calls to `register(...)`/`login(...)` must still pass unmodified
+(they never go through FastAPI's dependency resolution, so the new
+`dependencies=[...]` entry never runs for them). The `reset_rate_limiter`
+autouse fixture from Step 5 must also prevent this new test's rate-limit
+hits from leaking into other auth tests that go through `TestClient` (e.g.
+`tests/test_auth_login_verification.py`,
+`tests/test_auth_resend_verification.py`). If any unrelated test now fails
+with `429`, the fixture isn't resetting correctly — check it's registered
+as `autouse` and imports the same `rate_limit` module the app uses.
 
-- [ ] **Step 11: Commit**
+- [ ] **Step 10: Commit**
 
 ```bash
-git add requirements.txt backend/app/app.py backend/app/routers/auth.py \
+git add requirements.txt backend/app/routers/auth.py \
   backend/app/modules/shared/rate_limit.py tests/conftest.py \
   tests/test_auth_rate_limit.py
 git commit -m "feat(auth): rate-limit login/register/resend-verification"
@@ -924,7 +944,7 @@ Task 6. As of this plan, the versions are:
 | pyjwt | 2.13.0 |
 | zstandard | 0.25.0 |
 | sentry-sdk[fastapi] | 2.68.1 |
-| slowapi | 0.1.10 |
+| limits | 5.8.0 |
 
 If the versions your `pip freeze` output shows differ from this table (e.g.
 a newer patch release published since this plan was written), use the
@@ -953,7 +973,7 @@ email-validator==2.3.0
 pyjwt==2.13.0
 zstandard==0.25.0
 sentry-sdk[fastapi]==2.68.1
-slowapi==0.1.10
+limits==5.8.0
 ```
 
 - [ ] **Step 3: Rebuild from a clean image and verify**
