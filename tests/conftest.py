@@ -2,6 +2,7 @@ import sys
 from pathlib import Path
 
 from backend.app.app import app
+from backend.app.modules.shared import rate_limit as rate_limit_module
 from backend.app.modules.users.models import User
 from backend.app.routers.auth import hash_password
 
@@ -48,6 +49,12 @@ def seed_openings(db):
         if not existing:
             db.add(Opening(eco=eco, name=name))
     db.commit()
+    yield
+
+
+@pytest.fixture(autouse=True)
+def reset_rate_limiter():
+    rate_limit_module.reset()
     yield
 
 

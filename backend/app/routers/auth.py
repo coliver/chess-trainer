@@ -12,6 +12,7 @@ from pydantic import BaseModel, EmailStr, constr
 
 from backend.app.modules.email.sender import send_verification_email, supported_languages
 from backend.app.modules.shared.db import get_db
+from backend.app.modules.shared.rate_limit import rate_limit
 from backend.app.modules.users.models import User
 
 router = APIRouter(prefix="/auth", tags=["auth"])
@@ -49,7 +50,7 @@ def _email_verification_required() -> bool:
     )
 
 
-@router.post("/register")
+@router.post("/register", dependencies=[Depends(rate_limit("5/minute"))])
 def register(req: RegisterRequest, background_tasks: BackgroundTasks, db=Depends(get_db)):
     existing = (
         db.query(User).filter((User.email == req.email) | (User.username == req.username)).first()
@@ -88,7 +89,7 @@ class LoginRequest(BaseModel):
     password: constr(min_length=1)
 
 
-@router.post("/login")
+@router.post("/login", dependencies=[Depends(rate_limit("5/minute"))])
 def login(req: LoginRequest, db=Depends(get_db)):
     if not req.email and not req.username:
         raise HTTPException(status_code=400, detail="Provide email or username")
@@ -291,7 +292,7 @@ class ResendVerificationRequest(BaseModel):
     username: constr(min_length=1, strip_whitespace=True) | None = None
 
 
-@router.post("/resend-verification")
+@router.post("/resend-verification", dependencies=[Depends(rate_limit("5/minute"))])
 def resend_verification(
     req: ResendVerificationRequest, background_tasks: BackgroundTasks, db=Depends(get_db)
 ):
