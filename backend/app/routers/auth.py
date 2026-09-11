@@ -37,6 +37,9 @@ def verify_password(password: str, password_hash: str) -> bool:
     return hmac.compare_digest(dk, dk_stored)
 
 
+_DUMMY_PASSWORD_HASH = hash_password("dummy-password-for-timing")
+
+
 def _email_verification_required() -> bool:
     return os.getenv("EMAIL_VERIFICATION_REQUIRED", "false").strip().lower() in (
         "1",
@@ -98,6 +101,7 @@ def login(req: LoginRequest, db=Depends(get_db)):
         user = q.filter(User.username == req.username).first()
 
     if user is None:
+        verify_password(req.password, _DUMMY_PASSWORD_HASH)
         raise HTTPException(status_code=401, detail="Invalid credentials")
 
     if not verify_password(req.password, user.password_hash):
