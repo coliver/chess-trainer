@@ -768,8 +768,12 @@ def test_submit_training_response_uses_item_opening_over_session_for_record_atte
 def test_submit_training_response_reports_record_attempt_failure_to_sentry(monkeypatch):
     session = SimpleNamespace(id=123, status="active", user_id=1)
     current = SimpleNamespace(
-        id=10, fen="fen_before", correct_move_uci="e2e4", session_id=123,
-        opening_eco=None, opening_name=None,
+        id=10,
+        fen="fen_before",
+        correct_move_uci="e2e4",
+        session_id=123,
+        opening_eco=None,
+        opening_name=None,
     )
     all_items = [current]
 
@@ -803,9 +807,7 @@ def test_submit_training_response_reports_record_attempt_failure_to_sentry(monke
     monkeypatch.setattr(service, "record_attempt", failing_record_attempt)
 
     capture_calls = []
-    monkeypatch.setattr(
-        service.sentry_sdk, "capture_exception", lambda: capture_calls.append(True)
-    )
+    monkeypatch.setattr(service.sentry_sdk, "capture_exception", lambda: capture_calls.append(True))
 
     res = service.submit_training_response(
         db=db, session_id=123, item_id=10, move_uci="e2e4", current_user_id=1
