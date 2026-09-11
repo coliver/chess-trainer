@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 import chess
+import sentry_sdk
 from fastapi import HTTPException
 from sqlalchemy import and_, func, select
 from sqlalchemy.orm import Session
@@ -314,6 +315,7 @@ def submit_training_response(
         logger.exception(
             "record_attempt failed for user_id=%s item_id=%s", current_user_id, item_id
         )
+        sentry_sdk.capture_exception()
 
     correct_ids = _correct_response_item_ids(db, [it.id for it in all_items])
     session_completed = all(it.id in correct_ids for it in all_items)

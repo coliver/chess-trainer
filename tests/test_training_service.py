@@ -765,6 +765,56 @@ def test_submit_training_response_uses_item_opening_over_session_for_record_atte
     assert record_attempt_calls[0]["opening_name"] == "Sicilian Defense"
 
 
+def test_submit_training_response_reports_record_attempt_failure_to_sentry(monkeypatch):
+    session = SimpleNamespace(id=123, status="active", user_id=1)
+    current = SimpleNamespace(
+        id=10, fen="fen_before", correct_move_uci="e2e4", session_id=123,
+        opening_eco=None, opening_name=None,
+    )
+    all_items = [current]
+
+    db = FakeDB(
+        get_return=session,
+        scalars_all=all_items,
+        training_item_count_side_effects=[len(all_items), len(all_items)],
+        training_response_first_side_effects=[None],
+        correct_response_item_ids_side_effects=[{10}],
+    )
+    monkeypatch.setattr(db, "begin_nested", lambda: contextlib.nullcontext(), raising=False)
+
+    def get_side_effect(model_cls, pk):
+        if model_cls is TrainingSession:
+            return session
+        if model_cls is TrainingItem and pk == 10:
+            return current
+        return None
+
+    monkeypatch.setattr(db, "get", get_side_effect)
+    monkeypatch.setattr(service, "get_current_training_item", lambda *a, **k: current)
+
+    result = SimpleNamespace(
+        correct=True, reason="Correct", fen_after="fen_after", http_status=200, error_message=None
+    )
+    monkeypatch.setattr(service, "validate_and_apply", lambda *a, **k: result)
+
+    def failing_record_attempt(db, **kwargs):
+        raise RuntimeError("boom")
+
+    monkeypatch.setattr(service, "record_attempt", failing_record_attempt)
+
+    capture_calls = []
+    monkeypatch.setattr(
+        service.sentry_sdk, "capture_exception", lambda: capture_calls.append(True)
+    )
+
+    res = service.submit_training_response(
+        db=db, session_id=123, item_id=10, move_uci="e2e4", current_user_id=1
+    )
+
+    assert res.http_status == 200
+    assert len(capture_calls) == 1
+
+
 def test_submit_training_response_falls_back_to_session_opening_when_item_has_none(
     monkeypatch,
 ):
