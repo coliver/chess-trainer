@@ -32,10 +32,13 @@ def hash_password(password: str) -> str:
 
 
 def verify_password(password: str, password_hash: str) -> bool:
-    raw = base64.b64decode(password_hash.encode("ascii"))
-    salt, dk_stored = raw[:16], raw[16:]
-    dk = hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), salt, 200_000)
-    return hmac.compare_digest(dk, dk_stored)
+    try:
+        raw = base64.b64decode(password_hash.encode("ascii"))
+        salt, dk_stored = raw[:16], raw[16:]
+        dk = hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), salt, 200_000)
+        return hmac.compare_digest(dk, dk_stored)
+    except (ValueError, TypeError):
+        return False
 
 
 _DUMMY_PASSWORD_HASH = hash_password("dummy-password-for-timing")

@@ -4,6 +4,7 @@ from fastapi.testclient import TestClient
 
 from backend.app.app import app
 from backend.app.routers import auth as auth_module
+from backend.app.routers.auth import verify_password
 
 client = TestClient(app)
 
@@ -41,3 +42,7 @@ def test_login_with_nonexistent_user_still_verifies_password():
     assert response.status_code == 401
     assert response.json()["detail"] == "Invalid credentials"
     spy.assert_called_once()
+
+
+def test_verify_password_returns_false_for_malformed_hash():
+    assert verify_password("anything", "not-valid-base64!!") is False
