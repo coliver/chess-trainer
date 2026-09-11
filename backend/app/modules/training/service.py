@@ -190,21 +190,25 @@ def create_session_from_due(db: Session, user_id: int, limit: int = 10) -> Train
     return session
 
 
+def _correct_response_item_ids(db: Session, item_ids: list[int]) -> set[int]:
+    if not item_ids:
+        return set()
+    rows = db.scalars(
+        select(TrainingResponse.item_id).where(
+            TrainingResponse.item_id.in_(item_ids),
+            TrainingResponse.is_correct.is_(True),
+        )
+    ).all()
+    return set(rows)
+
+
 def get_current_training_item(db, training_session, all_items):
     if not all_items:
         return None
 
+    correct_ids = _correct_response_item_ids(db, [item.id for item in all_items])
     for item in all_items:
-        exists_correct = (
-            db.query(TrainingResponse)
-            .filter(
-                TrainingResponse.item_id == item.id,
-                TrainingResponse.is_correct.is_(True),
-            )
-            .first()
-        )
-
-        if exists_correct is None:
+        if item.id not in correct_ids:
             return item
 
     return None
@@ -311,17 +315,8 @@ def submit_training_response(
             "record_attempt failed for user_id=%s item_id=%s", current_user_id, item_id
         )
 
-    all_responded = all(
-        db.query(TrainingResponse)
-        .filter(
-            TrainingResponse.item_id == it.id,
-            TrainingResponse.is_correct.is_(True),
-        )
-        .first()
-        is not None
-        for it in all_items
-    )
-    session_completed = all_responded
+    correct_ids = _correct_response_item_ids(db, [it.id for it in all_items])
+    session_completed = all(it.id in correct_ids for it in all_items)
 
     if session_completed:
         session.status = "completed"
