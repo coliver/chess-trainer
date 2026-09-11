@@ -19,7 +19,8 @@ def rate_limit(limit_string: str):
     item = parse(limit_string)
 
     def _check(request: Request) -> None:
-        key = request.client.host if request.client else "unknown"
+        client_host = request.client.host if request.client else "unknown"
+        key = f"{request.url.path}:{client_host}"
         if not _strategy.hit(item, key):
             raise HTTPException(status_code=429, detail="Too many requests")
 
