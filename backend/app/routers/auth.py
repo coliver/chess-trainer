@@ -3,7 +3,7 @@ import base64
 import hashlib
 import hmac
 import os
-from datetime import datetime, timedelta, timezone  # Update your imports
+from datetime import datetime, timedelta, timezone
 from typing import Any
 
 import jwt
@@ -122,7 +122,7 @@ def login(req: LoginRequest, db=Depends(get_db)):
         "email": user.email,
         "username": user.username,
         "access_token": access_token,
-        "refresh_token": refresh_token,  # Return both
+        "refresh_token": refresh_token,
         "token_type": "Bearer",
     }
 
@@ -145,7 +145,7 @@ def create_access_token(user_id: int) -> str:
 
     payload: dict[str, Any] = {
         "sub": str(user_id),
-        "type": "access",  # Add type to distinguish from refresh token
+        "type": "access",
         "iat": int(now.timestamp()),
         "exp": int(exp.timestamp()),
     }
@@ -230,7 +230,6 @@ def get_current_user_or_none(
         return None
 
 
-# New /refresh endpoint
 class RefreshRequest(BaseModel):
     refresh_token: str
 
