@@ -6,8 +6,7 @@ python-chess
 alembic
 pytest
 httpx2
-pydantic-settings
-ruff 
+ruff
 black
 coverage
 pytest-cov
