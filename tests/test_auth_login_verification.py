@@ -9,7 +9,8 @@ from backend.app.routers.auth import verify_password
 client = TestClient(app)
 
 
-def test_login_blocked_when_email_not_verified(unverified_user):
+def test_login_blocked_when_email_not_verified(unverified_user, monkeypatch):
+    monkeypatch.setenv("EMAIL_VERIFICATION_REQUIRED", "true")
     response = client.post(
         "/auth/login",
         json={"username": unverified_user.username, "password": "password123"},
