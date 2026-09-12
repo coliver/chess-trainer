@@ -3,7 +3,7 @@ import base64
 import hashlib
 import hmac
 import os
-from datetime import datetime, timedelta, timezone  # Update your imports
+from datetime import datetime, timedelta, timezone
 from typing import Any
 
 import jwt
@@ -12,6 +12,7 @@ from pydantic import BaseModel, EmailStr, constr
 
 from backend.app.modules.email.sender import send_verification_email, supported_languages
 from backend.app.modules.shared.db import get_db
+from backend.app.modules.shared.rate_limit import rate_limit
 from backend.app.modules.users.models import User
 
 router = APIRouter(prefix="/auth", tags=["auth"])
@@ -31,10 +32,16 @@ def hash_password(password: str) -> str:
 
 
 def verify_password(password: str, password_hash: str) -> bool:
-    raw = base64.b64decode(password_hash.encode("ascii"))
-    salt, dk_stored = raw[:16], raw[16:]
-    dk = hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), salt, 200_000)
-    return hmac.compare_digest(dk, dk_stored)
+    try:
+        raw = base64.b64decode(password_hash.encode("ascii"))
+        salt, dk_stored = raw[:16], raw[16:]
+        dk = hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), salt, 200_000)
+        return hmac.compare_digest(dk, dk_stored)
+    except (ValueError, TypeError):
+        return False
+
+
+_DUMMY_PASSWORD_HASH = hash_password("dummy-password-for-timing")
 
 
 def _email_verification_required() -> bool:
@@ -46,7 +53,7 @@ def _email_verification_required() -> bool:
     )
 
 
-@router.post("/register")
+@router.post("/register", dependencies=[Depends(rate_limit("5/minute"))])
 def register(req: RegisterRequest, background_tasks: BackgroundTasks, db=Depends(get_db)):
     existing = (
         db.query(User).filter((User.email == req.email) | (User.username == req.username)).first()
@@ -85,7 +92,7 @@ class LoginRequest(BaseModel):
     password: constr(min_length=1)
 
 
-@router.post("/login")
+@router.post("/login", dependencies=[Depends(rate_limit("5/minute"))])
 def login(req: LoginRequest, db=Depends(get_db)):
     if not req.email and not req.username:
         raise HTTPException(status_code=400, detail="Provide email or username")
@@ -98,6 +105,7 @@ def login(req: LoginRequest, db=Depends(get_db)):
         user = q.filter(User.username == req.username).first()
 
     if user is None:
+        verify_password(req.password, _DUMMY_PASSWORD_HASH)
         raise HTTPException(status_code=401, detail="Invalid credentials")
 
     if not verify_password(req.password, user.password_hash):
@@ -114,7 +122,7 @@ def login(req: LoginRequest, db=Depends(get_db)):
         "email": user.email,
         "username": user.username,
         "access_token": access_token,
-        "refresh_token": refresh_token,  # Return both
+        "refresh_token": refresh_token,
         "token_type": "Bearer",
     }
 
@@ -137,7 +145,7 @@ def create_access_token(user_id: int) -> str:
 
     payload: dict[str, Any] = {
         "sub": str(user_id),
-        "type": "access",  # Add type to distinguish from refresh token
+        "type": "access",
         "iat": int(now.timestamp()),
         "exp": int(exp.timestamp()),
     }
@@ -222,7 +230,6 @@ def get_current_user_or_none(
         return None
 
 
-# New /refresh endpoint
 class RefreshRequest(BaseModel):
     refresh_token: str
 
@@ -287,7 +294,7 @@ class ResendVerificationRequest(BaseModel):
     username: constr(min_length=1, strip_whitespace=True) | None = None
 
 
-@router.post("/resend-verification")
+@router.post("/resend-verification", dependencies=[Depends(rate_limit("5/minute"))])
 def resend_verification(
     req: ResendVerificationRequest, background_tasks: BackgroundTasks, db=Depends(get_db)
 ):

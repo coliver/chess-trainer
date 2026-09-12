@@ -53,6 +53,7 @@ class FakeDB:
         scalars_all=None,
         training_item_count_side_effects=None,
         training_response_first_side_effects=None,
+        correct_response_item_ids_side_effects=None,
     ):
         self._get_return = get_return
         self._scalars_all = scalars_all or []
@@ -67,9 +68,15 @@ class FakeDB:
             if training_response_first_side_effects is not None
             else []
         )
+        self._correct_response_item_ids_side_effects = (
+            list(correct_response_item_ids_side_effects)
+            if correct_response_item_ids_side_effects is not None
+            else []
+        )
 
         self._training_item_count_iter = iter(self._training_item_count_side_effects)
         self._training_response_first_iter = iter(self._training_response_first_side_effects)
+        self._correct_response_item_ids_iter = iter(self._correct_response_item_ids_side_effects)
 
         self.add_calls = 0
         self.added = []
@@ -79,8 +86,19 @@ class FakeDB:
     def get(self, *args, **kwargs):
         return self._get_return
 
-    def scalars(self, *args, **kwargs):
-        return FakeScalars(self._scalars_all)
+    def scalars(self, stmt, *args, **kwargs):
+        entity = stmt.column_descriptions[0]["entity"]
+        if entity is TrainingItem:
+            return FakeScalars(self._scalars_all)
+        if entity is TrainingResponse:
+            try:
+                return FakeScalars(sorted(next(self._correct_response_item_ids_iter)))
+            except StopIteration:
+                raise AssertionError(
+                    "scalars() called for TrainingResponse more times than "
+                    "correct_response_item_ids_side_effects configured"
+                )
+        raise AssertionError(f"Unexpected scalars() query for entity {entity}")
 
     def query(self, model_cls, *args, **kwargs):
         if model_cls is TrainingItem:
@@ -218,7 +236,8 @@ def test_submit_training_response_correct_creates_training_response_and_commits(
         get_return=session,
         scalars_all=all_items,
         training_item_count_side_effects=[len(all_items), len(all_items)],
-        training_response_first_side_effects=[None, object(), object()],
+        training_response_first_side_effects=[None],
+        correct_response_item_ids_side_effects=[{10, 11}],
     )
 
     def get_side_effect(model_cls, pk):
@@ -266,11 +285,8 @@ def test_submit_training_response_marks_session_completed_when_all_correct(monke
         get_return=session,
         scalars_all=all_items,
         training_item_count_side_effects=[len(all_items), len(all_items)],
-        training_response_first_side_effects=[
-            None,  # existing response for current item (item1) -> add new
-            object(),  # all_responded check for item1 -> is not None
-            object(),  # all_responded check for item2 -> is not None
-        ],
+        training_response_first_side_effects=[None],
+        correct_response_item_ids_side_effects=[{1, 2}],
     )
 
     # IMPORTANT: FakeDB.get() must return the right object type for model_cls
@@ -326,7 +342,8 @@ def test_submit_training_response_updates_existing_response_instead_of_creating(
         get_return=session,
         scalars_all=all_items,
         training_item_count_side_effects=[len(all_items), len(all_items)],
-        training_response_first_side_effects=[existing_response, None],
+        training_response_first_side_effects=[existing_response],
+        correct_response_item_ids_side_effects=[set()],
     )
 
     # Make db.get return correct model instances so session/item checks don't crash
@@ -463,7 +480,7 @@ def test_get_current_training_item_returns_first_incorrect_item():
     item2 = SimpleNamespace(id=2)
     all_items = [item1, item2]
 
-    db = FakeDB(training_response_first_side_effects=[None])
+    db = FakeDB(correct_response_item_ids_side_effects=[set()])
 
     out = service.get_current_training_item(db=db, training_session=None, all_items=all_items)
     assert out is item1
@@ -474,7 +491,7 @@ def test_get_current_training_item_returns_none_when_all_items_correct():
     item2 = SimpleNamespace(id=2)
     all_items = [item1, item2]
 
-    db = FakeDB(training_response_first_side_effects=[object(), object()])
+    db = FakeDB(correct_response_item_ids_side_effects=[{1, 2}])
 
     out = service.get_current_training_item(db=db, training_session=None, all_items=all_items)
     assert out is None
@@ -712,7 +729,8 @@ def test_submit_training_response_uses_item_opening_over_session_for_record_atte
         get_return=session,
         scalars_all=all_items,
         training_item_count_side_effects=[len(all_items), len(all_items)],
-        training_response_first_side_effects=[None, object()],
+        training_response_first_side_effects=[None],
+        correct_response_item_ids_side_effects=[{10}],
     )
     monkeypatch.setattr(db, "begin_nested", lambda: contextlib.nullcontext(), raising=False)
 
@@ -747,6 +765,58 @@ def test_submit_training_response_uses_item_opening_over_session_for_record_atte
     assert record_attempt_calls[0]["opening_name"] == "Sicilian Defense"
 
 
+def test_submit_training_response_reports_record_attempt_failure_to_sentry(monkeypatch):
+    session = SimpleNamespace(id=123, status="active", user_id=1)
+    current = SimpleNamespace(
+        id=10,
+        fen="fen_before",
+        correct_move_uci="e2e4",
+        session_id=123,
+        opening_eco=None,
+        opening_name=None,
+    )
+    all_items = [current]
+
+    db = FakeDB(
+        get_return=session,
+        scalars_all=all_items,
+        training_item_count_side_effects=[len(all_items), len(all_items)],
+        training_response_first_side_effects=[None],
+        correct_response_item_ids_side_effects=[{10}],
+    )
+    monkeypatch.setattr(db, "begin_nested", lambda: contextlib.nullcontext(), raising=False)
+
+    def get_side_effect(model_cls, pk):
+        if model_cls is TrainingSession:
+            return session
+        if model_cls is TrainingItem and pk == 10:
+            return current
+        return None
+
+    monkeypatch.setattr(db, "get", get_side_effect)
+    monkeypatch.setattr(service, "get_current_training_item", lambda *a, **k: current)
+
+    result = SimpleNamespace(
+        correct=True, reason="Correct", fen_after="fen_after", http_status=200, error_message=None
+    )
+    monkeypatch.setattr(service, "validate_and_apply", lambda *a, **k: result)
+
+    def failing_record_attempt(db, **kwargs):
+        raise RuntimeError("boom")
+
+    monkeypatch.setattr(service, "record_attempt", failing_record_attempt)
+
+    capture_calls = []
+    monkeypatch.setattr(service.sentry_sdk, "capture_exception", lambda: capture_calls.append(True))
+
+    res = service.submit_training_response(
+        db=db, session_id=123, item_id=10, move_uci="e2e4", current_user_id=1
+    )
+
+    assert res.http_status == 200
+    assert len(capture_calls) == 1
+
+
 def test_submit_training_response_falls_back_to_session_opening_when_item_has_none(
     monkeypatch,
 ):
@@ -770,7 +840,8 @@ def test_submit_training_response_falls_back_to_session_opening_when_item_has_no
         get_return=session,
         scalars_all=all_items,
         training_item_count_side_effects=[len(all_items), len(all_items)],
-        training_response_first_side_effects=[None, object()],
+        training_response_first_side_effects=[None],
+        correct_response_item_ids_side_effects=[{10}],
     )
     monkeypatch.setattr(db, "begin_nested", lambda: contextlib.nullcontext(), raising=False)
 
