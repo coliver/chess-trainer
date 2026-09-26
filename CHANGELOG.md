@@ -2,6 +2,20 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ---
 
+## September 26, 2026
+
+### 📝 Docs
+
+#### Backend architecture doc re-synced with the code
+
+> `backend/app/docs/ARCHITECTURE.md` had drifted from the code (it described a three-router
+> backend with empty `progress/` and no puzzles, users, text mode or email). Rewritten against
+> the code: all six routers and their endpoints, the progress/puzzles/email/shared modules, the
+> table list, SM-2 and streak logic, `.text` routes, env config, the data import scripts, and the
+> Angular/Rails frontends consuming `chess-core`.
+
+---
+
 ## September 6, 2026
 
 ### ✨ Added
