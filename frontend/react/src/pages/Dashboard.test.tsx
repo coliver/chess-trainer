@@ -560,9 +560,9 @@ describe("Dashboard", () => {
         await vi.advanceTimersByTimeAsync(0);
       });
 
-      expect(
-        screen.getByRole("heading", { name: /Good morning/i }),
-      ).toHaveTextContent("Good morning ☀️, Chris");
+      const heading = screen.getByRole("heading", { name: /Good morning/i });
+      expect(heading).toHaveTextContent("Good morning, Chris");
+      expect(within(heading).getByTestId("dashboard-greeting-icon")).toBeInTheDocument();
     });
 
     it("shows afternoon greeting when 12 <= hour < 18 (no username)", async () => {
@@ -574,9 +574,9 @@ describe("Dashboard", () => {
         await vi.advanceTimersByTimeAsync(0);
       });
 
-      expect(
-        screen.getByRole("heading", { name: /Good afternoon/i }),
-      ).toHaveTextContent("Good afternoon 🌤️");
+      const heading = screen.getByRole("heading", { name: /Good afternoon/i });
+      expect(heading).toHaveTextContent("Good afternoon");
+      expect(within(heading).getByTestId("dashboard-greeting-icon")).toBeInTheDocument();
     });
 
     it("shows evening greeting when hour >= 18 and includes username", async () => {
@@ -588,9 +588,9 @@ describe("Dashboard", () => {
         await vi.advanceTimersByTimeAsync(0);
       });
 
-      expect(
-        screen.getByRole("heading", { name: /Good evening/i }),
-      ).toHaveTextContent("Good evening 🌙, Chris");
+      const heading = screen.getByRole("heading", { name: /Good evening/i });
+      expect(heading).toHaveTextContent("Good evening, Chris");
+      expect(within(heading).getByTestId("dashboard-greeting-icon")).toBeInTheDocument();
     });
   });
 });

@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { AxiosError } from "axios";
+import { Lightbulb } from "lucide-react";
 import api from "../api";
 import Board, { type BoardArrow, type BoardMarker } from "../components/Board";
 import { Button } from "../components/Button";
@@ -463,7 +464,7 @@ export const Puzzles = () => {
                     aria-label={t("puzzles.showHint")}
                     title={t("puzzles.showHint")}
                   >
-                    <span aria-hidden="true">💡</span>
+                    <Lightbulb size={18} aria-hidden="true" />
                   </Button>
                 )}
                 {puzzleId && !puzzleComplete && (

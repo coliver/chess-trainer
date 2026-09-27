@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { Sunrise, Sun, Moon } from "lucide-react";
 import api from "../api";
 import { useApiResource } from "../hooks/useApiResource";
 import { useAuth } from "../hooks/useAuth";
@@ -88,13 +89,13 @@ export const Dashboard = () => {
           ? t("header.greetingAfternoon")
           : t("header.greetingEvening");
     const who = username ? `, ${username}` : "";
-    const match = base.match(/(\p{Extended_Pictographic}️?)\s*$/u);
-    if (!match) return { before: `${base}${who}`, emoji: "", who: "" };
-    return {
-      before: base.slice(0, match.index).trimEnd(),
-      emoji: match[1],
-      who,
-    };
+    // Strip any trailing emoji baked into the translation string: we render
+    // our own icon below instead, so it renders the same across every OS.
+    const before = base
+      .replace(/\p{Extended_Pictographic}️?\s*$/u, "")
+      .trimEnd();
+    const Icon = hour < 12 ? Sunrise : hour < 18 ? Sun : Moon;
+    return { before, who, Icon };
   }, [username, t]);
 
   const [openings, setOpenings] = useState<Opening[]>([]);
@@ -286,9 +287,12 @@ export const Dashboard = () => {
       <div className="dashboard-stack">
         <div role="heading" aria-level={1} className="dashboard-greeting">
           {greeting.before}
-          {greeting.emoji && (
-            <span className="dashboard-greeting-emoji"> {greeting.emoji}</span>
-          )}
+          <greeting.Icon
+            className="dashboard-greeting-icon"
+            size={20}
+            aria-hidden="true"
+            data-testid="dashboard-greeting-icon"
+          />
           {greeting.who}
         </div>
         <div className="card">

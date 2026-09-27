@@ -26,8 +26,10 @@
   margin-bottom: 4px;
 }
 
-.dashboard-greeting-emoji {
+.dashboard-greeting-icon {
   vertical-align: middle;
+  margin-left: 6px;
+  color: var(--accent);
 }
 
 .stat-tabs {

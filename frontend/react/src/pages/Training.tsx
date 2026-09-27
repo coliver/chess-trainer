@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
+import { Lightbulb } from "lucide-react";
 import api from "../api";
 import Board, { type BoardArrow, type BoardMarker } from "../components/Board";
 import { FlipBoardButton } from "../components/FlipBoardButton";
@@ -467,7 +468,7 @@ export const Training = () => {
                   aria-label={t("training.showHint")}
                   title={t("training.showHint")}
                 >
-                  💡
+                  <Lightbulb size={18} aria-hidden="true" />
                 </button>
               </div>
             </div>
