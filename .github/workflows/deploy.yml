@@ -40,6 +40,14 @@ jobs:
 
             APP_VERSION="$(git describe --tags --always)"
 
+            # Free space BEFORE building. The cleanup at the end of this
+            # script only runs if the deploy succeeds, so a disk that fills
+            # up mid-deploy (ENOSPC in `npm ci` on 2026-09-26) would otherwise
+            # stay full and fail every later deploy too. Unused images and
+            # build cache only; running containers and volumes are untouched.
+            docker builder prune -af
+            docker image prune -af
+
             # .env lives on the host (gitignored, provisioned by hand) and is
             # auto-loaded by `docker compose` for its own interpolation, but
             # this build step shells out to a bare node container instead —
