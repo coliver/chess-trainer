@@ -129,11 +129,11 @@ html[data-theme="dark"] {
   border: 1px solid var(--border);
 }
 .rail-eyebrow {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-fg);
 }
 .rail-title {
   display: flex;
@@ -316,5 +316,75 @@ html[data-theme="dark"] {
   .training-board-wrap {
     max-width: 480px;
     margin: 0 auto;
+  }
+}
+
+/* ===== Phone: full-bleed board, thumb-reach controls =====
+   Kept last in the file so it overrides the 900px board cap above. */
+@media (max-width: 600px) {
+  /* Drop the page and card gutters around the board so it runs edge to edge
+     (was ~334px on a 390px phone). Covers Training and Puzzles. */
+  .page:has(.train) {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 8px;
+  }
+  .page:has(.train) > .card {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+  .training-board-wrap {
+    max-width: none;
+    border-left: 0;
+    border-right: 0;
+    box-shadow: none;
+  }
+  .board-under {
+    padding: 0 12px;
+  }
+  .puzzle-status-slot {
+    padding: 0 16px;
+  }
+  .train-rail {
+    padding: 12px 16px env(safe-area-inset-bottom);
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  /* 44px touch targets for the board toolbar and rail controls. */
+  .board-toolbar .btn {
+    width: 44px;
+    height: 44px;
+  }
+  .text-input {
+    height: 48px;
+  }
+  .train-exit {
+    min-height: 44px;
+  }
+
+  /* Training: Prev/Next and the typed-move form become a sticky dock at the
+     bottom of the screen, in thumb reach (Training has no bottom tab bar). */
+  .page:has(.train:not(.puzzles-train)) {
+    padding-bottom: 0;
+  }
+  .train:not(.puzzles-train) .train-controls {
+    position: sticky;
+    bottom: 0;
+    z-index: 5;
+    margin: 0 -16px;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+    background: var(--card-bg);
+    border-top: 1px solid var(--border);
+    box-shadow: 0 -8px 20px -12px rgba(35, 30, 20, 0.25);
+  }
+  .train-controls .btn {
+    min-height: 52px;
+    border-radius: 14px;
+    font-size: 16px;
   }
 }
