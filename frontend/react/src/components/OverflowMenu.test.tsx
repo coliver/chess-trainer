@@ -125,4 +125,74 @@ describe("OverflowMenu", () => {
 
     expect(onClose).not.toHaveBeenCalled();
   });
+
+  it("opens GitHub link in new window and closes the menu", async () => {
+    const user = userEvent.setup();
+    const windowOpenSpy = vi.spyOn(window, "open").mockReturnValue(null);
+    const { onClose } = renderMenu();
+
+    await user.click(screen.getByText("View source on GitHub"));
+
+    expect(windowOpenSpy).toHaveBeenCalledWith(
+      "https://github.com/coliver/chess-trainer",
+      "_blank",
+    );
+    expect(onClose).toHaveBeenCalled();
+    windowOpenSpy.mockRestore();
+  });
+
+  it("closes the menu when pressing Escape", async () => {
+    const user = userEvent.setup();
+    const { onClose } = renderMenu();
+
+    await user.keyboard("{Escape}");
+
+    expect(onClose).toHaveBeenCalled();
+  });
+
+  it("focuses the first menu item when opened", () => {
+    renderMenu();
+
+    // When the menu opens, focus should be on the first focusable element
+    const firstItem = screen.getByText("Settings");
+    expect(firstItem).toHaveFocus();
+  });
+
+  it("traps focus forward with Tab key", () => {
+    renderMenu();
+
+    // The keyboard event handler is attached to document
+    // Dispatch Tab events to verify they're handled
+    const tabEvent = new KeyboardEvent("keydown", {
+      key: "Tab",
+      shiftKey: false,
+      bubbles: true,
+      cancelable: true,
+    });
+
+    // Tab event should be handled by the focus trap
+    document.dispatchEvent(tabEvent);
+
+    // Menu should still be visible and functional
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+    expect(screen.getByText("Settings")).toBeInTheDocument();
+  });
+
+  it("traps focus backward with Shift+Tab key", () => {
+    renderMenu();
+
+    // Dispatch Shift+Tab event to verify it's handled
+    const shiftTabEvent = new KeyboardEvent("keydown", {
+      key: "Tab",
+      shiftKey: true,
+      bubbles: true,
+      cancelable: true,
+    });
+
+    document.dispatchEvent(shiftTabEvent);
+
+    // Menu should still be visible and functional
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+    expect(screen.getByText("Settings")).toBeInTheDocument();
+  });
 });

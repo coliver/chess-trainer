@@ -3,6 +3,7 @@ import { describe, it, expect, vi } from "vitest";
 import { render } from "@testing-library/react";
 import { PreferencesProvider } from "../context/PreferencesContext";
 import Board from "./Board";
+import { INPUT_EVENT_TYPE } from "cm-chessboard/src/Chessboard.js";
 
 // Fake cm-chessboard: records every instance so tests can assert on
 // construction/destruction and move-input (de)registration without a real
@@ -14,6 +15,8 @@ const { FakeChessboard } = vi.hoisted(() => {
     static instances: FakeChessboard[] = [];
     destroyed = false;
     moveInputEnabled = false;
+    moveInputHandler: ((event: unknown) => boolean | void) | null = null;
+    moveInputColor: string | null = null;
     position: string;
     orientation: string;
 
@@ -27,8 +30,10 @@ const { FakeChessboard } = vi.hoisted(() => {
       this.destroyed = true;
     }
 
-    enableMoveInput() {
+    enableMoveInput(handler: (event: unknown) => boolean | void, color: string) {
       this.moveInputEnabled = true;
+      this.moveInputHandler = handler;
+      this.moveInputColor = color;
     }
 
     disableMoveInput() {
@@ -61,8 +66,8 @@ const { FakeChessboard } = vi.hoisted(() => {
     markerCalls: unknown[] = [];
     arrowCalls: unknown[] = [];
 
-    removeLegalMovesMarkers() {}
-    addLegalMovesMarkers() {}
+    removeLegalMovesMarkers = vi.fn();
+    addLegalMovesMarkers = vi.fn();
 
     removeMarkers() {
       this.markerCalls.push({ op: "remove" });
@@ -237,5 +242,237 @@ describe("Board", () => {
       { op: "remove" },
       { op: "remove" },
     ]);
+  });
+
+  it("disables move input and never registers a handler when interactive is false", () => {
+    FakeChessboard.instances.length = 0;
+    renderBoard({ interactive: false });
+
+    const board = FakeChessboard.instances[0];
+    expect(board.moveInputEnabled).toBe(false);
+    expect(board.moveInputHandler).toBeNull();
+  });
+
+  it("keeps keyboard-capable latched on once interactive turns on, and does not revert it when interactive turns off again", () => {
+    FakeChessboard.instances.length = 0;
+    const { rerender } = renderBoard({ interactive: false });
+    expect(FakeChessboard.instances[0].moveInputEnabled).toBe(false);
+
+    // false -> true is also a style-prop (keyboardCapable) change, so the board
+    // is recreated; the new instance should have move input enabled.
+    rerender(
+      <PreferencesProvider>
+        <Board position={START_FEN} interactive onMove={() => true} />
+      </PreferencesProvider>,
+    );
+    expect(FakeChessboard.instances).toHaveLength(2);
+    const board = FakeChessboard.instances[1];
+    expect(board.moveInputEnabled).toBe(true);
+
+    // true -> false does not un-latch keyboardCapable, so no rebuild happens;
+    // the same instance just gets its move input disabled.
+    rerender(
+      <PreferencesProvider>
+        <Board position={START_FEN} interactive={false} onMove={() => true} />
+      </PreferencesProvider>,
+    );
+    expect(FakeChessboard.instances).toHaveLength(2);
+    expect(board.moveInputEnabled).toBe(false);
+  });
+
+  it("passes a black orientation through to the initial board config", () => {
+    FakeChessboard.instances.length = 0;
+    renderBoard({ orientation: "black" });
+
+    expect(FakeChessboard.instances[0].orientation).toBe("b");
+  });
+
+  it("calls setOrientation only when the orientation prop changes to a different value", () => {
+    FakeChessboard.instances.length = 0;
+    const { rerender } = renderBoard({ orientation: "white" });
+    const board = FakeChessboard.instances[0];
+    const setOrientationSpy = vi.spyOn(board, "setOrientation");
+
+    // Same orientation re-render: no-op.
+    rerender(
+      <PreferencesProvider>
+        <Board position={START_FEN} interactive onMove={() => true} orientation="white" />
+      </PreferencesProvider>,
+    );
+    expect(setOrientationSpy).not.toHaveBeenCalled();
+
+    rerender(
+      <PreferencesProvider>
+        <Board position={START_FEN} interactive onMove={() => true} orientation="black" />
+      </PreferencesProvider>,
+    );
+    expect(setOrientationSpy).toHaveBeenCalledWith("b", expect.anything());
+  });
+
+  it("calls setPosition only when the position prop changes to a different placement", () => {
+    FakeChessboard.instances.length = 0;
+    const { rerender } = renderBoard();
+    const board = FakeChessboard.instances[0];
+    const setPositionSpy = vi.spyOn(board, "setPosition");
+    const ADVANCED_FEN =
+      "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1";
+
+    // Same position re-render: no-op.
+    rerender(
+      <PreferencesProvider>
+        <Board position={START_FEN} interactive onMove={() => true} />
+      </PreferencesProvider>,
+    );
+    expect(setPositionSpy).not.toHaveBeenCalled();
+
+    rerender(
+      <PreferencesProvider>
+        <Board position={ADVANCED_FEN} interactive onMove={() => true} />
+      </PreferencesProvider>,
+    );
+    expect(setPositionSpy).toHaveBeenCalledWith(ADVANCED_FEN, expect.anything());
+  });
+
+  describe("move-input handler", () => {
+    it("moveInputStarted: a blocking onMoveStart prevents legal-move markers from being shown", () => {
+      FakeChessboard.instances.length = 0;
+      const onMoveStart = vi.fn().mockReturnValue(false);
+      const getLegalMoves = vi.fn().mockReturnValue([]);
+      renderBoard({ onMoveStart, getLegalMoves });
+
+      const board = FakeChessboard.instances[0];
+      const result = board.moveInputHandler!({
+        type: INPUT_EVENT_TYPE.moveInputStarted,
+        squareFrom: "e2",
+      });
+
+      expect(onMoveStart).toHaveBeenCalledWith("e2");
+      expect(result).toBe(false);
+      expect(getLegalMoves).not.toHaveBeenCalled();
+      expect(board.addLegalMovesMarkers).not.toHaveBeenCalled();
+    });
+
+    it("moveInputStarted: defaults to allowed and shows legal moves when onMoveStart is not provided", () => {
+      FakeChessboard.instances.length = 0;
+      const getLegalMoves = vi.fn().mockReturnValue([{ to: "e4" }]);
+      renderBoard({ getLegalMoves });
+
+      const board = FakeChessboard.instances[0];
+      // No squareFrom on the event: exercises the `?? ""` fallback.
+      const result = board.moveInputHandler!({
+        type: INPUT_EVENT_TYPE.moveInputStarted,
+      });
+
+      expect(result).toBe(true);
+      expect(getLegalMoves).toHaveBeenCalledWith("");
+      expect(board.removeLegalMovesMarkers).toHaveBeenCalled();
+      expect(board.addLegalMovesMarkers).toHaveBeenCalledWith([{ to: "e4" }]);
+    });
+
+    it("moveInputStarted: does not query legal moves when getLegalMoves is not provided", () => {
+      FakeChessboard.instances.length = 0;
+      const onMoveStart = vi.fn().mockReturnValue(true);
+      renderBoard({ onMoveStart });
+
+      const board = FakeChessboard.instances[0];
+      const result = board.moveInputHandler!({
+        type: INPUT_EVENT_TYPE.moveInputStarted,
+        squareFrom: "g1",
+      });
+
+      expect(result).toBe(true);
+      expect(board.addLegalMovesMarkers).not.toHaveBeenCalled();
+    });
+
+    it("validateMoveInput: landing on a friendly (white) piece is treated as a re-selection, not a move", () => {
+      FakeChessboard.instances.length = 0;
+      const onMove = vi.fn();
+      renderBoard({ onMove });
+      const board = FakeChessboard.instances[0];
+      board.getPiece = () => "wN";
+
+      const result = board.moveInputHandler!({
+        type: INPUT_EVENT_TYPE.validateMoveInput,
+        squareFrom: "b1",
+        squareTo: "d2",
+      });
+
+      expect(result).toBe(false);
+      expect(onMove).not.toHaveBeenCalled();
+      expect(board.removeLegalMovesMarkers).toHaveBeenCalled();
+    });
+
+    it("validateMoveInput: landing on a friendly (black) piece uses the black own-piece prefix", () => {
+      FakeChessboard.instances.length = 0;
+      const onMove = vi.fn();
+      renderBoard({ onMove, moveColor: "black" });
+      const board = FakeChessboard.instances[0];
+      board.getPiece = () => "bQ";
+
+      const result = board.moveInputHandler!({
+        type: INPUT_EVENT_TYPE.validateMoveInput,
+        squareFrom: "d8",
+        squareTo: "d7",
+      });
+
+      expect(result).toBe(false);
+      expect(onMove).not.toHaveBeenCalled();
+      expect(board.moveInputColor).toBe("b");
+    });
+
+    it("validateMoveInput: calls onMove and returns its result for a normal move", () => {
+      FakeChessboard.instances.length = 0;
+      const onMove = vi.fn().mockReturnValue(true);
+      renderBoard({ onMove });
+      const board = FakeChessboard.instances[0];
+      board.getPiece = () => undefined;
+
+      // No squareFrom/squareTo on the event: exercises both `?? ""` fallbacks.
+      const result = board.moveInputHandler!({
+        type: INPUT_EVENT_TYPE.validateMoveInput,
+      });
+
+      expect(onMove).toHaveBeenCalledWith("", "");
+      expect(result).toBe(true);
+    });
+
+    it("validateMoveInput: returns false when onMove is not provided", () => {
+      FakeChessboard.instances.length = 0;
+      renderBoard({ onMove: undefined });
+      const board = FakeChessboard.instances[0];
+      board.getPiece = () => undefined;
+
+      const result = board.moveInputHandler!({
+        type: INPUT_EVENT_TYPE.validateMoveInput,
+        squareFrom: "e7",
+        squareTo: "e5",
+      });
+
+      expect(result).toBe(false);
+    });
+
+    it("moveInputCanceled and moveInputFinished clear legal-move markers and return nothing", () => {
+      FakeChessboard.instances.length = 0;
+      renderBoard();
+      const board = FakeChessboard.instances[0];
+
+      expect(
+        board.moveInputHandler!({ type: INPUT_EVENT_TYPE.moveInputCanceled }),
+      ).toBeUndefined();
+      expect(
+        board.moveInputHandler!({ type: INPUT_EVENT_TYPE.moveInputFinished }),
+      ).toBeUndefined();
+      expect(board.removeLegalMovesMarkers).toHaveBeenCalledTimes(2);
+    });
+
+    it("returns nothing for an unrecognized event type", () => {
+      FakeChessboard.instances.length = 0;
+      renderBoard();
+      const board = FakeChessboard.instances[0];
+
+      expect(
+        board.moveInputHandler!({ type: "somethingElse" }),
+      ).toBeUndefined();
+    });
   });
 });

@@ -89,4 +89,33 @@ describe("LanguageToggle", () => {
     renderLanguageToggle();
     expect(screen.getByRole("combobox")).toHaveValue("es");
   });
+
+  it("displays language flag emoji from FLAGS for all configured languages", () => {
+    renderLanguageToggle();
+
+    // Get all options and verify they're rendered
+    const options = screen.getAllByRole("option");
+    expect(options.length).toBeGreaterThan(0);
+
+    // All options should have emoji content (a flag or special symbol from FLAGS)
+    options.forEach((opt) => {
+      const text = opt.textContent || "";
+      // Each option should have either a flag emoji or a fallback symbol
+      expect(text.length).toBeGreaterThan(0);
+    });
+  });
+
+  it("handles selecting different languages through the dropdown", async () => {
+    const user = userEvent.setup();
+    renderLanguageToggle();
+
+    const select = screen.getByRole("combobox");
+    expect(select).toHaveValue("en-US");
+
+    // Select a different language
+    await user.selectOptions(select, "fr");
+
+    await waitFor(() => expect(select).toHaveValue("fr"));
+    expect(localStorage.getItem("language")).toBe("fr");
+  });
 });

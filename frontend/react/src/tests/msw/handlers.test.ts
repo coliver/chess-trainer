@@ -31,4 +31,14 @@ describe("default MSW handlers", () => {
     const res = await client.post("/training-sessions/5/responses", {});
     expect(res.data).toMatchObject({ correct: true, sessionCompleted: false });
   });
+
+  it("GET /training-sessions/:id/next handles requests with query strings", async () => {
+    const res = await client.get("/training-sessions/7/next?timestamp=123");
+    expect(res.data).toMatchObject({
+      sessionId: 7,
+      itemId: 10,
+      openingEco: "C20",
+      correctMoveUci: "e2e4",
+    });
+  });
 });
