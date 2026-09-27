@@ -4,6 +4,17 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ## September 26, 2026
 
+### 🛠️ Infrastructure
+
+#### Deploy frees disk space before building
+
+> The prod deploy already pruned Docker images and build cache at the end of a run, but that step
+> only runs after a successful deploy. When the 20GB root disk filled up mid-deploy (ENOSPC in
+> `npm ci`), the cleanup never ran and every later deploy would have failed the same way. The
+> prune (`docker builder prune -af`, `docker image prune -af`) now also runs at the start, so a
+> nearly full disk recovers on the next run. Unused images and cache only; running containers
+> and volumes are untouched.
+
 ### ⚡ Improved
 
 #### 📱 Mobile quick wins
