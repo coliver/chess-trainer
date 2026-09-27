@@ -325,6 +325,18 @@ export const Dashboard = () => {
             aria-label={t("dashboard.progress.yourProgress")}
             data-mobile-tab={mobileStatTab}
           >
+            <div className="progress-review-section">
+              <div className="progress-stat">
+                <button
+                  type="button"
+                  className="progress-review-btn"
+                  disabled={dueCount === 0}
+                  onClick={startReviewSession}
+                >
+                  {t("dashboard.progress.reviewDue", { count: dueCount })}
+                </button>
+              </div>
+            </div>
             <div
               className="progress-group progress-group--training"
               aria-label={t("dashboard.progress.trainingLabel")}
@@ -385,16 +397,6 @@ export const Dashboard = () => {
                     </div>
                   )}
                 </ProgressStat>
-                <div className="progress-stat">
-                  <button
-                    type="button"
-                    className="progress-review-btn"
-                    disabled={dueCount === 0}
-                    onClick={startReviewSession}
-                  >
-                    {t("dashboard.progress.reviewDue", { count: dueCount })}
-                  </button>
-                </div>
               </div>
 
               {(weakSpots.length > 0 || troubleSteps.length > 0) && (

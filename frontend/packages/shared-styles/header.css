@@ -95,8 +95,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 12px;
   border: 1px solid transparent;
   background: var(--social-bg);
@@ -121,8 +121,8 @@
 
 /* language toggle */
 .language-toggle-select {
-  height: 40px;
-  width: 40px;
+  height: 44px;
+  width: 44px;
   padding: 0;
   border-radius: 12px;
   border: 1px solid transparent;
@@ -153,8 +153,8 @@
 
 /* theme toggle */
 .theme-toggle-btn {
-  height: 40px;
-  width: 40px;
+  height: 44px;
+  width: 44px;
   padding: 0;
   border-radius: 12px;
   border: 1px solid transparent;
@@ -270,8 +270,8 @@
 }
 
 .home-header-menu-button {
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;

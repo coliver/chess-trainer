@@ -45,15 +45,19 @@
   margin-bottom: 16px;
   border-bottom: 1px solid var(--border);
 }
+.progress-review-section {
+  display: flex;
+  gap: 14px;
+}
 .progress-group-label {
   margin: 0 0 8px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   text-align: left;
-  color: var(--text);
-  opacity: 0.85;
+  color: var(--accent-fg);
+  opacity: 1;
 }
 .progress-group-row {
   display: flex;
@@ -737,6 +741,16 @@
     padding-bottom: 14px;
     margin-bottom: 14px;
   }
+  .progress-review-section {
+    display: flex;
+    gap: 0;
+  }
+  .progress-review-section .progress-stat {
+    width: 100%;
+    padding: 0;
+    border: none;
+    background: none;
+  }
   .progress-group-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -758,12 +772,6 @@
   }
   .progress-stat--mastery {
     min-width: 0;
-  }
-  .progress-stat:has(.progress-review-btn) {
-    grid-column: 1 / -1;
-    background: none;
-    border: none;
-    padding: 0;
   }
   .progress-review-btn {
     width: 100%;
@@ -837,6 +845,10 @@
     display: none;
   }
 
+  /* Hide review section when puzzles tab is active, since it's for training only. */
+  .progress-overview[data-mobile-tab="puzzles"] .progress-review-section {
+    display: none;
+  }
   /* Below the desktop two-column split, Training and Puzzles stacking
      full-height each burns too much vertical space, so tablet adopts the
      phone's segmented toggle instead of showing both at once. */
@@ -861,6 +873,10 @@
     padding: 8px 0;
     cursor: pointer;
     transition: background 0.15s ease, color 0.15s ease;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .stat-tab.active {
     background: var(--card-bg);

@@ -86,8 +86,8 @@ html[data-theme="dark"] {
   border: 1px solid var(--border);
 }
 .board-toolbar .btn {
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   padding: 0;
   border-radius: 9px;
   border: 1px solid transparent;
