@@ -27,6 +27,15 @@
   opacity: 0.28;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .cm-chessboard .markers .marker.marker-square-blink {
+    animation: none;
+  }
+  .flip-icon {
+    transition: none;
+  }
+}
+
 @keyframes board-blink {
   0% {
     opacity: 0.1;

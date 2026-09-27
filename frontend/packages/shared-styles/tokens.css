@@ -48,6 +48,10 @@
 :root {
   --eco-chip-fg: var(--accent);
   --eco-chip-bg: rgba(181, 72, 42, 0.03);
+  /* Accent for small text and icons (tab labels, eyebrows). Same as --accent
+     on light; dark swaps in a lighter mauve because --accent itself is ~2.4:1
+     on the dark card surface. */
+  --accent-fg: var(--accent);
 }
 
 @media (max-width: 1024px) {
@@ -75,6 +79,7 @@ html[data-theme="dark"] {
      dark chip background — same hue family, tuned for legibility. */
   --eco-chip-fg: #c97b96;
   --eco-chip-bg: rgba(138, 63, 86, 0.15);
+  --accent-fg: #c97b96;
 
   --social-bg: rgba(47, 48, 58, 0.5);
 

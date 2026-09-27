@@ -344,6 +344,17 @@
   box-shadow: var(--shadow);
   transform: translateY(-2px);
 }
+@media (hover: none) {
+  /* No hover on touch: the lift would stay stuck after a tap. */
+  .opening-card:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--border);
+  }
+}
+.opening-card:active {
+  transform: scale(0.98);
+}
 .opening-card:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
@@ -777,8 +788,24 @@
     min-width: 0;
     flex: 1 1 100%;
   }
+  /* 16px stops iOS Safari zooming the page when the field is focused. */
+  .ob-search input {
+    height: 44px;
+    font-size: 16px;
+  }
   .ob-sort {
     flex: 1 1 auto;
+    min-height: 44px;
+  }
+  .ob-color-filter-btn {
+    height: 44px;
+  }
+  .stat-tab {
+    min-height: 44px;
+  }
+  .ply-btn {
+    min-height: 44px;
+    font-size: 14px;
   }
   .ob-body {
     margin-top: 14px;

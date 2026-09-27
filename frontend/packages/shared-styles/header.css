@@ -538,12 +538,17 @@
     padding: 6px 0;
     color: var(--text);
     text-decoration: none;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
+    min-height: 44px;
+  }
+
+  .bottom-tab:active {
+    opacity: 0.6;
   }
 
   .bottom-tab.active {
-    color: var(--accent);
+    color: var(--accent-fg);
   }
 
   .home-header-tabs {
@@ -591,17 +596,28 @@
 
   .site-header-profile-link {
     box-sizing: border-box;
-    width: 34px;
-    height: 34px;
+    width: 44px;
+    height: 44px;
   }
 
   .theme-toggle-btn {
-    width: 34px;
-    height: 34px;
+    width: 44px;
+    height: 44px;
   }
 
   .language-toggle-select {
-    height: 34px;
-    width: 34px;
+    height: 44px;
+    width: 44px;
+  }
+
+  .home-header-menu-button,
+  .game-header-back,
+  .game-header-settings {
+    width: 44px;
+    height: 44px;
+  }
+
+  .game-header-inner {
+    height: 60px;
   }
 }

@@ -4,6 +4,25 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ## September 26, 2026
 
+### ⚡ Improved
+
+#### 📱 Mobile quick wins
+
+> Phone-usability pass across the shared styles and each frontend's `index.html`.
+> `viewport-fit=cover` is now set, so the existing `env(safe-area-inset-*)` rules actually apply
+> (landscape notch padding added on `body`), plus `theme-color` meta for light/dark browser chrome.
+> Phone touch targets are now 44px (header buttons, board toolbar, rail controls, filters, ply
+> buttons); the openings search is 16px so iOS Safari no longer zooms on focus. Tab labels and
+> eyebrows are 12px, and a new `--accent-fg` token gives the lighter mauve to small text and icons
+> in dark mode (the active tab was about 2.4:1). Opening cards no longer stay lifted after a tap
+> (`hover: none` guard), buttons and cards get `:active` press states, controls use
+> `touch-action: manipulation`, and the correct-move blink respects `prefers-reduced-motion`.
+>
+> Phone layout for Training and Puzzles: the board now runs edge to edge (the page and card
+> gutters are dropped around it, was about 334px on a 390px screen), and on Training the Prev/Next
+> buttons and typed-move form become a sticky bottom dock in thumb reach, padded for the
+> home-indicator safe area. CSS only, so it applies to every frontend that loads the shared styles.
+
 ### 📝 Docs
 
 #### Backend architecture doc re-synced with the code
