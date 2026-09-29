@@ -274,7 +274,7 @@ describe("Dashboard", () => {
 
     expect(await screen.findByText("40")).toBeInTheDocument();
     expect(screen.getByText("76%")).toBeInTheDocument();
-    expect(screen.getByText(/3 🔥/)).toBeInTheDocument();
+    expect(screen.getByText("3")).toBeInTheDocument();
     expect(screen.getByText(/best 7/)).toBeInTheDocument();
 
     const weakestOpeningTile = screen.getByRole("group", {

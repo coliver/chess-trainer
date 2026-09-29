@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 type Props = {
-  icon: string;
+  icon: ReactNode;
   value: ReactNode;
   label: ReactNode;
   variant?: "mastery";

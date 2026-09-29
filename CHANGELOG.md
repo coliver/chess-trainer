@@ -2,6 +2,34 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ---
 
+## September 29, 2026
+
+### 🐛 Fixed
+
+#### Dashboard progress column no longer has dead space under "Review due"
+
+> On wide screens the progress overview grid put the Review-due button in the same row as the
+> Training column (stats + weak-spot cards), so the row sized itself to Training's height and
+> left a large empty gap under the short Review-due button. Review-due and Puzzles now share one
+> flex column (`progress-col--left`), so their own combined height sets that column's row instead
+> of borrowing Training's.
+
+#### Weakest Opening card no longer truncates the opening name
+
+> `.ws-title` forced `white-space: nowrap` with an ellipsis even when the card had vertical room
+> to spare. It now wraps up to two lines before clipping.
+
+### ⚡ Improved
+
+#### Dashboard stat icons switched from emoji to Lucide
+
+> The progress-stat icons (positions trained, accuracy, streak, mastered, puzzles solved) were
+> raw emoji, which render inconsistently across OSes and can't be tinted via CSS — the same
+> problem already fixed for the greeting and hint icons. Swapped in Lucide's Swords/Target/Flame/
+> Trophy/Puzzle to match.
+
+---
+
 ## September 26, 2026
 
 ### 🛠️ Infrastructure

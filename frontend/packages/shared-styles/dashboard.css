@@ -45,6 +45,11 @@
   margin-bottom: 16px;
   border-bottom: 1px solid var(--border);
 }
+.progress-col--left {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
 .progress-review-section {
   display: flex;
   gap: 14px;
@@ -95,6 +100,8 @@
   color: var(--text-h);
 }
 .progress-stat-icon {
+  display: inline-flex;
+  align-items: center;
   font-size: 14px;
   line-height: 1;
   opacity: 0.55;
@@ -159,19 +166,26 @@
   filter: brightness(1.08);
 }
 
-/* On wide screens, put Training and Puzzles side by side as one KPI
-   strip instead of two short stacked rows with dead space beside them. */
+/* On wide screens, put the Review-due/Puzzles column beside Training as one
+   KPI strip instead of two short stacked rows with dead space beside them.
+   Review-due and Puzzles share a column (progress-col--left) so their
+   combined height sets that column's own row — it no longer has to match
+   Training's taller column, which used to leave a dead gap under the
+   Review-due button. */
 @media (min-width: 981px) {
   .progress-overview {
     display: grid;
-    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
     align-items: start;
     column-gap: 24px;
     row-gap: 0;
   }
+  .progress-col--left {
+    gap: 20px;
+  }
   .progress-group--puzzles {
-    padding-left: 24px;
-    border-left: 1px solid var(--border);
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
   }
 }
 
@@ -934,9 +948,10 @@
   font-size: 15px;
   font-weight: 650;
   color: var(--text-h);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .ws-stat {

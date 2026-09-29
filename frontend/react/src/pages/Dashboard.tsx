@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { Sunrise, Sun, Moon } from "lucide-react";
+import { Sunrise, Sun, Moon, Swords, Target, Flame, Trophy, Puzzle } from "lucide-react";
 import api from "../api";
 import { useApiResource } from "../hooks/useApiResource";
 import { useAuth } from "../hooks/useAuth";
@@ -325,16 +325,58 @@ export const Dashboard = () => {
             aria-label={t("dashboard.progress.yourProgress")}
             data-mobile-tab={mobileStatTab}
           >
-            <div className="progress-review-section">
-              <div className="progress-stat">
-                <button
-                  type="button"
-                  className="progress-review-btn"
-                  disabled={dueCount === 0}
-                  onClick={startReviewSession}
-                >
-                  {t("dashboard.progress.reviewDue", { count: dueCount })}
-                </button>
+            <div className="progress-col progress-col--left">
+              <div className="progress-review-section">
+                <div className="progress-stat">
+                  <button
+                    type="button"
+                    className="progress-review-btn"
+                    disabled={dueCount === 0}
+                    onClick={startReviewSession}
+                  >
+                    {t("dashboard.progress.reviewDue", { count: dueCount })}
+                  </button>
+                </div>
+              </div>
+
+              <div
+                className="progress-group progress-group--puzzles"
+                aria-label={t("dashboard.progress.puzzleLabel")}
+              >
+                <h2 className="progress-group-label">
+                  {t("dashboard.progress.puzzlesHeading")}
+                </h2>
+                <div className="progress-group-row">
+                  <ProgressStat
+                    icon={<Puzzle size={14} aria-hidden="true" />}
+                    value={puzzleSummary?.puzzlesSeen ?? 0}
+                    label={t("dashboard.progress.puzzlesSolved")}
+                  />
+                  <ProgressStat
+                    icon={<Target size={14} aria-hidden="true" />}
+                    value={
+                      puzzleSummary?.overallAccuracy != null &&
+                      puzzleSummary.puzzlesSeen > 0
+                        ? `${Math.round(puzzleSummary.overallAccuracy * 100)}%`
+                        : "—"
+                    }
+                    label={t("dashboard.progress.accuracy")}
+                  />
+                  <ProgressStat
+                    icon={<Trophy size={14} aria-hidden="true" />}
+                    value={puzzleSummary?.mastered ?? 0}
+                    label={t("dashboard.progress.mastered")}
+                  />
+                  <div className="progress-stat">
+                    <button
+                      type="button"
+                      className="progress-review-btn"
+                      onClick={() => navigate("/puzzles/themes")}
+                    >
+                      {t("dashboard.progress.practicePuzzles")}
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
             <div
@@ -346,12 +388,12 @@ export const Dashboard = () => {
               </h2>
               <div className="progress-group-row">
                 <ProgressStat
-                  icon="♟️"
+                  icon={<Swords size={14} aria-hidden="true" />}
                   value={summary?.positionsSeen ?? 0}
                   label={t("dashboard.progress.positionsTrained")}
                 />
                 <ProgressStat
-                  icon="🎯"
+                  icon={<Target size={14} aria-hidden="true" />}
                   value={
                     summary?.overallAccuracy != null
                       ? `${Math.round(summary.overallAccuracy * 100)}%`
@@ -360,13 +402,8 @@ export const Dashboard = () => {
                   label={t("dashboard.progress.accuracy")}
                 />
                 <ProgressStat
-                  icon="📅"
-                  value={
-                    <>
-                      {summary?.currentStreak ?? 0}
-                      {(summary?.currentStreak ?? 0) > 0 ? " 🔥" : ""}
-                    </>
-                  }
+                  icon={<Flame size={14} aria-hidden="true" />}
+                  value={summary?.currentStreak ?? 0}
                   label={
                     summary?.longestStreak
                       ? t("dashboard.progress.dayStreakBest", {
@@ -376,7 +413,7 @@ export const Dashboard = () => {
                   }
                 />
                 <ProgressStat
-                  icon="🏆"
+                  icon={<Trophy size={14} aria-hidden="true" />}
                   value={summary?.mastered ?? 0}
                   label={t("dashboard.progress.mastered")}
                   variant="mastery"
@@ -561,46 +598,6 @@ export const Dashboard = () => {
                   )}
                 </div>
               )}
-            </div>
-
-            <div
-              className="progress-group progress-group--puzzles"
-              aria-label={t("dashboard.progress.puzzleLabel")}
-            >
-              <h2 className="progress-group-label">
-                {t("dashboard.progress.puzzlesHeading")}
-              </h2>
-              <div className="progress-group-row">
-                <ProgressStat
-                  icon="🧩"
-                  value={puzzleSummary?.puzzlesSeen ?? 0}
-                  label={t("dashboard.progress.puzzlesSolved")}
-                />
-                <ProgressStat
-                  icon="🎯"
-                  value={
-                    puzzleSummary?.overallAccuracy != null &&
-                    puzzleSummary.puzzlesSeen > 0
-                      ? `${Math.round(puzzleSummary.overallAccuracy * 100)}%`
-                      : "—"
-                  }
-                  label={t("dashboard.progress.accuracy")}
-                />
-                <ProgressStat
-                  icon="🏆"
-                  value={puzzleSummary?.mastered ?? 0}
-                  label={t("dashboard.progress.mastered")}
-                />
-                <div className="progress-stat">
-                  <button
-                    type="button"
-                    className="progress-review-btn"
-                    onClick={() => navigate("/puzzles/themes")}
-                  >
-                    {t("dashboard.progress.practicePuzzles")}
-                  </button>
-                </div>
-              </div>
             </div>
           </section>
 
