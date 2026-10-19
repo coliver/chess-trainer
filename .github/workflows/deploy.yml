@@ -37,16 +37,20 @@ jobs:
             --instance-ids "$INSTANCE_ID" \
             --document-name "AWS-RunShellScript" \
             --comment "Deploy chess-trainer ${{ github.sha }}" \
-            --parameters commands='[
-              "cd /home/ec2-user/chess-trainer && git fetch origin main --tags && git reset --hard origin/main",
-              "cd /home/ec2-user/chess-trainer && bash scripts/deploy.sh"
-            ]' \
+            --parameters 'commands=["sudo -u ec2-user -H bash -c \"cd /home/ec2-user/chess-trainer && git fetch origin main --tags && git reset --hard origin/main && bash scripts/deploy.sh\""]' \
             --query "Command.CommandId" --output text)
 
           echo "SSM command: $COMMAND_ID"
-          aws ssm wait command-executed --command-id "$COMMAND_ID" --instance-id "$INSTANCE_ID" || true
 
-          STATUS=$(aws ssm get-command-invocation --command-id "$COMMAND_ID" --instance-id "$INSTANCE_ID" --query "Status" --output text)
+          # The built-in waiter gives up after ~100s; the deploy takes minutes.
+          # Poll up to 30 min instead.
+          for _ in $(seq 1 120); do
+            STATUS=$(aws ssm get-command-invocation --command-id "$COMMAND_ID" --instance-id "$INSTANCE_ID" --query "Status" --output text 2>/dev/null || echo Pending)
+            case "$STATUS" in
+              Pending|InProgress|Delayed) sleep 15 ;;
+              *) break ;;
+            esac
+          done
           echo "--- stdout ---"
           aws ssm get-command-invocation --command-id "$COMMAND_ID" --instance-id "$INSTANCE_ID" --query "StandardOutputContent" --output text
           echo "--- stderr ---"
