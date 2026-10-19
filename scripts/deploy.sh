@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+# Runs on the prod host (via SSM, see .github/workflows/deploy.yml) after
+# git fetch/reset has already placed the new commit on disk.
+set -euo pipefail
+cd /home/ec2-user/chess-trainer
+
+APP_VERSION="$(git describe --tags --always)"
+
+# Free space BEFORE building. The cleanup at the end of this script only
+# runs if the deploy succeeds, so a disk that fills up mid-deploy (ENOSPC
+# in `npm ci` on 2026-09-26) would otherwise stay full and fail every
+# later deploy too. Unused images and build cache only; running
+# containers and volumes are untouched.
+docker builder prune -af
+docker image prune -af
+
+# .env lives on the host (gitignored, provisioned by hand) and is
+# auto-loaded by `docker compose` for its own interpolation, but this
+# build step shells out to a bare node container instead, so source it
+# here so VITE_SENTRY_DSN reaches that container too.
+set -a
+[ -f .env ] && source .env
+set +a
+
+# Host has no Node installed; build the frontend/chess-core bundles with
+# a throwaway node container instead.
+docker run --rm -v "$(pwd)":/work -w /work/frontend/packages/chess-core node:20 \
+  sh -c 'npm ci && npm run build'
+docker run --rm -v "$(pwd)":/work -w /work/frontend/react \
+  -e VITE_APP_VERSION="$APP_VERSION" \
+  -e VITE_SENTRY_DSN="${VITE_SENTRY_DSN:-}" \
+  -e VITE_SENTRY_ENVIRONMENT=production \
+  node:20 sh -c 'npm ci && npm run build'
+docker run --rm -v "$(pwd)":/work -w /work/frontend/angular node:22 \
+  sh -c 'npm ci && npm run build'
+
+# --renew-anon-volumes: rails/angular mount an anonymous volume over
+# /app/node_modules to keep container deps isolated from the host
+# bind-mount (see docker-compose.yml). Without this flag, `up -d --build`
+# reuses that volume's content from the PREVIOUS container even when the
+# freshly built image would have different node_modules, e.g. a newly
+# added npm dependency stays invisible at runtime until the volume
+# itself is recreated, no matter how many times the image is rebuilt.
+docker compose -f docker-compose.yml -f docker-compose.prod.yml \
+  up -d --build --renew-anon-volumes db api rails nginx
+
+# nginx's config is a bind-mounted directory (nginx/conf-prod), so
+# `up -d` won't recreate the nginx container just because a .conf file's
+# contents changed underneath it: the running worker keeps serving
+# whatever config it loaded at last start or reload. Reload explicitly
+# so config-only changes (new location blocks, etc.) actually take
+# effect on every deploy.
+docker compose -f docker-compose.yml -f docker-compose.prod.yml \
+  exec -T nginx nginx -s reload
