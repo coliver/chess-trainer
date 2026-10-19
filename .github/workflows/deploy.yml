@@ -29,9 +29,10 @@ jobs:
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts
+          set -x
+          ssh-keyscan -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts || echo "ssh-keyscan exited $?"
 
-          ssh -i ~/.ssh/deploy_key "$DEPLOY_USER@$DEPLOY_HOST" bash -s <<'EOF'
+          ssh -v -o StrictHostKeyChecking=accept-new -i ~/.ssh/deploy_key "$DEPLOY_USER@$DEPLOY_HOST" bash -s <<'EOF'
             set -euo pipefail
             cd /home/ec2-user/chess-trainer
 
