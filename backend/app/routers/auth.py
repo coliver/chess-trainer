@@ -2,6 +2,7 @@
 import base64
 import hashlib
 import hmac
+import logging
 import os
 from datetime import datetime, timedelta, timezone
 from typing import Any
@@ -16,6 +17,7 @@ from backend.app.modules.shared.rate_limit import rate_limit
 from backend.app.modules.users.models import User
 
 router = APIRouter(prefix="/auth", tags=["auth"])
+logger = logging.getLogger(__name__)
 
 
 class RegisterRequest(BaseModel):
@@ -106,12 +108,17 @@ def login(req: LoginRequest, db=Depends(get_db)):
 
     if user is None:
         verify_password(req.password, _DUMMY_PASSWORD_HASH)
+        logger.warning(
+            "Login failed: unknown user (email=%s, username=%s)", req.email, req.username
+        )
         raise HTTPException(status_code=401, detail="Invalid credentials")
 
     if not verify_password(req.password, user.password_hash):
+        logger.warning("Login failed: bad password for user_id=%s", user.id)
         raise HTTPException(status_code=401, detail="Invalid credentials")
 
     if _email_verification_required() and not user.email_verified:
+        logger.warning("Login blocked: email not verified for user_id=%s", user.id)
         raise HTTPException(status_code=403, detail="Email not verified")
 
     access_token = create_access_token(user.id)

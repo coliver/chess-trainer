@@ -2,6 +2,36 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ---
 
+## October 19, 2026
+
+### 🛠️ Infrastructure
+
+#### Backend logging audit: app logs were silently dropped, API saw nginx's IP instead of the client's
+
+> Nothing configured the root logger, so `logging.info`/`logger.exception` calls anywhere in
+> the backend (e.g. the SMTP-not-configured verification link, `record_attempt` failures)
+> produced no output at all — confirmed by running the api container standalone. Fixed with
+> a `logging.basicConfig` call in `app.py`. Separately, uvicorn only trusts `X-Forwarded-For`
+> from `127.0.0.1` by default, so behind the nginx proxy every request's `request.client.host`
+> was nginx's own container IP — not just wrong in logs, but meant the `/auth/login` rate
+> limiter (keyed by client IP) was shared across every real user. Fixed by adding
+> `--forwarded-allow-ips=*` to uvicorn (safe here: the `api` container is never exposed to the
+> host, only reachable via nginx on the docker network). Also added `logger.warning` calls on
+> failed login attempts in `auth.py` (unknown user, bad password, unverified email) — there
+> was previously no trace of failed auth attempts anywhere. Frontend logging (Sentry on React)
+> and off-box log shipping were reviewed but left as-is / follow-up items.
+
+#### Prod EC2 instance now stops overnight to cut cost
+
+> `knightschool-click` was sharing its AWS bill with two unrelated EC2 instances (`wikijs`,
+> `aq2-server`) that had been running 24/7 since August — that's what made the bill look like
+> $45/month for a single t3.small. Both were cleaned up (`wikijs` backed up to an AMI first,
+> then terminated; `aq2-server` was already gone). Separately, the prod instance now has an
+> Elastic IP (`34.202.78.114`, DNS updated) and two EventBridge Scheduler schedules
+> (DST-aware via the `America/New_York` timezone) that stop it at 1am ET and start it at 7am ET,
+> saving a few dollars a month. No holding page during that window — a visit between 1-7am ET
+> just fails to connect.
+
 ## September 29, 2026
 
 ### 🐛 Fixed

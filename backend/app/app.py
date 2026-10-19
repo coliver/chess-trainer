@@ -1,4 +1,5 @@
 # backend/app/app.py
+import logging
 import os
 
 import sentry_sdk
@@ -25,6 +26,11 @@ from backend.app.routers.puzzles import render_puzzle_summary
 from backend.app.routers.puzzles import router as puzzles_router
 from backend.app.routers.training import router as training_router
 from backend.app.routers.users import router as users_router
+
+logging.basicConfig(
+    level=os.environ.get("LOG_LEVEL", "INFO"),
+    format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+)
 
 if dsn := os.environ.get("SENTRY_DSN"):
     sentry_sdk.init(

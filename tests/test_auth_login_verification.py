@@ -9,7 +9,7 @@ from backend.app.routers.auth import verify_password
 client = TestClient(app)
 
 
-def test_login_blocked_when_email_not_verified(unverified_user, monkeypatch):
+def test_login_blocked_when_email_not_verified(unverified_user, monkeypatch, caplog):
     monkeypatch.setenv("EMAIL_VERIFICATION_REQUIRED", "true")
     response = client.post(
         "/auth/login",
@@ -18,6 +18,7 @@ def test_login_blocked_when_email_not_verified(unverified_user, monkeypatch):
 
     assert response.status_code == 403
     assert response.json()["detail"] == "Email not verified"
+    assert any("Login blocked: email not verified" in r.message for r in caplog.records)
 
 
 def test_login_succeeds_when_email_verified(test_user):

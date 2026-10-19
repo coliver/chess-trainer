@@ -233,7 +233,7 @@ def test_login_requires_email_or_username_400(jwt_env):
     assert e.value.detail == "Provide email or username"
 
 
-def test_login_unknown_user_401(jwt_env):
+def test_login_unknown_user_401(jwt_env, caplog):
     db = FakeDB(users=[])
 
     req = LoginRequest(email="missing@example.com", username=None, password="pw123")
@@ -242,9 +242,13 @@ def test_login_unknown_user_401(jwt_env):
 
     assert e.value.status_code == 401
     assert e.value.detail == "Invalid credentials"
+    assert any(
+        "Login failed: unknown user" in r.message and "missing@example.com" in r.message
+        for r in caplog.records
+    )
 
 
-def test_login_wrong_password_401(jwt_env):
+def test_login_wrong_password_401(jwt_env, caplog):
     u = User(
         id=1,
         email="a@example.com",
@@ -260,6 +264,7 @@ def test_login_wrong_password_401(jwt_env):
 
     assert e.value.status_code == 401
     assert e.value.detail == "Invalid credentials"
+    assert any("Login failed: bad password for user_id=1" in r.message for r in caplog.records)
 
 
 def test_login_unverified_email_403(jwt_env):

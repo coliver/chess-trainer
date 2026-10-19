@@ -48,7 +48,7 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    command: sh -c "PYTHONPATH=/app alembic -c backend/app/migrations/alembic.ini upgrade head && uvicorn backend.app.app:app --host=0.0.0.0 --port=8000 --reload"
+    command: sh -c "PYTHONPATH=/app alembic -c backend/app/migrations/alembic.ini upgrade head && uvicorn backend.app.app:app --host=0.0.0.0 --port=8000 --reload --forwarded-allow-ips=*"
     restart: unless-stopped
 
   react:
