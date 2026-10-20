@@ -1,5 +1,5 @@
 fastapi==0.141.1
-uvicorn[standard]==0.52.4
+uvicorn[standard]==0.54.0
 sqlalchemy==2.0.52
 psycopg[binary]==3.3.5
 python-chess==1.999
