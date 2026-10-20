@@ -1,14 +1,19 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Board from "../Board";
+import usePrefersReducedMotion from "../../hooks/usePrefersReducedMotion";
 import { previewFen, uciListToMoves } from "@knight-school/chess-core";
 import { colorOf, type OpeningGroup } from "../../lib/groupOpenings";
+
+const STEP_MS = 700;
+const END_PAUSE_MS = 1500;
 
 /**
  * A base-opening card: board thumbnail (of the line's resulting position),
  * full name, variation count, and an ECO chip. The board is a real cm-chessboard
  * but is only mounted once the card scrolls near the viewport, so a grid of ~149
- * cards does not spin up 149 boards at once.
+ * cards does not spin up 149 boards at once. Hovering with a mouse replays the
+ * line from the start, pausing on the final position before looping.
  */
 export default function OpeningCard({
   group,
@@ -40,10 +45,23 @@ export default function OpeningCard({
   }, [visible]);
 
   const rep = group.representative;
-  const fen = useMemo(
-    () => previewFen(rep, uciListToMoves(rep.uci_moves).length),
-    [rep],
-  );
+  const total = useMemo(() => uciListToMoves(rep.uci_moves).length, [rep]);
+  const restingFen = useMemo(() => previewFen(rep, total), [rep, total]);
+  const reduceMotion = usePrefersReducedMotion();
+  const [hovering, setHovering] = useState(false);
+  const [ply, setPly] = useState(0);
+
+  // Step one ply per tick, pause on the final position, then loop back to 0.
+  useEffect(() => {
+    if (!hovering || reduceMotion || total === 0) return;
+    const id = setTimeout(
+      () => setPly((p) => (p >= total ? 0 : p + 1)),
+      ply >= total ? END_PAUSE_MS : STEP_MS,
+    );
+    return () => clearTimeout(id);
+  }, [hovering, reduceMotion, ply, total]);
+
+  const fen = hovering && !reduceMotion && total > 0 ? previewFen(rep, ply) : restingFen;
   const orientation = colorOf(group.base) === "b" ? "black" : "white";
 
   return (
@@ -53,6 +71,12 @@ export default function OpeningCard({
       className={`opening-card${selected ? " selected" : ""}`}
       onClick={onSelect}
       aria-pressed={selected}
+      onPointerEnter={(e) => {
+        if (e.pointerType !== "mouse" || reduceMotion) return;
+        setPly(0);
+        setHovering(true);
+      }}
+      onPointerLeave={() => setHovering(false)}
     >
       <div className="oc-thumb">
         {visible ? (
@@ -61,7 +85,6 @@ export default function OpeningCard({
             orientation={orientation}
             interactive={false}
             showCoordinates={false}
-            animated={false}
           />
         ) : (
           <div className="oc-thumb-ph" aria-hidden="true" data-testid="oc-thumb-placeholder" />

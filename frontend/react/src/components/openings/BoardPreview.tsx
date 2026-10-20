@@ -1,8 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Board from "../Board";
+import usePrefersReducedMotion from "../../hooks/usePrefersReducedMotion";
 import { uciListToMoves, previewFen } from "@knight-school/chess-core";
 import type { Opening } from "../../pages/Dashboard";
+
+// Delay between moves while a newly selected line plays, and the hold on the
+// final position before it loops.
+const STEP_MS = 700;
+const END_PAUSE_MS = 1500;
 
 export default function BoardPreview({
   openings,
@@ -16,14 +22,49 @@ export default function BoardPreview({
 }) {
   const { t } = useTranslation();
 
-  // Callers remount this via a `key` on the selected opening, so selectedPly
-  // starts fresh for each newly previewed line — a ply index never leaks
-  // from a longer line onto a shorter one. Default to the final ply so the
-  // preview opens showing the completed line, not the start position.
-  const [selectedPly, setSelectedPly] = useState(() => {
-    const opening = openings.find((o) => o.name === selectedOpeningName);
-    return uciListToMoves(opening?.uci_moves).length;
-  });
+  const opening = useMemo(
+    (): Opening | null =>
+      openings.find((o) => o.name === selectedOpeningName) ?? null,
+    [openings, selectedOpeningName],
+  );
+
+  const moveList = useMemo(
+    () => uciListToMoves(opening?.uci_moves),
+    [opening],
+  );
+
+  // Callers remount this via a `key` on the selected opening, so state starts
+  // fresh for each newly previewed line — a ply index never leaks from a
+  // longer line onto a shorter one. Each new line plays through from the start
+  // position, pauses on the final ply and loops; clicking any ply button takes over.
+  // With reduced motion there is no autoplay: open on the final ply instead.
+  const reduceMotion = usePrefersReducedMotion();
+  const [selectedPly, setSelectedPly] = useState(() =>
+    reduceMotion ? moveList.length : 0,
+  );
+  const [autoplay, setAutoplay] = useState(true);
+  const playing = autoplay && !reduceMotion && moveList.length > 0;
+
+  useEffect(() => {
+    if (!playing) return;
+    const last = moveList.length;
+    const id = setTimeout(
+      () => setSelectedPly((p) => (p >= last ? 0 : p + 1)),
+      selectedPly >= last ? END_PAUSE_MS : STEP_MS,
+    );
+    return () => clearTimeout(id);
+  }, [playing, selectedPly, moveList]);
+
+  const goToPly = (ply: number) => {
+    setAutoplay(false);
+    setSelectedPly(ply);
+  };
+
+  // Start rewinds to the initial position and resumes the loop.
+  const restart = () => {
+    setAutoplay(true);
+    setSelectedPly(0);
+  };
 
   // Measure container width and use it for board sizing
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -46,17 +87,6 @@ export default function BoardPreview({
     ro.observe(el);
     return () => ro.disconnect();
   }, []);
-
-  const opening = useMemo(
-    (): Opening | null =>
-      openings.find((o) => o.name === selectedOpeningName) ?? null,
-    [openings, selectedOpeningName],
-  );
-
-  const moveList = useMemo(
-    () => uciListToMoves(opening?.uci_moves),
-    [opening],
-  );
 
   const previewPosition = useMemo(
     () => previewFen(opening, selectedPly),
@@ -83,7 +113,7 @@ export default function BoardPreview({
         <button
           type="button"
           className={`ply-btn${selectedPly === 0 ? " active" : ""}`}
-          onClick={() => setSelectedPly(0)}
+          onClick={restart}
         >
           {t("dashboard.openings.boardPreviewStart")}
         </button>
@@ -97,7 +127,7 @@ export default function BoardPreview({
               key={`${uci}-${idx}`}
               type="button"
               className={`ply-btn${isActive ? " active" : ""}`}
-              onClick={() => setSelectedPly(plyNumber)}
+              onClick={() => goToPly(plyNumber)}
               title={t("dashboard.openings.boardPreviewAfterPly", { ply: plyNumber })}
             >
               {uci}

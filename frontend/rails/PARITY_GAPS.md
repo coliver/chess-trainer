@@ -142,6 +142,17 @@ renders a `.settings-back-button` (same CSS class and markup as React/Angular) l
 Covered by three new specs in `spec/requests/settings_spec.rb` (default-to-dashboard, honors a safe
 `return_to`, ignores an unsafe one like `//evil.example.com`).
 
+## 11. Opening replay animations (new gap, open)
+
+**Status: open (found 2026-10-19).** React added two motion features to the dashboard opening
+browser: hovering an opening card with a mouse replays its line on the thumbnail (0.7s per move,
+1.5s hold on the final position, loop; back to the final position on leave), and selecting an
+opening autoplays and loops it in the side-panel preview (Start rewinds and resumes, any move
+button stops it). Both are off under `prefers-reduced-motion`. See React's
+`components/openings/OpeningCard.tsx` and `BoardPreview.tsx`, plus
+`hooks/usePrefersReducedMotion.ts`. The ply-0 position fix these depended on is in chess-core's
+`previewFen`, so it is already shared.
+
 ## Suggested backport order
 
 1. ~~Puzzle multi-move handling fix (§1)~~ — landed 2026-09-04.
@@ -151,4 +162,4 @@ Covered by three new specs in `spec/requests/settings_spec.rb` (default-to-dashb
 5. ~~Minor: send active locale on register instead of hardcoded `en-US` (§6)~~ — landed 2026-09-05.
 6. ~~Settings back-navigation via `return_to` (§10)~~ — landed 2026-09-05.
 
-All tracked gaps are now closed.
+All tracked gaps through §10 are closed; §11 is open.

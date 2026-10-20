@@ -150,6 +150,7 @@ What each client implements today, at a glance. ✅ shipped · 🟡 partial · �
 | Login / Register | ✅ | ✅ | ✅ |
 | Email verification | ✅ | ✅ | ✅ |
 | Dashboard / opening browser | ✅ | ✅ | ✅ |
+| Opening replay animations | ✅ | ⬜ | ⬜ |
 | Training drills | ✅ | ✅ | ✅ |
 | Black-side play | ✅ | ✅ | ✅ |
 | Autoplay | ✅ | ✅ | ✅ |

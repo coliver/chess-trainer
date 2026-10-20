@@ -4,6 +4,39 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ## October 19, 2026
 
+### ✨ Added
+
+#### Opening cards replay on hover, and picking an opening plays it in the preview
+
+> Hovering a dashboard opening card with a mouse resets its thumbnail board to the start
+> position, plays the line one move at a time, pauses on the final position, then loops until the
+> pointer leaves (the board returns to the final position). Touch pointers are ignored so a tap
+> does not start a replay that never stops. Selecting an opening now plays it through in the
+> side-panel board from the start position, pausing on the final move and looping; clicking a move button
+> takes over and Start rewinds to the initial position and resumes the loop. Both are disabled under `prefers-reduced-motion` (new `usePrefersReducedMotion`
+> hook): cards stay static and the preview opens on the final position. The thumbnail now follows
+> the board-animations preference instead of being forced off.
+
+### 🐛 Fixed
+
+#### Progress tracking: concurrent first attempts no longer lose data
+
+> `record_attempt` and `record_streak` read the row, then inserted it if missing. Two simultaneous
+> first attempts at the same position (or the same user's first activity) both missed the row, one
+> hit the unique constraint, and the failure was swallowed by the best-effort wrapper in
+> `submit_training_response`, silently dropping that attempt. Both now insert with
+> `ON CONFLICT DO NOTHING` and then read the row with `SELECT ... FOR UPDATE`, so concurrent
+> attempts serialize instead of colliding. Covered by a threaded test that uses real committed
+> sessions.
+
+#### Opening previews: ply 0 showed the finished line instead of the initial position
+
+> `previewFen` (chess-core) returned an opening's EPD for ply 0, but the EPD is the position
+> after the whole line, so every preview's Start button (and the first frame of a replay) looked
+> identical to the last move. It now treats the moves as start-relative: ply 0 is the standard
+> start position, and the EPD is only used on its own (no moves) or when the first move is legal
+> from it. Affects React, Angular and Rails; Rails needs its esbuild bundle rebuilt to pick it up.
+
 ### 🛠️ Infrastructure
 
 #### Backend logging audit: app logs were silently dropped, API saw nginx's IP instead of the client's
