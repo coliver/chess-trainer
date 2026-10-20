@@ -23,7 +23,7 @@
     "chess.js": "^1.4.0"
   },
   "devDependencies": {
-    "tsup": "^8.5.0",
+    "tsup": "^9.0.0",
     "typescript": "~5.7.2",
     "vitest": "^5.0.0"
   },
