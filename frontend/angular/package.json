@@ -24,7 +24,7 @@
     "@angular/core": "^22.1.4",
     "@angular/forms": "^22.1.4",
     "@angular/platform-browser": "^22.1.4",
-    "@angular/platform-browser-dynamic": "^22.1.4",
+    "@angular/platform-browser-dynamic": "^22.2.3",
     "@angular/router": "^22.1.4",
     "@knight-school/chess-core": "file:../packages/chess-core",
     "canvas-confetti": "^1.9.4",
