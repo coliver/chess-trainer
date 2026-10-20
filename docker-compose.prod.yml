@@ -21,6 +21,9 @@
 # included) — so this mounts a whole replacement directory at the exact
 # same target instead, which fully replaces the base mount.
 services:
+  api:
+    # Same as the base command minus --reload (a dev-only file watcher).
+    command: sh -c "PYTHONPATH=/app alembic -c backend/app/migrations/alembic.ini upgrade head && uvicorn backend.app.app:app --host=0.0.0.0 --port=8000 --forwarded-allow-ips=*"
   rails:
     environment:
       RAILS_ENV: production
