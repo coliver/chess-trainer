@@ -32,6 +32,17 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 > saving a few dollars a month. No holding page during that window — a visit between 1-7am ET
 > just fails to connect.
 
+#### Deploys now go through AWS SSM instead of SSH from the GitHub runner
+
+> The deploy job started failing because GitHub's hosted runner could no longer open a TCP
+> connection to port 22 on the prod instance (`ssh -v` showed a plain connect timeout; the key,
+> sshd and security group were all fine). `deploy.yml` now authenticates to AWS with GitHub OIDC
+> (role `knightschool-github-deploy`, scoped to this repo's `main` branch) and runs the deploy
+> over SSM Run Command as `ec2-user`, polling for completion. The deploy steps moved out of the
+> workflow heredoc into `scripts/deploy.sh`. The instance got an SSM instance profile; no
+> inbound port is needed. The `DEPLOY_SSH_KEY`, `DEPLOY_HOST` and `DEPLOY_USER` secrets are now
+> unused.
+
 ## September 29, 2026
 
 ### 🐛 Fixed
