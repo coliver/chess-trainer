@@ -26,28 +26,23 @@ function applyMoves(game: Chess, moveList: string[], upto: number): number {
 }
 
 /**
- * FEN after applying `ply` half-moves of an opening. Starts from the opening's
- * EPD when present (else the standard start position). If an EPD is present but
- * its moves apply to nothing at `ply > 0`, retries from the start position — a
- * fallback for openings whose UCI moves are relative to the start, not the EPD.
+ * FEN after applying `ply` half-moves of an opening. Moves are normally relative
+ * to the standard start position, and the opening's EPD is the position after the
+ * whole line, so ply 0 is the start position, not the EPD. If the first move is
+ * legal from the EPD, the moves are treated as relative to it instead. With an
+ * EPD but no moves, the EPD itself is returned.
  */
 export function previewFen(opening: PreviewOpening | null, ply: number): string {
   const moveList = uciListToMoves(opening?.uci_moves);
 
-  const gameFromEpd = new Chess();
   if (opening?.epd) {
-    gameFromEpd.load(opening.epd.trim());
-  }
-  const appliedFromEpd = opening ? applyMoves(gameFromEpd, moveList, ply) : 0;
-
-  if (opening?.epd && ply > 0 && appliedFromEpd === 0) {
-    const gameFromStart = new Chess();
-    applyMoves(gameFromStart, moveList, ply);
-    return gameFromStart.fen();
-  }
-
-  if (opening?.epd) {
-    return gameFromEpd.fen();
+    const fromEpd = new Chess();
+    fromEpd.load(opening.epd.trim());
+    if (moveList.length === 0) return fromEpd.fen();
+    if (applyMoves(new Chess(fromEpd.fen()), moveList, 1) === 1) {
+      applyMoves(fromEpd, moveList, ply);
+      return fromEpd.fen();
+    }
   }
 
   const game = new Chess();
