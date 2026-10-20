@@ -84,7 +84,9 @@
       "showMore_other": "Εμφάνιση {{count}} περισσότερων",
       "popularHeading": "Δημοφιλή ανοίγματα",
       "boardPreviewStart": "Έναρξη",
-      "boardPreviewAfterPly": "Μετά από ημι-κίνηση {{ply}}"
+      "boardPreviewAfterPly": "Μετά από ημι-κίνηση {{ply}}",
+      "boardPreviewPause": "Παύση",
+      "boardPreviewPlay": "Αναπαραγωγή"
     }
   },
   "puzzles": {

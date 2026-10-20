@@ -84,7 +84,9 @@
       "showMore_other": "显示 {{count}} 个更多",
       "popularHeading": "热门开局",
       "boardPreviewStart": "开始",
-      "boardPreviewAfterPly": "第 {{ply}} 步后"
+      "boardPreviewAfterPly": "第 {{ply}} 步后",
+      "boardPreviewPause": "暂停",
+      "boardPreviewPlay": "播放"
     }
   },
   "puzzles": {

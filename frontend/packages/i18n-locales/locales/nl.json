@@ -84,7 +84,9 @@
       "showMore_other": "{{count}} meer weergeven",
       "popularHeading": "Populaire openingen",
       "boardPreviewStart": "Start",
-      "boardPreviewAfterPly": "Na zet {{ply}}"
+      "boardPreviewAfterPly": "Na zet {{ply}}",
+      "boardPreviewPause": "Pauze",
+      "boardPreviewPlay": "Afspelen"
     }
   },
   "puzzles": {

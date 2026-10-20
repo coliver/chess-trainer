@@ -84,7 +84,9 @@
       "showMore_other": "{{count}} अधिक दिखाएँ",
       "popularHeading": "लोकप्रिय उद्घाटन",
       "boardPreviewStart": "शुरू",
-      "boardPreviewAfterPly": "{{ply}} ply के बाद"
+      "boardPreviewAfterPly": "{{ply}} ply के बाद",
+      "boardPreviewPause": "रोकें",
+      "boardPreviewPlay": "चलाएँ"
     }
   },
   "puzzles": {

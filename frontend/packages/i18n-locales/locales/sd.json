@@ -84,7 +84,9 @@
       "showMore_other": "Lîra {{count}} nîn",
       "popularHeading": "Methred",
       "boardPreviewStart": "Tog",
-      "boardPreviewAfterPly": "Aph {{ply}}"
+      "boardPreviewAfterPly": "Aph {{ply}}",
+      "boardPreviewPause": "Daro",
+      "boardPreviewPlay": "Tog"
     }
   },
   "puzzles": {

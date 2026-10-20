@@ -84,7 +84,9 @@
       "showMore_other": "Hiển thị {{count}} mục khác",
       "popularHeading": "Mở đầu phổ biến",
       "boardPreviewStart": "Bắt đầu",
-      "boardPreviewAfterPly": "Sau nước {{ply}}"
+      "boardPreviewAfterPly": "Sau nước {{ply}}",
+      "boardPreviewPause": "Tạm dừng",
+      "boardPreviewPlay": "Phát"
     }
   },
   "puzzles": {

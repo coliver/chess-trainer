@@ -84,7 +84,9 @@
       "showMore_other": "הצג {{count}} נוספים",
       "popularHeading": "פתיחות פופולריות",
       "boardPreviewStart": "התחלה",
-      "boardPreviewAfterPly": "אחרי חצי-מסע {{ply}}"
+      "boardPreviewAfterPly": "אחרי חצי-מסע {{ply}}",
+      "boardPreviewPause": "השהה",
+      "boardPreviewPlay": "נגן"
     }
   },
   "puzzles": {

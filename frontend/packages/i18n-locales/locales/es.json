@@ -84,7 +84,9 @@
       "showMore_other": "Mostrar {{count}} más",
       "popularHeading": "Aperturas populares",
       "boardPreviewStart": "Inicio",
-      "boardPreviewAfterPly": "Después de la jugada {{ply}}"
+      "boardPreviewAfterPly": "Después de la jugada {{ply}}",
+      "boardPreviewPause": "Pausa",
+      "boardPreviewPlay": "Reproducir"
     }
   },
   "puzzles": {

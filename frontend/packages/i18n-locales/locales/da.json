@@ -84,7 +84,9 @@
       "showMore_other": "Vis {{count}} mere",
       "popularHeading": "Populære åbninger",
       "boardPreviewStart": "Start",
-      "boardPreviewAfterPly": "Efter halvtræk {{ply}}"
+      "boardPreviewAfterPly": "Efter halvtræk {{ply}}",
+      "boardPreviewPause": "Pause",
+      "boardPreviewPlay": "Afspil"
     }
   },
   "puzzles": {

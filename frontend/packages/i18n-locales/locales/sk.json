@@ -84,7 +84,9 @@
       "showMore_other": "Zobraziť {{count}} ďalších",
       "popularHeading": "Populárne otvárania",
       "boardPreviewStart": "Začiatok",
-      "boardPreviewAfterPly": "Po ťahu {{ply}}"
+      "boardPreviewAfterPly": "Po ťahu {{ply}}",
+      "boardPreviewPause": "Pozastaviť",
+      "boardPreviewPlay": "Prehrať"
     }
   },
   "puzzles": {

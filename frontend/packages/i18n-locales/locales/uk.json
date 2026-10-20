@@ -84,7 +84,9 @@
       "showMore_other": "Показати {{count}} ще",
       "popularHeading": "Популярні дебюти",
       "boardPreviewStart": "Початок",
-      "boardPreviewAfterPly": "Після ходу {{ply}}"
+      "boardPreviewAfterPly": "Після ходу {{ply}}",
+      "boardPreviewPause": "Пауза",
+      "boardPreviewPlay": "Відтворити"
     }
   },
   "puzzles": {

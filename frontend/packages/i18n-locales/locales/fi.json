@@ -84,7 +84,9 @@
       "showMore_other": "Näytä {{count}} lisää",
       "popularHeading": "Suositut avaukset",
       "boardPreviewStart": "Aloita",
-      "boardPreviewAfterPly": "{{ply}} puolen siirron jälkeen"
+      "boardPreviewAfterPly": "{{ply}} puolen siirron jälkeen",
+      "boardPreviewPause": "Tauko",
+      "boardPreviewPlay": "Toista"
     }
   },
   "puzzles": {

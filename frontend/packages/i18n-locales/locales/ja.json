@@ -84,7 +84,9 @@
       "showMore_other": "あと {{count}} 件を表示",
       "popularHeading": "人気のあるオープニング",
       "boardPreviewStart": "開始",
-      "boardPreviewAfterPly": "{{ply}}手後"
+      "boardPreviewAfterPly": "{{ply}}手後",
+      "boardPreviewPause": "一時停止",
+      "boardPreviewPlay": "再生"
     }
   },
   "puzzles": {

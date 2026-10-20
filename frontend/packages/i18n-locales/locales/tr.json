@@ -84,7 +84,9 @@
       "showMore_other": "Daha {{count}} göster",
       "popularHeading": "Popüler açılışlar",
       "boardPreviewStart": "Başla",
-      "boardPreviewAfterPly": "{{ply}} hamleden sonra"
+      "boardPreviewAfterPly": "{{ply}} hamleden sonra",
+      "boardPreviewPause": "Duraklat",
+      "boardPreviewPlay": "Oynat"
     }
   },
   "puzzles": {

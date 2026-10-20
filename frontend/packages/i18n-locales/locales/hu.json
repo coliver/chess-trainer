@@ -84,7 +84,9 @@
       "showMore_other": "{{count}} további megjelenítése",
       "popularHeading": "Népszerű megnyitások",
       "boardPreviewStart": "Kezdés",
-      "boardPreviewAfterPly": "{{ply}}. fél lépés után"
+      "boardPreviewAfterPly": "{{ply}}. fél lépés után",
+      "boardPreviewPause": "Szünet",
+      "boardPreviewPlay": "Lejátszás"
     }
   },
   "puzzles": {
