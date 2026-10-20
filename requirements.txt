@@ -11,7 +11,7 @@ black==26.5.1
 coverage==7.16.0
 pytest-cov==7.1.0
 email-validator==2.3.0
-pyjwt==2.15.0
+pyjwt==2.15.1
 zstandard==0.25.0
 sentry-sdk[fastapi]==2.69.1
 limits==5.8.0
