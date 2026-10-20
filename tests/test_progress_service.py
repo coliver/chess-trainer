@@ -343,3 +343,73 @@ def test_progress_scoped_to_user(db, test_user):
 
     summary = service.get_summary(db, test_user.id)
     assert summary["positions_seen"] == 0
+
+
+def test_record_attempt_concurrent_first_attempts_are_not_lost():
+    """Real committed sessions on separate connections: two simultaneous first
+    attempts at a new position must both be counted (no unique-violation loss)."""
+    import threading
+    import uuid
+
+    from sqlalchemy.orm import sessionmaker
+
+    from backend.app.modules.progress.models import PositionProgress, UserStreak
+    from backend.app.modules.shared.db import engine
+    from backend.app.modules.users.models import User
+    from backend.app.routers.auth import hash_password
+
+    SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
+    tag = uuid.uuid4().hex[:8]
+
+    setup = SessionLocal()
+    user = User(
+        username=f"race-{tag}",
+        email=f"race-{tag}@example.com",
+        password_hash=hash_password("password123"),
+        is_active=True,
+    )
+    setup.add(user)
+    setup.commit()
+    user_id = user.id
+    setup.close()
+
+    workers = 8
+    barrier = threading.Barrier(workers)
+    errors: list[Exception] = []
+
+    def attempt():
+        session = SessionLocal()
+        try:
+            barrier.wait()
+            service.record_attempt(
+                session, user_id=user_id, fen="race-fen", correct_move_uci="e2e4", is_correct=True
+            )
+            session.commit()
+        except Exception as exc:  # noqa: BLE001
+            errors.append(exc)
+            session.rollback()
+        finally:
+            session.close()
+
+    try:
+        threads = [threading.Thread(target=attempt) for _ in range(workers)]
+        for t in threads:
+            t.start()
+        for t in threads:
+            t.join()
+
+        check = SessionLocal()
+        try:
+            rows = check.query(PositionProgress).filter_by(user_id=user_id).all()
+            streak = check.query(UserStreak).filter_by(user_id=user_id).one()
+            assert errors == []
+            assert len(rows) == 1
+            assert rows[0].attempts == workers
+            assert streak.current_streak == 1
+        finally:
+            check.close()
+    finally:
+        cleanup = SessionLocal()
+        cleanup.query(User).filter_by(id=user_id).delete()
+        cleanup.commit()
+        cleanup.close()

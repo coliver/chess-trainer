@@ -2,6 +2,7 @@ import dataclasses
 import datetime
 
 from sqlalchemy import func, select
+from sqlalchemy.dialects.postgresql import insert as pg_insert
 from sqlalchemy.orm import Session
 
 from backend.app.modules.progress.models import PositionProgress, UserStreak
@@ -20,18 +21,12 @@ def record_attempt(
     opening_name: str | None = None,
 ) -> PositionProgress:
     """Upsert the per-user/per-position progress row and advance its SM-2 schedule."""
-    row = db.execute(
-        select(PositionProgress).where(
-            PositionProgress.user_id == user_id,
-            PositionProgress.fen == fen,
-            PositionProgress.correct_move_uci == correct_move_uci,
-        )
-    ).scalar_one_or_none()
-
-    now = datetime.datetime.now(datetime.timezone.utc)
-
-    if row is None:
-        row = PositionProgress(
+    # Insert-if-missing then lock the row: two concurrent first attempts at the
+    # same position both reach the UPDATE path instead of one hitting the unique
+    # constraint, and FOR UPDATE serializes the read-modify-write of the counters.
+    db.execute(
+        pg_insert(PositionProgress)
+        .values(
             user_id=user_id,
             fen=fen,
             correct_move_uci=correct_move_uci,
@@ -44,7 +39,20 @@ def record_attempt(
             interval_days=0,
             repetitions=0,
         )
-        db.add(row)
+        .on_conflict_do_nothing(constraint="uq_position_progress_user_position")
+    )
+    row = db.execute(
+        select(PositionProgress)
+        .where(
+            PositionProgress.user_id == user_id,
+            PositionProgress.fen == fen,
+            PositionProgress.correct_move_uci == correct_move_uci,
+        )
+        .with_for_update()
+        .execution_options(populate_existing=True)
+    ).scalar_one()
+
+    now = datetime.datetime.now(datetime.timezone.utc)
 
     row.attempts += 1
     if is_correct:
@@ -82,11 +90,17 @@ def record_attempt(
 
 def record_streak(db: Session, user_id: int, today: datetime.date) -> UserStreak:
     """Upsert the user's daily streak counter."""
-    row = db.execute(select(UserStreak).where(UserStreak.user_id == user_id)).scalar_one_or_none()
-
-    if row is None:
-        row = UserStreak(user_id=user_id, current_streak=0, longest_streak=0, last_active_date=None)
-        db.add(row)
+    db.execute(
+        pg_insert(UserStreak)
+        .values(user_id=user_id, current_streak=0, longest_streak=0, last_active_date=None)
+        .on_conflict_do_nothing(index_elements=["user_id"])
+    )
+    row = db.execute(
+        select(UserStreak)
+        .where(UserStreak.user_id == user_id)
+        .with_for_update()
+        .execution_options(populate_existing=True)
+    ).scalar_one()
 
     result = next_streak(
         today=today,
