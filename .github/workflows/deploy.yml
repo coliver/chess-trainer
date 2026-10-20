@@ -18,6 +18,11 @@ jobs:
 
   deploy:
     needs: [core, react, tests, rails, angular]
+    # Back-to-back merges must queue: two deploys at once run npm ci in the
+    # same checkout on the box and corrupt each other's node_modules.
+    concurrency:
+      group: deploy-prod
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     permissions:
       id-token: write

@@ -46,6 +46,12 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ### 🛠️ Infrastructure
 
+#### Prod deploys queue instead of overlapping
+
+> Merging two PRs back to back started two deploys at once. Both ran `npm ci` in the same
+> checkout on the box, broke each other's `node_modules`, and both failed. The deploy job now
+> has a `deploy-prod` concurrency group, so a second deploy waits for the first.
+
 #### Prod API no longer runs uvicorn with `--reload`
 
 > The base compose `api` command uses `--reload` (a dev file watcher), and the prod overlay
