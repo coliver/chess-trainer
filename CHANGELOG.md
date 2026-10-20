@@ -39,6 +39,11 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ### 🛠️ Infrastructure
 
+#### Prod API no longer runs uvicorn with `--reload`
+
+> The base compose `api` command uses `--reload` (a dev file watcher), and the prod overlay
+> inherited it. `docker-compose.prod.yml` now overrides the command without it.
+
 #### Backend logging audit: app logs were silently dropped, API saw nginx's IP instead of the client's
 
 > Nothing configured the root logger, so `logging.info`/`logger.exception` calls anywhere in
