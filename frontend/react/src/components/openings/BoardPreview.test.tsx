@@ -23,6 +23,10 @@ beforeEach(() => {
   vi.stubGlobal("ResizeObserver", RO);
 });
 
+// Move-step buttons only (Start + one per ply), excluding the Pause/Play toggle.
+const plyButtonsOf = () =>
+  screen.getAllByRole("button").filter((b) => !b.hasAttribute("aria-pressed"));
+
 const openings: Opening[] = [
   {
     name: "Sicilian Defense",
@@ -44,7 +48,7 @@ describe("BoardPreview", () => {
         />,
       );
       const pos = () => screen.getByTestId("board").getAttribute("data-position");
-      const plyButtons = screen.getAllByRole("button");
+      const plyButtons = plyButtonsOf();
       // Start + 2 plies (e2e4, c7c5)
       expect(plyButtons).toHaveLength(3);
       expect(plyButtons[0]).toHaveClass("active");
@@ -78,10 +82,35 @@ describe("BoardPreview", () => {
           playerColor="w"
         />,
       );
-      const plyButtons = screen.getAllByRole("button");
+      const plyButtons = plyButtonsOf();
       fireEvent.click(plyButtons[1]);
       act(() => void vi.advanceTimersByTime(5000));
       expect(plyButtons[1]).toHaveClass("active");
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("Pause holds the current ply and Play resumes from it", () => {
+    vi.useFakeTimers();
+    try {
+      const line = { uci_moves: "e2e4 c7c5" };
+      render(
+        <BoardPreview
+          openings={openings}
+          selectedOpeningName="Sicilian Defense"
+          playerColor="w"
+        />,
+      );
+      const pos = () => screen.getByTestId("board").getAttribute("data-position");
+      act(() => void vi.advanceTimersByTime(700));
+      fireEvent.click(screen.getByText("Pause"));
+      act(() => void vi.advanceTimersByTime(5000));
+      expect(pos()).toBe(previewFen(line, 1));
+
+      fireEvent.click(screen.getByText("Play"));
+      act(() => void vi.advanceTimersByTime(700));
+      expect(pos()).toBe(previewFen(line, 2));
     } finally {
       vi.useRealTimers();
     }
@@ -99,7 +128,7 @@ describe("BoardPreview", () => {
         />,
       );
       const pos = () => screen.getByTestId("board").getAttribute("data-position");
-      const plyButtons = screen.getAllByRole("button");
+      const plyButtons = plyButtonsOf();
       fireEvent.click(plyButtons[2]);
       act(() => void vi.advanceTimersByTime(5000));
       expect(pos()).toBe(previewFen(line, 2));
@@ -136,7 +165,7 @@ describe("BoardPreview", () => {
           />,
         );
         const final = previewFen({ uci_moves: "e2e4 c7c5" }, 2);
-        expect(screen.getAllByRole("button")[2]).toHaveClass("active");
+        expect(plyButtonsOf()[2]).toHaveClass("active");
         // Long enough to have looped back to the start if autoplay were running.
         act(() => void vi.advanceTimersByTime(5000));
         expect(screen.getByTestId("board").getAttribute("data-position")).toBe(final);
@@ -210,6 +239,6 @@ describe("BoardPreview", () => {
       />,
     );
 
-    expect(screen.getAllByRole("button")).toHaveLength(1);
+    expect(plyButtonsOf()).toHaveLength(1);
   });
 });

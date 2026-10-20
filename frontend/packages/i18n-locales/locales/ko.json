@@ -84,7 +84,9 @@
       "showMore_other": "{{count}}개 더 보기",
       "popularHeading": "인기 있는 오프닝",
       "boardPreviewStart": "시작",
-      "boardPreviewAfterPly": "{{ply}}수 후"
+      "boardPreviewAfterPly": "{{ply}}수 후",
+      "boardPreviewPause": "일시정지",
+      "boardPreviewPlay": "재생"
     }
   },
   "puzzles": {

@@ -84,7 +84,9 @@
       "showMore_other": "Tampilkan {{count}} lagi",
       "popularHeading": "Pembukaan populer",
       "boardPreviewStart": "Mulai",
-      "boardPreviewAfterPly": "Setelah ply {{ply}}"
+      "boardPreviewAfterPly": "Setelah ply {{ply}}",
+      "boardPreviewPause": "Jeda",
+      "boardPreviewPlay": "Putar"
     }
   },
   "puzzles": {

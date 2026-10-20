@@ -84,7 +84,9 @@
       "showMore_other": "Mostrar {{count}} mais",
       "popularHeading": "Aberturas populares",
       "boardPreviewStart": "Início",
-      "boardPreviewAfterPly": "Após lance {{ply}}"
+      "boardPreviewAfterPly": "Após lance {{ply}}",
+      "boardPreviewPause": "Pausar",
+      "boardPreviewPlay": "Reproduzir"
     }
   },
   "puzzles": {

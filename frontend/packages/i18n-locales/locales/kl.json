@@ -84,7 +84,9 @@
       "showMore_other": "{{count}} latlh yIlegh",
       "popularHeading": "poplar poHmey",
       "boardPreviewStart": "qaS pegh",
-      "boardPreviewAfterPly": "{{ply}} 'ar loDpu' vI"
+      "boardPreviewAfterPly": "{{ply}} 'ar loDpu' vI",
+      "boardPreviewPause": "yev",
+      "boardPreviewPlay": "Quj"
     }
   },
   "puzzles": {

@@ -6,6 +6,13 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 
 ### ✨ Added
 
+#### Pause/Play toggle on the looping opening preview
+
+> The side-panel preview loops indefinitely, so it now has a Pause/Play button (WCAG 2.2.2) that
+> holds the current move and resumes from it. Hidden under `prefers-reduced-motion`, where the
+> preview never autoplays. New `dashboard.openings.boardPreviewPause`/`boardPreviewPlay` keys,
+> translated in every locale.
+
 #### Opening cards replay on hover, and picking an opening plays it in the preview
 
 > Hovering a dashboard opening card with a mouse resets its thumbnail board to the start

@@ -84,7 +84,9 @@
       "showMore_other": "{{count}} I am Groot",
       "popularHeading": "I am Groot",
       "boardPreviewStart": "I am Groot",
-      "boardPreviewAfterPly": "I am Groot {{ply}}"
+      "boardPreviewAfterPly": "I am Groot {{ply}}",
+      "boardPreviewPause": "I am Groot",
+      "boardPreviewPlay": "I am Groot"
     }
   },
   "puzzles": {

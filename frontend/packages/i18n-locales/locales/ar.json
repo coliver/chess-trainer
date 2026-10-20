@@ -84,7 +84,9 @@
       "showMore_other": "عرض {{count}} أكثر",
       "popularHeading": "الافتتاحيات الشهيرة",
       "boardPreviewStart": "ابدأ",
-      "boardPreviewAfterPly": "بعد نصف نقلة {{ply}}"
+      "boardPreviewAfterPly": "بعد نصف نقلة {{ply}}",
+      "boardPreviewPause": "إيقاف مؤقت",
+      "boardPreviewPlay": "تشغيل"
     }
   },
   "puzzles": {

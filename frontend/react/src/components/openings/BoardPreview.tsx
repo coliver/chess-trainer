@@ -110,6 +110,17 @@ export default function BoardPreview({
       </div>
 
       <div className="ply-stepper">
+        {!reduceMotion && moveList.length > 0 && (
+          <button
+            type="button"
+            className="ply-btn"
+            aria-pressed={!autoplay}
+            onClick={() => setAutoplay((a) => !a)}
+          >
+            {t(autoplay ? "dashboard.openings.boardPreviewPause" : "dashboard.openings.boardPreviewPlay")}
+          </button>
+        )}
+
         <button
           type="button"
           className={`ply-btn${selectedPly === 0 ? " active" : ""}`}

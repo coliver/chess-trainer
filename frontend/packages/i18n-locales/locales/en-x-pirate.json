@@ -84,7 +84,9 @@
       "showMore_other": "Show {{count}} more",
       "popularHeading": "Openings o' Renown",
       "boardPreviewStart": "Set sail",
-      "boardPreviewAfterPly": "After ply {{ply}}"
+      "boardPreviewAfterPly": "After ply {{ply}}",
+      "boardPreviewPause": "Drop anchor",
+      "boardPreviewPlay": "Hoist the sails"
     }
   },
   "puzzles": {

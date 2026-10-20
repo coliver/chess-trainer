@@ -84,7 +84,9 @@
       "showMore_other": "Arată {{count}} mai mulți",
       "popularHeading": "Deschideri populare",
       "boardPreviewStart": "Început",
-      "boardPreviewAfterPly": "După mutarea {{ply}}"
+      "boardPreviewAfterPly": "După mutarea {{ply}}",
+      "boardPreviewPause": "Pauză",
+      "boardPreviewPlay": "Redă"
     }
   },
   "puzzles": {
