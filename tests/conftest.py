@@ -1,5 +1,10 @@
+import os
 import sys
 from pathlib import Path
+
+# Keep test failures (FakeDB stubs, simulated outages) out of the real Sentry project.
+# Must run before backend.app.app is imported, since that is where sentry_sdk.init() fires.
+os.environ.pop("SENTRY_DSN", None)
 
 from backend.app.app import app
 from backend.app.modules.shared import rate_limit as rate_limit_module
