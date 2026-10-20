@@ -126,14 +126,23 @@ describe("BoardPreview", () => {
     });
 
     it("opens on the final ply without playing", () => {
-      render(
-        <BoardPreview
-          openings={openings}
-          selectedOpeningName="Sicilian Defense"
-          playerColor="w"
-        />,
-      );
-      expect(screen.getAllByRole("button")[2]).toHaveClass("active");
+      vi.useFakeTimers();
+      try {
+        render(
+          <BoardPreview
+            openings={openings}
+            selectedOpeningName="Sicilian Defense"
+            playerColor="w"
+          />,
+        );
+        const final = previewFen({ uci_moves: "e2e4 c7c5" }, 2);
+        expect(screen.getAllByRole("button")[2]).toHaveClass("active");
+        // Long enough to have looped back to the start if autoplay were running.
+        act(() => void vi.advanceTimersByTime(5000));
+        expect(screen.getByTestId("board").getAttribute("data-position")).toBe(final);
+      } finally {
+        vi.useRealTimers();
+      }
     });
   });
 
@@ -184,8 +193,11 @@ describe("BoardPreview", () => {
       />,
     );
 
-    await user.click(screen.getByText("Start"));
+    await user.click(screen.getByText("c7c5"));
+    expect(screen.getByText("c7c5")).toHaveClass("active");
+    expect(screen.getByText("Start")).not.toHaveClass("active");
 
+    await user.click(screen.getByText("Start"));
     expect(screen.getByText("Start")).toHaveClass("active");
   });
 

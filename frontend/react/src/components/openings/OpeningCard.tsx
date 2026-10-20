@@ -53,13 +53,13 @@ export default function OpeningCard({
 
   // Step one ply per tick, pause on the final position, then loop back to 0.
   useEffect(() => {
-    if (!hovering || total === 0) return;
+    if (!hovering || reduceMotion || total === 0) return;
     const id = setTimeout(
       () => setPly((p) => (p >= total ? 0 : p + 1)),
       ply >= total ? END_PAUSE_MS : STEP_MS,
     );
     return () => clearTimeout(id);
-  }, [hovering, ply, total]);
+  }, [hovering, reduceMotion, ply, total]);
 
   const fen = hovering && !reduceMotion && total > 0 ? previewFen(rep, ply) : restingFen;
   const orientation = colorOf(group.base) === "b" ? "black" : "white";

@@ -276,6 +276,17 @@ hand-rolled SVG icons (matching the component's existing hamburger-icon style ra
 an icon library), plus an `isSettingsActive()` signal alongside the existing
 `isOpeningsActive()`/`isPuzzlesActive()`. No new CSS or i18n keys needed — both already existed.
 
+## 13. Opening replay animations (new gap, open)
+
+**Status: open (found 2026-10-19).** React added two motion features to the dashboard opening
+browser: hovering an opening card with a mouse replays its line on the thumbnail (0.7s per move,
+1.5s hold on the final position, loop; back to the final position on leave), and selecting an
+opening autoplays and loops it in the side-panel preview (Start rewinds and resumes, any move
+button stops it). Both are off under `prefers-reduced-motion`. See React's
+`components/openings/OpeningCard.tsx` and `BoardPreview.tsx`, plus
+`hooks/usePrefersReducedMotion.ts`. The ply-0 position fix these depended on is in chess-core's
+`previewFen`, so it is already shared.
+
 ## Suggested backport order
 
 1. i18n plumbing (§1) — everything else touches translated strings.
@@ -288,4 +299,4 @@ an icon library), plus an `isSettingsActive()` signal alongside the existing
    FenTurnBadge, AuthCard (§5).
 
 This list predates §9-§12, which were found and closed afterward. All tracked gaps (§1-§12)
-are now landed as of 2026-09-06.
+are now landed as of 2026-09-06; §13 is open.

@@ -59,7 +59,8 @@ type PreviewOpening = {
 
 previewFen(opening: PreviewOpening | null, ply: number): string
   // FEN after applying up to `ply` half-moves of an opening
-  // Uses opening's EPD (or start position) + its UCI moves; handles fallback if EPD moves don't apply
+  // Moves are start-relative (the EPD is the finished line), so ply 0 is the start position;
+  // the EPD is used alone when there are no moves, or as the base if the first move is legal from it
 ```
 
 ### Move Timeline (`timeline.ts`)
