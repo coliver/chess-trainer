@@ -8,16 +8,32 @@ from datetime import datetime, timedelta, timezone
 from typing import Any
 
 import jwt
-from fastapi import APIRouter, BackgroundTasks, Depends, Header, HTTPException
+from fastapi import APIRouter, BackgroundTasks, Depends, Header, HTTPException, Request
 from pydantic import BaseModel, EmailStr, constr
 
 from backend.app.modules.email.sender import send_verification_email, supported_languages
 from backend.app.modules.shared.db import get_db
 from backend.app.modules.shared.rate_limit import rate_limit
-from backend.app.modules.users.models import User
+from backend.app.modules.users.models import AuthEvent, User
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 logger = logging.getLogger(__name__)
+
+
+def _record_auth_event(db, event_type: str, request: Request, user_id: int | None = None) -> None:
+    """Best-effort analytics row; a failure here must never break auth itself."""
+    try:
+        db.add(
+            AuthEvent(
+                user_id=user_id,
+                event_type=event_type,
+                ip=request.client.host if request.client else None,
+            )
+        )
+        db.commit()
+    except Exception:
+        db.rollback()
+        logger.exception("Failed to record auth event %s", event_type)
 
 
 class RegisterRequest(BaseModel):
@@ -56,7 +72,9 @@ def _email_verification_required() -> bool:
 
 
 @router.post("/register", dependencies=[Depends(rate_limit("5/minute"))])
-def register(req: RegisterRequest, background_tasks: BackgroundTasks, db=Depends(get_db)):
+def register(
+    req: RegisterRequest, background_tasks: BackgroundTasks, request: Request, db=Depends(get_db)
+):
     existing = (
         db.query(User).filter((User.email == req.email) | (User.username == req.username)).first()
     )
@@ -78,6 +96,7 @@ def register(req: RegisterRequest, background_tasks: BackgroundTasks, db=Depends
     db.add(user)
     db.commit()
     db.refresh(user)
+    _record_auth_event(db, "register", request, user.id)
     if verification_required:
         background_tasks.add_task(
             send_verification_email,
@@ -95,7 +114,7 @@ class LoginRequest(BaseModel):
 
 
 @router.post("/login", dependencies=[Depends(rate_limit("5/minute"))])
-def login(req: LoginRequest, db=Depends(get_db)):
+def login(req: LoginRequest, request: Request, db=Depends(get_db)):
     if not req.email and not req.username:
         raise HTTPException(status_code=400, detail="Provide email or username")
 
@@ -111,16 +130,20 @@ def login(req: LoginRequest, db=Depends(get_db)):
         logger.warning(
             "Login failed: unknown user (email=%s, username=%s)", req.email, req.username
         )
+        _record_auth_event(db, "login_failed", request)
         raise HTTPException(status_code=401, detail="Invalid credentials")
 
     if not verify_password(req.password, user.password_hash):
         logger.warning("Login failed: bad password for user_id=%s", user.id)
+        _record_auth_event(db, "login_failed", request, user.id)
         raise HTTPException(status_code=401, detail="Invalid credentials")
 
     if _email_verification_required() and not user.email_verified:
         logger.warning("Login blocked: email not verified for user_id=%s", user.id)
+        _record_auth_event(db, "login_failed", request, user.id)
         raise HTTPException(status_code=403, detail="Email not verified")
 
+    _record_auth_event(db, "login", request, user.id)
     access_token = create_access_token(user.id)
     refresh_token = create_refresh_token(user.id)
 
@@ -263,6 +286,17 @@ def refresh(req: RefreshRequest, db=Depends(get_db)):
         }
     except jwt.PyJWTError:
         raise HTTPException(status_code=401, detail="Invalid refresh token")
+
+
+@router.post("/logout", status_code=204)
+def logout(request: Request, user=Depends(get_current_user_or_none), db=Depends(get_db)) -> None:
+    """Analytics only: tokens are stateless, so the client still clears its own.
+
+    Always 204, even with a missing/expired access token (nothing is recorded
+    then), so a stale session can never block a logout.
+    """
+    if user is not None:
+        _record_auth_event(db, "logout", request, user.id)
 
 
 @router.get("/me")

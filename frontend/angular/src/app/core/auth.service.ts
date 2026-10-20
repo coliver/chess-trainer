@@ -76,6 +76,16 @@ export class AuthService {
     localStorage.setItem('token', token);
   }
 
+  /**
+   * Tells the backend a user-initiated logout happened (analytics only, tokens
+   * are stateless). Call before `logout()`, which clears the token the
+   * interceptor attaches. Not part of `logout()` itself because the interceptor
+   * also calls that on a failed token refresh, which is not a user logout.
+   */
+  recordLogout(): void {
+    this.http.post(`${this.base}/auth/logout`, {}).subscribe({ error: () => {} });
+  }
+
   logout(): void {
     this.keys.forEach((k) => localStorage.removeItem(k));
     this.loggedIn.set(false);

@@ -1,9 +1,15 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { login, logout, AUTH_CHANGED_EVENT } from "./auth";
 
 describe("auth", () => {
   beforeEach(() => {
     localStorage.clear();
+    // logout() calls the backend; keep that off the (msw-guarded) network.
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(new Response(null, { status: 204 })));
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
   });
 
   it("login stores all fields and dispatches AUTH_CHANGED_EVENT", () => {
@@ -50,5 +56,36 @@ describe("auth", () => {
     expect(listener).toHaveBeenCalledTimes(1);
 
     window.removeEventListener(AUTH_CHANGED_EVENT, listener);
+  });
+
+  it("logout tells the backend, using the token read before it is cleared", () => {
+    const fetchMock = vi.fn().mockResolvedValue(new Response(null, { status: 204 }));
+    vi.stubGlobal("fetch", fetchMock);
+    localStorage.setItem("token", "tok");
+
+    logout();
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      "/api/auth/logout",
+      expect.objectContaining({
+        method: "POST",
+        headers: { Authorization: "Bearer tok" },
+        keepalive: true,
+      })
+    );
+    expect(localStorage.getItem("token")).toBeNull();
+  });
+
+  it("logout still clears state when the backend call fails or there is no token", () => {
+    const fetchMock = vi.fn().mockRejectedValue(new Error("offline"));
+    vi.stubGlobal("fetch", fetchMock);
+
+    logout();
+    expect(fetchMock).not.toHaveBeenCalled();
+
+    localStorage.setItem("token", "tok");
+    logout();
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(localStorage.getItem("token")).toBeNull();
   });
 });

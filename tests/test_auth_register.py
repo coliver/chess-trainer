@@ -4,9 +4,9 @@ import os
 
 import jwt
 import pytest
-from fastapi import BackgroundTasks, HTTPException
+from fastapi import BackgroundTasks, HTTPException, Request
 
-from backend.app.modules.users.models import User
+from backend.app.modules.users.models import AuthEvent, User
 from backend.app.routers.auth import (
     LoginRequest,
     RegisterRequest,
@@ -73,6 +73,7 @@ class FakeDB:
         self.users = list(users or [])
         self._next_id = 1 + max([u.id for u in self.users], default=0)
         self._pending = []
+        self.events = []
 
     def query(self, model):
         if model is not User:
@@ -84,6 +85,9 @@ class FakeDB:
 
     def commit(self):
         for obj in self._pending:
+            if isinstance(obj, AuthEvent):
+                self.events.append(obj)
+                continue
             if getattr(obj, "id", None) is None:
                 obj.id = self._next_id
                 self._next_id += 1
@@ -93,6 +97,13 @@ class FakeDB:
 
     def refresh(self, obj):
         return obj
+
+    def rollback(self):
+        self._pending.clear()
+
+
+def fake_request(host="203.0.113.7"):
+    return Request({"type": "http", "headers": [], "client": (host, 12345)})
 
 
 @pytest.fixture
@@ -108,7 +119,7 @@ def test_register_creates_user_when_unique(jwt_env):
     background_tasks = BackgroundTasks()
 
     req = RegisterRequest(email="a@example.com", username="alice", password="pw123")
-    out = register(req, background_tasks=background_tasks, db=db)
+    out = register(req, background_tasks=background_tasks, request=fake_request(), db=db)
 
     assert "id" in out and out["email"] == "a@example.com" and out["username"] == "alice"
     assert len(db.users) == 1
@@ -133,7 +144,7 @@ def test_register_schedules_verification_email(jwt_env, monkeypatch):
     db = FakeDB(users=[])
     background_tasks = BackgroundTasks()
     req = RegisterRequest(email="a@example.com", username="alice", password="pw123")
-    register(req, background_tasks=background_tasks, db=db)
+    register(req, background_tasks=background_tasks, request=fake_request(), db=db)
 
     # Run the scheduled task the way FastAPI would after the response is sent.
     for task in background_tasks.tasks:
@@ -151,7 +162,7 @@ def test_register_schedules_verification_email(jwt_env, monkeypatch):
 def test_register_stores_requested_language_when_supported(jwt_env):
     db = FakeDB(users=[])
     req = RegisterRequest(email="a@example.com", username="alice", password="pw123", language="de")
-    register(req, background_tasks=BackgroundTasks(), db=db)
+    register(req, background_tasks=BackgroundTasks(), request=fake_request(), db=db)
 
     assert db.users[0].language == "de"
 
@@ -161,7 +172,7 @@ def test_register_defaults_to_english_for_unsupported_language(jwt_env):
     req = RegisterRequest(
         email="a@example.com", username="alice", password="pw123", language="not-a-locale"
     )
-    register(req, background_tasks=BackgroundTasks(), db=db)
+    register(req, background_tasks=BackgroundTasks(), request=fake_request(), db=db)
 
     assert db.users[0].language == "en-US"
 
@@ -179,7 +190,7 @@ def test_register_duplicate_email_409(jwt_env):
 
     req = RegisterRequest(email="a@example.com", username="alice", password="pw123")
     with pytest.raises(HTTPException) as e:
-        register(req, background_tasks=BackgroundTasks(), db=db)
+        register(req, background_tasks=BackgroundTasks(), request=fake_request(), db=db)
 
     assert e.value.status_code == 409
     assert e.value.detail == "Email or username already exists"
@@ -194,7 +205,7 @@ def test_register_auto_verifies_when_flag_disabled(monkeypatch):
     background_tasks = BackgroundTasks()
 
     req = RegisterRequest(email="a@example.com", username="alice", password="pw123")
-    register(req, background_tasks=background_tasks, db=db)
+    register(req, background_tasks=background_tasks, request=fake_request(), db=db)
 
     assert db.users[0].email_verified is True
     assert len(background_tasks.tasks) == 0
@@ -216,7 +227,7 @@ def test_login_succeeds_when_unverified_and_flag_disabled(monkeypatch):
     db = FakeDB(users=[u])
 
     req = LoginRequest(email="a@example.com", username=None, password="correct")
-    out = login(req, db=db)
+    out = login(req, request=fake_request(), db=db)
 
     assert out["id"] == 1
     assert "access_token" in out
@@ -227,7 +238,7 @@ def test_login_requires_email_or_username_400(jwt_env):
     req = LoginRequest(email=None, username=None, password="pw123")
 
     with pytest.raises(HTTPException) as e:
-        login(req, db=db)
+        login(req, request=fake_request(), db=db)
 
     assert e.value.status_code == 400
     assert e.value.detail == "Provide email or username"
@@ -238,7 +249,7 @@ def test_login_unknown_user_401(jwt_env, caplog):
 
     req = LoginRequest(email="missing@example.com", username=None, password="pw123")
     with pytest.raises(HTTPException) as e:
-        login(req, db=db)
+        login(req, request=fake_request(), db=db)
 
     assert e.value.status_code == 401
     assert e.value.detail == "Invalid credentials"
@@ -260,7 +271,7 @@ def test_login_wrong_password_401(jwt_env, caplog):
 
     req = LoginRequest(email="a@example.com", username=None, password="wrong")
     with pytest.raises(HTTPException) as e:
-        login(req, db=db)
+        login(req, request=fake_request(), db=db)
 
     assert e.value.status_code == 401
     assert e.value.detail == "Invalid credentials"
@@ -280,7 +291,7 @@ def test_login_unverified_email_403(jwt_env):
 
     req = LoginRequest(email="a@example.com", username=None, password="correct")
     with pytest.raises(HTTPException) as e:
-        login(req, db=db)
+        login(req, request=fake_request(), db=db)
 
     assert e.value.status_code == 403
     assert e.value.detail == "Email not verified"
@@ -298,7 +309,7 @@ def test_login_success_returns_access_token(jwt_env):
     db = FakeDB(users=[u])
 
     req = LoginRequest(email="a@example.com", username=None, password="correct")
-    out = login(req, db=db)
+    out = login(req, request=fake_request(), db=db)
 
     assert out["id"] == 1
     assert out["email"] == "a@example.com"
@@ -327,7 +338,7 @@ def test_login_by_username_success_returns_access_token(jwt_env):
     db = FakeDB(users=[u])
 
     req = LoginRequest(email=None, username="alice", password="correct")
-    out = login(req, db=db)
+    out = login(req, request=fake_request(), db=db)
 
     assert out["id"] == 1
     assert out["username"] == "alice"

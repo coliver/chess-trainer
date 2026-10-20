@@ -89,7 +89,7 @@ module; only `tests/test_openings_service.py` exercises it.
 
 | Router | Endpoints | Auth |
 |---|---|---|
-| `auth.py` (`/auth`) | `POST /register`, `POST /login`, `POST /refresh`, `GET /me`, `GET /verify-email`, `POST /resend-verification` | public except `/me` |
+| `auth.py` (`/auth`) | `POST /register`, `POST /login`, `POST /logout` (204, analytics only), `POST /refresh`, `GET /me`, `GET /verify-email`, `POST /resend-verification` | public except `/me` |
 | `openings.py` | `GET /openings` | public |
 | `training.py` | `POST /training-sessions`, `POST /training-sessions/from-due`, `GET /training-sessions/{id}/next`, `POST /training-sessions/{id}/responses`, `POST /training-sessions/{id}/items` | required |
 | `progress.py` | `GET /progress/summary`, `/progress/due`, `/progress/step-accuracy`, `/progress/step-accuracy/global`, `/progress/weak-spots`, plus `/progress/summary.text` | JSON: required; `.text`: soft (see Text mode) |

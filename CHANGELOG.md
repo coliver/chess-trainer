@@ -32,6 +32,19 @@ This layout prioritizes "air" and visual anchors. The `####` headers provide a l
 > saving a few dollars a month. No holding page during that window — a visit between 1-7am ET
 > just fails to connect.
 
+#### Auth events recorded for usage analytics (login, logout, register, failed login)
+
+> There was no record of who logged in or out; the only activity signal was submitted training
+> moves, and the logout button just cleared the browser's tokens without telling the backend.
+> New `auth_events` table (migration `0014`) gets a row on register, successful login, failed
+> login (unknown user, bad password, unverified email) and logout, with the user id (NULL when
+> the attempt matched no account), event type and client IP. Writes are best-effort: a failure
+> is logged and never blocks auth. New `POST /auth/logout` endpoint (always `204`; records the
+> event only if the access token is still valid) is called by the React and Angular logout
+> buttons, but not by Angular's forced logout after a failed token refresh, which is not a
+> user action. The Rails frontend does not report logouts yet. `scripts/analytics.sql` has
+> ready-made queries over this table and the existing training data.
+
 #### Deploys now go through AWS SSM instead of SSH from the GitHub runner
 
 > The deploy job started failing because GitHub's hosted runner could no longer open a TCP

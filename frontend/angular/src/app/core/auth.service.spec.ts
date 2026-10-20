@@ -80,6 +80,22 @@ describe('AuthService', () => {
     req.flush(null);
   });
 
+  it('reports a user-initiated logout to the backend', () => {
+    service.recordLogout();
+
+    const req = httpMock.expectOne('/api/auth/logout');
+    expect(req.request.method).toBe('POST');
+    req.flush(null, { status: 204, statusText: 'No Content' });
+  });
+
+  it('ignores a failed logout report', () => {
+    service.recordLogout();
+
+    httpMock
+      .expectOne('/api/auth/logout')
+      .flush(null, { status: 500, statusText: 'Server Error' });
+  });
+
   it('clears all auth keys on logout', () => {
     localStorage.setItem('token', 'AT');
     localStorage.setItem('refresh_token', 'RT');

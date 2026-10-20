@@ -25,6 +25,17 @@ export function login(data: LoginData) {
 }
 
 export function logout() {
+  // Tokens are stateless, so this is analytics only: let the backend log the
+  // logout. Fire-and-forget (keepalive survives the navigation to /login), and
+  // read the token before it is cleared below.
+  const token = localStorage.getItem("token");
+  if (token && typeof fetch === "function") {
+    fetch("/api/auth/logout", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}` },
+      keepalive: true,
+    }).catch(() => {});
+  }
   localStorage.removeItem("token");
   localStorage.removeItem("refresh_token");
   localStorage.removeItem("user_id");

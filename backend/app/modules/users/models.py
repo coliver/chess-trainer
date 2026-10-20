@@ -1,6 +1,6 @@
 import datetime
 
-from sqlalchemy import Boolean, DateTime, Integer, String, func
+from sqlalchemy import Boolean, DateTime, ForeignKey, Integer, String, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from backend.app.modules.shared.db import Base
@@ -59,4 +59,24 @@ class User(Base):
         "PuzzleProgress",
         back_populates="user",
         cascade="all, delete-orphan",
+    )
+
+
+class AuthEvent(Base):
+    """Append-only log of register/login/login_failed/logout, for usage analytics.
+
+    user_id is NULL when the attempt matched no account (unknown username/email),
+    and is kept (SET NULL) if the user is later deleted.
+    """
+
+    __tablename__ = "auth_events"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int | None] = mapped_column(
+        ForeignKey("users.id", ondelete="SET NULL"), nullable=True, index=True
+    )
+    event_type: Mapped[str] = mapped_column(String(20), nullable=False)
+    ip: Mapped[str | None] = mapped_column(String(45), nullable=True)
+    created_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now(), index=True
     )
