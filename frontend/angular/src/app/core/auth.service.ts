@@ -83,7 +83,7 @@ export class AuthService {
    * also calls that on a failed token refresh, which is not a user logout.
    */
   recordLogout(): void {
-    this.http.post(`${this.base}/auth/logout`, {}).subscribe({ error: () => {} });
+    this.http.post(`${this.base}/auth/logout`, {}).subscribe({ error: () => undefined });
   }
 
   logout(): void {
