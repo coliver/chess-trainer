@@ -9,7 +9,7 @@
     "@hotwired/turbo-rails": "^8.0.16",
     "@knight-school/chess-core": "file:../packages/chess-core",
     "canvas-confetti": "^1.9.4",
-    "cm-chessboard": "^8.12.19"
+    "cm-chessboard": "^8.15.4"
   },
   "devDependencies": {
     "esbuild": "^0.28.1"
